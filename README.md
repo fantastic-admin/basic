@@ -2,9 +2,7 @@
     <img src="http://hooray.gitee.io/fantastic-admin/logo.png" width="200" height="200" />
 </p>
 
-<p align="center">
-    <h1>Fantastic-admin</h1>
-</p>
+<h1 align="center">Fantastic-admin</h1>
 
 ## 这是什么
 
