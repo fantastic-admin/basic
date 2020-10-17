@@ -1,3 +1,7 @@
+<p style="text-align: center;">
+    <img src="http://hooray.gitee.io/fantastic-admin/logo.png" />
+</p>
+
 # Fantastic-admin
 
 ## 这是什么
