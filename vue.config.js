@@ -124,6 +124,7 @@ module.exports = {
                     args[0].cdn = cdn
                 }
                 args[0].debugTool = process.env.VUE_APP_DEBUG_TOOL
+                args[0].appType = process.env.VUE_APP_TYPE
                 return args
             })
     }
