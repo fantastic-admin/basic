@@ -1,4 +1,4 @@
-<p style="text-align: center;">
+<p align="center">
     <img src="http://hooray.gitee.io/fantastic-admin/logo.png" />
 </p>
 
