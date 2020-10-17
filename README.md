@@ -1,8 +1,10 @@
 <p align="center">
-    <img src="http://hooray.gitee.io/fantastic-admin/logo.png" />
+    <img src="http://hooray.gitee.io/fantastic-admin/logo.png" width="200" height="200" />
 </p>
 
-# Fantastic-admin
+<p align="center">
+    <h1>Fantastic-admin</h1>
+</p>
 
 ## 这是什么
 
