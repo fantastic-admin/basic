@@ -1,0 +1,18 @@
+{
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-recommended-scss"
+    ],
+    "plugins": [
+        "stylelint-scss"
+    ],
+    "rules": {
+        "indentation": 4,
+        "rule-empty-line-before": "never",
+        "at-rule-empty-line-before": "never",
+        "no-descending-specificity": null,
+        "selector-pseudo-class-no-unknown": null,
+        "selector-pseudo-element-no-unknown": [true, { "ignorePseudoElements": ["v-deep"] }],
+        "property-no-unknown": null
+    }
+}
