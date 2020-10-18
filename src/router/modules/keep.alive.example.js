@@ -28,7 +28,7 @@ export default {
             meta: {
                 title: '同级路由',
                 sidebar: false,
-                activeMenu: '/keep_alive_example/page'
+                activeMenu: '/keep_alive_example'
             }
         },
         {
@@ -37,8 +37,7 @@ export default {
             redirect: '/keep_alive_example/detail2',
             meta: {
                 title: '下级路由',
-                sidebar: false,
-                activeMenu: '/keep_alive_example/page'
+                sidebar: false
             },
             children: [
                 {
@@ -46,7 +45,8 @@ export default {
                     name: 'keepAliveExampleDetail2',
                     component: () => import(/* webpackChunkName: 'keep_alive_example' */ '@/views/keep_alive_example/detail'),
                     meta: {
-                        title: '下级路由'
+                        title: '下级路由',
+                        activeMenu: '/keep_alive_example'
                     }
                 },
                 {
@@ -55,8 +55,7 @@ export default {
                     redirect: '/keep_alive_example/detail2/detail3',
                     meta: {
                         title: '下下级路由',
-                        sidebar: false,
-                        activeMenu: '/keep_alive_example/page'
+                        sidebar: false
                     },
                     children: [
                         {
@@ -64,7 +63,8 @@ export default {
                             name: 'keepAliveExampleDetail3',
                             component: () => import(/* webpackChunkName: 'keep_alive_example' */ '@/views/keep_alive_example/detail'),
                             meta: {
-                                title: '下下级路由'
+                                title: '下下级路由',
+                                activeMenu: '/keep_alive_example'
                             }
                         }
                     ]
