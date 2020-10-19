@@ -6,7 +6,7 @@
 
 ## 这是什么
 
-一款开箱即用的 Vue 中后台管理系统模版，基于 [vue-automation](https://hooray.github.io/vue-automation) & [Element](https://element.eleme.cn)
+一款开箱即用的 Vue 中后台管理系统模版
 
 ## 特点
 
