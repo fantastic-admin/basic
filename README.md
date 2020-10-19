@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="http://hooray.gitee.io/fantastic-admin/images/logo.png" width="200" height="200" />
+    <img src="https://hooray.gitee.io/fantastic-admin/logo.png" width="200" height="200" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>
@@ -19,22 +19,20 @@
 
 [基础版](https://hooray.gitee.io/fantastic-admin/basic)（免费，可商用）
 
-[专业版](https://hooray.gitee.io/fantastic-admin/pro)（付费）
+[专业版](https://hooray.gitee.io/fantastic-admin/pro)（付费，购买方式请查看演示地址首页说明）
 
 ## 文档
 
-[基础版](https://hooray.gitee.io/fantastic-admin/basic/docs)
-
-专业版稍后添加
+[点击查看](https://hooray.gitee.io/fantastic-admin)
 
 ## 预览
 
 > 预览截图为专业版
 
-![](https://hooray.gitee.io/fantastic-admin/images/preview1.png)
-![](https://hooray.gitee.io/fantastic-admin/images/preview2.png)
-![](https://hooray.gitee.io/fantastic-admin/images/preview3.png)
-![](https://hooray.gitee.io/fantastic-admin/images/preview4.png)
+![](https://hooray.gitee.io/fantastic-admin/preview1.png)
+![](https://hooray.gitee.io/fantastic-admin/preview2.png)
+![](https://hooray.gitee.io/fantastic-admin/preview3.png)
+![](https://hooray.gitee.io/fantastic-admin/preview4.png)
 
 ## 支持
 
