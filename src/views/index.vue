@@ -2,7 +2,7 @@
     <div>
         <page-header title="欢迎使用 Fantastic-admin（基础版）">
             <el-button-group style="margin-right: 10px;">
-                <el-button type="success" plain @click="open('https://hooray.gitee.io/fantastic-admin/basic/docs')">开发文档</el-button>
+                <el-button type="success" plain @click="open('https://hooray.gitee.io/fantastic-admin')">开发文档</el-button>
                 <el-button type="primary" plain @click="open('https://gitee.com/hooray/fantastic-admin')">代码仓库</el-button>
             </el-button-group>
             <el-button type="primary" @click="open('https://hooray.gitee.io/fantastic-admin/pro')">查看专业版</el-button>
