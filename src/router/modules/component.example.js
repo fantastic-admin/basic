@@ -11,19 +11,19 @@ export default {
     },
     children: [
         {
-            path: 'pagemain',
-            name: 'componentExamplePagemain',
-            component: () => import(/* webpackChunkName: 'component_example' */ '@/views/component_example/pagemain'),
-            meta: {
-                title: '空白页'
-            }
-        },
-        {
             path: 'pageheader',
             name: 'componentExamplePageheader',
             component: () => import(/* webpackChunkName: 'component_example' */ '@/views/component_example/pageheader'),
             meta: {
                 title: '页头'
+            }
+        },
+        {
+            path: 'pagemain',
+            name: 'componentExamplePagemain',
+            component: () => import(/* webpackChunkName: 'component_example' */ '@/views/component_example/pagemain'),
+            meta: {
+                title: '内容块'
             }
         },
         {

@@ -1,9 +1,8 @@
 <template>
     <div>
+        <page-header title="图片预览" content="ImagePreview" />
         <page-main>
             <image-preview src="https://s1.ax1x.com/2020/07/03/NOeqld.jpg" :width="200" />
-            <image-preview src="http://image.lookbi.com/four_season/uploads/supply//1/20200623/1592845429844750.png" :width="200" :height="150" />
-            <el-divider content-position="left">加载失败</el-divider>
             <image-preview src="" width="100px" height="100px" />
         </page-main>
     </div>

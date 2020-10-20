@@ -1,5 +1,11 @@
 <template>
     <div>
+        <page-header title="批量操作栏">
+            <template #content>
+                <p>BatchActionBar</p>
+                <p style="margin-bottom: 0;">该组件需要和 ElTable 搭配使用</p>
+            </template>
+        </page-header>
         <page-main>
             <batch-action-bar :data="dataList" :selection-data="selectionDataList" @checkAll="$refs.table.toggleAllSelection()" @checkNull="$refs.table.clearSelection()">
                 <el-button size="small">单个批量操作按钮</el-button>

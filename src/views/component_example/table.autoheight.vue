@@ -1,6 +1,6 @@
 <template>
     <div class="table-auto-height">
-        <page-header title="表格自适应" content="缩小浏览器窗口高度试试" />
+        <page-header title="表格自适应" content="缩小浏览器窗口高度看看效果。该演示非组件，由于实际页面情况复杂且不可控，故提供了一种实现思路" />
         <page-main>
             <el-table :data="dataList" border stripe highlight-current-row>
                 <el-table-column type="index" width="50" />

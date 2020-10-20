@@ -2,9 +2,11 @@
     <div class="header">
         <div>
             <div class="title">{{ title }}</div>
-            <div v-if="content" class="content">{{ content }}</div>
+            <div class="content">
+                <slot name="content">{{ content }}</slot>
+            </div>
         </div>
-        <div v-if="$slots.default">
+        <div>
             <slot />
         </div>
     </div>
@@ -42,6 +44,9 @@ export default {
         color: #909399;
         font-size: 14px;
         margin-top: 10px;
+        &:empty {
+            display: none;
+        }
     }
 }
 </style>

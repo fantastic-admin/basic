@@ -1,11 +1,13 @@
 <template>
     <div>
-        <page-main>
-            <el-divider content-position="left">单图上传</el-divider>
+        <page-header title="上传" content="ImageUpload / ImagesUpload / FileUpload" />
+        <page-main title="单图上传">
             <image-upload :url.sync="image" action="http://scrm.1daas.com/api/upload/upload" name="image" :width="250" :height="150" :data="{'token':'TKD628431923530324'}" @onSuccess="handleSuccess1" />
-            <el-divider content-position="left">多图上传（默认最多3张）</el-divider>
+        </page-main>
+        <page-main title="多图上传（默认最多3张）">
             <images-upload :url="images" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{'token':'TKD628431923530324'}" @onSuccess="handleSuccess2" />
-            <el-divider content-position="left">文件上传（默认最多3个）</el-divider>
+        </page-main>
+        <page-main title="文件上传（默认最多3个）">
             <file-upload :files="files" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{'token':'TKD628431923530324'}" @onSuccess="handleSuccess3" />
         </page-main>
     </div>

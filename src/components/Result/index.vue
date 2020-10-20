@@ -47,7 +47,7 @@ $warning: #e6a23c;
 $error: #f56c6c;
 .result {
     width: 72%;
-    margin: 0 auto;
+    margin: 20px auto 0;
     text-align: center;
     .icon {
         i {

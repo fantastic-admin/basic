@@ -1,13 +1,10 @@
 <template>
     <div>
-        <el-image class="img" :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" @click="dialogVisible = true">
+        <el-image class="img" :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]">
             <div slot="error" class="image-slot">
                 <svg-icon name="image-load-fail" />
             </div>
         </el-image>
-        <el-dialog :visible.sync="dialogVisible" title="预览" width="800px">
-            <img :src="src" style="display: block; max-width: 100%; margin: 0 auto;">
-        </el-dialog>
     </div>
 </template>
 
@@ -55,7 +52,7 @@ export default {
         transition: all 0.3s;
         cursor: pointer;
         &:hover {
-            transform: scale(1.2) rotateZ(-10deg);
+            transform: scale(1.2);
         }
     }
     ::v-deep .image-slot {

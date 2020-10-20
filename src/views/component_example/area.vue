@@ -1,5 +1,6 @@
 <template>
     <div>
+        <page-header title="省市区联动" content="CascaderArea" />
         <page-main>
             <cascader-area v-model="area" />
         </page-main>
