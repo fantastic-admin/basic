@@ -21,9 +21,11 @@
 
 [专业版](https://hooray.gitee.io/fantastic-admin/pro)（付费，购买方式请查看演示地址首页说明）
 
-## 文档
+## 技术支持
 
-[点击查看](https://hooray.gitee.io/fantastic-admin)
+[开发文档](https://hooray.gitee.io/fantastic-admin)
+
+技术交流QQ群：1001394973
 
 ## 预览
 
