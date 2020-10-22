@@ -68,11 +68,6 @@ export default {
                 setTimeout(() => {
                     this.$refs.input.$el.children[0].focus()
                 }, 100)
-                if (this.sourceList.length == 0) {
-                    this.$store.state.global.allRoutes.map(item => {
-                        this.getSourceList(item.children)
-                    })
-                }
             } else {
                 document.querySelector('body').classList.remove('hidden')
                 setTimeout(() => {
@@ -82,7 +77,11 @@ export default {
         }
     },
     created() {},
-    mounted() {},
+    mounted() {
+        this.$store.state.global.allRoutes.map(item => {
+            this.getSourceList(item.children)
+        })
+    },
     methods: {
         isExternal(path) {
             return /^(https?:|mailto:|tel:)/.test(path)
