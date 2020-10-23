@@ -143,7 +143,7 @@ export default {
         }
     },
     mounted() {
-        this.$hotkeys('ctrl+s', e => {
+        this.$hotkeys('alt+s', e => {
             e.preventDefault()
             this.$store.commit('global/toggleSearch')
         })

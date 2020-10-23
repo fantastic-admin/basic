@@ -3,7 +3,7 @@
         <div class="container">
             <div class="search-box" @click.stop>
                 <el-input ref="input" v-model="search" prefix-icon="el-icon-search" placeholder="搜索页面" clearable @keydown.esc.native="$store.commit('global/toggleSearch')" />
-                <div class="tips">你可以使用快捷键<span>ctrl</span>+<span>s</span>唤醒搜索面板，按<span>esc</span>退出</div>
+                <div class="tips">你可以使用快捷键<span>alt</span>+<span>s</span>唤醒搜索面板，按<span>esc</span>退出</div>
             </div>
             <div ref="search" class="result">
                 <router-link v-for="item in resultList" :key="item.path" v-slot="{ href, route, navigate }" :to="item.path">
@@ -174,14 +174,14 @@ export default {
     .container {
         display: flex;
         flex-direction: column;
-        width: 800px;
+        max-width: 800px;
         height: 100%;
         margin: 0 auto;
         transition: all 0.3s;
         transform: scale(1.1);
         filter: blur(10px);
         .search-box {
-            margin-top: 50px;
+            margin: 50px 20px 0;
             ::v-deep .el-input__inner {
                 height: 52px;
                 line-height: 52px;
@@ -202,6 +202,7 @@ export default {
             }
         }
         .result {
+            margin: 0 20px;
             max-height: calc(100% - 250px);
             border-radius: 5px;
             overflow: auto;
@@ -229,7 +230,7 @@ export default {
                     }
                 }
                 .icon {
-                    width: 66px;
+                    flex: 0 0 66px;
                     text-align: center;
                     .svg-icon {
                         color: #999;
@@ -245,10 +246,12 @@ export default {
                     justify-content: space-around;
                     border-left: 1px solid #ebeef5;
                     padding: 5px 10px 7px;
+                    @include text-overflow(1, true);
                     .title {
                         font-size: 18px;
                         font-weight: bold;
                         color: #666;
+                        @include text-overflow(1, true);
                         .svg-icon {
                             font-size: 14px;
                         }
@@ -259,6 +262,7 @@ export default {
                         font-size: 12px;
                         color: #c0c4cc;
                         transition: all 0.3s;
+                        @include text-overflow(1, true);
                     }
                     .breadcrumb {
                         span:last-child i {
