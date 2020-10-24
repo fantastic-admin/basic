@@ -41,8 +41,7 @@
                         <el-radio-button :label="true">开启</el-radio-button>
                         <el-radio-button :label="false">关闭</el-radio-button>
                     </el-radio-group>
-                    <el-alert title="该功能为页面右上角的刷新按钮" type="info" :closable="false" />
-                    <el-alert title="不建议开启，该功能使用场景极少，用户习惯于通过浏览器上的刷新按钮，或者 F5 键进行页面刷新" type="warning" :closable="false" />
+                    <el-alert title="该功能为页面右上角的刷新按钮，开启时会阻止 F5 键原刷新功能，并采用框架提供的刷新模式进行页面刷新" type="info" :closable="false" />
                 </el-form-item>
                 <el-form-item label="加载进度条">
                     <el-radio-group v-model="enableProgress">

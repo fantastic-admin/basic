@@ -1,5 +1,5 @@
 import Layout from '@/layout'
-import KeepAliveLayout from '@/layout/keepAlive'
+import EmptyLayout from '@/layout/empty'
 
 export default {
     path: '/breadcrumb_example',
@@ -32,7 +32,7 @@ export default {
         {
             path: 'list2',
             name: 'breadcrumbExampleList2',
-            component: KeepAliveLayout,
+            component: EmptyLayout,
             redirect: '/breadcrumb_example/list2',
             meta: {
                 title: '列表2（层级模式）'

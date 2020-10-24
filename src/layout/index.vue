@@ -88,7 +88,7 @@
                     <div class="main">
                         <transition name="main" mode="out-in">
                             <keep-alive :include="$store.state.keepAlive.list">
-                                <RouterView />
+                                <RouterView :key="$route.path" />
                             </keep-alive>
                         </transition>
                     </div>
@@ -106,6 +106,7 @@
 import variables from '@/assets/styles/resources/variables.scss'
 
 export default {
+    inject: ['reload'],
     name: 'Layout',
     data() {
         return {
@@ -144,8 +145,16 @@ export default {
     },
     mounted() {
         this.$hotkeys('alt+s', e => {
-            e.preventDefault()
-            this.$store.commit('global/toggleSearch')
+            if (this.$store.state.global.enableNavSearch) {
+                e.preventDefault()
+                this.$store.commit('global/toggleSearch')
+            }
+        })
+        this.$hotkeys('f5', e => {
+            if (this.$store.state.global.enablePageReload) {
+                e.preventDefault()
+                this.reload(2)
+            }
         })
         window.addEventListener('scroll', this.onScroll)
     },

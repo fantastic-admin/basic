@@ -1,5 +1,5 @@
 import Layout from '@/layout'
-import KeepAliveLayout from '@/layout/keepAlive'
+import EmptyLayout from '@/layout/empty'
 
 export default {
     path: '/multilevel_menu_example',
@@ -22,7 +22,7 @@ export default {
         {
             path: 'level2',
             name: 'multilevelMenuExample2',
-            component: KeepAliveLayout,
+            component: EmptyLayout,
             redirect: '/multilevel_menu_example/level2/page',
             meta: {
                 title: '导航2'
@@ -39,7 +39,7 @@ export default {
                 {
                     path: 'level3',
                     name: 'multilevelMenuExample2-2',
-                    component: KeepAliveLayout,
+                    component: EmptyLayout,
                     redirect: '/multilevel_menu_example/level2/level3/page1',
                     meta: {
                         title: '导航2-2'

@@ -1,5 +1,5 @@
 import Layout from '@/layout'
-import KeepAliveLayout from '@/layout/keepAlive'
+import EmptyLayout from '@/layout/empty'
 
 export default {
     path: '/keep_alive_example',
@@ -33,7 +33,7 @@ export default {
         },
         {
             path: 'detail2',
-            component: KeepAliveLayout,
+            component: EmptyLayout,
             redirect: '/keep_alive_example/detail2',
             meta: {
                 title: '下级路由',
@@ -51,7 +51,7 @@ export default {
                 },
                 {
                     path: 'detail3',
-                    component: KeepAliveLayout,
+                    component: EmptyLayout,
                     redirect: '/keep_alive_example/detail2/detail3',
                     meta: {
                         title: '下下级路由',
