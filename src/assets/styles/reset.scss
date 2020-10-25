@@ -34,15 +34,6 @@ body {
 * {
     box-sizing: inherit;
 }
-// remix icon
-[class^="ri-"],
-[class*=" ri-"] {
-    vertical-align: middle;
-}
-.el-button [class*=ri-] + span {
-    margin-left: 5px;
-    vertical-align: middle;
-}
 // textarea 字体跟随系统
 textarea {
     font-family: inherit;
