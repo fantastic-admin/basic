@@ -45,15 +45,18 @@
                 <el-alert :title="`上传图片支持 ${ ext.join(' / ') } 格式，单张图片大小不超过 ${ size }MB，建议图片尺寸为 ${width}*${height}，且图片数量不超过 ${ max } 张`" type="info" show-icon :closable="false" />
             </div>
         </div>
-        <el-dialog :visible.sync="dialogVisible" title="预览" width="800px">
-            <img :src="dialogImageUrl" style="display: block; max-width: 100%; margin: 0 auto;">
-        </el-dialog>
+        <el-image-viewer v-if="imageViewerVisible" :on-close="() => {imageViewerVisible = false}" :url-list="[dialogImageUrl]" />
     </div>
 </template>
 
 <script>
+import ElImageViewer from 'element-ui/packages/image/src/image-viewer'
+
 export default {
     name: 'ImagesUpload',
+    components: {
+        ElImageViewer
+    },
     props: {
         action: {
             type: String,
@@ -107,7 +110,7 @@ export default {
     data() {
         return {
             dialogImageUrl: '',
-            dialogVisible: false,
+            imageViewerVisible: false,
             progress: {
                 preview: '',
                 percent: 0
@@ -118,21 +121,24 @@ export default {
         // 预览
         preview(index) {
             this.dialogImageUrl = this.url[index]
-            this.dialogVisible = true
+            this.imageViewerVisible = true
         },
         // 移除
         remove(index) {
-            this.url.splice(index, 1)
-            this.$emit('update:url', this.url)
+            let url = this.url
+            url.splice(index, 1)
+            this.$emit('update:url', url)
         },
         // 移动
         move(index, type) {
+            let url = this.url
             if (type == 'left' && index != 0) {
-                this.url[index] = this.url.splice(index - 1, 1, this.url[index])[0]
+                url[index] = url.splice(index - 1, 1, url[index])[0]
             }
-            if (type == 'right' && index != this.url.length - 1) {
-                this.url[index] = this.url.splice(index + 1, 1, this.url[index])[0]
+            if (type == 'right' && index != url.length - 1) {
+                url[index] = url.splice(index + 1, 1, url[index])[0]
             }
+            this.$emit('update:url', url)
         },
         beforeUpload(file) {
             const fileName = file.name.split('.')
@@ -158,7 +164,7 @@ export default {
             }
         },
         onSuccess(res) {
-            this.$emit('onSuccess', res)
+            this.$emit('on-success', res)
         }
     }
 }

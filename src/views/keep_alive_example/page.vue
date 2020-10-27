@@ -20,13 +20,6 @@
 <script>
 export default {
     name: 'KeepAliveExamplePage',
-    props: {},
-    data() {
-        return {
-            openKeepAlive: false,
-            num: 1
-        }
-    },
     beforeRouteEnter(to, from, next) {
         // 进入页面时，先将当前页面的 name 信息存入 keep-alive 全局状态
         next(vm => {
@@ -45,6 +38,13 @@ export default {
             this.$store.commit('keepAlive/clean')
         }
         next()
+    },
+    props: {},
+    data() {
+        return {
+            openKeepAlive: false,
+            num: 1
+        }
     },
     created() {},
     mounted() {},

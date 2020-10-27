@@ -134,7 +134,7 @@ export default {
             }
         },
         onSuccess(res) {
-            this.$emit('onSuccess', res)
+            this.$emit('on-success', res)
         }
     }
 }

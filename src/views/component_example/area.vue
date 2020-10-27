@@ -9,8 +9,8 @@
 
 <script>
 export default {
-    inject: ['reload'],
     name: 'ComponentExampleArea',
+    inject: ['reload'],
     props: {},
     data() {
         return {

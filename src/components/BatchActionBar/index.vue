@@ -34,7 +34,7 @@ export default {
                 return flag
             },
             set: function(newVal) {
-                newVal ? this.$emit('checkAll') : this.$emit('checkNull')
+                newVal ? this.$emit('check-all') : this.$emit('check-null')
             }
         },
         isIndeterminate() {

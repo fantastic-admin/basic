@@ -70,6 +70,12 @@
 <script>
 export default {
     name: 'PersonalSetting',
+    beforeRouteLeave(to, from, next) {
+        if (['personalEditPassword'].includes(to.name)) {
+            this.$store.commit('keepAlive/add', 'PersonalSetting')
+        }
+        next()
+    },
     props: {},
     data() {
         return {
@@ -97,12 +103,6 @@ export default {
                 name: 'personalEditPassword'
             })
         }
-    },
-    beforeRouteLeave(to, from, next) {
-        if (['personalEditPassword'].includes(to.name)) {
-            this.$store.commit('keepAlive/add', 'PersonalSetting')
-        }
-        next()
     }
 }
 </script>

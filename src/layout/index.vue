@@ -106,8 +106,8 @@
 import variables from '@/assets/styles/resources/variables.scss'
 
 export default {
-    inject: ['reload'],
     name: 'Layout',
+    inject: ['reload'],
     data() {
         return {
             routePath: '',

@@ -58,22 +58,23 @@ export default {
             },
             // 将 code 码转成中文
             set: function(value) {
-                const [pCode, cCode, aCode] = value
+                let [pCode, cCode, aCode] = value
                 area.map(p => {
                     if (p.code === pCode) {
-                        this.value[0] = p.name
+                        pCode = p.name
                         p.children.map(c => {
                             if (c.code === cCode) {
-                                this.value[1] = c.name
+                                cCode = c.name
                                 c.children.map(a => {
                                     if (a.code === aCode) {
-                                        this.value[2] = a.name
+                                        aCode = a.name
                                     }
                                 })
                             }
                         })
                     }
                 })
+                this.$emit('update:value', [pCode, cCode, aCode])
             }
         }
     }

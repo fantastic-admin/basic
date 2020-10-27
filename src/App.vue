@@ -18,7 +18,7 @@ export default {
     },
     watch: {
         $route: 'routeChange',
-        '$store.state.keepAlive.list': val => {
+        '$store.state.keepAlive.list'(val) {
             process.env.NODE_ENV == 'development' && console.log(`[ keepAliveList ] ${val}`)
         }
     },

@@ -81,7 +81,7 @@ export default {
             this.$message.warning('文件上传超过限制')
         },
         onSuccess(res, file) {
-            this.$emit('onSuccess', res, file)
+            this.$emit('on-success', res, file)
         }
     }
 }

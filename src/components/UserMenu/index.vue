@@ -41,8 +41,8 @@
 import screenfull from 'screenfull'
 
 export default {
-    inject: ['reload'],
     name: 'UserMenu',
+    inject: ['reload'],
     data() {
         return {
             isFullscreenEnable: screenfull.isEnabled,
