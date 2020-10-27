@@ -1,6 +1,10 @@
 <template>
     <div class="user">
         <div class="tools">
+            <span class="item item-pro" @click="pro">
+                <svg-icon name="pro" />
+                <span class="title">查看专业版</span>
+            </span>
             <el-tooltip v-if="$store.state.global.enableNavSearch" effect="dark" content="搜索页面" placement="bottom">
                 <span class="item" @click="$store.commit('global/toggleSearch')">
                     <svg-icon name="search" />
@@ -86,6 +90,9 @@ export default {
                     })
                     break
             }
+        },
+        pro() {
+            window.open('https://hooray.gitee.io/fantastic-admin/pro', 'top')
         }
     }
 }
@@ -105,6 +112,31 @@ export default {
         outline: none;
         cursor: pointer;
         transition: all 0.3s;
+    }
+    .item-pro {
+        display: inline-block;
+        animation: pro-text 3s ease-out infinite;
+        @keyframes pro-text {
+            0%,
+            20% {
+                transform: scale(1);
+            }
+            50%,
+            70% {
+                transform: scale(1.2) translateX(-5px) translateY(-2px);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .title {
+            padding-left: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            background-image: linear-gradient(to right, #ffa237, #fc455d);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 }
 .user-container {
