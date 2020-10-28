@@ -33,10 +33,16 @@
 
 > 预览截图为专业版
 
-![](https://hooray.gitee.io/fantastic-admin/preview1.png)
-![](https://hooray.gitee.io/fantastic-admin/preview2.png)
-![](https://hooray.gitee.io/fantastic-admin/preview3.png)
-![](https://hooray.gitee.io/fantastic-admin/preview4.png)
+<table>
+    <tr>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview1.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview2.png" /></td>
+    </tr>
+    <tr>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview3.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview4.png" /></td>
+    </tr>
+</table>
 
 ## 支持
 
