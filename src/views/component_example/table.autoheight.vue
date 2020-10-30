@@ -1,6 +1,11 @@
 <template>
-    <div class="table-auto-height">
-        <page-header title="表格自适应" content="缩小浏览器窗口高度看看效果。该演示非组件，由于实际页面情况复杂且不可控，故提供了一种实现思路" />
+    <AbsoluteContainer>
+        <page-header title="表格自适应">
+            <template #content>
+                <p>AbsoluteContainer</p>
+                <p style="margin-bottom: 0;">该组件是一个 absolute 固定容器，表格自适应需要自行实现，可参考演示源码，缩小浏览器窗口高度可查看最终效果</p>
+            </template>
+        </page-header>
         <page-main>
             <el-table :data="dataList" border stripe highlight-current-row>
                 <el-table-column type="index" width="50" />
@@ -8,13 +13,14 @@
                 <el-table-column prop="name" label="姓名" width="180" />
                 <el-table-column prop="address" label="地址" />
             </el-table>
+            <el-button type="primary">新增</el-button>
         </page-main>
-    </div>
+    </AbsoluteContainer>
 </template>
 
 <script>
 export default {
-    name: 'ComponentExampleBatchactionbar',
+    name: 'ComponentExampleAbsoluteContainer',
     props: {},
     data() {
         return {
@@ -136,19 +142,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.table-auto-height {
-    position: absolute;
-    height: calc(100% - #{$g-breadcrumb-height});
-    width: 100%;
-}
 .page-main {
     display: flex;
     flex-direction: column;
 
     // 减去的 40px 为 page-main 的上下 margin
-    // 减去的 91px 为 page-header 的高度，如果没有设置，可以去掉
+    // 减去的 130px 为 page-header 的高度，如果没有设置，可以去掉
 
-    height: calc(100% - 40px - 91px);
+    height: calc(100% - 40px - 130px);
     ::v-deep .el-table {
         height: 100%;
         .el-table__body-wrapper {
