@@ -17,7 +17,7 @@
                                 }" @click="$store.commit('global/switchHeader', index)"
                                 >
                                     <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
-                                    <span>{{ item.meta.title }}</span>
+                                    <span v-if="item.meta.title">{{ item.meta.title }}</span>
                                 </div>
                             </template>
                         </div>
@@ -218,7 +218,9 @@ header {
             }
             .svg-icon {
                 font-size: 20px;
-                margin-right: 5px;
+                & + span {
+                    margin-left: 5px;
+                }
             }
         }
     }
@@ -382,7 +384,7 @@ header + .wrapper {
     .main-container {
         .breadcrumb-container {
             top: $g-header-height;
-            .user {
+            ::v-deep .user {
                 display: none;
             }
         }

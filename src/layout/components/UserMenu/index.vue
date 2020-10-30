@@ -28,7 +28,9 @@
         </div>
         <el-dropdown class="user-container" @command="handleCommand">
             <div class="user-wrapper">
-                <el-avatar size="medium" />
+                <el-avatar size="medium">
+                    <i class="el-icon-user-solid" />
+                </el-avatar>
                 {{ $store.state.token.account }}
                 <i class="el-icon-caret-bottom" />
             </div>
