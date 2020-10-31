@@ -1582,10 +1582,10 @@
   resolved "https://registry.npmjs.org/@vue/cli-overlay/-/cli-overlay-4.5.8.tgz#5b71b81bd490b9b596cfdda78f90155643e037d4"
   integrity sha512-M6q4QPKQfErHk54ycxBASgBadgdsK45f6v2NWUTAiFXdTtqv1Z7gR8JAbQhiXbni/m9571bLJnZFv5c8uhAHnw==
 
-"@vue/cli-plugin-babel@^4.5.8":
+"@vue/cli-plugin-babel@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.npmjs.org/@vue/cli-plugin-babel/-/cli-plugin-babel-4.5.8.tgz#5759e0d24c568cb145e7d0b307497ce64f472cb0"
-  integrity sha512-2quuLuCZq2vH29xfp66L5YfUxQvyMX9te5jMslfQGVzvUmFpPbz8ceioZYW9+VqWjg8pzqSuBE+ANJLWdy2RtQ==
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-babel/download/@vue/cli-plugin-babel-4.5.8.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-plugin-babel%2Fdownload%2F%40vue%2Fcli-plugin-babel-4.5.8.tgz#5759e0d24c568cb145e7d0b307497ce64f472cb0"
+  integrity sha1-V1ng0kxWjLFF59CzB0l85k9HLLA=
   dependencies:
     "@babel/core" "^7.11.0"
     "@vue/babel-preset-app" "^4.5.8"
@@ -1595,10 +1595,10 @@
     thread-loader "^2.1.3"
     webpack "^4.0.0"
 
-"@vue/cli-plugin-eslint@^4.5.8":
+"@vue/cli-plugin-eslint@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.npmjs.org/@vue/cli-plugin-eslint/-/cli-plugin-eslint-4.5.8.tgz#fce1ed659dbb50de7477592591348cf29f3353ff"
-  integrity sha512-1lg3K2D/harXbN4FvRoA1b0X9947H+G4Ql/43rxJY39OqswfK/d1ck438Fo9M4l1+zhBSUNDmcjn7Q2EH6qWmA==
+  resolved "https://registry.npm.taobao.org/@vue/cli-plugin-eslint/download/@vue/cli-plugin-eslint-4.5.8.tgz?cache=0&sync_timestamp=1603104207483&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-plugin-eslint%2Fdownload%2F%40vue%2Fcli-plugin-eslint-4.5.8.tgz#fce1ed659dbb50de7477592591348cf29f3353ff"
+  integrity sha1-/OHtZZ27UN50d1klkTSM8p8zU/8=
   dependencies:
     "@vue/cli-shared-utils" "^4.5.8"
     eslint-loader "^2.2.1"
@@ -1619,10 +1619,10 @@
   resolved "https://registry.npmjs.org/@vue/cli-plugin-vuex/-/cli-plugin-vuex-4.5.8.tgz#8122ae93bf59327d3a0063c0c6da51513a1e2456"
   integrity sha512-wU9WPhay1zBxtdd/HLRYhFRLBbG9lw3YTBJep9sTnYwUeXiEgum4O88Q2j6cwBBPPHMgeMrKMPHS85Jf4hMc0g==
 
-"@vue/cli-service@^4.5.8":
+"@vue/cli-service@~4.5.8":
   version "4.5.8"
-  resolved "https://registry.npmjs.org/@vue/cli-service/-/cli-service-4.5.8.tgz#9fe58bc7c77c5121eabb940f80e06c18dab123ea"
-  integrity sha512-YcVEJvA5vQOcfRzhCQDfHxRW9WHvKqlQeiuSvNddfV2uQqKD3ifhsNYiZZuFvbev9qgRUmtmxSafpwYzj/LLBw==
+  resolved "https://registry.npm.taobao.org/@vue/cli-service/download/@vue/cli-service-4.5.8.tgz?cache=0&sync_timestamp=1603104211861&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40vue%2Fcli-service%2Fdownload%2F%40vue%2Fcli-service-4.5.8.tgz#9fe58bc7c77c5121eabb940f80e06c18dab123ea"
+  integrity sha1-n+WLx8d8USHqu5QPgOBsGNqxI+o=
   dependencies:
     "@intervolga/optimize-cssnano-plugin" "^1.0.5"
     "@soda/friendly-errors-webpack-plugin" "^1.7.1"
@@ -1871,10 +1871,10 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@winner-fed/vue-cli-plugin-stylelint@^1.0.4":
+"@winner-fed/vue-cli-plugin-stylelint@~1.0.4":
   version "1.0.4"
-  resolved "https://registry.npmjs.org/@winner-fed/vue-cli-plugin-stylelint/-/vue-cli-plugin-stylelint-1.0.4.tgz#948836bdcb174f05a79ef0a5c45922ec9e9d1f6f"
-  integrity sha512-XZupxQzieIL1088YbNkqnMLOn+vuWsYqvTWI/IUitcr2vYGDjEbCX4V8D6+0QrVBNwmZ2i2rTm56zscVffxjkg==
+  resolved "https://registry.npm.taobao.org/@winner-fed/vue-cli-plugin-stylelint/download/@winner-fed/vue-cli-plugin-stylelint-1.0.4.tgz#948836bdcb174f05a79ef0a5c45922ec9e9d1f6f"
+  integrity sha1-lIg2vcsXTwWnnvClxFki7J6dH28=
   dependencies:
     chalk "^4.1.0"
     inquirer "^7.3.2"
