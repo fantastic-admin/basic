@@ -104,6 +104,8 @@ export default {
 .user {
     display: flex;
     align-items: center;
+    padding: 0 20px;
+    white-space: nowrap;
 }
 .tools {
     margin-right: 20px;

@@ -54,7 +54,6 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
     height: $g-breadcrumb-height;
     background-color: #fff;
     transition: 0.3s;
@@ -65,10 +64,12 @@ export default {
     .left-box {
         display: flex;
         align-items: center;
+        padding-right: 50px;
+        overflow: hidden;
+        mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 50px), transparent);
         .sidebar-collapse {
             display: flex;
             align-items: center;
-            margin-left: -20px;
             padding: 0 20px;
             height: 50px;
             cursor: pointer;
@@ -82,15 +83,21 @@ export default {
             &.is-collapse .svg-icon {
                 transform: rotateZ(-180deg);
             }
-        }
-    }
-    ::v-deep .el-breadcrumb {
-        .el-breadcrumb__item {
-            span {
-                font-weight: normal;
+            & + .el-breadcrumb {
+                margin-left: 0;
             }
-            &:last-child span {
-                color: #97a8be;
+        }
+        ::v-deep .el-breadcrumb {
+            margin-left: 20px;
+            white-space: nowrap;
+            .el-breadcrumb__item {
+                float: initial;
+                span {
+                    font-weight: normal;
+                }
+                &:last-child span {
+                    color: #97a8be;
+                }
             }
         }
     }

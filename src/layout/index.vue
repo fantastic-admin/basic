@@ -225,6 +225,7 @@ header {
         }
     }
     ::v-deep .user {
+        padding: 0;
         .user-container {
             color: #fff;
             font-size: 16px;

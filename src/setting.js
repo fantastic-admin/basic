@@ -37,8 +37,8 @@ let globalSettings = {
     enableThemeSetting: true
 }
 
-// 演示环境开启全部功能（这部分代码可删除，仅方便作者打包演示环境）
-if (process.env.VUE_APP_TYPE == 'example') {
+// 演示&开发环境开启全部功能（这部分代码可删除，仅方便作者打包演示环境）
+if (process.env.VUE_APP_TYPE == 'example' || process.env.NODE_ENV == 'development') {
     globalSettings.openPermission = true
     globalSettings.enableSidebarCollapse = true
     globalSettings.enableFullscreen = true
