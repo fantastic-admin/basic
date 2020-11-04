@@ -175,6 +175,12 @@ router.beforeEach(async(to, from, next) => {
                 })
             }
         } else {
+            // 百度统计代码
+            if (process.env.VUE_APP_TYPE == 'example') {
+                if (window._hmt) {
+                    window._hmt.push(['_trackPageview', '/#' + to.fullPath])
+                }
+            }
             next()
         }
     } else {
@@ -186,6 +192,12 @@ router.beforeEach(async(to, from, next) => {
                 }
             })
         } else {
+            // 百度统计代码
+            if (process.env.VUE_APP_TYPE == 'example') {
+                if (window._hmt) {
+                    window._hmt.push(['_trackPageview', '/#' + to.fullPath])
+                }
+            }
             next()
         }
     }
