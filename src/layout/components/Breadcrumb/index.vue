@@ -91,7 +91,8 @@ export default {
             margin-left: 20px;
             white-space: nowrap;
             .el-breadcrumb__item {
-                float: initial;
+                display: inline-block;
+                float: none;
                 span {
                     font-weight: normal;
                 }
