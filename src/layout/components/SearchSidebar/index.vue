@@ -9,7 +9,7 @@
                 <router-link v-for="item in resultList" :key="item.path" v-slot="{ href, navigate }" :to="item.path">
                     <a :href="isExternal(item.path) ? item.path : href" class="item" :target="isExternal(item.path) ? '_blank' : '_self'" @click="navigate">
                         <div class="icon">
-                            <svg-icon :name="item.icon" />
+                            <svg-icon v-if="item.icon" :name="item.icon" />
                         </div>
                         <div class="info">
                             <div class="title">

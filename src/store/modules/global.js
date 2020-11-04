@@ -129,7 +129,7 @@ const mutations = {
     },
     setHeaderActive(state, currentPath) {
         state.allRoutes.map((item, index) => {
-            if (item.children.some(r => currentPath.indexOf(r.path + '/') === 0)) {
+            if (item.children.some(r => currentPath.indexOf(r.path + '/') === 0 || currentPath == r.path)) {
                 state.headerNavActive = index
             }
         })

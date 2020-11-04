@@ -326,7 +326,6 @@ header {
         .el-menu {
             border-right: 0;
             padding-top: $g-breadcrumb-height;
-            padding-bottom: 30px;
             &:not(.el-menu--collapse) {
                 width: inherit;
             }

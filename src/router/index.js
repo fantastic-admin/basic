@@ -72,6 +72,7 @@ import BreadcrumbExample from './modules/breadcrumb.example'
 import KeepAliveExample from './modules/keep.alive.example'
 import ComponentExample from './modules/component.example'
 import PermissionExample from './modules/permission.example'
+import VideosExample from './modules/videos.example'
 import ExTernalLinkExample from './modules/external.link.example'
 
 // 当 children 不为空的主导航只有一项时，则隐藏
@@ -87,6 +88,15 @@ let asyncRoutes = [
             KeepAliveExample,
             ComponentExample,
             PermissionExample
+        ]
+    },
+    {
+        meta: {
+            title: '教程',
+            icon: 'sidebar-videos'
+        },
+        children: [
+            ...VideosExample
         ]
     },
     {
