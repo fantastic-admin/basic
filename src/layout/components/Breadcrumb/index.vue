@@ -110,9 +110,6 @@ export default {
 .breadcrumb-enter,
 .breadcrumb-leave-active {
     opacity: 0;
-    transform: translateX(20px);
-}
-.breadcrumb-leave-active {
-    position: absolute;
+    transform: translateX(30px) skewX(-50deg);
 }
 </style>
