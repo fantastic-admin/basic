@@ -262,6 +262,7 @@ header {
         background-color: $g-main-sidebar-bg;
         color: #fff;
         .sidebar-logo {
+            transition: 0.3s;
             background-color: $g-main-sidebar-bg;
         }
         .nav {
@@ -311,7 +312,7 @@ header {
         }
         .sidebar-logo {
             background: $g-sub-sidebar-bg;
-            transition: box-shadow 0.5s;
+            transition: box-shadow 0.2s, background-color 0.3s, color 0.3s;
             &:not(.sidebar-logo-bg) {
                 ::v-deep span {
                     color: $g-sub-sidebar-menu-color;
@@ -327,6 +328,7 @@ header {
         .el-menu {
             border-right: 0;
             padding-top: $g-breadcrumb-height;
+            transition: border-color 0.3s, background-color 0.3s, color 0.3s;
             &:not(.el-menu--collapse) {
                 width: inherit;
             }
@@ -393,7 +395,7 @@ header + .wrapper {
 
 // 侧边栏动画
 .sidebar-enter-active {
-    transition: all 0.3s;
+    transition: all 0.2s;
 }
 .sidebar-enter,
 .sidebar-leave-active {
@@ -405,9 +407,11 @@ header + .wrapper {
 }
 
 // 主内容区动画
-.main-enter-active,
+.main-enter-active {
+    transition: all 0.2s;
+}
 .main-leave-active {
-    transition: all 0.3s;
+    transition: all 0.15s;
 }
 .main-enter {
     opacity: 0;

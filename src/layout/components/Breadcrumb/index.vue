@@ -56,7 +56,7 @@ export default {
     justify-content: space-between;
     height: $g-breadcrumb-height;
     background-color: #fff;
-    transition: 0.3s;
+    transition: 0.3s, box-shadow 0.2s;
     box-shadow: 0 0 1px 0 #ccc;
     &.shadow {
         box-shadow: 0 10px 10px -10px #ccc;
@@ -105,7 +105,7 @@ export default {
 }
 // 面包屑动画
 .breadcrumb-enter-active {
-    transition: all 0.3s;
+    transition: all 0.25s;
 }
 .breadcrumb-enter,
 .breadcrumb-leave-active {

@@ -159,7 +159,7 @@ export default {
     height: 100%;
     background-color: rgba($color: #000, $alpha: 0.5);
     backdrop-filter: blur(10px);
-    transition: all 0.3s;
+    transition: all 0.2s;
     transform: translateZ(0);
     opacity: 0;
     visibility: hidden;
@@ -177,7 +177,7 @@ export default {
         max-width: 800px;
         height: 100%;
         margin: 0 auto;
-        transition: all 0.3s;
+        transition: all 0.2s;
         transform: scale(1.1);
         filter: blur(10px);
         .search-box {
