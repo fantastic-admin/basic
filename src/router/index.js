@@ -178,7 +178,7 @@ router.beforeEach(async(to, from, next) => {
             // 百度统计代码
             if (process.env.VUE_APP_TYPE == 'example') {
                 if (window._hmt) {
-                    window._hmt.push(['_trackPageview', '/#' + to.fullPath])
+                    window._hmt.push(['_trackPageview', location.pathname + '#' + to.fullPath])
                 }
             }
             next()
@@ -195,7 +195,7 @@ router.beforeEach(async(to, from, next) => {
             // 百度统计代码
             if (process.env.VUE_APP_TYPE == 'example') {
                 if (window._hmt) {
-                    window._hmt.push(['_trackPageview', '/#' + to.fullPath])
+                    window._hmt.push(['_trackPageview', location.pathname + '#' + to.fullPath])
                 }
             }
             next()
