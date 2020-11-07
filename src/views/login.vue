@@ -139,6 +139,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+[data-mode=mobile] {
+    #login-box {
+        max-width: 80%;
+        .flex-container:first-child {
+            display: none;
+        }
+    }
+}
 ::v-deep input[type=password]::-ms-reveal {
     display: none;
 }
@@ -198,6 +206,7 @@ export default {
                 margin: 0 auto 30px;
                 text-align: center;
                 font-weight: bold;
+                @include text-overflow;
             }
         }
     }
