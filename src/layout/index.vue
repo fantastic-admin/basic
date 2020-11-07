@@ -4,7 +4,7 @@
             '--real-sidebar-width': realSidebarWidth
         }"
         >
-            <header v-if="$store.state.global.showHeader">
+            <header v-if="$store.state.global.mode == 'pc' && $store.state.global.showHeader">
                 <div class="header-container">
                     <div class="main">
                         <Logo />
@@ -26,8 +26,12 @@
                 </div>
             </header>
             <div class="wrapper">
-                <div class="sidebar-container">
-                    <div v-if="!$store.state.global.showHeader && $store.state.global.allRoutes.length > 1" class="main-sidebar-container">
+                <div :class="{
+                    'sidebar-container': true,
+                    'show': $store.state.global.mode == 'mobile' && !$store.state.global.sidebarCollapse
+                }"
+                >
+                    <div v-if="(!$store.state.global.showHeader || $store.state.global.mode == 'mobile') && $store.state.global.allRoutes.length > 1" class="main-sidebar-container">
                         <Logo :show-title="false" class="sidebar-logo" />
                         <div class="nav">
                             <template v-for="(item, index) in $store.state.global.allRoutes">
@@ -44,7 +48,7 @@
                     </div>
                     <div :class="{
                         'sub-sidebar-container': true,
-                        'is-collapse': $store.state.global.sidebarCollapse
+                        'is-collapse': $store.state.global.mode == 'pc' && $store.state.global.sidebarCollapse
                     }" @scroll="onSidebarScroll"
                     >
                         <Logo :show-logo="$store.state.global.allRoutes.length <= 1" :class="{
@@ -53,8 +57,8 @@
                             'shadow': sidebarScrollTop
                         }"
                         />
-                        <el-menu :background-color="variables.g_sub_sidebar_bg" :text-color="variables.g_sub_sidebar_menu_color" :active-text-color="variables.g_sub_sidebar_menu_active_color" unique-opened :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.global.sidebarCollapse" :collapse-transition="false" :class="{
-                            'is-collapse-without-logo': $store.state.global.allRoutes.length > 1 && $store.state.global.sidebarCollapse
+                        <el-menu :background-color="variables.g_sub_sidebar_bg" :text-color="variables.g_sub_sidebar_menu_color" :active-text-color="variables.g_sub_sidebar_menu_active_color" unique-opened :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.global.mode == 'pc' && $store.state.global.sidebarCollapse" :collapse-transition="false" :class="{
+                            'is-collapse-without-logo': $store.state.global.allRoutes.length > 1 && $store.state.global.mode == 'pc' && $store.state.global.sidebarCollapse
                         }"
                         >
                             <transition-group name="sidebar">
@@ -63,6 +67,11 @@
                         </el-menu>
                     </div>
                 </div>
+                <div :class="{
+                    'sidebar-mask': true,
+                    'show': $store.state.global.mode == 'mobile' && !$store.state.global.sidebarCollapse
+                }" @click="$store.commit('global/toggleSidebarCollapse')"
+                />
                 <div class="main-container">
                     <Breadcrumb :class="{'shadow': scrollTop}" />
                     <div class="main">
@@ -110,15 +119,30 @@ export default {
         },
         realSidebarWidth() {
             let realSidebarWidth = 0
-            if (!this.$store.state.global.showHeader && this.$store.state.global.allRoutes.length > 1) {
-                realSidebarWidth = parseInt(variables.g_main_sidebar_width)
-            }
-            if (this.$store.state.global.sidebarCollapse) {
-                realSidebarWidth += 64
+            if (this.$store.state.global.mode == 'pc') {
+                if (!this.$store.state.global.showHeader && this.$store.state.global.allRoutes.length > 1) {
+                    realSidebarWidth = parseInt(variables.g_main_sidebar_width)
+                }
+                if (this.$store.state.global.sidebarCollapse) {
+                    realSidebarWidth += 64
+                } else {
+                    realSidebarWidth += parseInt(variables.g_sub_sidebar_width)
+                }
             } else {
-                realSidebarWidth += parseInt(variables.g_sub_sidebar_width)
+                realSidebarWidth = parseInt(variables.g_main_sidebar_width) + parseInt(variables.g_sub_sidebar_width)
             }
             return `${realSidebarWidth}px`
+        }
+    },
+    watch: {
+        '$store.state.global.sidebarCollapse'(val) {
+            if (this.$store.state.global.mode == 'mobile') {
+                if (!val) {
+                    document.querySelector('body').classList.add('hidden')
+                } else {
+                    document.querySelector('body').classList.remove('hidden')
+                }
+            }
         }
     },
     mounted() {
@@ -151,6 +175,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+[data-mode=mobile] {
+    .sidebar-container {
+        transition: 0.3s;
+        transform: translateX(calc(-1 * #{$g-sidebar-width}));
+        &.show {
+            transform: translateX(0);
+        }
+    }
+    .main-container {
+        margin-left: 0 !important;
+    }
+}
 .layout {
     height: 100%;
 }
@@ -238,11 +274,29 @@ header {
     height: 100%;
     .sidebar-container {
         position: fixed;
-        z-index: 1000;
+        z-index: 1010;
         top: 0;
         bottom: 0;
         display: flex;
         width: var(--real-sidebar-width);
+    }
+    .sidebar-mask {
+        position: fixed;
+        z-index: 1000;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba($color: #000, $alpha: 0.5);
+        backdrop-filter: blur(2px);
+        transition: all 0.2s;
+        transform: translateZ(0);
+        opacity: 0;
+        visibility: hidden;
+        &.show {
+            opacity: 1;
+            visibility: visible;
+        }
     }
     .main-sidebar-container,
     .sub-sidebar-container {

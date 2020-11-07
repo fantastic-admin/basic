@@ -40,6 +40,8 @@ function filterAsyncRoutes(routes, permissions) {
 
 const state = {
     ...setting,
+    // 显示模式，支持：mobile、pc
+    mode: 'pc',
     // 如果未开启 openPermission 则 permissionInit 和 permissions 参数不会使用到
     permissionInit: false,
     permissions: [],
@@ -117,6 +119,13 @@ const actions = {
 }
 
 const mutations = {
+    setMode(state, width) {
+        if (width < 992) {
+            state.mode = 'mobile'
+        } else {
+            state.mode = 'pc'
+        }
+    },
     setPermissions(state, permissions) {
         state.permissions = permissions
     },

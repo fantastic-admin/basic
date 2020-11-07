@@ -20,7 +20,31 @@ export default {
         $route: 'routeChange',
         '$store.state.keepAlive.list'(val) {
             process.env.NODE_ENV == 'development' && console.log(`[ keepAliveList ] ${val}`)
+        },
+        '$store.state.global.mode': {
+            handler() {
+                if (this.$store.state.global.mode == 'pc') {
+                    if (this.$store.state.global.enableSidebarCollapse) {
+                        this.$store.commit('global/updateThemeSetting', {
+                            'sidebarCollapse': false
+                        })
+                    }
+                }
+                if (this.$store.state.global.mode == 'mobile') {
+                    this.$store.commit('global/updateThemeSetting', {
+                        'sidebarCollapse': true
+                    })
+                }
+                document.body.setAttribute('data-mode', this.$store.state.global.mode)
+            },
+            immediate: true
         }
+    },
+    mounted() {
+        window.onresize = () => {
+            this.$store.commit('global/setMode', document.body.clientWidth)
+        }
+        window.onresize()
     },
     methods: {
         reload(type = 1) {

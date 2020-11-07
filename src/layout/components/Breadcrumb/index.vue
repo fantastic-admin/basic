@@ -1,14 +1,14 @@
 <template>
     <div class="breadcrumb-container">
         <div class="left-box">
-            <div v-if="$store.state.global.enableSidebarCollapse" :class="{
+            <div v-if="$store.state.global.mode == 'mobile' || $store.state.global.enableSidebarCollapse" :class="{
                 'sidebar-collapse': true,
                 'is-collapse': $store.state.global.sidebarCollapse
             }" @click="$store.commit('global/toggleSidebarCollapse')"
             >
                 <svg-icon name="collapse" />
             </div>
-            <el-breadcrumb separator-class="el-icon-arrow-right">
+            <el-breadcrumb v-if="$store.state.global.mode == 'pc'" separator-class="el-icon-arrow-right">
                 <transition-group name="breadcrumb">
                     <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="item.path">{{ item.meta.title }}</el-breadcrumb-item>
                 </transition-group>
@@ -43,6 +43,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+[data-mode=mobile] {
+    .breadcrumb-container {
+        width: 100%;
+        transform: translateX(-50%);
+    }
+}
 .breadcrumb-container {
     position: fixed;
     z-index: 999;
