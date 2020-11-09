@@ -24,17 +24,17 @@ api.interceptors.request.use(
     request => {
         if (request.method == 'post') {
             if (request.data instanceof FormData) {
-                if (store.getters['token/isLogin']) {
+                if (store.getters['user/isLogin']) {
                     // 如果是 FormData 类型（上传图片）
-                    request.data.append('token', store.state.token.token)
+                    request.data.append('token', store.state.user.token)
                 }
             } else {
                 // 带上 token
                 if (request.data == undefined) {
                     request.data = {}
                 }
-                if (store.getters['token/isLogin']) {
-                    request.data.token = store.state.token.token
+                if (store.getters['user/isLogin']) {
+                    request.data.token = store.state.user.token
                 }
                 request.data = qs.stringify(request.data)
             }
@@ -43,8 +43,8 @@ api.interceptors.request.use(
             if (request.params == undefined) {
                 request.params = {}
             }
-            if (store.getters['token/isLogin']) {
-                request.params.token = store.state.token.token
+            if (store.getters['user/isLogin']) {
+                request.params.token = store.state.user.token
             }
         }
         return request

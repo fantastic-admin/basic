@@ -2,7 +2,7 @@
     <div>
         <page-header title="权限验证" />
         <page-main>
-            <div v-if="!$store.state.global.openPermission">请到 seeting.js 里打开权限功能，再进入该页面查看演示</div>
+            <div v-if="!$store.state.settings.openPermission">请到 seeting.js 里打开权限功能，再进入该页面查看演示</div>
             <div v-else>
                 <h3>切换帐号</h3>
                 <el-radio-group v-model="account" @change="accountChange">
@@ -10,7 +10,7 @@
                     <el-radio-button label="test" />
                 </el-radio-group>
                 <h3>帐号权限</h3>
-                <div>{{ $store.state.global.permissions }}</div>
+                <div>{{ $store.state.settings.permissions }}</div>
                 <h3>鉴权组件（请对照代码查看）</h3>
                 <div>
                     <auth value="permission.browse" style="margin-bottom: 10px;">
@@ -73,12 +73,12 @@
 export default {
     data() {
         return {
-            account: this.$store.state.token.account
+            account: this.$store.state.user.account
         }
     },
     methods: {
         accountChange(val) {
-            this.$store.dispatch('token/login', {
+            this.$store.dispatch('user/login', {
                 account: val,
                 password: ''
             }).then(() => {

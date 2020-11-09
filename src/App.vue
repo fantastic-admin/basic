@@ -21,28 +21,28 @@ export default {
         '$store.state.keepAlive.list'(val) {
             process.env.NODE_ENV == 'development' && console.log(`[ keepAliveList ] ${val}`)
         },
-        '$store.state.global.mode': {
+        '$store.state.settings.mode': {
             handler() {
-                if (this.$store.state.global.mode == 'pc') {
-                    if (this.$store.state.global.enableSidebarCollapse) {
-                        this.$store.commit('global/updateThemeSetting', {
+                if (this.$store.state.settings.mode == 'pc') {
+                    if (this.$store.state.settings.enableSidebarCollapse) {
+                        this.$store.commit('settings/updateThemeSetting', {
                             'sidebarCollapse': false
                         })
                     }
                 }
-                if (this.$store.state.global.mode == 'mobile') {
-                    this.$store.commit('global/updateThemeSetting', {
+                if (this.$store.state.settings.mode == 'mobile') {
+                    this.$store.commit('settings/updateThemeSetting', {
                         'sidebarCollapse': true
                     })
                 }
-                document.body.setAttribute('data-mode', this.$store.state.global.mode)
+                document.body.setAttribute('data-mode', this.$store.state.settings.mode)
             },
             immediate: true
         }
     },
     mounted() {
         window.onresize = () => {
-            this.$store.commit('global/setMode', document.body.clientWidth)
+            this.$store.commit('settings/setMode', document.body.clientWidth)
         }
         window.onresize()
     },
@@ -65,7 +65,7 @@ export default {
     },
     metaInfo() {
         return {
-            title: this.$store.state.global.enableDynamicTitle && this.$store.state.global.title,
+            title: this.$store.state.settings.enableDynamicTitle && this.$store.state.settings.title,
             titleTemplate: title => {
                 return title ? `${title} - ${process.env.VUE_APP_TITLE}` : process.env.VUE_APP_TITLE
             }

@@ -4,17 +4,17 @@
             '--real-sidebar-width': realSidebarWidth
         }"
         >
-            <header v-if="$store.state.global.mode == 'pc' && $store.state.global.showHeader">
+            <header v-if="$store.state.settings.mode == 'pc' && $store.state.settings.showHeader">
                 <div class="header-container">
                     <div class="main">
                         <Logo />
                         <!-- 当头部导航大于 1 个的时候才会显示 -->
-                        <div v-if="$store.state.global.allRoutes.length > 1" class="nav">
-                            <template v-for="(item, index) in $store.state.global.allRoutes">
+                        <div v-if="$store.state.menu.routes.length > 1" class="nav">
+                            <template v-for="(item, index) in $store.state.menu.routes">
                                 <div v-if="item.children && item.children.length !== 0" :key="index" :class="{
                                     'item': true,
-                                    'active': index == $store.state.global.headerNavActive
-                                }" @click="$store.commit('global/switchHeader', index)"
+                                    'active': index == $store.state.settings.headerNavActive
+                                }" @click="$store.commit('settings/switchHeader', index)"
                                 >
                                     <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                                     <span v-if="item.meta.title">{{ item.meta.title }}</span>
@@ -28,17 +28,17 @@
             <div class="wrapper">
                 <div :class="{
                     'sidebar-container': true,
-                    'show': $store.state.global.mode == 'mobile' && !$store.state.global.sidebarCollapse
+                    'show': $store.state.settings.mode == 'mobile' && !$store.state.settings.sidebarCollapse
                 }"
                 >
-                    <div v-if="(!$store.state.global.showHeader || $store.state.global.mode == 'mobile') && $store.state.global.allRoutes.length > 1" class="main-sidebar-container">
+                    <div v-if="(!$store.state.settings.showHeader || $store.state.settings.mode == 'mobile') && $store.state.menu.routes.length > 1" class="main-sidebar-container">
                         <Logo :show-title="false" class="sidebar-logo" />
                         <div class="nav">
-                            <template v-for="(item, index) in $store.state.global.allRoutes">
+                            <template v-for="(item, index) in $store.state.menu.routes">
                                 <div v-if="item.children && item.children.length !== 0" :key="index" :class="{
                                     'item': true,
-                                    'active': index == $store.state.global.headerNavActive
-                                }" :title="item.meta.title" @click="$store.commit('global/switchHeader', index)"
+                                    'active': index == $store.state.menu.headerActived
+                                }" :title="item.meta.title" @click="$store.commit('menu/switchHeaderActived', index)"
                                 >
                                     <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                                     <span>{{ item.meta.title }}</span>
@@ -48,29 +48,29 @@
                     </div>
                     <div :class="{
                         'sub-sidebar-container': true,
-                        'is-collapse': $store.state.global.mode == 'pc' && $store.state.global.sidebarCollapse
+                        'is-collapse': $store.state.settings.mode == 'pc' && $store.state.settings.sidebarCollapse
                     }" @scroll="onSidebarScroll"
                     >
-                        <Logo :show-logo="$store.state.global.allRoutes.length <= 1" :class="{
+                        <Logo :show-logo="$store.state.menu.routes.length <= 1" :class="{
                             'sidebar-logo': true,
-                            'sidebar-logo-bg': $store.state.global.allRoutes.length <= 1,
+                            'sidebar-logo-bg': $store.state.menu.routes.length <= 1,
                             'shadow': sidebarScrollTop
                         }"
                         />
-                        <el-menu :background-color="variables.g_sub_sidebar_bg" :text-color="variables.g_sub_sidebar_menu_color" :active-text-color="variables.g_sub_sidebar_menu_active_color" unique-opened :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.global.mode == 'pc' && $store.state.global.sidebarCollapse" :collapse-transition="false" :class="{
-                            'is-collapse-without-logo': $store.state.global.allRoutes.length > 1 && $store.state.global.mode == 'pc' && $store.state.global.sidebarCollapse
+                        <el-menu :background-color="variables.g_sub_sidebar_bg" :text-color="variables.g_sub_sidebar_menu_color" :active-text-color="variables.g_sub_sidebar_menu_active_color" unique-opened :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.settings.mode == 'pc' && $store.state.settings.sidebarCollapse" :collapse-transition="false" :class="{
+                            'is-collapse-without-logo': $store.state.menu.routes.length > 1 && $store.state.settings.mode == 'pc' && $store.state.settings.sidebarCollapse
                         }"
                         >
                             <transition-group name="sidebar">
-                                <SidebarItem v-for="route in $store.state.global.sidebarRoutes" :key="route.path" :item="route" :base-path="route.path" />
+                                <SidebarItem v-for="route in $store.getters['menu/sidebarRoutes']" :key="route.path" :item="route" :base-path="route.path" />
                             </transition-group>
                         </el-menu>
                     </div>
                 </div>
                 <div :class="{
                     'sidebar-mask': true,
-                    'show': $store.state.global.mode == 'mobile' && !$store.state.global.sidebarCollapse
-                }" @click="$store.commit('global/toggleSidebarCollapse')"
+                    'show': $store.state.settings.mode == 'mobile' && !$store.state.settings.sidebarCollapse
+                }" @click="$store.commit('settings/toggleSidebarCollapse')"
                 />
                 <div class="main-container">
                     <Breadcrumb :class="{'shadow': scrollTop}" />
@@ -81,7 +81,7 @@
                             </keep-alive>
                         </transition>
                     </div>
-                    <Copyright v-if="$store.state.global.showCopyright" />
+                    <Copyright v-if="$store.state.settings.showCopyright" />
                 </div>
             </div>
             <el-backtop :right="20" :bottom="20" title="回到顶部" />
@@ -119,11 +119,11 @@ export default {
         },
         realSidebarWidth() {
             let realSidebarWidth = 0
-            if (this.$store.state.global.mode == 'pc') {
-                if (!this.$store.state.global.showHeader && this.$store.state.global.allRoutes.length > 1) {
+            if (this.$store.state.settings.mode == 'pc') {
+                if (!this.$store.state.settings.showHeader && this.$store.state.menu.routes.length > 1) {
                     realSidebarWidth = parseInt(variables.g_main_sidebar_width)
                 }
-                if (this.$store.state.global.sidebarCollapse) {
+                if (this.$store.state.settings.sidebarCollapse) {
                     realSidebarWidth += 64
                 } else {
                     realSidebarWidth += parseInt(variables.g_sub_sidebar_width)
@@ -135,8 +135,8 @@ export default {
         }
     },
     watch: {
-        '$store.state.global.sidebarCollapse'(val) {
-            if (this.$store.state.global.mode == 'mobile') {
+        '$store.state.settings.sidebarCollapse'(val) {
+            if (this.$store.state.settings.mode == 'mobile') {
                 if (!val) {
                     document.querySelector('body').classList.add('hidden')
                 } else {
@@ -147,13 +147,13 @@ export default {
     },
     mounted() {
         this.$hotkeys('alt+s', e => {
-            if (this.$store.state.global.enableNavSearch) {
+            if (this.$store.state.settings.enableNavSearch) {
                 e.preventDefault()
-                this.$store.commit('global/toggleSearch')
+                this.$eventBus.$emit('global-search-toggle')
             }
         })
         this.$hotkeys('f5', e => {
-            if (this.$store.state.global.enablePageReload) {
+            if (this.$store.state.settings.enablePageReload) {
                 e.preventDefault()
                 this.reload(2)
             }

@@ -36,10 +36,10 @@ export function deepClone(target) {
 export function auth(value) {
     let auth
     if (typeof value === 'string') {
-        auth = store.getters['global/hasPermission'](value)
+        auth = store.getters['user/hasPermission'](value)
     } else {
         auth = value.some(item => {
-            return store.getters['global/hasPermission'](item)
+            return store.getters['user/hasPermission'](item)
         })
     }
     return auth
@@ -47,7 +47,7 @@ export function auth(value) {
 
 export function authAll(value) {
     const auth = value.every(item => {
-        return store.getters['global/hasPermission'](item)
+        return store.getters['user/hasPermission'](item)
     })
     return auth
 }

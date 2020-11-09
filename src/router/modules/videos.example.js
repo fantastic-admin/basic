@@ -4,7 +4,6 @@ export default [
     {
         path: '/videos_example/1',
         component: Layout,
-        name: 'videosExample1',
         meta: {
             title: '01 - 开发环境配置'
         },
@@ -25,7 +24,6 @@ export default [
     {
         path: '/videos_example/2',
         component: Layout,
-        name: 'videosExample2',
         meta: {
             title: '02 - 框架配置'
         },
@@ -46,7 +44,6 @@ export default [
     {
         path: '/videos_example/3',
         component: Layout,
-        name: 'videosExample3',
         meta: {
             title: '03 - 布局和主题'
         },
@@ -67,7 +64,6 @@ export default [
     {
         path: '/videos_example/4',
         component: Layout,
-        name: 'videosExample4',
         meta: {
             title: '04 - 全局资源'
         },
@@ -88,7 +84,6 @@ export default [
     {
         path: '/videos_example/5',
         component: Layout,
-        name: 'videosExample5',
         meta: {
             title: '05 - 组件'
         },

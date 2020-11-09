@@ -1,27 +1,27 @@
 <template>
     <div class="user">
         <div class="tools">
-            <span v-if="$store.state.global.mode == 'pc'" class="item item-pro" @click="pro">
+            <span v-if="$store.state.settings.mode == 'pc'" class="item item-pro" @click="pro">
                 <svg-icon name="pro" />
                 <span class="title">查看专业版</span>
             </span>
-            <el-tooltip v-if="$store.state.global.enableNavSearch" effect="dark" content="搜索页面" placement="bottom">
-                <span class="item" @click="$store.commit('global/toggleSearch')">
+            <el-tooltip v-if="$store.state.settings.enableNavSearch" effect="dark" content="搜索页面" placement="bottom">
+                <span class="item" @click="$eventBus.$emit('global-search-toggle')">
                     <svg-icon name="search" />
                 </span>
             </el-tooltip>
-            <el-tooltip v-if="$store.state.global.mode == 'pc' && isFullscreenEnable && $store.state.global.enableFullscreen" effect="dark" content="全屏" placement="bottom">
+            <el-tooltip v-if="$store.state.settings.mode == 'pc' && isFullscreenEnable && $store.state.settings.enableFullscreen" effect="dark" content="全屏" placement="bottom">
                 <span class="item" @click="fullscreen">
                     <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
                 </span>
             </el-tooltip>
-            <el-tooltip v-if="$store.state.global.enablePageReload" effect="dark" content="刷新页面" placement="bottom">
+            <el-tooltip v-if="$store.state.settings.enablePageReload" effect="dark" content="刷新页面" placement="bottom">
                 <span class="item" @click="reload(2)">
                     <svg-icon name="reload" />
                 </span>
             </el-tooltip>
-            <el-tooltip v-if="$store.state.global.enableThemeSetting" effect="dark" content="主题配置" placement="bottom">
-                <span class="item" @click="$store.commit('global/toggleTheme')">
+            <el-tooltip v-if="$store.state.settings.enableThemeSetting" effect="dark" content="主题配置" placement="bottom">
+                <span class="item" @click="$eventBus.$emit('global-theme-toggle')">
                     <svg-icon name="theme" />
                 </span>
             </el-tooltip>
@@ -31,11 +31,11 @@
                 <el-avatar size="medium">
                     <i class="el-icon-user-solid" />
                 </el-avatar>
-                {{ $store.state.token.account }}
+                {{ $store.state.user.account }}
                 <i class="el-icon-caret-bottom" />
             </div>
             <el-dropdown-menu slot="dropdown" class="user-dropdown">
-                <el-dropdown-item v-if="$store.state.global.enableDashboard" command="dashboard">控制台</el-dropdown-item>
+                <el-dropdown-item v-if="$store.state.settings.enableDashboard" command="dashboard">控制台</el-dropdown-item>
                 <el-dropdown-item command="setting">个人设置</el-dropdown-item>
                 <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
             </el-dropdown-menu>
@@ -85,7 +85,7 @@ export default {
                     })
                     break
                 case 'logout':
-                    this.$store.dispatch('token/logout').then(() => {
+                    this.$store.dispatch('user/logout').then(() => {
                         this.$router.push({
                             name: 'login'
                         })

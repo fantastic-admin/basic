@@ -3,7 +3,8 @@
 const state = {
     account: localStorage.account,
     token: localStorage.token,
-    failure_time: localStorage.failure_time
+    failure_time: localStorage.failure_time,
+    permissions: []
 }
 
 const getters = {
@@ -16,6 +17,15 @@ const getters = {
             }
         }
         return retn
+    },
+    hasPermission: state => permissions => {
+        if (state.openPermission) {
+            return state.permissions.some(v => {
+                return v === permissions
+            })
+        } else {
+            return true
+        }
     }
 }
 
@@ -23,7 +33,7 @@ const actions = {
     // login({commit}, data) {
     //     return new Promise((resolve, reject) => {
     //         api.post('member/login', data).then(res => {
-    //             commit('setData', res.data)
+    //             commit('setUserData', res.data)
     //             resolve(res)
     //         }).catch(error => {
     //             reject(error)
@@ -33,7 +43,7 @@ const actions = {
     login({commit}, data) {
         return new Promise(resolve => {
             // 模拟登录成功，写入 token 信息
-            commit('setData', {
+            commit('setUserData', {
                 account: data.account,
                 token: '1234567890',
                 failure_time: Date.parse(new Date()) / 1000 + 24 * 60 * 60
@@ -42,13 +52,36 @@ const actions = {
         })
     },
     logout({commit}) {
-        commit('removeData')
-        commit('global/invalidRoutes', null, {root: true})
+        commit('removeUserData')
+        commit('menu/invalidRoutes', null, {root: true})
+    },
+    // 获取我的权限
+    getPermissions({state, commit}) {
+        return new Promise(resolve => {
+            // 模拟权限数据
+            let permissions
+            if (state.user.account == 'admin') {
+                permissions = [
+                    'permission.browse',
+                    'permission.create',
+                    'permission.edit',
+                    'permission.remove'
+                ]
+            } else if (state.user.account == 'test') {
+                permissions = [
+                    'permission.browse'
+                ]
+            } else {
+                permissions = []
+            }
+            commit('setPermissions', permissions)
+            resolve(permissions)
+        })
     }
 }
 
 const mutations = {
-    setData(state, data) {
+    setUserData(state, data) {
         localStorage.setItem('account', data.account)
         localStorage.setItem('token', data.token)
         localStorage.setItem('failure_time', data.failure_time)
@@ -56,13 +89,16 @@ const mutations = {
         state.token = data.token
         state.failure_time = data.failure_time
     },
-    removeData(state) {
+    removeUserData(state) {
         localStorage.removeItem('account')
         localStorage.removeItem('token')
         localStorage.removeItem('failure_time')
         state.account = ''
         state.token = ''
         state.failure_time = ''
+    },
+    setPermissions(state, permissions) {
+        state.permissions = permissions
     }
 }
 

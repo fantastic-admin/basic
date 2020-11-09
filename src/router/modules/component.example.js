@@ -3,7 +3,7 @@ import Layout from '@/layout'
 export default {
     path: '/component_example',
     component: Layout,
-    redirect: '/component_example/pagemain',
+    redirect: '/component_example/pageheader',
     name: 'componentExample',
     meta: {
         title: '基础组件',

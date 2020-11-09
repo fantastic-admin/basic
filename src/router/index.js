@@ -28,7 +28,7 @@ const constantRoutes = [
                 name: 'dashboard',
                 component: () => import('@/views/index'),
                 meta: {
-                    title: store.state.global.dashboardTitle
+                    title: store.state.settings.dashboardTitle
                 }
             },
             {
@@ -134,9 +134,9 @@ Router.prototype.replace = function replace(location) {
 }
 
 router.beforeEach(async(to, from, next) => {
-    store.state.global.enableProgress && NProgress.start()
+    store.state.settings.enableProgress && NProgress.start()
     // 已经登录，但还没根据权限动态挂载路由
-    if (store.getters['token/isLogin'] && !store.state.global.permissionInit) {
+    if (store.getters['user/isLogin'] && !store.state.menu.isGenerate) {
         /**
          * 重置 matcher
          * https://blog.csdn.net/baidu_28647571/article/details/101711682
@@ -144,7 +144,7 @@ router.beforeEach(async(to, from, next) => {
         router.matcher = new Router({
             routes: constantRoutes
         }).matcher
-        const accessRoutes = await store.dispatch('global/generateRoutes', {
+        const accessRoutes = await store.dispatch('menu/generateRoutes', {
             asyncRoutes,
             currentPath: to.path
         })
@@ -152,17 +152,17 @@ router.beforeEach(async(to, from, next) => {
         router.addRoutes(lastRoute)
         next({ ...to, replace: true })
     }
-    if (store.state.global.permissionInit) {
-        store.commit('global/setHeaderActive', to.path)
+    if (store.state.menu.isGenerate) {
+        store.commit('menu/setHeaderActived', to.path)
     }
-    to.meta.title && store.commit('global/setTitle', to.meta.title)
-    if (store.getters['token/isLogin']) {
+    to.meta.title && store.commit('settings/setTitle', to.meta.title)
+    if (store.getters['user/isLogin']) {
         if (to.name) {
             if (to.matched.length !== 0) {
                 // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
-                if (!store.state.global.enableDashboard && to.name == 'dashboard') {
+                if (!store.state.settings.enableDashboard && to.name == 'dashboard') {
                     next({
-                        name: store.state.global.sidebarRoutes[0].name,
+                        name: store.getters['menu/sidebarRoutes'][0].name,
                         replace: true
                     })
                 } else {
@@ -201,7 +201,7 @@ router.beforeEach(async(to, from, next) => {
             next()
         }
     }
-    store.state.global.enableProgress && NProgress.done()
+    store.state.settings.enableProgress && NProgress.done()
 })
 
 export default router

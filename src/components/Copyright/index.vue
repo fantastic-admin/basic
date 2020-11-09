@@ -1,8 +1,8 @@
 <template>
     <footer class="copyright">
-        Copyright © {{ $store.state.global.copyrightDates }}
+        Copyright © {{ $store.state.settings.copyrightDates }}
         <!-- eslint-disable-next-line vue/require-component-is -->
-        <component v-bind="linkProps()">{{ $store.state.global.copyrightCompany }}</component>
+        <component v-bind="linkProps()">{{ $store.state.settings.copyrightCompany }}</component>
     </footer>
 </template>
 
@@ -11,10 +11,10 @@ export default {
     name: 'Copyright',
     methods: {
         linkProps() {
-            if (this.$store.state.global.copyrightWebsite) {
+            if (this.$store.state.settings.copyrightWebsite) {
                 return {
                     is: 'a',
-                    href: this.$store.state.global.copyrightWebsite,
+                    href: this.$store.state.settings.copyrightWebsite,
                     target: '_blank',
                     rel: 'noopener'
                 }

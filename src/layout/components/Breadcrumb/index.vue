@@ -1,14 +1,14 @@
 <template>
     <div class="breadcrumb-container">
         <div class="left-box">
-            <div v-if="$store.state.global.mode == 'mobile' || $store.state.global.enableSidebarCollapse" :class="{
+            <div v-if="$store.state.settings.mode == 'mobile' || $store.state.settings.enableSidebarCollapse" :class="{
                 'sidebar-collapse': true,
-                'is-collapse': $store.state.global.sidebarCollapse
-            }" @click="$store.commit('global/toggleSidebarCollapse')"
+                'is-collapse': $store.state.settings.sidebarCollapse
+            }" @click="$store.commit('settings/toggleSidebarCollapse')"
             >
                 <svg-icon name="collapse" />
             </div>
-            <el-breadcrumb v-if="$store.state.global.mode == 'pc'" separator-class="el-icon-arrow-right">
+            <el-breadcrumb v-if="$store.state.settings.mode == 'pc'" separator-class="el-icon-arrow-right">
                 <transition-group name="breadcrumb">
                     <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="item.path">{{ item.meta.title }}</el-breadcrumb-item>
                 </transition-group>
@@ -30,9 +30,9 @@ export default {
         breadcrumbList() {
             let matched = this.$route.matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
             if (matched.length != 0) {
-                if (this.$store.state.global.enableDashboard) {
+                if (this.$store.state.settings.enableDashboard) {
                     if (!(matched[0].name == 'dashboard' && matched[0].path == '/dashboard')) {
-                        matched = [{ path: '/dashboard', meta: { title: this.$store.state.global.dashboardTitle }}].concat(matched)
+                        matched = [{ path: '/dashboard', meta: { title: this.$store.state.settings.dashboardTitle }}].concat(matched)
                     }
                 }
             }

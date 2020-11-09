@@ -1,8 +1,8 @@
 <template>
-    <div id="search" :class="{'searching': $store.state.global.openSearch}" @click="exit">
+    <div id="search" :class="{'searching': isShow}" @click="$eventBus.$emit('global-search-toggle')">
         <div class="container">
             <div class="search-box" @click.stop>
-                <el-input ref="input" v-model="search" prefix-icon="el-icon-search" placeholder="搜索页面" clearable @keydown.esc.native="$store.commit('global/toggleSearch')" />
+                <el-input ref="input" v-model="search" prefix-icon="el-icon-search" placeholder="搜索页面" clearable @keydown.esc.native="$eventBus.$emit('global-search-toggle')" />
                 <div class="tips">你可以使用快捷键<span>alt</span>+<span>s</span>唤醒搜索面板，按<span>esc</span>退出</div>
             </div>
             <div ref="search" class="result">
@@ -37,6 +37,7 @@ export default {
     props: {},
     data() {
         return {
+            isShow: false,
             search: '',
             sourceList: []
         }
@@ -61,7 +62,7 @@ export default {
         }
     },
     watch: {
-        '$store.state.global.openSearch'(val) {
+        isShow(val) {
             if (val) {
                 document.querySelector('body').classList.add('hidden')
                 this.$refs.search.scrollTop = 0
@@ -78,7 +79,10 @@ export default {
     },
     created() {},
     mounted() {
-        this.$store.state.global.allRoutes.map(item => {
+        this.$eventBus.$on('global-search-toggle', () => {
+            this.isShow = !this.isShow
+        })
+        this.$store.state.menu.routes.map(item => {
             this.getSourceList(item.children)
         })
     },
@@ -132,9 +136,6 @@ export default {
                     }
                 }
             })
-        },
-        exit() {
-            this.$store.commit('global/toggleSearch')
         },
         deepCopy(obj) {
             var copy = Object.create(Object.getPrototypeOf(obj))

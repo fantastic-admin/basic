@@ -1,15 +1,15 @@
 <template>
     <div>
-        <el-drawer title="主题配置" :visible.sync="openTheme" direction="rtl" :size="$store.state.global.mode == 'pc' ? '500px' : '300px'">
+        <el-drawer title="主题配置" :visible.sync="isShow" direction="rtl" :size="$store.state.settings.mode == 'pc' ? '500px' : '300px'">
             <el-alert title="主题配置可实时预览效果，更多设置请在 src/setting.js 中进行设置，建议在生产环境隐藏主题配置功能" type="error" :closable="false" />
-            <el-form ref="form" :label-position="$store.state.global.mode == 'pc' ? 'right' : 'top'" label-width="100px" size="small">
-                <el-form-item v-if="$store.state.global.mode == 'pc'" label="头部">
+            <el-form ref="form" :label-position="$store.state.settings.mode == 'pc' ? 'right' : 'top'" label-width="100px" size="small">
+                <el-form-item v-if="$store.state.settings.mode == 'pc'" label="头部">
                     <el-radio-group v-model="showHeader">
                         <el-radio-button :label="true">显示</el-radio-button>
                         <el-radio-button :label="false">隐藏</el-radio-button>
                     </el-radio-group>
                 </el-form-item>
-                <el-form-item v-if="$store.state.global.mode == 'pc'" label="侧边栏切换">
+                <el-form-item v-if="$store.state.settings.mode == 'pc'" label="侧边栏切换">
                     <el-radio-group v-model="enableSidebarCollapse">
                         <el-radio-button :label="true">启用</el-radio-button>
                         <el-radio-button :label="false">关闭</el-radio-button>
@@ -34,7 +34,7 @@
                     </el-radio-group>
                     <el-alert title="该功能为页面右上角的搜索按钮，可对侧边栏导航进行快捷搜索" type="info" :closable="false" />
                 </el-form-item>
-                <el-form-item v-if="$store.state.global.mode == 'pc'" label="全屏">
+                <el-form-item v-if="$store.state.settings.mode == 'pc'" label="全屏">
                     <el-radio-group v-model="enableFullscreen">
                         <el-radio-button :label="true">开启</el-radio-button>
                         <el-radio-button :label="false">关闭</el-radio-button>
@@ -80,119 +80,117 @@ export default {
     name: 'ThemeSetting',
     props: {},
     data() {
-        return {}
+        return {
+            isShow: false
+        }
     },
     computed: {
-        openTheme: {
-            get: function() {
-                return this.$store.state.global.openTheme
-            },
-            set: function() {
-                this.$store.commit('global/toggleTheme')
-            }
-        },
         showHeader: {
             get: function() {
-                return this.$store.state.global.showHeader
+                return this.$store.state.settings.showHeader
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'showHeader': newValue
                 })
             }
         },
         enableSidebarCollapse: {
             get: function() {
-                return this.$store.state.global.enableSidebarCollapse
+                return this.$store.state.settings.enableSidebarCollapse
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'enableSidebarCollapse': newValue
                 })
             }
         },
         sidebarCollapse: {
             get: function() {
-                return this.$store.state.global.sidebarCollapse
+                return this.$store.state.settings.sidebarCollapse
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'sidebarCollapse': newValue
                 })
             }
         },
         showCopyright: {
             get: function() {
-                return this.$store.state.global.showCopyright
+                return this.$store.state.settings.showCopyright
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'showCopyright': newValue
                 })
             }
         },
         enableNavSearch: {
             get: function() {
-                return this.$store.state.global.enableNavSearch
+                return this.$store.state.settings.enableNavSearch
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'enableNavSearch': newValue
                 })
             }
         },
         enableFullscreen: {
             get: function() {
-                return this.$store.state.global.enableFullscreen
+                return this.$store.state.settings.enableFullscreen
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'enableFullscreen': newValue
                 })
             }
         },
         enablePageReload: {
             get: function() {
-                return this.$store.state.global.enablePageReload
+                return this.$store.state.settings.enablePageReload
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'enablePageReload': newValue
                 })
             }
         },
         enableProgress: {
             get: function() {
-                return this.$store.state.global.enableProgress
+                return this.$store.state.settings.enableProgress
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'enableProgress': newValue
                 })
             }
         },
         enableDynamicTitle: {
             get: function() {
-                return this.$store.state.global.enableDynamicTitle
+                return this.$store.state.settings.enableDynamicTitle
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'enableDynamicTitle': newValue
                 })
             }
         },
         enableDashboard: {
             get: function() {
-                return this.$store.state.global.enableDashboard
+                return this.$store.state.settings.enableDashboard
             },
             set: function(newValue) {
-                this.$store.commit('global/updateThemeSetting', {
+                this.$store.commit('settings/updateThemeSetting', {
                     'enableDashboard': newValue
                 })
             }
         }
     },
-    mounted() {},
+    mounted() {
+        this.$eventBus.$on('global-theme-toggle', () => {
+            this.isShow = !this.isShow
+        })
+    },
     methods: {}
 }
 </script>
