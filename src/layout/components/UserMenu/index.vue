@@ -1,7 +1,7 @@
 <template>
     <div class="user">
         <div class="tools">
-            <span class="item item-pro" @click="pro">
+            <span v-if="$store.state.global.mode == 'pc'" class="item item-pro" @click="pro">
                 <svg-icon name="pro" />
                 <span class="title">查看专业版</span>
             </span>
@@ -10,7 +10,7 @@
                     <svg-icon name="search" />
                 </span>
             </el-tooltip>
-            <el-tooltip v-if="isFullscreenEnable && $store.state.global.enableFullscreen" effect="dark" content="全屏" placement="bottom">
+            <el-tooltip v-if="$store.state.global.mode == 'pc' && isFullscreenEnable && $store.state.global.enableFullscreen" effect="dark" content="全屏" placement="bottom">
                 <span class="item" @click="fullscreen">
                     <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
                 </span>

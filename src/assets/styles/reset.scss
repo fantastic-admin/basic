@@ -27,6 +27,7 @@ body {
     background-color: $g-app-bg;
     box-sizing: border-box;
     font-family: Lato, PingFang SC, Microsoft YaHei, sans-serif;
+    -webkit-tap-highlight-color: transparent;
     &.hidden {
         overflow: hidden;
     }

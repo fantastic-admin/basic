@@ -43,6 +43,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+[data-mode=mobile] {
+    .actionbar {
+        width: 100%;
+        transform: translateX(-50%);
+    }
+}
 .actionbar {
     position: fixed;
     z-index: 4;
