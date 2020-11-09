@@ -33,7 +33,7 @@
 
 <script>
 export default {
-    name: 'SearchSidebar',
+    name: 'Search',
     props: {},
     data() {
         return {

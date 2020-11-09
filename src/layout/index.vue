@@ -77,7 +77,7 @@
             </div>
             <el-backtop :right="20" :bottom="20" title="回到顶部" />
         </div>
-        <SearchSidebar />
+        <Search />
         <ThemeSetting />
     </div>
 </template>
@@ -88,13 +88,13 @@ import Logo from './components/Logo'
 import UserMenu from './components/UserMenu'
 import SidebarItem from './components/SidebarItem'
 import Breadcrumb from './components/Breadcrumb'
-import SearchSidebar from './components/SearchSidebar'
+import Search from './components/Search'
 import ThemeSetting from './components/ThemeSetting'
 
 export default {
     name: 'Layout',
     components: {
-        Logo, SearchSidebar, SidebarItem, Breadcrumb, ThemeSetting, UserMenu
+        Logo, Search, SidebarItem, Breadcrumb, ThemeSetting, UserMenu
     },
     inject: ['reload'],
     data() {
