@@ -76,7 +76,7 @@
                     <Breadcrumb :class="{'shadow': scrollTop}" />
                     <div class="main">
                         <transition name="main" mode="out-in">
-                            <keep-alive :include="$store.state.keepAlive.list">
+                            <keep-alive v-if="isRouterAlive" :include="$store.state.keepAlive.list">
                                 <RouterView :key="$route.path" />
                             </keep-alive>
                         </transition>
@@ -103,11 +103,21 @@ import ThemeSetting from './components/ThemeSetting'
 export default {
     name: 'Layout',
     components: {
-        Logo, Search, SidebarItem, Breadcrumb, ThemeSetting, UserMenu
+        Logo,
+        Search,
+        SidebarItem,
+        Breadcrumb,
+        ThemeSetting,
+        UserMenu
     },
-    inject: ['reload'],
+    provide() {
+        return {
+            reload: this.reload
+        }
+    },
     data() {
         return {
+            isRouterAlive: true,
             routePath: '',
             sidebarScrollTop: 0,
             scrollTop: 0
@@ -135,6 +145,7 @@ export default {
         }
     },
     watch: {
+        $route: 'routeChange',
         '$store.state.settings.sidebarCollapse'(val) {
             if (this.$store.state.settings.mode == 'mobile') {
                 if (!val) {
@@ -164,6 +175,21 @@ export default {
         window.removeEventListener('scroll', this.onScroll)
     },
     methods: {
+        reload(type = 1) {
+            if (type == 1) {
+                this.isRouterAlive = false
+                this.$nextTick(() => (this.isRouterAlive = true))
+            } else {
+                this.$router.push({
+                    name: 'reload'
+                })
+            }
+        },
+        routeChange(newVal, oldVal) {
+            if (newVal.name == oldVal.name) {
+                this.reload()
+            }
+        },
         onSidebarScroll(e) {
             this.sidebarScrollTop = e.target.scrollTop
         },

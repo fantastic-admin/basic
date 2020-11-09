@@ -1,23 +1,15 @@
 <template>
     <div id="app">
-        <RouterView v-if="isRouterAlive" />
+        <RouterView />
     </div>
 </template>
 
 <script>
 export default {
-    provide() {
-        return {
-            reload: this.reload
-        }
-    },
     data() {
-        return {
-            isRouterAlive: true
-        }
+        return {}
     },
     watch: {
-        $route: 'routeChange',
         '$store.state.keepAlive.list'(val) {
             process.env.NODE_ENV == 'development' && console.log(`[ keepAliveList ] ${val}`)
         },
@@ -46,23 +38,7 @@ export default {
         }
         window.onresize()
     },
-    methods: {
-        reload(type = 1) {
-            if (type == 1) {
-                this.isRouterAlive = false
-                this.$nextTick(() => (this.isRouterAlive = true))
-            } else {
-                this.$router.push({
-                    name: 'reload'
-                })
-            }
-        },
-        routeChange(newVal, oldVal) {
-            if (newVal.name == oldVal.name) {
-                this.reload()
-            }
-        }
-    },
+    methods: {},
     metaInfo() {
         return {
             title: this.$store.state.settings.enableDynamicTitle && this.$store.state.settings.title,
