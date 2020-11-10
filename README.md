@@ -46,6 +46,8 @@
 
 ## 支持
 
-给个小 ❤️ 吧~
+如果觉得这个 Fantastic-admin 不错，或者已经在使用了，请给个小 ❤️ 支持下我吧~
+
+[![star](https://img.shields.io/github/stars/hooray/fantastic-admin?style=social)](https://github.com/hooray/fantastic-admin/stargazers)
 
 [![star](https://gitee.com/hooray/fantastic-admin/badge/star.svg?theme=dark)](https://gitee.com/hooray/fantastic-admin/stargazers)
