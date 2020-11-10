@@ -13,7 +13,7 @@
                             <template v-for="(item, index) in $store.state.menu.routes">
                                 <div v-if="item.children && item.children.length !== 0" :key="index" :class="{
                                     'item': true,
-                                    'active': index == $store.state.settings.headerNavActive
+                                    'active': index == $store.state.menu.headerActived
                                 }" @click="$store.commit('settings/switchHeader', index)"
                                 >
                                     <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
