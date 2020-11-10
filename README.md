@@ -19,7 +19,7 @@
 
 [基础版](https://hooray.gitee.io/fantastic-admin/basic)（免费，可商用）
 
-[专业版](https://hooray.gitee.io/fantastic-admin/pro)（付费，购买方式请查看演示地址首页说明）
+[专业版](https://hooray.gitee.io/fantastic-admin/pro)（付费，购买请联系 QQ：304327508）
 
 ## 技术支持
 
@@ -46,7 +46,7 @@
 
 ## 支持
 
-如果觉得这个 Fantastic-admin 不错，或者已经在使用了，请给个小 ❤️ 支持下我吧~
+如果觉得 Fantastic-admin 这个框架不错，或者已经在使用了，希望你可以去 **Github** 或者 **Gitee(码云)** 帮我点个 ⭐ ，这将对我是极大的鼓励。
 
 [![star](https://img.shields.io/github/stars/hooray/fantastic-admin?style=social)](https://github.com/hooray/fantastic-admin/stargazers)
 
