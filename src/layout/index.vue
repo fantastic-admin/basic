@@ -14,7 +14,7 @@
                                 <div v-if="item.children && item.children.length !== 0" :key="index" :class="{
                                     'item': true,
                                     'active': index == $store.state.menu.headerActived
-                                }" @click="$store.commit('settings/switchHeader', index)"
+                                }" @click="$store.commit('menu/switchHeaderActived', index)"
                                 >
                                     <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                                     <span v-if="item.meta.title">{{ item.meta.title }}</span>
