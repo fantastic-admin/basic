@@ -17,15 +17,6 @@ const getters = {
             }
         }
         return retn
-    },
-    hasPermission: state => permissions => {
-        if (state.openPermission) {
-            return state.permissions.some(v => {
-                return v === permissions
-            })
-        } else {
-            return true
-        }
     }
 }
 
@@ -60,14 +51,14 @@ const actions = {
         return new Promise(resolve => {
             // 模拟权限数据
             let permissions
-            if (state.user.account == 'admin') {
+            if (state.account == 'admin') {
                 permissions = [
                     'permission.browse',
                     'permission.create',
                     'permission.edit',
                     'permission.remove'
                 ]
-            } else if (state.user.account == 'test') {
+            } else if (state.account == 'test') {
                 permissions = [
                     'permission.browse'
                 ]

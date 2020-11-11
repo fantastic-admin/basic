@@ -33,13 +33,26 @@ export function deepClone(target) {
     return result
 }
 
+function hasPermission(permission) {
+    if (store.state.settings.openPermission) {
+        console.log(permission, store.state.user.permissions.some(v => {
+            return v === permission
+        }))
+        return store.state.user.permissions.some(v => {
+            return v === permission
+        })
+    } else {
+        return true
+    }
+}
+
 export function auth(value) {
     let auth
     if (typeof value === 'string') {
-        auth = store.getters['user/hasPermission'](value)
+        auth = hasPermission(value)
     } else {
         auth = value.some(item => {
-            return store.getters['user/hasPermission'](item)
+            return hasPermission(item)
         })
     }
     return auth
@@ -47,7 +60,7 @@ export function auth(value) {
 
 export function authAll(value) {
     const auth = value.every(item => {
-        return store.getters['user/hasPermission'](item)
+        return hasPermission(item)
     })
     return auth
 }

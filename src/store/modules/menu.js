@@ -48,12 +48,12 @@ const getters = {
 
 const actions = {
     // 根据权限动态生成路由
-    generateRoutes({state, dispatch, commit}, data) {
+    generateRoutes({rootState, dispatch, commit}, data) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async resolve => {
             let accessedRoutes
             // 判断权限功能是否开启
-            if (state.openPermission) {
+            if (rootState.settings.openPermission) {
                 const permissions = await dispatch('user/getPermissions', null, { root: true })
                 accessedRoutes = filterAsyncRoutes(data.asyncRoutes, permissions)
             } else {
