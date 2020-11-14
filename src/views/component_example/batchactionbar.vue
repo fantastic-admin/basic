@@ -7,7 +7,7 @@
             </template>
         </page-header>
         <page-main>
-            <batch-action-bar :data="dataList" :selection-data="selectionDataList" @checkAll="$refs.table.toggleAllSelection()" @checkNull="$refs.table.clearSelection()">
+            <batch-action-bar :data="dataList" :selection-data="selectionDataList" @check-all="$refs.table.toggleAllSelection()" @check-null="$refs.table.clearSelection()">
                 <el-button size="small">单个批量操作按钮</el-button>
                 <el-button-group>
                     <el-button size="small">批量操作按钮组1</el-button>
@@ -20,7 +20,7 @@
                 <el-table-column prop="name" label="姓名" width="180" />
                 <el-table-column prop="address" label="地址" />
             </el-table>
-            <batch-action-bar :data="dataList" :selection-data="selectionDataList" @checkAll="$refs.table.toggleAllSelection()" @checkNull="$refs.table.clearSelection()">
+            <batch-action-bar :data="dataList" :selection-data="selectionDataList" @check-all="$refs.table.toggleAllSelection()" @check-null="$refs.table.clearSelection()">
                 <el-button size="small">单个批量操作按钮</el-button>
                 <el-button-group>
                     <el-button size="small">批量操作按钮组1</el-button>
