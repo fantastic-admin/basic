@@ -171,8 +171,6 @@ router.beforeEach(async(to, from, next) => {
                         name: store.getters['menu/sidebarRoutes'][0].name,
                         replace: true
                     })
-                } else {
-                    next()
                 }
             } else {
                 // 如果是通过 name 跳转，并且 name 对应的路由没有权限时，需要做这步处理，手动指向到 404 页面
@@ -180,14 +178,6 @@ router.beforeEach(async(to, from, next) => {
                     path: '/404'
                 })
             }
-        } else {
-            // 百度统计代码
-            if (process.env.VUE_APP_TYPE == 'example') {
-                if (window._hmt) {
-                    window._hmt.push(['_trackPageview', location.pathname + '#' + to.fullPath])
-                }
-            }
-            next()
         }
     } else {
         if (to.name != 'login') {
@@ -197,16 +187,18 @@ router.beforeEach(async(to, from, next) => {
                     redirect: to.fullPath
                 }
             })
-        } else {
-            // 百度统计代码
-            if (process.env.VUE_APP_TYPE == 'example') {
-                if (window._hmt) {
-                    window._hmt.push(['_trackPageview', location.pathname + '#' + to.fullPath])
-                }
-            }
-            next()
         }
     }
+    // 百度统计代码
+    if (process.env.VUE_APP_TYPE == 'example') {
+        if (window._hmt) {
+            window._hmt.push(['_trackPageview', location.pathname + '#' + to.fullPath])
+        }
+    }
+    next()
+})
+
+router.afterEach(() => {
     store.state.settings.enableProgress && NProgress.done()
 })
 
