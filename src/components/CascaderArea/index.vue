@@ -74,7 +74,7 @@ export default {
                         })
                     }
                 })
-                this.$emit('update:value', [pCode, cCode, aCode])
+                this.$emit('input', [pCode, cCode, aCode])
             }
         }
     }
