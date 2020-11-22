@@ -1,4 +1,4 @@
-// import api from '@/api'
+import api from '@/api'
 
 const state = {
     account: localStorage.account,
@@ -21,25 +21,13 @@ const getters = {
 }
 
 const actions = {
-    // login({commit}, data) {
-    //     return new Promise((resolve, reject) => {
-    //         api.post('member/login', data).then(res => {
-    //             commit('setUserData', res.data)
-    //             resolve(res)
-    //         }).catch(error => {
-    //             reject(error)
-    //         })
-    //     })
-    // }
     login({commit}, data) {
         return new Promise(resolve => {
-            // 模拟登录成功，写入 token 信息
-            commit('setUserData', {
-                account: data.account,
-                token: '1234567890',
-                failure_time: Date.parse(new Date()) / 1000 + 24 * 60 * 60
+            // 通过 mock 进行登录
+            api.post('mock/member/login', data).then(res => {
+                commit('setUserData', res.data)
+                resolve()
             })
-            resolve()
         })
     },
     logout({commit}) {
@@ -49,24 +37,15 @@ const actions = {
     // 获取我的权限
     getPermissions({state, commit}) {
         return new Promise(resolve => {
-            // 模拟权限数据
-            let permissions
-            if (state.account == 'admin') {
-                permissions = [
-                    'permission.browse',
-                    'permission.create',
-                    'permission.edit',
-                    'permission.remove'
-                ]
-            } else if (state.account == 'test') {
-                permissions = [
-                    'permission.browse'
-                ]
-            } else {
-                permissions = []
-            }
-            commit('setPermissions', permissions)
-            resolve(permissions)
+            // 通过 mock 获取权限
+            api.get('mock/member/permission', {
+                params: {
+                    account: state.account
+                }
+            }).then(res => {
+                commit('setPermissions', res.data.permissions)
+                resolve(res.data.permissions)
+            })
         })
     }
 }

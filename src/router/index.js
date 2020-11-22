@@ -72,6 +72,7 @@ import BreadcrumbExample from './modules/breadcrumb.example'
 import KeepAliveExample from './modules/keep.alive.example'
 import ComponentExample from './modules/component.example'
 import PermissionExample from './modules/permission.example'
+import MockExample from './modules/mock.example'
 import VideosExample from './modules/videos.example'
 import ExTernalLinkExample from './modules/external.link.example'
 
@@ -87,7 +88,8 @@ let asyncRoutes = [
             BreadcrumbExample,
             KeepAliveExample,
             ComponentExample,
-            PermissionExample
+            PermissionExample,
+            MockExample
         ]
     },
     {

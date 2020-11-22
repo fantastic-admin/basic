@@ -35,6 +35,8 @@ requireAll(req)
 
 import './assets/styles/reset.scss'
 
+import './mock'
+
 Vue.config.productionTip = false
 
 Vue.prototype.$eventBus = new Vue({

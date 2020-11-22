@@ -59,7 +59,18 @@ module.exports = {
         //         target: process.env.VUE_APP_API_ROOT,
         //         changeOrigin: true
         //     }
-        // }
+        // },
+        // 用于 mock-server
+        // proxy: {
+        //     '/mock': {
+        //         target: '/',
+        //         changeOrigin: true
+        //     },
+        //     '/': {
+        //         target: process.env.VUE_APP_API_ROOT,
+        //         changeOrigin: true
+        //     }
+        // },
     },
     configureWebpack: config => {
         config.resolve.modules = ['node_modules', 'assets/sprites']
@@ -86,7 +97,11 @@ module.exports = {
         lintStyleOnBuild: true,
         stylelint: {
             fix: true
-        }
+        },
+        // mock: {
+        //     entry: './src/mock/server.js',
+        //     debug: true
+        // }
     },
     chainWebpack: config => {
         const oneOfsMap = config.module.rule('scss').oneOfs.store
