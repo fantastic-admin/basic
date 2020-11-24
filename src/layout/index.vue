@@ -88,6 +88,7 @@
         </div>
         <Search />
         <ThemeSetting />
+        <BuyIt />
     </div>
 </template>
 
@@ -99,6 +100,7 @@ import SidebarItem from './components/SidebarItem'
 import Breadcrumb from './components/Breadcrumb'
 import Search from './components/Search'
 import ThemeSetting from './components/ThemeSetting'
+import BuyIt from './components/BuyIt'
 
 export default {
     name: 'Layout',
@@ -108,7 +110,8 @@ export default {
         SidebarItem,
         Breadcrumb,
         ThemeSetting,
-        UserMenu
+        UserMenu,
+        BuyIt
     },
     provide() {
         return {

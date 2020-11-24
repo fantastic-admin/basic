@@ -20,6 +20,9 @@ export default {
                     message: res.map(p => `<p>${p}</p>`).join('')
                 })
             })
+        },
+        open(url) {
+            window.open(url, 'top')
         }
     }
 }
