@@ -11,16 +11,21 @@
 
 <script>
 export default {
+    beforeRouteLeave(to, from, next) {
+        clearInterval(this.inter)
+        next()
+    },
     data() {
         return {
+            inter: null,
             countdown: 5
         }
     },
     mounted() {
-        const inter = setInterval(() => {
+        this.inter = setInterval(() => {
             this.countdown--
             if (this.countdown == 0) {
-                clearInterval(inter)
+                clearInterval(this.inter)
                 this.goBack()
             }
         }, 1000)
