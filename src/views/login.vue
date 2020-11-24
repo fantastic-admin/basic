@@ -37,7 +37,7 @@
                 </div>
             </el-form>
         </div>
-        <Copyright />
+        <Copyright v-if="$store.state.settings.showCopyright" />
     </div>
 </template>
 
