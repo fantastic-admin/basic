@@ -16,13 +16,10 @@ export default {
         '$store.state.settings.mode': {
             handler() {
                 if (this.$store.state.settings.mode == 'pc') {
-                    if (this.$store.state.settings.enableSidebarCollapse) {
-                        this.$store.commit('settings/updateThemeSetting', {
-                            'sidebarCollapse': false
-                        })
-                    }
-                }
-                if (this.$store.state.settings.mode == 'mobile') {
+                    this.$store.commit('settings/updateThemeSetting', {
+                        'sidebarCollapse': this.$store.state.settings.sidebarCollapseLastStatus
+                    })
+                } else if (this.$store.state.settings.mode == 'mobile') {
                     this.$store.commit('settings/updateThemeSetting', {
                         'sidebarCollapse': true
                     })

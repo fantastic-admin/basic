@@ -5,6 +5,8 @@ import setting from '@/setting'
 
 const state = {
     ...setting,
+    // 侧边栏是否收起（用于记录 pc 模式下最后的状态）
+    sidebarCollapseLastStatus: setting.sidebarCollapse,
     // 显示模式，支持：mobile、pc
     mode: 'pc',
     // 页面标题
@@ -31,6 +33,9 @@ const mutations = {
     // 切换侧边栏导航展开/收起
     toggleSidebarCollapse(state) {
         state.sidebarCollapse = !state.sidebarCollapse
+        if (state.mode == 'pc') {
+            state.sidebarCollapseLastStatus = !state.sidebarCollapseLastStatus
+        }
     },
     // 更新主题配置
     updateThemeSetting(state, data) {
