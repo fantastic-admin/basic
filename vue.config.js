@@ -98,10 +98,11 @@ module.exports = {
         stylelint: {
             fix: true
         },
-        // mock: {
-        //     entry: './src/mock/server.js',
-        //     debug: true
-        // }
+        mock: {
+            entry: './src/mock/server.js',
+            debug: true,
+            disable: true
+        }
     },
     chainWebpack: config => {
         const oneOfsMap = config.module.rule('scss').oneOfs.store
