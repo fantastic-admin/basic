@@ -13,7 +13,7 @@
                 <el-col :md="12">
                     <el-table :data="versionDiff" row-key="prop" size="mini" border stripe default-expand-all :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
                         <el-table-column prop="prop" label="功能项" />
-                        <el-table-column label="基础版" width="120" align="center">
+                        <el-table-column label="基础版" width="150" align="center">
                             <template slot-scope="scope">
                                 <span v-if="typeof scope.row.basic == 'string'">{{ scope.row.basic }}</span>
                                 <i v-else-if="scope.row.basic" class="el-icon-check" />
@@ -70,9 +70,8 @@ export default {
         return {
             versionDiff: [
                 { prop: '页面布局', basic: '3 套', pro: '12 套（全新开发）' },
-                { prop: '主题风格', basic: '1 款', pro: '5 款' },
-                { prop: '根据路由配置生成侧边栏导航', basic: true, pro: true },
-                { prop: '路由配置项', basic: true, pro: true, children: [
+                { prop: '主题风格（可自行扩展）', basic: '1 款', pro: '5 款' },
+                { prop: '路由（侧边栏导航）配置项', basic: true, pro: true, children: [
                     { prop: 'title - 标题', basic: true, pro: true },
                     { prop: 'icon - 图标', basic: true, pro: true },
                     { prop: 'auth - 权限', basic: true, pro: true },
@@ -86,16 +85,19 @@ export default {
                 ] },
                 { prop: '外链导航', basic: true, pro: true },
                 { prop: '多级导航', basic: true, pro: true },
+                { prop: '标签栏（Tab 标签页）', basic: false, pro: true },
                 { prop: '全方位权限验证', basic: true, pro: true },
-                { prop: 'CSS 精灵图（又称 CSS Sprites ，自动合并生成精灵图及 scss 文件）', basic: true, pro: true },
+                { prop: 'CSS Sprites（支持自动合并生成图片及 css 代码）', basic: true, pro: true },
                 { prop: 'SVG 图标（提供组件方便使用 svg 图标）', basic: true, pro: true },
-                { prop: '全局组件（自动注册，方便使用）', basic: true, pro: true },
+                { prop: '全局组件（自动注册）', basic: true, pro: true },
                 { prop: '页面缓存', basic: true, pro: true },
                 { prop: '基础组件', basic: true, pro: true },
                 { prop: '扩展组件', basic: false, pro: true },
+                { prop: '国际化', basic: false, pro: true },
+                { prop: 'Mock', basic: false, pro: true },
                 { prop: '错误日志', basic: false, pro: true },
                 { prop: '业务应用页面（拿来即用的静态页面）', basic: false, pro: '不定期扩充' },
-                { prop: '文件模版（提供设计规范）', basic: false, pro: true },
+                { prop: '文件模版（代码快速生成）', basic: false, pro: true },
                 { prop: '框架基础模版源码（不含演示代码）', basic: false, pro: true },
                 { prop: '团队代码规范', basic: true, pro: true, children: [
                     { prop: 'IDE 开发编辑器规范', basic: true, pro: true },
@@ -104,10 +106,10 @@ export default {
                     { prop: 'Git 验证', basic: false, pro: true }
                 ] },
                 { prop: '兼容 IE11', basic: false, pro: true },
-                { prop: '开发文档', basic: true, pro: true },
-                { prop: '技术支持', basic: false, pro: true },
                 { prop: '版权信息修改/隐藏', basic: false, pro: true },
-                { prop: '技术交流QQ群', basic: '1001394973', pro: '购买后由作者邀请加入指定群' },
+                { prop: '开发文档', basic: true, pro: true },
+                { prop: '视频教程', basic: true, pro: true },
+                { prop: '技术支持', basic: 'QQ群：1001394973', pro: '作者提供 1 对 1 技术支持' },
                 { prop: '价格', basic: '免费', pro: '限时 396 元（原价 596 元）' }
             ]
         }
