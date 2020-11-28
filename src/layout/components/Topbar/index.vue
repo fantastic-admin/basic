@@ -1,5 +1,5 @@
 <template>
-    <div class="breadcrumb-container">
+    <div class="topbar-container">
         <div class="left-box">
             <div v-if="$store.state.settings.mode == 'mobile' || $store.state.settings.enableSidebarCollapse" :class="{
                 'sidebar-collapse': true,
@@ -44,12 +44,12 @@ export default {
 
 <style lang="scss" scoped>
 [data-mode=mobile] {
-    .breadcrumb-container {
+    .topbar-container {
         width: 100%;
         transform: translateX(-50%);
     }
 }
-.breadcrumb-container {
+.topbar-container {
     position: fixed;
     z-index: 999;
     top: 0;
@@ -60,7 +60,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: $g-breadcrumb-height;
+    height: $g-topbar-height;
     background-color: #fff;
     transition: 0.3s, box-shadow 0.2s;
     box-shadow: 0 0 1px 0 #ccc;

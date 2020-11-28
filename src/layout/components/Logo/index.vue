@@ -50,7 +50,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: $g-breadcrumb-height;
+    height: $g-sidebar-logo-height;
     text-align: center;
     overflow: hidden;
     text-decoration: none;

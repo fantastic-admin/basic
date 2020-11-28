@@ -20,6 +20,6 @@ export default {
 .absolute-container {
     position: absolute;
     width: 100%;
-    height: calc(100% - #{$g-breadcrumb-height});
+    height: calc(100% - #{$g-topbar-height});
 }
 </style>

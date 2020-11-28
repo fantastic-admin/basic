@@ -73,7 +73,7 @@
                 }" @click="$store.commit('settings/toggleSidebarCollapse')"
                 />
                 <div class="main-container">
-                    <Breadcrumb :class="{'shadow': scrollTop}" />
+                    <Topbar :class="{'shadow': scrollTop}" />
                     <div class="main">
                         <transition name="main" mode="out-in">
                             <keep-alive v-if="isRouterAlive" :include="$store.state.keepAlive.list">
@@ -97,7 +97,7 @@ import variables from '@/assets/styles/resources/variables.scss'
 import Logo from './components/Logo'
 import UserMenu from './components/UserMenu'
 import SidebarItem from './components/SidebarItem'
-import Breadcrumb from './components/Breadcrumb'
+import Topbar from './components/Topbar'
 import Search from './components/Search'
 import ThemeSetting from './components/ThemeSetting'
 import BuyIt from './components/BuyIt'
@@ -108,7 +108,7 @@ export default {
         Logo,
         Search,
         SidebarItem,
-        Breadcrumb,
+        Topbar,
         ThemeSetting,
         UserMenu,
         BuyIt
@@ -350,7 +350,7 @@ header {
         }
         .nav {
             width: inherit;
-            padding-top: $g-breadcrumb-height;
+            padding-top: $g-sidebar-logo-height;
             .item {
                 display: flex;
                 flex-direction: column;
@@ -410,7 +410,7 @@ header {
         }
         .el-menu {
             border-right: 0;
-            padding-top: $g-breadcrumb-height;
+            padding-top: $g-sidebar-logo-height;
             transition: border-color 0.3s, background-color 0.3s, color 0.3s;
             &:not(.el-menu--collapse) {
                 width: inherit;
@@ -450,7 +450,7 @@ header {
             height: 100%;
             flex: auto;
             position: relative;
-            padding: $g_breadcrumb_height 0 0;
+            padding: $g-topbar-height 0 0;
             overflow: hidden;
         }
     }
@@ -467,7 +467,7 @@ header + .wrapper {
         }
     }
     .main-container {
-        .breadcrumb-container {
+        .topbar-container {
             top: $g-header-height;
             ::v-deep .user {
                 display: none;
