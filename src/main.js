@@ -15,8 +15,8 @@ Vue.use(auth)
 import cookies from 'vue-cookies'
 Vue.use(cookies)
 
-import meta from 'vue-meta'
-Vue.use(meta)
+import VueMeta from 'vue-meta'
+Vue.use(VueMeta)
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'

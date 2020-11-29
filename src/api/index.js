@@ -1,5 +1,5 @@
 import axios from 'axios'
-// import qs from 'qs'
+// import Qs from 'qs'
 import router from '@/router/index'
 import store from '@/store/index'
 import { Message } from 'element-ui'
@@ -36,7 +36,7 @@ api.interceptors.request.use(
                 if (store.getters['user/isLogin']) {
                     request.data.token = store.state.user.token
                 }
-                // request.data = qs.stringify(request.data)
+                // request.data = Qs.stringify(request.data)
             }
         } else {
             // 带上 token

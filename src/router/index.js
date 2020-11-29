@@ -1,10 +1,10 @@
 import Vue from 'vue'
-import Router from 'vue-router'
+import VueRouter from 'vue-router'
 import store from '@/store/index'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // progress bar style
 
-Vue.use(Router)
+Vue.use(VueRouter)
 
 import Layout from '@/layout'
 import EmptyLayout from '@/layout/empty'
@@ -121,17 +121,17 @@ const lastRoute = [{
     }
 }]
 
-const router = new Router({
+const router = new VueRouter({
     routes: constantRoutes
 })
 
 // 解决路由在 push/replace 了相同地址报错的问题
-const originalPush = Router.prototype.push
-Router.prototype.push = function push(location) {
+const originalPush = VueRouter.prototype.push
+VueRouter.prototype.push = function push(location) {
     return originalPush.call(this, location).catch(err => err)
 }
-const originalReplace = Router.prototype.replace
-Router.prototype.replace = function replace(location) {
+const originalReplace = VueRouter.prototype.replace
+VueRouter.prototype.replace = function replace(location) {
     return originalReplace.call(this, location).catch(err => err)
 }
 
@@ -143,7 +143,7 @@ router.beforeEach(async(to, from, next) => {
          * 重置 matcher
          * https://blog.csdn.net/baidu_28647571/article/details/101711682
          */
-        router.matcher = new Router({
+        router.matcher = new VueRouter({
             routes: constantRoutes
         }).matcher
         const accessRoutes = await store.dispatch('menu/generateRoutes', {
