@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const spritesmithPlugin = require('webpack-spritesmith')
 const terserPlugin = require('terser-webpack-plugin')
+const CompressionPlugin = require('compression-webpack-plugin')
 const cdnDependencies = require('./dependencies.cdn')
 
 const spritesmithTasks = []
@@ -48,6 +49,8 @@ const cdn = {
     css: cdnDependencies.map(e => e.css).filter(e => e),
     js: cdnDependencies.map(e => e.js).filter(e => e)
 }
+// gzip 相关
+const isGZIP = process.env.VUE_APP_GZIP == 'ON'
 
 module.exports = {
     publicPath: '',
@@ -91,6 +94,19 @@ module.exports = {
                     }
                 })
             ]
+        }
+        if (isGZIP) {
+            return {
+                plugins: [
+                    new CompressionPlugin({
+                        algorithm: 'gzip',
+                        test: /\.(js|css)$/, // 匹配文件名
+                        threshold: 10240, // 对超过10k的数据压缩
+                        deleteOriginalAssets: false, // 不删除源文件
+                        minRatio: 0.8 // 压缩比
+                    })
+                ]
+            }
         }
     },
     pluginOptions: {
