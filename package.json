@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "serve": "vue-cli-service serve",
-        "build:dev": "vue-cli-service build --mode development --dest dist-dev",
+        "build:test": "vue-cli-service build --mode test --dest dist-test",
         "build": "vue-cli-service build",
         "build:example": "vue-cli-service build --mode example --dest dist-example",
         "lint": "vue-cli-service lint",
