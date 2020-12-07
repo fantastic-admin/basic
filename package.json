@@ -9,8 +9,7 @@
         "build:example": "vue-cli-service build --mode example --dest dist-example",
         "lint": "vue-cli-service lint",
         "stylelint": "vue-cli-service lint:style",
-        "svgo": "svgo -f src/assets/icons",
-        "new": "plop"
+        "svgo": "svgo -f src/assets/icons"
     },
     "dependencies": {
         "@tinymce/tinymce-vue": "^3.2.6",
