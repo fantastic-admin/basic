@@ -1,18 +1,8 @@
 <template>
     <div>
-        <swiper :options="bgSwiperOption" class="swiper-no-swiping bg-banner">
-            <swiper-slide class="item item1" />
-            <swiper-slide class="item item2" />
-            <swiper-slide class="item item3" />
-        </swiper>
+        <div class="bg-banner" />
         <div id="login-box">
-            <div class="flex-container">
-                <swiper :options="swiperOption" class="banner">
-                    <swiper-slide v-for="(item, index) in banner" :key="index">
-                        <img class="item" :src="item">
-                    </swiper-slide>
-                </swiper>
-            </div>
+            <div class="login-banner" />
             <el-form ref="form" :model="form" :rules="rules" class="flex-container login-form" auto-complete="on" label-position="left">
                 <div class="title-container">
                     <h3 class="title">{{ title }}管理后台</h3>
@@ -42,45 +32,11 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import { Swiper as SwiperClass, Pagination, Mousewheel, Autoplay, EffectFade } from 'swiper/swiper.esm'
-import getAwesomeSwiper from 'vue-awesome-swiper/dist/exporter'
-SwiperClass.use([Pagination, Mousewheel, Autoplay, EffectFade])
-Vue.use(getAwesomeSwiper(SwiperClass))
-const { Swiper, SwiperSlide } = getAwesomeSwiper(SwiperClass)
-import 'swiper/swiper-bundle.css'
-
 export default {
     name: 'Login',
-    components: {
-        Swiper,
-        SwiperSlide
-    },
     data() {
         return {
             title: process.env.VUE_APP_TITLE,
-            bgSwiperOption: {
-                init: true,
-                autoplay: {
-                    delay: 5000,
-                    disableOnInteraction: false
-                },
-                loop: true,
-                effect: 'fade'
-            },
-            swiperOption: {
-                init: true,
-                autoplay: {
-                    delay: 3000,
-                    disableOnInteraction: false
-                },
-                loop: true
-            },
-            banner: [
-                'https://i.loli.net/2020/04/21/B2ThI5N6UZlxMwr.png',
-                'https://i.loli.net/2020/04/21/A1cvYsQeXfTDoJx.png',
-                'https://i.loli.net/2020/04/21/5URp2Ge6YVEcfS1.png'
-            ],
             form: {
                 account: localStorage.login_account || '',
                 password: '',
@@ -142,7 +98,7 @@ export default {
 [data-mode=mobile] {
     #login-box {
         max-width: 80%;
-        .flex-container:first-child {
+        .login-banner {
             display: none;
         }
     }
@@ -155,19 +111,8 @@ export default {
     z-index: 0;
     width: 100%;
     height: 100%;
-    background-color: #000;
-    .item {
-        background-size: cover;
-        &1 {
-            background-image: url(../assets/images/login/bg1.jpg);
-        }
-        &2 {
-            background-image: url(../assets/images/login/bg2.jpg);
-        }
-        &3 {
-            background-image: url(../assets/images/login/bg3.jpg);
-        }
-    }
+    background-size: cover;
+    background-image: url(../assets/images/login-bg.jpg);
 }
 #login-box {
     display: flex;
@@ -181,15 +126,14 @@ export default {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 5px #999;
+    .login-banner {
+        width: 300px;
+        height: 400px;
+        background-image: url(../assets/images/login-banner.jpg);
+        background-size: cover;
+    }
     .flex-container {
         width: 400px;
-    }
-    .banner {
-        opacity: 0.9;
-        .item {
-            width: 400px;
-            height: 400px;
-        }
     }
     .login-form {
         width: 450px;

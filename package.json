@@ -9,8 +9,7 @@
         "build:example": "vue-cli-service build --mode example --dest dist-example",
         "lint": "vue-cli-service lint",
         "stylelint": "vue-cli-service lint:style",
-        "svgo": "svgo -f src/assets/icons",
-        "new": "plop"
+        "svgo": "svgo -f src/assets/icons"
     },
     "dependencies": {
         "@tinymce/tinymce-vue": "^3.2.6",
@@ -21,10 +20,8 @@
         "hotkeys-js": "^3.8.1",
         "nprogress": "^0.2.0",
         "screenfull": "^5.0.2",
-        "swiper": "6.3.5",
         "tinymce": "^5.5.1",
         "vue": "^2.6.12",
-        "vue-awesome-swiper": "^4.1.1",
         "vue-clipboard2": "^0.3.1",
         "vue-cookies": "^1.7.4",
         "vue-meta": "^2.4.0",
