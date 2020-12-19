@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { deepClone } from '@/util'
+
 export default {
     name: 'Search',
     props: {},
@@ -105,9 +107,9 @@ export default {
             arr.map(item => {
                 if (item.meta.sidebar !== false) {
                     if (this.hasChildren(item)) {
-                        let baseBreadcrumb = item.meta.baseBreadcrumb ? this.deepCopy(item.meta.baseBreadcrumb) : []
+                        let baseBreadcrumb = item.meta.baseBreadcrumb ? deepClone(item.meta.baseBreadcrumb) : []
                         baseBreadcrumb.push(item.meta.title)
-                        let child = this.deepCopy(item.children)
+                        let child = deepClone(item.children)
                         child.map(c => {
                             c.meta.baseIcon = item.meta.icon || item.meta.baseIcon
                             c.meta.baseBreadcrumb = baseBreadcrumb
@@ -117,7 +119,7 @@ export default {
                     } else {
                         let breadcrumb = []
                         if (item.meta.baseBreadcrumb) {
-                            breadcrumb = this.deepCopy(item.meta.baseBreadcrumb)
+                            breadcrumb = deepClone(item.meta.baseBreadcrumb)
                         }
                         breadcrumb.push(item.meta.title)
                         let path = ''
@@ -136,15 +138,6 @@ export default {
                     }
                 }
             })
-        },
-        deepCopy(obj) {
-            var copy = Object.create(Object.getPrototypeOf(obj))
-            var propNames = Object.getOwnPropertyNames(obj)
-            propNames.forEach(function(name) {
-                var desc = Object.getOwnPropertyDescriptor(obj, name)
-                Object.defineProperty(copy, name, desc)
-            })
-            return copy
         }
     }
 }
