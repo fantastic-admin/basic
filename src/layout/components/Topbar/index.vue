@@ -10,7 +10,7 @@
             </div>
             <el-breadcrumb v-if="$store.state.settings.mode == 'pc'" separator-class="el-icon-arrow-right">
                 <transition-group name="breadcrumb">
-                    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="item.path">{{ item.meta.title }}</el-breadcrumb-item>
+                    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="item.path">{{ item.title }}</el-breadcrumb-item>
                 </transition-group>
             </el-breadcrumb>
         </div>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { deepClone } from '@/util'
 import UserMenu from '../UserMenu'
 
 export default {
@@ -28,15 +29,34 @@ export default {
     },
     computed: {
         breadcrumbList() {
-            let matched = this.$route.matched.filter(item => item.meta && item.meta.title && item.meta.breadcrumb !== false)
-            if (matched.length != 0) {
-                if (this.$store.state.settings.enableDashboard) {
-                    if (!(matched[0].name == 'dashboard' && matched[0].path == '/dashboard')) {
-                        matched = [{ path: '/dashboard', meta: { title: this.$store.state.settings.dashboardTitle }}].concat(matched)
-                    }
-                }
+            let breadcrumbList = []
+            if (this.$store.state.settings.enableDashboard) {
+                breadcrumbList.push({
+                    path: '/dashboard',
+                    title: this.$store.state.settings.dashboardTitle
+                })
             }
-            return matched
+            if (this.$store.state.settings.enableFlatRoutes) {
+                if (this.$route.meta.breadcrumbNeste) {
+                    this.$route.meta.breadcrumbNeste.map((item, index) => {
+                        let tmpItem = deepClone(item)
+                        if (index != 0) {
+                            tmpItem.path = `${this.$route.meta.breadcrumbNeste[0].path}/${item.path}`
+                        }
+                        breadcrumbList.push(tmpItem)
+                    })
+                }
+            } else {
+                this.$route.matched.map(item => {
+                    if (item.meta && item.meta.title && item.meta.breadcrumb !== false && item.path != '/dashboard') {
+                        breadcrumbList.push({
+                            path: item.path,
+                            title: item.meta.title
+                        })
+                    }
+                })
+            }
+            return breadcrumbList
         }
     }
 }

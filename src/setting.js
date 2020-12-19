@@ -31,6 +31,8 @@ let globalSettings = {
     enableDynamicTitle: false,
     // 是否开启控制台
     enableDashboard: true,
+    // 是否开启扁平化路由，开启后三级以及三级以上的嵌套路由均为被处理成二级，但侧边栏导航的层级效果不变
+    enableFlatRoutes: false,
     // 控制台名称
     dashboardTitle: '控制台',
     // 是否开启主题配置（建议在生产环境关闭）
