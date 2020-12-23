@@ -62,7 +62,9 @@
                         }"
                         >
                             <transition-group name="sidebar">
-                                <SidebarItem v-for="route in $store.getters['menu/sidebarRoutes']" :key="route.path" :item="route" :base-path="route.path" />
+                                <template v-for="route in $store.getters['menu/sidebarRoutes']">
+                                    <SidebarItem v-if="route.meta.sidebar !== false" :key="route.path" :item="route" :base-path="route.path" />
+                                </template>
                             </transition-group>
                         </el-menu>
                     </div>
