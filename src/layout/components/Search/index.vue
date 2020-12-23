@@ -252,7 +252,6 @@ export default {
                     }
                     .breadcrumb,
                     .path {
-                        line-height: 14px;
                         font-size: 12px;
                         color: #c0c4cc;
                         transition: all 0.3s;
