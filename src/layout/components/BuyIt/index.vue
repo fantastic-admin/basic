@@ -8,15 +8,15 @@
             <el-popover placement="left" width="400" trigger="hover">
                 <div class="pay">
                     <div class="wechat">
-                        <el-image :src="require('@/assets/images/wechat.png')" />
+                        <el-image src="http://hooray.gitee.io/fantastic-admin/wechat.png" />
                     </div>
                     <div class="alipay">
-                        <el-image :src="require('@/assets/images/alipay.png')" />
+                        <el-image src="http://hooray.gitee.io/fantastic-admin/alipay.png" />
                     </div>
                     <div class="info">
-                        <p>专业版限时优惠 <b style="font-size: 18px; color: #f40;">396</b> 元，截止至 2020/12/31</p>
+                        <p>专业版售价 <b style="font-size: 18px; color: #f40;">596</b> 元</p>
                         <p>请先加作者 QQ ：304327508 ，或者点击右侧在线咨询，然后通过上方微信或支付宝进行支付</p>
-                        <p>支付成功后将需提供一个源码接收邮箱地址，源码包含专业版演示源码和模版源码</p>
+                        <p>支付成功后需要提供一个源码接收邮箱地址，源码包含专业版<b>演示源码</b>和<b>模版源码</b></p>
                     </div>
                 </div>
                 <div slot="reference" class="item buy">
@@ -38,15 +38,6 @@
 
 <script>
 export default {
-    mounted() {
-        this.$notify({
-            type: 'info',
-            iconClass: '',
-            title: '优惠啦~',
-            message: '专业版限时优惠 396 元，截止至 2020/12/31',
-            duration: 6000
-        })
-    },
     methods: {
         open(url) {
             window.open(url, 'top')

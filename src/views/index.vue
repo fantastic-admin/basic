@@ -49,13 +49,13 @@
                     <h3 class="question">两个版本都长期维护吗？</h3>
                     <div class="answer">都长期维护，但侧重不同。基础版侧重于稳定性维护，主要在修复 bug ，不定期增加新特性；而专业版侧重于新特性开发，在确保稳定的基础上，会长期深挖中后台系统框架，持续产出可落地的特性或开发规范。</div>
                     <h3 class="question">如何购买专业版？</h3>
-                    <div class="answer">请先加作者 QQ ：304327508 ，或者点击右侧在线咨询，然后通过上方微信或支付宝进行支付，支付成功后将需提供一个源码接收邮箱地址，源码包含专业版演示源码和模版源码。</div>
+                    <div class="answer">请先加作者 QQ ：304327508 ，或者点击右侧在线咨询，然后通过上方微信或支付宝进行支付，支付成功后需要提供一个源码接收邮箱地址，源码包含专业版<span>演示源码</span>和<span>模版源码</span>。</div>
                     <div class="pay">
                         <div class="wechat">
-                            <el-image :src="require('@/assets/images/wechat.png')" />
+                            <el-image src="http://hooray.gitee.io/fantastic-admin/wechat.png" />
                         </div>
                         <div class="alipay">
-                            <el-image :src="require('@/assets/images/alipay.png')" />
+                            <el-image src="http://hooray.gitee.io/fantastic-admin/alipay.png" />
                         </div>
                     </div>
                 </el-col>
@@ -110,7 +110,7 @@ export default {
                 { prop: '开发文档', basic: true, pro: true },
                 { prop: '视频教程', basic: true, pro: true },
                 { prop: '技术支持', basic: 'QQ群：1001394973', pro: '作者提供 1 对 1 技术支持' },
-                { prop: '价格', basic: '免费', pro: '限时 396 元（原价 596 元）' }
+                { prop: '价格', basic: '免费', pro: '596 元' }
             ]
         }
     },
