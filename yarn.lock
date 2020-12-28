@@ -3268,9 +3268,9 @@ data-uri-to-buffer@0.0.3:
   integrity sha1-GK6XmmoMqZSwYlhTkW0mYruuCxo=
 
 dayjs@^1.9.4:
-  version "1.9.7"
-  resolved "https://registry.npm.taobao.org/dayjs/download/dayjs-1.9.7.tgz?cache=0&sync_timestamp=1607180938588&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdayjs%2Fdownload%2Fdayjs-1.9.7.tgz#4b260bb17dceed2d5f29038dfee03c65a6786fc0"
-  integrity sha1-SyYLsX3O7S1fKQON/uA8ZaZ4b8A=
+  version "1.9.8"
+  resolved "https://registry.npm.taobao.org/dayjs/download/dayjs-1.9.8.tgz?cache=0&sync_timestamp=1609039441369&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fdayjs%2Fdownload%2Fdayjs-1.9.8.tgz#9a65fbdca037e3d5835f98672da6e796f757cd58"
+  integrity sha1-mmX73KA349WDX5hnLabnlvdXzVg=
 
 de-indent@^1.0.2:
   version "1.0.2"
@@ -3796,9 +3796,9 @@ eslint-loader@^2.2.1:
     rimraf "^2.6.1"
 
 eslint-plugin-vue@^7.1.0:
-  version "7.3.0"
-  resolved "https://registry.npm.taobao.org/eslint-plugin-vue/download/eslint-plugin-vue-7.3.0.tgz?cache=0&sync_timestamp=1608096277721&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-vue%2Fdownload%2Feslint-plugin-vue-7.3.0.tgz#0faf0fcf0e1b1052bf800d4dee42d64f50679cb0"
-  integrity sha1-D68Pzw4bEFK/gA1N7kLWT1BnnLA=
+  version "7.4.0"
+  resolved "https://registry.npm.taobao.org/eslint-plugin-vue/download/eslint-plugin-vue-7.4.0.tgz?cache=0&sync_timestamp=1609112475762&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Feslint-plugin-vue%2Fdownload%2Feslint-plugin-vue-7.4.0.tgz#27324cbe8f00705708c9fa9e8c0401d8f0742c20"
+  integrity sha1-JzJMvo8AcFcIyfqejAQB2PB0LCA=
   dependencies:
     eslint-utils "^2.1.0"
     natural-compare "^1.4.0"
