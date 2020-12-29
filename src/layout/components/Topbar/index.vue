@@ -10,7 +10,7 @@
             </div>
             <el-breadcrumb v-if="$store.state.settings.mode == 'pc'" separator-class="el-icon-arrow-right">
                 <transition-group name="breadcrumb">
-                    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="item.path">{{ item.title }}</el-breadcrumb-item>
+                    <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="pathCompile(item.path)">{{ item.title }}</el-breadcrumb-item>
                 </transition-group>
             </el-breadcrumb>
         </div>
@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { compile } from 'path-to-regexp'
 import { deepClone } from '@/util'
 import UserMenu from '../UserMenu'
 
@@ -57,6 +58,12 @@ export default {
                 })
             }
             return breadcrumbList
+        }
+    },
+    methods: {
+        pathCompile(path) {
+            var toPath = compile(path)
+            return toPath(this.$route.params)
         }
     }
 }

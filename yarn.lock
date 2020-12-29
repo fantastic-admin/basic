@@ -7080,6 +7080,11 @@ path-to-regexp@^2.2.1:
   resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-2.4.0.tgz?cache=0&sync_timestamp=1601400328354&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-2.4.0.tgz#35ce7f333d5616f1c1e1bfe266c3aba2e5b2e704"
   integrity sha1-Nc5/Mz1WFvHB4b/iZsOrouWy5wQ=
 
+path-to-regexp@^6.2.0:
+  version "6.2.0"
+  resolved "https://registry.npm.taobao.org/path-to-regexp/download/path-to-regexp-6.2.0.tgz?cache=0&sync_timestamp=1601400328354&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fpath-to-regexp%2Fdownload%2Fpath-to-regexp-6.2.0.tgz#f7b3803336104c346889adece614669230645f38"
+  integrity sha1-97OAMzYQTDRoia3s5hRmkjBkXzg=
+
 path-type@^3.0.0:
   version "3.0.0"
   resolved "https://registry.npm.taobao.org/path-type/download/path-type-3.0.0.tgz#cef31dc8e0a1a3bb0d105c0cd97cf3bf47f4e36f"

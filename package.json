@@ -19,6 +19,7 @@
         "element-ui": "^2.14.0",
         "hotkeys-js": "^3.8.1",
         "nprogress": "^0.2.0",
+        "path-to-regexp": "^6.2.0",
         "screenfull": "^5.0.2",
         "tinymce": "^5.5.1",
         "vue": "^2.6.12",
