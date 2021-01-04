@@ -3,13 +3,21 @@ import Layout from '@/layout'
 export default {
     path: '/component_example',
     component: Layout,
-    redirect: '/component_example/pageheader',
+    redirect: '/component_example/element',
     name: 'componentExample',
     meta: {
         title: '基础组件',
         icon: 'sidebar-component'
     },
     children: [
+        {
+            path: 'element',
+            name: 'componentExampleElement',
+            component: () => import(/* webpackChunkName: 'component_example' */ '@/views/component_example/element'),
+            meta: {
+                title: 'Element 组件'
+            }
+        },
         {
             path: 'pageheader',
             name: 'componentExamplePageheader',
