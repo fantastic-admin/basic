@@ -1,11 +1,9 @@
 <template>
-    <div>
-        <el-image class="img" :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]">
-            <div slot="error" class="image-slot">
-                <svg-icon name="image-load-fail" />
-            </div>
-        </el-image>
-    </div>
+    <el-image :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]">
+        <div slot="error" class="image-slot">
+            <svg-icon name="image-load-fail" />
+        </div>
+    </el-image>
 </template>
 
 <script>
@@ -48,6 +46,7 @@ export default {
 .el-image {
     border-radius: 5px;
     background-color: #ebeef5;
+    box-shadow: 0 0 5px 1px #ccc;
     ::v-deep .el-image__inner {
         transition: all 0.3s;
         cursor: pointer;
