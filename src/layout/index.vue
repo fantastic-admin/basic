@@ -384,6 +384,7 @@ header {
         left: 0;
         top: 0;
         bottom: 0;
+        box-shadow: 10px 0 10px -10px darken($g-sub-sidebar-bg, 20);
         &.is-collapse {
             width: 64px;
             .sidebar-logo {

@@ -3,7 +3,7 @@
         <div class="bg-banner" />
         <div id="login-box">
             <div class="login-banner" />
-            <el-form ref="form" :model="form" :rules="rules" class="flex-container login-form" auto-complete="on" label-position="left">
+            <el-form ref="form" :model="form" :rules="rules" class="login-form" auto-complete="on" label-position="left">
                 <div class="title-container">
                     <h3 class="title">{{ title }}管理后台</h3>
                 </div>
@@ -21,9 +21,11 @@
                     </el-form-item>
                 </div>
                 <el-checkbox v-model="form.remember">记住我</el-checkbox>
-                <el-button :loading="loading" type="primary" style="width: 100%;" @click.native.prevent="handleLogin">登录</el-button>
-                <div style="margin-top: 20px; color: #999; font-size: 14px; text-align: center;">
-                    演示帐号一键登录：<span style="padding: 0 5px; cursor: pointer; color: #666;" @click="testAccount('admin')">admin</span>或<span style="padding: 0 5px; cursor: pointer; color: #666;" @click="testAccount('test')">test</span>
+                <el-button :loading="loading" type="primary" style="width: 100%;" @click.native.prevent="handleLogin">登 录</el-button>
+                <div style="margin-top: 20px; margin-bottom: -10px; color: #666; font-size: 14px; text-align: center; font-weight: bold;">
+                    <span style="margin-right: 5px;">演示帐号一键登录：</span>
+                    <el-button type="danger" size="mini" @click="testAccount('admin')">admin</el-button>
+                    <el-button type="danger" size="mini" plain @click="testAccount('test')">test</el-button>
                 </div>
             </el-form>
         </div>
@@ -111,8 +113,9 @@ export default {
     z-index: 0;
     width: 100%;
     height: 100%;
-    background-size: cover;
     background-image: url(../assets/images/login-bg.jpg);
+    background-size: cover;
+    background-position: center center;
 }
 #login-box {
     display: flex;
@@ -122,22 +125,18 @@ export default {
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
     background: rgba(255, 255, 255, 0.8);
-    height: 400px;
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 5px #999;
     .login-banner {
         width: 300px;
-        height: 400px;
         background-image: url(../assets/images/login-banner.jpg);
         background-size: cover;
-    }
-    .flex-container {
-        width: 400px;
+        background-position: center center;
     }
     .login-form {
         width: 450px;
-        padding: 50px 35px 0;
+        padding: 50px 35px 30px;
         overflow: hidden;
         .svg-icon {
             vertical-align: -0.35em;
