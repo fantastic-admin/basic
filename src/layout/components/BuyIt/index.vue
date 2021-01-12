@@ -2,42 +2,42 @@
     <div class="buy-it">
         <div class="item" @click="open('http://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes')">
             <svg-icon name="fixed-right-qq" />
-            <span class="title">咨询</span>
+            <span class="title">在线<br>咨询</span>
         </div>
-        <template>
-            <el-popover placement="left" width="400" trigger="hover">
-                <div class="pay">
-                    <div class="wechat">
-                        <el-image src="http://hooray.gitee.io/fantastic-admin/wechat.png" />
-                    </div>
-                    <div class="alipay">
-                        <el-image src="http://hooray.gitee.io/fantastic-admin/alipay.png" />
-                    </div>
-                    <div class="info">
-                        <p>专业版售价 <b style="font-size: 18px; color: #f40;">596</b> 元</p>
-                        <p>请先加作者 QQ ：304327508 ，或者点击右侧在线咨询，然后通过上方微信或支付宝进行支付</p>
-                        <p>支付成功后需要提供一个源码接收邮箱地址，源码包含专业版<b>演示源码</b>和<b>模版源码</b></p>
-                    </div>
-                </div>
-                <div slot="reference" class="item buy">
-                    <svg-icon name="fixed-right-buy" />
-                    <span class="title">购买</span>
-                </div>
-            </el-popover>
-            <div class="item doc" @click="open('https://hooray.gitee.io/fantastic-admin/')">
-                <svg-icon name="fixed-right-doc" />
-                <span class="title">文档</span>
-            </div>
-            <div class="item code" @click="open('https://gitee.com/hooray/fantastic-admin/')">
-                <svg-icon name="fixed-right-code" />
-                <span class="title">源码</span>
-            </div>
-        </template>
+        <div class="item chat" @click="open('https://qm.qq.com/cgi-bin/qm/qr?k=WoDBYN0S9r94f9oBZkxlGbiYxu3dEzgt&jump_from=webapi')">
+            <svg-icon name="fixed-right-chat" />
+            <span class="title">加入<br>QQ群</span>
+        </div>
+        <div class="item buy" @click="open('https://hooray.gitee.io/fantastic-admin/buy.html')">
+            <svg-icon name="fixed-right-buy" />
+            <span class="title">购买<br>专业版</span>
+        </div>
+        <div class="item doc" @click="open('https://hooray.gitee.io/fantastic-admin/')">
+            <svg-icon name="fixed-right-doc" />
+            <span class="title">开发<br>文档</span>
+        </div>
+        <div class="item code" @click="open('https://gitee.com/hooray/fantastic-admin/')">
+            <svg-icon name="fixed-right-code" />
+            <span class="title">下载<br>基础版</span>
+        </div>
     </div>
 </template>
 
 <script>
 export default {
+    mounted() {
+        this.$notify({
+            type: 'success',
+            title: '温馨提示',
+            dangerouslyUseHTMLString: true,
+            message: `
+                <p>当前访问的是<b>基础版</b></p>
+                <p>你可以点<a href="https://hooray.gitee.io/fantastic-admin/pro/" target="_blank"><b>这里</b></a>访问专业版</p>
+            `,
+            position: 'bottom-right',
+            duration: 0
+        })
+    },
     methods: {
         open(url) {
             window.open(url, 'top')
@@ -51,7 +51,7 @@ export default {
     position: fixed;
     right: 0;
     top: 50%;
-    margin-top: -120px;
+    margin-top: -170px;
     width: 60px;
     display: flex;
     flex-direction: column;
@@ -59,7 +59,7 @@ export default {
         display: flex;
         flex-direction: column;
         justify-content: center;
-        height: 60px;
+        height: 70px;
         text-align: center;
         color: #fff;
         background-color: #409eff;
@@ -77,9 +77,10 @@ export default {
             border-bottom-left-radius: 5px;
             border-bottom: 0;
         }
+        &.chat {
+            background-color: #0fcc1a;
+        }
         &.buy {
-            border-radius: 0;
-            border-bottom: 1px solid #fff;
             background-color: #ff4200;
         }
         &.doc {
@@ -96,44 +97,6 @@ export default {
         .title {
             display: inline-block;
             font-size: 12px;
-        }
-    }
-}
-.pay {
-    text-align: center;
-    .wechat,
-    .alipay {
-        display: inline-block;
-        width: 160px;
-        margin: 10px 10px;
-        padding: 20px 20px 0;
-        color: #fff;
-        border-radius: 4px;
-        &::after {
-            display: block;
-            height: 40px;
-            line-height: 36px;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-        }
-    }
-    .wechat {
-        background-color: #22ab38;
-        &::after {
-            content: '请使用微信支付';
-        }
-    }
-    .alipay {
-        background-color: #1678ff;
-        &::after {
-            content: '请使用支付宝支付';
-        }
-    }
-    .info {
-        line-height: 20px;
-        p {
-            margin: 10px;
         }
     }
 }
