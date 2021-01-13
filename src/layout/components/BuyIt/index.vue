@@ -16,7 +16,7 @@
             <svg-icon name="fixed-right-doc" />
             <span class="title">开发<br>文档</span>
         </div>
-        <div class="item code" @click="open('https://gitee.com/hooray/fantastic-admin/')">
+        <div class="item code" @click="open('https://gitee.com/hooray/Fantastic-admin/')">
             <svg-icon name="fixed-right-code" />
             <span class="title">下载<br>基础版</span>
         </div>
