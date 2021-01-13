@@ -17,9 +17,15 @@
 
 ## 演示
 
-[基础版](https://hooray.gitee.io/fantastic-admin/basic)（免费，可商用）
+[基础版](https://hooray.gitee.io/fantastic-admin/basic) | [专业版](https://hooray.gitee.io/fantastic-admin/pro)
 
-[专业版](https://hooray.gitee.io/fantastic-admin/pro)（付费，购买请联系 QQ：304327508）
+## 下载 & 购买
+
+- 基础版（免费，可商用）
+  - 去 [Gitee](https://gitee.com/hooray/Fantastic-admin) 下载
+  - 去 [Github](https://github.com/hooray/Fantastic-admin) 下载
+- 专业版（付费，可商用）
+  - [去购买](http://hooray.gitee.io/fantastic-admin/buy.html)
 
 ## 技术支持
 
@@ -48,6 +54,6 @@
 
 如果觉得 Fantastic-admin 这个框架不错，或者已经在使用了，希望你可以去 **Github** 或者 **Gitee(码云)** 帮我点个 ⭐ ，这将对我是极大的鼓励。
 
-[![star](https://img.shields.io/github/stars/hooray/fantastic-admin?style=social)](https://github.com/hooray/fantastic-admin/stargazers)
+[![star](https://img.shields.io/github/stars/hooray/Fantastic-admin?style=social)](https://github.com/hooray/Fantastic-admin/stargazers)
 
-[![star](https://gitee.com/hooray/fantastic-admin/badge/star.svg?theme=dark)](https://gitee.com/hooray/fantastic-admin/stargazers)
+[![star](https://gitee.com/hooray/Fantastic-admin/badge/star.svg?theme=dark)](https://gitee.com/hooray/Fantastic-admin/stargazers)
