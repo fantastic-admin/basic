@@ -54,6 +54,6 @@
 
 如果觉得 Fantastic-admin 这个框架不错，或者已经在使用了，希望你可以去 **Github** 或者 **Gitee(码云)** 帮我点个 ⭐ ，这将对我是极大的鼓励。
 
-[![star](https://img.shields.io/github/stars/hooray/Fantastic-admin?style=social)](https://github.com/hooray/Fantastic-admin/stargazers)
+[![star](https://img.shields.io/github/stars/hooray/fantastic-admin?style=social)](https://github.com/hooray/fantastic-admin/stargazers)
 
-[![star](https://gitee.com/hooray/Fantastic-admin/badge/star.svg?theme=dark)](https://gitee.com/hooray/Fantastic-admin/stargazers)
+[![star](https://gitee.com/hooray/fantastic-admin/badge/star.svg?theme=dark)](https://gitee.com/hooray/fantastic-admin/stargazers)
