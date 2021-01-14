@@ -100,5 +100,45 @@ export default [
                 }
             }
         ]
+    },
+    {
+        path: '/videos_example/6',
+        component: Layout,
+        meta: {
+            title: '06 - 和服务端交互'
+        },
+        children: [
+            {
+                path: '',
+                name: 'videosExampleVideo6',
+                component: () => import(/* webpackChunkName: 'videos_example' */ '@/views/videos_example/6'),
+                meta: {
+                    title: '06 和服务端交互',
+                    sidebar: false,
+                    breadcrumb: false,
+                    activeMenu: '/videos_example/6'
+                }
+            }
+        ]
+    },
+    {
+        path: '/videos_example/7',
+        component: Layout,
+        meta: {
+            title: '07 - 路由和侧边栏导航'
+        },
+        children: [
+            {
+                path: '',
+                name: 'videosExampleVideo6',
+                component: () => import(/* webpackChunkName: 'videos_example' */ '@/views/videos_example/7'),
+                meta: {
+                    title: '07 路由和侧边栏导航',
+                    sidebar: false,
+                    breadcrumb: false,
+                    activeMenu: '/videos_example/7'
+                }
+            }
+        ]
     }
 ]

@@ -13,7 +13,7 @@
             </el-button-group>
         </page-header>
         <el-row :gutter="20" style="margin: 0 10px;">
-            <el-col :xl="8">
+            <el-col :lg="8">
                 <page-main title="框架信息" style="margin: 0 0 20px 0;">
                     <div class="fa-info">
                         <img src="https://hooray.gitee.io/fantastic-admin/logo.png" style="width: 150px;">
@@ -33,7 +33,7 @@
                     </div>
                 </page-main>
             </el-col>
-            <el-col :xl="16">
+            <el-col :lg="16">
                 <el-row :gutter="20" style="margin: 0 -10px 20px -10px;">
                     <el-col :md="4">
                         <div class="icon-box icon-box-1" @click="onIconClick('收藏')">
