@@ -75,6 +75,7 @@ module.exports = {
         //     }
         // },
     },
+    transpileDependencies: ['element-ui'],
     configureWebpack: config => {
         config.resolve.modules = ['node_modules', 'assets/sprites']
         config.plugins.push(...spritesmithTasks)
