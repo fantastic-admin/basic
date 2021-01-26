@@ -18,6 +18,7 @@
         "dayjs": "^1.9.4",
         "element-ui": "^2.14.0",
         "hotkeys-js": "^3.8.1",
+        "mavon-editor": "^2.9.1",
         "nprogress": "^0.2.0",
         "path-to-regexp": "^6.2.0",
         "screenfull": "^5.0.2",

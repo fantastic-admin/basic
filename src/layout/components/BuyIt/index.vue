@@ -49,6 +49,7 @@ export default {
 <style lang="scss" scoped>
 .buy-it {
     position: fixed;
+    z-index: 10;
     right: 0;
     top: 50%;
     margin-top: -170px;
