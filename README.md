@@ -22,8 +22,8 @@
 ## 下载 & 购买
 
 - 基础版（免费，可商用）
-  - 去 [Gitee](https://gitee.com/hooray/Fantastic-admin) 下载
-  - 去 [Github](https://github.com/hooray/Fantastic-admin) 下载
+  - 去 [Gitee](https://gitee.com/hooray/fantastic-admin) 下载
+  - 去 [Github](https://github.com/hooray/fantastic-admin) 下载
 - 专业版（付费，可商用）
   - [去购买](http://hooray.gitee.io/fantastic-admin/buy.html)
 
