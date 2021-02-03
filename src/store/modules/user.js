@@ -22,11 +22,13 @@ const getters = {
 
 const actions = {
     login({commit}, data) {
-        return new Promise(resolve => {
+        return new Promise((resolve, reject) => {
             // 通过 mock 进行登录
             api.post('mock/member/login', data).then(res => {
                 commit('setUserData', res.data)
                 resolve()
+            }).catch(error => {
+                reject(error)
             })
         })
     },
