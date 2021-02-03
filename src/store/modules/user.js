@@ -1,16 +1,16 @@
 import api from '@/api'
 
 const state = {
-    account: localStorage.account,
-    token: localStorage.token,
-    failure_time: localStorage.failure_time,
+    account: localStorage.account || '',
+    token: localStorage.token || '',
+    failure_time: localStorage.failure_time || '',
     permissions: []
 }
 
 const getters = {
     isLogin: state => {
         let retn = false
-        if (state.token != null) {
+        if (state.token) {
             let unix = Date.parse(new Date())
             if (unix < state.failure_time * 1000) {
                 retn = true
