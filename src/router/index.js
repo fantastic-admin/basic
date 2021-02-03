@@ -152,8 +152,10 @@ router.beforeEach(async(to, from, next) => {
             asyncRoutes,
             currentPath: to.path
         })
-        router.addRoutes(accessRoutes)
-        router.addRoutes(lastRoute)
+        accessRoutes.push(...lastRoute)
+        accessRoutes.forEach(route => {
+            router.addRoute(route)
+        })
         next({ ...to, replace: true })
     }
     if (store.state.menu.isGenerate) {

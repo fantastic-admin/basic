@@ -1,11 +1,13 @@
 <template>
-    <router-link :to="to" :class="{
+    <router-link v-slot="{ navigate }" custom :to="to" :class="{
         'title': true,
         'is-link': $store.state.settings.enableDashboard
     }" :title="title" tag="div"
     >
-        <img v-if="showLogo" :src="logo" class="logo">
-        <span v-if="showTitle">{{ title }}</span>
+        <div @click="navigate">
+            <img v-if="showLogo" :src="logo" class="logo">
+            <span v-if="showTitle">{{ title }}</span>
+        </div>
     </router-link>
 </template>
 

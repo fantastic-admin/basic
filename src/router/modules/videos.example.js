@@ -130,7 +130,7 @@ export default [
         children: [
             {
                 path: '',
-                name: 'videosExampleVideo6',
+                name: 'videosExampleVideo7',
                 component: () => import(/* webpackChunkName: 'videos_example' */ '@/views/videos_example/7'),
                 meta: {
                     title: '07 路由和侧边栏导航',

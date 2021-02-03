@@ -6,7 +6,7 @@
                 <div class="tips">你可以使用快捷键<span>alt</span>+<span>s</span>唤醒搜索面板，按<span>esc</span>退出</div>
             </div>
             <div ref="search" class="result">
-                <router-link v-for="item in resultList" :key="item.path" v-slot="{ href, navigate }" :to="isShow ? item.path : ''">
+                <router-link v-for="item in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
                     <a :href="isExternal(item.path) ? item.path : href" class="item" :target="isExternal(item.path) ? '_blank' : '_self'" @click="navigate">
                         <div class="icon">
                             <svg-icon v-if="item.icon" :name="item.icon" />
