@@ -31,7 +31,7 @@
                     'show': $store.state.settings.mode == 'mobile' && !$store.state.settings.sidebarCollapse
                 }"
                 >
-                    <div v-if="(!$store.state.settings.showHeader || $store.state.settings.mode == 'mobile') && $store.state.menu.routes.length > 1" class="main-sidebar-container">
+                    <div v-if="(!$store.state.settings.showHeader || $store.state.settings.mode == 'mobile') && ($store.state.menu.routes.length > 1 || $store.state.settings.alwaysShowMainSidebar)" class="main-sidebar-container">
                         <Logo :show-title="false" class="sidebar-logo" />
                         <div class="nav">
                             <template v-for="(item, index) in $store.state.menu.routes">
@@ -51,9 +51,9 @@
                         'is-collapse': $store.state.settings.mode == 'pc' && $store.state.settings.sidebarCollapse
                     }" @scroll="onSidebarScroll"
                     >
-                        <Logo :show-logo="$store.state.menu.routes.length <= 1" :class="{
+                        <Logo :show-logo="$store.state.menu.routes.length <= 1 && !$store.state.settings.alwaysShowMainSidebar" :class="{
                             'sidebar-logo': true,
-                            'sidebar-logo-bg': $store.state.menu.routes.length <= 1,
+                            'sidebar-logo-bg': $store.state.menu.routes.length <= 1 && !$store.state.settings.alwaysShowMainSidebar,
                             'shadow': sidebarScrollTop
                         }"
                         />
@@ -135,7 +135,7 @@ export default {
         realSidebarWidth() {
             let realSidebarWidth = 0
             if (this.$store.state.settings.mode == 'pc') {
-                if (!this.$store.state.settings.showHeader && this.$store.state.menu.routes.length > 1) {
+                if (!this.$store.state.settings.showHeader && (this.$store.state.menu.routes.length > 1 || this.$store.state.settings.alwaysShowMainSidebar)) {
                     realSidebarWidth = parseInt(variables.g_main_sidebar_width)
                 }
                 if (this.$store.state.settings.sidebarCollapse) {

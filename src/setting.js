@@ -9,6 +9,8 @@ let globalSettings = {
     openPermission: false,
     // 是否显示头部
     showHeader: false,
+    // 是否始终显示主侧边栏，设置为 false 且主侧边栏里只有一个导航时，主侧边栏会自动隐藏
+    alwaysShowMainSidebar: false,
     // 是否开启侧边栏展开收起按钮
     enableSidebarCollapse: false,
     // 侧边栏是否收起
