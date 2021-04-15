@@ -2,7 +2,7 @@
 node_modules
 /dist*
 /src/assets/sprites/*.*
-!/src/assets/sprites/.gitkeep
+!/src/assets/sprites/_.scss
 
 # local env files
 .env.local
