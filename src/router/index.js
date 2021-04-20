@@ -172,11 +172,13 @@ router.beforeEach(async(to, from, next) => {
                         replace: true
                     })
                 } else if (!store.state.settings.enableDashboard && to.name == 'dashboard') {
-                    // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
-                    next({
-                        name: store.getters['menu/sidebarRoutes'][0].name,
-                        replace: true
-                    })
+                    // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块，但如果侧边栏导航没有模块，则还是进入控制台页面
+                    if (store.getters['menu/sidebarRoutes'].length > 0) {
+                        next({
+                            name: store.getters['menu/sidebarRoutes'][0].name,
+                            replace: true
+                        })
+                    }
                 }
             } else {
                 // 如果是通过 name 跳转，并且 name 对应的路由没有权限时，需要做这步处理，手动指向到 404 页面

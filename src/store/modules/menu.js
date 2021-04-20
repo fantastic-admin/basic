@@ -102,7 +102,7 @@ const state = {
 
 const getters = {
     sidebarRoutes: state => {
-        return state.routes[state.headerActived].children
+        return state.routes.length > 0 ? state.routes[state.headerActived].children : []
     }
 }
 
