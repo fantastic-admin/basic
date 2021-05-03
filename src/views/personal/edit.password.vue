@@ -59,12 +59,12 @@ export default {
         onSubmit() {
             this.$refs['form'].validate(valid => {
                 if (valid) {
-                    this.$store.dispatch('admin/editPassword', this.form).then(() => {
+                    this.$store.dispatch('user/editPassword', this.form).then(() => {
                         this.$message({
                             type: 'success',
                             message: '修改成功，请重新登录'
                         })
-                        this.$store.dispatch('admin/logout').then(() => {
+                        this.$store.dispatch('user/logout').then(() => {
                             this.$router.push('/login')
                         })
                     }).catch(() => {})
