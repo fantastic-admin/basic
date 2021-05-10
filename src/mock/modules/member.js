@@ -5,7 +5,7 @@ module.exports = [
         result: option => {
             return {
                 error: '',
-                state: 1,
+                status: 1,
                 data: {
                     account: option.body.account,
                     token: '@string',
@@ -33,7 +33,7 @@ module.exports = [
             }
             return {
                 error: '',
-                state: 1,
+                status: 1,
                 data: {
                     permissions
                 }
