@@ -76,6 +76,11 @@ export default {
     vertical-align: inherit;
     @include text-overflow;
 }
+::v-deep .el-menu-item,
+::v-deep .el-submenu__title {
+    display: flex;
+    align-items: center;
+}
 ::v-deep .el-submenu {
     .el-menu--inline {
         .el-submenu > .el-submenu__title,
