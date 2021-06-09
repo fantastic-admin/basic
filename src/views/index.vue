@@ -8,15 +8,15 @@
                 </div>
             </template>
             <el-button-group style="margin-right: 10px;">
-                <el-button type="success" plain @click="open('https://hooray.gitee.io/fantastic-admin')">开发文档</el-button>
-                <el-button type="primary" plain @click="open('https://gitee.com/hooray/fantastic-admin')">代码仓库</el-button>
+                <el-button type="success" plain @click="open('https://hooray.github.io/fantastic-admin')">开发文档</el-button>
+                <el-button type="primary" plain @click="open('https://github.com/hooray/fantastic-admin')">代码仓库</el-button>
             </el-button-group>
         </page-header>
         <el-row :gutter="20" style="margin: 0 10px;">
             <el-col :lg="8">
                 <page-main title="框架信息" style="margin: 0 0 20px 0;">
                     <div class="fa-info">
-                        <img src="https://hooray.gitee.io/fantastic-admin/logo.png" style="width: 150px;">
+                        <img src="https://hooray.github.io/fantastic-admin/logo.png" style="width: 150px;">
                         <h1>Fantastic-admin</h1>
                         <el-table :data="diff" row-key="prop" size="mini" border stripe>
                             <el-table-column label="基础版" align="center">

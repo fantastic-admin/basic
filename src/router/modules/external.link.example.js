@@ -1,6 +1,6 @@
 
 export default {
-    path: 'https://hooray.gitee.io/fantastic-admin',
+    path: 'https://hooray.github.io/fantastic-admin',
     name: 'externalLinkExample',
     meta: {
         title: '官网',
