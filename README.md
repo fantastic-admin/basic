@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://hooray.gitee.io/fantastic-admin/logo.png" width="200" height="200" />
+    <img src="https://hooray.github.io/fantastic-admin/logo.png" width="200" height="200" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>
