@@ -17,7 +17,7 @@
 
 ## 演示
 
-[基础版](https://hooray.gitee.io/fantastic-admin/basic) | [专业版](https://hooray.gitee.io/fantastic-admin/pro)
+[基础版](https://hooray.github.io/fantastic-admin/basic) | [专业版](https://hooray.github.io/fantastic-admin/pro)
 
 ## 下载 & 购买
 
@@ -25,11 +25,11 @@
   - 去 [Gitee](https://gitee.com/hooray/fantastic-admin) 下载
   - 去 [Github](https://github.com/hooray/fantastic-admin) 下载
 - 专业版（付费，可商用）
-  - [去购买](http://hooray.gitee.io/fantastic-admin/buy.html)
+  - [去购买](http://hooray.github.io/fantastic-admin/buy.html)
 
 ## 技术支持
 
-[开发文档](https://hooray.gitee.io/fantastic-admin)
+[开发文档](https://hooray.github.io/fantastic-admin)
 
 [视频教程](https://space.bilibili.com/3079082/channel/detail?cid=156985)
 
@@ -41,12 +41,12 @@
 
 <table>
     <tr>
-        <td><img src="https://hooray.gitee.io/fantastic-admin/preview1.png" /></td>
-        <td><img src="https://hooray.gitee.io/fantastic-admin/preview2.png" /></td>
+        <td><img src="https://hooray.github.io/fantastic-admin/preview1.png" /></td>
+        <td><img src="https://hooray.github.io/fantastic-admin/preview2.png" /></td>
     </tr>
     <tr>
-        <td><img src="https://hooray.gitee.io/fantastic-admin/preview3.png" /></td>
-        <td><img src="https://hooray.gitee.io/fantastic-admin/preview4.png" /></td>
+        <td><img src="https://hooray.github.io/fantastic-admin/preview3.png" /></td>
+        <td><img src="https://hooray.github.io/fantastic-admin/preview4.png" /></td>
     </tr>
 </table>
 
