@@ -48,6 +48,9 @@ if (process.env.VUE_APP_TYPE == 'example' || process.env.NODE_ENV == 'developmen
     globalSettings.enableFullscreen = true
     globalSettings.enablePageReload = true
     globalSettings.enableDynamicTitle = true
+    if (process.env.VUE_APP_TYPE == 'example') {
+        globalSettings.copyrightWebsite = '/fantastic-admin'
+    }
 }
 
 export default globalSettings

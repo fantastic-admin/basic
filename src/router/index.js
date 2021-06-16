@@ -81,7 +81,7 @@ import ExTernalLinkExample from './modules/external.link.example'
 let asyncRoutes = [
     {
         meta: {
-            title: '默认',
+            title: '演示',
             icon: 'sidebar-default'
         },
         children: [
@@ -91,7 +91,8 @@ let asyncRoutes = [
             ComponentBasicExample,
             ComponentExtendExample,
             PermissionExample,
-            MockExample
+            MockExample,
+            ExTernalLinkExample
         ]
     },
     {
@@ -101,15 +102,6 @@ let asyncRoutes = [
         },
         children: [
             ...VideosExample
-        ]
-    },
-    {
-        meta: {
-            title: '其它',
-            icon: 'sidebar-other'
-        },
-        children: [
-            ExTernalLinkExample
         ]
     }
 ]

@@ -94,7 +94,11 @@ export default {
             }
         },
         pro() {
-            window.open('https://hooray.github.io/fantastic-admin/pro', 'top')
+            if (location.origin.includes('gitee')) {
+                window.open('https://hooray.gitee.io/fantastic-admin/pro', 'top')
+            } else {
+                window.open('https://hooray.github.io/fantastic-admin/pro', 'top')
+            }
         }
     }
 }
