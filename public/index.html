@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <meta name="keywords" content="fantastic-admin,后台系统,管理后台,后台模版,vue后台,vue-admin,vue-element-admin,vue-admin-template">
+    <meta name="description" content="Fantastic-admin 是一款开箱即用的 Vue 中后台管理系统模版">
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.css) { %>
+        <!-- 使用CDN的CSS文件 -->
+        <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="external nofollow preload" as="style">
+        <link href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" rel="external nofollow stylesheet">
+    <% } %>
+    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+        <!-- 使用CDN的JS文件 -->
+        <link href="<%= htmlWebpackPlugin.options.cdn.js[i] %>" rel="external nofollow preload" as="script">
+    <% } %>
+    <style>
+        .vaa-home {
+            position: absolute;
+            z-index: 10000;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            user-select: none;
+            color: #736477;
+            background-color: snow;
+        }
+        .vaa-home .loading {
+            position: relative;
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            color: inherit;
+            vertical-align: middle;
+            pointer-events: none;
+            transform: scale(3);
+        }
+        .vaa-home .loading::before,
+        .vaa-home .loading::after {
+            content: '';
+            display: block;
+            position: absolute;
+            background-color: currentColor;
+            left: 50%;
+            right: 0;
+            top: 0;
+            bottom: 50%;
+            box-shadow: -0.5em 0 0 currentColor;
+            animation: loading 1s linear infinite;
+        }
+        .vaa-home .loading::after {
+            top: 50%;
+            bottom: 0;
+            animation-delay: 0.25s;
+        }
+        @keyframes loading {
+            0%,
+            100% {
+                box-shadow: -0.5em 0 0 transparent;
+                background-color: currentColor;
+            }
+            50% {
+                box-shadow: -0.5em 0 0 currentColor;
+                background-color: transparent;
+            }
+        }
+        .vaa-home .text {
+            font-size: 24px;
+            margin-top: 50px;
+        }
+    </style>
+    <% if (htmlWebpackPlugin.options.appType == 'example') { %>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+                if (location.origin.includes('gitee')) {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?ba0ee7b31f404b7dc10bfcd8bdc7183d";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                }
+                if (location.origin.includes('github')) {
+                    var hm = document.createElement("script");
+                    hm.src = "https://hm.baidu.com/hm.js?d07a64f7a02cd5e9c01e1b36948ac4a5";
+                    var s = document.getElementsByTagName("script")[0];
+                    s.parentNode.insertBefore(hm, s);
+                }
+            })();
+        </script>
+    <% } %>
+</head>
+<body>
+    <noscript>
+        <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+    </noscript>
+    <div id="app">
+        <div class="vaa-home">
+            <div class="loading"></div>
+            <div class="text"><%= htmlWebpackPlugin.options.title %>载入中…</div>
+        </div>
+    </div>
+    <!-- built files will be auto injected -->
+    <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
+        <script src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.debugTool == 'eruda') { %>
+        <script src="https://cdn.jsdelivr.net/npm/eruda/eruda.min.js"></script>
+        <script>eruda.init();</script>
+    <% } %>
+    <% if (htmlWebpackPlugin.options.debugTool == 'vconsole') { %>
+        <script src="https://cdn.jsdelivr.net/npm/vconsole/dist/vconsole.min.js"></script>
+        <script>new VConsole();</script>
+    <% } %>
+</body>
+</html>

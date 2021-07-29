@@ -1,0 +1,67 @@
+{
+    "name": "fantastic-admin",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build:test": "vue-cli-service build --mode test --dest dist-test",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint",
+        "stylelint": "vue-cli-service lint:style",
+        "svgo": "svgo -f src/assets/icons"
+    },
+    "dependencies": {
+        "@tinymce/tinymce-vue": "^3.2.6",
+        "axios": "^0.21.0",
+        "core-js": "^3.6.4",
+        "dayjs": "^1.9.4",
+        "element-ui": "^2.14.0",
+        "hotkeys-js": "^3.8.1",
+        "mavon-editor": "^2.9.1",
+        "nprogress": "^0.2.0",
+        "path-to-regexp": "^6.2.0",
+        "screenfull": "^5.0.2",
+        "tinymce": "^5.5.1",
+        "vue": "^2.6.12",
+        "vue-clipboard2": "^0.3.1",
+        "vue-cookies": "^1.7.4",
+        "vue-meta": "^2.4.0",
+        "vue-router": "^3.4.8",
+        "vuex": "^3.5.1"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-babel": "~4.5.8",
+        "@vue/cli-plugin-eslint": "~4.5.8",
+        "@vue/cli-service": "~4.5.8",
+        "@winner-fed/vue-cli-plugin-stylelint": "^1.0.4",
+        "babel-eslint": "^10.1.0",
+        "babel-plugin-dynamic-import-node": "^2.3.3",
+        "compression-webpack-plugin": "^6.1.1",
+        "eslint": "^7.12.1",
+        "eslint-plugin-vue": "^7.1.0",
+        "html-webpack-plugin": "^4.5.0",
+        "mockjs": "^1.1.0",
+        "sass": "^1.28.0",
+        "sass-loader": "^10.0.4",
+        "sass-resources-loader": "^2.1.1",
+        "stylelint": "^13.7.2",
+        "stylelint-config-recommended-scss": "^4.2.0",
+        "stylelint-config-standard": "^22.0.0",
+        "stylelint-scss": "^3.18.0",
+        "svg-sprite-loader": "^6.0.6",
+        "svgo": "^2.3.0",
+        "vue-cli-plugin-mock": "^1.0.2",
+        "vue-template-compiler": "^2.6.12",
+        "webpack-spritesmith": "^1.1.0"
+    },
+    "postcss": {
+        "plugins": {
+            "autoprefixer": {}
+        }
+    },
+    "browserslist": [
+        "> 1%",
+        "last 2 versions",
+        "not ie <= 8"
+    ]
+}
