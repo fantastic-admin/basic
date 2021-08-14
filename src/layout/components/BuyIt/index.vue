@@ -39,7 +39,9 @@ export default {
             dangerouslyUseHTMLString: true,
             message: `
                 <p>当前访问的是<b>基础版</b></p>
-                <p>你可以点<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/pro/" target="_blank"><b>这里</b></a>访问专业版</p>
+                <p>你可以点<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue2/pro/" target="_blank"><b>这里</b></a>访问专业版</p>
+                <div style="border-top: 1px solid #ccc; margin: 10px 0;"></div>
+                <p>如果你对 Vue3 感兴趣，框架也提供了 Vue3 版本的：<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/basic/" target="_blank"><b>基础版</b></a>和<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro/" target="_blank"><b>专业版</b></a></p>
             `,
             position: 'bottom-right',
             duration: 0

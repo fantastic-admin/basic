@@ -95,9 +95,9 @@ export default {
         },
         pro() {
             if (location.origin.includes('gitee')) {
-                window.open('https://hooray.gitee.io/fantastic-admin/pro', 'top')
+                window.open('https://hooray.gitee.io/fantastic-admin/vue2/pro', 'top')
             } else {
-                window.open('https://hooray.github.io/fantastic-admin/pro', 'top')
+                window.open('https://hooray.github.io/fantastic-admin/vue2/pro', 'top')
             }
         }
     }
