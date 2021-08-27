@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title><%= title %></title>
+        <style>
+            #app {
+                height: 100%;
+            }
+            .fantastic-admin-home {
+                position: absolute;
+                z-index: 10000;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                user-select: none;
+                color: #736477;
+                background-color: snow;
+            }
+            .fantastic-admin-home .loading {
+                position: relative;
+                display: inline-block;
+                width: 1em;
+                height: 1em;
+                color: inherit;
+                vertical-align: middle;
+                pointer-events: none;
+                transform: scale(3);
+            }
+            .fantastic-admin-home .loading::before,
+            .fantastic-admin-home .loading::after {
+                content: '';
+                display: block;
+                position: absolute;
+                background-color: currentColor;
+                left: 50%;
+                right: 0;
+                top: 0;
+                bottom: 50%;
+                box-shadow: -0.5em 0 0 currentColor;
+                animation: loading 1s linear infinite;
+            }
+            .fantastic-admin-home .loading::after {
+                top: 50%;
+                bottom: 0;
+                animation-delay: 0.25s;
+            }
+            @keyframes loading {
+                0%,
+                100% {
+                    box-shadow: -0.5em 0 0 transparent;
+                    background-color: currentColor;
+                }
+                50% {
+                    box-shadow: -0.5em 0 0 currentColor;
+                    background-color: transparent;
+                }
+            }
+            .fantastic-admin-home .text {
+                font-size: 24px;
+                margin-top: 50px;
+            }
+        </style>
+        <% if (appMode == 'example') { %>
+            <script>
+                var _hmt = _hmt || [];
+                (function() {
+                    if (location.origin.includes('gitee')) {
+                        var hm = document.createElement("script");
+                        hm.src = "https://hm.baidu.com/hm.js?ba0ee7b31f404b7dc10bfcd8bdc7183d";
+                        var s = document.getElementsByTagName("script")[0];
+                        s.parentNode.insertBefore(hm, s);
+                    }
+                    if (location.origin.includes('github')) {
+                        var hm = document.createElement("script");
+                        hm.src = "https://hm.baidu.com/hm.js?d07a64f7a02cd5e9c01e1b36948ac4a5";
+                        var s = document.getElementsByTagName("script")[0];
+                        s.parentNode.insertBefore(hm, s);
+                    }
+                })();
+            </script>
+        <% } %>
+    </head>
+    <body>
+        <div id="app">
+            <div class="fantastic-admin-home">
+                <div class="loading"></div>
+                <div class="text"><%= title %>载入中…</div>
+            </div>
+        </div>
+        <script type="module" src="/src/main.js"></script>
+        <% if (debugTool == 'eruda') { %>
+            <script src="//cdn.jsdelivr.net/npm/eruda/eruda.min.js"></script>
+            <script>eruda.init();</script>
+        <% } %>
+        <% if (debugTool == 'vconsole') { %>
+            <script src="//cdn.jsdelivr.net/npm/vconsole/dist/vconsole.min.js"></script>
+            <script>new VConsole();</script>
+        <% } %>
+    </body>
+</html>

@@ -1,0 +1,4 @@
+dist/
+node_modules/
+babel.config.js
+.eslintrc.js
