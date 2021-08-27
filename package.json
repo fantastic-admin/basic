@@ -1,5 +1,5 @@
 {
-    "name": "fantastic-admin-pro",
+    "name": "fantastic-admin",
     "version": "0.1.0",
     "scripts": {
         "dev": "vite",
