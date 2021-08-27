@@ -1,0 +1,66 @@
+{
+    // Default options
+    'functions': true,
+    'variableNameTransforms': ['dasherize']
+}
+
+{{#block "sprites"}}
+{{#each sprites}}
+${{../spritesheet_info.strings.name}}-sprite-{{strings.name}}: ({{px.x}}, {{px.y}}, {{px.offset_x}}, {{px.offset_y}}, {{px.width}}, {{px.height}}, {{px.total_width}}, {{px.total_height}}, '{{{escaped_image}}}', '{{name}}');
+{{/each}}
+
+${{spritesheet_info.strings.name}}-sprites: (
+{{#each sprites}}
+	{{strings.name}}: ${{../spritesheet_info.strings.name}}-sprite-{{strings.name}},
+{{/each}}
+);
+{{/block}}
+
+{{#block "sprite-functions"}}
+{{#if options.functions}}
+@mixin {{spritesheet_info.strings.name}}-sprite-width($sprite) {
+    width: nth($sprite, 5);
+}
+
+@mixin {{spritesheet_info.strings.name}}-sprite-height($sprite) {
+    height: nth($sprite, 6);
+}
+
+@mixin {{spritesheet_info.strings.name}}-sprite-position($sprite) {
+    $sprite-offset-x: nth($sprite, 3);
+    $sprite-offset-y: nth($sprite, 4);
+    background-position: $sprite-offset-x $sprite-offset-y;
+}
+
+@mixin {{spritesheet_info.strings.name}}-sprite-size($sprite) {
+    background-size: nth($sprite, 7) nth($sprite, 8);
+}
+
+@mixin {{spritesheet_info.strings.name}}-sprite-image($sprite) {
+    $sprite-image: nth($sprite, 9);
+    background-image: url(#{$sprite-image});
+}
+
+@mixin {{spritesheet_info.strings.name}}-sprite($name) {
+    @include {{spritesheet_info.strings.name}}-sprite-image(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+    @include {{spritesheet_info.strings.name}}-sprite-position(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+    @include {{spritesheet_info.strings.name}}-sprite-size(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+    @include {{spritesheet_info.strings.name}}-sprite-width(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+    @include {{spritesheet_info.strings.name}}-sprite-height(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+    background-repeat: no-repeat;
+}
+{{/if}}
+{{/block}}
+
+{{#block "spritesheet-functions"}}
+{{#if options.functions}}
+@mixin all-{{spritesheet_info.strings.name}}-sprites() {
+    @each $key, $val in ${{spritesheet_info.strings.name}}-sprites {
+        $sprite-name: nth($val, 10);
+        .{{spritesheet_info.strings.name}}-#{$sprite-name}-sprites {
+            @include {{spritesheet_info.strings.name}}-sprite($key);
+        }
+    }
+}
+{{/if}}
+{{/block}}

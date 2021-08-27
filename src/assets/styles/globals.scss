@@ -1,0 +1,86 @@
+// 全局样式
+::-webkit-scrollbar {
+    width: 13px;
+    height: 13px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 7px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+::-webkit-scrollbar-track:hover {
+    background-color: #f8fafc;
+}
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    color: #333;
+    box-sizing: border-box;
+    font-family: Lato, PingFang SC, Microsoft YaHei, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    &.hidden {
+        overflow: hidden;
+    }
+}
+* {
+    box-sizing: inherit;
+}
+// 右侧内容区针对fixed元素，有横向铺满的需求，可在fixed元素上设置 [data-fixed-calc-width]
+[data-fixed-calc-width] {
+    position: fixed;
+    left: 50%;
+    right: 0;
+    width: calc(100% - #{$g-main-sidebar-width} - #{$g-sub-sidebar-width});
+}
+[data-sidebar-no-collapse] {
+    [data-fixed-calc-width] {
+        transform: translateX(-50%) translateX(division($g-main-sidebar-width, 2)) translateX(division($g-sub-sidebar-width, 2));
+    }
+    &[data-menu-mode=head],
+    &[data-menu-mode=single] {
+        [data-fixed-calc-width] {
+            width: calc(100% - #{$g-sub-sidebar-width});
+            transform: translateX(-50%) translateX(division($g-sub-sidebar-width, 2));
+        }
+    }
+}
+[data-sidebar-collapse] {
+    [data-fixed-calc-width] {
+        width: calc(100% - #{$g-main-sidebar-width} - 64px);
+        transform: translateX(-50%) translateX(division($g-main-sidebar-width, 2)) translateX(32px);
+    }
+    &[data-menu-mode=head],
+    &[data-menu-mode=single] {
+        [data-fixed-calc-width] {
+            width: calc(100% - 64px);
+            transform: translateX(-50%) translateX(32px);
+        }
+    }
+}
+[data-mode=mobile] {
+    [data-fixed-calc-width] {
+        width: 100% !important;
+        transform: translateX(-50%) !important;
+    }
+}
+// textarea 字体跟随系统
+textarea {
+    font-family: inherit;
+}
+// 列表页全局样式
+.el-table.list-table {
+    margin: 20px 0;
+    .el-button + .el-dropdown {
+        margin-left: 10px;
+    }
+}
