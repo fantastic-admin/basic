@@ -1,3 +1,4 @@
+import path from 'path-browserify'
 import { deepClone } from '@/util'
 import api from '@/api'
 
@@ -116,6 +117,7 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
 const state = () => ({
     isGenerate: false,
     routes: [],
+    defaultOpenedPaths: [],
     headerActived: 0,
     currentRemoveRoutes: []
 })
@@ -167,6 +169,7 @@ const actions = {
                     }])
                 }
             })
+            commit('setDefaultOpenedPaths', routes)
             resolve(routes)
         })
     },
@@ -192,6 +195,7 @@ const actions = {
                         }])
                     }
                 })
+                commit('setDefaultOpenedPaths', routes)
                 resolve(routes)
             })
         })
@@ -209,6 +213,16 @@ const mutations = {
         state.routes = newRoutes.filter(item => {
             return item.children.length != 0
         })
+    },
+    setDefaultOpenedPaths(state, routes) {
+        let defaultOpenedPaths = []
+        routes.map(item => {
+            item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
+            item.children.map(child => {
+                child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
+            })
+        })
+        state.defaultOpenedPaths = defaultOpenedPaths
     },
     // 根据路由判断属于哪个头部导航
     setHeaderActived(state, path) {
