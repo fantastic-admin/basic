@@ -7,7 +7,7 @@
         }"
         />
         <!-- 侧边栏模式（无主导航） -->
-        <el-menu unique-opened :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse" :collapse-transition="false" :class="{
+        <el-menu :unique-opened="$store.state.settings.sidebarUniqueOpened" :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse" :collapse-transition="false" :class="{
             'is-collapse-without-logo': $store.state.settings.menuMode !== 'single' && $store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse
         }"
         >

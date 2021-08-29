@@ -36,7 +36,16 @@
                         <svg-icon name="el-icon-question" />
                     </el-tooltip>
                 </div>
-                <el-switch v-model="switchSidebarAndPageJump" />
+                <el-switch v-model="switchSidebarAndPageJump" :disabled="['single'].includes($store.state.settings.menuMode)" />
+            </div>
+            <div class="setting-item">
+                <div class="label">
+                    保持展开一个
+                    <el-tooltip content="开启该功能后，侧边栏只保持一个子菜单的展开" placement="top" :append-to-body="false">
+                        <svg-icon name="ri-question-line" />
+                    </el-tooltip>
+                </div>
+                <el-switch v-model="sidebarUniqueOpened" />
             </div>
             <el-divider>顶栏</el-divider>
             <div class="setting-item">
@@ -192,6 +201,16 @@ export default {
             set: function(newValue) {
                 this.$store.commit('settings/updateThemeSetting', {
                     'switchSidebarAndPageJump': newValue
+                })
+            }
+        },
+        sidebarUniqueOpened: {
+            get: function() {
+                return this.$store.state.settings.sidebarUniqueOpened
+            },
+            set: function(newValue) {
+                this.$store.commit('settings/updateThemeSetting', {
+                    'sidebarUniqueOpened': newValue
                 })
             }
         },
