@@ -21,10 +21,6 @@ globalProperties(app)
 import directive from '@/util/directive'
 directive(app)
 
-// 全局组件自动注册
-import registerGlobalComponent from '@/components/registerGlobalComponent'
-registerGlobalComponent(app)
-
 // 加载 svg 图标
 import 'vite-plugin-svg-icons/register'
 
