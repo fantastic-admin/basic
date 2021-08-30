@@ -1,4 +1,4 @@
-import components from 'vite-plugin-components'
+import components from 'unplugin-vue-components/vite'
 
 export default function createComponents() {
     return components({
