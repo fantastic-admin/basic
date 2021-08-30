@@ -17,7 +17,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
     vitePlugins.push(createSvgIcon(isBuild))
     vitePlugins.push(createMock())
     isBuild && vitePlugins.push(...createCompression(viteEnv))
-    vitePlugins.push(...createSpritesmith())
+    vitePlugins.push(...createSpritesmith(isBuild))
     vitePlugins.push(createBanner())
     return vitePlugins
 }
