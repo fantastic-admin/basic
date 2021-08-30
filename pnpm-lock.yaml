@@ -30,6 +30,7 @@ specifiers:
   tinymce: ^5.9.1
   vite: ^2.5.1
   vite-plugin-banner: ^0.1.3
+  vite-plugin-components: ^0.13.2
   vite-plugin-compression: ^0.3.5
   vite-plugin-html: ^2.1.0
   vite-plugin-mock: ^2.9.6
@@ -76,6 +77,7 @@ devDependencies:
   svgo: registry.nlark.com/svgo/2.5.0
   vite: registry.nlark.com/vite/2.5.1
   vite-plugin-banner: registry.nlark.com/vite-plugin-banner/0.1.3
+  vite-plugin-components: registry.nlark.com/vite-plugin-components/0.13.2_vite@2.5.1
   vite-plugin-compression: registry.nlark.com/vite-plugin-compression/0.3.5_vite@2.5.1
   vite-plugin-html: registry.nlark.com/vite-plugin-html/2.1.0_vite@2.5.1
   vite-plugin-mock: registry.nlark.com/vite-plugin-mock/2.9.6_mockjs@1.1.0+vite@2.5.1
@@ -680,6 +682,18 @@ packages:
       is-plain-object: 2.0.4
     dev: true
 
+  /is-extglob/2.1.1:
+    resolution: {integrity: sha1-qIwCU1eR8C7TfHahueqXc8gz+MI=, tarball: is-extglob/download/is-extglob-2.1.1.tgz}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
+  /is-glob/4.0.1:
+    resolution: {integrity: sha1-dWfb6fL14kZ7x3q4PEopSCQHpdw=, tarball: is-glob/download/is-glob-4.0.1.tgz}
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      is-extglob: 2.1.1
+    dev: true
+
   /is-number/3.0.0:
     resolution: {integrity: sha1-JP1iAaR4LPUFYcgQJ2r8fRLXEZU=, tarball: is-number/download/is-number-3.0.0.tgz}
     engines: {node: '>=0.10.0'}
@@ -867,6 +881,11 @@ packages:
     resolution: {integrity: sha1-L93n5gIJOfcJBqaPLXrmheTIxkY=, tarball: merge-source-map/download/merge-source-map-1.1.0.tgz}
     dependencies:
       source-map: registry.nlark.com/source-map/0.6.1
+    dev: true
+
+  /merge2/1.4.1:
+    resolution: {integrity: sha1-Q2iJL4hekHRVpv19xVwMnUBJkK4=, tarball: merge2/download/merge2-1.4.1.tgz}
+    engines: {node: '>= 8'}
     dev: true
 
   /micromatch/3.1.0:
@@ -1133,6 +1152,10 @@ packages:
       posthtml-render: registry.nlark.com/posthtml-render/1.4.0
     dev: true
 
+  /queue-microtask/1.2.3:
+    resolution: {integrity: sha1-SSkii7xyTfrEPg77BYyve2z7YkM=, tarball: queue-microtask/download/queue-microtask-1.2.3.tgz}
+    dev: true
+
   /repeat-string/1.6.1:
     resolution: {integrity: sha1-jcrkcOHIirwtYA//Sndihtp15jc=, tarball: repeat-string/download/repeat-string-1.6.1.tgz}
     engines: {node: '>=0.10'}
@@ -1157,11 +1180,22 @@ packages:
     engines: {node: '>=0.12'}
     dev: true
 
+  /reusify/1.0.4:
+    resolution: {integrity: sha1-kNo4Kx4SbvwCFG6QhFqI2xKSXXY=, tarball: reusify/download/reusify-1.0.4.tgz}
+    engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
+    dev: true
+
   /rimraf/3.0.2:
     resolution: {integrity: sha1-8aVAK6YiCtUswSgrrBrjqkn9Bho=, tarball: rimraf/download/rimraf-3.0.2.tgz?cache=0&sync_timestamp=1604308910029&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Frimraf%2Fdownload%2Frimraf-3.0.2.tgz}
     hasBin: true
     dependencies:
       glob: registry.nlark.com/glob/7.1.7
+    dev: true
+
+  /run-parallel/1.2.0:
+    resolution: {integrity: sha1-ZtE2jae9+SHrnZW9GpIp5/IaQ+4=, tarball: run-parallel/download/run-parallel-1.2.0.tgz}
+    dependencies:
+      queue-microtask: 1.2.3
     dev: true
 
   /screenfull/5.1.0:
@@ -1770,7 +1804,7 @@ packages:
     engines: {node: '>= 8'}
     dependencies:
       '@nodelib/fs.stat': registry.nlark.com/@nodelib/fs.stat/2.0.5
-      run-parallel: registry.nlark.com/run-parallel/1.2.0
+      run-parallel: 1.2.0
     dev: true
 
   registry.nlark.com/@nodelib/fs.stat/2.0.5:
@@ -2801,7 +2835,7 @@ packages:
     dev: true
 
   registry.nlark.com/debug/4.3.2:
-    resolution: {integrity: sha1-8KScGKyHeeMdSgxgKd+3aHPHQos=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/debug/download/debug-4.3.2.tgz?cache=0&sync_timestamp=1625405131798&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fdebug%2Fdownload%2Fdebug-4.3.2.tgz}
+    resolution: {integrity: sha1-8KScGKyHeeMdSgxgKd+3aHPHQos=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/debug/download/debug-4.3.2.tgz}
     name: debug
     version: 4.3.2
     engines: {node: '>=6.0'}
@@ -3365,7 +3399,7 @@ packages:
       '@nodelib/fs.stat': registry.nlark.com/@nodelib/fs.stat/2.0.5
       '@nodelib/fs.walk': registry.nlark.com/@nodelib/fs.walk/1.2.8
       glob-parent: registry.nlark.com/glob-parent/5.1.2
-      merge2: registry.nlark.com/merge2/1.4.1
+      merge2: 1.4.1
       micromatch: 4.0.4
     dev: true
 
@@ -3386,7 +3420,7 @@ packages:
     name: fastq
     version: 1.12.0
     dependencies:
-      reusify: registry.nlark.com/reusify/1.0.4
+      reusify: 1.0.4
     dev: true
 
   registry.nlark.com/figures/3.2.0:
@@ -3617,7 +3651,7 @@ packages:
     version: 5.1.2
     engines: {node: '>= 6'}
     dependencies:
-      is-glob: registry.nlark.com/is-glob/4.0.1
+      is-glob: 4.0.1
     dev: true
 
   registry.nlark.com/glob/7.1.7:
@@ -5444,12 +5478,6 @@ packages:
       strict-uri-encode: registry.nlark.com/strict-uri-encode/1.1.0
     dev: true
 
-  registry.nlark.com/queue-microtask/1.2.3:
-    resolution: {integrity: sha1-SSkii7xyTfrEPg77BYyve2z7YkM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/queue-microtask/download/queue-microtask-1.2.3.tgz}
-    name: queue-microtask
-    version: 1.2.3
-    dev: true
-
   registry.nlark.com/quick-lru/4.0.1:
     resolution: {integrity: sha1-W4h48ROlgheEjGSCAmxz4bpXcn8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/quick-lru/download/quick-lru-4.0.1.tgz}
     name: quick-lru
@@ -5726,13 +5754,6 @@ packages:
       signal-exit: registry.nlark.com/signal-exit/3.0.3
     dev: true
 
-  registry.nlark.com/reusify/1.0.4:
-    resolution: {integrity: sha1-kNo4Kx4SbvwCFG6QhFqI2xKSXXY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/reusify/download/reusify-1.0.4.tgz}
-    name: reusify
-    version: 1.0.4
-    engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
-    dev: true
-
   registry.nlark.com/rollup/2.56.3:
     resolution: {integrity: sha1-tj7a3ZhRsNYYptDmr4IBlVp3rv8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/rollup/download/rollup-2.56.3.tgz}
     name: rollup
@@ -5748,14 +5769,6 @@ packages:
     name: run-async
     version: 2.4.1
     engines: {node: '>=0.12.0'}
-    dev: true
-
-  registry.nlark.com/run-parallel/1.2.0:
-    resolution: {integrity: sha1-ZtE2jae9+SHrnZW9GpIp5/IaQ+4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/run-parallel/download/run-parallel-1.2.0.tgz}
-    name: run-parallel
-    version: 1.2.0
-    dependencies:
-      queue-microtask: registry.nlark.com/queue-microtask/1.2.3
     dev: true
 
   registry.nlark.com/rxjs/6.6.7:
@@ -6686,6 +6699,21 @@ packages:
     resolution: {integrity: sha1-09To4oSt3tNf6qVKuMonOp0zSeA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/vite-plugin-banner/download/vite-plugin-banner-0.1.3.tgz}
     name: vite-plugin-banner
     version: 0.1.3
+    dev: true
+
+  registry.nlark.com/vite-plugin-components/0.13.2_vite@2.5.1:
+    resolution: {integrity: sha1-nhsbkMqKgXlU9axezCTbvfHMFoQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/vite-plugin-components/download/vite-plugin-components-0.13.2.tgz}
+    id: registry.nlark.com/vite-plugin-components/0.13.2
+    name: vite-plugin-components
+    version: 0.13.2
+    peerDependencies:
+      vite: ^2.0.0
+    dependencies:
+      debug: registry.nlark.com/debug/4.3.2
+      fast-glob: registry.nlark.com/fast-glob/3.2.7
+      magic-string: 0.25.7
+      minimatch: 3.0.4
+      vite: registry.nlark.com/vite/2.5.1
     dev: true
 
   registry.nlark.com/vite-plugin-compression/0.3.5_vite@2.5.1:
