@@ -22,7 +22,7 @@ import directive from '@/util/directive'
 directive(app)
 
 // 加载 svg 图标
-import 'vite-plugin-svg-icons/register'
+import 'virtual:svg-icons-register'
 
 // 全局样式
 import '@/assets/styles/globals.scss'
