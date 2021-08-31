@@ -13,7 +13,7 @@ export default {
         {
             path: 'svg',
             name: 'componentExtendExampleSvg',
-            component: () => import('@/views/component_extend_example/svg.vue'),
+            component: () => import('@/views/component_extend_example/svg.demo.vue'),
             meta: {
                 title: 'SVG Icon'
             }
@@ -21,7 +21,7 @@ export default {
         {
             path: 'pageheader',
             name: 'componentExtendExamplePageheader',
-            component: () => import('@/views/component_extend_example/pageheader.vue'),
+            component: () => import('@/views/component_extend_example/pageheader.demo.vue'),
             meta: {
                 title: '页头'
             }
@@ -29,7 +29,7 @@ export default {
         {
             path: 'pagemain',
             name: 'componentExtendExamplePagemain',
-            component: () => import('@/views/component_extend_example/pagemain.vue'),
+            component: () => import('@/views/component_extend_example/pagemain.demo.vue'),
             meta: {
                 title: '内容块'
             }
@@ -37,7 +37,7 @@ export default {
         {
             path: 'result',
             name: 'componentExtendExampleResult',
-            component: () => import('@/views/component_extend_example/result.vue'),
+            component: () => import('@/views/component_extend_example/result.demo.vue'),
             meta: {
                 title: '处理结果'
             }
@@ -45,7 +45,7 @@ export default {
         {
             path: 'actionbar',
             name: 'componentExtendExampleActionbar',
-            component: () => import('@/views/component_extend_example/actionbar.vue'),
+            component: () => import('@/views/component_extend_example/actionbar.demo.vue'),
             meta: {
                 title: '固定底部操作栏'
             }
@@ -53,7 +53,7 @@ export default {
         {
             path: 'searchbar',
             name: 'componentExtendExampleSearchbar',
-            component: () => import('@/views/component_extend_example/searchbar.vue'),
+            component: () => import('@/views/component_extend_example/searchbar.demo.vue'),
             meta: {
                 title: '搜索面板'
             }
@@ -61,7 +61,7 @@ export default {
         {
             path: 'batchactionbar',
             name: 'componentExtendExampleBatchactionbar',
-            component: () => import('@/views/component_extend_example/batchactionbar.vue'),
+            component: () => import('@/views/component_extend_example/batchactionbar.demo.vue'),
             meta: {
                 title: '批量操作栏'
             }
@@ -69,7 +69,7 @@ export default {
         {
             path: 'tableautoheight',
             name: 'componentExtendExampleTableautoheight',
-            component: () => import('@/views/component_extend_example/table.autoheight.vue'),
+            component: () => import('@/views/component_extend_example/table.autoheight.demo.vue'),
             meta: {
                 title: '表格自适应'
             }
@@ -77,7 +77,7 @@ export default {
         {
             path: 'upload',
             name: 'componentExtendExampleUpload',
-            component: () => import('@/views/component_extend_example/upload.vue'),
+            component: () => import('@/views/component_extend_example/upload.demo.vue'),
             meta: {
                 title: '上传'
             }
@@ -85,7 +85,7 @@ export default {
         {
             path: 'imagepreview',
             name: 'componentExtendExampleImagePreview',
-            component: () => import('@/views/component_extend_example/image.preview.vue'),
+            component: () => import('@/views/component_extend_example/image.preview.demo.vue'),
             meta: {
                 title: '图片预览'
             }
@@ -93,7 +93,7 @@ export default {
         {
             path: 'trend',
             name: 'componentExtendExampleTrend',
-            component: () => import('@/views/component_extend_example/trend.vue'),
+            component: () => import('@/views/component_extend_example/trend.demo.vue'),
             meta: {
                 title: '趋势标记'
             }
@@ -101,7 +101,7 @@ export default {
         {
             path: 'area',
             name: 'componentExtendExampleArea',
-            component: () => import('@/views/component_extend_example/area.vue'),
+            component: () => import('@/views/component_extend_example/area.demo.vue'),
             meta: {
                 title: '省市区联动'
             }
@@ -109,7 +109,7 @@ export default {
         {
             path: 'editor',
             name: 'componentExtendExampleEditor',
-            component: () => import('@/views/component_extend_example/editor.vue'),
+            component: () => import('@/views/component_extend_example/editor.demo.vue'),
             meta: {
                 title: '编辑器'
             }
