@@ -223,9 +223,6 @@ export default {
         width: 450px;
         padding: 50px 35px 30px;
         overflow: hidden;
-        .svg-icon {
-            vertical-align: -0.35em;
-        }
         .title-container {
             position: relative;
             .title {
@@ -244,6 +241,11 @@ export default {
         width: 100%;
         input {
             height: 48px;
+        }
+        .el-input__prefix,
+        .el-input__suffix {
+            display: flex;
+            align-items: center;
         }
         .el-input__prefix {
             left: 10px;
