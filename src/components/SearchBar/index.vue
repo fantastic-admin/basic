@@ -7,39 +7,31 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'SearchBar',
-    props: {
-        showMore: {
-            type: Boolean,
-            default: false
-        },
-        unfold: {
-            type: Boolean,
-            default: false
-        }
+<script setup>
+import { defineProps, defineEmits, ref, watch } from 'vue'
+
+const props = defineProps({
+    showMore: {
+        type: Boolean,
+        default: false
     },
-    emits: ['toggle'],
-    data() {
-        return {
-            isUnfold: !this.unfold
-        }
-    },
-    watch: {
-        unfold: {
-            handler() {
-                this.toggle()
-            },
-            immediate: true
-        }
-    },
-    methods: {
-        toggle() {
-            this.isUnfold = !this.isUnfold
-            this.$emit('toggle', this.isUnfold)
-        }
+    unfold: {
+        type: Boolean,
+        default: false
     }
+})
+
+const emit = defineEmits(['toggle'])
+
+const isUnfold = ref(!props.unfold)
+
+watch(() => props.unfold, () => toggle(), {
+    immediate: true
+})
+
+function toggle() {
+    isUnfold.value = !isUnfold.value
+    emit('toggle', isUnfold.value)
 }
 </script>
 

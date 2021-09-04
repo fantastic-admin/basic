@@ -24,69 +24,70 @@
     </el-upload>
 </template>
 
-<script>
-export default {
-    name: 'FileUpload',
-    props: {
-        action: {
-            type: String,
-            required: true
-        },
-        headers: {
-            type: Object,
-            default: () => {}
-        },
-        data: {
-            type: Object,
-            default: () => {}
-        },
-        name: {
-            type: String,
-            default: 'file'
-        },
-        size: {
-            type: Number,
-            default: 2
-        },
-        max: {
-            type: Number,
-            default: 3
-        },
-        files: {
-            type: Array,
-            default: () => []
-        },
-        notip: {
-            type: Boolean,
-            default: false
-        },
-        ext: {
-            type: Array,
-            default: () => ['zip', 'rar']
-        }
+<script setup>
+import { defineProps, defineEmits, getCurrentInstance } from 'vue'
+
+const { proxy } = getCurrentInstance()
+
+const props = defineProps({
+    action: {
+        type: String,
+        required: true
     },
-    emits: ['on-success'],
-    methods: {
-        beforeUpload(file) {
-            const fileName = file.name.split('.')
-            const fileExt = fileName[fileName.length - 1]
-            const isTypeOk = this.ext.indexOf(fileExt) >= 0
-            const isSizeOk = file.size / 1024 / 1024 < this.size
-            if (!isTypeOk) {
-                this.$message.error(`上传文件只支持 ${ this.ext.join(' / ') } 格式！`)
-            }
-            if (!isSizeOk) {
-                this.$message.error(`上传文件大小不能超过 ${this.size}MB！`)
-            }
-            return isTypeOk && isSizeOk
-        },
-        onExceed() {
-            this.$message.warning('文件上传超过限制')
-        },
-        onSuccess(res, file) {
-            this.$emit('on-success', res, file)
-        }
+    headers: {
+        type: Object,
+        default: () => {}
+    },
+    data: {
+        type: Object,
+        default: () => {}
+    },
+    name: {
+        type: String,
+        default: 'file'
+    },
+    size: {
+        type: Number,
+        default: 2
+    },
+    max: {
+        type: Number,
+        default: 3
+    },
+    files: {
+        type: Array,
+        default: () => []
+    },
+    notip: {
+        type: Boolean,
+        default: false
+    },
+    ext: {
+        type: Array,
+        default: () => ['zip', 'rar']
     }
+})
+
+const emit = defineEmits(['on-success'])
+
+function beforeUpload(file) {
+    const fileName = file.name.split('.')
+    const fileExt = fileName[fileName.length - 1]
+    const isTypeOk = props.ext.indexOf(fileExt) >= 0
+    const isSizeOk = file.size / 1024 / 1024 < props.size
+    if (!isTypeOk) {
+        proxy.$message.error(`上传文件只支持 ${ props.ext.join(' / ') } 格式！`)
+    }
+    if (!isSizeOk) {
+        proxy.$message.error(`上传文件大小不能超过 ${props.size}MB！`)
+    }
+    return isTypeOk && isSizeOk
+}
+function onExceed() {
+    proxy.$message.warning('文件上传超过限制')
+}
+function onSuccess(res, file) {
+    emit('on-success', res, file)
 }
 </script>
 

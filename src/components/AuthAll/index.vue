@@ -5,21 +5,18 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { authAll } from '@/util'
+import { defineProps } from 'vue'
 
-export default {
-    name: 'AuthAll',
-    props: {
-        value: {
-            type: Array,
-            default: () => []
-        }
-    },
-    methods: {
-        check() {
-            return authAll(this.value)
-        }
+const props = defineProps({
+    value: {
+        type: Array,
+        default: () => []
     }
+})
+
+function check() {
+    return authAll(props.value)
 }
 </script>

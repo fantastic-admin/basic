@@ -7,12 +7,6 @@
     </footer>
 </template>
 
-<script>
-export default {
-    name: 'Copyright'
-}
-</script>
-
 <style lang="scss" scoped>
 footer {
     margin: 40px 0 20px 0;

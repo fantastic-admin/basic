@@ -8,40 +8,31 @@
     </el-image>
 </template>
 
-<script>
-export default {
-    name: 'ImagePreview',
-    props: {
-        src: {
-            type: String,
-            required: true
-        },
-        width: {
-            type: [Number, String],
-            default: ''
-        },
-        height: {
-            type: [Number, String],
-            default: ''
-        }
+<script setup>
+import { defineProps, computed } from 'vue'
+
+const props = defineProps({
+    src: {
+        type: String,
+        required: true
     },
-    data() {
-        return {
-            dialogVisible: false
-        }
+    width: {
+        type: [Number, String],
+        default: ''
     },
-    computed: {
-        realWidth() {
-            return typeof this.width == 'string' ? this.width : `${this.width}px`
-        },
-        realHeight() {
-            return typeof this.height == 'string' ? this.height : `${this.height}px`
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {}
-}
+    height: {
+        type: [Number, String],
+        default: ''
+    }
+})
+
+const realWidth = computed(() => {
+    return typeof props.width == 'string' ? props.width : `${props.width}px`
+})
+
+const realHeight = computed(() => {
+    return typeof props.height == 'string' ? props.height : `${props.height}px`
+})
 </script>
 
 <style lang="scss" scoped>

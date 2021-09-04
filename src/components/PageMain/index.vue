@@ -8,39 +8,34 @@
     >
         <div v-if="title" class="title-container">{{ title }}</div>
         <slot />
-        <div v-if="collaspeData" class="collaspe" title="展开" @click="uncollaspe">
+        <div v-if="collaspeData" class="collaspe" title="展开" @click="unCollaspe">
             <i class="el-icon-arrow-down" />
         </div>
     </div>
 </template>
 
-<script>
-export default {
-    name: 'PageMain',
-    props: {
-        title: {
-            type: String,
-            default: ''
-        },
-        collaspe: {
-            type: Boolean,
-            default: false
-        },
-        height: {
-            type: String,
-            default: ''
-        }
+<script setup>
+import { defineProps, ref } from 'vue'
+
+const props = defineProps({
+    title: {
+        type: String,
+        default: ''
     },
-    data() {
-        return {
-            collaspeData: this.collaspe
-        }
+    collaspe: {
+        type: Boolean,
+        default: false
     },
-    methods: {
-        uncollaspe() {
-            this.collaspeData = false
-        }
+    height: {
+        type: String,
+        default: ''
     }
+})
+
+const collaspeData = ref(props.collaspe)
+
+function unCollaspe() {
+    collaspeData.value = false
 }
 </script>
 
@@ -61,7 +56,7 @@ export default {
             text-align: center;
             font-size: 24px;
             color: #ccc;
-            text-shadow: 0 0 1px #000;
+            text-shadow: 0 0 1px #fff;
             background: linear-gradient(to bottom, transparent, #fff);
             cursor: pointer;
             transition: 0.3s;

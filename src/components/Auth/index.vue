@@ -5,21 +5,18 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { auth } from '@/util'
+import { defineProps } from 'vue'
 
-export default {
-    name: 'Auth',
-    props: {
-        value: {
-            type: [String, Array],
-            default: ''
-        }
-    },
-    methods: {
-        check() {
-            return auth(this.value)
-        }
+const props = defineProps({
+    value: {
+        type: [String, Array],
+        default: ''
     }
+})
+
+function check() {
+    return auth(props.value)
 }
 </script>
