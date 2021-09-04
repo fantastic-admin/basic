@@ -1,43 +1,37 @@
 <template>
-    <div :class="{
-        'actionbar': true,
-        'shadow': !isBottom
-    }" data-fixed-calc-width
-    >
+    <div class="actionbar" :class="{'shadow': !data.isBottom}" data-fixed-calc-width>
         <slot />
     </div>
 </template>
 
-<script>
-export default {
-    name: 'FixedActionBar',
-    data() {
-        return {
-            isBottom: true
-        }
-    },
-    mounted() {
-        this.onScroll()
-        window.addEventListener('scroll', this.onScroll)
-    },
-    unmounted() {
-        window.removeEventListener('scroll', this.onScroll)
-    },
-    methods: {
-        onScroll() {
-            // 变量scrollTop是滚动条滚动时，滚动条上端距离顶部的距离
-            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-            // 变量windowHeight是可视区的高度
-            var windowHeight = document.documentElement.clientHeight || document.body.clientHeight
-            // 变量scrollHeight是滚动条的总高度（当前可滚动的页面的总高度）
-            var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
-            // 滚动条到底部
-            if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
-                this.isBottom = true
-            } else {
-                this.isBottom = false
-            }
-        }
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const data = ref({
+    isBottom: true
+})
+
+onMounted(() => {
+    onScroll()
+    window.addEventListener('scroll', onScroll)
+})
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', onScroll)
+})
+
+function onScroll() {
+    // 变量scrollTop是滚动条滚动时，滚动条上端距离顶部的距离
+    var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
+    // 变量windowHeight是可视区的高度
+    var windowHeight = document.documentElement.clientHeight || document.body.clientHeight
+    // 变量scrollHeight是滚动条的总高度（当前可滚动的页面的总高度）
+    var scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight
+    // 滚动条到底部
+    if (Math.ceil(scrollTop + windowHeight) >= scrollHeight) {
+        data.value.isBottom = true
+    } else {
+        data.value.isBottom = false
     }
 }
 </script>

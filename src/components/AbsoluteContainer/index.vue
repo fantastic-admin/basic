@@ -4,18 +4,6 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'AbsoluteContainer',
-    props: {},
-    data() {
-        return {}
-    },
-    mounted() {},
-    methods: {}
-}
-</script>
-
 <style lang="scss" scoped>
 .absolute-container {
     position: absolute;

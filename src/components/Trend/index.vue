@@ -7,42 +7,40 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'Trend',
-    props: {
-        value: {
-            type: String,
-            required: true
-        },
-        type: {
-            type: String,
-            validator: val => ['up', 'down'].includes(val),
-            default: 'up'
-        },
-        prefix: {
-            type: String,
-            default: ''
-        },
-        suffix: {
-            type: String,
-            default: ''
-        },
-        reverse: {
-            type: Boolean,
-            default: false
-        }
+<script setup>
+import { defineProps, computed } from 'vue'
+
+const props = defineProps({
+    value: {
+        type: String,
+        required: true
     },
-    computed: {
-        isUp() {
-            let isUp = this.type === 'up'
-            if (this.reverse) {
-                isUp = !isUp
-            }
-            return isUp
-        }
+    type: {
+        type: String,
+        validator: val => ['up', 'down'].includes(val),
+        default: 'up'
+    },
+    prefix: {
+        type: String,
+        default: ''
+    },
+    suffix: {
+        type: String,
+        default: ''
+    },
+    reverse: {
+        type: Boolean,
+        default: false
     }
-}
+})
+
+const isUp = computed(() => {
+    let isUp = props.type === 'up'
+    if (props.reverse) {
+        isUp = !isUp
+    }
+    return isUp
+})
 </script>
 
 <style lang="scss" scoped>

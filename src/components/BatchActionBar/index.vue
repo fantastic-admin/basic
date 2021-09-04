@@ -8,48 +8,42 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'BatchActionBar',
-    props: {
-        data: {
-            type: Array,
-            default: () => []
-        },
-        selectionData: {
-            type: Array,
-            default: () => []
+<script setup>
+import { defineProps, defineEmits, computed } from 'vue'
+
+const props = defineProps({
+    data: {
+        type: Array,
+        default: () => []
+    },
+    selectionData: {
+        type: Array,
+        default: () => []
+    }
+})
+
+const emit = defineEmits(['check-all', 'check-null'])
+
+const checkAll = computed({
+    get: function() {
+        let flag = false
+        if (props.data.length != 0 && props.data.length == props.selectionData.length) {
+            flag = true
         }
+        return flag
     },
-    emits: ['check-all', 'check-null'],
-    data() {
-        return {}
-    },
-    computed: {
-        checkAll: {
-            get: function() {
-                let flag = false
-                if (this.data.length != 0 && this.data.length == this.selectionData.length) {
-                    flag = true
-                }
-                return flag
-            },
-            set: function(newVal) {
-                newVal ? this.$emit('check-all') : this.$emit('check-null')
-            }
-        },
-        isIndeterminate() {
-            let flag = false
-            if (this.selectionData.length > 0 && this.selectionData.length < this.data.length) {
-                flag = true
-            }
-            return flag
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {}
-}
+    set: function(newVal) {
+        newVal ? emit('check-all') : emit('check-null')
+    }
+})
+
+const isIndeterminate = computed(() => {
+    let flag = false
+    if (props.selectionData.length > 0 && props.selectionData.length < props.data.length) {
+        flag = true
+    }
+    return flag
+})
 </script>
 
 <style lang="scss" scoped>

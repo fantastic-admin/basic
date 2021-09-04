@@ -12,20 +12,19 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'PageHeader',
-    props: {
-        title: {
-            type: String,
-            required: true
-        },
-        content: {
-            type: String,
-            default: ''
-        }
+<script setup>
+import { defineProps } from 'vue'
+
+defineProps({
+    title: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        default: ''
     }
-}
+})
 </script>
 
 <style lang="scss" scoped>

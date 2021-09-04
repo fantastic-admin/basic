@@ -4,7 +4,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import tinymce from 'tinymce/tinymce'
 import TinymceEditor from '@tinymce/tinymce-vue'
 import 'tinymce/themes/silver/theme'
@@ -28,71 +28,66 @@ import 'tinymce/plugins/wordcount'
 import 'tinymce/plugins/code'
 import 'tinymce/plugins/searchreplace'
 
-export default {
-    name: 'Editor',
-    components: {
-        TinymceEditor
+import { defineProps, defineEmits, ref, computed, watch, onMounted } from 'vue'
+
+const props = defineProps({
+    modelValue: {
+        type: String,
+        default: ''
     },
-    props: {
-        modelValue: {
-            type: String,
-            default: ''
-        },
-        setting: {
-            type: Object,
-            default: () => {}
-        },
-        disabled: {
-            type: Boolean,
-            default: false
-        }
+    setting: {
+        type: Object,
+        default: () => {}
     },
-    emits: ['update:modelValue'],
-    data() {
-        return {
-            defaultSetting: {
-                language_url: 'tinymce/langs/zh_CN.js',
-                language: 'zh_CN',
-                skin_url: 'tinymce/skins/ui/oxide',
-                min_height: 250,
-                max_height: 600,
-                selector: 'textarea',
-                plugins: 'autolink autoresize contextmenu fullscreen hr image imagetools insertdatetime link lists media preview table textcolor wordcount code searchreplace',
-                toolbar: 'undo redo | formatselect | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | hr link image media table insertdatetime searchreplace removeformat | preview code fullscreen',
-                branding: false,
-                menubar: false,
-                toolbar_mode: 'sliding',
-                insertdatetime_formats: [
-                    '%Y年%m月%d日',
-                    '%H点%M分%S秒',
-                    '%Y-%m-%d',
-                    '%H:%M:%S'
-                ],
-                images_upload_handler: (blobInfo, success) => {
-                    const img = 'data:image/jpeg;base64,' + blobInfo.base64()
-                    success(img)
-                }
-            },
-            myValue: this.modelValue
-        }
-    },
-    computed: {
-        completeSetting() {
-            return Object.assign(this.defaultSetting, this.setting)
-        }
-    },
-    watch: {
-        myValue(newValue) {
-            this.$emit('update:modelValue', newValue)
-        },
-        value(newValue) {
-            this.myValue = newValue
-        }
-    },
-    mounted() {
-        tinymce.init({})
+    disabled: {
+        type: Boolean,
+        default: false
     }
-}
+})
+
+const emit = defineEmits(['update:modelValue'])
+
+const defaultSetting = ref({
+    language_url: 'tinymce/langs/zh_CN.js',
+    language: 'zh_CN',
+    skin_url: 'tinymce/skins/ui/oxide',
+    min_height: 250,
+    max_height: 600,
+    selector: 'textarea',
+    plugins: 'autolink autoresize contextmenu fullscreen hr image imagetools insertdatetime link lists media preview table textcolor wordcount code searchreplace',
+    toolbar: 'undo redo | formatselect | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | hr link image media table insertdatetime searchreplace removeformat | preview code fullscreen',
+    branding: false,
+    menubar: false,
+    toolbar_mode: 'sliding',
+    insertdatetime_formats: [
+        '%Y年%m月%d日',
+        '%H点%M分%S秒',
+        '%Y-%m-%d',
+        '%H:%M:%S'
+    ],
+    images_upload_handler: (blobInfo, success) => {
+        const img = 'data:image/jpeg;base64,' + blobInfo.base64()
+        success(img)
+    }
+})
+
+const myValue = ref(props.modelValue)
+
+const completeSetting = computed(() => {
+    return Object.assign(defaultSetting.value, props.setting)
+})
+
+watch(() => myValue.value, newValue => {
+    emit('update:modelValue', newValue)
+})
+
+watch(() => props.modelValue, newValue => {
+    myValue.value = newValue
+})
+
+onMounted(() => {
+    tinymce.init({})
+})
 </script>
 
 <style lang="scss" scoped>

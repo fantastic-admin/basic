@@ -35,9 +35,9 @@
             <div class="image-slot" :style="`width:${width}px;height:${height}px;`">
                 <i class="el-icon-plus" />
             </div>
-            <div v-show="progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
-                <el-image :src="progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
-                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="progress.percent" />
+            <div v-show="data.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
+                <el-image :src="data.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
+                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="data.progress.percent" />
             </div>
         </el-upload>
         <div v-if="!notip" class="el-upload__tip">
@@ -45,124 +45,128 @@
                 <el-alert :title="`上传图片支持 ${ ext.join(' / ') } 格式，单张图片大小不超过 ${ size }MB，建议图片尺寸为 ${width}*${height}，且图片数量不超过 ${ max } 张`" type="info" show-icon :closable="false" />
             </div>
         </div>
-        <el-image-viewer v-if="imageViewerVisible" :url-list="url" :initial-index="dialogImageIndex" @close="() => {imageViewerVisible = false}" />
+        <el-image-viewer v-if="data.imageViewerVisible" :url-list="url" :initial-index="data.dialogImageIndex" @close="previewClose" />
     </div>
 </template>
 
-<script>
-export default {
-    name: 'ImagesUpload',
-    props: {
-        action: {
-            type: String,
-            required: true
-        },
-        headers: {
-            type: Object,
-            default: () => {}
-        },
-        data: {
-            type: Object,
-            default: () => {}
-        },
-        name: {
-            type: String,
-            default: 'file'
-        },
-        url: {
-            type: Array,
-            default: () => []
-        },
-        max: {
-            type: Number,
-            default: 3
-        },
-        size: {
-            type: Number,
-            default: 2
-        },
-        width: {
-            type: Number,
-            default: 150
-        },
-        height: {
-            type: Number,
-            default: 150
-        },
-        placeholder: {
-            type: String,
-            default: ''
-        },
-        notip: {
-            type: Boolean,
-            default: false
-        },
-        ext: {
-            type: Array,
-            default: () => ['jpg', 'png', 'gif', 'bmp']
-        }
+<script setup>
+import { defineProps, defineEmits, ref, getCurrentInstance } from 'vue'
+
+const { proxy } = getCurrentInstance()
+
+const props = defineProps({
+    action: {
+        type: String,
+        required: true
     },
-    emits: ['update:url', 'on-success'],
-    data() {
-        return {
-            dialogImageIndex: 0,
-            imageViewerVisible: false,
-            progress: {
-                preview: '',
-                percent: 0
-            }
-        }
+    headers: {
+        type: Object,
+        default: () => {}
     },
-    methods: {
-        // 预览
-        preview(index) {
-            this.dialogImageIndex = index
-            this.imageViewerVisible = true
-        },
-        // 移除
-        remove(index) {
-            let url = this.url
-            url.splice(index, 1)
-            this.$emit('update:url', url)
-        },
-        // 移动
-        move(index, type) {
-            let url = this.url
-            if (type == 'left' && index != 0) {
-                url[index] = url.splice(index - 1, 1, url[index])[0]
-            }
-            if (type == 'right' && index != url.length - 1) {
-                url[index] = url.splice(index + 1, 1, url[index])[0]
-            }
-            this.$emit('update:url', url)
-        },
-        beforeUpload(file) {
-            const fileName = file.name.split('.')
-            const fileExt = fileName[fileName.length - 1]
-            const isTypeOk = this.ext.indexOf(fileExt) >= 0
-            const isSizeOk = file.size / 1024 / 1024 < this.size
-            if (!isTypeOk) {
-                this.$message.error(`上传图片只支持 ${ this.ext.join(' / ') } 格式！`)
-            }
-            if (!isSizeOk) {
-                this.$message.error(`上传图片大小不能超过 ${this.size}MB！`)
-            }
-            if (isTypeOk && isSizeOk) {
-                this.progress.preview = URL.createObjectURL(file)
-            }
-            return isTypeOk && isSizeOk
-        },
-        onProgress(file) {
-            this.progress.percent = ~~file.percent
-            if (this.progress.percent == 100) {
-                this.progress.preview = ''
-                this.progress.percent = 0
-            }
-        },
-        onSuccess(res) {
-            this.$emit('on-success', res)
-        }
+    data: {
+        type: Object,
+        default: () => {}
+    },
+    name: {
+        type: String,
+        default: 'file'
+    },
+    url: {
+        type: Array,
+        default: () => []
+    },
+    max: {
+        type: Number,
+        default: 3
+    },
+    size: {
+        type: Number,
+        default: 2
+    },
+    width: {
+        type: Number,
+        default: 150
+    },
+    height: {
+        type: Number,
+        default: 150
+    },
+    placeholder: {
+        type: String,
+        default: ''
+    },
+    notip: {
+        type: Boolean,
+        default: false
+    },
+    ext: {
+        type: Array,
+        default: () => ['jpg', 'png', 'gif', 'bmp']
     }
+})
+
+const emit = defineEmits(['update:url', 'on-success'])
+
+const data = ref({
+    dialogImageIndex: 0,
+    imageViewerVisible: false,
+    progress: {
+        preview: '',
+        percent: 0
+    }
+})
+
+// 预览
+function preview(index) {
+    data.value.dialogImageIndex = index
+    data.value.imageViewerVisible = true
+}
+// 关闭预览
+function previewClose() {
+    data.value.imageViewerVisible = false
+}
+// 移除
+function remove(index) {
+    let url = props.url
+    url.splice(index, 1)
+    emit('update:url', url)
+}
+// 移动
+function move(index, type) {
+    let url = props.url
+    if (type == 'left' && index != 0) {
+        url[index] = url.splice(index - 1, 1, url[index])[0]
+    }
+    if (type == 'right' && index != url.length - 1) {
+        url[index] = url.splice(index + 1, 1, url[index])[0]
+    }
+    emit('update:url', url)
+}
+function beforeUpload(file) {
+    const fileName = file.name.split('.')
+    const fileExt = fileName[fileName.length - 1]
+    const isTypeOk = props.ext.indexOf(fileExt) >= 0
+    const isSizeOk = file.size / 1024 / 1024 < props.size
+    if (!isTypeOk) {
+        proxy.$message.error(`上传图片只支持 ${ props.ext.join(' / ') } 格式！`)
+    }
+    if (!isSizeOk) {
+        proxy.$message.error(`上传图片大小不能超过 ${props.size}MB！`)
+    }
+    if (isTypeOk && isSizeOk) {
+        data.value.progress.preview = URL.createObjectURL(file)
+    }
+    return isTypeOk && isSizeOk
+}
+function onProgress(file) {
+    data.value.progress.percent = ~~file.percent
+    if (data.value.progress.percent == 100) {
+        data.value.progress.preview = ''
+        data.value.progress.percent = 0
+    }
+}
+function onSuccess(res) {
+    emit('on-success', res)
 }
 </script>
 
