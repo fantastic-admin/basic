@@ -19,16 +19,11 @@
     </transition>
 </template>
 
-<script>
+<script setup>
 import Logo from '../Logo/index.vue'
+import { inject } from 'vue'
 
-export default {
-    name: 'MainSidebar',
-    components: {
-        Logo
-    },
-    inject: ['switchMenu']
-}
+const switchMenu = inject('switchMenu')
 </script>
 
 <style lang="scss" scoped>

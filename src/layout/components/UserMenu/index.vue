@@ -37,60 +37,59 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import screenfull from 'screenfull'
+import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
-export default {
-    name: 'UserMenu',
-    inject: ['reload'],
-    data() {
-        return {
-            isFullscreenEnable: screenfull.isEnabled,
-            isFullscreen: false
-        }
-    },
-    mounted() {
-        if (screenfull.isEnabled) {
-            screenfull.on('change', this.fullscreenChange)
-        }
-    },
-    beforeUnmount() {
-        if (screenfull.isEnabled) {
-            screenfull.off('change', this.fullscreenChange)
-        }
-    },
-    methods: {
-        fullscreen() {
-            screenfull.toggle()
-        },
-        fullscreenChange() {
-            this.isFullscreen = screenfull.isFullscreen
-        },
-        userCommand(command) {
-            switch (command) {
-                case 'dashboard':
-                    this.$router.push({
-                        name: 'dashboard'
-                    })
-                    break
-                case 'setting':
-                    this.$router.push({
-                        name: 'personalSetting'
-                    })
-                    break
-                case 'logout':
-                    this.$store.dispatch('user/logout').then(() => {
-                        this.$router.push({
-                            name: 'login'
-                        })
-                    })
-                    break
-            }
-        },
-        pro() {
-            window.open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro`, 'top')
-        }
+const reload = inject('reload')
+const store = useStore()
+const router = useRouter()
+
+const isFullscreenEnable = computed(() => screenfull.isEnabled)
+const isFullscreen = ref(false)
+
+onMounted(() => {
+    if (isFullscreenEnable.value) {
+        screenfull.on('change', fullscreenChange)
     }
+})
+onBeforeUnmount(() => {
+    if (isFullscreenEnable.value) {
+        screenfull.off('change', fullscreenChange)
+    }
+})
+
+function fullscreen() {
+    screenfull.toggle()
+}
+function fullscreenChange() {
+    isFullscreen.value = screenfull.isFullscreen
+}
+function userCommand(command) {
+    switch (command) {
+        case 'dashboard':
+            router.push({
+                name: 'dashboard'
+            })
+            break
+        case 'setting':
+            router.push({
+                name: 'personalSetting'
+            })
+            break
+        case 'logout':
+            store.dispatch('user/logout').then(() => {
+                router.push({
+                    name: 'login'
+                })
+            })
+            break
+    }
+}
+function pro() {
+    window.open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro`, 'top')
 }
 </script>
 

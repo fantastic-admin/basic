@@ -20,18 +20,12 @@
     </transition>
 </template>
 
-<script>
+<script setup>
 import Logo from '../Logo/index.vue'
 import UserMenu from '../UserMenu/index.vue'
+import { inject } from 'vue'
 
-export default {
-    name: 'Header',
-    components: {
-        Logo,
-        UserMenu
-    },
-    inject: ['switchMenu']
-}
+const switchMenu = inject('switchMenu')
 </script>
 
 <style lang="scss" scoped>

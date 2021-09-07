@@ -23,29 +23,29 @@
     </div>
 </template>
 
-<script>
-export default {
-    computed: {
-        locationOrigin: () => location.origin
-    },
-    mounted() {
-        this.$notify({
-            type: 'success',
-            title: '温馨提示',
-            dangerouslyUseHTMLString: true,
-            message: `
+<script setup>
+import { getCurrentInstance, onMounted, ref } from 'vue'
+
+const { proxy } = getCurrentInstance()
+
+const locationOrigin = ref(location.href)
+
+onMounted(() => {
+    proxy.$notify({
+        type: 'success',
+        title: '温馨提示',
+        dangerouslyUseHTMLString: true,
+        message: `
                 <p>当前访问的是<b>基础版</b> (Vue3)</p>
                 <p>你可以点<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro/" target="_blank"><b>这里</b></a>访问专业版 (Vue3)</p>
             `,
-            position: 'bottom-right',
-            duration: 5000
-        })
-    },
-    methods: {
-        open(url) {
-            window.open(url, 'top')
-        }
-    }
+        position: 'bottom-right',
+        duration: 5000
+    })
+})
+
+function open(url) {
+    window.open(url, 'top')
 }
 </script>
 

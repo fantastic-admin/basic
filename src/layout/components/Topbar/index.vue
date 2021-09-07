@@ -25,57 +25,51 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { compile } from 'path-to-regexp'
 import { deepClone } from '@/util'
 import UserMenu from '../UserMenu/index.vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
-export default {
-    name: 'Topbar',
-    components: {
-        UserMenu
-    },
-    data() {
-        return {
-            scrollTop: 0
-        }
-    },
-    computed: {
-        breadcrumbList() {
-            let breadcrumbList = []
-            if (this.$store.state.settings.enableDashboard) {
-                breadcrumbList.push({
-                    path: '/dashboard',
-                    title: this.$store.state.settings.dashboardTitle
-                })
-            }
-            if (this.$route.meta.breadcrumbNeste) {
-                this.$route.meta.breadcrumbNeste.map((item, index) => {
-                    let tmpItem = deepClone(item)
-                    if (index != 0) {
-                        tmpItem.path = `${this.$route.meta.breadcrumbNeste[0].path}/${item.path}`
-                    }
-                    breadcrumbList.push(tmpItem)
-                })
-            }
-            return breadcrumbList
-        }
-    },
-    mounted() {
-        window.addEventListener('scroll', this.onScroll)
-    },
-    unmounted() {
-        window.removeEventListener('scroll', this.onScroll)
-    },
-    methods: {
-        pathCompile(path) {
-            let toPath = compile(path)
-            return toPath(this.$route.params)
-        },
-        onScroll() {
-            this.scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-        }
+const store = useStore()
+const route = useRoute()
+
+const breadcrumbList = computed(() => {
+    let breadcrumbList = []
+    if (store.state.settings.enableDashboard) {
+        breadcrumbList.push({
+            path: '/dashboard',
+            title: store.state.settings.dashboardTitle
+        })
     }
+    if (route.meta.breadcrumbNeste) {
+        route.meta.breadcrumbNeste.map((item, index) => {
+            let tmpItem = deepClone(item)
+            if (index != 0) {
+                tmpItem.path = `${route.meta.breadcrumbNeste[0].path}/${item.path}`
+            }
+            breadcrumbList.push(tmpItem)
+        })
+    }
+    return breadcrumbList
+})
+
+const scrollTop = ref(0)
+onMounted(() => {
+    window.addEventListener('scroll', onScroll)
+})
+onUnmounted(() => {
+    window.removeEventListener('scroll', onScroll)
+})
+function onScroll() {
+    scrollTop.value = document.documentElement.scrollTop || document.body.scrollTop
+}
+
+function pathCompile(path) {
+    let toPath = compile(path)
+    return toPath(route.params)
 }
 </script>
 

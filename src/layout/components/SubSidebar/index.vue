@@ -20,26 +20,15 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Logo from '../Logo/index.vue'
 import SidebarItem from '../SidebarItem/index.vue'
+import { ref } from 'vue'
 
-export default {
-    name: 'SubSidebar',
-    components: {
-        Logo,
-        SidebarItem
-    },
-    data() {
-        return {
-            sidebarScrollTop: 0
-        }
-    },
-    methods: {
-        onSidebarScroll(e) {
-            this.sidebarScrollTop = e.target.scrollTop
-        }
-    }
+const sidebarScrollTop = ref(0)
+
+function onSidebarScroll(e) {
+    sidebarScrollTop.value = e.target.scrollTop
 }
 </script>
 
