@@ -1,6 +1,10 @@
 <template>
     <div class="user">
         <div class="tools">
+            <span v-if="$store.state.settings.mode == 'pc'" class="item item-pro" @click="pro">
+                <svg-icon name="pro" />
+                <span class="title">查看专业版</span>
+            </span>
             <span v-if="$store.state.settings.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
                 <svg-icon name="search" />
             </span>
@@ -33,60 +37,59 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import screenfull from 'screenfull'
+import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 
-export default {
-    name: 'UserMenu',
-    inject: ['reload'],
-    data() {
-        return {
-            isFullscreenEnable: screenfull.isEnabled,
-            isFullscreen: false
-        }
-    },
-    mounted() {
-        if (screenfull.isEnabled) {
-            screenfull.on('change', this.fullscreenChange)
-        }
-    },
-    beforeUnmount() {
-        if (screenfull.isEnabled) {
-            screenfull.off('change', this.fullscreenChange)
-        }
-    },
-    methods: {
-        fullscreen() {
-            screenfull.toggle()
-        },
-        fullscreenChange() {
-            this.isFullscreen = screenfull.isFullscreen
-        },
-        userCommand(command) {
-            switch (command) {
-                case 'dashboard':
-                    this.$router.push({
-                        name: 'dashboard'
-                    })
-                    break
-                case 'setting':
-                    this.$router.push({
-                        name: 'personalSetting'
-                    })
-                    break
-                case 'logout':
-                    this.$store.dispatch('user/logout').then(() => {
-                        this.$router.push({
-                            name: 'login'
-                        })
-                    })
-                    break
-            }
-        },
-        pro() {
-            window.open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro`, 'top')
-        }
+const reload = inject('reload')
+const store = useStore()
+const router = useRouter()
+
+const isFullscreenEnable = computed(() => screenfull.isEnabled)
+const isFullscreen = ref(false)
+
+onMounted(() => {
+    if (isFullscreenEnable.value) {
+        screenfull.on('change', fullscreenChange)
     }
+})
+onBeforeUnmount(() => {
+    if (isFullscreenEnable.value) {
+        screenfull.off('change', fullscreenChange)
+    }
+})
+
+function fullscreen() {
+    screenfull.toggle()
+}
+function fullscreenChange() {
+    isFullscreen.value = screenfull.isFullscreen
+}
+function userCommand(command) {
+    switch (command) {
+        case 'dashboard':
+            router.push({
+                name: 'dashboard'
+            })
+            break
+        case 'setting':
+            router.push({
+                name: 'personalSetting'
+            })
+            break
+        case 'logout':
+            store.dispatch('user/logout').then(() => {
+                router.push({
+                    name: 'login'
+                })
+            })
+            break
+    }
+}
+function pro() {
+    window.open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro`, 'top')
 }
 </script>
 
@@ -107,6 +110,31 @@ export default {
         cursor: pointer;
         vertical-align: middle;
         transition: all 0.3s;
+    }
+    .item-pro {
+        display: inline-block;
+        animation: pro-text 3s ease-out infinite;
+        @keyframes pro-text {
+            0%,
+            20% {
+                transform: scale(1);
+            }
+            50%,
+            70% {
+                transform: scale(1.2) translateX(-5px) translateY(-2px);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        .title {
+            padding-left: 5px;
+            font-weight: bold;
+            font-size: 14px;
+            background-image: linear-gradient(to right, #ffa237, #fc455d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     }
 }
 :deep(.user-container) {

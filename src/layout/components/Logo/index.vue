@@ -1,45 +1,38 @@
 <template>
-    <router-link :to="to" :class="{
-        'title': true,
-        'is-link': $store.state.settings.enableDashboard
-    }" :title="title"
-    >
+    <router-link :to="to" class="title" :class="{'is-link': $store.state.settings.enableDashboard}" :title="title">
         <img v-if="showLogo" :src="logo" class="logo">
         <span v-if="showTitle">{{ title }}</span>
     </router-link>
 </template>
 
-<script>
+<script setup>
 import imgLogo from '@/assets/images/logo.png'
+import { defineProps, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 
-export default {
-    name: 'Logo',
-    props: {
-        showLogo: {
-            type: Boolean,
-            default: true
-        },
-        showTitle: {
-            type: Boolean,
-            default: true
-        }
+const store = useStore()
+
+defineProps({
+    showLogo: {
+        type: Boolean,
+        default: true
     },
-    data() {
-        return {
-            title: import.meta.env.VITE_APP_TITLE,
-            logo: imgLogo
-        }
-    },
-    computed: {
-        to() {
-            let rtn = {}
-            if (this.$store.state.settings.enableDashboard) {
-                rtn.name = 'dashboard'
-            }
-            return rtn
-        }
+    showTitle: {
+        type: Boolean,
+        default: true
     }
-}
+})
+
+const title = ref(import.meta.env.VITE_APP_TITLE)
+const logo = ref(imgLogo)
+
+const to = computed(() => {
+    let rtn = {}
+    if (store.state.settings.enableDashboard) {
+        rtn.name = 'dashboard'
+    }
+    return rtn
+})
 </script>
 
 <style lang="scss" scoped>

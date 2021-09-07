@@ -2,7 +2,7 @@
     <div id="search" :class="{'searching': isShow}" @click="isShow && $eventBus.emit('global-search-toggle')">
         <div class="container">
             <div class="search-box" @click.stop>
-                <el-input ref="input" v-model="search" prefix-icon="el-icon-search" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter" />
+                <el-input ref="input" v-model="searchInput" prefix-icon="el-icon-search" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter" />
                 <div class="tips">
                     <div class="tip">
                         <span>Alt</span>+<span>S</span>
@@ -35,7 +35,7 @@
                                 <svg-icon v-if="item.isExternal" name="external-link" />
                             </div>
                             <div class="breadcrumb">
-                                <span v-for="(bc, index) in item.breadcrumb" :key="index">
+                                <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
                                     {{ bc }}
                                     <i class="el-icon-arrow-right" />
                                 </span>
@@ -49,169 +49,163 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import { deepClone } from '@/util'
+import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
+import { useStore } from 'vuex'
 
-export default {
-    name: 'Search',
-    props: {},
-    data() {
-        return {
-            isShow: false,
-            search: '',
-            sourceList: [],
-            actived: -1
+const { proxy } = getCurrentInstance()
+const store = useStore()
+
+const isShow = ref(false)
+const searchInput = ref('')
+const sourceList = ref([])
+const actived = ref(-1)
+
+const resultList = computed(() => {
+    let result = []
+    result = sourceList.value.filter(item => {
+        let flag = false
+        if (item.title.indexOf(searchInput.value) >= 0) {
+            flag = true
         }
-    },
-    computed: {
-        resultList() {
-            let result = []
-            result = this.sourceList.filter(item => {
-                let flag = false
-                if (item.title.indexOf(this.search) >= 0) {
-                    flag = true
-                }
-                if (item.path.indexOf(this.search) >= 0) {
-                    flag = true
-                }
-                if (item.breadcrumb.some(b => b.indexOf(this.search) >= 0)) {
-                    flag = true
-                }
-                return flag
-            })
-            return result
+        if (item.path.indexOf(searchInput.value) >= 0) {
+            flag = true
         }
-    },
-    watch: {
-        isShow(val) {
-            if (val) {
-                document.querySelector('body').classList.add('hidden')
-                this.$refs.search.scrollTop = 0
-                // 当搜索显示的时候绑定上、下、回车快捷键，隐藏的时候再解绑。另外当 input 处于 focus 状态时，采用 vue 来绑定键盘事件
-                this.$hotkeys('up', this.keyUp)
-                this.$hotkeys('down', this.keyDown)
-                this.$hotkeys('enter', this.keyEnter)
-                setTimeout(() => {
-                    this.$refs.input.$el.children[0].focus()
-                }, 100)
+        if (item.breadcrumb.some(b => b.indexOf(searchInput.value) >= 0)) {
+            flag = true
+        }
+        return flag
+    })
+    return result
+})
+
+watch(() => isShow.value, val => {
+    if (val) {
+        document.querySelector('body').classList.add('hidden')
+        proxy.$refs.search.scrollTop = 0
+        // 当搜索显示的时候绑定上、下、回车快捷键，隐藏的时候再解绑。另外当 input 处于 focus 状态时，采用 vue 来绑定键盘事件
+        proxy.$hotkeys('up', keyUp)
+        proxy.$hotkeys('down', keyDown)
+        proxy.$hotkeys('enter', keyEnter)
+        setTimeout(() => {
+            proxy.$refs.input.$el.children[0].focus()
+        }, 100)
+    } else {
+        document.querySelector('body').classList.remove('hidden')
+        proxy.$hotkeys.unbind('up', keyUp)
+        proxy.$hotkeys.unbind('down', keyDown)
+        proxy.$hotkeys.unbind('enter', keyEnter)
+        setTimeout(() => {
+            searchInput.value = ''
+            actived.value = -1
+        }, 500)
+    }
+})
+watch(() => resultList.value, () => {
+    actived.value = -1
+    scrollTo(0)
+})
+
+onMounted(() => {
+    proxy.$eventBus.on('global-search-toggle', () => {
+        isShow.value = !isShow.value
+    })
+    proxy.$hotkeys('alt+s', e => {
+        if (store.state.settings.enableNavSearch) {
+            e.preventDefault()
+            isShow.value = true
+        }
+    })
+    store.state.menu.routes.map(item => {
+        getSourceList(item.children)
+    })
+})
+
+function isExternal(path) {
+    return /^(https?:|mailto:|tel:)/.test(path)
+}
+function hasChildren(item) {
+    let flag = true
+    if (item.children) {
+        if (item.children.every(i => i.meta.sidebar === false)) {
+            flag = false
+        }
+    } else {
+        flag = false
+    }
+    return flag
+}
+function getSourceList(arr) {
+    arr.map(item => {
+        if (item.meta.sidebar !== false) {
+            if (hasChildren(item)) {
+                let baseBreadcrumb = item.meta.baseBreadcrumb ? deepClone(item.meta.baseBreadcrumb) : []
+                baseBreadcrumb.push(item.meta.title)
+                let child = deepClone(item.children)
+                child.map(c => {
+                    c.meta.baseIcon = item.meta.icon || item.meta.baseIcon
+                    c.meta.baseBreadcrumb = baseBreadcrumb
+                    c.meta.basePath = item.meta.basePath ? [item.meta.basePath, item.path].join('/') : item.path
+                })
+                getSourceList(child)
             } else {
-                document.querySelector('body').classList.remove('hidden')
-                this.$hotkeys.unbind('up', this.keyUp)
-                this.$hotkeys.unbind('down', this.keyDown)
-                this.$hotkeys.unbind('enter', this.keyEnter)
-                setTimeout(() => {
-                    this.search = ''
-                    this.actived = -1
-                }, 500)
+                let breadcrumb = []
+                if (item.meta.baseBreadcrumb) {
+                    breadcrumb = deepClone(item.meta.baseBreadcrumb)
+                }
+                breadcrumb.push(item.meta.title)
+                let path = ''
+                if (isExternal(item.path)) {
+                    path = item.path
+                } else {
+                    path = item.meta.basePath ? [item.meta.basePath, item.path].join('/') : item.path
+                }
+                sourceList.value.push({
+                    icon: item.meta.icon || item.meta.baseIcon,
+                    title: item.meta.title,
+                    i18n: item.meta.i18n,
+                    breadcrumb: breadcrumb,
+                    path: path,
+                    isExternal: isExternal(item.path)
+                })
             }
-        },
-        resultList() {
-            this.actived = -1
-            this.scrollTo(0)
         }
-    },
-    created() {},
-    mounted() {
-        this.$eventBus.on('global-search-toggle', () => {
-            this.isShow = !this.isShow
-        })
-        this.$hotkeys('alt+s', e => {
-            if (this.$store.state.settings.enableNavSearch) {
-                e.preventDefault()
-                this.isShow = true
-            }
-        })
-        this.$store.state.menu.routes.map(item => {
-            this.getSourceList(item.children)
-        })
-    },
-    methods: {
-        isExternal(path) {
-            return /^(https?:|mailto:|tel:)/.test(path)
-        },
-        hasChildren(item) {
-            let flag = true
-            if (item.children) {
-                if (item.children.every(i => i.meta.sidebar === false)) {
-                    flag = false
-                }
-            } else {
-                flag = false
-            }
-            return flag
-        },
-        getSourceList(arr) {
-            arr.map(item => {
-                if (item.meta.sidebar !== false) {
-                    if (this.hasChildren(item)) {
-                        let baseBreadcrumb = item.meta.baseBreadcrumb ? deepClone(item.meta.baseBreadcrumb) : []
-                        baseBreadcrumb.push(item.meta.title)
-                        let child = deepClone(item.children)
-                        child.map(c => {
-                            c.meta.baseIcon = item.meta.icon || item.meta.baseIcon
-                            c.meta.baseBreadcrumb = baseBreadcrumb
-                            c.meta.basePath = item.meta.basePath ? [item.meta.basePath, item.path].join('/') : item.path
-                        })
-                        this.getSourceList(child)
-                    } else {
-                        let breadcrumb = []
-                        if (item.meta.baseBreadcrumb) {
-                            breadcrumb = deepClone(item.meta.baseBreadcrumb)
-                        }
-                        breadcrumb.push(item.meta.title)
-                        let path = ''
-                        if (this.isExternal(item.path)) {
-                            path = item.path
-                        } else {
-                            path = item.meta.basePath ? [item.meta.basePath, item.path].join('/') : item.path
-                        }
-                        this.sourceList.push({
-                            icon: item.meta.icon || item.meta.baseIcon,
-                            title: item.meta.title,
-                            i18n: item.meta.i18n,
-                            breadcrumb: breadcrumb,
-                            path: path,
-                            isExternal: this.isExternal(item.path)
-                        })
-                    }
-                }
+    })
+}
+function keyUp() {
+    if (resultList.value.length) {
+        actived.value -= 1
+        if (actived.value < 0) {
+            actived.value = resultList.value.length - 1
+        }
+        scrollTo(proxy.$refs[`search-item-${actived.value}`].offsetTop)
+    }
+}
+function keyDown() {
+    if (resultList.value.length) {
+        actived.value += 1
+        if (actived.value > resultList.value.length - 1) {
+            actived.value = 0
+        }
+        scrollTo(proxy.$refs[`search-item-${actived.value}`].offsetTop)
+    }
+}
+function keyEnter() {
+    if (actived.value !== -1) {
+        proxy.$refs[`search-item-${actived.value}`].click()
+    }
+}
+function scrollTo(offsetTop) {
+    if (actived.value !== -1) {
+        if (
+            offsetTop + proxy.$refs[`search-item-${actived.value}`].clientHeight > proxy.$refs['search'].scrollTop + proxy.$refs['search'].clientHeight ||
+            offsetTop + proxy.$refs[`search-item-${actived.value}`].clientHeight <= proxy.$refs['search'].scrollTop
+        ) {
+            proxy.$refs['search'].scrollTo({
+                top: offsetTop,
+                behavior: 'smooth'
             })
-        },
-        keyUp() {
-            if (this.resultList.length) {
-                this.actived -= 1
-                if (this.actived < 0) {
-                    this.actived = this.resultList.length - 1
-                }
-                this.scrollTo(this.$refs[`search-item-${this.actived}`].offsetTop)
-            }
-        },
-        keyDown() {
-            if (this.resultList.length) {
-                this.actived += 1
-                if (this.actived > this.resultList.length - 1) {
-                    this.actived = 0
-                }
-                this.scrollTo(this.$refs[`search-item-${this.actived}`].offsetTop)
-            }
-        },
-        keyEnter() {
-            if (this.actived !== -1) {
-                this.$refs[`search-item-${this.actived}`].click()
-            }
-        },
-        scrollTo(offsetTop) {
-            if (this.actived !== -1) {
-                if (
-                    offsetTop + this.$refs[`search-item-${this.actived}`].clientHeight > this.$refs['search'].scrollTop + this.$refs['search'].clientHeight ||
-                    offsetTop + this.$refs[`search-item-${this.actived}`].clientHeight <= this.$refs['search'].scrollTop
-                ) {
-                    this.$refs['search'].scrollTo({
-                        top: offsetTop,
-                        behavior: 'smooth'
-                    })
-                }
-            }
         }
     }
 }

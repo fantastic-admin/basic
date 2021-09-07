@@ -139,178 +139,179 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'ThemeSetting',
-    inject: ['reload'],
-    props: {},
-    data() {
-        return {
-            isShow: false
-        }
+<script setup>
+import { computed, getCurrentInstance, inject, onMounted, ref } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+
+const { proxy } = getCurrentInstance()
+const store = useStore()
+const route = useRoute()
+
+const reload = inject('reload')
+
+const isShow = ref(false)
+
+const menuMode = computed({
+    get: function() {
+        return store.state.settings.menuMode
     },
-    computed: {
-        menuMode: {
-            get: function() {
-                return this.$store.state.settings.menuMode
-            },
-            set: function(newValue) {
-                this.$store.commit('menu/switchHeaderActived', 0)
-                this.$store.commit('settings/updateThemeSetting', {
-                    'menuMode': newValue
-                })
-                this.$store.state.settings.menuMode !== 'single' && this.$store.commit('menu/setHeaderActived', this.$route.fullPath)
-            }
-        },
-        elementSize: {
-            get: function() {
-                return this.$store.state.settings.elementSize
-            },
-            set: function(newValue) {
-                this.$ELEMENT.size = newValue
-                this.$store.commit('settings/updateThemeSetting', {
-                    'elementSize': newValue
-                })
-                this.reload()
-            }
-        },
-        enableSidebarCollapse: {
-            get: function() {
-                return this.$store.state.settings.enableSidebarCollapse
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enableSidebarCollapse': newValue
-                })
-            }
-        },
-        sidebarCollapse: {
-            get: function() {
-                return this.$store.state.settings.sidebarCollapse
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'sidebarCollapse': newValue
-                })
-            }
-        },
-        switchSidebarAndPageJump: {
-            get: function() {
-                return this.$store.state.settings.switchSidebarAndPageJump
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'switchSidebarAndPageJump': newValue
-                })
-            }
-        },
-        sidebarUniqueOpened: {
-            get: function() {
-                return this.$store.state.settings.sidebarUniqueOpened
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'sidebarUniqueOpened': newValue
-                })
-            }
-        },
-        topbarFixed: {
-            get: function() {
-                return this.$store.state.settings.topbarFixed
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'topbarFixed': newValue
-                })
-            }
-        },
-        enableBreadcrumb: {
-            get: function() {
-                return this.$store.state.settings.enableBreadcrumb
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enableBreadcrumb': newValue
-                })
-            }
-        },
-        showCopyright: {
-            get: function() {
-                return this.$store.state.settings.showCopyright
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'showCopyright': newValue
-                })
-            }
-        },
-        enableNavSearch: {
-            get: function() {
-                return this.$store.state.settings.enableNavSearch
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enableNavSearch': newValue
-                })
-            }
-        },
-        enableFullscreen: {
-            get: function() {
-                return this.$store.state.settings.enableFullscreen
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enableFullscreen': newValue
-                })
-            }
-        },
-        enablePageReload: {
-            get: function() {
-                return this.$store.state.settings.enablePageReload
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enablePageReload': newValue
-                })
-            }
-        },
-        enableProgress: {
-            get: function() {
-                return this.$store.state.settings.enableProgress
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enableProgress': newValue
-                })
-            }
-        },
-        enableDynamicTitle: {
-            get: function() {
-                return this.$store.state.settings.enableDynamicTitle
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enableDynamicTitle': newValue
-                })
-            }
-        },
-        enableDashboard: {
-            get: function() {
-                return this.$store.state.settings.enableDashboard
-            },
-            set: function(newValue) {
-                this.$store.commit('settings/updateThemeSetting', {
-                    'enableDashboard': newValue
-                })
-            }
-        }
+    set: function(newValue) {
+        store.commit('menu/switchHeaderActived', 0)
+        store.commit('settings/updateThemeSetting', {
+            'menuMode': newValue
+        })
+        store.state.settings.menuMode !== 'single' && store.commit('menu/setHeaderActived', route.fullPath)
+    }
+})
+const elementSize = computed({
+    get: function() {
+        return store.state.settings.elementSize
     },
-    mounted() {
-        this.$eventBus.on('global-theme-toggle', () => {
-            this.isShow = !this.isShow
+    set: function(newValue) {
+        proxy.$ELEMENT.size = newValue
+        store.commit('settings/updateThemeSetting', {
+            'elementSize': newValue
+        })
+        reload()
+    }
+})
+const enableSidebarCollapse = computed({
+    get: function() {
+        return store.state.settings.enableSidebarCollapse
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enableSidebarCollapse': newValue
         })
     }
-}
+})
+const sidebarCollapse = computed({
+    get: function() {
+        return store.state.settings.sidebarCollapse
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'sidebarCollapse': newValue
+        })
+    }
+})
+const switchSidebarAndPageJump = computed({
+    get: function() {
+        return store.state.settings.switchSidebarAndPageJump
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'switchSidebarAndPageJump': newValue
+        })
+    }
+})
+const sidebarUniqueOpened = computed({
+    get: function() {
+        return store.state.settings.sidebarUniqueOpened
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'sidebarUniqueOpened': newValue
+        })
+    }
+})
+const topbarFixed = computed({
+    get: function() {
+        return store.state.settings.topbarFixed
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'topbarFixed': newValue
+        })
+    }
+})
+const enableBreadcrumb = computed({
+    get: function() {
+        return store.state.settings.enableBreadcrumb
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enableBreadcrumb': newValue
+        })
+    }
+})
+const showCopyright = computed({
+    get: function() {
+        return store.state.settings.showCopyright
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'showCopyright': newValue
+        })
+    }
+})
+const enableNavSearch = computed({
+    get: function() {
+        return store.state.settings.enableNavSearch
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enableNavSearch': newValue
+        })
+    }
+})
+const enableFullscreen = computed({
+    get: function() {
+        return store.state.settings.enableFullscreen
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enableFullscreen': newValue
+        })
+    }
+})
+const enablePageReload = computed({
+    get: function() {
+        return store.state.settings.enablePageReload
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enablePageReload': newValue
+        })
+    }
+})
+const enableProgress = computed({
+    get: function() {
+        return store.state.settings.enableProgress
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enableProgress': newValue
+        })
+    }
+})
+const enableDynamicTitle = computed({
+    get: function() {
+        return store.state.settings.enableDynamicTitle
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enableDynamicTitle': newValue
+        })
+    }
+})
+const enableDashboard = computed({
+    get: function() {
+        return store.state.settings.enableDashboard
+    },
+    set: function(newValue) {
+        store.commit('settings/updateThemeSetting', {
+            'enableDashboard': newValue
+        })
+    }
+})
+
+onMounted(() => {
+    proxy.$eventBus.on('global-theme-toggle', () => {
+        isShow.value = !isShow.value
+    })
+})
 </script>
 
 <style lang="scss" scoped>
