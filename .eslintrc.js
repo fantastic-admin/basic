@@ -66,6 +66,7 @@ module.exports = {
             'after': true,
             'before': false
         }],
+        'object-curly-spacing': [2, 'always'],
         // ES6
         'arrow-parens': [2, 'as-needed'],
         'arrow-spacing': [2, {
