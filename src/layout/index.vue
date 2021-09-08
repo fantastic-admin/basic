@@ -29,7 +29,7 @@
     </div>
 </template>
 
-<script>
+<script setup>
 import Header from './components/Header/index.vue'
 import MainSidebar from './components/MainSidebar/index.vue'
 import SubSidebar from './components/SubSidebar/index.vue'
@@ -37,63 +37,48 @@ import Topbar from './components/Topbar/index.vue'
 import Search from './components/Search/index.vue'
 import ThemeSetting from './components/ThemeSetting/index.vue'
 
-export default {
-    name: 'Layout',
-    components: {
-        Header,
-        MainSidebar,
-        SubSidebar,
-        Topbar,
-        Search,
-        ThemeSetting
-    },
-    provide() {
-        return {
-            reload: this.reload,
-            switchMenu: this.switchMenu
+import { provide, computed, watch, getCurrentInstance, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRoute, useRouter } from 'vue-router'
+
+const { proxy } = getCurrentInstance()
+const store = useStore()
+const route = useRoute(), router = useRouter()
+
+const showCopyright = computed(() => {
+    return typeof route.meta.copyright !== 'undefined' ? route.meta.copyright : store.state.settings.showCopyright
+})
+
+watch(() => store.state.settings.sidebarCollapse, val => {
+    if (store.state.settings.mode === 'mobile') {
+        if (!val) {
+            document.querySelector('body').classList.add('hidden')
+        } else {
+            document.querySelector('body').classList.remove('hidden')
         }
-    },
-    data() {
-        return {
-            routePath: ''
+    }
+})
+
+onMounted(() => {
+    proxy.$hotkeys('f5', e => {
+        if (store.state.settings.enablePageReload) {
+            e.preventDefault()
+            reload()
         }
-    },
-    computed: {
-        showCopyright() {
-            return typeof this.$route.meta.copyright !== 'undefined' ? this.$route.meta.copyright : this.$store.state.settings.showCopyright
-        }
-    },
-    watch: {
-        '$store.state.settings.sidebarCollapse'(val) {
-            if (this.$store.state.settings.mode === 'mobile') {
-                if (!val) {
-                    document.querySelector('body').classList.add('hidden')
-                } else {
-                    document.querySelector('body').classList.remove('hidden')
-                }
-            }
-        }
-    },
-    mounted() {
-        this.$hotkeys('f5', e => {
-            if (this.$store.state.settings.enablePageReload) {
-                e.preventDefault()
-                this.reload()
-            }
-        })
-    },
-    methods: {
-        reload() {
-            this.$router.push({
-                name: 'reload'
-            })
-        },
-        switchMenu(index) {
-            this.$store.commit('menu/switchHeaderActived', index)
-            if (this.$store.state.settings.switchSidebarAndPageJump) {
-                this.$router.push(this.$store.getters['menu/sidebarRoutes'][0].path)
-            }
-        }
+    })
+})
+provide('reload', reload)
+function reload() {
+    router.push({
+        name: 'reload'
+    })
+}
+
+provide('switchMenu', switchMenu)
+function switchMenu(index) {
+    store.commit('menu/switchHeaderActived', index)
+    if (store.state.settings.switchSidebarAndPageJump) {
+        router.push(store.getters['menu/sidebarRoutes'][0].path)
     }
 }
 </script>
