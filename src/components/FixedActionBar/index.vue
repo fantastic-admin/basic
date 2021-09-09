@@ -5,8 +5,6 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-
 const data = ref({
     isBottom: true
 })

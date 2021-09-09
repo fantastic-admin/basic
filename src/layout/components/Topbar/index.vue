@@ -29,9 +29,6 @@
 import { compile } from 'path-to-regexp'
 import { deepClone } from '@/util'
 import UserMenu from '../UserMenu/index.vue'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
 
 const store = useStore()
 const route = useRoute()

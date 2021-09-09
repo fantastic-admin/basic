@@ -37,10 +37,6 @@ import Topbar from './components/Topbar/index.vue'
 import Search from './components/Search/index.vue'
 import ThemeSetting from './components/ThemeSetting/index.vue'
 
-import { provide, computed, watch, getCurrentInstance, onMounted } from 'vue'
-import { useStore } from 'vuex'
-import { useRoute, useRouter } from 'vue-router'
-
 const { proxy } = getCurrentInstance()
 const store = useStore()
 const route = useRoute(), router = useRouter()

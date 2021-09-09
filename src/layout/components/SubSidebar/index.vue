@@ -23,7 +23,6 @@
 <script setup>
 import Logo from '../Logo/index.vue'
 import SidebarItem from '../SidebarItem/index.vue'
-import { ref } from 'vue'
 
 const sidebarScrollTop = ref(0)
 

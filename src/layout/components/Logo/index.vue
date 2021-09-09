@@ -7,8 +7,6 @@
 
 <script setup>
 import imgLogo from '@/assets/images/logo.png'
-import { defineProps, ref, computed } from 'vue'
-import { useStore } from 'vuex'
 
 const store = useStore()
 

@@ -2,6 +2,7 @@ import vue from '@vitejs/plugin-vue'
 
 import createRestart from './restart'
 import createHtml from './html'
+import createAutoImport from './auto-import'
 import createComponents from './components'
 import createSvgIcon from './svg-icon'
 import createMock from './mock'
@@ -13,6 +14,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
     const vitePlugins = [vue()]
     !isBuild && vitePlugins.push(createRestart())
     vitePlugins.push(createHtml(viteEnv, isBuild))
+    vitePlugins.push(createAutoImport())
     vitePlugins.push(createComponents())
     vitePlugins.push(createSvgIcon(isBuild))
     vitePlugins.push(createMock())

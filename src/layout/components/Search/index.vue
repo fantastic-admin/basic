@@ -51,8 +51,6 @@
 
 <script setup>
 import { deepClone } from '@/util'
-import { computed, getCurrentInstance, onMounted, ref, watch } from 'vue'
-import { useStore } from 'vuex'
 
 const { proxy } = getCurrentInstance()
 const store = useStore()
