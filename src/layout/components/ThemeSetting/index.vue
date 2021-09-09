@@ -140,10 +140,6 @@
 </template>
 
 <script setup>
-import { computed, getCurrentInstance, inject, onMounted, ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRoute } from 'vue-router'
-
 const { proxy } = getCurrentInstance()
 const store = useStore()
 const route = useRoute()

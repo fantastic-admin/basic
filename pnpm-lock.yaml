@@ -28,6 +28,7 @@ specifiers:
   stylelint-scss: ^3.20.1
   svgo: ^2.5.0
   tinymce: ^5.9.1
+  unplugin-auto-import: ^0.4.5
   unplugin-vue-components: ^0.14.11
   vite: ^2.5.3
   vite-plugin-banner: ^0.1.3
@@ -75,6 +76,7 @@ devDependencies:
   stylelint-config-standard: registry.nlark.com/stylelint-config-standard/22.0.0_stylelint@13.13.1
   stylelint-scss: registry.nlark.com/stylelint-scss/3.20.1_stylelint@13.13.1
   svgo: registry.nlark.com/svgo/2.5.0
+  unplugin-auto-import: registry.nlark.com/unplugin-auto-import/0.4.5_vite@2.5.3
   unplugin-vue-components: registry.nlark.com/unplugin-vue-components/0.14.11_vite@2.5.3+vue@3.2.8
   vite: registry.nlark.com/vite/2.5.3
   vite-plugin-banner: registry.nlark.com/vite-plugin-banner/0.1.3
@@ -2546,7 +2548,7 @@ packages:
     dev: true
 
   /resolve/1.20.0:
-    resolution: {integrity: sha1-YpoBP7P3B1XW8LeTXMHCxTeLGXU=, tarball: resolve/download/resolve-1.20.0.tgz?cache=0&sync_timestamp=1613098300584&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fresolve%2Fdownload%2Fresolve-1.20.0.tgz}
+    resolution: {integrity: sha1-YpoBP7P3B1XW8LeTXMHCxTeLGXU=, tarball: resolve/download/resolve-1.20.0.tgz}
     dependencies:
       is-core-module: registry.nlark.com/is-core-module/2.6.0
       path-parse: registry.nlark.com/path-parse/1.0.7
@@ -3068,11 +3070,6 @@ packages:
       isobject: 3.0.1
     dev: true
 
-  /upath/2.0.1:
-    resolution: {integrity: sha1-UMc96mjW9rmQ9R0nnOYIFmXWGos=, tarball: upath/download/upath-2.0.1.tgz}
-    engines: {node: '>=4'}
-    dev: true
-
   /upper-case-first/1.1.2:
     resolution: {integrity: sha1-XXm+3P8UQZUY/S7bCgUHybaFkRU=, tarball: upper-case-first/download/upper-case-first-1.1.2.tgz}
     dependencies:
@@ -3231,6 +3228,14 @@ packages:
 
   /zwitch/1.0.5:
     resolution: {integrity: sha1-0R1zgf/tFrdC9q97PyI9XNn+mSA=, tarball: zwitch/download/zwitch-1.0.5.tgz}
+    dev: true
+
+  registry.nlark.com/@antfu/utils/0.3.0:
+    resolution: {integrity: sha1-YwbEO1Kog72Olz4+2N1kJIQYvMQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@antfu/utils/download/@antfu/utils-0.3.0.tgz}
+    name: '@antfu/utils'
+    version: 0.3.0
+    dependencies:
+      '@types/throttle-debounce': registry.nlark.com/@types/throttle-debounce/2.1.0
     dev: true
 
   registry.nlark.com/@babel/code-frame/7.12.11:
@@ -3754,6 +3759,12 @@ packages:
     version: 2.4.1
     dependencies:
       '@types/node': registry.nlark.com/@types/node/16.7.10
+    dev: true
+
+  registry.nlark.com/@types/throttle-debounce/2.1.0:
+    resolution: {integrity: sha1-HD32JL/Eti+ZLTASuExW1B6rN3Y=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@types/throttle-debounce/download/@types/throttle-debounce-2.1.0.tgz}
+    name: '@types/throttle-debounce'
+    version: 2.1.0
     dev: true
 
   registry.nlark.com/@types/through/0.0.30:
@@ -4712,6 +4723,12 @@ packages:
     dev: true
     optional: true
 
+  registry.nlark.com/function-bind/1.1.1:
+    resolution: {integrity: sha1-pWiZ0+o8m6uHS7l3O3xe3pL0iV0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/function-bind/download/function-bind-1.1.1.tgz}
+    name: function-bind
+    version: 1.1.1
+    dev: true
+
   registry.nlark.com/get-pixels/3.3.3:
     resolution: {integrity: sha1-ceLf1L77gQtUeKYcY1SACXbOAcc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/get-pixels/download/get-pixels-3.3.3.tgz}
     name: get-pixels
@@ -4865,6 +4882,15 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  registry.nlark.com/has/1.0.3:
+    resolution: {integrity: sha1-ci18v8H2qoJB8W3YFOAR4fQeh5Y=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/has/download/has-1.0.3.tgz}
+    name: has
+    version: 1.0.3
+    engines: {node: '>= 0.4.0'}
+    dependencies:
+      function-bind: registry.nlark.com/function-bind/1.1.1
+    dev: true
+
   registry.nlark.com/he/1.2.0:
     resolution: {integrity: sha1-hK5l+n6vsWX922FWauFLrwVmTw8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/he/download/he-1.2.0.tgz}
     name: he
@@ -4999,11 +5025,11 @@ packages:
     dev: true
 
   registry.nlark.com/is-core-module/2.6.0:
-    resolution: {integrity: sha1-11U7JSb+Wbkro+QMjfdX7Ipwnhk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/is-core-module/download/is-core-module-2.6.0.tgz}
+    resolution: {integrity: sha1-11U7JSb+Wbkro+QMjfdX7Ipwnhk=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/is-core-module/download/is-core-module-2.6.0.tgz?cache=0&sync_timestamp=1629224905008&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fis-core-module%2Fdownload%2Fis-core-module-2.6.0.tgz}
     name: is-core-module
     version: 2.6.0
     dependencies:
-      has: 1.0.3
+      has: registry.nlark.com/has/1.0.3
     dev: true
 
   registry.nlark.com/is-data-descriptor/0.1.4:
@@ -5435,7 +5461,7 @@ packages:
     dev: true
 
   registry.nlark.com/picomatch/2.3.0:
-    resolution: {integrity: sha1-8fBh3o9qS/AiiS4tEoI0+5gwKXI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/picomatch/download/picomatch-2.3.0.tgz}
+    resolution: {integrity: sha1-8fBh3o9qS/AiiS4tEoI0+5gwKXI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/picomatch/download/picomatch-2.3.0.tgz?cache=0&sync_timestamp=1621648246651&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fpicomatch%2Fdownload%2Fpicomatch-2.3.0.tgz}
     name: picomatch
     version: 2.3.0
     engines: {node: '>=8.6'}
@@ -6202,6 +6228,27 @@ packages:
     version: 4.1.0
     dev: true
 
+  registry.nlark.com/unplugin-auto-import/0.4.5_vite@2.5.3:
+    resolution: {integrity: sha1-JVpSgT8+955Xdb5jD5X2Znz0qFA=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/unplugin-auto-import/download/unplugin-auto-import-0.4.5.tgz}
+    id: registry.nlark.com/unplugin-auto-import/0.4.5
+    name: unplugin-auto-import
+    version: 0.4.5
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@vueuse/core': ^6.0.0
+    dependencies:
+      '@antfu/utils': registry.nlark.com/@antfu/utils/0.3.0
+      '@rollup/pluginutils': registry.nlark.com/@rollup/pluginutils/4.1.1
+      has-pkg: registry.nlark.com/has-pkg/0.0.1
+      magic-string: 0.25.7
+      resolve: 1.20.0
+      unplugin: registry.nlark.com/unplugin/0.2.7_vite@2.5.3
+    transitivePeerDependencies:
+      - rollup
+      - vite
+      - webpack
+    dev: true
+
   registry.nlark.com/unplugin-vue-components/0.14.11_vite@2.5.3+vue@3.2.8:
     resolution: {integrity: sha1-rvLASAMW6GRFDLPgt/Y+jxBpUCc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/unplugin-vue-components/download/unplugin-vue-components-0.14.11.tgz}
     id: registry.nlark.com/unplugin-vue-components/0.14.11
@@ -6235,17 +6282,17 @@ packages:
       rollup: ^2.50.0
       vite: ^2.3.0
       webpack: ^4.0.0
-    peerDependenciesMeta:
-      rollup:
-        optional: true
-      vite:
-        optional: true
-      webpack:
-        optional: true
     dependencies:
-      upath: 2.0.1
+      upath: registry.nlark.com/upath/2.0.1
       vite: registry.nlark.com/vite/2.5.3
       webpack-virtual-modules: registry.nlark.com/webpack-virtual-modules/0.4.3
+    dev: true
+
+  registry.nlark.com/upath/2.0.1:
+    resolution: {integrity: sha1-UMc96mjW9rmQ9R0nnOYIFmXWGos=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/upath/download/upath-2.0.1.tgz}
+    name: upath
+    version: 2.0.1
+    engines: {node: '>=4'}
     dev: true
 
   registry.nlark.com/uuid/3.4.0:

@@ -3,9 +3,6 @@
 </template>
 
 <script setup>
-import { watch, onMounted } from 'vue'
-import { useStore } from 'vuex'
-
 const store = useStore()
 
 watch(() => store.state.settings.mode, () => {

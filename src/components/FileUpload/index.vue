@@ -25,8 +25,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, getCurrentInstance } from 'vue'
-
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({

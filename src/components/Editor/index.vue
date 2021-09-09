@@ -28,8 +28,6 @@ import 'tinymce/plugins/wordcount'
 import 'tinymce/plugins/code'
 import 'tinymce/plugins/searchreplace'
 
-import { defineProps, defineEmits, ref, computed, watch, onMounted } from 'vue'
-
 const props = defineProps({
     modelValue: {
         type: String,

@@ -50,8 +50,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, ref, getCurrentInstance } from 'vue'
-
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({

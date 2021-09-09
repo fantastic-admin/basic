@@ -4,3 +4,4 @@ dist*
 dist-ssr
 *.local
 src/assets/sprites/*.*
+auto-imports.d.ts

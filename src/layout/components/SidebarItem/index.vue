@@ -29,7 +29,6 @@
 <script setup>
 import SidebarItem from './index.vue'
 import path from 'path-browserify'
-import { computed, defineProps } from 'vue'
 
 const props = defineProps({
     item: {

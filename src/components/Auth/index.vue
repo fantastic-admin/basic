@@ -7,7 +7,6 @@
 
 <script setup>
 import { auth } from '@/util'
-import { defineProps } from 'vue'
 
 const props = defineProps({
     value: {

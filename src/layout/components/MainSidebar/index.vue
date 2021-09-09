@@ -21,7 +21,6 @@
 
 <script setup>
 import Logo from '../Logo/index.vue'
-import { inject } from 'vue'
 
 const switchMenu = inject('switchMenu')
 </script>

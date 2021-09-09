@@ -39,9 +39,6 @@
 
 <script setup>
 import screenfull from 'screenfull'
-import { computed, inject, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
 
 const reload = inject('reload')
 const store = useStore()

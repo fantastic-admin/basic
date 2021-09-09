@@ -24,8 +24,6 @@
 </template>
 
 <script setup>
-import { getCurrentInstance, onMounted, ref } from 'vue'
-
 const { proxy } = getCurrentInstance()
 
 const locationOrigin = ref(location.href)

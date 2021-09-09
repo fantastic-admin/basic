@@ -9,8 +9,6 @@
 </template>
 
 <script setup>
-import { defineProps, defineEmits, computed } from 'vue'
-
 const props = defineProps({
     data: {
         type: Array,

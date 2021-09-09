@@ -39,10 +39,6 @@ import Search from './components/Search/index.vue'
 import ThemeSetting from './components/ThemeSetting/index.vue'
 import BuyIt from './components/BuyIt/index.vue'
 
-import { provide, computed, watch, getCurrentInstance, onMounted } from 'vue'
-import { useStore } from 'vuex'
-import { useRoute, useRouter } from 'vue-router'
-
 const { proxy } = getCurrentInstance()
 const store = useStore()
 const route = useRoute(), router = useRouter()
