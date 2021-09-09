@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@tinymce/tinymce-vue": "^4.0.4",
-        "axios": "^0.21.1",
+        "axios": "^0.21.4",
         "dayjs": "^1.10.6",
         "element-plus": "^1.1.0-beta.8",
         "hotkeys-js": "^3.8.7",

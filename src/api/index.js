@@ -14,7 +14,7 @@ const toLogin = () => {
 }
 
 const api = axios.create({
-    baseURL: import.meta.env.DEV ? '/proxy/' : import.meta.env.VITE_APP_API_BASEURL,
+    baseURL: import.meta.env.DEV && import.meta.env.VITE_OPEN_PROXY === 'true' ? '/proxy/' : import.meta.env.VITE_APP_API_BASEURL,
     timeout: 10000,
     responseType: 'json'
 })
