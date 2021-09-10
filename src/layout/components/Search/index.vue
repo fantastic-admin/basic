@@ -3,7 +3,7 @@
         <div class="container">
             <div class="search-box" @click.stop>
                 <el-input ref="input" v-model="searchInput" prefix-icon="el-icon-search" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter" />
-                <div class="tips">
+                <div v-if="$store.state.settings.mode === 'pc'" class="tips">
                     <div class="tip">
                         <span>Alt</span>+<span>S</span>
                         唤醒搜索面板
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div ref="search" class="result">
+            <div ref="search" class="result" :class="{'mobile': $store.state.settings.mode === 'mobile'}">
                 <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
                     <a :ref="`search-item-${index}`" :href="isExternal(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternal(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
                         <div class="icon">
@@ -241,7 +241,7 @@ function scrollTo(offsetTop) {
         transform: scale(1.1);
         filter: blur(10px);
         .search-box {
-            margin: 50px 20px 0;
+            margin: 50px 20px 40px;
             :deep(.el-input__inner) {
                 height: 52px;
                 line-height: 52px;
@@ -256,7 +256,7 @@ function scrollTo(offsetTop) {
                 display: flex;
                 align-items: center;
                 justify-content: space-evenly;
-                margin: 20px 0 40px;
+                margin-top: 20px;
                 line-height: 24px;
                 font-size: 14px;
                 color: #fff;
@@ -279,6 +279,9 @@ function scrollTo(offsetTop) {
             border-radius: 5px;
             overflow: auto;
             background-color: #fff;
+            &.mobile {
+                max-height: calc(100% - 200px);
+            }
             .item {
                 display: flex;
                 align-items: center;
