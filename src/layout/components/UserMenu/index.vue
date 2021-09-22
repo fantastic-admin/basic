@@ -110,6 +110,7 @@ function pro() {
     }
     .item-pro {
         display: inline-block;
+        transform-origin: right center;
         animation: pro-text 3s ease-out infinite;
         @keyframes pro-text {
             0%,
@@ -118,7 +119,7 @@ function pro() {
             }
             50%,
             70% {
-                transform: scale(1.2) translateX(-5px) translateY(-2px);
+                transform: scale(1.2);
             }
             100% {
                 transform: scale(1);
