@@ -1,5 +1,5 @@
 <template>
-    <div class="buy-it">
+    <div class="buy-it" :class="{'actived': isActived}">
         <div class="item" @click="open('https://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes')">
             <svg-icon name="fixed-right-qq" />
             <span class="title">在线<br>咨询</span>
@@ -27,6 +27,11 @@
 const { proxy } = getCurrentInstance()
 
 const locationOrigin = ref(location.href)
+
+const isActived = ref(true)
+setTimeout(() => {
+    isActived.value = false
+}, 5000)
 
 onMounted(() => {
     proxy.$notify({
@@ -58,6 +63,7 @@ function open(url) {
     display: flex;
     flex-direction: column;
     transition: right 0.3s;
+    &.actived,
     &:hover {
         right: 0;
     }
