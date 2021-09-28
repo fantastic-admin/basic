@@ -7,15 +7,11 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: '{{ properCase componentName }}',
-    data() {
-        return {}
-    },
-    mounted() {},
-    methods: {}
-}
+<script setup name="{{ properCase componentName }}">
+// const { proxy } = getCurrentInstance()
+// const router = useRouter()
+// const route = useRoute()
+// const store = useStore()
 </script>
 
 <style lang="scss" scoped>
