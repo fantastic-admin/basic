@@ -12,6 +12,7 @@ export default function createRestart() {
             'vite/plugins/html.js',
             'vite/plugins/mock.js',
             'vite/plugins/restart.js',
+            'vite/plugins/setup-extend.js',
             'vite/plugins/spritesmith.js',
             'vite/plugins/svg-icon.js'
         ]
