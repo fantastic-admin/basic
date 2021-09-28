@@ -15,7 +15,8 @@ export default {
             name: 'keepAliveExamplePage',
             component: () => import('@/views/keep_alive_example/page.vue'),
             meta: {
-                title: '二级路由缓存'
+                title: '页面缓存',
+                breadcrumb: false
             }
         },
         {
@@ -23,13 +24,13 @@ export default {
             name: 'keepAliveExampleDetail',
             component: () => import('@/views/keep_alive_example/detail.vue'),
             meta: {
-                title: '同级路由',
+                title: '平级路由',
                 sidebar: false,
                 activeMenu: '/keep_alive_example/page'
             }
         },
         {
-            path: 'detail2',
+            path: 'nested',
             redirect: '/keep_alive_example/detail2',
             meta: {
                 title: '下级路由',
@@ -37,32 +38,13 @@ export default {
             },
             children: [
                 {
-                    path: '',
-                    name: 'keepAliveExampleDetail2',
+                    path: 'detail',
+                    name: 'keepAliveExampleNestedDetail',
                     component: () => import('@/views/keep_alive_example/detail.vue'),
                     meta: {
-                        title: '下级路由',
+                        title: '测试页面',
                         activeMenu: '/keep_alive_example/page'
                     }
-                },
-                {
-                    path: 'detail3',
-                    redirect: '/keep_alive_example/detail2/detail3',
-                    meta: {
-                        title: '下下级路由',
-                        sidebar: false
-                    },
-                    children: [
-                        {
-                            path: '',
-                            name: 'keepAliveExampleDetail3',
-                            component: () => import('@/views/keep_alive_example/detail.vue'),
-                            meta: {
-                                title: '下下级路由',
-                                activeMenu: '/keep_alive_example/page'
-                            }
-                        }
-                    ]
                 }
             ]
         },

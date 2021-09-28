@@ -58,6 +58,7 @@
         "vite-plugin-restart": "^0.0.2",
         "vite-plugin-spritesmith": "^0.1.1",
         "vite-plugin-svg-icons": "^1.0.4",
+        "vite-plugin-vue-setup-extend": "^0.1.0",
         "vue-eslint-parser": "^7.11.0"
     }
 }
