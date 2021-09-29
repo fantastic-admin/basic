@@ -10,15 +10,14 @@
         <router-link v-else-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolvePath(item.path)">
             <a :href="isExternal(resolvePath(item.path)) ? resolvePath(item.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternal(resolvePath(item.path)) ? '_blank' : '_self'" @click="navigate">
                 <el-menu-item :title="item.meta.title" :index="resolvePath(item.path)">
-                    <svg-icon v-if="iconName(isActive || isExactActive, item.meta.icon)" :name="iconName(isActive || isExactActive, item.meta.icon)" class="icon" />
+                    <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon" />
                     <span class="title">{{ item.meta.title }}</span>
                 </el-menu-item>
             </a>
         </router-link>
         <el-sub-menu v-else :title="item.meta.title" :index="resolvePath(item.path)">
             <template #title>
-                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon unactive" />
-                <svg-icon v-if="item.meta.activeIcon || item.meta.icon" :name="item.meta.activeIcon || item.meta.icon" class="icon active" />
+                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon" />
                 <span class="title">{{ item.meta.title }}</span>
             </template>
             <SidebarItem v-for="route in item.children" :key="route.path" :item="route" :base-path="resolvePath(item.path)" />
@@ -65,13 +64,6 @@ function resolvePath(routePath) {
     }
     return props.basePath ? path.resolve(props.basePath, routePath) : routePath
 }
-function iconName(isActive, icon) {
-    let name = ''
-    if (!isActive && icon) {
-        name = icon
-    }
-    return name
-}
 </script>
 
 <style lang="scss" scoped>
@@ -110,14 +102,6 @@ function iconName(isActive, icon) {
 :deep(.el-sub-menu) {
     > .el-sub-menu__title > .icon.active {
         display: none;
-    }
-    &.is-active {
-        > .el-sub-menu__title > .icon.unactive {
-            display: none;
-        }
-        > .el-sub-menu__title > .icon.active {
-            display: block;
-        }
     }
 }
 a {
