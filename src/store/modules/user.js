@@ -21,7 +21,7 @@ const getters = {
 }
 
 const actions = {
-    login({commit}, data) {
+    login({ commit }, data) {
         return new Promise((resolve, reject) => {
             // 通过 mock 进行登录
             api.post('member/login', data, {
@@ -34,14 +34,14 @@ const actions = {
             })
         })
     },
-    logout({commit}) {
+    logout({ commit }) {
         commit('removeUserData')
-        commit('menu/invalidRoutes', null, {root: true})
-        commit('tabbar/clean', null, {root: true})
-        commit('menu/removeRoutes', null, {root: true})
+        commit('menu/invalidRoutes', null, { root: true })
+        commit('tabbar/clean', null, { root: true })
+        commit('menu/removeRoutes', null, { root: true })
     },
     // 获取我的权限
-    getPermissions({state, commit}) {
+    getPermissions({ state, commit }) {
         return new Promise(resolve => {
             // 通过 mock 获取权限
             api.get('member/permission', {
