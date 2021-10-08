@@ -127,7 +127,7 @@ const getters = {
     routes: (state, getters, rootState) => {
         let routes
         if (rootState.settings.menuMode === 'single') {
-            routes = [{children: []}]
+            routes = [{ children: [] }]
             state.routes.map(item => {
                 routes[0].children.push(...item.children)
             })
@@ -143,7 +143,7 @@ const getters = {
 
 const actions = {
     // 根据权限动态生成路由（前端生成）
-    generateRoutesAtFront({rootState, dispatch, commit}, data) {
+    generateRoutesAtFront({ rootState, dispatch, commit }, data) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async resolve => {
             let accessedRoutes
