@@ -22,7 +22,7 @@
                 <el-image :src="url" :style="`width:${width}px;height:${height}px;`" fit="fill" />
                 <div class="mask">
                     <div class="actions">
-                        <span title="预览" @click.stop="imageViewerVisible = true">
+                        <span title="预览" @click.stop="preview">
                             <i class="el-icon-zoom-in" />
                         </span>
                         <span title="移除" @click.stop="remove">
@@ -105,6 +105,10 @@ const data = ref({
     }
 })
 
+// 预览
+function preview() {
+    data.value.imageViewerVisible = true
+}
 // 关闭预览
 function previewClose() {
     data.value.imageViewerVisible = false
