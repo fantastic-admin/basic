@@ -14,6 +14,7 @@
         "prepare": "husky install"
     },
     "dependencies": {
+        "@element-plus/icons": "^0.0.11",
         "@tinymce/tinymce-vue": "^4.0.4",
         "axios": "^0.22.0",
         "dayjs": "^1.10.7",

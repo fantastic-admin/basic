@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@element-plus/icons': ^0.0.11
   '@tinymce/tinymce-vue': ^4.0.4
   '@vitejs/plugin-vue': ^1.9.3
   '@vue/compiler-sfc': ^3.2.19
@@ -45,6 +46,7 @@ specifiers:
   vuex: ^4.0.2
 
 dependencies:
+  '@element-plus/icons': registry.nlark.com/@element-plus/icons/0.0.11
   '@tinymce/tinymce-vue': registry.npmmirror.com/@tinymce/tinymce-vue/4.0.4_vue@3.2.19
   axios: registry.npmmirror.com/axios/0.22.0
   dayjs: registry.nlark.com/dayjs/1.10.7
@@ -267,6 +269,8 @@ packages:
       '@babel/helper-optimise-call-expression': registry.nlark.com/@babel/helper-optimise-call-expression/7.15.4
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.4
       '@babel/types': registry.nlark.com/@babel/types/7.15.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/helper-simple-access/7.15.4:
@@ -310,6 +314,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.15.4
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.4
       '@babel/types': registry.nlark.com/@babel/types/7.15.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.nlark.com/@babel/highlight/7.14.5:
@@ -372,6 +378,12 @@ packages:
       '@babel/helper-validator-identifier': registry.nlark.com/@babel/helper-validator-identifier/7.15.7
       to-fast-properties: registry.nlark.com/to-fast-properties/2.0.0
     dev: true
+
+  registry.nlark.com/@element-plus/icons/0.0.11:
+    resolution: {integrity: sha1-mxh8ACd0VIuRGFDRf6X8L5pRX1c=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@element-plus/icons/download/@element-plus/icons-0.0.11.tgz}
+    name: '@element-plus/icons'
+    version: 0.0.11
+    dev: false
 
   registry.nlark.com/@eslint/eslintrc/0.4.3:
     resolution: {integrity: sha1-nkKYHvA1vrPdSa3ResuW6P9vOUw=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/@eslint/eslintrc/download/@eslint/eslintrc-0.4.3.tgz}
@@ -6461,6 +6473,8 @@ packages:
       '@babel/template': registry.nlark.com/@babel/template/7.15.4
       '@babel/traverse': registry.nlark.com/@babel/traverse/7.15.4
       '@babel/types': registry.nlark.com/@babel/types/7.15.6
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   registry.npmmirror.com/@babel/parser/7.15.8:
