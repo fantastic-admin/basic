@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "EditorConfig.EditorConfig",
+        "mikestead.dotenv",
+        "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
+        "octref.vetur"
+    ]
+}
