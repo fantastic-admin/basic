@@ -126,7 +126,7 @@ const getters = {
     // 由于 getter 的结果不会被缓存，导致导航栏切换时有明显的延迟，该问题会在 Vue 3.2 版本中修复，详看 https://github.com/vuejs/vuex/pull/1883
     routes: (state, getters, rootState) => {
         let routes
-        if (rootState.settings.menuMode === 'single') {
+        if (rootState.settings.menuMode === 'single' && rootState.settings.mode === 'pc') {
             routes = [{ children: [] }]
             state.routes.map(item => {
                 routes[0].children.push(...item.children)

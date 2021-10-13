@@ -1,8 +1,8 @@
 <template>
     <div v-if="['side', 'head', 'single'].includes($store.state.settings.menuMode) || $store.state.settings.mode === 'mobile'" class="sub-sidebar-container" :class="{'is-collapse': $store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse}" @scroll="onSidebarScroll">
-        <Logo :show-logo="$store.state.settings.menuMode === 'single'" :class="{
+        <Logo :show-logo="$store.state.settings.menuMode === 'single' && $store.state.settings.mode === 'pc'" :class="{
             'sidebar-logo': true,
-            'sidebar-logo-bg': $store.state.settings.menuMode === 'single',
+            'sidebar-logo-bg': $store.state.settings.menuMode === 'single' && $store.state.settings.mode === 'pc',
             'shadow': sidebarScrollTop
         }"
         />
