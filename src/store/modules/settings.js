@@ -20,10 +20,20 @@ const getters = {}
 const actions = {}
 
 const mutations = {
-    // 设置访问模式，页面宽度小于 992px 时切换为移动端展示
+    // 设置访问模式
     setMode(state, width) {
-        if (state.enableMobileAdaptation && width < 992) {
-            state.mode = 'mobile'
+        if (state.enableMobileAdaptation) {
+            // 先判断 UA 是否为移动端设备（手机&平板）
+            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                state.mode = 'mobile'
+            } else {
+                // 如果为桌面设备，再根据页面宽度判断是否需要切换为移动端展示
+                if (width < 992) {
+                    state.mode = 'mobile'
+                } else {
+                    state.mode = 'pc'
+                }
+            }
         } else {
             state.mode = 'pc'
         }
