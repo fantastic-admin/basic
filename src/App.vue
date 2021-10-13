@@ -27,28 +27,6 @@ watch([
     immediate: true
 })
 
-watch([
-    () => store.state.settings.enableDynamicTitle,
-    () => store.state.settings.title
-], () => setDocumentTitle(), {
-    immediate: true
-})
-
-onMounted(() => {
-    window.onresize = () => {
-        store.commit('settings/setMode', document.documentElement.clientWidth)
-    }
-    window.onresize()
-})
-
-function setDocumentTitle() {
-    if (store.state.settings.enableDynamicTitle && store.state.settings.title) {
-        let title = store.state.settings.title
-        document.title = `${title} - ${import.meta.env.VITE_APP_TITLE}`
-    } else {
-        document.title = import.meta.env.VITE_APP_TITLE
-    }
-}
 function setMenuMode() {
     document.body.removeAttribute('data-sidebar-no-collapse')
     document.body.removeAttribute('data-sidebar-collapse')
@@ -59,4 +37,27 @@ function setMenuMode() {
     }
     document.body.setAttribute('data-menu-mode', store.state.settings.menuMode)
 }
+
+watch([
+    () => store.state.settings.enableDynamicTitle,
+    () => store.state.settings.title
+], () => setDocumentTitle(), {
+    immediate: true
+})
+
+function setDocumentTitle() {
+    if (store.state.settings.enableDynamicTitle && store.state.settings.title) {
+        let title = store.state.settings.title
+        document.title = `${title} - ${import.meta.env.VITE_APP_TITLE}`
+    } else {
+        document.title = import.meta.env.VITE_APP_TITLE
+    }
+}
+
+onMounted(() => {
+    window.onresize = () => {
+        store.commit('settings/setMode', document.documentElement.clientWidth)
+    }
+    window.onresize()
+})
 </script>
