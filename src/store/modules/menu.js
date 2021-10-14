@@ -174,12 +174,20 @@ const actions = {
         })
     },
     // 生成路由（后端获取）
-    generateRoutesAtBack({ commit }, data) {
+    generateRoutesAtBack({ rootState, dispatch, commit }, data) {
         return new Promise(resolve => {
             api.get('route/list', {
                 baseURL: '/mock/'
-            }).then(res => {
-                let accessedRoutes = formatBackRoutes(res.data)
+            }).then(async res => {
+                let asyncRoutes = formatBackRoutes(res.data)
+                let accessedRoutes
+                // 如果权限功能开启，则需要对路由数据进行筛选过滤
+                if (rootState.settings.enablePermission) {
+                    const permissions = await dispatch('user/getPermissions', null, { root: true })
+                    accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+                } else {
+                    accessedRoutes = asyncRoutes
+                }
                 commit('setRoutes', accessedRoutes)
                 commit('setHeaderActived', data.currentPath)
                 let routes = []
