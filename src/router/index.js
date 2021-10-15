@@ -214,11 +214,7 @@ router.afterEach((to, from) => {
     if (to.meta.cache) {
         let componentName = to.matched[to.matched.length - 1].components.default.name
         if (componentName) {
-            to.matched.forEach(item => {
-                if (item.components.default.name && item.components.default.name != 'Layout') {
-                    store.commit('keepAlive/add', item.components.default.name)
-                }
-            })
+            store.commit('keepAlive/add', componentName)
         } else {
             console.warn('该页面组件未设置组件名，会导致缓存失效，请检查')
         }
