@@ -131,11 +131,22 @@ function switchMenu(index) {
     .main-container {
         margin-left: 0;
     }
-    &[data-menu-mode=head],
-    &[data-menu-mode=single] {
+    &[data-menu-mode=head] {
         .sidebar-container {
             width: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
             transform: translateX(-#{$g-main-sidebar-width}) translateX(-#{$g-sub-sidebar-width});
+            &.show {
+                transform: translateX(0);
+            }
+        }
+        .main-container {
+            margin-left: 0;
+        }
+    }
+    &[data-menu-mode=single] {
+        .sidebar-container {
+            width: calc(#{$g-sub-sidebar-width});
+            transform: translateX(-#{$g-sub-sidebar-width});
             &.show {
                 transform: translateX(0);
             }

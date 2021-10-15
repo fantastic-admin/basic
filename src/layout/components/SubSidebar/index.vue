@@ -1,14 +1,14 @@
 <template>
     <div v-if="['side', 'head', 'single'].includes($store.state.settings.menuMode) || $store.state.settings.mode === 'mobile'" class="sub-sidebar-container" :class="{'is-collapse': $store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse}" @scroll="onSidebarScroll">
-        <Logo :show-logo="$store.state.settings.menuMode === 'single' && $store.state.settings.mode === 'pc'" :class="{
+        <Logo :show-logo="$store.state.settings.menuMode === 'single'" :class="{
             'sidebar-logo': true,
-            'sidebar-logo-bg': $store.state.settings.menuMode === 'single' && $store.state.settings.mode === 'pc',
+            'sidebar-logo-bg': $store.state.settings.menuMode === 'single',
             'shadow': sidebarScrollTop
         }"
         />
         <!-- 侧边栏模式（无主导航） -->
         <el-menu :unique-opened="$store.state.settings.sidebarUniqueOpened" :default-openeds="$store.state.menu.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse" :collapse-transition="false" :class="{
-            'is-collapse-without-logo': $store.state.settings.menuMode !== 'single' && $store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse
+            'is-collapse-without-logo': $store.state.settings.menuMode !== 'single' && $store.state.settings.sidebarCollapse
         }"
         >
             <transition-group name="sub-sidebar">
