@@ -46,6 +46,18 @@ export default {
             position: 'bottom-right',
             duration: 0
         })
+        setTimeout(() => {
+            this.$notify({
+                type: 'warning',
+                title: '点⭐领取专业版源码',
+                dangerouslyUseHTMLString: true,
+                message: `
+                    <p>给项目仓库点⭐就可以领取专业版源码，点<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/buy" target="_blank"><b>这里</b></a>了解一下</p>
+                `,
+                position: 'bottom-right',
+                duration: 0
+            })
+        }, 0)
     },
     methods: {
         open(url) {
