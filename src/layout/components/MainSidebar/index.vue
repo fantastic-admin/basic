@@ -1,6 +1,6 @@
 <template>
     <transition name="main-sidebar">
-        <div v-if="$store.state.settings.menuMode === 'side' || $store.state.settings.mode === 'mobile'" class="main-sidebar-container">
+        <div v-if="$store.state.settings.menuMode === 'side' || ($store.state.settings.mode === 'mobile' && $store.state.settings.menuMode !== 'single')" class="main-sidebar-container">
             <Logo :show-title="false" class="sidebar-logo" />
             <!-- 侧边栏模式（含主导航） -->
             <div class="nav">
