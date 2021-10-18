@@ -1,6 +1,6 @@
 <template>
     <div v-if="item.meta.sidebar !== false" class="sidebar-item">
-        <el-sub-menu v-if="item.path == undefined" :title="item.meta.title" :index="item">
+        <el-sub-menu v-if="item.path == undefined" :title="item.meta.title" :index="JSON.stringify(item)">
             <template #title>
                 <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon" />
                 <span class="title">{{ item.meta.title }}</span>
