@@ -1,6 +1,6 @@
 <template>
     <div class="layout">
-        <div id="app-main" :class="{'main-page-maximize': $store.state.settings.mainPageMaximizeStatus}">
+        <div id="app-main">
             <Header />
             <div class="wrapper">
                 <div class="sidebar-container" :class="{'show': $store.state.settings.mode === 'mobile' && !$store.state.settings.sidebarCollapse}">
@@ -162,29 +162,6 @@ function switchMenu(index) {
     height: 100%;
     margin: 0 auto;
     transition: all 0.2s;
-    // 当前标签页全屏
-    &.main-page-maximize {
-        header,
-        .sidebar-container {
-            display: none;
-        }
-        .wrapper {
-            padding-top: 0;
-            .main-container {
-                margin-left: 0;
-                .topbar-container {
-                    display: none;
-                }
-                .main {
-                    padding: 0;
-                }
-            }
-        }
-        :deep([data-fixed-calc-width]) {
-            width: 100%;
-            transform: translateX(-50%);
-        }
-    }
 }
 .wrapper {
     position: relative;

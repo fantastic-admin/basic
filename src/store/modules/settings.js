@@ -7,8 +7,6 @@ const state = () => ({
     ...settings,
     // 侧边栏是否收起（用于记录 pc 模式下最后的状态）
     sidebarCollapseLastStatus: settings.sidebarCollapse,
-    // 主页面是否最大化
-    mainPageMaximizeStatus: false,
     // 显示模式，支持：mobile、pc
     mode: 'pc',
     // 页面标题
