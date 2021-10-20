@@ -174,7 +174,6 @@ function switchMenu(index) {
             padding-top: 0;
             .main-container {
                 margin-left: 0;
-                .tabbar-container,
                 .topbar-container {
                     display: none;
                 }
@@ -230,12 +229,9 @@ function switchMenu(index) {
         transition: margin-left 0.3s;
         background-color: $g-main-bg;
         box-shadow: 1px 0 0 0 darken($g-main-bg, 10);
-        .tabbar-container + .topbar-container {
-            top: $g-tabbar-height;
+        .topbar-container {
+            top: 0;
             z-index: 998;
-        }
-        .topbar-container + .tabbar-container {
-            top: $g-topbar-height;
         }
         .main {
             height: 100%;
@@ -247,10 +243,6 @@ function switchMenu(index) {
         }
         .topbar-container + .main {
             padding: calc(#{$g-topbar-height}) 0 0;
-        }
-        .tabbar-container + .topbar-container + .main,
-        .topbar-container + .tabbar-container + .main {
-            padding: calc(#{$g-tabbar-height} + #{$g-topbar-height}) 0 0;
         }
     }
 }
@@ -266,20 +258,11 @@ header + .wrapper {
         }
     }
     .main-container {
-        .tabbar-container {
-            top: $g-header-height;
-        }
         .topbar-container {
             top: $g-header-height;
             :deep(.user) {
                 display: none;
             }
-        }
-        .tabbar-container + .topbar-container {
-            top: calc(#{$g-header-height} + #{$g-tabbar-height});
-        }
-        .topbar-container + .tabbar-container {
-            top: calc(#{$g-header-height} + #{$g-topbar-height});
         }
     }
 }

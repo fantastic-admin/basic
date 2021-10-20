@@ -37,7 +37,6 @@ const actions = {
     logout({ commit }) {
         commit('removeUserData')
         commit('menu/invalidRoutes', null, { root: true })
-        commit('tabbar/clean', null, { root: true })
         commit('menu/removeRoutes', null, { root: true })
     },
     // 获取我的权限

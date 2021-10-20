@@ -14,9 +14,5 @@
     .topbar-container + .main .absolute-container {
         height: calc(100% - #{$g-topbar-height});
     }
-    .tabbar-container + .topbar-container + .main .absolute-container,
-    .topbar-container + .tabbar-container + .main .absolute-container {
-        height: calc(100% - #{$g-tabbar-height} - #{$g-topbar-height});
-    }
 }
 </style>
