@@ -11,8 +11,7 @@ const getters = {
     isLogin: state => {
         let retn = false
         if (state.token) {
-            let unix = Date.parse(new Date())
-            if (unix < state.failure_time * 1000) {
+            if (new Date().getTime() < state.failure_time * 1000) {
                 retn = true
             }
         }
