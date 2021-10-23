@@ -9,7 +9,7 @@
 
 <style lang="scss" scoped>
 footer {
-    margin: 40px 0 20px 0;
+    margin: 40px 0 20px;
     line-height: 20px;
     text-align: center;
     color: #808695;

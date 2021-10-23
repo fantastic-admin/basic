@@ -38,7 +38,7 @@ function onSidebarScroll(e) {
 }
 .sub-sidebar-enter-from,
 .sub-sidebar-leave-active {
-    opacity: 0;
+    opacity: 0%;
     transform: translateY(30px) skewY(10deg);
 }
 .sub-sidebar-leave-active {

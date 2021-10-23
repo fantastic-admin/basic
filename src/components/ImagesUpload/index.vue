@@ -183,13 +183,13 @@ function onSuccess(res) {
         display: block;
     }
     .mask {
-        opacity: 0;
+        opacity: 0%;
         position: absolute;
         top: 0;
         width: 100%;
         height: 100%;
         font-size: 24px;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgb(0 0 0 / 50%);
         transition: all 0.3s;
         .actions {
             width: 100px;
@@ -216,7 +216,7 @@ function onSuccess(res) {
         }
     }
     &:hover .mask {
-        opacity: 1;
+        opacity: 100%;
     }
 }
 .images-upload {
@@ -243,13 +243,13 @@ function onSuccess(res) {
             position: absolute;
             top: 0;
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 width: 100%;
                 height: 100%;
                 left: 0;
                 top: 0;
-                background-color: rgba(0, 0, 0, 0.2);
+                background-color: rgb(0 0 0 / 20%);
             }
             .el-progress {
                 z-index: 1;

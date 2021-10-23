@@ -345,7 +345,7 @@ onMounted(() => {
         }
         &-side {
             &::before {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -354,7 +354,7 @@ onMounted(() => {
                 background-color: #222b45;
             }
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 0;
                 left: 10px;
@@ -365,7 +365,7 @@ onMounted(() => {
         }
         &-head {
             &::before {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -374,7 +374,7 @@ onMounted(() => {
                 background-color: #222b45;
             }
             &::after {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 10px;
                 left: 0;
@@ -385,7 +385,7 @@ onMounted(() => {
         }
         &-single {
             &::before {
-                content: '';
+                content: "";
                 position: absolute;
                 top: 0;
                 left: 0;

@@ -89,8 +89,8 @@ function switchMenu(index) {
         margin-left: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
     }
     // 没有主侧边栏
-    &[data-menu-mode=head],
-    &[data-menu-mode=single] {
+    &[data-menu-mode="head"],
+    &[data-menu-mode="single"] {
         .sidebar-container {
             width: $g-sub-sidebar-width;
         }
@@ -108,8 +108,8 @@ function switchMenu(index) {
         margin-left: calc(#{$g-main-sidebar-width} + 64px);
     }
     // 没有主侧边栏
-    &[data-menu-mode=head],
-    &[data-menu-mode=single] {
+    &[data-menu-mode="head"],
+    &[data-menu-mode="single"] {
         .sidebar-container {
             width: 64px;
         }
@@ -118,7 +118,7 @@ function switchMenu(index) {
         }
     }
 }
-[data-mode=mobile] {
+[data-mode="mobile"] {
     .sidebar-container {
         width: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
         transform: translateX(-#{$g-main-sidebar-width}) translateX(-#{$g-sub-sidebar-width});
@@ -129,7 +129,7 @@ function switchMenu(index) {
     .main-container {
         margin-left: 0;
     }
-    &[data-menu-mode=head] {
+    &[data-menu-mode="head"] {
         .sidebar-container {
             width: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
             transform: translateX(-#{$g-main-sidebar-width}) translateX(-#{$g-sub-sidebar-width});
@@ -141,7 +141,7 @@ function switchMenu(index) {
             margin-left: 0;
         }
     }
-    &[data-menu-mode=single] {
+    &[data-menu-mode="single"] {
         .sidebar-container {
             width: calc(#{$g-sub-sidebar-width});
             transform: translateX(-#{$g-sub-sidebar-width});
@@ -183,14 +183,14 @@ function switchMenu(index) {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba($color: #000, $alpha: 0.5);
+        background-color: rgb(0 0 0 / 50%);
         backdrop-filter: blur(2px);
         transition: all 0.2s;
         transform: translateZ(0);
-        opacity: 0;
+        opacity: 0%;
         visibility: hidden;
         &.show {
-            opacity: 1;
+            opacity: 100%;
             visibility: visible;
         }
     }
@@ -250,11 +250,11 @@ header + .wrapper {
     transition: 0.15s;
 }
 .main-enter-from {
-    opacity: 0;
+    opacity: 0%;
     margin-left: -20px;
 }
 .main-leave-to {
-    opacity: 0;
+    opacity: 0%;
     margin-left: 20px;
 }
 </style>
