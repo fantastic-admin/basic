@@ -3,7 +3,7 @@
         <page-header title="欢迎使用 Fantastic-admin（基础版）">
             <template #content>
                 <div>
-                    <div style="margin-bottom: 5px;">这是一款<b style="text-emphasis-style: '❤';">开箱即用</b>的中后台框架，同时它也经历过数十个真实项目的技术沉淀，确保框架在开发中可落地、可使用、可维护</div>
+                    <div style="margin-bottom: 5px;">这是一款<b class="text-emphasis">开箱即用</b>的中后台框架，同时它也经历过数十个真实项目的技术沉淀，确保框架在开发中可落地、可使用、可维护</div>
                     <div>注：在作者就职的公司，本框架已在电商、直播、OA、ERP等多个不同领域的中后台系统中应用并稳定运行</div>
                 </div>
             </template>
@@ -14,7 +14,7 @@
         </page-header>
         <el-row :gutter="20" style="margin: 0 10px;">
             <el-col :lg="8">
-                <page-main title="框架信息" style="margin: 0 0 20px 0;">
+                <page-main title="框架信息" style="margin: 0 0 20px;">
                     <div class="fa-info">
                         <img :src="`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/logo.png`" style="width: 150px;">
                         <h1>Fantastic-admin</h1>
@@ -34,7 +34,7 @@
                 </page-main>
             </el-col>
             <el-col :lg="16">
-                <el-row :gutter="20" style="margin: 0 -10px 20px -10px;">
+                <el-row :gutter="20" style="margin: 0 -10px 20px;">
                     <el-col :md="4">
                         <div class="icon-box icon-box-1" @click="onIconClick('收藏')">
                             <i class="el-icon-star-off" />
@@ -72,7 +72,7 @@
                         </div>
                     </el-col>
                 </el-row>
-                <page-main title="应用场景" style="margin: 0 0 20px 0;">
+                <page-main title="应用场景" style="margin: 0 0 20px;">
                     <div class="question">
                         <ol class="answer">
                             <li><span>没有前端开发人员的小型公司。</span>据了解，有些小型公司没有前端开发人员，而这些公司在开发中后台系统的时候，直接要求后端开发人员来进行开发工作。所以借助 Vue 的易学习易上手特性，再加上本框架的加持，可以让后端开发人员能在短时间内转型成为全栈开发。</li>
@@ -272,6 +272,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.text-emphasis {
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-text-emphasis-style: "❤";
+}
 .fa-info {
     padding: 10px 0 0;
     text-align: center;
@@ -378,7 +382,7 @@ export default {
         color: #666;
     }
     .contrast::after {
-        content: '%';
+        content: "%";
     }
     .sub-title {
         font-size: 12px;

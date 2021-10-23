@@ -217,14 +217,14 @@ function scrollTo(offsetTop) {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba($color: #000, $alpha: 0.5);
+    background-color: rgb(0 0 0 / 50%);
     backdrop-filter: blur(10px);
     transition: all 0.2s;
     transform: translateZ(0);
-    opacity: 0;
+    opacity: 0%;
     visibility: hidden;
     &.searching {
-        opacity: 1;
+        opacity: 100%;
         visibility: visible;
         .container {
             transform: initial;
@@ -267,7 +267,7 @@ function scrollTo(offsetTop) {
                     font-size: 12px;
                     font-weight: bold;
                     color: #333;
-                    background-color: rgba($color: #fff, $alpha: 0.8);
+                    background-color: rgb(255 255 255 / 80%);
                     box-shadow: inset 0 -2px #505e5f, inset 0 0 1px 1px #dec6c6, 0 1px 2px 1px #acb0c166;
                 }
             }
@@ -291,8 +291,8 @@ function scrollTo(offsetTop) {
                 &.actived {
                     background-color: #dbe7f8;
                     .icon {
-                        [class^=el-icon-],
-                        [class^=ri-],
+                        [class^="el-icon-"],
+                        [class^="ri-"],
                         .svg-icon {
                             color: #409eff;
                             transform: scale(1.2);
@@ -312,8 +312,8 @@ function scrollTo(offsetTop) {
                 .icon {
                     flex: 0 0 66px;
                     text-align: center;
-                    [class^=el-icon-],
-                    [class^=ri-],
+                    [class^="el-icon-"],
+                    [class^="ri-"],
                     .svg-icon {
                         color: #999;
                         font-size: 20px;

@@ -130,6 +130,7 @@ function pro() {
             font-weight: bold;
             font-size: 14px;
             background-image: linear-gradient(to right, #ffa237, #fc455d);
+            /* stylelint-disable-next-line property-no-vendor-prefix */
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }

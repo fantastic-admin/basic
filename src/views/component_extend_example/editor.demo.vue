@@ -24,7 +24,7 @@ export default {
 .preview {
     margin-top: 10px;
     &::before {
-        content: '预览：';
+        content: "预览：";
         display: block;
     }
 }

@@ -182,7 +182,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-[data-mode=mobile] {
+[data-mode="mobile"] {
     #login-box {
         max-width: 80%;
         .login-banner {
@@ -190,7 +190,7 @@ export default {
         }
     }
 }
-:deep(input[type=password]::-ms-reveal) {
+:deep(input[type="password"]::-ms-reveal) {
     display: none;
 }
 .bg-banner {
@@ -198,7 +198,7 @@ export default {
     z-index: 0;
     width: 100%;
     height: 100%;
-    background-image: url(../assets/images/login-bg.jpg);
+    background-image: url("../assets/images/login-bg.jpg");
     background-size: cover;
     background-position: center center;
 }
@@ -209,13 +209,13 @@ export default {
     top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgb(255 255 255 / 80%);
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 0 5px #999;
     .login-banner {
         width: 300px;
-        background-image: url(../assets/images/login-banner.jpg);
+        background-image: url("../assets/images/login-banner.jpg");
         background-size: cover;
         background-position: center center;
     }

@@ -89,7 +89,7 @@ function resolvePath(routePath) {
         vertical-align: -0.25em;
         transition: transform 0.3s;
         color: unset;
-        &[class^=el-icon-],
+        &[class^="el-icon-"],
         &[class*=" el-icon-"] {
             vertical-align: middle;
         }

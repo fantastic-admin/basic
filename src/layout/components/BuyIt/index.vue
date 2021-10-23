@@ -89,10 +89,10 @@ function open(url) {
         background-color: #409eff;
         border-bottom: 1px solid #fff;
         transition: 0.3s;
-        opacity: 0.7;
+        opacity: 70%;
         cursor: pointer;
         &:hover {
-            opacity: 1;
+            opacity: 100%;
         }
         &:first-child {
             border-top-left-radius: 5px;
