@@ -1,8 +1,9 @@
 <template>
-    <div class="topbar-container" :class="{
-        'fixed': $store.state.settings.topbarFixed,
-        'shadow': scrollTop
-    }" data-fixed-calc-width
+    <div
+        class="topbar-container" :class="{
+            'fixed': $store.state.settings.topbarFixed,
+            'shadow': scrollTop
+        }" data-fixed-calc-width
     >
         <div class="left-box">
             <div v-if="$store.state.settings.mode === 'mobile' || (['side', 'head', 'single'].includes($store.state.settings.menuMode) && $store.state.settings.enableSidebarCollapse)" class="sidebar-collapse" :class="{'is-collapse': $store.state.settings.sidebarCollapse}" @click="$store.commit('settings/toggleSidebarCollapse')">
