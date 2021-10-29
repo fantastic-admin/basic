@@ -75,6 +75,7 @@ module.exports = {
             'after': true
         }],
         // Vue - https://github.com/vuejs/eslint-plugin-vue
+        'vue/multi-word-component-names': 0,
         'vue/html-indent': [2, 4],
         'vue/no-v-html': 0,
         'vue/max-attributes-per-line': 0,

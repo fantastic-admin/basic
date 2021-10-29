@@ -41,10 +41,10 @@ import BuyIt from './components/BuyIt/index.vue'
 
 const { proxy } = getCurrentInstance()
 const store = useStore()
-const route = useRoute(), router = useRouter()
+const routeInfo = useRoute(), router = useRouter()
 
 const showCopyright = computed(() => {
-    return typeof route.meta.copyright !== 'undefined' ? route.meta.copyright : store.state.settings.showCopyright
+    return typeof routeInfo.meta.copyright !== 'undefined' ? routeInfo.meta.copyright : store.state.settings.showCopyright
 })
 
 watch(() => store.state.settings.sidebarCollapse, val => {
@@ -145,7 +145,7 @@ function switchMenu(index) {
     }
     &[data-menu-mode="single"] {
         .sidebar-container {
-            width: calc(#{$g-sub-sidebar-width});
+            width: $g-sub-sidebar-width;
             transform: translateX(-#{$g-sub-sidebar-width});
             &.show {
                 transform: translateX(0);
@@ -219,7 +219,7 @@ function switchMenu(index) {
             transition: 0.3s;
         }
         .topbar-container + .main {
-            padding: calc(#{$g-topbar-height}) 0 0;
+            padding: $g-topbar-height 0 0;
         }
     }
 }

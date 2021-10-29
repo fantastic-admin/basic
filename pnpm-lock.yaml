@@ -9,7 +9,7 @@ specifiers:
   dayjs: ^1.10.7
   element-plus: ^1.1.0-beta.24
   eslint: ^8.1.0
-  eslint-plugin-vue: ^7.20.0
+  eslint-plugin-vue: ^8.0.1
   hotkeys-js: ^3.8.7
   http-server: ^14.0.0
   husky: ^7.0.4
@@ -22,7 +22,7 @@ specifiers:
   path-to-regexp: ^6.2.0
   plop: ^2.7.6
   postcss-html: ^1.1.0
-  postcss-scss: ^4.0.1
+  postcss-scss: ^4.0.2
   sass: ^1.43.4
   screenfull: ^5.1.0
   stylelint: ^14.0.1
@@ -34,7 +34,7 @@ specifiers:
   stylelint-scss: ^4.0.0
   svgo: ^2.7.0
   tinymce: ^5.10.0
-  unplugin-auto-import: ^0.4.12
+  unplugin-auto-import: ^0.4.13
   unplugin-vue-components: ^0.16.0
   vite: ^2.6.13
   vite-plugin-banner: ^0.1.3
@@ -73,13 +73,13 @@ devDependencies:
   '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/1.9.4_vite@2.6.13
   '@vue/compiler-sfc': 3.2.20
   eslint: 8.1.0
-  eslint-plugin-vue: 7.20.0_eslint@8.1.0
+  eslint-plugin-vue: registry.npmmirror.com/eslint-plugin-vue/8.0.1_eslint@8.1.0
   http-server: registry.npmmirror.com/http-server/14.0.0
   husky: 7.0.4
   lint-staged: registry.npmmirror.com/lint-staged/11.2.6
   plop: 2.7.6
   postcss-html: registry.npmmirror.com/postcss-html/1.1.0
-  postcss-scss: 4.0.1
+  postcss-scss: registry.npmmirror.com/postcss-scss/4.0.2
   sass: registry.npmmirror.com/sass/1.43.4
   stylelint: registry.npmmirror.com/stylelint/14.0.1
   stylelint-config-html: registry.npmmirror.com/stylelint-config-html/1.0.0_7b6e16fed7d2a310596360cdd00184fb
@@ -89,7 +89,7 @@ devDependencies:
   stylelint-config-standard: registry.npmmirror.com/stylelint-config-standard/23.0.0_stylelint@14.0.1
   stylelint-scss: registry.npmmirror.com/stylelint-scss/4.0.0_stylelint@14.0.1
   svgo: 2.7.0
-  unplugin-auto-import: 0.4.12_vite@2.6.13
+  unplugin-auto-import: registry.npmmirror.com/unplugin-auto-import/0.4.13_vite@2.6.13
   unplugin-vue-components: registry.npmmirror.com/unplugin-vue-components/0.16.0_vite@2.6.13+vue@3.2.20
   vite: registry.npmmirror.com/vite/2.6.13_sass@1.43.4
   vite-plugin-banner: 0.1.3
@@ -1373,42 +1373,12 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-plugin-vue/7.20.0_eslint@8.1.0:
-    resolution: {integrity: sha1-mMIYhaa/3wcTw6kpV6Wv6q7tklM=, tarball: eslint-plugin-vue/download/eslint-plugin-vue-7.20.0.tgz}
-    engines: {node: '>=8.10'}
-    peerDependencies:
-      eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
-    dependencies:
-      eslint: 8.1.0
-      eslint-utils: 2.1.0
-      natural-compare: 1.4.0
-      semver: 6.3.0
-      vue-eslint-parser: registry.npmmirror.com/vue-eslint-parser/7.11.0_eslint@8.1.0
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
-  /eslint-scope/5.1.1:
-    resolution: {integrity: sha1-54blmmbLkrP2wfsNUIqrF0hI9Iw=, tarball: eslint-scope/download/eslint-scope-5.1.1.tgz}
-    engines: {node: '>=8.0.0'}
-    dependencies:
-      esrecurse: registry.nlark.com/esrecurse/4.3.0
-      estraverse: registry.nlark.com/estraverse/4.3.0
-    dev: true
-
   /eslint-scope/6.0.0:
     resolution: {integrity: sha1-nPRbE8Wsjz1MUPRqUSH2Gz4xiXg=, tarball: eslint-scope/download/eslint-scope-6.0.0.tgz}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       esrecurse: 4.3.0
       estraverse: 5.2.0
-    dev: true
-
-  /eslint-utils/2.1.0:
-    resolution: {integrity: sha1-0t5eA0JOcH3BDHQGjd7a5wh0Gyc=, tarball: eslint-utils/download/eslint-utils-2.1.0.tgz}
-    engines: {node: '>=6'}
-    dependencies:
-      eslint-visitor-keys: 1.3.0
     dev: true
 
   /eslint-utils/3.0.0_eslint@8.1.0:
@@ -1418,17 +1388,7 @@ packages:
       eslint: '>=5'
     dependencies:
       eslint: 8.1.0
-      eslint-visitor-keys: 2.1.0
-    dev: true
-
-  /eslint-visitor-keys/1.3.0:
-    resolution: {integrity: sha1-MOvR73wv3/AcOk8VEESvJfqwUj4=, tarball: eslint-visitor-keys/download/eslint-visitor-keys-1.3.0.tgz}
-    engines: {node: '>=4'}
-    dev: true
-
-  /eslint-visitor-keys/2.1.0:
-    resolution: {integrity: sha1-9lMoJZMFknOSyTjtROsKXJsr0wM=, tarball: eslint-visitor-keys/download/eslint-visitor-keys-2.1.0.tgz}
-    engines: {node: '>=10'}
+      eslint-visitor-keys: registry.nlark.com/eslint-visitor-keys/2.1.0
     dev: true
 
   /eslint-visitor-keys/3.0.0:
@@ -1483,22 +1443,13 @@ packages:
       - supports-color
     dev: true
 
-  /espree/6.2.1:
-    resolution: {integrity: sha1-d/xy4f10SiBSwg84pbV1gy6Cc0o=, tarball: espree/download/espree-6.2.1.tgz}
-    engines: {node: '>=6.0.0'}
-    dependencies:
-      acorn: registry.nlark.com/acorn/7.4.1
-      acorn-jsx: registry.nlark.com/acorn-jsx/5.3.2_acorn@7.4.1
-      eslint-visitor-keys: registry.nlark.com/eslint-visitor-keys/1.3.0
-    dev: true
-
   /espree/9.0.0:
     resolution: {integrity: sha1-6QopZWmCKFAudxx6WEibGp0QcJA=, tarball: espree/download/espree-9.0.0.tgz}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       acorn: 8.5.0
       acorn-jsx: 5.3.2_acorn@8.5.0
-      eslint-visitor-keys: 3.0.0
+      eslint-visitor-keys: registry.nlark.com/eslint-visitor-keys/3.0.0
     dev: true
 
   /esprima/4.0.1:
@@ -2715,13 +2666,6 @@ packages:
       tslib: 2.3.1
     dev: true
 
-  /lru-cache/6.0.0:
-    resolution: {integrity: sha1-bW/mVw69lqr5D8rR2vo7JWbbOpQ=, tarball: lru-cache/download/lru-cache-6.0.0.tgz}
-    engines: {node: '>=10'}
-    dependencies:
-      yallist: 4.0.0
-    dev: true
-
   /magic-string/0.25.7:
     resolution: {integrity: sha1-P0l9b9NMZpxnmNy4IfLvMfVEUFE=, tarball: magic-string/download/magic-string-0.25.7.tgz}
     dependencies:
@@ -3418,13 +3362,6 @@ packages:
       postcss: 8.3.11
     dev: true
 
-  /postcss-scss/4.0.1:
-    resolution: {integrity: sha1-b1gn9EV9rDX8xaCz3lZs+zd9sec=, tarball: postcss-scss/download/postcss-scss-4.0.1.tgz}
-    engines: {node: '>=12.0'}
-    peerDependencies:
-      postcss: ^8.3.3
-    dev: true
-
   /postcss-selector-parser/6.0.6:
     resolution: {integrity: sha1-LFu6gXSsL2mBq2MaQqsO5UrzMuo=, tarball: postcss-selector-parser/download/postcss-selector-parser-6.0.6.tgz}
     engines: {node: '>=4'}
@@ -3812,17 +3749,12 @@ packages:
     resolution: {integrity: sha1-De4hahyUGrN+nvsXiPavxf9VN/w=, tarball: semver-compare/download/semver-compare-1.0.0.tgz}
     dev: true
 
-  /semver/6.3.0:
-    resolution: {integrity: sha1-7gpkyK9ejO6mdoexM3YeG+y9HT0=, tarball: semver/download/semver-6.3.0.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsemver%2Fdownload%2Fsemver-6.3.0.tgz}
-    hasBin: true
-    dev: true
-
   /semver/7.3.5:
     resolution: {integrity: sha1-C2Ich5NI2JmOSw5L6Us/EuYBjvc=, tarball: semver/download/semver-7.3.5.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fsemver%2Fdownload%2Fsemver-7.3.5.tgz}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
-      lru-cache: 6.0.0
+      lru-cache: registry.nlark.com/lru-cache/6.0.0
     dev: true
 
   /sentence-case/2.1.1:
@@ -4425,27 +4357,6 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /unplugin-auto-import/0.4.12_vite@2.6.13:
-    resolution: {integrity: sha1-Qqnq4w2zDxEwcVuQyPHbZ+3ZRXo=, tarball: unplugin-auto-import/download/unplugin-auto-import-0.4.12.tgz}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@vueuse/core': ^6.0.0
-    peerDependenciesMeta:
-      '@vueuse/core':
-        optional: true
-    dependencies:
-      '@antfu/utils': 0.3.0
-      '@rollup/pluginutils': 4.1.1
-      local-pkg: 0.1.0
-      magic-string: 0.25.7
-      resolve: 1.20.0
-      unplugin: 0.2.16_vite@2.6.13
-    transitivePeerDependencies:
-      - rollup
-      - vite
-      - webpack
-    dev: true
-
   /unplugin/0.2.16_vite@2.6.13:
     resolution: {integrity: sha1-bzTp9QaMo+ySo2sBb0e1rYu4dco=, tarball: unplugin/download/unplugin-0.2.16.tgz}
     peerDependencies:
@@ -4785,10 +4696,6 @@ packages:
     engines: {node: '>=0.4'}
     dev: true
 
-  /yallist/4.0.0:
-    resolution: {integrity: sha1-m7knkNnA7/7GO+c1GeEaNQGaOnI=, tarball: yallist/download/yallist-4.0.0.tgz}
-    dev: true
-
   /yaml/1.10.2:
     resolution: {integrity: sha1-IwHF/78StGfejaIzOkWeKeeSDks=, tarball: yaml/download/yaml-1.10.2.tgz}
     engines: {node: '>= 6'}
@@ -4863,17 +4770,6 @@ packages:
     version: 2.1.0
     dev: true
 
-  registry.nlark.com/acorn-jsx/5.3.2_acorn@7.4.1:
-    resolution: {integrity: sha1-ftW7VZCLOy8bxVxq8WU7rafweTc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/acorn-jsx/download/acorn-jsx-5.3.2.tgz}
-    id: registry.nlark.com/acorn-jsx/5.3.2
-    name: acorn-jsx
-    version: 5.3.2
-    peerDependencies:
-      acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
-    dependencies:
-      acorn: registry.nlark.com/acorn/7.4.1
-    dev: true
-
   registry.nlark.com/acorn-jsx/5.3.2_acorn@8.5.0:
     resolution: {integrity: sha1-ftW7VZCLOy8bxVxq8WU7rafweTc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/acorn-jsx/download/acorn-jsx-5.3.2.tgz}
     id: registry.nlark.com/acorn-jsx/5.3.2
@@ -4883,14 +4779,6 @@ packages:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
       acorn: registry.nlark.com/acorn/8.5.0
-    dev: true
-
-  registry.nlark.com/acorn/7.4.1:
-    resolution: {integrity: sha1-/q7SVZc9LndVW4PbwIhRpsY1IPo=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/acorn/download/acorn-7.4.1.tgz}
-    name: acorn
-    version: 7.4.1
-    engines: {node: '>=0.4.0'}
-    hasBin: true
     dev: true
 
   registry.nlark.com/acorn/8.5.0:
@@ -5156,11 +5044,24 @@ packages:
       estraverse: registry.nlark.com/estraverse/5.2.0
     dev: true
 
-  registry.nlark.com/eslint-visitor-keys/1.3.0:
-    resolution: {integrity: sha1-MOvR73wv3/AcOk8VEESvJfqwUj4=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/eslint-visitor-keys/download/eslint-visitor-keys-1.3.0.tgz}
+  registry.nlark.com/eslint-utils/3.0.0_eslint@8.1.0:
+    resolution: {integrity: sha1-iuuvrOc0W7M1WdsKHxOh0tSMNnI=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/eslint-utils/download/eslint-utils-3.0.0.tgz}
+    id: registry.nlark.com/eslint-utils/3.0.0
+    name: eslint-utils
+    version: 3.0.0
+    engines: {node: ^10.0.0 || ^12.0.0 || >= 14.0.0}
+    peerDependencies:
+      eslint: '>=5'
+    dependencies:
+      eslint: 8.1.0
+      eslint-visitor-keys: registry.nlark.com/eslint-visitor-keys/2.1.0
+    dev: true
+
+  registry.nlark.com/eslint-visitor-keys/2.1.0:
+    resolution: {integrity: sha1-9lMoJZMFknOSyTjtROsKXJsr0wM=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/eslint-visitor-keys/download/eslint-visitor-keys-2.1.0.tgz}
     name: eslint-visitor-keys
-    version: 1.3.0
-    engines: {node: '>=4'}
+    version: 2.1.0
+    engines: {node: '>=10'}
     dev: true
 
   registry.nlark.com/eslint-visitor-keys/3.0.0:
@@ -5197,13 +5098,6 @@ packages:
     engines: {node: '>=4.0'}
     dependencies:
       estraverse: registry.nlark.com/estraverse/5.2.0
-    dev: true
-
-  registry.nlark.com/estraverse/4.3.0:
-    resolution: {integrity: sha1-OYrT88WiSUi+dyXoPRGn3ijNvR0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/estraverse/download/estraverse-4.3.0.tgz}
-    name: estraverse
-    version: 4.3.0
-    engines: {node: '>=4.0'}
     dev: true
 
   registry.nlark.com/estraverse/5.2.0:
@@ -5525,6 +5419,12 @@ packages:
       minimist: registry.nlark.com/minimist/1.2.5
     dev: true
 
+  registry.nlark.com/natural-compare/1.4.0:
+    resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/natural-compare/download/natural-compare-1.4.0.tgz}
+    name: natural-compare
+    version: 1.4.0
+    dev: true
+
   registry.nlark.com/normalize-path/3.0.0:
     resolution: {integrity: sha1-Dc1p/yOhybEf0JeDFmRKA4ghamU=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/normalize-path/download/normalize-path-3.0.0.tgz}
     name: normalize-path
@@ -5689,21 +5589,21 @@ packages:
     dev: true
 
   registry.nlark.com/semver/5.0.3:
-    resolution: {integrity: sha1-d0Zt5YnNXTyV8TiqeLxWmjy10no=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/semver/download/semver-5.0.3.tgz?cache=0&sync_timestamp=1631509518320&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsemver%2Fdownload%2Fsemver-5.0.3.tgz}
+    resolution: {integrity: sha1-d0Zt5YnNXTyV8TiqeLxWmjy10no=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/semver/download/semver-5.0.3.tgz?cache=0&sync_timestamp=1631501920740&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsemver%2Fdownload%2Fsemver-5.0.3.tgz}
     name: semver
     version: 5.0.3
     hasBin: true
     dev: true
 
   registry.nlark.com/semver/5.7.1:
-    resolution: {integrity: sha1-qVT5Ma66UI0we78Gnv8MAclhFvc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/semver/download/semver-5.7.1.tgz?cache=0&sync_timestamp=1631509518320&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsemver%2Fdownload%2Fsemver-5.7.1.tgz}
+    resolution: {integrity: sha1-qVT5Ma66UI0we78Gnv8MAclhFvc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/semver/download/semver-5.7.1.tgz?cache=0&sync_timestamp=1631501920740&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsemver%2Fdownload%2Fsemver-5.7.1.tgz}
     name: semver
     version: 5.7.1
     hasBin: true
     dev: true
 
   registry.nlark.com/semver/7.3.5:
-    resolution: {integrity: sha1-C2Ich5NI2JmOSw5L6Us/EuYBjvc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/semver/download/semver-7.3.5.tgz?cache=0&sync_timestamp=1631509518320&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsemver%2Fdownload%2Fsemver-7.3.5.tgz}
+    resolution: {integrity: sha1-C2Ich5NI2JmOSw5L6Us/EuYBjvc=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/semver/download/semver-7.3.5.tgz?cache=0&sync_timestamp=1631501920740&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fsemver%2Fdownload%2Fsemver-7.3.5.tgz}
     name: semver
     version: 7.3.5
     engines: {node: '>=10'}
@@ -5987,6 +5887,24 @@ packages:
     dev: true
     optional: true
 
+  registry.npmmirror.com/eslint-plugin-vue/8.0.1_eslint@8.1.0:
+    resolution: {integrity: sha1-HSfZdqtkccWDM5fLyN7HjDt3JgY=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-vue/download/eslint-plugin-vue-8.0.1.tgz}
+    id: registry.npmmirror.com/eslint-plugin-vue/8.0.1
+    name: eslint-plugin-vue
+    version: 8.0.1
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    peerDependencies:
+      eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 8.1.0
+      eslint-utils: registry.nlark.com/eslint-utils/3.0.0_eslint@8.1.0
+      natural-compare: registry.nlark.com/natural-compare/1.4.0
+      semver: registry.nlark.com/semver/7.3.5
+      vue-eslint-parser: registry.npmmirror.com/vue-eslint-parser/8.0.0_eslint@8.1.0
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
   registry.npmmirror.com/glob-parent/5.1.2:
     resolution: {integrity: sha1-hpgyxYA0/mikCTwX3BXoNA2EAcQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/glob-parent/download/glob-parent-5.1.2.tgz}
     name: glob-parent
@@ -6126,10 +6044,10 @@ packages:
       postcss-safe-parser: registry.nlark.com/postcss-safe-parser/6.0.0_postcss@8.3.11
     dev: true
 
-  registry.npmmirror.com/postcss-scss/4.0.1:
-    resolution: {integrity: sha1-b1gn9EV9rDX8xaCz3lZs+zd9sec=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/postcss-scss/download/postcss-scss-4.0.1.tgz}
+  registry.npmmirror.com/postcss-scss/4.0.2:
+    resolution: {integrity: sha1-Od3MCrMvFV1asyjukTU9Z6UtU3s=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/postcss-scss/download/postcss-scss-4.0.2.tgz?cache=0&sync_timestamp=1635496549918&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fpostcss-scss%2Fdownload%2Fpostcss-scss-4.0.2.tgz}
     name: postcss-scss
-    version: 4.0.1
+    version: 4.0.2
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.3.3
@@ -6178,7 +6096,7 @@ packages:
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      postcss-scss: registry.npmmirror.com/postcss-scss/4.0.1
+      postcss-scss: registry.npmmirror.com/postcss-scss/4.0.2
       stylelint: registry.npmmirror.com/stylelint/14.0.1
       stylelint-config-recommended: registry.npmmirror.com/stylelint-config-recommended/6.0.0_stylelint@14.0.1
       stylelint-scss: registry.npmmirror.com/stylelint-scss/4.0.0_stylelint@14.0.1
@@ -6290,6 +6208,30 @@ packages:
       - supports-color
     dev: true
 
+  registry.npmmirror.com/unplugin-auto-import/0.4.13_vite@2.6.13:
+    resolution: {integrity: sha1-iYbUfw9SG0hdSocPfDnZUQBkINQ=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/unplugin-auto-import/download/unplugin-auto-import-0.4.13.tgz}
+    id: registry.npmmirror.com/unplugin-auto-import/0.4.13
+    name: unplugin-auto-import
+    version: 0.4.13
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@vueuse/core': ^6.0.0
+    peerDependenciesMeta:
+      '@vueuse/core':
+        optional: true
+    dependencies:
+      '@antfu/utils': 0.3.0
+      '@rollup/pluginutils': 4.1.1
+      local-pkg: 0.1.0
+      magic-string: 0.25.7
+      resolve: 1.20.0
+      unplugin: 0.2.16_vite@2.6.13
+    transitivePeerDependencies:
+      - rollup
+      - vite
+      - webpack
+    dev: true
+
   registry.npmmirror.com/unplugin-vue-components/0.16.0_vite@2.6.13+vue@3.2.20:
     resolution: {integrity: sha1-FaXV0DrWWK4CAlI4Eex2FQd2Vp0=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/unplugin-vue-components/download/unplugin-vue-components-0.16.0.tgz}
     id: registry.npmmirror.com/unplugin-vue-components/0.16.0
@@ -6364,27 +6306,6 @@ packages:
       sass: registry.npmmirror.com/sass/1.43.4
     optionalDependencies:
       fsevents: registry.nlark.com/fsevents/2.3.2
-    dev: true
-
-  registry.npmmirror.com/vue-eslint-parser/7.11.0_eslint@8.1.0:
-    resolution: {integrity: sha1-IUtd6pYQB/z/su5luJEjB2KNDa8=, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-eslint-parser/download/vue-eslint-parser-7.11.0.tgz?cache=0&sync_timestamp=1634623985221&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fvue-eslint-parser%2Fdownload%2Fvue-eslint-parser-7.11.0.tgz}
-    id: registry.npmmirror.com/vue-eslint-parser/7.11.0
-    name: vue-eslint-parser
-    version: 7.11.0
-    engines: {node: '>=8.10'}
-    peerDependencies:
-      eslint: '>=5.0.0'
-    dependencies:
-      debug: registry.nlark.com/debug/4.3.2
-      eslint: 8.1.0
-      eslint-scope: 5.1.1
-      eslint-visitor-keys: 1.3.0
-      espree: 6.2.1
-      esquery: 1.4.0
-      lodash: 4.17.21
-      semver: 6.3.0
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   registry.npmmirror.com/vue-eslint-parser/8.0.0_eslint@8.1.0:

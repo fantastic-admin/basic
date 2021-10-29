@@ -1,10 +1,11 @@
 <template>
-    <div :class="{
-        'page-main': true,
-        'is-collaspe': collaspeData
-    }" :style="{
-        'height': collaspeData ? height : ''
-    }"
+    <div
+        :class="{
+            'page-main': true,
+            'is-collaspe': collaspeData
+        }" :style="{
+            'height': collaspeData ? height : ''
+        }"
     >
         <div v-if="title" class="title-container">{{ title }}</div>
         <slot />
