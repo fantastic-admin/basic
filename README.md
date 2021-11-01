@@ -4,7 +4,7 @@
 
 <h1 align="center">Fantastic-admin</h1>
 
-<p align="center">一款开箱即用的 Vue 中后台管理系统框架</p>
+<p align="center">一款**开箱即用**的 Vue 中后台管理系统框架</p>
 
 ## 特点
 
@@ -78,3 +78,41 @@
 [![star](https://img.shields.io/github/stars/hooray/fantastic-admin?style=social)](https://github.com/hooray/fantastic-admin/stargazers)
 
 [![star](https://gitee.com/hooray/fantastic-admin/badge/star.svg?theme=dark)](https://gitee.com/hooray/fantastic-admin/stargazers)
+
+## 生态
+
+<table>
+    <tr>
+        <th colspan="3" align="center">
+            <a href="https://hooray.gitee.io/fantastic-template" target="_blank">Fantastic-template</a>
+        </th>
+    </tr>
+    <tr>
+        <th colspan="3" align="center">
+            一款开箱即用的 Vue 项目模版
+        </th>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th colspan="3" align="center">
+            <a href="https://hooray.gitee.io/fantastic-admin-discovery" target="_blank">Fantastic-admin (探索版)</a>
+        </th>
+    </tr>
+    <tr>
+        <th colspan="3" align="center">
+            一款具备全新交互方式的 Vue 中后台管理系统框架
+        </th>
+    </tr>
+    <tr>
+        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview1.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview2.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview3.png" /></td>
+    </tr>
+    <tr>
+        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview4.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview5.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview6.png" /></td>
+    </tr>
+</table>
