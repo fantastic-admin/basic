@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div v-show="uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
+            <div v-show="url === '' && uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
                 <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
                 <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="uploadData.progress.percent" />
             </div>
@@ -135,14 +135,10 @@ function beforeUpload(file) {
 }
 function onProgress(file) {
     uploadData.value.progress.percent = ~~file.percent
-    if (uploadData.value.progress.percent == 100) {
-        setTimeout(() => {
-            uploadData.value.progress.preview = ''
-            uploadData.value.progress.percent = 0
-        }, 1000)
-    }
 }
 function onSuccess(res) {
+    uploadData.value.progress.preview = ''
+    uploadData.value.progress.percent = 0
     emit('on-success', res)
 }
 </script>

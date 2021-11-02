@@ -158,12 +158,10 @@ function beforeUpload(file) {
 }
 function onProgress(file) {
     uploadData.value.progress.percent = ~~file.percent
-    if (uploadData.value.progress.percent == 100) {
-        uploadData.value.progress.preview = ''
-        uploadData.value.progress.percent = 0
-    }
 }
 function onSuccess(res) {
+    uploadData.value.progress.preview = ''
+    uploadData.value.progress.percent = 0
     emit('on-success', res)
 }
 </script>
