@@ -31,7 +31,7 @@
         </el-carousel>
         <el-image-viewer v-if="discoveryInfo.imageVisible" :url-list="discoveryInfo.imagePreview" @close="discoveryInfo.imageVisible = false" />
         <template #footer>
-            <el-button>不用了</el-button>
+            <el-button @click="discoveryInfo.dialogVisible = false">不用了</el-button>
             <el-button type="primary" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin-discovery/`)">去看看</el-button>
         </template>
     </el-dialog>
