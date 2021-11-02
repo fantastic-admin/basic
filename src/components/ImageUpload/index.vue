@@ -31,9 +31,9 @@
                     </div>
                 </div>
             </div>
-            <div v-show="data.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
-                <el-image :src="data.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
-                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="data.progress.percent" />
+            <div v-show="uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
+                <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
+                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="uploadData.progress.percent" />
             </div>
         </el-upload>
         <div v-if="!notip" class="el-upload__tip">
@@ -41,7 +41,7 @@
                 <el-alert :title="`上传图片支持 ${ ext.join(' / ') } 格式，且图片大小不超过 ${ size }MB，建议图片尺寸为 ${width}*${height}`" type="info" show-icon :closable="false" />
             </div>
         </div>
-        <el-image-viewer v-if="data.imageViewerVisible" :url-list="[url]" @close="previewClose" />
+        <el-image-viewer v-if="uploadData.imageViewerVisible" :url-list="[url]" @close="previewClose" />
     </div>
 </template>
 
@@ -97,7 +97,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:url', 'on-success'])
 
-const data = ref({
+const uploadData = ref({
     imageViewerVisible: false,
     progress: {
         preview: '',
@@ -107,11 +107,11 @@ const data = ref({
 
 // 预览
 function preview() {
-    data.value.imageViewerVisible = true
+    uploadData.value.imageViewerVisible = true
 }
 // 关闭预览
 function previewClose() {
-    data.value.imageViewerVisible = false
+    uploadData.value.imageViewerVisible = false
 }
 // 移除
 function remove() {
@@ -129,16 +129,16 @@ function beforeUpload(file) {
         proxy.$message.error(`上传图片大小不能超过 ${props.size}MB！`)
     }
     if (isTypeOk && isSizeOk) {
-        data.value.progress.preview = URL.createObjectURL(file)
+        uploadData.value.progress.preview = URL.createObjectURL(file)
     }
     return isTypeOk && isSizeOk
 }
 function onProgress(file) {
-    data.value.progress.percent = ~~file.percent
-    if (data.value.progress.percent == 100) {
+    uploadData.value.progress.percent = ~~file.percent
+    if (uploadData.value.progress.percent == 100) {
         setTimeout(() => {
-            data.value.progress.preview = ''
-            data.value.progress.percent = 0
+            uploadData.value.progress.preview = ''
+            uploadData.value.progress.percent = 0
         }, 1000)
     }
 }
