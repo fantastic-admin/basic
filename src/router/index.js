@@ -240,12 +240,6 @@ router.afterEach((to, from) => {
             store.commit('keepAlive/remove', componentName)
         }
     }
-    // 百度统计代码
-    if (import.meta.env.MODE == 'example') {
-        if (window._hmt) {
-            window._hmt.push(['_trackPageview', location.pathname + '#' + to.fullPath])
-        }
-    }
 })
 
 export default router
