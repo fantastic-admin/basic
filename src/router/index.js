@@ -2,7 +2,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 import store from '@/store'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // progress bar style
-import path from 'path-browserify'
 
 // 固定路由
 const constantRoutes = [
@@ -127,31 +126,8 @@ router.beforeEach(async(to, from, next) => {
                     } else if (!store.state.settings.enableDashboard && to.name == 'dashboard') {
                         // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
                         if (store.getters['menu/sidebarRoutes'].length > 0) {
-                            // 此处没有使用 store.getters['menu/sidebarRoutes'][0].path 直接进行跳转是因为会有个隐性 bug ，即当父级路由如果设置了 redirect ，而 redirect 对应的嵌套子路由由于没有权限导致没有被注册，此时则会无限进入 404 页面
-                            let getDeepestPath = (routes, rootPath = '') => {
-                                let retnPath
-                                if (routes.children) {
-                                    if (
-                                        routes.children.some(item => {
-                                            return item.meta.sidebar != false
-                                        })
-                                    ) {
-                                        for (let i = 0; i < routes.children.length; i++) {
-                                            if (routes.children[i].meta.sidebar != false) {
-                                                retnPath = getDeepestPath(routes.children[i], path.resolve(rootPath, routes.path))
-                                                break
-                                            }
-                                        }
-                                    } else {
-                                        retnPath = getDeepestPath(routes.children[0], path.resolve(rootPath, routes.path))
-                                    }
-                                } else {
-                                    retnPath = path.resolve(rootPath, routes.path)
-                                }
-                                return retnPath
-                            }
                             next({
-                                path: getDeepestPath(store.getters['menu/sidebarRoutes'][0]),
+                                path: store.getters['menu/sidebarRoutesFirstDeepestPath'],
                                 replace: true
                             })
                         } else {

@@ -74,7 +74,7 @@ provide('switchMenu', switchMenu)
 function switchMenu(index) {
     store.commit('menu/switchHeaderActived', index)
     if (store.state.settings.switchSidebarAndPageJump) {
-        router.push(store.getters['menu/sidebarRoutes'][0].path)
+        router.push(store.getters['menu/sidebarRoutesFirstDeepestPath'])
     }
 }
 </script>

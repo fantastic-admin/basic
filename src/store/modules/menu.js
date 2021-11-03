@@ -114,6 +114,29 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
     return res
 }
 
+function getDeepestPath(routes, rootPath = '') {
+    let retnPath
+    if (routes.children) {
+        if (
+            routes.children.some(item => {
+                return item.meta.sidebar != false
+            })
+        ) {
+            for (let i = 0; i < routes.children.length; i++) {
+                if (routes.children[i].meta.sidebar != false) {
+                    retnPath = getDeepestPath(routes.children[i], path.resolve(rootPath, routes.path))
+                    break
+                }
+            }
+        } else {
+            retnPath = getDeepestPath(routes.children[0], path.resolve(rootPath, routes.path))
+        }
+    } else {
+        retnPath = path.resolve(rootPath, routes.path)
+    }
+    return retnPath
+}
+
 const state = () => ({
     isGenerate: false,
     routes: [],
@@ -138,6 +161,9 @@ const getters = {
     },
     sidebarRoutes: (state, getters) => {
         return getters.routes.length > 0 ? getters.routes[state.headerActived].children : []
+    },
+    sidebarRoutesFirstDeepestPath: (state, getters) => {
+        return getDeepestPath(getters.sidebarRoutes[0])
     }
 }
 
