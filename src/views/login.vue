@@ -3,7 +3,7 @@
         <div class="bg-banner" />
         <div id="login-box">
             <div class="login-banner" />
-            <el-form v-show="formType == 'login'" ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+            <el-form v-show="formType == 'login'" ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
                 <div class="title-container">
                     <h3 class="title">{{ title }}管理后台</h3>
                 </div>
@@ -37,7 +37,7 @@
                     <el-button type="danger" size="mini" plain @click="testAccount('test')">test</el-button>
                 </div>
             </el-form>
-            <el-form v-show="formType == 'reset'" ref="resetForm" :model="resetForm" :rules="resetRules" class="login-form" auto-complete="on" label-position="left">
+            <el-form v-show="formType == 'reset'" ref="resetFormRef" :model="resetForm" :rules="resetRules" class="login-form" auto-complete="on" label-position="left">
                 <div class="title-container">
                     <h3 class="title">重置密码</h3>
                 </div>
@@ -84,100 +84,99 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'Login',
-    data() {
-        return {
-            title: import.meta.env.VITE_APP_TITLE,
-            // 表单类型，login 登录，reset 重置密码
-            formType: 'login',
-            loginForm: {
-                account: localStorage.login_account || '',
-                password: '',
-                remember: !!localStorage.login_account
-            },
-            loginRules: {
-                account: [
-                    { required: true, trigger: 'blur', message: '请输入用户名' }
-                ],
-                password: [
-                    { required: true, trigger: 'blur', message: '请输入密码' },
-                    { min: 6, max: 18, trigger: 'blur', message: '密码长度为6到18位' }
-                ]
-            },
-            resetForm: {
-                account: localStorage.login_account || '',
-                captcha: '',
-                newPassword: ''
-            },
-            resetRules: {
-                account: [
-                    { required: true, trigger: 'blur', message: '请输入用户名' }
-                ],
-                captcha: [
-                    { required: true, trigger: 'blur', message: '请输入验证码' }
-                ],
-                newPassword: [
-                    { required: true, trigger: 'blur', message: '请输入新密码' },
-                    { min: 6, max: 18, trigger: 'blur', message: '密码长度为6到18位' }
-                ]
-            },
-            loading: false,
-            passwordType: 'password',
-            redirect: undefined
-        }
-    },
-    watch: {
-        $route: {
-            handler: function(route) {
-                this.redirect = route.query && route.query.redirect
-            },
-            immediate: true
-        }
-    },
-    methods: {
-        showPassword() {
-            this.passwordType = this.passwordType === 'password' ? '' : 'password'
-            this.$nextTick(() => {
-                this.$refs.password.focus()
-            })
-        },
-        handleLogin() {
-            this.$refs.loginForm.validate(valid => {
-                if (valid) {
-                    this.loading = true
-                    this.$store.dispatch('user/login', this.loginForm).then(() => {
-                        this.loading = false
-                        if (this.loginForm.remember) {
-                            localStorage.setItem('login_account', this.loginForm.account)
-                        } else {
-                            localStorage.removeItem('login_account')
-                        }
-                        this.$router.push({ path: this.redirect || '/' })
-                    }).catch(() => {
-                        this.loading = false
-                    })
+<script setup name="Login">
+const { proxy } = getCurrentInstance()
+const store = useStore()
+const route = useRoute(), router = useRouter()
+
+const title = import.meta.env.VITE_APP_TITLE
+
+// 表单类型，login 登录，reset 重置密码
+const formType = ref('login')
+
+const loginForm = ref({
+    account: localStorage.login_account || '',
+    password: '',
+    remember: !!localStorage.login_account
+})
+const loginRules = ref({
+    account: [
+        { required: true, trigger: 'blur', message: '请输入用户名' }
+    ],
+    password: [
+        { required: true, trigger: 'blur', message: '请输入密码' },
+        { min: 6, max: 18, trigger: 'blur', message: '密码长度为6到18位' }
+    ]
+})
+
+const resetForm = ref({
+    account: localStorage.login_account || '',
+    captcha: '',
+    newPassword: ''
+})
+const resetRules = ref({
+    account: [
+        { required: true, trigger: 'blur', message: '请输入用户名' }
+    ],
+    captcha: [
+        { required: true, trigger: 'blur', message: '请输入验证码' }
+    ],
+    newPassword: [
+        { required: true, trigger: 'blur', message: '请输入新密码' },
+        { min: 6, max: 18, trigger: 'blur', message: '密码长度为6到18位' }
+    ]
+})
+
+const loading = ref(false)
+const passwordType = ref('password')
+const redirect = ref(null)
+
+onMounted(() => {
+    redirect.value = route.query.redirect ?? '/'
+})
+
+function showPassword() {
+    passwordType.value = passwordType.value === 'password' ? '' : 'password'
+    nextTick(() => {
+        proxy.$refs.password.focus()
+    })
+}
+
+function handleLogin() {
+    proxy.$refs.loginFormRef.validate(valid => {
+        if (valid) {
+            loading.value = true
+            store.dispatch('user/login', loginForm.value).then(() => {
+                loading.value = false
+                if (loginForm.value.remember) {
+                    localStorage.setItem('login_account', loginForm.value.account)
+                } else {
+                    localStorage.removeItem('login_account')
                 }
+                router.push(redirect.value)
+            }).catch(() => {
+                loading.value = false
             })
-        },
-        handleFind() {
-            this.$message({
-                message: '重置密码仅提供界面演示，无实际功能，需开发者自行扩展',
-                type: 'info'
-            })
-            this.$refs.resetForm.validate(valid => {
-                if (valid) {
-                    // 这里编写业务代码
-                }
-            })
-        },
-        testAccount(account) {
-            this.loginForm.account = account
-            this.loginForm.password = '123456'
-            this.handleLogin()
         }
-    }
+    })
+}
+
+function handleFind() {
+    proxy.$message({
+        message: '重置密码仅提供界面演示，无实际功能，需开发者自行扩展',
+        type: 'info'
+    })
+    proxy.$refs.resetFormRef.validate(valid => {
+        if (valid) {
+            // 这里编写业务代码
+        }
+    })
+}
+
+function testAccount(account) {
+    loginForm.value.account = account
+    loginForm.value.password = '123456'
+    handleLogin()
 }
 </script>
 
