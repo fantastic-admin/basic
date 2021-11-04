@@ -15,8 +15,16 @@
             <el-input v-model="input" placeholder="请输入内容" show-password />
         </page-main>
         <page-main title="带 icon 的输入框" class="demo">
-            <el-input v-model="input1" placeholder="请选择日期" suffix-icon="el-icon-date" />
-            <el-input v-model="input2" placeholder="请输入内容" prefix-icon="el-icon-search" />
+            <el-input v-model="input1" placeholder="请选择日期">
+                <template #suffix>
+                    <el-icon><el-icon-calendar /></el-icon>
+                </template>
+            </el-input>
+            <el-input v-model="input2" placeholder="请输入内容">
+                <template #prefix>
+                    <el-icon><el-icon-search /></el-icon>
+                </template>
+            </el-input>
         </page-main>
         <page-main title="文本域" class="demo">
             <el-input v-model="textarea" type="textarea" :rows="2" placeholder="请输入内容" />

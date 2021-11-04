@@ -37,37 +37,37 @@
                 <el-row :gutter="20" style="margin: 0 -10px 20px;">
                     <el-col :md="4">
                         <div class="icon-box icon-box-1" @click="onIconClick('收藏')">
-                            <i class="el-icon-star-off" />
+                            <el-icon><el-icon-star /></el-icon>
                             <div class="title">收藏</div>
                         </div>
                     </el-col>
                     <el-col :md="4">
                         <div class="icon-box icon-box-2" @click="onIconClick('通知')">
-                            <i class="el-icon-bell" />
+                            <el-icon><el-icon-bell /></el-icon>
                             <div class="title">通知</div>
                         </div>
                     </el-col>
                     <el-col :md="4">
                         <div class="icon-box icon-box-3" @click="onIconClick('图集')">
-                            <i class="el-icon-picture-outline" />
+                            <el-icon><el-icon-picture /></el-icon>
                             <div class="title">图集</div>
                         </div>
                     </el-col>
                     <el-col :md="4">
                         <div class="icon-box icon-box-4" @click="onIconClick('拍照')">
-                            <i class="el-icon-camera" />
+                            <el-icon><el-icon-camera /></el-icon>
                             <div class="title">拍照</div>
                         </div>
                     </el-col>
                     <el-col :md="4">
                         <div class="icon-box icon-box-5" @click="onIconClick('视频')">
-                            <i class="el-icon-video-camera" />
+                            <el-icon><el-icon-video-camera /></el-icon>
                             <div class="title">视频</div>
                         </div>
                     </el-col>
                     <el-col :md="4">
                         <div class="icon-box icon-box-6" @click="onIconClick('购物')">
-                            <i class="el-icon-goods" />
+                            <el-icon><el-icon-goods /></el-icon>
                             <div class="title">购物</div>
                         </div>
                     </el-col>

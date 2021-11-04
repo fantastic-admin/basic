@@ -21,10 +21,10 @@
         <el-dropdown class="user-container" @command="userCommand">
             <div class="user-wrapper">
                 <el-avatar size="medium">
-                    <i class="el-icon-user-solid" />
+                    <el-icon><el-icon-user-filled /></el-icon>
                 </el-avatar>
                 {{ $store.state.user.account }}
-                <i class="el-icon-caret-bottom" />
+                <el-icon><el-icon-caret-bottom /></el-icon>
             </div>
             <template #dropdown>
                 <el-dropdown-menu class="user-dropdown">

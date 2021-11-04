@@ -3,40 +3,24 @@
         <Alert />
         <page-header title="图标" />
         <page-main class="demo">
-            <i class="el-icon-edit" />
-            <i class="el-icon-share" />
-            <i class="el-icon-delete" />
-            <el-button type="primary" icon="el-icon-search">搜索</el-button>
-        </page-main>
-        <page-main title="图标集合">
-            <div v-for="(item, index) in icon" :key="index" class="list-icon">
-                <el-tooltip class="item" effect="dark" :content="`el-icon-${item}`" placement="top">
-                    <i :class="`el-icon-${item}`" />
-                </el-tooltip>
-            </div>
+            <el-icon><el-icon-edit /></el-icon>
+            <el-icon><el-icon-share /></el-icon>
+            <el-icon><el-icon-delete /></el-icon>
+            <el-button type="primary" :icon="Search">
+                搜索
+            </el-button>
         </page-main>
     </div>
 </template>
 
-<script>
+<script setup>
 import Alert from './components/alert.vue'
-import icon from './icon.json'
-
-export default {
-    components: {
-        Alert
-    },
-    computed: {
-        icon() {
-            return icon
-        }
-    }
-}
+import { Search } from '@element-plus/icons'
 </script>
 
 <style lang="scss" scoped>
 .demo {
-    i {
+    > .el-icon {
         color: #606266;
         margin: 0 20px;
         font-size: 1.5em;
@@ -45,11 +29,5 @@ export default {
     button {
         margin: 0 20px;
     }
-}
-.list-icon {
-    display: inline-block;
-    font-size: 32px;
-    color: #606266;
-    margin: 10px;
 }
 </style>
