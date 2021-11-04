@@ -3,7 +3,7 @@
         <span v-if="prefix" class="prefix">{{ prefix }}</span>
         <span class="text">{{ value }}</span>
         <span v-if="suffix" class="suffix">{{ suffix }}</span>
-        <i :class="`${isUp ? 'el-icon-caret-top' : 'el-icon-caret-bottom'}`" />
+        <svg-icon :name="`${isUp ? 'el-icon-caret-top' : 'el-icon-caret-bottom'}`" />
     </div>
 </template>
 

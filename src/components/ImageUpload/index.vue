@@ -23,10 +23,10 @@
                 <div class="mask">
                     <div class="actions">
                         <span title="预览" @click.stop="preview">
-                            <i class="el-icon-zoom-in" />
+                            <el-icon><el-icon-zoom-in /></el-icon>
                         </span>
                         <span title="移除" @click.stop="remove">
-                            <i class="el-icon-delete" />
+                            <el-icon><el-icon-delete /></el-icon>
                         </span>
                     </div>
                 </div>
@@ -155,7 +155,6 @@ function onSuccess(res) {
         top: 0;
         width: 100%;
         height: 100%;
-        font-size: 24px;
         background-color: rgb(0 0 0 / 50%);
         transition: all 0.3s;
         .actions {
@@ -178,6 +177,9 @@ function onSuccess(res) {
                 }
                 &:hover:not(.disabled) {
                     transform: scale(1.5);
+                }
+                .el-icon {
+                    font-size: 24px;
                 }
             }
         }
