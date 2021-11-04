@@ -1,13 +1,13 @@
 <template>
     <div class="result">
         <div v-if="type === 'success'" class="icon icon-success">
-            <i class="el-icon-success" />
+            <el-icon><el-icon-success-filled /></el-icon>
         </div>
         <div v-else-if="type === 'warning'" class="icon icon-warning">
-            <i class="el-icon-warning" />
+            <el-icon><el-icon-warning-filled /></el-icon>
         </div>
         <div v-else class="icon icon-error">
-            <i class="el-icon-error" />
+            <el-icon><el-icon-circle-close-filled /></el-icon>
         </div>
         <h1>{{ title }}</h1>
         <div v-if="desc" class="desc">{{ desc }}</div>
