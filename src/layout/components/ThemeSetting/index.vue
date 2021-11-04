@@ -33,7 +33,7 @@
                 <div class="label">
                     切换跳转
                     <el-tooltip content="开启该功能后，切换侧边栏时，页面自动跳转至该侧边栏导航下第一个路由地址" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="switchSidebarAndPageJump" :disabled="['single'].includes($store.state.settings.menuMode)" />
@@ -52,7 +52,7 @@
                 <div class="label">
                     顶栏固定
                     <el-tooltip content="包含顶部导航栏和标签栏" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="topbarFixed" />
@@ -66,7 +66,7 @@
                 <div class="label">
                     导航栏搜索
                     <el-tooltip content="对导航栏进行快捷搜索" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="enableNavSearch" />
@@ -75,7 +75,7 @@
                 <div class="label">
                     全屏
                     <el-tooltip content="该功能使用场景极少，用户习惯于通过窗口“最大化”功能来扩大显示区域，以显示更多内容，并且使用 F11 键也可以进入全屏效果" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="enableFullscreen" />
@@ -84,7 +84,7 @@
                 <div class="label">
                     页面刷新
                     <el-tooltip content="开启时会阻止原生 F5 键刷新功能，并采用框架提供的刷新模式进行页面刷新" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="enablePageReload" />
@@ -94,7 +94,7 @@
                 <div class="label">
                     组件尺寸
                     <el-tooltip content="全局设置 Element Plus 组件的默认尺寸大小" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-select v-model="elementSize" size="small">
@@ -112,7 +112,7 @@
                 <div class="label">
                     加载进度条
                     <el-tooltip content="该功能开启时，跳转路由会看到页面顶部有条蓝色的进度条" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="enableProgress" />
@@ -121,7 +121,7 @@
                 <div class="label">
                     动态标题
                     <el-tooltip content="该功能开启时，页面标题会显示当前路由标题，格式为“页面标题 - 网站名称”；关闭时则显示网站名称，网站名称在项目根目录下 .env.* 文件里配置" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="enableDynamicTitle" />
@@ -130,7 +130,7 @@
                 <div class="label">
                     欢迎页
                     <el-tooltip content="欢迎页即控制台页面，该功能开启时，登录成功默认进入控制台页面；关闭时则默认进入侧边栏导航第一个导航页面" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="enableDashboard" />
