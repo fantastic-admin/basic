@@ -55,6 +55,14 @@ watch(() => store.state.settings.sidebarCollapse, val => {
     }
 })
 
+watch(() => routeInfo.path, () => {
+    if (store.state.settings.mode === 'mobile') {
+        store.commit('settings/updateThemeSetting', {
+            sidebarCollapse: true
+        })
+    }
+})
+
 onMounted(() => {
     proxy.$hotkeys('f5', e => {
         if (store.state.settings.enablePageReload) {
