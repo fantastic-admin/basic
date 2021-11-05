@@ -1,10 +1,10 @@
 <p align="center">
-    <img src="./src/assets/images/logo.png" width="200" height="200" />
+    <img src="https://hooray.gitee.io/fantastic-admin/logo.png" width="200" height="200" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>
 
-<p align="center">一款**开箱即用**的 Vue 中后台管理系统框架</p>
+<p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架</p>
 
 ## 特点
 
