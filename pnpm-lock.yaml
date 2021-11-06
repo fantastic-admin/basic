@@ -7,8 +7,8 @@ specifiers:
   '@vue/compiler-sfc': ^3.2.21
   axios: ^0.24.0
   dayjs: ^1.10.7
-  element-plus: ^1.2.0-beta.1
-  eslint: ^8.1.0
+  element-plus: ^1.2.0-beta.2
+  eslint: ^8.2.0
   eslint-plugin-vue: ^8.0.3
   hotkeys-js: ^3.8.7
   http-server: ^14.0.0
@@ -35,7 +35,7 @@ specifiers:
   svgo: ^2.8.0
   tinymce: ^5.10.1
   unplugin-auto-import: ^0.4.13
-  unplugin-vue-components: ^0.17.0
+  unplugin-vue-components: ^0.17.2
   vite: ^2.6.13
   vite-plugin-banner: ^0.1.3
   vite-plugin-compression: ^0.3.5
@@ -55,7 +55,7 @@ dependencies:
   '@tinymce/tinymce-vue': 4.0.4_vue@3.2.21
   axios: 0.24.0
   dayjs: 1.10.7
-  element-plus: 1.2.0-beta.1_vue@3.2.21
+  element-plus: 1.2.0-beta.2_vue@3.2.21
   hotkeys-js: 3.8.7
   js-cookie: 3.0.1
   mitt: 3.0.0
@@ -72,8 +72,8 @@ dependencies:
 devDependencies:
   '@vitejs/plugin-vue': 1.9.4_vite@2.6.13
   '@vue/compiler-sfc': 3.2.21
-  eslint: 8.1.0
-  eslint-plugin-vue: 8.0.3_eslint@8.1.0
+  eslint: 8.2.0
+  eslint-plugin-vue: 8.0.3_eslint@8.2.0
   http-server: 14.0.0
   husky: 7.0.4
   lint-staged: 11.2.6
@@ -90,7 +90,7 @@ devDependencies:
   stylelint-scss: 4.0.0_stylelint@14.0.1
   svgo: 2.8.0
   unplugin-auto-import: 0.4.13_vite@2.6.13
-  unplugin-vue-components: 0.17.0_vite@2.6.13+vue@3.2.21
+  unplugin-vue-components: 0.17.2_vite@2.6.13+vue@3.2.21
   vite: 2.6.13_sass@1.43.4
   vite-plugin-banner: 0.1.3
   vite-plugin-compression: 0.3.5_vite@2.6.13
@@ -100,7 +100,7 @@ devDependencies:
   vite-plugin-spritesmith: 0.1.1
   vite-plugin-svg-icons: 1.0.5_vite@2.6.13
   vite-plugin-vue-setup-extend: 0.1.0_vite@2.6.13
-  vue-eslint-parser: 8.0.1_eslint@8.1.0
+  vue-eslint-parser: 8.0.1_eslint@8.2.0
 
 packages:
 
@@ -148,8 +148,8 @@ packages:
     resolution: {integrity: sha1-mxh8ACd0VIuRGFDRf6X8L5pRX1c=, tarball: '@element-plus/icons/download/@element-plus/icons-0.0.11.tgz'}
     dev: false
 
-  /@eslint/eslintrc/1.0.3:
-    resolution: {integrity: sha1-QfCMWXAlYF9nIlHcxOi+ZrXtc2Y=, tarball: '@eslint/eslintrc/download/@eslint/eslintrc-1.0.3.tgz'}
+  /@eslint/eslintrc/1.0.4:
+    resolution: {integrity: sha1-3+D/e6JwhI0Qxa3QcV4ElkwDSzE=, tarball: '@eslint/eslintrc/download/@eslint/eslintrc-1.0.4.tgz'}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: 6.12.6
@@ -158,9 +158,11 @@ packages:
       globals: 13.11.0
       ignore: 4.0.6
       import-fresh: 3.3.0
-      js-yaml: 3.14.1
+      js-yaml: 4.1.0
       minimatch: 3.0.4
       strip-json-comments: 3.1.1
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@humanwhocodes/config-array/0.6.0:
@@ -170,6 +172,8 @@ packages:
       '@humanwhocodes/object-schema': 1.2.0
       debug: 4.3.2
       minimatch: 3.0.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /@humanwhocodes/object-schema/1.2.0:
@@ -546,12 +550,6 @@ packages:
     dependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.0
-    dev: true
-
-  /argparse/1.0.10:
-    resolution: {integrity: sha1-vNZ5HqWuCXJeF+WtmIE0zUCz2RE=, tarball: argparse/download/argparse-1.0.10.tgz}
-    dependencies:
-      sprintf-js: 1.0.3
     dev: true
 
   /argparse/2.0.1:
@@ -1160,8 +1158,26 @@ packages:
   /debug/4.3.2:
     resolution: {integrity: sha1-8KScGKyHeeMdSgxgKd+3aHPHQos=, tarball: debug/download/debug-4.3.2.tgz}
     engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
     dependencies:
       ms: 2.1.2
+    dev: true
+
+  /debug/4.3.2_supports-color@8.1.1:
+    resolution: {integrity: sha1-8KScGKyHeeMdSgxgKd+3aHPHQos=, tarball: debug/download/debug-4.3.2.tgz}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+      supports-color: 8.1.1
     dev: true
 
   /decamelize-keys/1.1.0:
@@ -1349,8 +1365,8 @@ packages:
       jake: 10.8.2
     dev: true
 
-  /element-plus/1.2.0-beta.1_vue@3.2.21:
-    resolution: {integrity: sha1-d7/Zk3Qb4XMVQN2Zfb3g0D0GW14=, tarball: element-plus/download/element-plus-1.2.0-beta.1.tgz}
+  /element-plus/1.2.0-beta.2_vue@3.2.21:
+    resolution: {integrity: sha1-9sYJNAXM5V+tRfCNFbipLfpy6cM=, tarball: element-plus/download/element-plus-1.2.0-beta.2.tgz}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -1578,17 +1594,19 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-plugin-vue/8.0.3_eslint@8.1.0:
+  /eslint-plugin-vue/8.0.3_eslint@8.2.0:
     resolution: {integrity: sha1-eRzEVDlAMZ5hLqYaHXeejIfPdJo=, tarball: eslint-plugin-vue/download/eslint-plugin-vue-8.0.3.tgz}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
     dependencies:
-      eslint: 8.1.0
-      eslint-utils: 3.0.0_eslint@8.1.0
+      eslint: 8.2.0
+      eslint-utils: 3.0.0_eslint@8.2.0
       natural-compare: 1.4.0
       semver: 7.3.5
-      vue-eslint-parser: 8.0.1_eslint@8.1.0
+      vue-eslint-parser: 8.0.1_eslint@8.2.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /eslint-scope/6.0.0:
@@ -1599,13 +1617,13 @@ packages:
       estraverse: 5.3.0
     dev: true
 
-  /eslint-utils/3.0.0_eslint@8.1.0:
+  /eslint-utils/3.0.0_eslint@8.2.0:
     resolution: {integrity: sha1-iuuvrOc0W7M1WdsKHxOh0tSMNnI=, tarball: eslint-utils/download/eslint-utils-3.0.0.tgz}
     engines: {node: ^10.0.0 || ^12.0.0 || >= 14.0.0}
     peerDependencies:
       eslint: '>=5'
     dependencies:
-      eslint: 8.1.0
+      eslint: 8.2.0
       eslint-visitor-keys: 2.1.0
     dev: true
 
@@ -1619,12 +1637,12 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /eslint/8.1.0:
-    resolution: {integrity: sha1-APH32/QTTyZYjmyfLv6XB2D2RmQ=, tarball: eslint/download/eslint-8.1.0.tgz}
+  /eslint/8.2.0:
+    resolution: {integrity: sha1-RNP7UG0PhmpQbZeg/A6Q7m0GqBU=, tarball: eslint/download/eslint-8.2.0.tgz}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     hasBin: true
     dependencies:
-      '@eslint/eslintrc': 1.0.3
+      '@eslint/eslintrc': 1.0.4
       '@humanwhocodes/config-array': 0.6.0
       ajv: 6.12.6
       chalk: 4.1.2
@@ -1634,7 +1652,7 @@ packages:
       enquirer: 2.3.6
       escape-string-regexp: 4.0.0
       eslint-scope: 6.0.0
-      eslint-utils: 3.0.0_eslint@8.1.0
+      eslint-utils: 3.0.0_eslint@8.2.0
       eslint-visitor-keys: 3.0.0
       espree: 9.0.0
       esquery: 1.4.0
@@ -1662,6 +1680,8 @@ packages:
       strip-json-comments: 3.1.1
       text-table: 0.2.0
       v8-compile-cache: 2.3.0
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /espree/9.0.0:
@@ -1671,12 +1691,6 @@ packages:
       acorn: 8.5.0
       acorn-jsx: 5.3.2_acorn@8.5.0
       eslint-visitor-keys: 3.0.0
-    dev: true
-
-  /esprima/4.0.1:
-    resolution: {integrity: sha1-E7BM2z5sXRnfkatph6hpVhmwqnE=, tarball: esprima/download/esprima-4.0.1.tgz}
-    engines: {node: '>=4'}
-    hasBin: true
     dev: true
 
   /esquery/1.4.0:
@@ -2140,7 +2154,7 @@ packages:
       dir-glob: 3.0.1
       fast-glob: 3.2.7
       glob: 7.2.0
-      ignore: 5.1.8
+      ignore: 5.1.9
       merge2: 1.4.1
       slash: 3.0.0
     dev: true
@@ -2393,6 +2407,11 @@ packages:
 
   /ignore/5.1.8:
     resolution: {integrity: sha1-8VCotQo0KJsz4i9YiavU2AFvDlc=, tarball: ignore/download/ignore-5.1.8.tgz}
+    engines: {node: '>= 4'}
+    dev: true
+
+  /ignore/5.1.9:
+    resolution: {integrity: sha1-nsGly+jhRG7GDUQgBg1Dqm5zgvs=, tarball: ignore/download/ignore-5.1.9.tgz}
     engines: {node: '>= 4'}
     dev: true
 
@@ -2747,14 +2766,6 @@ packages:
     resolution: {integrity: sha1-GSA/tZmR35jjoocFDUZHzerzJJk=, tarball: js-tokens/download/js-tokens-4.0.0.tgz}
     dev: true
 
-  /js-yaml/3.14.1:
-    resolution: {integrity: sha1-2ugS/bOCX6MGYJqHFzg8UMNqBTc=, tarball: js-yaml/download/js-yaml-3.14.1.tgz}
-    hasBin: true
-    dependencies:
-      argparse: 1.0.10
-      esprima: 4.0.1
-    dev: true
-
   /js-yaml/4.1.0:
     resolution: {integrity: sha1-wftl+PUBeQHN0slRhkuhhFihBgI=, tarball: js-yaml/download/js-yaml-4.1.0.tgz}
     hasBin: true
@@ -2889,7 +2900,7 @@ packages:
       colorette: 1.4.0
       commander: 8.2.0
       cosmiconfig: 7.0.1
-      debug: 4.3.2
+      debug: 4.3.2_supports-color@8.1.1
       enquirer: 2.3.6
       execa: 5.1.1
       listr2: 3.12.2_enquirer@2.3.6
@@ -4320,10 +4331,6 @@ packages:
       extend-shallow: 3.0.2
     dev: true
 
-  /sprintf-js/1.0.3:
-    resolution: {integrity: sha1-BOaSb2YolTVPPdAVIDYzuFcpfiw=, tarball: sprintf-js/download/sprintf-js-1.0.3.tgz}
-    dev: true
-
   /sprintf-js/1.1.2:
     resolution: {integrity: sha1-2hdlJiv4wPVxdJ8q1sJjACB65nM=, tarball: sprintf-js/download/sprintf-js-1.1.2.tgz}
     dev: true
@@ -4594,6 +4601,8 @@ packages:
       table: 6.7.2
       v8-compile-cache: 2.3.0
       write-file-atomic: 3.0.3
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /supports-color/2.0.0:
@@ -4904,8 +4913,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-vue-components/0.17.0_vite@2.6.13+vue@3.2.21:
-    resolution: {integrity: sha1-/f5OjITtdeLCb5mJGe2cktue1ts=, tarball: unplugin-vue-components/download/unplugin-vue-components-0.17.0.tgz}
+  /unplugin-vue-components/0.17.2_vite@2.6.13+vue@3.2.21:
+    resolution: {integrity: sha1-235mn6w8w2uHugVvY+LqpHp/G5s=, tarball: unplugin-vue-components/download/unplugin-vue-components-0.17.2.tgz}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -4930,6 +4939,7 @@ packages:
       vue: 3.2.21
     transitivePeerDependencies:
       - rollup
+      - supports-color
       - vite
       - webpack
     dev: true
@@ -5089,6 +5099,8 @@ packages:
       debug: 4.3.2
       fs-extra: 10.0.0
       vite: 2.6.13_sass@1.43.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite-plugin-html/2.1.1_vite@2.6.13:
@@ -5125,6 +5137,7 @@ packages:
       vite: 2.6.13_sass@1.43.4
     transitivePeerDependencies:
       - rollup
+      - supports-color
     dev: true
 
   /vite-plugin-restart/0.0.2_vite@2.6.13:
@@ -5161,6 +5174,8 @@ packages:
       svg-baker: 1.7.0
       svgo: 2.8.0
       vite: 2.6.13_sass@1.43.4
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite-plugin-vue-setup-extend/0.1.0_vite@2.6.13:
@@ -5213,20 +5228,22 @@ packages:
       vue: 3.2.21
     dev: false
 
-  /vue-eslint-parser/8.0.1_eslint@8.1.0:
+  /vue-eslint-parser/8.0.1_eslint@8.2.0:
     resolution: {integrity: sha1-JeCLIKQUVRUx8+GfmZkC4ez0XxM=, tarball: vue-eslint-parser/download/vue-eslint-parser-8.0.1.tgz}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '>=6.0.0'
     dependencies:
       debug: 4.3.2
-      eslint: 8.1.0
+      eslint: 8.2.0
       eslint-scope: 6.0.0
       eslint-visitor-keys: 3.0.0
       espree: 9.0.0
       esquery: 1.4.0
       lodash: 4.17.21
       semver: 7.3.5
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vue-router/4.0.12_vue@3.2.21:
