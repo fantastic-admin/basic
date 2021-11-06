@@ -23,13 +23,13 @@ function hasPermission(permissions, route) {
 function filterAsyncRoutes(routes, permissions) {
     const res = []
     routes.forEach(route => {
-        const tmp = { ...route }
-        if (hasPermission(permissions, tmp)) {
-            if (tmp.children) {
-                tmp.children = filterAsyncRoutes(tmp.children, permissions)
-                tmp.children.length && res.push(tmp)
+        let tmpRoute = deepClone(route)
+        if (hasPermission(permissions, tmpRoute)) {
+            if (tmpRoute.children) {
+                tmpRoute.children = filterAsyncRoutes(tmpRoute.children, permissions)
+                tmpRoute.children.length && res.push(tmpRoute)
             } else {
-                res.push(tmp)
+                res.push(tmpRoute)
             }
         }
     })
@@ -58,13 +58,12 @@ function formatBackRoutes(routes, views = import.meta.glob('../../views/**/*.vue
 function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
     let res = []
     routes.forEach(route => {
-        const tmp = { ...route }
-        if (tmp.children) {
+        if (route.children) {
             let childrenBaseUrl = ''
             if (baseUrl == '') {
-                childrenBaseUrl = tmp.path
-            } else if (tmp.path != '') {
-                childrenBaseUrl = `${baseUrl}/${tmp.path}`
+                childrenBaseUrl = route.path
+            } else if (route.path != '') {
+                childrenBaseUrl = `${baseUrl}/${route.path}`
             }
             let childrenBreadcrumb = deepClone(breadcrumb)
             if (route.meta.breadcrumb !== false) {
@@ -78,7 +77,7 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
             tmpRoute.meta.breadcrumbNeste = childrenBreadcrumb
             delete tmpRoute.children
             res.push(tmpRoute)
-            let childrenRoutes = flatAsyncRoutes(tmp.children, childrenBreadcrumb, childrenBaseUrl)
+            let childrenRoutes = flatAsyncRoutes(route.children, childrenBreadcrumb, childrenBaseUrl)
             childrenRoutes.map(item => {
                 // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
                 if (res.some(v => v.path == item.path)) {
@@ -92,23 +91,24 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
                 }
             })
         } else {
+            let tmpRoute = deepClone(route)
             if (baseUrl != '') {
-                if (tmp.path != '') {
-                    tmp.path = `${baseUrl}/${tmp.path}`
+                if (tmpRoute.path != '') {
+                    tmpRoute.path = `${baseUrl}/${tmpRoute.path}`
                 } else {
-                    tmp.path = baseUrl
+                    tmpRoute.path = baseUrl
                 }
             }
             // 处理面包屑导航
             let tmpBreadcrumb = deepClone(breadcrumb)
-            if (tmp.meta.breadcrumb !== false) {
+            if (tmpRoute.meta.breadcrumb !== false) {
                 tmpBreadcrumb.push({
-                    path: tmp.path,
-                    title: tmp.meta.title
+                    path: tmpRoute.path,
+                    title: tmpRoute.meta.title
                 })
             }
-            tmp.meta.breadcrumbNeste = tmpBreadcrumb
-            res.push(tmp)
+            tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
+            res.push(tmpRoute)
         }
     })
     return res
@@ -239,6 +239,8 @@ const actions = {
 const mutations = {
     invalidRoutes(state) {
         state.isGenerate = false
+        state.routes = []
+        state.defaultOpenedPaths = []
         state.headerActived = 0
     },
     setRoutes(state, routes) {
@@ -283,6 +285,7 @@ const mutations = {
         state.currentRemoveRoutes.forEach(removeRoute => {
             removeRoute()
         })
+        state.currentRemoveRoutes = []
     }
 }
 
