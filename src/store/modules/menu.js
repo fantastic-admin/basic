@@ -163,7 +163,7 @@ const getters = {
         return getters.routes.length > 0 ? getters.routes[state.headerActived].children : []
     },
     sidebarRoutesFirstDeepestPath: (state, getters) => {
-        return getDeepestPath(getters.sidebarRoutes[0])
+        return getters.routes.length > 0 ? getDeepestPath(getters.sidebarRoutes[0]) : '/'
     }
 }
 
@@ -178,7 +178,7 @@ const actions = {
                 const permissions = await dispatch('user/getPermissions', null, { root: true })
                 accessedRoutes = filterAsyncRoutes(data.asyncRoutes, permissions)
             } else {
-                accessedRoutes = data.asyncRoutes
+                accessedRoutes = deepClone(data.asyncRoutes)
             }
             commit('setRoutes', accessedRoutes)
             commit('setHeaderActived', data.currentPath)
@@ -212,7 +212,7 @@ const actions = {
                     const permissions = await dispatch('user/getPermissions', null, { root: true })
                     accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
                 } else {
-                    accessedRoutes = asyncRoutes
+                    accessedRoutes = deepClone(asyncRoutes)
                 }
                 commit('setRoutes', accessedRoutes)
                 commit('setHeaderActived', data.currentPath)
