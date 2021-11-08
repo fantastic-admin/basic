@@ -10,12 +10,23 @@
                 搜索
             </el-button>
         </page-main>
+        <page-main title="图标集合">
+            <div v-for="(item, index) in icon" :key="index" class="list-icon">
+                <el-tooltip class="item" effect="dark" :content="hyphen(`ElIcon${item}`)" placement="top">
+                    <svg-icon :name="hyphen(`ElIcon${item}`)" />
+                </el-tooltip>
+            </div>
+        </page-main>
     </div>
 </template>
 
 <script setup>
 import Alert from './components/alert.vue'
 import { Search } from '@element-plus/icons'
+import * as ElementIcons from '@element-plus/icons'
+import { hyphen } from 'naming-style'
+
+const icon = Object.keys(ElementIcons)
 </script>
 
 <style lang="scss" scoped>
@@ -28,6 +39,14 @@ import { Search } from '@element-plus/icons'
     }
     button {
         margin: 0 20px;
+    }
+}
+.list-icon {
+    display: inline-block;
+    margin: 10px;
+    i {
+        font-size: 32px;
+        color: #606266;
     }
 }
 </style>
