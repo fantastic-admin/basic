@@ -24,6 +24,7 @@
         "selector-id-pattern": null,
         "selector-class-pattern": null,
         "scss/no-global-function-names": null,
+        "scss/at-import-partial-extension": null,
         "max-line-length": null
     }
 }
