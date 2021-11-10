@@ -111,32 +111,12 @@ const router = createRouter({
 
 router.beforeEach(async(to, from, next) => {
     store.state.settings.enableProgress && NProgress.start()
-    // 已经登录，但还没根据权限动态生成并挂载路由
-    if (store.getters['user/isLogin'] && !store.state.menu.isGenerate) {
-        let accessRoutes = []
-        if (!store.state.settings.enableBackendReturnRoute) {
-            accessRoutes = await store.dispatch('menu/generateRoutesAtFront', {
-                asyncRoutes,
-                currentPath: to.path
-            })
-        } else {
-            accessRoutes = await store.dispatch('menu/generateRoutesAtBack', {
-                currentPath: to.path
-            })
-        }
-        accessRoutes.push(lastRoute)
-        let removeRoutes = []
-        accessRoutes.forEach(route => {
-            removeRoutes.push(router.addRoute(route))
-        })
-        // 记录的 accessRoutes 路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
-        store.commit('menu/setCurrentRemoveRoutes', removeRoutes)
-        next({ ...to, replace: true })
-    } else {
-        if (store.state.menu.isGenerate && store.state.settings.menuMode !== 'single') {
-            store.commit('menu/setHeaderActived', to.path)
-        }
-        if (store.getters['user/isLogin']) {
+    // 是否已登录
+    if (store.getters['user/isLogin']) {
+        // 是否已根据权限动态生成并挂载路由
+        if (store.state.menu.isGenerate) {
+            // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
+            store.state.settings.menuMode !== 'single' && store.commit('menu/setHeaderActived', to.path)
             if (to.name) {
                 if (to.matched.length !== 0) {
                     // 如果已登录状态下，进入登录页会强制跳转到控制台页面
@@ -168,16 +148,36 @@ router.beforeEach(async(to, from, next) => {
                 next()
             }
         } else {
-            if (to.name != 'login') {
-                next({
-                    name: 'login',
-                    query: {
-                        redirect: to.fullPath
-                    }
+            let accessRoutes = []
+            if (!store.state.settings.enableBackendReturnRoute) {
+                accessRoutes = await store.dispatch('menu/generateRoutesAtFront', {
+                    asyncRoutes,
+                    currentPath: to.path
                 })
             } else {
-                next()
+                accessRoutes = await store.dispatch('menu/generateRoutesAtBack', {
+                    currentPath: to.path
+                })
             }
+            accessRoutes.push(lastRoute)
+            let removeRoutes = []
+            accessRoutes.forEach(route => {
+                removeRoutes.push(router.addRoute(route))
+            })
+            // 记录的 accessRoutes 路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
+            store.commit('menu/setCurrentRemoveRoutes', removeRoutes)
+            next({ ...to, replace: true })
+        }
+    } else {
+        if (to.name != 'login') {
+            next({
+                name: 'login',
+                query: {
+                    redirect: to.fullPath
+                }
+            })
+        } else {
+            next()
         }
     }
 })
