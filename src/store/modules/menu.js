@@ -169,19 +169,18 @@ const getters = {
 
 const actions = {
     // 根据权限动态生成路由（前端生成）
-    generateRoutesAtFront({ rootState, dispatch, commit }, data) {
+    generateRoutesAtFront({ rootState, dispatch, commit }, asyncRoutes) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise(async resolve => {
             let accessedRoutes
             // 如果权限功能开启，则需要对路由数据进行筛选过滤
             if (rootState.settings.enablePermission) {
                 const permissions = await dispatch('user/getPermissions', null, { root: true })
-                accessedRoutes = filterAsyncRoutes(data.asyncRoutes, permissions)
+                accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
             } else {
-                accessedRoutes = deepClone(data.asyncRoutes)
+                accessedRoutes = deepClone(asyncRoutes)
             }
             commit('setRoutes', accessedRoutes)
-            commit('setHeaderActived', data.currentPath)
             let routes = []
             accessedRoutes.map(item => {
                 routes.push(...item.children)
@@ -200,7 +199,7 @@ const actions = {
         })
     },
     // 生成路由（后端获取）
-    generateRoutesAtBack({ rootState, dispatch, commit }, data) {
+    generateRoutesAtBack({ rootState, dispatch, commit }) {
         return new Promise(resolve => {
             api.get('route/list', {
                 baseURL: '/mock/'
@@ -215,7 +214,6 @@ const actions = {
                     accessedRoutes = deepClone(asyncRoutes)
                 }
                 commit('setRoutes', accessedRoutes)
-                commit('setHeaderActived', data.currentPath)
                 let routes = []
                 accessedRoutes.map(item => {
                     routes.push(...item.children)
