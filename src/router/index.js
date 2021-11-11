@@ -150,14 +150,9 @@ router.beforeEach(async(to, from, next) => {
         } else {
             let accessRoutes = []
             if (!store.state.settings.enableBackendReturnRoute) {
-                accessRoutes = await store.dispatch('menu/generateRoutesAtFront', {
-                    asyncRoutes,
-                    currentPath: to.path
-                })
+                accessRoutes = await store.dispatch('menu/generateRoutesAtFront', asyncRoutes)
             } else {
-                accessRoutes = await store.dispatch('menu/generateRoutesAtBack', {
-                    currentPath: to.path
-                })
+                accessRoutes = await store.dispatch('menu/generateRoutesAtBack')
             }
             accessRoutes.push(lastRoute)
             let removeRoutes = []
