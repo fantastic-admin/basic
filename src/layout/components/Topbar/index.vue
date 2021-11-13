@@ -43,13 +43,7 @@ const breadcrumbList = computed(() => {
         })
     }
     if (route.meta.breadcrumbNeste) {
-        route.meta.breadcrumbNeste.map((item, index) => {
-            let tmpItem = deepClone(item)
-            if (index != 0) {
-                tmpItem.path = `${route.meta.breadcrumbNeste[0].path}/${item.path}`
-            }
-            breadcrumbList.push(tmpItem)
-        })
+        breadcrumbList.push(...deepClone(route.meta.breadcrumbNeste))
     }
     return breadcrumbList
 })
