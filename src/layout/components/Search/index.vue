@@ -37,7 +37,7 @@
                             <div class="breadcrumb">
                                 <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
                                     {{ bc }}
-                                    <i class="el-icon-arrow-right" />
+                                    <svg-icon name="el-icon-arrow-right" />
                                 </span>
                             </div>
                             <div class="path">{{ item.path }}</div>
@@ -347,8 +347,11 @@ function scrollTo(offsetTop) {
                         @include text-overflow(1, true);
                     }
                     .breadcrumb {
-                        span:last-child i {
-                            display: none;
+                        span {
+                            margin-right: 5px;
+                            &:last-child i {
+                                display: none;
+                            }
                         }
                     }
                 }

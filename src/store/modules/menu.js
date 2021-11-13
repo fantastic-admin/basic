@@ -191,7 +191,7 @@ const actions = {
                     item.children = flatAsyncRoutes(item.children, [{
                         path: item.path,
                         title: item.meta.title
-                    }])
+                    }], item.path)
                 }
             })
             commit('setDefaultOpenedPaths', routes)
@@ -224,7 +224,7 @@ const actions = {
                         item.children = flatAsyncRoutes(item.children, [{
                             path: item.path,
                             title: item.meta.title
-                        }])
+                        }], item.path)
                     }
                 })
                 commit('setDefaultOpenedPaths', routes)
