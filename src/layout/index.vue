@@ -195,10 +195,10 @@ function switchMenu(index) {
         backdrop-filter: blur(2px);
         transition: all 0.2s;
         transform: translateZ(0);
-        opacity: 0%;
+        opacity: 0;
         visibility: hidden;
         &.show {
-            opacity: 100%;
+            opacity: 1;
             visibility: visible;
         }
     }
@@ -258,11 +258,11 @@ header + .wrapper {
     transition: 0.15s;
 }
 .main-enter-from {
-    opacity: 0%;
+    opacity: 0;
     margin-left: -20px;
 }
 .main-leave-to {
-    opacity: 0%;
+    opacity: 0;
     margin-left: 20px;
 }
 </style>

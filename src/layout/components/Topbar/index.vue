@@ -132,7 +132,7 @@ function pathCompile(path) {
 }
 .breadcrumb-enter-from,
 .breadcrumb-leave-active {
-    opacity: 0%;
+    opacity: 0;
     transform: translateX(30px) skewX(-50deg);
 }
 </style>

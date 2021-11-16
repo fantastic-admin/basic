@@ -181,7 +181,7 @@ function onSuccess(res) {
         display: block;
     }
     .mask {
-        opacity: 0%;
+        opacity: 0;
         position: absolute;
         top: 0;
         width: 100%;
@@ -216,7 +216,7 @@ function onSuccess(res) {
         }
     }
     &:hover .mask {
-        opacity: 100%;
+        opacity: 1;
     }
 }
 .images-upload {
