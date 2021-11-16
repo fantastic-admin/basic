@@ -17,6 +17,7 @@
         "indentation": 4,
         "rule-empty-line-before": "never",
         "at-rule-empty-line-before": "never",
+        "at-rule-no-unknown": null,
         "no-descending-specificity": null,
         "selector-pseudo-class-no-unknown": null,
         "property-no-unknown": null,

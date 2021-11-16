@@ -221,10 +221,10 @@ function scrollTo(offsetTop) {
     backdrop-filter: blur(10px);
     transition: all 0.2s;
     transform: translateZ(0);
-    opacity: 0%;
+    opacity: 0;
     visibility: hidden;
     &.searching {
-        opacity: 100%;
+        opacity: 1;
         visibility: visible;
         .container {
             transform: initial;

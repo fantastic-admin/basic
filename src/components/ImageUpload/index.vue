@@ -150,7 +150,7 @@ function onSuccess(res) {
 .image {
     position: relative;
     .mask {
-        opacity: 0%;
+        opacity: 0;
         position: absolute;
         top: 0;
         width: 100%;
@@ -185,7 +185,7 @@ function onSuccess(res) {
         }
     }
     &:hover .mask {
-        opacity: 100%;
+        opacity: 1;
     }
 }
 :deep(.el-upload) {

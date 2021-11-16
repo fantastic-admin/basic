@@ -116,10 +116,10 @@ function open(url) {
         background-color: #409eff;
         border-bottom: 1px solid #fff;
         transition: 0.3s;
-        opacity: 70%;
+        opacity: 0.7;
         cursor: pointer;
         &:hover {
-            opacity: 100%;
+            opacity: 1;
         }
         &:first-child {
             border-top-left-radius: 5px;
