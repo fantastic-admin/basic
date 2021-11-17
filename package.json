@@ -29,6 +29,7 @@
         "nprogress": "^0.2.0",
         "path-browserify": "^1.0.1",
         "path-to-regexp": "^6.2.0",
+        "qs": "^6.10.1",
         "screenfull": "^6.0.0",
         "tinymce": "^5.10.1",
         "vue": "^3.2.22",
