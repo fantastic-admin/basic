@@ -9,12 +9,13 @@ specifiers:
   dayjs: ^1.10.7
   element-plus: ^1.2.0-beta.3
   eslint: ^8.2.0
-  eslint-plugin-vue: ^8.0.3
+  eslint-plugin-vue: ^8.1.1
   hotkeys-js: ^3.8.7
   http-server: ^14.0.0
   husky: ^7.0.4
   js-cookie: ^3.0.1
-  lint-staged: ^12.0.2
+  lint-staged: ^12.0.3
+  mavon-editor: ^3.0.0-beta
   mitt: ^3.0.0
   mockjs: ^1.1.0
   naming-style: ^1.0.1
@@ -35,7 +36,7 @@ specifiers:
   stylelint-config-standard: ^24.0.0
   stylelint-scss: ^4.0.0
   svgo: ^2.8.0
-  tinymce: ^5.10.1
+  tinymce: ^5.10.2
   unplugin-auto-import: ^0.4.14
   unplugin-vue-components: ^0.17.2
   vite: ^2.6.14
@@ -60,6 +61,7 @@ dependencies:
   element-plus: 1.2.0-beta.3_vue@3.2.22
   hotkeys-js: 3.8.7
   js-cookie: 3.0.1
+  mavon-editor: 3.0.0-beta
   mitt: 3.0.0
   mockjs: 1.1.0
   naming-style: 1.0.1
@@ -68,7 +70,7 @@ dependencies:
   path-to-regexp: 6.2.0
   qs: 6.10.1
   screenfull: 6.0.0
-  tinymce: 5.10.1
+  tinymce: 5.10.2
   vue: 3.2.22
   vue-router: 4.0.12_vue@3.2.22
   vuex: 4.0.2_vue@3.2.22
@@ -77,10 +79,10 @@ devDependencies:
   '@vitejs/plugin-vue': 1.9.4_vite@2.6.14
   '@vue/compiler-sfc': 3.2.22
   eslint: 8.2.0
-  eslint-plugin-vue: 8.0.3_eslint@8.2.0
+  eslint-plugin-vue: 8.1.1_eslint@8.2.0
   http-server: 14.0.0
   husky: 7.0.4
-  lint-staged: 12.0.2
+  lint-staged: 12.0.3
   plop: 2.7.6
   postcss-html: 1.2.0
   postcss-scss: 4.0.2
@@ -1006,8 +1008,7 @@ packages:
     dev: true
 
   /commander/2.20.3:
-    resolution: {integrity: sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=, tarball: commander/download/commander-2.20.3.tgz}
-    dev: true
+    resolution: {integrity: sha1-/UhehMA+tIgcIHIrpIA16FMa6zM=, tarball: commander/download/commander-2.20.3.tgz?cache=0&sync_timestamp=1634889569010&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fcommander%2Fdownload%2Fcommander-2.20.3.tgz}
 
   /commander/4.1.1:
     resolution: {integrity: sha1-n9YCvZNilOnp70aj9NaWQESxgGg=, tarball: commander/download/commander-4.1.1.tgz}
@@ -1144,6 +1145,10 @@ packages:
     engines: {node: '>=4'}
     hasBin: true
     dev: true
+
+  /cssfilter/0.0.10:
+    resolution: {integrity: sha1-xtJnJjKi5cg+AT5oZKQs6N79IK4=, tarball: cssfilter/download/cssfilter-0.0.10.tgz}
+    dev: false
 
   /csso/4.2.0:
     resolution: {integrity: sha1-6jpWE0bo3J9UbW/r7dUBh884lSk=, tarball: csso/download/csso-4.2.0.tgz}
@@ -1632,8 +1637,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /eslint-plugin-vue/8.0.3_eslint@8.2.0:
-    resolution: {integrity: sha1-eRzEVDlAMZ5hLqYaHXeejIfPdJo=, tarball: eslint-plugin-vue/download/eslint-plugin-vue-8.0.3.tgz}
+  /eslint-plugin-vue/8.1.1_eslint@8.2.0:
+    resolution: {integrity: sha512-rx64IrlhdfPya6u2V5ukOGiLCTgaCBdMSpczLVqyo8A0l+Vbo+lzvIfEUfAQ2auj+MF6y0TwxLorzdCIzHunnw==, tarball: eslint-plugin-vue/download/eslint-plugin-vue-8.1.1.tgz}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.2.0 || ^7.0.0 || ^8.0.0
@@ -2346,6 +2351,16 @@ packages:
       upper-case: 1.1.3
     dev: true
 
+  /highlight.js-async-webpack/1.0.4:
+    resolution: {integrity: sha1-wGtnv5nwSQRdYrdW5YVbCRLsYWw=, tarball: highlight.js-async-webpack/download/highlight.js-async-webpack-1.0.4.tgz}
+    dev: false
+
+  /highlight.js/9.18.5:
+    resolution: {integrity: sha1-0Yo1mGfzeME41oGe38KorNXymCU=, tarball: highlight.js/download/highlight.js-9.18.5.tgz}
+    deprecated: Support has ended for 9.x series. Upgrade to @latest
+    requiresBuild: true
+    dev: false
+
   /homedir-polyfill/1.0.3:
     resolution: {integrity: sha1-dDKYzvTlrz4ZQWH7rcwhUdOgWOg=, tarball: homedir-polyfill/download/homedir-polyfill-1.0.3.tgz}
     engines: {node: '>=0.10.0'}
@@ -2931,8 +2946,8 @@ packages:
     resolution: {integrity: sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=, tarball: lines-and-columns/download/lines-and-columns-1.1.6.tgz}
     dev: true
 
-  /lint-staged/12.0.2:
-    resolution: {integrity: sha512-tpCvACqc7bykziGJmXG0G8YG2RaCrWiDBwmrP9wU7i/3za9JMOvCECQmXjw/sO4ICC70ApVwyqixS1htQX9Haw==, tarball: lint-staged/download/lint-staged-12.0.2.tgz}
+  /lint-staged/12.0.3:
+    resolution: {integrity: sha512-/NwNQjrhqz+AjV+e0URbtphvpHNcNdR/W6p9GxO+qIg7cxCxy0uKYO0xORQhZamp1BPjIhRUWsjbLnwEIiPHgQ==, tarball: lint-staged/download/lint-staged-12.0.3.tgz}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
     dependencies:
@@ -2941,18 +2956,17 @@ packages:
       commander: 8.3.0
       cosmiconfig: 7.0.1
       debug: 4.3.2_supports-color@9.0.2
+      enquirer: 2.3.6
       execa: 5.1.1
-      listr2: 3.13.3
+      listr2: 3.13.3_enquirer@2.3.6
       micromatch: 4.0.4
       normalize-path: 3.0.0
       object-inspect: 1.11.0
       string-argv: 0.3.1
       supports-color: 9.0.2
-    transitivePeerDependencies:
-      - enquirer
     dev: true
 
-  /listr2/3.13.3:
+  /listr2/3.13.3_enquirer@2.3.6:
     resolution: {integrity: sha1-2PYJXJNxs4LJscK8M8WUHY4XfxE=, tarball: listr2/download/listr2-3.13.3.tgz}
     engines: {node: '>=10.0.0'}
     peerDependencies:
@@ -2961,6 +2975,7 @@ packages:
       cli-truncate: 2.1.0
       clone: 2.1.2
       colorette: 2.0.16
+      enquirer: 2.3.6
       log-update: 4.0.0
       p-map: 4.0.0
       rxjs: 7.4.0
@@ -3082,6 +3097,14 @@ packages:
   /mathml-tag-names/2.1.3:
     resolution: {integrity: sha1-TdrdZzCOeAzxakdoWHjuJ7c2oKM=, tarball: mathml-tag-names/download/mathml-tag-names-2.1.3.tgz}
     dev: true
+
+  /mavon-editor/3.0.0-beta:
+    resolution: {integrity: sha512-cmGKbkgrlvFtrhEVyEUIO2X30R+0p0cWpWcYZ97p2E7zn5flKakgv3gq/4mrzjb6UTmhUiHis38k+a6fP6XUEQ==, tarball: mavon-editor/download/mavon-editor-3.0.0-beta.tgz}
+    dependencies:
+      highlight.js: 9.18.5
+      highlight.js-async-webpack: 1.0.4
+      xss: 1.0.10
+    dev: false
 
   /mdn-data/2.0.14:
     resolution: {integrity: sha1-cRP8QoGRfWPOKbQ0RvcB5owlulA=, tarball: mdn-data/download/mdn-data-2.0.14.tgz}
@@ -4789,8 +4812,8 @@ packages:
       xtend: 4.0.2
     dev: true
 
-  /tinymce/5.10.1:
-    resolution: {integrity: sha1-4KNgx8xC4+i6KsilIxZuyjSTqIA=, tarball: tinymce/download/tinymce-5.10.1.tgz}
+  /tinymce/5.10.2:
+    resolution: {integrity: sha512-5QhnZ6c8F28fYucLLc00MM37fZoAZ4g7QCYzwIl38i5TwJR5xGqzOv6YMideyLM4tytCzLCRwJoQen2LI66p5A==, tarball: tinymce/download/tinymce-5.10.2.tgz?cache=0&sync_timestamp=1637126736818&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Ftinymce%2Fdownload%2Ftinymce-5.10.2.tgz}
     dev: false
 
   /title-case/2.1.1:
@@ -5413,6 +5436,15 @@ packages:
       signal-exit: 3.0.5
       typedarray-to-buffer: 3.1.5
     dev: true
+
+  /xss/1.0.10:
+    resolution: {integrity: sha1-XNY6mxR6dVoUywRVx9uIZhIOtNI=, tarball: xss/download/xss-1.0.10.tgz}
+    engines: {node: '>= 0.10.0'}
+    hasBin: true
+    dependencies:
+      commander: 2.20.3
+      cssfilter: 0.0.10
+    dev: false
 
   /xtend/4.0.2:
     resolution: {integrity: sha1-u3J3n1+kZRhrH0OPZ0+jR/2121Q=, tarball: xtend/download/xtend-4.0.2.tgz}
