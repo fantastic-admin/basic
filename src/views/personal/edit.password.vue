@@ -4,7 +4,7 @@
         <page-main>
             <el-row>
                 <el-col :md="24" :lg="12">
-                    <el-form ref="form" :model="form" :rules="rules" label-width="120px">
+                    <el-form ref="formRef" :model="form" :rules="rules" label-width="120px">
                         <el-form-item label="原密码" prop="password">
                             <el-input v-model="form.password" type="password" placeholder="请输入原密码" />
                         </el-form-item>
@@ -24,53 +24,57 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        const validatePassword = (rule, value, callback) => {
-            if (value !== this.form.newpassword) {
-                callback(new Error('请确认新密码'))
-            } else {
-                callback()
-            }
-        }
-        return {
-            form: {
-                password: '',
-                newpassword: '',
-                checkpassword: ''
-            },
-            rules: {
-                password: [
-                    { required: true, message: '请输入原密码', trigger: 'blur' }
-                ],
-                newpassword: [
-                    { required: true, message: '请输入新密码', trigger: 'blur' },
-                    { min: 6, max: 18, trigger: 'blur', message: '密码长度为6到18位' }
-                ],
-                checkpassword: [
-                    { required: true, message: '请输入新密码', trigger: 'blur' },
-                    { validator: validatePassword }
-                ]
-            }
-        }
-    },
-    methods: {
-        onSubmit() {
-            this.$refs['form'].validate(valid => {
-                if (valid) {
-                    this.$store.dispatch('user/editPassword', this.form).then(() => {
-                        this.$message({
-                            type: 'success',
-                            message: '修改成功，请重新登录'
-                        })
-                        this.$store.dispatch('user/logout').then(() => {
-                            this.$router.push('/login')
-                        })
-                    }).catch(() => {})
-                }
-            })
-        }
+<script setup name="PersonalEditPassword">
+const store = useStore()
+const route = useRoute(), router = useRouter()
+const { proxy } = getCurrentInstance()
+
+const validatePassword = (rule, value, callback) => {
+    if (value !== form.value.newpassword) {
+        callback(new Error('请确认新密码'))
+    } else {
+        callback()
     }
+}
+
+const form = ref({
+    password: '',
+    newpassword: '',
+    checkpassword: ''
+})
+
+const rules = ref({
+    password: [
+        { required: true, message: '请输入原密码', trigger: 'blur' }
+    ],
+    newpassword: [
+        { required: true, message: '请输入新密码', trigger: 'blur' },
+        { min: 6, max: 18, trigger: 'blur', message: '密码长度为6到18位' }
+    ],
+    checkpassword: [
+        { required: true, message: '请输入新密码', trigger: 'blur' },
+        { validator: validatePassword }
+    ]
+})
+
+function onSubmit() {
+    proxy.$refs['formRef'].validate(valid => {
+        if (valid) {
+            store.dispatch('user/editPassword', form.value).then(() => {
+                proxy.$message({
+                    type: 'success',
+                    message: '模拟修改成功，请重新登录'
+                })
+                store.dispatch('user/logout').then(() => {
+                    router.push({
+                        name: 'login',
+                        query: {
+                            redirect: route.fullPath
+                        }
+                    })
+                })
+            }).catch(() => {})
+        }
+    })
 }
 </script>

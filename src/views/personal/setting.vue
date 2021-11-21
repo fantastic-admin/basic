@@ -67,43 +67,29 @@
     </div>
 </template>
 
-<script>
-export default {
-    name: 'PersonalSetting',
-    beforeRouteLeave(to, from, next) {
-        if (['personalEditPassword'].includes(to.name)) {
-            this.$store.commit('keepAlive/add', 'PersonalSetting')
-        }
-        next()
-    },
-    props: {},
-    data() {
-        return {
-            form: {
-                headimg: '',
-                mobile: '',
-                name: '',
-                qq: '',
-                wechat: ''
-            }
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        handleSuccess(res) {
-            if (res.error == '') {
-                this.form.headimg = res.data.path
-            } else {
-                this.$message.warning(res.error)
-            }
-        },
-        editPassword() {
-            this.$router.push({
-                name: 'personalEditPassword'
-            })
-        }
+<script setup name="PersonalSetting">
+const router = useRouter()
+const { proxy } = getCurrentInstance()
+
+const form = ref({
+    headimg: '',
+    mobile: '',
+    name: '',
+    qq: '',
+    wechat: ''
+})
+
+function handleSuccess(res) {
+    if (res.error == '') {
+        form.value.headimg = res.data.path
+    } else {
+        proxy.$message.warning(res.error)
     }
+}
+function editPassword() {
+    router.push({
+        name: 'personalEditPassword'
+    })
 }
 </script>
 

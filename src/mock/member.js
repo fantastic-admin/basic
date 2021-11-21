@@ -39,5 +39,16 @@ export default [
                 }
             }
         }
+    },
+    {
+        url: '/mock/member/edit/password',
+        method: 'post',
+        response: {
+            error: '',
+            status: 1,
+            data: {
+                isSuccess: true
+            }
+        }
     }
 ]
