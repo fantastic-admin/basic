@@ -32,6 +32,7 @@ const constantRoutes = [
                 component: () => import('@/views/personal/setting.vue'),
                 meta: {
                     title: '个人设置',
+                    cache: 'personalEditPassword',
                     breadcrumbNeste: [
                         { title: '个人设置', path: '/personal/setting' }
                     ]

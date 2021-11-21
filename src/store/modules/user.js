@@ -52,6 +52,19 @@ const actions = {
                 resolve(res.data.permissions)
             })
         })
+    },
+    editPassword({ state }, data) {
+        return new Promise(resolve => {
+            api.post('member/edit/password', {
+                account: state.account,
+                password: data.password,
+                newpassword: data.newpassword
+            }, {
+                baseURL: '/mock/'
+            }).then(() => {
+                resolve()
+            })
+        })
     }
 }
 

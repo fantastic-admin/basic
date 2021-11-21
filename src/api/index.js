@@ -6,7 +6,7 @@ import { ElMessage } from 'element-plus'
 
 const toLogin = () => {
     router.push({
-        path: '/login',
+        name: 'login',
         query: {
             redirect: router.currentRoute.value.path !== '/login' ? router.currentRoute.value.fullPath : undefined
         }
