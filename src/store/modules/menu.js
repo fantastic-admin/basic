@@ -252,7 +252,7 @@ const mutations = {
         let defaultOpenedPaths = []
         routes.map(item => {
             item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
-            item.children.map(child => {
+            item.children && item.children.map(child => {
                 child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
             })
         })
