@@ -136,7 +136,9 @@ router.beforeEach(async(to, from, next) => {
             accessRoutes.push(lastRoute)
             let removeRoutes = []
             accessRoutes.forEach(route => {
-                removeRoutes.push(router.addRoute(route))
+                if (!/^(https?:|mailto:|tel:)/.test(route.path)) {
+                    removeRoutes.push(router.addRoute(route))
+                }
             })
             // 记录的 accessRoutes 路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
             store.commit('menu/setCurrentRemoveRoutes', removeRoutes)
