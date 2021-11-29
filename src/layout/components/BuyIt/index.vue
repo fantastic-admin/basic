@@ -21,8 +21,8 @@
             <span class="title">下载<br>基础版</span>
         </div>
     </div>
-    <el-dialog v-model="discoveryInfo.dialogVisible" title="Fantastic-admin (探索版) 正式发布" width="600px" center :close-on-click-modal="false">
-        <div style="text-align: center; margin-bottom: 20px;">Fantastic-admin (探索版) 是一款具备<b>全新交互方式</b>的 Vue 中后台管理系统框架</div>
+    <el-dialog v-model="discoveryInfo.dialogVisible" title="One-step-admin 正式发布" width="600px" center :close-on-click-modal="false">
+        <div style="text-align: center; margin-bottom: 20px;">One-step-admin 是一款<b>干啥都快人一步</b>的 Vue 中后台管理系统框架</div>
         <el-carousel trigger="click" indicator-position="none" arrow="always" :autoplay="false" height="330px">
             <el-carousel-item v-for="item in discoveryInfo.data" :key="item">
                 <img :src="item.img" style="cursor: pointer; width: 100%; margin: auto;" @click="discoveryInfo.imageVisible = true; discoveryInfo.imagePreview = [item.img]">
@@ -32,7 +32,7 @@
         <el-image-viewer v-if="discoveryInfo.imageVisible" :url-list="discoveryInfo.imagePreview" @close="discoveryInfo.imageVisible = false" />
         <template #footer>
             <el-button @click="discoveryInfo.dialogVisible = false">不用了</el-button>
-            <el-button type="primary" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin-discovery/`)">去看看</el-button>
+            <el-button type="primary" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/`)">去看看</el-button>
         </template>
     </el-dialog>
 </template>
@@ -52,11 +52,11 @@ const discoveryInfo = ref({
     imageVisible: false,
     imagePreview: [],
     data: [
-        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin-discovery/intro-1.gif`, text: '摆脱传统后台框架路由跳转的交互，将每个模块以窗口的形式展示在同一个界面中，让使用人员可以做到跨模块的多线操作。' },
-        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin-discovery/intro-2.gif`, text: '窗口默认宽度为 800px ，可以在项目中进行调整，也可以通过最大化按钮将窗口最大化展示，以便展示更多信息。' },
-        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin-discovery/intro-3.gif`, text: '提供的预览界面可以帮助使用人员快速定位到需要操作的窗口。' },
-        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin-discovery/intro-4.gif`, text: '可勾选 2 到 4 个窗口平均分布在页面中，专注于所勾选的窗口进行操作。' },
-        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin-discovery/intro-5.gif`, text: '快速调整窗口的展示顺序。' }
+        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/intro-1.gif`, text: '摆脱传统后台框架路由跳转的交互，将每个模块以窗口的形式展示在同一个界面中，让使用人员可以做到跨模块的多线操作。' },
+        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/intro-2.gif`, text: '窗口默认宽度为 800px ，可以在项目中进行调整，也可以通过最大化按钮将窗口最大化展示，以便展示更多信息。' },
+        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/intro-3.gif`, text: '提供的预览界面可以帮助使用人员快速定位到需要操作的窗口。' },
+        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/intro-4.gif`, text: '可勾选 2 到 4 个窗口平均分布在页面中，专注于所勾选的窗口进行操作。' },
+        { img: `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/intro-5.gif`, text: '快速调整窗口的展示顺序。' }
     ]
 })
 
