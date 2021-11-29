@@ -97,22 +97,22 @@
 <table>
     <tr>
         <th colspan="3" align="center">
-            <a href="https://hooray.gitee.io/fantastic-admin-discovery" target="_blank">Fantastic-admin (探索版)</a>
+            <a href="https://hooray.gitee.io/one-step-admin" target="_blank">One-step-admin</a>
         </th>
     </tr>
     <tr>
         <th colspan="3" align="center">
-            一款具备全新交互方式的 Vue 中后台管理系统框架
+            一款干啥都快人一步的 Vue 中后台管理系统框架
         </th>
     </tr>
     <tr>
-        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview1.png" /></td>
-        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview2.png" /></td>
-        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview3.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview1.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview2.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview3.png" /></td>
     </tr>
     <tr>
-        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview4.png" /></td>
-        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview5.png" /></td>
-        <td><img src="https://hooray.gitee.io/fantastic-admin-discovery/preview6.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview4.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview5.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview6.png" /></td>
     </tr>
 </table>
