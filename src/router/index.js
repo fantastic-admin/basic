@@ -67,6 +67,7 @@ import PermissionExample from './modules/permission.example'
 import MockExample from './modules/mock.example'
 import ExternalLinkExample from './modules/external.link.example'
 import VideosExample from './modules/videos.example'
+import EcologyExample from './modules/ecology.example'
 import CooperationExample from './modules/cooperation.example'
 
 // 动态路由（异步路由、导航栏路由）
@@ -94,6 +95,15 @@ const asyncRoutes = [
         },
         children: [
             ...VideosExample
+        ]
+    },
+    {
+        meta: {
+            title: '生态',
+            icon: 'sidebar-ecology'
+        },
+        children: [
+            ...EcologyExample
         ]
     },
     {
