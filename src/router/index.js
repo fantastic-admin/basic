@@ -76,6 +76,8 @@ import PermissionExample from './modules/permission.example'
 import MockExample from './modules/mock.example'
 import VideosExample from './modules/videos.example'
 import ExTernalLinkExample from './modules/external.link.example'
+import EcologyExample from './modules/ecology.example'
+import CooperationExample from './modules/cooperation.example'
 
 // 当 children 不为空的主导航只有一项时，则隐藏
 let asyncRoutes = [
@@ -102,6 +104,24 @@ let asyncRoutes = [
         },
         children: [
             ...VideosExample
+        ]
+    },
+    {
+        meta: {
+            title: '生态',
+            icon: 'sidebar-ecology'
+        },
+        children: [
+            ...EcologyExample
+        ]
+    },
+    {
+        meta: {
+            title: '战略合作',
+            icon: 'sidebar-cooperation'
+        },
+        children: [
+            ...CooperationExample
         ]
     }
 ]
