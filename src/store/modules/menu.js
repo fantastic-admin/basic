@@ -1,5 +1,5 @@
 import path from 'path-browserify'
-import { deepClone } from '@/util'
+import { deepClone, resolveRoutePath } from '@/util'
 import api from '@/api'
 
 function hasPermission(permissions, route) {
@@ -124,15 +124,15 @@ function getDeepestPath(routes, rootPath = '') {
         ) {
             for (let i = 0; i < routes.children.length; i++) {
                 if (routes.children[i].meta.sidebar != false) {
-                    retnPath = getDeepestPath(routes.children[i], path.resolve(rootPath, routes.path))
+                    retnPath = getDeepestPath(routes.children[i], resolveRoutePath(rootPath, routes.path))
                     break
                 }
             }
         } else {
-            retnPath = getDeepestPath(routes.children[0], path.resolve(rootPath, routes.path))
+            retnPath = getDeepestPath(routes.children[0], resolveRoutePath(rootPath, routes.path))
         }
     } else {
-        retnPath = path.resolve(rootPath, routes.path)
+        retnPath = resolveRoutePath(rootPath, routes.path)
     }
     return retnPath
 }
@@ -252,7 +252,7 @@ const mutations = {
         let defaultOpenedPaths = []
         routes.map(item => {
             item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
-            item.children.map(child => {
+            item.children && item.children.map(child => {
                 child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
             })
         })

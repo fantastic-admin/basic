@@ -7,27 +7,27 @@
             </template>
             <SidebarItem v-for="route in item.children" :key="route.path" :item="route" />
         </el-sub-menu>
-        <router-link v-else-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolvePath(item.path)">
-            <a :href="isExternal(resolvePath(item.path)) ? resolvePath(item.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternal(resolvePath(item.path)) ? '_blank' : '_self'" @click="navigate">
-                <el-menu-item :title="item.meta.title" :index="resolvePath(item.path)">
+        <router-link v-else-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
+            <a :href="isExternalLink(resolveRoutePath(basePath, item.path)) ? resolveRoutePath(basePath, item.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternalLink(resolveRoutePath(basePath, item.path)) ? '_blank' : '_self'" @click="navigate">
+                <el-menu-item :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
                     <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon" />
                     <span class="title">{{ item.meta.title }}</span>
                 </el-menu-item>
             </a>
         </router-link>
-        <el-sub-menu v-else :title="item.meta.title" :index="resolvePath(item.path)">
+        <el-sub-menu v-else :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
             <template #title>
                 <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon" />
                 <span class="title">{{ item.meta.title }}</span>
             </template>
-            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" :base-path="resolvePath(item.path)" />
+            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path)" />
         </el-sub-menu>
     </div>
 </template>
 
 <script setup>
 import SidebarItem from './index.vue'
-import path from 'path-browserify'
+import { isExternalLink, resolveRoutePath } from '@/util'
 
 const props = defineProps({
     item: {
@@ -51,19 +51,6 @@ const hasChildren = computed(() => {
     }
     return flag
 })
-
-function isExternal(path) {
-    return /^(https?:|mailto:|tel:)/.test(path)
-}
-function resolvePath(routePath) {
-    if (isExternal(routePath)) {
-        return routePath
-    }
-    if (isExternal(props.basePath)) {
-        return props.basePath
-    }
-    return props.basePath ? path.resolve(props.basePath, routePath) : routePath
-}
 </script>
 
 <style lang="scss" scoped>

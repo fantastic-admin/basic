@@ -1,3 +1,4 @@
+import path from 'path-browserify'
 import store from '@/store'
 
 export function deepClone(target) {
@@ -60,4 +61,18 @@ export function authAll(value) {
         return hasPermission(item)
     })
     return auth
+}
+
+export function isExternalLink(path) {
+    return /^(https?:|mailto:|tel:)/.test(path)
+}
+
+export function resolveRoutePath(basePath, routePath) {
+    if (isExternalLink(routePath)) {
+        return routePath
+    }
+    if (isExternalLink(basePath)) {
+        return basePath
+    }
+    return basePath ? path.resolve(basePath, routePath) : routePath
 }
