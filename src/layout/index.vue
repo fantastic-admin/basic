@@ -38,6 +38,7 @@ import Topbar from './components/Topbar/index.vue'
 import Search from './components/Search/index.vue'
 import ThemeSetting from './components/ThemeSetting/index.vue'
 import BuyIt from './components/BuyIt/index.vue'
+import { isExternalLink } from '@/util'
 
 const { proxy } = getCurrentInstance()
 const store = useStore()
@@ -84,7 +85,11 @@ provide('switchMenu', switchMenu)
 function switchMenu(index) {
     store.commit('menu/switchHeaderActived', index)
     if (store.state.settings.switchSidebarAndPageJump) {
-        router.push(store.getters['menu/sidebarRoutesFirstDeepestPath'])
+        if (isExternalLink(store.getters['menu/sidebarRoutesFirstDeepestPath'])) {
+            window.open(store.getters['menu/sidebarRoutesFirstDeepestPath'], '_blank')
+        } else {
+            router.push(store.getters['menu/sidebarRoutesFirstDeepestPath'])
+        }
     }
 }
 </script>

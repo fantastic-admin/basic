@@ -25,14 +25,14 @@
             </div>
             <div ref="search" class="result" :class="{'mobile': $store.state.settings.mode === 'mobile'}">
                 <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
-                    <a :ref="`search-item-${index}`" :href="isExternal(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternal(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
+                    <a :ref="`search-item-${index}`" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
                         <div class="icon">
                             <svg-icon v-if="item.icon" :name="item.icon" />
                         </div>
                         <div class="info">
                             <div class="title">
                                 {{ item.title }}
-                                <svg-icon v-if="item.isExternal" name="external-link" />
+                                <svg-icon v-if="item.isExternalLink" name="external-link" />
                             </div>
                             <div class="breadcrumb">
                                 <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
@@ -50,7 +50,7 @@
 </template>
 
 <script setup>
-import { deepClone } from '@/util'
+import { deepClone, isExternalLink } from '@/util'
 
 const { proxy } = getCurrentInstance()
 const store = useStore()
@@ -120,9 +120,6 @@ onMounted(() => {
     })
 })
 
-function isExternal(path) {
-    return /^(https?:|mailto:|tel:)/.test(path)
-}
 function hasChildren(item) {
     let flag = true
     if (item.children) {
@@ -154,7 +151,7 @@ function getSourceList(arr) {
                 }
                 breadcrumb.push(item.meta.title)
                 let path = ''
-                if (isExternal(item.path)) {
+                if (isExternalLink(item.path)) {
                     path = item.path
                 } else {
                     path = item.meta.basePath ? [item.meta.basePath, item.path].join('/') : item.path
@@ -165,7 +162,7 @@ function getSourceList(arr) {
                     i18n: item.meta.i18n,
                     breadcrumb: breadcrumb,
                     path: path,
-                    isExternal: isExternal(item.path)
+                    isExternalLink: isExternalLink(item.path)
                 })
             }
         }
