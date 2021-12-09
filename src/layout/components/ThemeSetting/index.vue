@@ -42,7 +42,7 @@
                 <div class="label">
                     保持展开一个
                     <el-tooltip content="开启该功能后，侧边栏只保持一个子菜单的展开" placement="top" :append-to-body="false">
-                        <svg-icon name="ri-question-line" />
+                        <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
                 <el-switch v-model="sidebarUniqueOpened" />
