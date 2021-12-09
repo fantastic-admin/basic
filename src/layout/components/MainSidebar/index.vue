@@ -32,7 +32,7 @@ const switchMenu = inject('switchMenu')
     transition: 0.3s;
 }
 .main-sidebar-enter-from {
-    transform: translateX(-#{$g-main-sidebar-width});
+    transform: translateX(calc(var(--g-main-sidebar-width) * -1));
 }
 .main-sidebar-container {
     overflow-x: hidden;
@@ -47,7 +47,7 @@ const switchMenu = inject('switchMenu')
 
     position: relative;
     z-index: 1;
-    width: $g-main-sidebar-width;
+    width: var(--g-main-sidebar-width);
     color: $g-main-sidebar-menu-color;
     background-color: $g-main-sidebar-bg;
     .sidebar-logo {

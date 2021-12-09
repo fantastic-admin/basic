@@ -95,77 +95,22 @@ function switchMenu(index) {
 </script>
 
 <style lang="scss" scoped>
-// 侧边栏未折叠
-[data-sidebar-no-collapse] {
-    .sidebar-container {
-        width: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
-    }
-    .main-container {
-        margin-left: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
-    }
-    // 没有主侧边栏
-    &[data-menu-mode="head"],
-    &[data-menu-mode="single"] {
-        .sidebar-container {
-            width: $g-sub-sidebar-width;
-        }
-        .main-container {
-            margin-left: $g-sub-sidebar-width;
-        }
-    }
-}
-// 侧边栏折叠
-[data-sidebar-collapse] {
-    .sidebar-container {
-        width: calc(#{$g-main-sidebar-width} + 64px);
-    }
-    .main-container {
-        margin-left: calc(#{$g-main-sidebar-width} + 64px);
-    }
-    // 没有主侧边栏
-    &[data-menu-mode="head"],
-    &[data-menu-mode="single"] {
-        .sidebar-container {
-            width: 64px;
-        }
-        .main-container {
-            margin-left: 64px;
-        }
-    }
-}
 [data-mode="mobile"] {
     .sidebar-container {
-        width: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
-        transform: translateX(-#{$g-main-sidebar-width}) translateX(-#{$g-sub-sidebar-width});
+        transform: translateX(calc((var(--g-main-sidebar-width) + var(--g-sub-sidebar-width)) * -1));
         &.show {
             transform: translateX(0);
         }
     }
     .main-container {
-        margin-left: 0;
-    }
-    &[data-menu-mode="head"] {
-        .sidebar-container {
-            width: calc(#{$g-main-sidebar-width} + #{$g-sub-sidebar-width});
-            transform: translateX(-#{$g-main-sidebar-width}) translateX(-#{$g-sub-sidebar-width});
-            &.show {
-                transform: translateX(0);
-            }
-        }
-        .main-container {
-            margin-left: 0;
-        }
+        margin-left: 0 !important;
     }
     &[data-menu-mode="single"] {
         .sidebar-container {
-            width: $g-sub-sidebar-width;
-            transform: translateX(-#{$g-sub-sidebar-width});
+            transform: translateX(calc(var(--g-main-sidebar-width) * -1));
             &.show {
                 transform: translateX(0);
             }
-        }
-        .main-container {
-            margin-left: 0;
         }
     }
 }
@@ -190,6 +135,7 @@ function switchMenu(index) {
         bottom: 0;
         display: flex;
         transition: transform 0.3s;
+        width: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
     }
     .sidebar-mask {
         position: fixed;
@@ -210,7 +156,7 @@ function switchMenu(index) {
         }
     }
     .main-sidebar-container + .sub-sidebar-container {
-        left: $g-main-sidebar-width;
+        left: var(--g-main-sidebar-width);
     }
     .main-container {
         display: flex;
@@ -219,6 +165,7 @@ function switchMenu(index) {
         transition: margin-left 0.3s;
         background-color: $g-main-bg;
         box-shadow: 1px 0 0 0 darken($g-main-bg, 10);
+        margin-left: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
         .topbar-container {
             top: 0;
             z-index: 998;

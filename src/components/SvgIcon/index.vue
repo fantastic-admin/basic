@@ -2,7 +2,6 @@
     <el-icon v-if="name.indexOf('el-icon-') === 0 || name.indexOf('ElIcon') === 0" class="svg-icon" :style="transformStyle">
         <Component :is="name" />
     </el-icon>
-    <i v-else-if="name.indexOf('ri-') === 0" class="svg-icon" :style="transformStyle" :class="name" />
     <svg v-else class="svg-icon" :style="transformStyle" aria-hidden="true">
         <use :xlink:href="`#icon-${name}`" />
     </svg>

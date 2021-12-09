@@ -289,7 +289,6 @@ function scrollTo(offsetTop) {
                     background-color: #dbe7f8;
                     .icon {
                         [class^="el-icon-"],
-                        [class^="ri-"],
                         .svg-icon {
                             color: #409eff;
                             transform: scale(1.2);
@@ -310,7 +309,6 @@ function scrollTo(offsetTop) {
                     flex: 0 0 66px;
                     text-align: center;
                     [class^="el-icon-"],
-                    [class^="ri-"],
                     .svg-icon {
                         color: #999;
                         font-size: 20px;

@@ -57,7 +57,7 @@ function onSidebarScroll(e) {
         display: none;
     }
 
-    width: $g-sub-sidebar-width;
+    width: var(--g-sub-sidebar-width);
     position: absolute;
     left: 0;
     top: 0;
