@@ -13,7 +13,8 @@
         "new": "plop",
         "lint:eslint": "eslint src/**/*.{js,vue} --fix",
         "lint:stylelint": "stylelint src/**/*.{vue,scss,less} --fix",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "preinstall": "npx only-allow pnpm"
     },
     "dependencies": {
         "@element-plus/icons": "^0.0.11",
@@ -57,7 +58,7 @@
         "stylelint-config-standard": "^24.0.0",
         "stylelint-scss": "^4.0.1",
         "svgo": "^2.8.0",
-        "unplugin-auto-import": "^0.5.1",
+        "unplugin-auto-import": "^0.5.3",
         "unplugin-vue-components": "^0.17.6",
         "vite": "^2.7.1",
         "vite-plugin-banner": "^0.1.3",
