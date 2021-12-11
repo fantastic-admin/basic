@@ -88,11 +88,6 @@ const hasChildren = computed(() => {
         transform: scale(1.2);
     }
 }
-:deep(.el-sub-menu) {
-    > .el-sub-menu__title > .svg-icon.active {
-        display: none;
-    }
-}
 a {
     cursor: pointer;
     color: inherit;
