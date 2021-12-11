@@ -1,13 +1,13 @@
 lockfileVersion: 5.3
 
 specifiers:
-  '@element-plus/icons': ^0.0.11
+  '@element-plus/icons-vue': ^0.2.4
   '@tinymce/tinymce-vue': ^4.0.5
   '@vitejs/plugin-vue': ^1.10.2
   '@vue/compiler-sfc': ^3.2.24
   axios: ^0.24.0
   dayjs: ^1.10.7
-  element-plus: ^1.2.0-beta.5
+  element-plus: ^1.2.0-beta.6
   eslint: ^8.4.1
   eslint-plugin-vue: ^8.2.0
   hotkeys-js: ^3.8.7
@@ -26,7 +26,7 @@ specifiers:
   postcss-html: ^1.3.0
   postcss-scss: ^4.0.2
   qs: ^6.10.2
-  sass: ^1.44.0
+  sass: ^1.45.0
   screenfull: ^6.0.0
   stylelint: ^14.1.0
   stylelint-config-html: ^1.0.0
@@ -38,7 +38,7 @@ specifiers:
   svgo: ^2.8.0
   tinymce: ^5.10.2
   unplugin-auto-import: ^0.5.3
-  unplugin-vue-components: ^0.17.6
+  unplugin-vue-components: ^0.17.8
   vite: ^2.7.1
   vite-plugin-banner: ^0.1.3
   vite-plugin-compression: ^0.3.6
@@ -54,11 +54,11 @@ specifiers:
   vuex: ^4.0.2
 
 dependencies:
-  '@element-plus/icons': 0.0.11
+  '@element-plus/icons-vue': 0.2.4_vue@3.2.24
   '@tinymce/tinymce-vue': 4.0.5_vue@3.2.24
   axios: 0.24.0
   dayjs: 1.10.7
-  element-plus: 1.2.0-beta.5_vue@3.2.24
+  element-plus: 1.2.0-beta.6_vue@3.2.24
   hotkeys-js: 3.8.7
   js-cookie: 3.0.1
   mavon-editor: 3.0.0-beta
@@ -86,7 +86,7 @@ devDependencies:
   plop: 3.0.4
   postcss-html: 1.3.0
   postcss-scss: 4.0.2
-  sass: 1.44.0
+  sass: 1.45.0
   stylelint: 14.1.0
   stylelint-config-html: 1.0.0_c1fe332c2f0bd1acbb28be685cc2d480
   stylelint-config-recommended: 6.0.0_stylelint@14.1.0
@@ -96,8 +96,8 @@ devDependencies:
   stylelint-scss: 4.0.1_stylelint@14.1.0
   svgo: 2.8.0
   unplugin-auto-import: 0.5.3_vite@2.7.1
-  unplugin-vue-components: 0.17.6_vite@2.7.1+vue@3.2.24
-  vite: 2.7.1_sass@1.44.0
+  unplugin-vue-components: 0.17.8_vite@2.7.1+vue@3.2.24
+  vite: 2.7.1_sass@1.45.0
   vite-plugin-banner: 0.1.3
   vite-plugin-compression: 0.3.6_vite@2.7.1
   vite-plugin-html: 2.1.1_vite@2.7.1
@@ -149,8 +149,12 @@ packages:
       regenerator-runtime: 0.13.9
     dev: true
 
-  /@element-plus/icons/0.0.11:
-    resolution: {integrity: sha1-mxh8ACd0VIuRGFDRf6X8L5pRX1c=, tarball: '@element-plus/icons/download/@element-plus/icons-0.0.11.tgz'}
+  /@element-plus/icons-vue/0.2.4_vue@3.2.24:
+    resolution: {integrity: sha512-RsJNyL58rwxtsjeMy34o8txkL6UlME1stWsUlRpTac6UE9Bx9gdJvnDXbIKhOJqBLX17fBjmposdrn6VTqim2w==, tarball: '@element-plus/icons-vue/download/@element-plus/icons-vue-0.2.4.tgz'}
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      vue: 3.2.24
     dev: false
 
   /@eslint/eslintrc/1.0.5:
@@ -368,7 +372,7 @@ packages:
     peerDependencies:
       vite: ^2.5.10
     dependencies:
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
     dev: true
 
   /@vue/compiler-core/3.2.24:
@@ -1466,12 +1470,12 @@ packages:
       jake: 10.8.2
     dev: true
 
-  /element-plus/1.2.0-beta.5_vue@3.2.24:
-    resolution: {integrity: sha512-8KNGsNZ6RjVJ7kmxq/WLeTBMhVxSjfaGdW2QdcdXz4km1MgxbyBfdiNGVQG4XH/n+hbtLFldCPw0mVT4vkncuA==, tarball: element-plus/download/element-plus-1.2.0-beta.5.tgz}
+  /element-plus/1.2.0-beta.6_vue@3.2.24:
+    resolution: {integrity: sha512-8EdSIR/5/FHcSB8w1diAh+gJMHgxIvxuZoayY99k6taAR1QyEFHuPTgFccZLopJ1+iP4UEsZFz49l57qS08Utw==, tarball: element-plus/download/element-plus-1.2.0-beta.6.tgz}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
-      '@element-plus/icons': 0.0.11
+      '@element-plus/icons-vue': 0.2.4_vue@3.2.24
       '@popperjs/core': 2.10.2
       '@vueuse/core': 7.1.2_vue@3.2.24
       async-validator: 4.0.7
@@ -4324,13 +4328,14 @@ packages:
     resolution: {integrity: sha1-RPoWGwGHuVSd2Eu5GAL5vYOFzWo=, tarball: safer-buffer/download/safer-buffer-2.1.2.tgz}
     dev: true
 
-  /sass/1.44.0:
-    resolution: {integrity: sha512-0hLREbHFXGQqls/K8X+koeP+ogFRPF4ZqetVB19b7Cst9Er8cOR0rc6RU7MaI4W1JmUShd1BPgPoeqmmgMMYFw==, tarball: sass/download/sass-1.44.0.tgz}
+  /sass/1.45.0:
+    resolution: {integrity: sha512-ONy5bjppoohtNkFJRqdz1gscXamMzN3wQy1YH9qO2FiNpgjLhpz/IPRGg0PpCjyz/pWfCOaNEaiEGCcjOFAjqw==, tarball: sass/download/sass-1.45.0.tgz}
     engines: {node: '>=8.9.0'}
     hasBin: true
     dependencies:
       chokidar: 3.5.2
       immutable: 4.0.0
+      source-map-js: 1.0.1
     dev: true
 
   /save-pixels/2.3.6:
@@ -5144,8 +5149,8 @@ packages:
       - webpack
     dev: true
 
-  /unplugin-vue-components/0.17.6_vite@2.7.1+vue@3.2.24:
-    resolution: {integrity: sha512-Z2XvwKeY7/++MucRKzJihDsbdL8rFb71VfmuhtMtLE8zurjFu57XKFx0RNFUD5zD4g0HEyR9GGTwXu2YI0rang==, tarball: unplugin-vue-components/download/unplugin-vue-components-0.17.6.tgz}
+  /unplugin-vue-components/0.17.8_vite@2.7.1+vue@3.2.24:
+    resolution: {integrity: sha512-biyIE8TQwolK/ii3vu3xJ4w83+bliAgka3AuhU2cX5OOvJP+xuq39Skhf+BkNkZoY8xoeU65WHOgLFl//m3/YQ==, tarball: unplugin-vue-components/download/unplugin-vue-components-0.17.8.tgz}
     engines: {node: '>=14'}
     peerDependencies:
       '@babel/parser': ^7.15.8
@@ -5189,7 +5194,7 @@ packages:
       webpack:
         optional: true
     dependencies:
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
       webpack-virtual-modules: 0.4.3
     dev: true
 
@@ -5305,7 +5310,7 @@ packages:
       chalk: 4.1.2
       debug: 4.3.2
       fs-extra: 10.0.0
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5321,7 +5326,7 @@ packages:
       ejs: 3.1.6
       fs-extra: 10.0.0
       html-minifier-terser: 5.1.1
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
     dev: true
 
   /vite-plugin-mock/2.9.6_mockjs@1.1.0+vite@2.7.1:
@@ -5341,7 +5346,7 @@ packages:
       fast-glob: 3.2.7
       mockjs: 1.1.0
       path-to-regexp: 6.2.0
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -5354,7 +5359,7 @@ packages:
     dependencies:
       chalk: 4.1.2
       micromatch: 4.0.4
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
     dev: true
 
   /vite-plugin-spritesmith/0.1.1:
@@ -5380,7 +5385,7 @@ packages:
       fs-extra: 10.0.0
       svg-baker: 1.7.0
       svgo: 2.8.0
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -5392,10 +5397,10 @@ packages:
     dependencies:
       '@vue/compiler-sfc': 3.2.24
       magic-string: 0.25.7
-      vite: 2.7.1_sass@1.44.0
+      vite: 2.7.1_sass@1.45.0
     dev: true
 
-  /vite/2.7.1_sass@1.44.0:
+  /vite/2.7.1_sass@1.45.0:
     resolution: {integrity: sha512-TDXXhcu5lyQ6uosK4ZWaOyB4VzOiizk0biitRzDzaEtgSUi8rVYPc4k1xgOjLSf0OuceDJmojFKXHOX9DB1WuQ==, tarball: vite/download/vite-2.7.1.tgz}
     engines: {node: '>=12.2.0'}
     hasBin: true
@@ -5415,7 +5420,7 @@ packages:
       postcss: 8.4.4
       resolve: 1.20.0
       rollup: 2.60.2
-      sass: 1.44.0
+      sass: 1.45.0
     optionalDependencies:
       fsevents: 2.3.2
     dev: true

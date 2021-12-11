@@ -22,8 +22,8 @@
 
 <script setup>
 import Alert from './components/alert.vue'
-import { Search } from '@element-plus/icons'
-import * as ElementIcons from '@element-plus/icons'
+import { Search } from '@element-plus/icons-vue'
+import * as ElementIcons from '@element-plus/icons-vue'
 import { hyphen } from 'naming-style'
 
 const icon = Object.keys(ElementIcons)
