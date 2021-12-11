@@ -8,7 +8,7 @@
                     <div class="nav">
                         <template v-for="(item, index) in $store.getters['menu/routes']">
                             <div v-if="item.children && item.children.length !== 0" :key="index" class="item" :class="{'active': index == $store.state.menu.headerActived}" @click="switchMenu(index)">
-                                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon" />
+                                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                                 <span v-if="item.meta.title">{{ item.meta.title }}</span>
                             </div>
                         </template>
@@ -104,7 +104,7 @@ header {
                 color: $g-header-menu-active-color;
                 background-color: $g-header-menu-active-bg;
             }
-            .icon {
+            .svg-icon {
                 font-size: 24px;
                 vertical-align: middle;
                 & + span {
