@@ -11,7 +11,7 @@
                             'active': index === $store.state.menu.headerActived
                         }" :title="item.meta.title" @click="switchMenu(index)"
                     >
-                        <svg-icon v-if="item.meta.icon" :name="item.meta.icon" class="icon" />
+                        <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                         <span>{{ item.meta.title }}</span>
                     </div>
                 </template>
@@ -75,7 +75,7 @@ const switchMenu = inject('switchMenu')
                 color: $g-main-sidebar-menu-active-color;
                 background-color: $g-main-sidebar-menu-active-bg;
             }
-            .icon {
+            .svg-icon {
                 margin: 0 auto;
                 font-size: 24px;
             }
