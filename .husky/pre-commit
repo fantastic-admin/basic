@@ -1,4 +1,4 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-pnpm lint-staged -c ./.husky/lintstagedrc.js
+pnpm lint-staged
