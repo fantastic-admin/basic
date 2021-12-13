@@ -10,7 +10,7 @@
         "svgo": "svgo -f src/assets/icons",
         "new": "plop",
         "lint:eslint": "eslint src/**/*.{js,vue} --fix",
-        "lint:stylelint": "stylelint src/**/*.{vue,scss,less} --fix",
+        "lint:stylelint": "stylelint src/**/*.{css,scss,vue} --fix",
         "prepare": "husky install",
         "preinstall": "npx only-allow pnpm"
     },
