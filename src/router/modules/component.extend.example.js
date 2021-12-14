@@ -71,7 +71,7 @@ export default {
             name: 'componentExtendExampleTableautoheight',
             component: () => import('@/views/component_extend_example/table.autoheight.demo.vue'),
             meta: {
-                title: '表格自适应'
+                title: '表格高度自适应'
             }
         },
         {
