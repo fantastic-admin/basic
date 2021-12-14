@@ -9,7 +9,7 @@
                 </div>
                 <div class="sidebar-mask" :class="{'show': $store.state.settings.mode === 'mobile' && !$store.state.settings.sidebarCollapse}" @click="$store.commit('settings/toggleSidebarCollapse')" />
                 <div class="main-container" :style="{'padding-bottom': $route.meta.paddingBottom}">
-                    <Topbar />
+                    <Topbar v-if="!($store.state.settings.menuMode === 'head' && !$store.state.settings.enableSidebarCollapse && !$store.state.settings.enableBreadcrumb)" />
                     <div class="main">
                         <router-view v-slot="{ Component, route }">
                             <transition name="main" mode="out-in" appear>
@@ -172,12 +172,11 @@ function switchMenu(index) {
             height: 100%;
             flex: auto;
             position: relative;
-            padding: $g-topbar-height 0 0;
             overflow: hidden;
             transition: 0.3s;
         }
         .topbar-container + .main {
-            padding: $g-topbar-height 0 0;
+            margin: $g-topbar-height 0 0;
         }
     }
 }
