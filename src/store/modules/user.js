@@ -34,9 +34,12 @@ const actions = {
         })
     },
     logout({ commit }) {
-        commit('removeUserData')
-        commit('menu/invalidRoutes', null, { root: true })
-        commit('menu/removeRoutes', null, { root: true })
+        return new Promise(resolve => {
+            commit('removeUserData')
+            commit('menu/invalidRoutes', null, { root: true })
+            commit('menu/removeRoutes', null, { root: true })
+            resolve()
+        })
     },
     // 获取我的权限
     getPermissions({ state, commit }) {

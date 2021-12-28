@@ -5,11 +5,13 @@ import store from '@/store/index'
 import { ElMessage } from 'element-plus'
 
 const toLogin = () => {
-    router.push({
-        name: 'login',
-        query: {
-            redirect: router.currentRoute.value.path !== '/login' ? router.currentRoute.value.fullPath : undefined
-        }
+    store.dispatch('user/logout').then(() => {
+        router.push({
+            name: 'login',
+            query: {
+                redirect: router.currentRoute.value.path !== '/login' ? router.currentRoute.value.fullPath : undefined
+            }
+        })
     })
 }
 
