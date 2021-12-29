@@ -8,13 +8,14 @@
 </template>
 
 <script setup>
-const store = useStore()
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
 
 // 侧边栏主导航当前实际宽度
 const mainSidebarActualWidth = computed(() => {
     let actualWidth = getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width')
     actualWidth = parseInt(actualWidth)
-    if (['head', 'single'].includes(store.state.settings.menuMode)) {
+    if (['head', 'single'].includes(settingsStore.menuMode)) {
         actualWidth = 0
     }
     return `${actualWidth}px`
@@ -24,39 +25,39 @@ const mainSidebarActualWidth = computed(() => {
 const subSidebarActualWidth = computed(() => {
     let actualWidth = getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width')
     actualWidth = parseInt(actualWidth)
-    if (store.state.settings.sidebarCollapse) {
+    if (settingsStore.sidebarCollapse) {
         actualWidth = 64
     }
     return `${actualWidth}px`
 })
 
-watch(() => store.state.settings.mode, () => {
-    if (store.state.settings.mode === 'pc') {
-        store.commit('settings/updateThemeSetting', {
-            'sidebarCollapse': store.state.settings.sidebarCollapseLastStatus
+watch(() => settingsStore.mode, () => {
+    if (settingsStore.mode === 'pc') {
+        settingsStore.updateThemeSetting({
+            'sidebarCollapse': settingsStore.sidebarCollapseLastStatus
         })
-    } else if (store.state.settings.mode === 'mobile') {
-        store.commit('settings/updateThemeSetting', {
+    } else if (settingsStore.mode === 'mobile') {
+        settingsStore.updateThemeSetting({
             'sidebarCollapse': true
         })
     }
-    document.body.setAttribute('data-mode', store.state.settings.mode)
+    document.body.setAttribute('data-mode', settingsStore.mode)
 }, {
     immediate: true
 })
 
-watch(() => store.state.settings.menuMode, () => {
-    document.body.setAttribute('data-menu-mode', store.state.settings.menuMode)
+watch(() => settingsStore.menuMode, () => {
+    document.body.setAttribute('data-menu-mode', settingsStore.menuMode)
 }, {
     immediate: true
 })
 
 watch([
-    () => store.state.settings.enableDynamicTitle,
-    () => store.state.settings.title
+    () => settingsStore.enableDynamicTitle,
+    () => settingsStore.title
 ], () => {
-    if (store.state.settings.enableDynamicTitle && store.state.settings.title) {
-        let title = store.state.settings.title
+    if (settingsStore.enableDynamicTitle && settingsStore.title) {
+        let title = settingsStore.title
         document.title = `${title} - ${import.meta.env.VITE_APP_TITLE}`
     } else {
         document.title = import.meta.env.VITE_APP_TITLE
@@ -67,7 +68,7 @@ watch([
 
 onMounted(() => {
     window.onresize = () => {
-        store.commit('settings/setMode', document.documentElement.clientWidth)
+        settingsStore.setMode(document.documentElement.clientWidth)
     }
     window.onresize()
 })

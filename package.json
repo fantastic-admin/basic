@@ -27,12 +27,12 @@
         "nprogress": "^0.2.0",
         "path-browserify": "^1.0.1",
         "path-to-regexp": "^6.2.0",
+        "pinia": "^2.0.9",
         "qs": "^6.10.2",
         "screenfull": "^6.0.0",
         "tinymce": "^5.10.2",
         "vue": "^3.2.24",
-        "vue-router": "^4.0.12",
-        "vuex": "^4.0.2"
+        "vue-router": "^4.0.12"
     },
     "devDependencies": {
         "@vitejs/plugin-vue": "^1.10.2",

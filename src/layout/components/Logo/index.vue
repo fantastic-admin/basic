@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="to" class="title" :class="{'is-link': $store.state.settings.enableDashboard}" :title="title">
+    <router-link :to="to" class="title" :class="{'is-link': settingsStore.enableDashboard}" :title="title">
         <img v-if="showLogo" :src="logo" class="logo">
         <span v-if="showTitle">{{ title }}</span>
     </router-link>
@@ -8,7 +8,8 @@
 <script setup>
 import imgLogo from '@/assets/images/logo.png'
 
-const store = useStore()
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
 
 defineProps({
     showLogo: {
@@ -26,7 +27,7 @@ const logo = ref(imgLogo)
 
 const to = computed(() => {
     let rtn = {}
-    if (store.state.settings.enableDashboard) {
+    if (settingsStore.enableDashboard) {
         rtn.name = 'dashboard'
     }
     return rtn

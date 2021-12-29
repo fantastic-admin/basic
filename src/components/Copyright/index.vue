@@ -1,11 +1,16 @@
 <template>
     <footer class="copyright">
-        Copyright © {{ $store.state.settings.copyrightDates }}
-        <a v-if="$store.state.settings.copyrightWebsite" :href="$store.state.settings.copyrightWebsite" target="_blank" rel="noopener">{{ $store.state.settings.copyrightCompany }},</a>
-        <span v-else>{{ $store.state.settings.copyrightCompany }},</span>
+        Copyright © {{ settingsStore.copyrightDates }}
+        <a v-if="settingsStore.copyrightWebsite" :href="settingsStore.copyrightWebsite" target="_blank" rel="noopener">{{ settingsStore.copyrightCompany }},</a>
+        <span v-else>{{ settingsStore.copyrightCompany }},</span>
         All Rights Reserved
     </footer>
 </template>
+
+<script setup>
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+</script>
 
 <style lang="scss" scoped>
 footer {

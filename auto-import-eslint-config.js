@@ -46,8 +46,6 @@ module.exports = {
         withDefaults: 'readonly',
         // vue-router
         useRoute: 'readonly',
-        useRouter: 'readonly',
-        // vuex
-        useStore: 'readonly'
+        useRouter: 'readonly'
     }
 }

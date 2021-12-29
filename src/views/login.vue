@@ -80,14 +80,18 @@
                 </el-row>
             </el-form>
         </div>
-        <Copyright v-if="$store.state.settings.showCopyright" />
+        <Copyright v-if="settingsStore.showCopyright" />
     </div>
 </template>
 
 <script setup name="Login">
 const { proxy } = getCurrentInstance()
-const store = useStore()
 const route = useRoute(), router = useRouter()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
 
 const title = import.meta.env.VITE_APP_TITLE
 
@@ -146,7 +150,7 @@ function handleLogin() {
     proxy.$refs.loginFormRef.validate(valid => {
         if (valid) {
             loading.value = true
-            store.dispatch('user/login', loginForm.value).then(() => {
+            userStore.login(loginForm.value).then(() => {
                 loading.value = false
                 if (loginForm.value.remember) {
                     localStorage.setItem('login_account', loginForm.value.account)

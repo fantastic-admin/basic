@@ -4,18 +4,8 @@
     </div>
 </template>
 
-<script>
-export default {
-    {{#if isGlobal}}
-    name: '{{ properCase name }}',
-    {{/if}}
-    props: {},
-    data() {
-        return {}
-    },
-    mounted() {},
-    methods: {}
-}
+<script setup{{#if isGlobal}} name="{{ properCase name }}"{{/if}}>
+// const { proxy } = getCurrentInstance()
 </script>
 
 <style lang="scss" scoped>

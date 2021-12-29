@@ -14,11 +14,11 @@ module.exports = {
             }
         }
     ],
-    actions: data => {
+    actions: () => {
         const actions = [
             {
                 type: 'add',
-                path: `src/store/modules/${data.name}.js`,
+                path: 'src/store/modules/{{camelCase name}}.js',
                 templateFile: 'plop-templates/store/index.hbs'
             }
         ]

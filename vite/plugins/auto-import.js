@@ -4,10 +4,7 @@ export default function createAutoImport() {
     return autoImport({
         imports: [
             'vue',
-            'vue-router',
-            {
-                'vuex': ['useStore']
-            }
+            'vue-router'
         ],
         dts: false
     })

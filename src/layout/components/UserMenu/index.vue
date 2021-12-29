@@ -1,20 +1,20 @@
 <template>
     <div class="user">
         <div class="tools">
-            <span v-if="$store.state.settings.mode == 'pc'" class="item item-pro" @click="pro">
+            <span v-if="settingsStore.mode == 'pc'" class="item item-pro" @click="pro">
                 <svg-icon name="pro" />
                 <span class="title">查看专业版</span>
             </span>
-            <span v-if="$store.state.settings.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
+            <span v-if="settingsStore.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
                 <svg-icon name="search" />
             </span>
-            <span v-if="$store.state.settings.mode === 'pc' && isFullscreenEnable && $store.state.settings.enableFullscreen" class="item" @click="fullscreen">
+            <span v-if="settingsStore.mode === 'pc' && isFullscreenEnable && settingsStore.enableFullscreen" class="item" @click="fullscreen">
                 <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
             </span>
-            <span v-if="$store.state.settings.enablePageReload" class="item" @click="reload()">
+            <span v-if="settingsStore.enablePageReload" class="item" @click="reload()">
                 <svg-icon name="toolbar-reload" />
             </span>
-            <span v-if="$store.state.settings.enableThemeSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
+            <span v-if="settingsStore.enableThemeSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
                 <svg-icon name="toolbar-theme" />
             </span>
         </div>
@@ -23,12 +23,12 @@
                 <el-avatar size="medium">
                     <el-icon><el-icon-user-filled /></el-icon>
                 </el-avatar>
-                {{ $store.state.user.account }}
+                {{ userStore.account }}
                 <el-icon><el-icon-caret-bottom /></el-icon>
             </div>
             <template #dropdown>
                 <el-dropdown-menu class="user-dropdown">
-                    <el-dropdown-item v-if="$store.state.settings.enableDashboard" command="dashboard">控制台</el-dropdown-item>
+                    <el-dropdown-item v-if="settingsStore.enableDashboard" command="dashboard">控制台</el-dropdown-item>
                     <el-dropdown-item command="setting">个人设置</el-dropdown-item>
                     <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>
@@ -41,8 +41,12 @@
 import screenfull from 'screenfull'
 
 const reload = inject('reload')
-const store = useStore()
 const router = useRouter()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
 
 const isFullscreenEnable = computed(() => screenfull.isEnabled)
 const isFullscreen = ref(false)
@@ -77,7 +81,7 @@ function userCommand(command) {
             })
             break
         case 'logout':
-            store.dispatch('user/logout').then(() => {
+            userStore.logout().then(() => {
                 router.push({
                     name: 'login'
                 })

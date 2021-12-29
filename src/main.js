@@ -2,8 +2,9 @@ import { createApp } from 'vue'
 import App from './App.vue'
 const app = createApp(App)
 
-import store from './store'
-app.use(store)
+import { piniaStore } from './store'
+import { useSettingsOutsideStore } from './store/modules/settings'
+app.use(piniaStore)
 
 import router from './router'
 app.use(router)
@@ -18,7 +19,7 @@ for (var key in ElementIcons) {
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 app.use(ElementPlus, {
     locale: zhCn,
-    size: store.state.settings.elementSize
+    size: useSettingsOutsideStore().elementSize
 })
 
 import globalProperties from '@/util/global.properties'
