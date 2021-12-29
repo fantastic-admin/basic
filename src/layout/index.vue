@@ -3,17 +3,17 @@
         <div id="app-main">
             <Header />
             <div class="wrapper">
-                <div class="sidebar-container" :class="{'show': $store.state.settings.mode === 'mobile' && !$store.state.settings.sidebarCollapse}">
+                <div class="sidebar-container" :class="{'show': settingsStore.mode === 'mobile' && !settingsStore.sidebarCollapse}">
                     <MainSidebar />
                     <SubSidebar />
                 </div>
-                <div class="sidebar-mask" :class="{'show': $store.state.settings.mode === 'mobile' && !$store.state.settings.sidebarCollapse}" @click="$store.commit('settings/toggleSidebarCollapse')" />
+                <div class="sidebar-mask" :class="{'show': settingsStore.mode === 'mobile' && !settingsStore.sidebarCollapse}" @click="settingsStore.toggleSidebarCollapse()" />
                 <div class="main-container" :style="{'padding-bottom': $route.meta.paddingBottom}">
-                    <Topbar v-if="!($store.state.settings.menuMode === 'head' && !$store.state.settings.enableSidebarCollapse && !$store.state.settings.enableBreadcrumb)" />
+                    <Topbar v-if="!(settingsStore.menuMode === 'head' && !settingsStore.enableSidebarCollapse && !settingsStore.enableBreadcrumb)" />
                     <div class="main">
                         <router-view v-slot="{ Component, route }">
                             <transition name="main" mode="out-in" appear>
-                                <keep-alive :include="$store.state.keepAlive.list">
+                                <keep-alive :include="keepAliveStore.list">
                                     <component :is="Component" :key="route.fullPath" />
                                 </keep-alive>
                             </transition>
@@ -41,15 +41,21 @@ import BuyIt from './components/BuyIt/index.vue'
 import { isExternalLink } from '@/util'
 
 const { proxy } = getCurrentInstance()
-const store = useStore()
 const routeInfo = useRoute(), router = useRouter()
 
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useKeepAliveStore } from '@/store/modules/keepAlive'
+const keepAliveStore = useKeepAliveStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
+
 const showCopyright = computed(() => {
-    return typeof routeInfo.meta.copyright !== 'undefined' ? routeInfo.meta.copyright : store.state.settings.showCopyright
+    return typeof routeInfo.meta.copyright !== 'undefined' ? routeInfo.meta.copyright : settingsStore.showCopyright
 })
 
-watch(() => store.state.settings.sidebarCollapse, val => {
-    if (store.state.settings.mode === 'mobile') {
+watch(() => settingsStore.sidebarCollapse, val => {
+    if (settingsStore.mode === 'mobile') {
         if (!val) {
             document.querySelector('body').classList.add('hidden')
         } else {
@@ -59,8 +65,8 @@ watch(() => store.state.settings.sidebarCollapse, val => {
 })
 
 watch(() => routeInfo.path, () => {
-    if (store.state.settings.mode === 'mobile') {
-        store.commit('settings/updateThemeSetting', {
+    if (settingsStore.mode === 'mobile') {
+        settingsStore.updateThemeSetting({
             sidebarCollapse: true
         })
     }
@@ -68,7 +74,7 @@ watch(() => routeInfo.path, () => {
 
 onMounted(() => {
     proxy.$hotkeys('f5', e => {
-        if (store.state.settings.enablePageReload) {
+        if (settingsStore.enablePageReload) {
             e.preventDefault()
             reload()
         }
@@ -83,12 +89,12 @@ function reload() {
 
 provide('switchMenu', switchMenu)
 function switchMenu(index) {
-    store.commit('menu/switchHeaderActived', index)
-    if (store.state.settings.switchSidebarAndPageJump) {
-        if (isExternalLink(store.getters['menu/sidebarRoutesFirstDeepestPath'])) {
-            window.open(store.getters['menu/sidebarRoutesFirstDeepestPath'], '_blank')
+    menuStore.switchHeaderActived(index)
+    if (settingsStore.switchSidebarAndPageJump) {
+        if (isExternalLink(menuStore.sidebarRoutesFirstDeepestPath)) {
+            window.open(menuStore.sidebarRoutesFirstDeepestPath, '_blank')
         } else {
-            router.push(store.getters['menu/sidebarRoutesFirstDeepestPath'])
+            router.push(menuStore.sidebarRoutesFirstDeepestPath)
         }
     }
 }

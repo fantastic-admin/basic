@@ -2,15 +2,15 @@
     <div>
         <page-header title="权限验证" />
         <page-main>
-            <div v-if="!$store.state.settings.enablePermission">请到 seeting.js 里打开权限功能，再进入该页面查看演示</div>
+            <div v-if="!settingsStore.enablePermission">请到 seeting.js 里打开权限功能，再进入该页面查看演示</div>
             <div v-else>
                 <h3>切换帐号</h3>
-                <el-radio-group v-model="account" @change="accountChange">
+                <el-radio-group v-model="userStore.account" @change="accountChange">
                     <el-radio-button label="admin" />
                     <el-radio-button label="test" />
                 </el-radio-group>
                 <h3>帐号权限</h3>
-                <div>{{ $store.state.user.permissions }}</div>
+                <div>{{ userStore.permissions }}</div>
                 <h3>鉴权组件（请对照代码查看）</h3>
                 <div>
                     <auth value="permission.browse" style="margin-bottom: 10px;">
@@ -69,43 +69,41 @@
     </div>
 </template>
 
-<script>
-export default {
-    data() {
-        return {
-            account: this.$store.state.user.account
-        }
-    },
-    methods: {
-        accountChange(val) {
-            this.$loading({
-                lock: true,
-                text: '帐号切换中',
-                background: 'rgba(0, 0, 0, 0.7)'
-            })
-            this.$store.dispatch('user/login', {
-                account: val,
-                password: ''
-            }).then(() => {
-                setTimeout(() => {
-                    location.reload()
-                }, 1000)
-            })
-        },
-        permissionCheck(permissions) {
-            if (this.$auth(permissions)) {
-                this.$message.success('校验通过')
-            } else {
-                this.$message.error('校验不通过')
-            }
-        },
-        permissionCheck2(permissions) {
-            if (this.$authAll(permissions)) {
-                this.$message.success('校验通过')
-            } else {
-                this.$message.error('校验不通过')
-            }
-        }
+<script setup>
+const { proxy } = getCurrentInstance()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
+
+function accountChange(val) {
+    proxy.$loading({
+        lock: true,
+        text: '帐号切换中',
+        background: 'rgba(0, 0, 0, 0.7)'
+    })
+    userStore.login({
+        account: val,
+        password: ''
+    }).then(() => {
+        setTimeout(() => {
+            location.reload()
+        }, 1000)
+    })
+}
+function permissionCheck(permissions) {
+    if (proxy.$auth(permissions)) {
+        proxy.$message.success('校验通过')
+    } else {
+        proxy.$message.error('校验不通过')
+    }
+}
+function permissionCheck2(permissions) {
+    if (proxy.$authAll(permissions)) {
+        proxy.$message.success('校验通过')
+    } else {
+        proxy.$message.error('校验不通过')
     }
 }
 </script>

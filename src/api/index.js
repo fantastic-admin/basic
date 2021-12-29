@@ -1,11 +1,12 @@
 import axios from 'axios'
 // import qs from 'qs'
 import router from '@/router/index'
-import store from '@/store/index'
 import { ElMessage } from 'element-plus'
+import { useUserOutsideStore } from '@/store/modules/user'
 
 const toLogin = () => {
-    store.dispatch('user/logout').then(() => {
+    const userOutsideStore = useUserOutsideStore()
+    userOutsideStore.logout().then(() => {
         router.push({
             name: 'login',
             query: {
@@ -23,12 +24,13 @@ const api = axios.create({
 
 api.interceptors.request.use(
     request => {
+        const userOutsideStore = useUserOutsideStore()
         /**
          * 全局拦截请求发送前提交的参数
          * 以下代码为示例，在请求头里带上 token 信息
          */
-        if (store.getters['user/isLogin']) {
-            request.headers['Token'] = store.state.user.token
+        if (userOutsideStore.isLogin) {
+            request.headers['Token'] = userOutsideStore.token
         }
         // 是否将 POST 请求参数进行字符串化处理
         if (request.method === 'post') {

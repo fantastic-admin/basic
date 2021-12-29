@@ -1,20 +1,20 @@
 <template>
-    <div v-if="['side', 'head', 'single'].includes($store.state.settings.menuMode) || $store.state.settings.mode === 'mobile'" class="sub-sidebar-container" :class="{'is-collapse': $store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse}" @scroll="onSidebarScroll">
+    <div v-if="['side', 'head', 'single'].includes(settingsStore.menuMode) || settingsStore.mode === 'mobile'" class="sub-sidebar-container" :class="{'is-collapse': settingsStore.mode === 'pc' && settingsStore.sidebarCollapse}" @scroll="onSidebarScroll">
         <Logo
-            :show-logo="$store.state.settings.menuMode === 'single'" :class="{
+            :show-logo="settingsStore.menuMode === 'single'" :class="{
                 'sidebar-logo': true,
-                'sidebar-logo-bg': $store.state.settings.menuMode === 'single',
+                'sidebar-logo-bg': settingsStore.menuMode === 'single',
                 'shadow': sidebarScrollTop
             }"
         />
         <!-- 侧边栏模式（无主导航） -->
         <el-menu
-            :unique-opened="$store.state.settings.sidebarUniqueOpened" :default-openeds="$store.state.menu.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="$store.state.settings.mode === 'pc' && $store.state.settings.sidebarCollapse" :collapse-transition="false" :class="{
-                'is-collapse-without-logo': $store.state.settings.menuMode !== 'single' && $store.state.settings.sidebarCollapse
+            :unique-opened="settingsStore.sidebarUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.sidebarCollapse" :collapse-transition="false" :class="{
+                'is-collapse-without-logo': settingsStore.menuMode !== 'single' && settingsStore.sidebarCollapse
             }"
         >
             <transition-group name="sub-sidebar">
-                <template v-for="route in $store.getters['menu/sidebarRoutes']">
+                <template v-for="route in menuStore.sidebarRoutes">
                     <SidebarItem v-if="route.meta.sidebar !== false" :key="route.path" :item="route" :base-path="route.path" />
                 </template>
             </transition-group>
@@ -25,6 +25,11 @@
 <script setup>
 import Logo from '../Logo/index.vue'
 import SidebarItem from '../SidebarItem/index.vue'
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
 
 const sidebarScrollTop = ref(0)
 

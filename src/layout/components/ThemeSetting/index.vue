@@ -2,8 +2,8 @@
     <div>
         <el-drawer v-model="isShow" title="主题配置" direction="rtl" :size="300">
             <el-alert title="主题配置可实时预览效果，更多设置请在 src/settings.js 中进行设置，建议在生产环境隐藏主题配置功能" type="error" :closable="false" />
-            <el-divider v-if="$store.state.settings.mode === 'pc'">导航栏模式</el-divider>
-            <div v-if="$store.state.settings.mode === 'pc'" class="menu-mode">
+            <el-divider v-if="settingsStore.mode === 'pc'">导航栏模式</el-divider>
+            <div v-if="settingsStore.mode === 'pc'" class="menu-mode">
                 <el-tooltip content="侧边栏模式（含主导航）" placement="top" :show-after="500" :append-to-body="false">
                     <div class="mode mode-side" :class="{'active': menuMode === 'side'}" @click="menuMode = 'side'">
                         <svg-icon name="el-icon-check" />
@@ -21,7 +21,7 @@
                 </el-tooltip>
             </div>
             <el-divider>侧边栏</el-divider>
-            <div v-if="$store.state.settings.mode === 'pc'" class="setting-item">
+            <div v-if="settingsStore.mode === 'pc'" class="setting-item">
                 <div class="label">折叠按钮</div>
                 <el-switch v-model="enableSidebarCollapse" />
             </div>
@@ -36,7 +36,7 @@
                         <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
-                <el-switch v-model="switchSidebarAndPageJump" :disabled="['single'].includes($store.state.settings.menuMode)" />
+                <el-switch v-model="switchSidebarAndPageJump" :disabled="['single'].includes(settingsStore.menuMode)" />
             </div>
             <div class="setting-item">
                 <div class="label">
@@ -57,7 +57,7 @@
                 </div>
                 <el-switch v-model="topbarFixed" />
             </div>
-            <div v-if="$store.state.settings.mode === 'pc'" class="setting-item">
+            <div v-if="settingsStore.mode === 'pc'" class="setting-item">
                 <div class="label">面包屑导航</div>
                 <el-switch v-model="enableBreadcrumb" />
             </div>
@@ -71,7 +71,7 @@
                 </div>
                 <el-switch v-model="enableNavSearch" />
             </div>
-            <div v-if="$store.state.settings.mode === 'pc'" class="setting-item">
+            <div v-if="settingsStore.mode === 'pc'" class="setting-item">
                 <div class="label">
                     全屏
                     <el-tooltip content="该功能使用场景极少，用户习惯于通过窗口“最大化”功能来扩大显示区域，以显示更多内容，并且使用 F11 键也可以进入全屏效果" placement="top" :append-to-body="false">
@@ -141,8 +141,12 @@
 
 <script setup>
 const { proxy } = getCurrentInstance()
-const store = useStore()
 const route = useRoute()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
 
 const reload = inject('reload')
 
@@ -150,23 +154,23 @@ const isShow = ref(false)
 
 const menuMode = computed({
     get: function() {
-        return store.state.settings.menuMode
+        return settingsStore.menuMode
     },
     set: function(newValue) {
-        store.commit('menu/switchHeaderActived', 0)
-        store.commit('settings/updateThemeSetting', {
+        menuStore.switchHeaderActived(0)
+        settingsStore.updateThemeSetting({
             'menuMode': newValue
         })
-        store.state.settings.menuMode !== 'single' && store.commit('menu/setHeaderActived', route.fullPath)
+        settingsStore.menuMode !== 'single' && menuStore.setHeaderActived(route.fullPath)
     }
 })
 const elementSize = computed({
     get: function() {
-        return store.state.settings.elementSize
+        return settingsStore.elementSize
     },
     set: function(newValue) {
         proxy.$ELEMENT.size = newValue
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'elementSize': newValue
         })
         reload()
@@ -174,130 +178,130 @@ const elementSize = computed({
 })
 const enableSidebarCollapse = computed({
     get: function() {
-        return store.state.settings.enableSidebarCollapse
+        return settingsStore.enableSidebarCollapse
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enableSidebarCollapse': newValue
         })
     }
 })
 const sidebarCollapse = computed({
     get: function() {
-        return store.state.settings.sidebarCollapse
+        return settingsStore.sidebarCollapse
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'sidebarCollapse': newValue
         })
     }
 })
 const switchSidebarAndPageJump = computed({
     get: function() {
-        return store.state.settings.switchSidebarAndPageJump
+        return settingsStore.switchSidebarAndPageJump
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'switchSidebarAndPageJump': newValue
         })
     }
 })
 const sidebarUniqueOpened = computed({
     get: function() {
-        return store.state.settings.sidebarUniqueOpened
+        return settingsStore.sidebarUniqueOpened
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'sidebarUniqueOpened': newValue
         })
     }
 })
 const topbarFixed = computed({
     get: function() {
-        return store.state.settings.topbarFixed
+        return settingsStore.topbarFixed
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'topbarFixed': newValue
         })
     }
 })
 const enableBreadcrumb = computed({
     get: function() {
-        return store.state.settings.enableBreadcrumb
+        return settingsStore.enableBreadcrumb
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enableBreadcrumb': newValue
         })
     }
 })
 const showCopyright = computed({
     get: function() {
-        return store.state.settings.showCopyright
+        return settingsStore.showCopyright
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'showCopyright': newValue
         })
     }
 })
 const enableNavSearch = computed({
     get: function() {
-        return store.state.settings.enableNavSearch
+        return settingsStore.enableNavSearch
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enableNavSearch': newValue
         })
     }
 })
 const enableFullscreen = computed({
     get: function() {
-        return store.state.settings.enableFullscreen
+        return settingsStore.enableFullscreen
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enableFullscreen': newValue
         })
     }
 })
 const enablePageReload = computed({
     get: function() {
-        return store.state.settings.enablePageReload
+        return settingsStore.enablePageReload
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enablePageReload': newValue
         })
     }
 })
 const enableProgress = computed({
     get: function() {
-        return store.state.settings.enableProgress
+        return settingsStore.enableProgress
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enableProgress': newValue
         })
     }
 })
 const enableDynamicTitle = computed({
     get: function() {
-        return store.state.settings.enableDynamicTitle
+        return settingsStore.enableDynamicTitle
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enableDynamicTitle': newValue
         })
     }
 })
 const enableDashboard = computed({
     get: function() {
-        return store.state.settings.enableDashboard
+        return settingsStore.enableDashboard
     },
     set: function(newValue) {
-        store.commit('settings/updateThemeSetting', {
+        settingsStore.updateThemeSetting({
             'enableDashboard': newValue
         })
     }

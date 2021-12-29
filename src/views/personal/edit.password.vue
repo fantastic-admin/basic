@@ -25,9 +25,11 @@
 </template>
 
 <script setup name="PersonalEditPassword">
-const store = useStore()
 const route = useRoute(), router = useRouter()
 const { proxy } = getCurrentInstance()
+
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
 
 const validatePassword = (rule, value, callback) => {
     if (value !== form.value.newpassword) {
@@ -60,12 +62,12 @@ const rules = ref({
 function onSubmit() {
     proxy.$refs['formRef'].validate(valid => {
         if (valid) {
-            store.dispatch('user/editPassword', form.value).then(() => {
+            userStore.editPassword(form.value).then(() => {
                 proxy.$message({
                     type: 'success',
                     message: '模拟修改成功，请重新登录'
                 })
-                store.dispatch('user/logout').then(() => {
+                userStore.logout().then(() => {
                     router.push({
                         name: 'login',
                         query: {

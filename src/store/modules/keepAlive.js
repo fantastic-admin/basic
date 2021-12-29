@@ -1,41 +1,41 @@
-const state = () => ({
-    list: []
-})
+import { defineStore } from 'pinia'
+import { piniaStore } from '@/store'
 
-const getters = {}
-
-const actions = {}
-
-const mutations = {
-    add(state, name) {
-        if (typeof name === 'string') {
-            !state.list.includes(name) && state.list.push(name)
-        } else {
-            name.map(v => {
-                v && !state.list.includes(v) && state.list.push(v)
-            })
+export const useKeepAliveStore = defineStore(
+    // 唯一ID
+    'keepAlive',
+    {
+        state: () => ({
+            list: []
+        }),
+        actions: {
+            add(name) {
+                if (typeof name === 'string') {
+                    !this.list.includes(name) && this.list.push(name)
+                } else {
+                    name.map(v => {
+                        v && !this.list.includes(v) && this.list.push(v)
+                    })
+                }
+            },
+            remove(name) {
+                if (typeof name === 'string') {
+                    this.list = this.list.filter(v => {
+                        return v !== name
+                    })
+                } else {
+                    this.list = this.list.filter(v => {
+                        return !name.includes(v)
+                    })
+                }
+            },
+            clean() {
+                this.list = []
+            }
         }
-    },
-    remove(state, name) {
-        if (typeof name === 'string') {
-            state.list = state.list.filter(v => {
-                return v != name
-            })
-        } else {
-            state.list = state.list.filter(v => {
-                return !name.includes(v)
-            })
-        }
-    },
-    clean(state) {
-        state.list = []
     }
-}
+)
 
-export default {
-    namespaced: true,
-    state,
-    actions,
-    getters,
-    mutations
+export function useKeepAliveOutsideStore() {
+    return useKeepAliveStore(piniaStore)
 }

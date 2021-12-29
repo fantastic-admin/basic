@@ -1,6 +1,11 @@
+import { defineStore } from 'pinia'
+import { piniaStore } from '@/store'
 import path from 'path-browserify'
 import { deepClone, resolveRoutePath } from '@/util'
 import api from '@/api'
+
+import { useSettingsStore } from './settings'
+import { useUserStore } from './user'
 
 function hasPermission(permissions, route) {
     let isAuth = false
@@ -137,160 +142,170 @@ function getDeepestPath(routes, rootPath = '') {
     return retnPath
 }
 
-const state = () => ({
-    isGenerate: false,
-    routes: [],
-    defaultOpenedPaths: [],
-    headerActived: 0,
-    currentRemoveRoutes: []
-})
-
-const getters = {
-    // 由于 getter 的结果不会被缓存，导致导航栏切换时有明显的延迟，该问题会在 Vue 3.2 版本中修复，详看 https://github.com/vuejs/vuex/pull/1883
-    routes: (state, getters, rootState) => {
-        let routes
-        if (rootState.settings.menuMode === 'single') {
-            routes = [{ children: [] }]
-            state.routes.map(item => {
-                routes[0].children.push(...item.children)
-            })
-        } else {
-            routes = state.routes
-        }
-        return routes
-    },
-    sidebarRoutes: (state, getters) => {
-        return getters.routes.length > 0 ? getters.routes[state.headerActived].children : []
-    },
-    sidebarRoutesFirstDeepestPath: (state, getters) => {
-        return getters.routes.length > 0 ? getDeepestPath(getters.sidebarRoutes[0]) : '/'
-    }
-}
-
-const actions = {
-    // 根据权限动态生成路由（前端生成）
-    generateRoutesAtFront({ rootState, dispatch, commit }, asyncRoutes) {
-        // eslint-disable-next-line no-async-promise-executor
-        return new Promise(async resolve => {
-            let accessedRoutes
-            // 如果权限功能开启，则需要对路由数据进行筛选过滤
-            if (rootState.settings.enablePermission) {
-                const permissions = await dispatch('user/getPermissions', null, { root: true })
-                accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
-            } else {
-                accessedRoutes = deepClone(asyncRoutes)
-            }
-            commit('setRoutes', accessedRoutes)
-            let routes = []
-            accessedRoutes.map(item => {
-                routes.push(...item.children)
-            })
-            // 将三级及以上路由数据拍平成二级
-            routes.map(item => {
-                if (item.children) {
-                    item.children = flatAsyncRoutes(item.children, [{
-                        path: item.path,
-                        title: item.meta.title
-                    }], item.path)
-                }
-            })
-            commit('setDefaultOpenedPaths', routes)
-            resolve(routes)
-        })
-    },
-    // 生成路由（后端获取）
-    generateRoutesAtBack({ rootState, dispatch, commit }) {
-        return new Promise(resolve => {
-            api.get('route/list', {
-                baseURL: '/mock/'
-            }).then(async res => {
-                let asyncRoutes = formatBackRoutes(res.data)
-                let accessedRoutes
-                // 如果权限功能开启，则需要对路由数据进行筛选过滤
-                if (rootState.settings.enablePermission) {
-                    const permissions = await dispatch('user/getPermissions', null, { root: true })
-                    accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+export const useMenuStore = defineStore(
+    // 唯一ID
+    'menu',
+    {
+        state: () => ({
+            isGenerate: false,
+            routes: [],
+            defaultOpenedPaths: [],
+            headerActived: 0,
+            currentRemoveRoutes: []
+        }),
+        getters: {
+            transformRoutes: state => {
+                let routes
+                const settingsStore = useSettingsStore()
+                if (settingsStore.menuMode === 'single') {
+                    routes = [{ children: [] }]
+                    state.routes.map(item => {
+                        routes[0].children.push(...item.children)
+                    })
                 } else {
-                    accessedRoutes = deepClone(asyncRoutes)
+                    routes = state.routes
                 }
-                commit('setRoutes', accessedRoutes)
-                let routes = []
-                accessedRoutes.map(item => {
-                    routes.push(...item.children)
+                return routes
+            },
+            sidebarRoutes() {
+                return this.transformRoutes.length > 0 ? this.transformRoutes[this.headerActived].children : []
+            },
+            sidebarRoutesFirstDeepestPath() {
+                return this.transformRoutes.length > 0 ? getDeepestPath(this.sidebarRoutes[0]) : '/'
+            }
+        },
+        actions: {
+            // 根据权限动态生成路由（前端生成）
+            generateRoutesAtFront(asyncRoutes) {
+                // eslint-disable-next-line no-async-promise-executor
+                return new Promise(async resolve => {
+                    const settingsStore = useSettingsStore()
+                    const userStore = useUserStore()
+                    let accessedRoutes
+                    // 如果权限功能开启，则需要对路由数据进行筛选过滤
+                    if (settingsStore.enablePermission) {
+                        const permissions = await userStore.getPermissions()
+                        accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+                    } else {
+                        accessedRoutes = deepClone(asyncRoutes)
+                    }
+                    // 设置 routes 数据
+                    this.isGenerate = true
+                    let newRoutes = deepClone(accessedRoutes)
+                    this.routes = newRoutes.filter(item => {
+                        return item.children.length != 0
+                    })
+                    // 将三级及以上路由数据拍平成二级
+                    let routes = []
+                    accessedRoutes.map(item => {
+                        routes.push(...item.children)
+                    })
+                    routes.map(item => {
+                        if (item.children) {
+                            item.children = flatAsyncRoutes(item.children, [{
+                                path: item.path,
+                                title: item.meta.title
+                            }], item.path)
+                        }
+                    })
+                    // 设置 defaultOpenedPaths 数据
+                    let defaultOpenedPaths = []
+                    routes.map(item => {
+                        item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
+                        item.children && item.children.map(child => {
+                            child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
+                        })
+                    })
+                    this.defaultOpenedPaths = defaultOpenedPaths
+                    resolve(routes)
                 })
-                // 将三级及以上路由数据拍平成二级
-                routes.map(item => {
-                    if (item.children) {
-                        item.children = flatAsyncRoutes(item.children, [{
-                            path: item.path,
-                            title: item.meta.title
-                        }], item.path)
+            },
+            // 生成路由（后端获取）
+            generateRoutesAtBack() {
+                return new Promise(resolve => {
+                    api.get('route/list', {
+                        baseURL: '/mock/'
+                    }).then(async res => {
+                        const settingsStore = useSettingsStore()
+                        const userStore = useUserStore()
+                        let asyncRoutes = formatBackRoutes(res.data)
+                        let accessedRoutes
+                        // 如果权限功能开启，则需要对路由数据进行筛选过滤
+                        if (settingsStore.enablePermission) {
+                            const permissions = await userStore.getPermissions()
+                            accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+                        } else {
+                            accessedRoutes = deepClone(asyncRoutes)
+                        }
+                        // 设置 routes 数据
+                        this.isGenerate = true
+                        let newRoutes = deepClone(accessedRoutes)
+                        this.routes = newRoutes.filter(item => {
+                            return item.children.length != 0
+                        })
+                        // 将三级及以上路由数据拍平成二级
+                        let routes = []
+                        accessedRoutes.map(item => {
+                            routes.push(...item.children)
+                        })
+                        routes.map(item => {
+                            if (item.children) {
+                                item.children = flatAsyncRoutes(item.children, [{
+                                    path: item.path,
+                                    title: item.meta.title
+                                }], item.path)
+                            }
+                        })
+                        // 设置 defaultOpenedPaths 数据
+                        let defaultOpenedPaths = []
+                        routes.map(item => {
+                            item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
+                            item.children && item.children.map(child => {
+                                child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
+                            })
+                        })
+                        this.defaultOpenedPaths = defaultOpenedPaths
+                        resolve(routes)
+                    })
+                })
+            },
+            invalidRoutes() {
+                this.isGenerate = false
+                this.routes = []
+                this.defaultOpenedPaths = []
+                this.headerActived = 0
+            },
+            // 根据路由判断属于哪个头部导航
+            setHeaderActived(path) {
+                this.routes.map((item, index) => {
+                    if (
+                        item.children.some(r => {
+                            return path.indexOf(r.path + '/') === 0 || path == r.path
+                        })
+                    ) {
+                        this.headerActived = index
                     }
                 })
-                commit('setDefaultOpenedPaths', routes)
-                resolve(routes)
-            })
-        })
-    }
-}
-
-const mutations = {
-    invalidRoutes(state) {
-        state.isGenerate = false
-        state.routes = []
-        state.defaultOpenedPaths = []
-        state.headerActived = 0
-    },
-    setRoutes(state, routes) {
-        state.isGenerate = true
-        let newRoutes = deepClone(routes)
-        state.routes = newRoutes.filter(item => {
-            return item.children.length != 0
-        })
-    },
-    setDefaultOpenedPaths(state, routes) {
-        let defaultOpenedPaths = []
-        routes.map(item => {
-            item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
-            item.children && item.children.map(child => {
-                child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
-            })
-        })
-        state.defaultOpenedPaths = defaultOpenedPaths
-    },
-    // 根据路由判断属于哪个头部导航
-    setHeaderActived(state, path) {
-        state.routes.map((item, index) => {
-            if (
-                item.children.some(r => {
-                    return path.indexOf(r.path + '/') === 0 || path == r.path
+            },
+            // 切换头部导航
+            switchHeaderActived(index) {
+                this.headerActived = index
+            },
+            // 记录 accessRoutes 路由，用于登出时删除路由
+            setCurrentRemoveRoutes(routes) {
+                this.currentRemoveRoutes = routes
+            },
+            // 清空动态路由
+            removeRoutes() {
+                this.currentRemoveRoutes.forEach(removeRoute => {
+                    removeRoute()
                 })
-            ) {
-                state.headerActived = index
+                this.currentRemoveRoutes = []
             }
-        })
-    },
-    // 切换头部导航
-    switchHeaderActived(state, index) {
-        state.headerActived = index
-    },
-    // 记录 accessRoutes 路由，用于登出时删除路由
-    setCurrentRemoveRoutes(state, routes) {
-        state.currentRemoveRoutes = routes
-    },
-    // 清空动态路由
-    removeRoutes(state) {
-        state.currentRemoveRoutes.forEach(removeRoute => {
-            removeRoute()
-        })
-        state.currentRemoveRoutes = []
+        }
     }
-}
+)
 
-export default {
-    namespaced: true,
-    state,
-    actions,
-    getters,
-    mutations
+export function useMenuOutsideStore() {
+    return useMenuStore(piniaStore)
 }

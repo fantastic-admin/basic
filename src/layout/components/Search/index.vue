@@ -3,7 +3,7 @@
         <div class="container">
             <div class="search-box" @click.stop>
                 <el-input ref="input" v-model="searchInput" prefix-icon="el-icon-search" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter" />
-                <div v-if="$store.state.settings.mode === 'pc'" class="tips">
+                <div v-if="settingsStore.mode === 'pc'" class="tips">
                     <div class="tip">
                         <span>Alt</span>+<span>S</span>
                         唤醒搜索面板
@@ -23,7 +23,7 @@
                     </div>
                 </div>
             </div>
-            <div ref="search" class="result" :class="{'mobile': $store.state.settings.mode === 'mobile'}">
+            <div ref="search" class="result" :class="{'mobile': settingsStore.mode === 'mobile'}">
                 <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
                     <a :ref="`search-item-${index}`" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
                         <div class="icon">
@@ -53,7 +53,11 @@
 import { deepClone, isExternalLink } from '@/util'
 
 const { proxy } = getCurrentInstance()
-const store = useStore()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
 
 const isShow = ref(false)
 const searchInput = ref('')
@@ -110,12 +114,12 @@ onMounted(() => {
         isShow.value = !isShow.value
     })
     proxy.$hotkeys('alt+s', e => {
-        if (store.state.settings.enableNavSearch) {
+        if (settingsStore.enableNavSearch) {
             e.preventDefault()
             isShow.value = true
         }
     })
-    store.state.menu.routes.map(item => {
+    menuStore.routes.map(item => {
         getSourceList(item.children)
     })
 })

@@ -17,12 +17,15 @@
 </template>
 
 <script>
+import { useKeepAliveStore } from '@/store/modules/keepAlive'
+const keepAliveStore = useKeepAliveStore()
+
 export default {
     name: 'KeepAliveExamplePage',
     beforeRouteEnter(to, from, next) {
         // 进入页面时，先将当前页面的 name 信息存入 keep-alive 全局状态
         next(vm => {
-            vm.$store.commit('keepAlive/add', vm.$options.name)
+            keepAliveStore.add(vm.$options.name)
         })
     },
     beforeRouteLeave(to, from, next) {
@@ -31,10 +34,10 @@ export default {
             // 所以下面的代码意思就是，如果目标路由的 name 不是 keepAliveExampleDetail 或者 keepAliveExampleNestedDetail ，则将当前页面的 name 从 keep-alive 中删除
             if (!['keepAliveExampleDetail', 'keepAliveExampleNestedDetail'].includes(to.name)) {
                 // 注意：上面校验的是路由的 name ，下面记录的是当前页面的 name
-                this.$store.commit('keepAlive/remove', 'KeepAliveExamplePage')
+                keepAliveStore.remove('KeepAliveExamplePage')
             }
         } else {
-            this.$store.commit('keepAlive/remove', 'KeepAliveExamplePage')
+            keepAliveStore.remove('KeepAliveExamplePage')
         }
         next()
     },

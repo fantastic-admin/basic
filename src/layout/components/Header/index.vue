@@ -1,13 +1,13 @@
 <template>
     <transition name="header">
-        <header v-if="$store.state.settings.mode === 'pc' && $store.state.settings.menuMode === 'head'">
+        <header v-if="settingsStore.mode === 'pc' && settingsStore.menuMode === 'head'">
             <div class="header-container">
                 <div class="main">
                     <Logo />
                     <!-- 顶部模式 -->
                     <div class="nav">
-                        <template v-for="(item, index) in $store.getters['menu/routes']">
-                            <div v-if="item.children && item.children.length !== 0" :key="index" class="item" :class="{'active': index == $store.state.menu.headerActived}" @click="switchMenu(index)">
+                        <template v-for="(item, index) in menuStore.transformRoutes">
+                            <div v-if="item.children && item.children.length !== 0" :key="index" class="item" :class="{'active': index == menuStore.headerActived}" @click="switchMenu(index)">
                                 <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                                 <span v-if="item.meta.title">{{ item.meta.title }}</span>
                             </div>
@@ -23,6 +23,11 @@
 <script setup>
 import Logo from '../Logo/index.vue'
 import UserMenu from '../UserMenu/index.vue'
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
 
 const switchMenu = inject('switchMenu')
 </script>

@@ -1,15 +1,16 @@
-const state = () => ({})
+import { defineStore } from 'pinia'
+import { piniaStore } from '@/store'
 
-const getters = {}
+export const use{{ properCase name }}Store = defineStore(
+    // 唯一ID
+    '{{ camelCase name }}',
+    {
+        state: () => ({}),
+        getters: {},
+        actions: {}
+    }
+)
 
-const actions = {}
-
-const mutations = {}
-
-export default {
-    namespaced: true,
-    state,
-    actions,
-    getters,
-    mutations
+export function use{{ properCase name }}OutsideStore() {
+    return use{{ properCase name }}Store(piniaStore)
 }

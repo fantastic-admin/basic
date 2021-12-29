@@ -1,7 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import store from '@/store'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css' // progress bar style
+import { useSettingsOutsideStore } from '@/store/modules/settings'
+import { useKeepAliveOutsideStore } from '@/store/modules/keepAlive'
+import { useUserOutsideStore } from '@/store/modules/user'
+import { useMenuOutsideStore } from '@/store/modules/menu'
 
 // 固定路由
 const constantRoutes = [
@@ -23,7 +26,10 @@ const constantRoutes = [
                 name: 'dashboard',
                 component: () => import('@/views/index.vue'),
                 meta: {
-                    title: () => store.state.settings.dashboardTitle
+                    title: () => {
+                        const settingsOutsideStore = useSettingsOutsideStore()
+                        return settingsOutsideStore.dashboardTitle
+                    }
                 }
             },
             {
@@ -66,7 +72,7 @@ import ComponentExtendExample from './modules/component.extend.example'
 import PermissionExample from './modules/permission.example'
 import MockExample from './modules/mock.example'
 import ExternalLinkExample from './modules/external.link.example'
-import VideosExample from './modules/videos.example'
+// import VideosExample from './modules/videos.example'
 import EcologyExample from './modules/ecology.example'
 import CooperationExample from './modules/cooperation.example'
 
@@ -88,15 +94,15 @@ const asyncRoutes = [
             ExternalLinkExample
         ]
     },
-    {
-        meta: {
-            title: '教程',
-            icon: 'sidebar-videos'
-        },
-        children: [
-            ...VideosExample
-        ]
-    },
+    // {
+    //     meta: {
+    //         title: '教程',
+    //         icon: 'sidebar-videos'
+    //     },
+    //     children: [
+    //         ...VideosExample
+    //     ]
+    // },
     {
         meta: {
             title: '生态',
@@ -131,13 +137,16 @@ const router = createRouter({
 })
 
 router.beforeEach(async(to, from, next) => {
-    store.state.settings.enableProgress && NProgress.start()
+    const settingsOutsideStore = useSettingsOutsideStore()
+    const userOutsideStore = useUserOutsideStore()
+    const menuOutsideStore = useMenuOutsideStore()
+    settingsOutsideStore.enableProgress && NProgress.start()
     // 是否已登录
-    if (store.getters['user/isLogin']) {
+    if (userOutsideStore.isLogin) {
         // 是否已根据权限动态生成并挂载路由
-        if (store.state.menu.isGenerate) {
+        if (menuOutsideStore.isGenerate) {
             // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
-            store.state.settings.menuMode !== 'single' && store.commit('menu/setHeaderActived', to.path)
+            settingsOutsideStore.menuMode !== 'single' && menuOutsideStore.setHeaderActived(to.path)
             if (to.name) {
                 if (to.matched.length !== 0) {
                     // 如果已登录状态下，进入登录页会强制跳转到控制台页面
@@ -146,11 +155,11 @@ router.beforeEach(async(to, from, next) => {
                             name: 'dashboard',
                             replace: true
                         })
-                    } else if (!store.state.settings.enableDashboard && to.name == 'dashboard') {
+                    } else if (!settingsOutsideStore.enableDashboard && to.name == 'dashboard') {
                         // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
-                        if (store.getters['menu/sidebarRoutes'].length > 0) {
+                        if (menuOutsideStore.sidebarRoutes.length > 0) {
                             next({
-                                path: store.getters['menu/sidebarRoutesFirstDeepestPath'],
+                                path: menuOutsideStore.sidebarRoutesFirstDeepestPath,
                                 replace: true
                             })
                         } else {
@@ -170,10 +179,10 @@ router.beforeEach(async(to, from, next) => {
             }
         } else {
             let accessRoutes = []
-            if (!store.state.settings.enableBackendReturnRoute) {
-                accessRoutes = await store.dispatch('menu/generateRoutesAtFront', asyncRoutes)
+            if (!settingsOutsideStore.enableBackendReturnRoute) {
+                accessRoutes = await menuOutsideStore.generateRoutesAtFront(asyncRoutes)
             } else {
-                accessRoutes = await store.dispatch('menu/generateRoutesAtBack')
+                accessRoutes = await menuOutsideStore.generateRoutesAtBack()
             }
             accessRoutes.push(lastRoute)
             let removeRoutes = []
@@ -183,7 +192,7 @@ router.beforeEach(async(to, from, next) => {
                 }
             })
             // 记录的 accessRoutes 路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
-            store.commit('menu/setCurrentRemoveRoutes', removeRoutes)
+            menuOutsideStore.setCurrentRemoveRoutes(removeRoutes)
             next({ ...to, replace: true })
         }
     } else {
@@ -201,14 +210,16 @@ router.beforeEach(async(to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-    store.state.settings.enableProgress && NProgress.done()
+    const settingsOutsideStore = useSettingsOutsideStore()
+    const keepAliveOutsideStore = useKeepAliveOutsideStore()
+    settingsOutsideStore.enableProgress && NProgress.done()
     // 设置页面 title
-    to.meta.title && store.commit('settings/setTitle', typeof to.meta.title === 'function' ? to.meta.title() : to.meta.title)
+    to.meta.title && settingsOutsideStore.setTitle(typeof to.meta.title === 'function' ? to.meta.title() : to.meta.title)
     // 判断当前页面是否开启缓存，如果开启，则将当前页面的 name 信息存入 keep-alive 全局状态
     if (to.meta.cache) {
         let componentName = to.matched[to.matched.length - 1].components.default.name
         if (componentName) {
-            store.commit('keepAlive/add', componentName)
+            keepAliveOutsideStore.add(componentName)
         } else {
             console.warn('该页面组件未设置组件名，会导致缓存失效，请检查')
         }
@@ -220,18 +231,18 @@ router.afterEach((to, from) => {
         switch (typeof from.meta.cache) {
             case 'string':
                 if (from.meta.cache != to.name) {
-                    store.commit('keepAlive/remove', componentName)
+                    keepAliveOutsideStore.remove(componentName)
                 }
                 break
             case 'object':
                 if (!from.meta.cache.includes(to.name)) {
-                    store.commit('keepAlive/remove', componentName)
+                    keepAliveOutsideStore.remove(componentName)
                 }
                 break
         }
         // 如果进入的是 reload 页面，则也将离开页面的缓存清空
         if (to.name == 'reload') {
-            store.commit('keepAlive/remove', componentName)
+            keepAliveOutsideStore.remove(componentName)
         }
     }
 })
