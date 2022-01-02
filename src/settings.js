@@ -14,8 +14,8 @@ let globalSettings = {
      * single 侧边栏模式（无主导航）
      */
     menuMode: 'side',
-    // Element 组件默认尺寸，支持：large、medium、small、mini
-    elementSize: 'large',
+    // Element 组件默认尺寸，支持：large、default、small
+    elementSize: 'default',
     // 是否开启侧边栏展开收起按钮
     enableSidebarCollapse: false,
     // 侧边栏是否收起

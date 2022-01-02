@@ -18,9 +18,9 @@
                 <svg-icon name="toolbar-theme" />
             </span>
         </div>
-        <el-dropdown class="user-container" @command="userCommand">
+        <el-dropdown class="user-container" size="default" @command="userCommand">
             <div class="user-wrapper">
-                <el-avatar size="medium">
+                <el-avatar size="small">
                     <el-icon><el-icon-user-filled /></el-icon>
                 </el-avatar>
                 {{ userStore.account }}
@@ -104,16 +104,19 @@ function pro() {
 .tools {
     margin-right: 20px;
     .item {
-        margin-left: 5px;
-        padding: 6px 8px;
-        border-radius: 5px;
-        outline: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        height: 24px;
+        width: 34px;
         cursor: pointer;
         vertical-align: middle;
         transition: all 0.3s;
     }
     .item-pro {
         display: inline-block;
+        width: auto;
+        padding: 0 10px;
         transform-origin: right center;
         animation: pro-text 3s ease-out infinite;
         @keyframes pro-text {

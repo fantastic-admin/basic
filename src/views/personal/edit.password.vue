@@ -19,7 +19,7 @@
             </el-row>
         </page-main>
         <fixed-action-bar>
-            <el-button type="primary" @click="onSubmit">提交</el-button>
+            <el-button type="primary" size="large" @click="onSubmit">提交</el-button>
         </fixed-action-bar>
     </div>
 </template>

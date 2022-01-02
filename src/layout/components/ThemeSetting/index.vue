@@ -97,12 +97,11 @@
                         <svg-icon name="el-icon-question-filled" />
                     </el-tooltip>
                 </div>
-                <el-select v-model="elementSize" size="small">
-                    <el-option label="默认 (large)" value="large" />
-                    <el-option label="中等 (medium)" value="medium" />
-                    <el-option label="小 (small)" value="small" />
-                    <el-option label="极小 (mini)" value="mini" />
-                </el-select>
+                <el-radio-group v-model="elementSize" size="small">
+                    <el-radio-button label="large">较大</el-radio-button>
+                    <el-radio-button label="default">默认</el-radio-button>
+                    <el-radio-button label="small">稍小</el-radio-button>
+                </el-radio-group>
             </div>
             <div class="setting-item">
                 <div class="label">底部版权</div>
@@ -148,8 +147,6 @@ const settingsStore = useSettingsStore()
 import { useMenuStore } from '@/store/modules/menu'
 const menuStore = useMenuStore()
 
-const reload = inject('reload')
-
 const isShow = ref(false)
 
 const menuMode = computed({
@@ -169,11 +166,9 @@ const elementSize = computed({
         return settingsStore.elementSize
     },
     set: function(newValue) {
-        proxy.$ELEMENT.size = newValue
         settingsStore.updateThemeSetting({
             'elementSize': newValue
         })
-        reload()
     }
 })
 const enableSidebarCollapse = computed({

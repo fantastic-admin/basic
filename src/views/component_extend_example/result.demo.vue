@@ -3,8 +3,8 @@
         <page-header title="处理结果" content="Result" />
         <page-main>
             <result type="success" title="提交成功" desc="提交结果页用于反馈一系列操作任务的处理结果。">
-                <el-button type="primary" size="small">返回列表</el-button>
-                <el-button size="small">打印</el-button>
+                <el-button type="primary">返回列表</el-button>
+                <el-button>打印</el-button>
             </result>
         </page-main>
         <page-main>
@@ -16,7 +16,7 @@
                         <a href="###">打印</a>
                     </div>
                 </template>
-                <el-button type="primary" size="small">返回修改</el-button>
+                <el-button type="primary">返回修改</el-button>
             </result>
         </page-main>
     </div>

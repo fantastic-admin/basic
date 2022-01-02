@@ -129,8 +129,8 @@
             </el-row>
         </page-main>
         <fixed-action-bar>
-            <el-button type="primary">立即创建</el-button>
-            <el-button>取消</el-button>
+            <el-button type="primary" size="large">立即创建</el-button>
+            <el-button size="large">取消</el-button>
         </fixed-action-bar>
     </div>
 </template>

@@ -8,8 +8,8 @@
                 </div>
             </template>
             <el-button-group style="margin-right: 10px;">
-                <el-button type="success" plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin`)">开发文档</el-button>
-                <el-button type="primary" @click="open(`https://${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.com/hooray/fantastic-admin`)">代码仓库</el-button>
+                <el-button type="success" size="large" plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin`)">开发文档</el-button>
+                <el-button type="primary" size="large" @click="open(`https://${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.com/hooray/fantastic-admin`)">代码仓库</el-button>
             </el-button-group>
         </page-header>
         <el-row :gutter="20" style="margin: 0 10px;">

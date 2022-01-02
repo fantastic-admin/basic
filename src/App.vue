@@ -1,10 +1,12 @@
 <template>
-    <RouterView
-        :style="{
-            '--g-main-sidebar-actual-width': mainSidebarActualWidth,
-            '--g-sub-sidebar-actual-width': subSidebarActualWidth
-        }"
-    />
+    <el-config-provider :size="settingsStore.elementSize">
+        <RouterView
+            :style="{
+                '--g-main-sidebar-actual-width': mainSidebarActualWidth,
+                '--g-sub-sidebar-actual-width': subSidebarActualWidth
+            }"
+        />
+    </el-config-provider>
 </template>
 
 <script setup>

@@ -84,16 +84,14 @@
         </page-main>
         <page-main title="不同尺寸" class="demo">
             <div style="margin-bottom: 10px;">
-                <el-button>默认按钮</el-button>
-                <el-button size="medium">中等按钮</el-button>
-                <el-button size="small">小型按钮</el-button>
-                <el-button size="mini">超小按钮</el-button>
+                <el-button size="large">大号按钮</el-button>
+                <el-button size="default">默认按钮</el-button>
+                <el-button size="small">小号按钮</el-button>
             </div>
             <div>
-                <el-button round>默认按钮</el-button>
-                <el-button size="medium" round>中等按钮</el-button>
-                <el-button size="small" round>小型按钮</el-button>
-                <el-button size="mini" round>超小按钮</el-button>
+                <el-button size="large" round>大号按钮</el-button>
+                <el-button size="default" round>默认按钮</el-button>
+                <el-button size="small" round>小号按钮</el-button>
             </div>
         </page-main>
     </div>

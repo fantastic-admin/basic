@@ -3,7 +3,7 @@
         <page-header title="搜索面板" content="SearchBar" />
         <page-main>
             <search-bar show-more @toggle="searchMore = $event">
-                <el-form :model="search" size="small" label-width="120px">
+                <el-form :model="search" size="default" label-width="120px">
                     <el-row>
                         <el-col :span="12">
                             <el-form-item label="姓名 / 手机号">
@@ -57,7 +57,7 @@
         </page-main>
         <page-main title="默认展开">
             <search-bar show-more unfold @toggle="searchMore2 = $event">
-                <el-form :model="search" size="small" label-width="120px">
+                <el-form :model="search" size="default" label-width="120px">
                     <el-row>
                         <el-col :span="12">
                             <el-form-item label="姓名 / 手机号">
