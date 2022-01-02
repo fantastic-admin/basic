@@ -30,11 +30,11 @@
                     <el-checkbox v-model="loginForm.remember">记住我</el-checkbox>
                     <el-button type="text" @click="formType = 'reset'">忘记密码</el-button>
                 </div>
-                <el-button :loading="loading" type="primary" style="width: 100%;" @click.prevent="handleLogin">登 录</el-button>
+                <el-button :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleLogin">登 录</el-button>
                 <div style="margin-top: 20px; margin-bottom: -10px; color: #666; font-size: 14px; text-align: center; font-weight: bold;">
                     <span style="margin-right: 5px;">演示帐号一键登录：</span>
-                    <el-button type="danger" size="mini" @click="testAccount('admin')">admin</el-button>
-                    <el-button type="danger" size="mini" plain @click="testAccount('test')">test</el-button>
+                    <el-button type="danger" size="small" @click="testAccount('admin')">admin</el-button>
+                    <el-button type="danger" size="small" plain @click="testAccount('test')">test</el-button>
                 </div>
             </el-form>
             <el-form v-show="formType == 'reset'" ref="resetFormRef" :model="resetForm" :rules="resetRules" class="login-form" auto-complete="on" label-position="left">
@@ -72,10 +72,10 @@
                 </div>
                 <el-row :gutter="15" style="padding-top: 20px;">
                     <el-col :md="6">
-                        <el-button style="width: 100%;" @click="formType = 'login'">去登录</el-button>
+                        <el-button size="large" style="width: 100%;" @click="formType = 'login'">去登录</el-button>
                     </el-col>
                     <el-col :md="18">
-                        <el-button :loading="loading" type="primary" style="width: 100%;" @click.prevent="handleFind">确 认</el-button>
+                        <el-button :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleFind">确 认</el-button>
                     </el-col>
                 </el-row>
             </el-form>
@@ -259,6 +259,7 @@ function testAccount(account) {
     }
     .flex-bar {
         display: flex;
+        align-items: center;
         justify-content: space-between;
     }
     .el-checkbox {
