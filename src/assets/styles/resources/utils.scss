@@ -14,7 +14,8 @@
         white-space: nowrap;
     }
     @else {
-        display: box;
+        /* stylelint-disable-next-line value-no-vendor-prefix */
+        display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: $line;
         overflow: hidden;
