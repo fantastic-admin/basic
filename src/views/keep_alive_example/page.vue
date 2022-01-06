@@ -16,53 +16,42 @@
     </div>
 </template>
 
-<script>
+<script setup name="KeepAliveExamplePage">
+import { onBeforeRouteLeave } from 'vue-router'
+
+const router = useRouter()
+
 import { useKeepAliveStore } from '@/store/modules/keepAlive'
 const keepAliveStore = useKeepAliveStore()
 
-export default {
-    name: 'KeepAliveExamplePage',
-    beforeRouteEnter(to, from, next) {
-        // 进入页面时，先将当前页面的 name 信息存入 keep-alive 全局状态
-        next(vm => {
-            keepAliveStore.add(vm.$options.name)
-        })
-    },
-    beforeRouteLeave(to, from, next) {
-        if (this.openKeepAlive) {
-            // 因为并不是所有的路由跳转都需要将当前页面进行缓存，例如最常见的情况，从列表页进入详情页，则需要将列表页缓存，而从列表页跳转到其它页面，则不需要将列表页缓存
-            // 所以下面的代码意思就是，如果目标路由的 name 不是 keepAliveExampleDetail 或者 keepAliveExampleNestedDetail ，则将当前页面的 name 从 keep-alive 中删除
-            if (!['keepAliveExampleDetail', 'keepAliveExampleNestedDetail'].includes(to.name)) {
-                // 注意：上面校验的是路由的 name ，下面记录的是当前页面的 name
-                keepAliveStore.remove('KeepAliveExamplePage')
-            }
-        } else {
-            keepAliveStore.remove('KeepAliveExamplePage')
-        }
-        next()
-    },
-    props: {},
-    data() {
-        return {
-            openKeepAlive: false,
-            num: 1
-        }
-    },
-    created() {},
-    mounted() {},
-    methods: {
-        go(type) {
-            let routerName
-            switch (type) {
-                case 1: routerName = 'keepAliveExampleDetail'; break
-                case 2: routerName = 'keepAliveExampleNestedDetail'; break
-            }
-            this.$router.push({
-                name: routerName
-            })
-        }
+const openKeepAlive = ref(false)
+const num = ref(1)
+
+function go(type) {
+    let routerName
+    switch (type) {
+        case 1: routerName = 'keepAliveExampleDetail'; break
+        case 2: routerName = 'keepAliveExampleNestedDetail'; break
     }
+    router.push({
+        name: routerName
+    })
 }
+
+onBeforeRouteLeave((to, from) => {
+    const componentName = from.matched[to.matched.length - 1].components.default.name
+    if (openKeepAlive.value) {
+        // 因为并不是所有的路由跳转都需要将当前页面进行缓存，例如最常见的情况，从列表页进入详情页，则需要将列表页缓存，而从列表页跳转到其它页面，则不需要将列表页缓存
+        // 所以下面的代码意思就是，如果目标路由的 name 是 keepAliveExampleDetail 或者 keepAliveExampleNestedDetail ，则将当前页面组件的 name 添加进 keep-alive 中，否则则删除
+        if (['keepAliveExampleDetail', 'keepAliveExampleNestedDetail'].includes(to.name)) {
+            keepAliveStore.add(componentName)
+        } else {
+            keepAliveStore.remove(componentName)
+        }
+    } else {
+        keepAliveStore.remove(componentName)
+    }
+})
 </script>
 
 <style lang="scss" scoped>
