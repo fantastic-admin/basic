@@ -22,14 +22,14 @@
                 </transition-group>
             </el-breadcrumb>
         </div>
-        <UserMenu />
+        <Tools />
     </div>
 </template>
 
 <script setup>
 import { compile } from 'path-to-regexp'
 import { deepClone } from '@/util'
-import UserMenu from '../UserMenu/index.vue'
+import Tools from '../Tools/index.vue'
 
 const route = useRoute()
 

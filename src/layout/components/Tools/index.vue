@@ -1,14 +1,10 @@
 <template>
-    <div class="user">
-        <div class="tools">
-            <span v-if="settingsStore.mode == 'pc'" class="item item-pro" @click="pro">
-                <svg-icon name="pro" />
-                <span class="title">查看专业版</span>
-            </span>
+    <div class="tools">
+        <div class="buttons">
             <span v-if="settingsStore.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
                 <svg-icon name="search" />
             </span>
-            <span v-if="settingsStore.mode === 'pc' && isFullscreenEnable && settingsStore.enableFullscreen" class="item" @click="fullscreen">
+            <span v-if="settingsStore.mode === 'pc' && settingsStore.enableFullscreen" class="item" @click="toggle">
                 <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
             </span>
             <span v-if="settingsStore.enablePageReload" class="item" @click="reload()">
@@ -38,8 +34,6 @@
 </template>
 
 <script setup>
-import screenfull from 'screenfull'
-
 const reload = inject('reload')
 const router = useRouter()
 
@@ -48,26 +42,9 @@ const settingsStore = useSettingsStore()
 import { useUserStore } from '@/store/modules/user'
 const userStore = useUserStore()
 
-const isFullscreenEnable = computed(() => screenfull.isEnabled)
-const isFullscreen = ref(false)
+import { useFullscreen } from '@vueuse/core'
+const { isFullscreen, toggle } = useFullscreen()
 
-onMounted(() => {
-    if (isFullscreenEnable.value) {
-        screenfull.on('change', fullscreenChange)
-    }
-})
-onBeforeUnmount(() => {
-    if (isFullscreenEnable.value) {
-        screenfull.off('change', fullscreenChange)
-    }
-})
-
-function fullscreen() {
-    screenfull.toggle()
-}
-function fullscreenChange() {
-    isFullscreen.value = screenfull.isFullscreen
-}
 function userCommand(command) {
     switch (command) {
         case 'dashboard':
@@ -89,64 +66,32 @@ function userCommand(command) {
             break
     }
 }
-function pro() {
-    window.open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro`, 'top')
-}
 </script>
 
 <style lang="scss" scoped>
-.user {
+.tools {
     display: flex;
     align-items: center;
     padding: 0 20px;
     white-space: nowrap;
-}
-.tools {
-    margin-right: 20px;
-    .item {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        height: 24px;
-        width: 34px;
-        cursor: pointer;
-        vertical-align: middle;
-        transition: all 0.3s;
-    }
-    .item-pro {
-        display: inline-block;
-        width: auto;
-        padding: 0 10px;
-        transform-origin: right center;
-        animation: pro-text 3s ease-out infinite;
-        @keyframes pro-text {
-            0%,
-            20% {
-                transform: scale(1);
-            }
-            50%,
-            70% {
-                transform: scale(1.2);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-        .title {
-            padding-left: 5px;
-            font-weight: bold;
-            font-size: 14px;
-            background-image: linear-gradient(to right, #ffa237, #fc455d);
-            /* stylelint-disable-next-line property-no-vendor-prefix */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+    .buttons {
+        margin-right: 20px;
+        .item {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 24px;
+            width: 34px;
+            cursor: pointer;
+            vertical-align: middle;
+            transition: all 0.3s;
         }
     }
 }
 :deep(.user-container) {
     display: inline-block;
-    height: 50px;
-    line-height: 50px;
+    height: 24px;
+    line-height: 24px;
     cursor: pointer;
     .user-wrapper {
         .el-avatar {

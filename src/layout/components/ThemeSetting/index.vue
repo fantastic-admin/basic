@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <teleport to="#app">
         <el-drawer v-model="isShow" title="主题配置" direction="rtl" :size="300">
             <el-alert title="主题配置可实时预览效果，更多设置请在 src/settings.js 中进行设置，建议在生产环境隐藏主题配置功能" type="error" :closable="false" />
             <el-divider v-if="settingsStore.mode === 'pc'">导航栏模式</el-divider>
@@ -49,12 +49,7 @@
             </div>
             <el-divider>顶栏</el-divider>
             <div class="setting-item">
-                <div class="label">
-                    顶栏固定
-                    <el-tooltip content="包含顶部导航栏和标签栏" placement="top" :append-to-body="false">
-                        <svg-icon name="el-icon-question-filled" />
-                    </el-tooltip>
-                </div>
+                <div class="label">顶栏固定</div>
                 <el-switch v-model="topbarFixed" />
             </div>
             <div v-if="settingsStore.mode === 'pc'" class="setting-item">
@@ -135,7 +130,7 @@
                 <el-switch v-model="enableDashboard" />
             </div>
         </el-drawer>
-    </div>
+    </teleport>
 </template>
 
 <script setup>
@@ -310,13 +305,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-:deep(.el-drawer__body) {
-    padding: 0 15px 20px;
-    overflow: auto;
-}
-:deep(.el-input) {
-    width: 150px;
-}
 .menu-mode {
     display: flex;
     align-items: center;
@@ -427,6 +415,9 @@ onMounted(() => {
             color: #e6a23c;
             cursor: help;
         }
+    }
+    .el-switch {
+        height: auto;
     }
 }
 </style>

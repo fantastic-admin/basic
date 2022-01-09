@@ -1,10 +1,12 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import NProgress from 'nprogress'
-import 'nprogress/nprogress.css' // progress bar style
 import { useSettingsOutsideStore } from '@/store/modules/settings'
 import { useKeepAliveOutsideStore } from '@/store/modules/keepAlive'
 import { useUserOutsideStore } from '@/store/modules/user'
 import { useMenuOutsideStore } from '@/store/modules/menu'
+
+import './nprogress.css'
+import { useNProgress } from '@vueuse/integrations/useNProgress'
+const { isLoading } = useNProgress()
 
 // 固定路由
 const constantRoutes = [
@@ -98,7 +100,7 @@ router.beforeEach(async(to, from, next) => {
     const settingsOutsideStore = useSettingsOutsideStore()
     const userOutsideStore = useUserOutsideStore()
     const menuOutsideStore = useMenuOutsideStore()
-    settingsOutsideStore.enableProgress && NProgress.start()
+    settingsOutsideStore.enableProgress && (isLoading.value = true)
     // 是否已登录
     if (userOutsideStore.isLogin) {
         // 是否已根据权限动态生成并挂载路由
@@ -170,7 +172,7 @@ router.beforeEach(async(to, from, next) => {
 router.afterEach((to, from) => {
     const settingsOutsideStore = useSettingsOutsideStore()
     const keepAliveOutsideStore = useKeepAliveOutsideStore()
-    settingsOutsideStore.enableProgress && NProgress.done()
+    settingsOutsideStore.enableProgress && (isLoading.value = false)
     // 设置页面 title
     to.meta.title && settingsOutsideStore.setTitle(typeof to.meta.title === 'function' ? to.meta.title() : to.meta.title)
     // 判断当前页面是否开启缓存，如果开启，则将当前页面的 name 信息存入 keep-alive 全局状态
