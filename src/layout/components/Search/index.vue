@@ -1,52 +1,54 @@
 <template>
-    <div id="search" :class="{'searching': isShow}" @click="isShow && $eventBus.emit('global-search-toggle')">
-        <div class="container">
-            <div class="search-box" @click.stop>
-                <el-input ref="input" v-model="searchInput" prefix-icon="el-icon-search" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter" />
-                <div v-if="settingsStore.mode === 'pc'" class="tips">
-                    <div class="tip">
-                        <span>Alt</span>+<span>S</span>
-                        唤醒搜索面板
-                    </div>
-                    <div class="tip">
-                        <span><svg-icon name="search-up" /></span>
-                        <span><svg-icon name="search-down" /></span>
-                        切换搜索结果
-                    </div>
-                    <div class="tip">
-                        <span><svg-icon name="search-enter" /></span>
-                        访问页面
-                    </div>
-                    <div class="tip">
-                        <span>ESC</span>
-                        退出
+    <teleport to="#app">
+        <div id="search" :class="{'searching': isShow}" @click="isShow && $eventBus.emit('global-search-toggle')">
+            <div class="container">
+                <div class="search-box" @click.stop>
+                    <el-input ref="input" v-model="searchInput" prefix-icon="el-icon-search" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter" />
+                    <div v-if="settingsStore.mode === 'pc'" class="tips">
+                        <div class="tip">
+                            <span>Alt</span>+<span>S</span>
+                            唤醒搜索面板
+                        </div>
+                        <div class="tip">
+                            <span><svg-icon name="search-up" /></span>
+                            <span><svg-icon name="search-down" /></span>
+                            切换搜索结果
+                        </div>
+                        <div class="tip">
+                            <span><svg-icon name="search-enter" /></span>
+                            访问页面
+                        </div>
+                        <div class="tip">
+                            <span>ESC</span>
+                            退出
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div ref="search" class="result" :class="{'mobile': settingsStore.mode === 'mobile'}">
-                <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
-                    <a :ref="`search-item-${index}`" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
-                        <div class="icon">
-                            <svg-icon v-if="item.icon" :name="item.icon" />
-                        </div>
-                        <div class="info">
-                            <div class="title">
-                                {{ item.title }}
-                                <svg-icon v-if="item.isExternalLink" name="external-link" />
+                <div ref="search" class="result" :class="{'mobile': settingsStore.mode === 'mobile'}">
+                    <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
+                        <a :ref="`search-item-${index}`" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
+                            <div class="icon">
+                                <svg-icon v-if="item.icon" :name="item.icon" />
                             </div>
-                            <div class="breadcrumb">
-                                <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
-                                    {{ bc }}
-                                    <svg-icon name="el-icon-arrow-right" />
-                                </span>
+                            <div class="info">
+                                <div class="title">
+                                    {{ item.title }}
+                                    <svg-icon v-if="item.isExternalLink" name="external-link" />
+                                </div>
+                                <div class="breadcrumb">
+                                    <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
+                                        {{ bc }}
+                                        <svg-icon name="el-icon-arrow-right" />
+                                    </span>
+                                </div>
+                                <div class="path">{{ item.path }}</div>
                             </div>
-                            <div class="path">{{ item.path }}</div>
-                        </div>
-                    </a>
-                </router-link>
+                        </a>
+                    </router-link>
+                </div>
             </div>
         </div>
-    </div>
+    </teleport>
 </template>
 
 <script setup>
@@ -178,7 +180,7 @@ function keyUp() {
         if (actived.value < 0) {
             actived.value = resultList.value.length - 1
         }
-        scrollTo(proxy.$refs[`search-item-${actived.value}`].offsetTop)
+        scrollTo(proxy.$refs[`search-item-${actived.value}`][0].offsetTop)
     }
 }
 function keyDown() {
@@ -187,19 +189,19 @@ function keyDown() {
         if (actived.value > resultList.value.length - 1) {
             actived.value = 0
         }
-        scrollTo(proxy.$refs[`search-item-${actived.value}`].offsetTop)
+        scrollTo(proxy.$refs[`search-item-${actived.value}`][0].offsetTop)
     }
 }
 function keyEnter() {
     if (actived.value !== -1) {
-        proxy.$refs[`search-item-${actived.value}`].click()
+        proxy.$refs[`search-item-${actived.value}`][0].click()
     }
 }
 function scrollTo(offsetTop) {
     if (actived.value !== -1) {
         if (
-            offsetTop + proxy.$refs[`search-item-${actived.value}`].clientHeight > proxy.$refs['search'].scrollTop + proxy.$refs['search'].clientHeight ||
-            offsetTop + proxy.$refs[`search-item-${actived.value}`].clientHeight <= proxy.$refs['search'].scrollTop
+            offsetTop + proxy.$refs[`search-item-${actived.value}`][0].clientHeight > proxy.$refs['search'].scrollTop + proxy.$refs['search'].clientHeight ||
+            offsetTop + proxy.$refs[`search-item-${actived.value}`][0].clientHeight <= proxy.$refs['search'].scrollTop
         ) {
             proxy.$refs['search'].scrollTo({
                 top: offsetTop,

@@ -24,7 +24,7 @@ let globalSettings = {
     switchSidebarAndPageJump: false,
     // 侧边栏只保持一个子菜单的展开
     sidebarUniqueOpened: true,
-    // 顶栏（顶部导航栏和标签栏）是否固定
+    // 顶栏是否固定
     topbarFixed: true,
     // 是否开启面包屑导航
     enableBreadcrumb: true,

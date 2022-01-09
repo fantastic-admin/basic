@@ -203,7 +203,7 @@ header + .wrapper {
     .main-container {
         .topbar-container {
             top: $g-header-height;
-            :deep(.user) {
+            :deep(.tools) {
                 display: none;
             }
         }
