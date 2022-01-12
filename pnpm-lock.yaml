@@ -9,11 +9,11 @@ specifiers:
   '@vueuse/integrations': ^7.5.3
   axios: ^0.24.0
   dayjs: ^1.10.7
-  element-plus: ^1.3.0-beta.3
+  element-plus: ^1.3.0-beta.4
   eslint: ^8.6.0
   eslint-plugin-vue: ^8.2.0
   hotkeys-js: ^3.8.7
-  http-server: ^14.0.0
+  http-server: ^14.1.0
   husky: ^7.0.4
   js-cookie: ^3.0.1
   lint-staged: ^12.1.7
@@ -26,8 +26,8 @@ specifiers:
   pinia: ^2.0.9
   plop: ^3.0.5
   postcss-html: ^1.3.0
-  postcss-scss: ^4.0.2
-  qs: ^6.10.2
+  postcss-scss: ^4.0.3
+  qs: ^6.10.3
   sass: ^1.47.0
   stylelint: ^14.2.0
   stylelint-config-html: ^1.0.0
@@ -38,7 +38,7 @@ specifiers:
   stylelint-scss: ^4.1.0
   svgo: ^2.8.0
   tinymce: ^5.10.2
-  unplugin-auto-import: ^0.5.5
+  unplugin-auto-import: ^0.5.9
   unplugin-vue-components: ^0.17.11
   vite: ^2.7.10
   vite-plugin-banner: ^0.2.0
@@ -60,7 +60,7 @@ dependencies:
   '@vueuse/integrations': 7.5.3_vue@3.2.26
   axios: 0.24.0
   dayjs: 1.10.7
-  element-plus: 1.3.0-beta.3_vue@3.2.26
+  element-plus: 1.3.0-beta.4_vue@3.2.26
   hotkeys-js: 3.8.7
   js-cookie: 3.0.1
   mavon-editor: 3.0.0-beta
@@ -70,7 +70,7 @@ dependencies:
   path-browserify: 1.0.1
   path-to-regexp: 6.2.0
   pinia: 2.0.9_vue@3.2.26
-  qs: 6.10.2
+  qs: 6.10.3
   tinymce: 5.10.2
   vue: 3.2.26
   vue-router: 4.0.12_vue@3.2.26
@@ -80,12 +80,12 @@ devDependencies:
   '@vue/compiler-sfc': 3.2.26
   eslint: 8.6.0
   eslint-plugin-vue: 8.2.0_eslint@8.6.0
-  http-server: 14.0.0
+  http-server: 14.1.0
   husky: 7.0.4
   lint-staged: 12.1.7
   plop: 3.0.5
   postcss-html: 1.3.0
-  postcss-scss: 4.0.2
+  postcss-scss: 4.0.3
   sass: 1.47.0
   stylelint: 14.2.0
   stylelint-config-html: 1.0.0_2d1bcf73d0f2e8e613ccd6d821b0344f
@@ -95,7 +95,7 @@ devDependencies:
   stylelint-config-standard: 24.0.0_stylelint@14.2.0
   stylelint-scss: 4.1.0_stylelint@14.2.0
   svgo: 2.8.0
-  unplugin-auto-import: 0.5.5_@vueuse+core@7.5.3+vite@2.7.10
+  unplugin-auto-import: 0.5.9_@vueuse+core@7.5.3+vite@2.7.10
   unplugin-vue-components: 0.17.11_vite@2.7.10+vue@3.2.26
   vite: 2.7.10_sass@1.47.0
   vite-plugin-banner: 0.2.0
@@ -112,6 +112,12 @@ packages:
 
   /@antfu/utils/0.3.0:
     resolution: {integrity: sha1-YwbEO1Kog72Olz4+2N1kJIQYvMQ=, tarball: '@antfu/utils/download/@antfu/utils-0.3.0.tgz'}
+    dependencies:
+      '@types/throttle-debounce': 2.1.0
+    dev: true
+
+  /@antfu/utils/0.4.0:
+    resolution: {integrity: sha512-gqkpvjkgFUu+s3kP+Ly33OKpo5zvVY3FDFhv5BIb98SncS3KD6DNxPfNDjwHIoyXbz1leWo1j8DtRLZ1D2Jv+Q==, tarball: '@antfu/utils/download/@antfu/utils-0.4.0.tgz'}
     dependencies:
       '@types/throttle-debounce': 2.1.0
     dev: true
@@ -230,7 +236,7 @@ packages:
       builtin-modules: 3.2.0
       deepmerge: 4.2.2
       is-module: 1.0.0
-      resolve: 1.20.0
+      resolve: 1.21.0
     dev: true
 
   /@rollup/pluginutils/3.1.0:
@@ -1492,8 +1498,8 @@ packages:
       jake: 10.8.2
     dev: true
 
-  /element-plus/1.3.0-beta.3_vue@3.2.26:
-    resolution: {integrity: sha512-OeSAfuXpZJAdakC9hsQkcBrQEib+uVzzTZ52EiZZxQ1ArktxdfONkQyZ/KTR20pfr+3gla2guhWseg60md1sLA==, tarball: element-plus/download/element-plus-1.3.0-beta.3.tgz}
+  /element-plus/1.3.0-beta.4_vue@3.2.26:
+    resolution: {integrity: sha512-iCJuNJBCWUQFiK6YVPkoxRkNppPqMTeFGajdHYVLWC+pbshmHaRIBriYOF8ytFW8fPyEC77b8JlSBG/tHiLsyQ==, tarball: element-plus/download/element-plus-1.3.0-beta.4.tgz}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -2561,13 +2567,13 @@ packages:
       entities: 3.0.1
     dev: true
 
-  /http-server/14.0.0:
-    resolution: {integrity: sha1-vSFJUqYLk86Mqbvouhgfr3+YIbA=, tarball: http-server/download/http-server-14.0.0.tgz}
+  /http-server/14.1.0:
+    resolution: {integrity: sha512-5lYsIcZtf6pdR8tCtzAHTWrAveo4liUlJdWc7YafwK/maPgYHs+VNP6KpCClmUnSorJrARVMXqtT055zBv11Yg==, tarball: http-server/download/http-server-14.1.0.tgz}
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
       basic-auth: registry.nlark.com/basic-auth/2.0.1
-      colors: registry.nlark.com/colors/1.4.0
+      chalk: 4.1.2
       corser: registry.nlark.com/corser/2.0.1
       he: registry.nlark.com/he/1.2.0
       html-encoding-sniffer: registry.nlark.com/html-encoding-sniffer/3.0.0
@@ -2753,6 +2759,12 @@ packages:
 
   /is-core-module/2.8.0:
     resolution: {integrity: sha1-AyEzbD0JJeSX/Zf12VyxFKXM1Ug=, tarball: is-core-module/download/is-core-module-2.8.0.tgz}
+    dependencies:
+      has: 1.0.3
+    dev: true
+
+  /is-core-module/2.8.1:
+    resolution: {integrity: sha512-SdNCUs284hr40hFTFP6l0IfZ/RSrMXF3qgoRHd3/79unUTvrFO/JoXwkGm+5J/Oe3E/b5GsnG330uUNgRpu1PA==, tarball: is-core-module/download/is-core-module-2.8.1.tgz}
     dependencies:
       has: 1.0.3
     dev: true
@@ -3176,6 +3188,11 @@ packages:
       mlly: 0.2.10
     dev: true
 
+  /local-pkg/0.4.1:
+    resolution: {integrity: sha512-lL87ytIGP2FU5PWwNDo0w3WhIo2gopIAxPg9RxDYF7m4rr5ahuZxP22xnJHIvaLTe4Z9P6uKKY2UHiwyB4pcrw==, tarball: local-pkg/download/local-pkg-0.4.1.tgz}
+    engines: {node: '>=14'}
+    dev: true
+
   /locate-path/5.0.0:
     resolution: {integrity: sha1-Gvujlq/WdqbUJQTQpno6frn2KqA=, tarball: locate-path/download/locate-path-5.0.0.tgz}
     engines: {node: '>=8'}
@@ -3528,7 +3545,7 @@ packages:
     resolution: {integrity: sha1-5m2xg4sgDB38IzIl0SyzZSDiNKg=, tarball: normalize-package-data/download/normalize-package-data-2.5.0.tgz}
     dependencies:
       hosted-git-info: 2.8.9
-      resolve: 1.20.0
+      resolve: 1.21.0
       semver: 5.7.1
       validate-npm-package-license: 3.0.4
     dev: true
@@ -3538,7 +3555,7 @@ packages:
     engines: {node: '>=10'}
     dependencies:
       hosted-git-info: 4.0.2
-      is-core-module: 2.8.0
+      is-core-module: 2.8.1
       semver: 7.3.5
       validate-npm-package-license: 3.0.4
     dev: true
@@ -3965,8 +3982,8 @@ packages:
       postcss: 8.4.1
     dev: true
 
-  /postcss-scss/4.0.2:
-    resolution: {integrity: sha1-Od3MCrMvFV1asyjukTU9Z6UtU3s=, tarball: postcss-scss/download/postcss-scss-4.0.2.tgz?cache=0&sync_timestamp=1635496549918&other_urls=https%3A%2F%2Fregistry.npmmirror.com%2Fpostcss-scss%2Fdownload%2Fpostcss-scss-4.0.2.tgz}
+  /postcss-scss/4.0.3:
+    resolution: {integrity: sha512-j4KxzWovfdHsyxwl1BxkUal/O4uirvHgdzMKS1aWJBAV0qh2qj5qAZqpeBfVUYGWv+4iK9Az7SPyZ4fyNju1uA==, tarball: postcss-scss/download/postcss-scss-4.0.3.tgz}
     engines: {node: '>=12.0'}
     peerDependencies:
       postcss: ^8.3.3
@@ -4104,14 +4121,14 @@ packages:
     dev: false
     optional: true
 
-  /qs/6.10.2:
-    resolution: {integrity: sha512-mSIdjzqznWgfd4pMii7sHtaYF8rx8861hBO80SraY5GT0XQibWZWJSid0avzHGkDIZLImux2S5mXO0Hfct2QCw==, tarball: qs/download/qs-6.10.2.tgz}
+  /qs/6.10.3:
+    resolution: {integrity: sha512-wr7M2E0OFRfIfJZjKGieI8lBKb7fRCH4Fv5KNPEs7gJ8jadvotdsS08PzOKR7opXhZ/Xkjtt3WF9g38drmyRqQ==, tarball: qs/download/qs-6.10.3.tgz}
     engines: {node: '>=0.6'}
     dependencies:
       side-channel: 1.0.4
 
-  /qs/6.5.2:
-    resolution: {integrity: sha1-yzroBuh0BERYTvFUzo7pjUA/PjY=, tarball: qs/download/qs-6.5.2.tgz}
+  /qs/6.5.3:
+    resolution: {integrity: sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==, tarball: qs/download/qs-6.5.3.tgz}
     engines: {node: '>=0.6'}
     dev: true
 
@@ -4276,7 +4293,7 @@ packages:
       mime-types: 2.1.33
       oauth-sign: 0.9.0
       performance-now: 2.1.0
-      qs: 6.5.2
+      qs: 6.5.3
       safe-buffer: 5.2.1
       tough-cookie: 2.5.0
       tunnel-agent: 0.6.0
@@ -4327,6 +4344,15 @@ packages:
     dependencies:
       is-core-module: 2.8.0
       path-parse: 1.0.7
+    dev: true
+
+  /resolve/1.21.0:
+    resolution: {integrity: sha512-3wCbTpk5WJlyE4mSOtDLhqQmGFi0/TD9VPwmiolnk8U0wRgMEktqCXd3vy5buTO3tljvalNvKrjHEfrd2WpEKA==, tarball: resolve/download/resolve-1.21.0.tgz}
+    hasBin: true
+    dependencies:
+      is-core-module: 2.8.1
+      path-parse: 1.0.7
+      supports-preserve-symlinks-flag: 1.0.0
     dev: true
 
   /restore-cursor/3.1.0:
@@ -4831,7 +4857,7 @@ packages:
     peerDependencies:
       stylelint: ^14.0.0
     dependencies:
-      postcss-scss: 4.0.2
+      postcss-scss: 4.0.3
       stylelint: 14.2.0
       stylelint-config-recommended: 6.0.0_stylelint@14.2.0
       stylelint-scss: 4.1.0_stylelint@14.2.0
@@ -4959,6 +4985,11 @@ packages:
   /supports-color/9.2.1:
     resolution: {integrity: sha512-Obv7ycoCTG51N7y175StI9BlAXrmgZrFhZOb0/PyjHBher/NmsdBgbbQ1Inhq+gIhz6+7Gb+jWF2Vqi7Mf1xnQ==, tarball: supports-color/download/supports-color-9.2.1.tgz}
     engines: {node: '>=12'}
+    dev: true
+
+  /supports-preserve-symlinks-flag/1.0.0:
+    resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==, tarball: supports-preserve-symlinks-flag/download/supports-preserve-symlinks-flag-1.0.0.tgz}
+    engines: {node: '>= 0.4'}
     dev: true
 
   /svg-baker/1.7.0:
@@ -5221,8 +5252,8 @@ packages:
     engines: {node: '>= 0.8'}
     dev: true
 
-  /unplugin-auto-import/0.5.5_@vueuse+core@7.5.3+vite@2.7.10:
-    resolution: {integrity: sha512-PAP/6WdqWtGhlQBvlVZ7qmhHbLcTYSsARtFSbY/jaUx/SaQkRT7SvronHIKEvx4bPmS+l4erQ9gQKSBBPzvUnQ==, tarball: unplugin-auto-import/download/unplugin-auto-import-0.5.5.tgz}
+  /unplugin-auto-import/0.5.9_@vueuse+core@7.5.3+vite@2.7.10:
+    resolution: {integrity: sha512-PUKmTbbyTf1G4OLb7+8NZ9Ky+UuslbwiGu9GwgejAKWJcNXTPQexrWHpiOo7goo/cWQ+fya/SxHF+Y6zeDDFxw==, tarball: unplugin-auto-import/download/unplugin-auto-import-0.5.9.tgz}
     engines: {node: '>=14'}
     peerDependencies:
       '@vueuse/core': '*'
@@ -5230,14 +5261,15 @@ packages:
       '@vueuse/core':
         optional: true
     dependencies:
-      '@antfu/utils': 0.3.0
+      '@antfu/utils': 0.4.0
       '@rollup/pluginutils': 4.1.2
       '@vueuse/core': 7.5.3_vue@3.2.26
-      local-pkg: 0.4.0
+      local-pkg: 0.4.1
       magic-string: 0.25.7
-      resolve: 1.20.0
-      unplugin: 0.2.21_vite@2.7.10
+      resolve: 1.21.0
+      unplugin: 0.3.0_vite@2.7.10
     transitivePeerDependencies:
+      - esbuild
       - rollup
       - vite
       - webpack
@@ -5281,6 +5313,27 @@ packages:
       vite: ^2.3.0
       webpack: 4 || 5
     peerDependenciesMeta:
+      rollup:
+        optional: true
+      vite:
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      vite: 2.7.10_sass@1.47.0
+      webpack-virtual-modules: 0.4.3
+    dev: true
+
+  /unplugin/0.3.0_vite@2.7.10:
+    resolution: {integrity: sha512-9yLlOo+XC4NdIRgpkDSHOAHkQDq2x4mbuVNO/eKVa3C8WTn5wWGfzEFfRJFL8euqnX3Gf7hEur0AhXxy+WSwkg==, tarball: unplugin/download/unplugin-0.3.0.tgz}
+    peerDependencies:
+      esbuild: '>=0.13'
+      rollup: ^2.50.0
+      vite: ^2.3.0
+      webpack: 4 || 5
+    peerDependenciesMeta:
+      esbuild:
+        optional: true
       rollup:
         optional: true
       vite:
@@ -5724,13 +5777,6 @@ packages:
       safe-buffer: registry.nlark.com/safe-buffer/5.1.2
     dev: true
 
-  registry.nlark.com/colors/1.4.0:
-    resolution: {integrity: sha1-xQSRR51MG9rtLJztMs98fcI2D3g=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/colors/download/colors-1.4.0.tgz}
-    name: colors
-    version: 1.4.0
-    engines: {node: '>=0.1.90'}
-    dev: true
-
   registry.nlark.com/corser/2.0.1:
     resolution: {integrity: sha1-jtolLsqrWEDc2XXOuQ2TcMgZ/4c=, registry: https://registry.npm.taobao.org/, tarball: https://registry.nlark.com/corser/download/corser-2.0.1.tgz}
     name: corser
@@ -5885,7 +5931,7 @@ packages:
     version: 0.5.0
     engines: {node: '>= 0.8.0'}
     dependencies:
-      qs: 6.10.2
+      qs: 6.10.3
     dev: true
 
   registry.nlark.com/url-join/4.0.1:
