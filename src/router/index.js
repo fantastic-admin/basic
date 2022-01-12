@@ -4,7 +4,7 @@ import { useKeepAliveOutsideStore } from '@/store/modules/keepAlive'
 import { useUserOutsideStore } from '@/store/modules/user'
 import { useMenuOutsideStore } from '@/store/modules/menu'
 
-import './nprogress.css'
+import '@/assets/styles/nprogress.scss'
 import { useNProgress } from '@vueuse/integrations/useNProgress'
 const { isLoading } = useNProgress()
 

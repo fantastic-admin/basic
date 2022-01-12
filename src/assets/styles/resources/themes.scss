@@ -1,7 +1,8 @@
-// 【主区域】
-// 背景色
+/* ----- 应用 ----- */
+// 主区域背景色
 $g-main-bg: #f0f2f5;
-// 【头部】
+
+/* ----- 顶部 ----- */
 // 背景色
 $g-header-bg: #222b45;
 // 文字颜色
@@ -16,7 +17,8 @@ $g-header-menu-hover-bg: #334067;
 $g-header-menu-active-color: #fff;
 // 导航选中背景色
 $g-header-menu-active-bg: #334067;
-// 【主侧边栏】
+
+/* ----- 主导航 ----- */
 // 背景色
 $g-main-sidebar-bg: #222b45;
 // 菜单文字颜色
@@ -29,7 +31,8 @@ $g-main-sidebar-menu-hover-bg: #334067;
 $g-main-sidebar-menu-active-color: #fff;
 // 菜单选中背景色
 $g-main-sidebar-menu-active-bg: #334067;
-// 【次侧边栏】
+
+/* ----- 次导航 ----- */
 // 背景色
 $g-sub-sidebar-bg: #fafafa;
 // 菜单背景色
@@ -44,3 +47,6 @@ $g-sub-sidebar-menu-hover-bg: darken(#fafafa, 10);
 $g-sub-sidebar-menu-active-color: #e7f4ff;
 // 菜单选中背景色
 $g-sub-sidebar-menu-active-bg: #5482ee;
+
+/* ----- 进度条 ----- */
+$g-nprogress-color: #29d;
