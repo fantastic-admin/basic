@@ -14,7 +14,7 @@
             <span v-if="settingsStore.topbar.enablePageReload" class="item" @click="reload()">
                 <svg-icon name="toolbar-reload" />
             </span>
-            <span v-if="settingsStore.toolbar.enableAppSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
+            <span v-if="settingsStore.topbar.enableAppSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
                 <svg-icon name="toolbar-theme" />
             </span>
         </div>
