@@ -19,7 +19,7 @@ for (var key in ElementIcons) {
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 app.use(ElementPlus, {
     locale: zhCn,
-    size: useSettingsOutsideStore().elementSize
+    size: useSettingsOutsideStore().app.elementSize
 })
 
 import globalProperties from '@/util/global.properties'

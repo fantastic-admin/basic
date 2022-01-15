@@ -1,5 +1,5 @@
 <template>
-    <router-link :to="to" class="title" :class="{'is-link': settingsStore.enableDashboard}" :title="title">
+    <router-link :to="to" class="title" :class="{'is-link': settingsStore.dashboard.enable}" :title="title">
         <img v-if="showLogo" :src="logo" class="logo">
         <span v-if="showTitle">{{ title }}</span>
     </router-link>
@@ -27,7 +27,7 @@ const logo = ref(imgLogo)
 
 const to = computed(() => {
     let rtn = {}
-    if (settingsStore.enableDashboard) {
+    if (settingsStore.dashboard.enable) {
         rtn.name = 'dashboard'
     }
     return rtn

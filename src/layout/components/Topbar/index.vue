@@ -1,15 +1,15 @@
 <template>
     <div
         class="topbar-container" :class="{
-            'fixed': settingsStore.topbarFixed,
+            'fixed': settingsStore.topbar.fixed,
             'shadow': scrollTop
         }" data-fixed-calc-width
     >
         <div class="left-box">
-            <div v-if="enableSidebarCollapse" class="sidebar-collapse" :class="{'is-collapse': settingsStore.sidebarCollapse}" @click="settingsStore.toggleSidebarCollapse()">
+            <div v-if="enableSidebarCollapse" class="sidebar-collapse" :class="{'is-collapse': settingsStore.menu.subMenuCollapse}" @click="settingsStore.toggleSidebarCollapse()">
                 <svg-icon name="toolbar-collapse" />
             </div>
-            <el-breadcrumb v-if="settingsStore.enableBreadcrumb && settingsStore.mode === 'pc'" separator-class="el-icon-arrow-right">
+            <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc'" separator-class="el-icon-arrow-right">
                 <transition-group name="breadcrumb">
                     <template v-for="(item, index) in breadcrumbList">
                         <el-breadcrumb-item v-if="index < breadcrumbList.length - 1" :key="item.path" :to="pathCompile(item.path)">
@@ -38,17 +38,17 @@ const settingsStore = useSettingsStore()
 
 const enableSidebarCollapse = computed(() => {
     return settingsStore.mode === 'mobile' || (
-        ['side', 'head', 'single'].includes(settingsStore.menuMode) &&
-        settingsStore.enableSidebarCollapse
+        ['side', 'head', 'single'].includes(settingsStore.menu.menuMode) &&
+        settingsStore.topbar.enableSidebarCollapse
     )
 })
 
 const breadcrumbList = computed(() => {
     let breadcrumbList = []
-    if (settingsStore.enableDashboard) {
+    if (settingsStore.dashboard.enable) {
         breadcrumbList.push({
             path: '/dashboard',
-            title: settingsStore.dashboardTitle
+            title: settingsStore.dashboard.title
         })
     }
     if (route.meta.breadcrumbNeste) {

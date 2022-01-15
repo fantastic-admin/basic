@@ -5,13 +5,13 @@
                 <svg-icon name="pro" />
                 <span class="title">查看专业版</span>
             </span>
-            <span v-if="settingsStore.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
+            <span v-if="settingsStore.topbar.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
                 <svg-icon name="search" />
             </span>
-            <span v-if="settingsStore.mode === 'pc' && settingsStore.enableFullscreen" class="item" @click="toggle">
+            <span v-if="settingsStore.mode === 'pc' && settingsStore.topbar.enableFullscreen" class="item" @click="toggle">
                 <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
             </span>
-            <span v-if="settingsStore.enablePageReload" class="item" @click="reload()">
+            <span v-if="settingsStore.topbar.enablePageReload" class="item" @click="reload()">
                 <svg-icon name="toolbar-reload" />
             </span>
             <span v-if="settingsStore.enableThemeSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
@@ -28,7 +28,7 @@
             </div>
             <template #dropdown>
                 <el-dropdown-menu class="user-dropdown">
-                    <el-dropdown-item v-if="settingsStore.enableDashboard" command="dashboard">控制台</el-dropdown-item>
+                    <el-dropdown-item v-if="settingsStore.dashboard.enable" command="dashboard">控制台</el-dropdown-item>
                     <el-dropdown-item command="setting">个人设置</el-dropdown-item>
                     <el-dropdown-item divided command="logout">退出登录</el-dropdown-item>
                 </el-dropdown-menu>

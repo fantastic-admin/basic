@@ -1,8 +1,8 @@
 <template>
     <footer class="copyright">
-        Copyright © {{ settingsStore.copyrightDates }}
-        <a v-if="settingsStore.copyrightWebsite" :href="settingsStore.copyrightWebsite" target="_blank" rel="noopener">{{ settingsStore.copyrightCompany }},</a>
-        <span v-else>{{ settingsStore.copyrightCompany }},</span>
+        Copyright © {{ settingsStore.copyright.dates }}
+        <a v-if="settingsStore.copyright.website" :href="settingsStore.copyright.website" target="_blank" rel="noopener">{{ settingsStore.copyright.company }},</a>
+        <span v-else>{{ settingsStore.copyright.company }},</span>
         All Rights Reserved
     </footer>
 </template>
