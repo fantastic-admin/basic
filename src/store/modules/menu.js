@@ -157,7 +157,7 @@ export const useMenuStore = defineStore(
             transformRoutes: state => {
                 let routes
                 const settingsStore = useSettingsStore()
-                if (settingsStore.menuMode === 'single') {
+                if (settingsStore.menu.menuMode === 'single') {
                     routes = [{ children: [] }]
                     state.routes.map(item => {
                         routes[0].children.push(...item.children)
@@ -183,7 +183,7 @@ export const useMenuStore = defineStore(
                     const userStore = useUserStore()
                     let accessedRoutes
                     // 如果权限功能开启，则需要对路由数据进行筛选过滤
-                    if (settingsStore.enablePermission) {
+                    if (settingsStore.app.enablePermission) {
                         const permissions = await userStore.getPermissions()
                         accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
                     } else {
@@ -231,7 +231,7 @@ export const useMenuStore = defineStore(
                         let asyncRoutes = formatBackRoutes(res.data)
                         let accessedRoutes
                         // 如果权限功能开启，则需要对路由数据进行筛选过滤
-                        if (settingsStore.enablePermission) {
+                        if (settingsStore.app.enablePermission) {
                             const permissions = await userStore.getPermissions()
                             accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
                         } else {

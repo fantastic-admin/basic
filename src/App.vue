@@ -1,5 +1,5 @@
 <template>
-    <el-config-provider :size="settingsStore.elementSize">
+    <el-config-provider :size="settingsStore.app.elementSize">
         <RouterView
             :style="{
                 '--g-main-sidebar-actual-width': mainSidebarActualWidth,
@@ -17,7 +17,7 @@ const settingsStore = useSettingsStore()
 const mainSidebarActualWidth = computed(() => {
     let actualWidth = getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width')
     actualWidth = parseInt(actualWidth)
-    if (['head', 'single'].includes(settingsStore.menuMode)) {
+    if (['head', 'single'].includes(settingsStore.menu.menuMode)) {
         actualWidth = 0
     }
     return `${actualWidth}px`
@@ -27,7 +27,7 @@ const mainSidebarActualWidth = computed(() => {
 const subSidebarActualWidth = computed(() => {
     let actualWidth = getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width')
     actualWidth = parseInt(actualWidth)
-    if (settingsStore.sidebarCollapse) {
+    if (settingsStore.menu.subMenuCollapse) {
         actualWidth = 64
     }
     return `${actualWidth}px`
@@ -35,12 +35,12 @@ const subSidebarActualWidth = computed(() => {
 
 watch(() => settingsStore.mode, () => {
     if (settingsStore.mode === 'pc') {
-        settingsStore.updateThemeSetting({
-            'sidebarCollapse': settingsStore.sidebarCollapseLastStatus
+        settingsStore.$patch(state => {
+            state.menu.subMenuCollapse = settingsStore.subMenuCollapseLastStatus
         })
     } else if (settingsStore.mode === 'mobile') {
-        settingsStore.updateThemeSetting({
-            'sidebarCollapse': true
+        settingsStore.$patch(state => {
+            state.menu.subMenuCollapse = true
         })
     }
     document.body.setAttribute('data-mode', settingsStore.mode)
@@ -48,17 +48,17 @@ watch(() => settingsStore.mode, () => {
     immediate: true
 })
 
-watch(() => settingsStore.menuMode, () => {
-    document.body.setAttribute('data-menu-mode', settingsStore.menuMode)
+watch(() => settingsStore.menu.menuMode, () => {
+    document.body.setAttribute('data-menu-mode', settingsStore.menu.menuMode)
 }, {
     immediate: true
 })
 
 watch([
-    () => settingsStore.enableDynamicTitle,
+    () => settingsStore.app.enableDynamicTitle,
     () => settingsStore.title
 ], () => {
-    if (settingsStore.enableDynamicTitle && settingsStore.title) {
+    if (settingsStore.app.enableDynamicTitle && settingsStore.title) {
         let title = settingsStore.title
         document.title = `${title} - ${import.meta.env.VITE_APP_TITLE}`
     } else {

@@ -30,7 +30,7 @@ const constantRoutes = [
                 meta: {
                     title: () => {
                         const settingsOutsideStore = useSettingsOutsideStore()
-                        return settingsOutsideStore.dashboardTitle
+                        return settingsOutsideStore.dashboard.title
                     }
                 }
             },
@@ -100,13 +100,13 @@ router.beforeEach(async(to, from, next) => {
     const settingsOutsideStore = useSettingsOutsideStore()
     const userOutsideStore = useUserOutsideStore()
     const menuOutsideStore = useMenuOutsideStore()
-    settingsOutsideStore.enableProgress && (isLoading.value = true)
+    settingsOutsideStore.app.enableProgress && (isLoading.value = true)
     // 是否已登录
     if (userOutsideStore.isLogin) {
         // 是否已根据权限动态生成并挂载路由
         if (menuOutsideStore.isGenerate) {
             // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
-            settingsOutsideStore.menuMode !== 'single' && menuOutsideStore.setHeaderActived(to.path)
+            settingsOutsideStore.menu.menuMode !== 'single' && menuOutsideStore.setHeaderActived(to.path)
             if (to.name) {
                 if (to.matched.length !== 0) {
                     // 如果已登录状态下，进入登录页会强制跳转到控制台页面
@@ -115,7 +115,7 @@ router.beforeEach(async(to, from, next) => {
                             name: 'dashboard',
                             replace: true
                         })
-                    } else if (!settingsOutsideStore.enableDashboard && to.name == 'dashboard') {
+                    } else if (!settingsOutsideStore.dashboard.enable && to.name == 'dashboard') {
                         // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
                         if (menuOutsideStore.sidebarRoutes.length > 0) {
                             next({
@@ -139,7 +139,7 @@ router.beforeEach(async(to, from, next) => {
             }
         } else {
             let accessRoutes = []
-            if (!settingsOutsideStore.enableBackendReturnRoute) {
+            if (!settingsOutsideStore.app.enableBackendReturnRoute) {
                 accessRoutes = await menuOutsideStore.generateRoutesAtFront(asyncRoutes)
             } else {
                 accessRoutes = await menuOutsideStore.generateRoutesAtBack()
@@ -172,7 +172,7 @@ router.beforeEach(async(to, from, next) => {
 router.afterEach((to, from) => {
     const settingsOutsideStore = useSettingsOutsideStore()
     const keepAliveOutsideStore = useKeepAliveOutsideStore()
-    settingsOutsideStore.enableProgress && (isLoading.value = false)
+    settingsOutsideStore.app.enableProgress && (isLoading.value = false)
     // 设置页面 title
     to.meta.title && settingsOutsideStore.setTitle(typeof to.meta.title === 'function' ? to.meta.title() : to.meta.title)
     // 判断当前页面是否开启缓存，如果开启，则将当前页面的 name 信息存入 keep-alive 全局状态

@@ -38,7 +38,7 @@ export function deepClone(target) {
 function hasPermission(permission) {
     const settingsOutsideStore = useSettingsOutsideStore()
     const userOutsideStore = useUserOutsideStore()
-    if (settingsOutsideStore.enablePermission) {
+    if (settingsOutsideStore.app.enablePermission) {
         return userOutsideStore.permissions.some(v => {
             return v === permission
         })

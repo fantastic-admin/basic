@@ -1,16 +1,16 @@
 <template>
-    <div v-if="['side', 'head', 'single'].includes(settingsStore.menuMode) || settingsStore.mode === 'mobile'" class="sub-sidebar-container" :class="{'is-collapse': settingsStore.mode === 'pc' && settingsStore.sidebarCollapse}" @scroll="onSidebarScroll">
+    <div v-if="['side', 'head', 'single'].includes(settingsStore.menu.menuMode) || settingsStore.mode === 'mobile'" class="sub-sidebar-container" :class="{'is-collapse': settingsStore.mode === 'pc' && settingsStore.menu.subMenuCollapse}" @scroll="onSidebarScroll">
         <Logo
-            :show-logo="settingsStore.menuMode === 'single'" :class="{
+            :show-logo="settingsStore.menu.menuMode === 'single'" :class="{
                 'sidebar-logo': true,
-                'sidebar-logo-bg': settingsStore.menuMode === 'single',
+                'sidebar-logo-bg': settingsStore.menu.menuMode === 'single',
                 'shadow': sidebarScrollTop
             }"
         />
         <!-- 侧边栏模式（无主导航） -->
         <el-menu
-            :unique-opened="settingsStore.sidebarUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.sidebarCollapse" :collapse-transition="false" :class="{
-                'is-collapse-without-logo': settingsStore.menuMode !== 'single' && settingsStore.sidebarCollapse
+            :unique-opened="settingsStore.menu.subMenuUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.menu.subMenuCollapse" :collapse-transition="false" :class="{
+                'is-collapse-without-logo': settingsStore.menu.menuMode !== 'single' && settingsStore.menu.subMenuCollapse
             }"
         >
             <transition-group name="sub-sidebar">

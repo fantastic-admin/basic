@@ -1,6 +1,6 @@
 <template>
     <transition name="header">
-        <header v-if="settingsStore.mode === 'pc' && settingsStore.menuMode === 'head'">
+        <header v-if="settingsStore.mode === 'pc' && settingsStore.menu.menuMode === 'head'">
             <div class="header-container">
                 <div class="main">
                     <Logo />

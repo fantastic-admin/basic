@@ -9,7 +9,7 @@ export const useSettingsStore = defineStore(
         state: () => ({
             ...settings,
             // 侧边栏是否收起（用于记录 pc 模式下最后的状态）
-            sidebarCollapseLastStatus: settings.sidebarCollapse,
+            subMenuCollapseLastStatus: settings.menu.subMenuCollapse,
             // 显示模式，支持：mobile、pc
             mode: 'pc',
             // 页面标题
@@ -18,7 +18,7 @@ export const useSettingsStore = defineStore(
         actions: {
             // 设置访问模式
             setMode(width) {
-                if (this.enableMobileAdaptation) {
+                if (this.layout.enableMobileAdaptation) {
                     // 先判断 UA 是否为移动端设备（手机&平板）
                     if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
                         this.mode = 'mobile'
@@ -40,9 +40,9 @@ export const useSettingsStore = defineStore(
             },
             // 切换侧边栏导航展开/收起
             toggleSidebarCollapse() {
-                this.sidebarCollapse = !this.sidebarCollapse
+                this.menu.subMenuCollapse = !this.menu.subMenuCollapse
                 if (this.mode == 'pc') {
-                    this.sidebarCollapseLastStatus = !this.sidebarCollapseLastStatus
+                    this.subMenuCollapseLastStatus = !this.subMenuCollapseLastStatus
                 }
             },
             // 更新主题配置

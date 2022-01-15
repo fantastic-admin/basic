@@ -80,7 +80,7 @@
                 </el-row>
             </el-form>
         </div>
-        <Copyright v-if="settingsStore.showCopyright" />
+        <Copyright v-if="settingsStore.copyright.enable" />
     </div>
 </template>
 
