@@ -58,7 +58,9 @@ let globalSettings = {
         // 是否开启全屏
         enableFullscreen: false,
         // 是否开启页面刷新
-        enablePageReload: false
+        enablePageReload: false,
+        // 是否开启应用配置（建议在生产环境关闭）
+        enableAppSetting: false
     },
     // 底部版权
     copyright: {
@@ -68,9 +70,7 @@ let globalSettings = {
         dates: '2020-2022',
         company: 'Fantastic-admin',
         website: 'https://hooray.github.io/fantastic-admin'
-    },
-    // 是否开启主题配置（建议在生产环境关闭）
-    enableThemeSetting: true
+    }
 }
 
 import settingsCustom from './settings.custom.json'
@@ -83,6 +83,7 @@ if (import.meta.env.VITE_APP_MODE === 'example' || import.meta.env.MODE === 'dev
     globalSettings.topbar.enableSidebarCollapse = true
     globalSettings.topbar.enableFullscreen = true
     globalSettings.topbar.enablePageReload = true
+    globalSettings.topbar.enableAppSetting = true
 }
 
 export default globalSettings
