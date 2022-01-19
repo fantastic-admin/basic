@@ -18,6 +18,12 @@ module.exports = {
         './auto-import-eslint-config.js'
     ],
     parser: 'vue-eslint-parser',
+    parserOptions: {
+        ecmaVersion: '2020',
+        ecmaFeatures: {
+            jsx: true
+        }
+    },
     rules: {
         // 代码风格
         'block-spacing': [2, 'always'],
