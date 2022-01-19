@@ -73,6 +73,7 @@ import ComponentBasicExample from './modules/component.basic.example'
 import ComponentExtendExample from './modules/component.extend.example'
 import PermissionExample from './modules/permission.example'
 import MockExample from './modules/mock.example'
+import JsxExample from './modules/jsx.example'
 import ExternalLinkExample from './modules/external.link.example'
 // import VideosExample from './modules/videos.example'
 import EcologyExample from './modules/ecology.example'
@@ -93,6 +94,7 @@ const asyncRoutes = [
             ComponentExtendExample,
             PermissionExample,
             MockExample,
+            JsxExample,
             ExternalLinkExample
         ]
     },

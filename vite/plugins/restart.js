@@ -10,6 +10,7 @@ export default function createRestart() {
             'vite/plugins/components.js',
             'vite/plugins/compression.js',
             'vite/plugins/html.js',
+            'vite/plugins/jsx.js',
             'vite/plugins/mock.js',
             'vite/plugins/restart.js',
             'vite/plugins/setup-extend.js',
