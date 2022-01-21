@@ -114,7 +114,7 @@ function switchMenu(index) {
     }
     &[data-menu-mode="single"] {
         .sidebar-container {
-            transform: translateX(calc(var(--g-main-sidebar-width) * -1));
+            transform: translateX(calc(var(--g-sub-sidebar-width) * -1));
             &.show {
                 transform: translateX(0);
             }
