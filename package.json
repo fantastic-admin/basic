@@ -15,10 +15,10 @@
         "preinstall": "npx only-allow pnpm"
     },
     "dependencies": {
-        "@element-plus/icons-vue": "^0.2.4",
+        "@element-plus/icons-vue": "^0.2.6",
         "@tinymce/tinymce-vue": "^4.0.5",
-        "@vueuse/core": "^7.5.3",
-        "@vueuse/integrations": "^7.5.3",
+        "@vueuse/core": "^7.5.4",
+        "@vueuse/integrations": "^7.5.4",
         "axios": "^0.24.0",
         "dayjs": "^1.10.7",
         "element-plus": "^1.3.0-beta.5",
@@ -31,23 +31,23 @@
         "pinia": "^2.0.9",
         "qs": "^6.10.3",
         "tinymce": "^5.10.2",
-        "vue": "^3.2.26",
+        "vue": "^3.2.29",
         "vue-router": "^4.0.12"
     },
     "devDependencies": {
-        "@vitejs/plugin-vue": "^2.0.1",
+        "@vitejs/plugin-vue": "^2.1.0",
         "@vitejs/plugin-vue-jsx": "^1.3.3",
-        "@vue/compiler-sfc": "^3.2.26",
-        "eslint": "^8.6.0",
+        "@vue/compiler-sfc": "^3.2.29",
+        "eslint": "^8.7.0",
         "eslint-plugin-vue": "^8.3.0",
         "http-server": "^14.1.0",
         "husky": "^7.0.4",
-        "lint-staged": "^12.1.7",
+        "lint-staged": "^12.3.1",
         "plop": "^3.0.5",
         "postcss-html": "^1.3.0",
         "postcss-scss": "^4.0.3",
-        "sass": "^1.48.0",
-        "stylelint": "^14.2.0",
+        "sass": "^1.49.0",
+        "stylelint": "^14.3.0",
         "stylelint-config-html": "^1.0.0",
         "stylelint-config-recommended": "^6.0.0",
         "stylelint-config-recommended-scss": "^5.0.2",
@@ -56,8 +56,8 @@
         "stylelint-scss": "^4.1.0",
         "svgo": "^2.8.0",
         "unplugin-auto-import": "^0.5.11",
-        "unplugin-vue-components": "^0.17.11",
-        "vite": "^2.7.12",
+        "unplugin-vue-components": "^0.17.14",
+        "vite": "^2.7.13",
         "vite-plugin-banner": "^0.2.0",
         "vite-plugin-compression": "^0.4.0",
         "vite-plugin-html": "^2.1.2",
@@ -66,6 +66,6 @@
         "vite-plugin-spritesmith": "^0.1.1",
         "vite-plugin-svg-icons": "^1.1.0",
         "vite-plugin-vue-setup-extend": "^0.3.0",
-        "vue-eslint-parser": "^8.0.1"
+        "vue-eslint-parser": "^8.2.0"
     }
 }
