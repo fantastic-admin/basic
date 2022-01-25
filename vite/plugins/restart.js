@@ -1,21 +1,17 @@
 import ViteRestart from 'vite-plugin-restart'
 
 export default function createRestart() {
+    const pluginsFile = []
+    const fs = require('fs')
+    fs.readdirSync('vite/plugins').map(dirname => {
+        if (fs.statSync(`vite/plugins/${dirname}`).isFile()) {
+            pluginsFile.push(`vite/plugins/${dirname}`)
+        }
+    })
     return ViteRestart({
         restart: [
-            '.env.development',
-            'vite/plugins/index.js',
-            'vite/plugins/auto-import.js',
-            'vite/plugins/banner.js',
-            'vite/plugins/components.js',
-            'vite/plugins/compression.js',
-            'vite/plugins/html.js',
-            'vite/plugins/jsx.js',
-            'vite/plugins/mock.js',
-            'vite/plugins/restart.js',
-            'vite/plugins/setup-extend.js',
-            'vite/plugins/spritesmith.js',
-            'vite/plugins/svg-icon.js'
+            ...pluginsFile,
+            '.env.development'
         ]
     })
 }
