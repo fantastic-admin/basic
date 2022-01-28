@@ -3,6 +3,5 @@
         "source.fixAll.eslint": true,
         "source.fixAll.stylelint": true
     },
-    "stylelint.validate": ["css", "scss", "vue"],
-    "vetur.completion.autoImport": false
+    "stylelint.validate": ["css", "scss", "vue"]
 }
