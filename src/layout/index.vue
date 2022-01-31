@@ -92,10 +92,10 @@ provide('switchMenu', switchMenu)
 function switchMenu(index) {
     menuStore.switchHeaderActived(index)
     if (settingsStore.menu.switchMainMenuAndPageJump) {
-        if (isExternalLink(menuStore.sidebarRoutesFirstDeepestPath)) {
-            window.open(menuStore.sidebarRoutesFirstDeepestPath, '_blank')
+        if (isExternalLink(menuStore.sidebarMenusFirstDeepestPath)) {
+            window.open(menuStore.sidebarMenusFirstDeepestPath, '_blank')
         } else {
-            router.push(menuStore.sidebarRoutesFirstDeepestPath)
+            router.push(menuStore.sidebarMenusFirstDeepestPath)
         }
     }
 }

@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 import { piniaStore } from '@/store'
 import api from '@/api'
 
+import { useRouteStore } from './route'
 import { useMenuStore } from './menu'
 
 export const useUserStore = defineStore(
@@ -46,6 +47,7 @@ export const useUserStore = defineStore(
             },
             logout() {
                 return new Promise(resolve => {
+                    const routeStore = useRouteStore()
                     const menuStore = useMenuStore()
                     localStorage.removeItem('account')
                     localStorage.removeItem('token')
@@ -53,8 +55,8 @@ export const useUserStore = defineStore(
                     this.account = ''
                     this.token = ''
                     this.failure_time = ''
-                    menuStore.invalidRoutes()
-                    menuStore.removeRoutes()
+                    routeStore.removeRoutes()
+                    menuStore.switchHeaderActived(0)
                     resolve()
                 })
             },

@@ -14,7 +14,7 @@
             }"
         >
             <transition-group name="sub-sidebar">
-                <template v-for="route in menuStore.sidebarRoutes">
+                <template v-for="route in menuStore.sidebarMenus">
                     <SidebarItem v-if="route.meta.sidebar !== false" :key="route.path" :item="route" :base-path="route.path" />
                 </template>
             </transition-group>

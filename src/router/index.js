@@ -3,6 +3,7 @@ import { useSettingsOutsideStore } from '@/store/modules/settings'
 import { useKeepAliveOutsideStore } from '@/store/modules/keepAlive'
 import { useUserOutsideStore } from '@/store/modules/user'
 import { useMenuOutsideStore } from '@/store/modules/menu'
+import { useRouteOutsideStore } from '@/store/modules/route'
 
 import '@/assets/styles/nprogress.scss'
 import { useNProgress } from '@vueuse/integrations/useNProgress'
@@ -144,11 +145,12 @@ router.beforeEach(async(to, from, next) => {
     const settingsOutsideStore = useSettingsOutsideStore()
     const userOutsideStore = useUserOutsideStore()
     const menuOutsideStore = useMenuOutsideStore()
+    const routeOutsideStore = useRouteOutsideStore()
     settingsOutsideStore.app.enableProgress && (isLoading.value = true)
     // 是否已登录
     if (userOutsideStore.isLogin) {
         // 是否已根据权限动态生成并挂载路由
-        if (menuOutsideStore.isGenerate) {
+        if (routeOutsideStore.isGenerate) {
             // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
             settingsOutsideStore.menu.menuMode !== 'single' && menuOutsideStore.setHeaderActived(to.path)
             if (to.name) {
@@ -161,9 +163,9 @@ router.beforeEach(async(to, from, next) => {
                         })
                     } else if (!settingsOutsideStore.dashboard.enable && to.name == 'dashboard') {
                         // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
-                        if (menuOutsideStore.sidebarRoutes.length > 0) {
+                        if (menuOutsideStore.sidebarMenus.length > 0) {
                             next({
-                                path: menuOutsideStore.sidebarRoutesFirstDeepestPath,
+                                path: menuOutsideStore.sidebarMenusFirstDeepestPath,
                                 replace: true
                             })
                         } else {
@@ -182,21 +184,20 @@ router.beforeEach(async(to, from, next) => {
                 next()
             }
         } else {
-            let accessRoutes = []
             if (!settingsOutsideStore.app.enableBackendReturnRoute) {
-                accessRoutes = await menuOutsideStore.generateRoutesAtFront(asyncRoutes)
+                await routeOutsideStore.generateRoutesAtFront(asyncRoutes)
             } else {
-                accessRoutes = await menuOutsideStore.generateRoutesAtBack()
+                await routeOutsideStore.generateRoutesAtBack()
             }
-            accessRoutes.push(lastRoute)
             let removeRoutes = []
-            accessRoutes.forEach(route => {
+            routeOutsideStore.flatRoutes.forEach(route => {
                 if (!/^(https?:|mailto:|tel:)/.test(route.path)) {
                     removeRoutes.push(router.addRoute(route))
                 }
             })
+            removeRoutes.push(router.addRoute(lastRoute))
             // 记录的 accessRoutes 路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
-            menuOutsideStore.setCurrentRemoveRoutes(removeRoutes)
+            routeOutsideStore.setCurrentRemoveRoutes(removeRoutes)
             next({ ...to, replace: true })
         }
     } else {
