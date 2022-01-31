@@ -4,7 +4,7 @@
             <Logo :show-title="false" class="sidebar-logo" />
             <!-- 侧边栏模式（含主导航） -->
             <div class="nav">
-                <template v-for="(item, index) in menuStore.transformRoutes">
+                <template v-for="(item, index) in menuStore.allMenus">
                     <div
                         v-if="item.children && item.children.length !== 0" :key="index" :class="{
                             'item': true,
