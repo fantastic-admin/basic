@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="breadcrumb">
                                     <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
-                                        {{ bc.title }}
+                                        {{ bc }}
                                         <svg-icon name="el-icon-arrow-right" />
                                     </span>
                                 </div>
@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { isExternalLink } from '@/util'
+import { deepClone, isExternalLink } from '@/util'
 
 const { proxy } = getCurrentInstance()
 
@@ -63,38 +63,8 @@ const routeStore = useRouteStore()
 
 const isShow = ref(false)
 const searchInput = ref('')
+const sourceList = ref([])
 const actived = ref(-1)
-
-const sourceList = computed(() => {
-    let list = []
-    routeStore.flatRoutes.map(item => {
-        if (item.children) {
-            item.children.map(child => {
-                list.push({
-                    icon: child.meta.icon || item.meta.icon,
-                    title: child.meta.title,
-                    i18n: child.meta.i18n,
-                    breadcrumb: child.meta.breadcrumbNeste,
-                    path: child.path,
-                    isExternalLink: isExternalLink(child.path)
-                })
-            })
-        } else {
-            list.push({
-                icon: item.meta.icon,
-                title: item.meta.title,
-                i18n: item.meta.i18n,
-                breadcrumb: [{
-                    title: item.meta.title,
-                    path: item.path
-                }],
-                path: item.path,
-                isExternalLink: isExternalLink(item.path)
-            })
-        }
-    })
-    return list
-})
 
 const resultList = computed(() => {
     let result = []
@@ -106,7 +76,7 @@ const resultList = computed(() => {
         if (item.path.indexOf(searchInput.value) >= 0) {
             flag = true
         }
-        if (item.breadcrumb.some(b => b.title.indexOf(searchInput.value) >= 0)) {
+        if (item.breadcrumb.some(b => b.indexOf(searchInput.value) >= 0)) {
             flag = true
         }
         return flag
@@ -151,8 +121,59 @@ onMounted(() => {
             isShow.value = true
         }
     })
+    routeStore.routes.map(item => {
+        getSourceList(item.children)
+    })
 })
 
+function hasChildren(item) {
+    let flag = true
+    if (item.children) {
+        if (item.children.every(i => i.meta.sidebar === false)) {
+            flag = false
+        }
+    } else {
+        flag = false
+    }
+    return flag
+}
+function getSourceList(arr) {
+    arr.map(item => {
+        if (item.meta.sidebar !== false) {
+            if (hasChildren(item)) {
+                let baseBreadcrumb = item.meta.baseBreadcrumb ? deepClone(item.meta.baseBreadcrumb) : []
+                baseBreadcrumb.push(item.meta.title)
+                let child = deepClone(item.children)
+                child.map(c => {
+                    c.meta.baseIcon = item.meta.icon || item.meta.baseIcon
+                    c.meta.baseBreadcrumb = baseBreadcrumb
+                    c.meta.basePath = item.meta.basePath ? [item.meta.basePath, item.path].join('/') : item.path
+                })
+                getSourceList(child)
+            } else {
+                let breadcrumb = []
+                if (item.meta.baseBreadcrumb) {
+                    breadcrumb = deepClone(item.meta.baseBreadcrumb)
+                }
+                breadcrumb.push(item.meta.title)
+                let path = ''
+                if (isExternalLink(item.path)) {
+                    path = item.path
+                } else {
+                    path = item.meta.basePath ? [item.meta.basePath, item.path].join('/') : item.path
+                }
+                sourceList.value.push({
+                    icon: item.meta.icon || item.meta.baseIcon,
+                    title: item.meta.title,
+                    i18n: item.meta.i18n,
+                    breadcrumb: breadcrumb,
+                    path: path,
+                    isExternalLink: isExternalLink(item.path)
+                })
+            }
+        }
+    })
+}
 function keyUp() {
     if (resultList.value.length) {
         actived.value -= 1
