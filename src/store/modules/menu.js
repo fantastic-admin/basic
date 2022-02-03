@@ -34,7 +34,7 @@ export const useMenuStore = defineStore(
     'menu',
     {
         state: () => ({
-            headerActived: 0
+            actived: 0
         }),
         getters: {
             // 完整导航数据
@@ -54,7 +54,7 @@ export const useMenuStore = defineStore(
             },
             // 次导航数据
             sidebarMenus() {
-                return this.allMenus.length > 0 ? this.allMenus[this.headerActived].children : []
+                return this.allMenus.length > 0 ? this.allMenus[this.actived].children : []
             },
             // 次导航里第一个导航的路径
             sidebarMenusFirstDeepestPath() {
@@ -73,22 +73,23 @@ export const useMenuStore = defineStore(
             }
         },
         actions: {
-            // 根据路由判断属于哪个头部导航
-            setHeaderActived(path) {
-                const routeStore = useRouteStore()
-                routeStore.routes.map((item, index) => {
-                    if (
-                        item.children.some(r => {
-                            return path.indexOf(r.path + '/') === 0 || path == r.path
-                        })
-                    ) {
-                        this.headerActived = index
-                    }
-                })
-            },
-            // 切换头部导航
-            switchHeaderActived(index) {
-                this.headerActived = index
+            // 切换主导航
+            setActived(data) {
+                if (typeof data === 'number') {
+                    // 如果是 number 类型，则认为是主导航的索引
+                    this.actived = data
+                } else {
+                    // 如果是 string 类型，则认为是路由，需要查找对应的主导航索引
+                    this.allMenus.map((item, index) => {
+                        if (
+                            item.children.some(r => {
+                                return data.indexOf(r.path + '/') === 0 || data == r.path
+                            })
+                        ) {
+                            this.actived = index
+                        }
+                    })
+                }
             }
         }
     }

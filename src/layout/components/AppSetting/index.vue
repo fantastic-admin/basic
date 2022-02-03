@@ -179,8 +179,8 @@ const settings = ref(globalSettings)
 
 watch(() => settings, () => {
     settingsStore.updateThemeSetting(settings.value)
-    menuStore.switchHeaderActived(0)
-    settings.value.menu.menuMode !== 'single' && menuStore.setHeaderActived(route.fullPath)
+    menuStore.setActived(0)
+    settings.value.menu.menuMode !== 'single' && menuStore.setActived(route.fullPath)
 }, {
     deep: true
 })

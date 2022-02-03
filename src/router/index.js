@@ -152,7 +152,7 @@ router.beforeEach(async(to, from, next) => {
         // 是否已根据权限动态生成并挂载路由
         if (routeOutsideStore.isGenerate) {
             // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
-            settingsOutsideStore.menu.menuMode !== 'single' && menuOutsideStore.setHeaderActived(to.path)
+            settingsOutsideStore.menu.menuMode !== 'single' && menuOutsideStore.setActived(to.path)
             if (to.name) {
                 if (to.matched.length !== 0) {
                     // 如果已登录状态下，进入登录页会强制跳转到控制台页面

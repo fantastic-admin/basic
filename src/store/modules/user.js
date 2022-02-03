@@ -56,7 +56,7 @@ export const useUserStore = defineStore(
                     this.token = ''
                     this.failure_time = ''
                     routeStore.removeRoutes()
-                    menuStore.switchHeaderActived(0)
+                    menuStore.setActived(0)
                     resolve()
                 })
             },

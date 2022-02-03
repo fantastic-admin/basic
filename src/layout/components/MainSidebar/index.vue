@@ -8,7 +8,7 @@
                     <div
                         v-if="item.children && item.children.length !== 0" :key="index" :class="{
                             'item': true,
-                            'active': index === menuStore.headerActived
+                            'active': index === menuStore.actived
                         }" :title="item.meta.title" @click="switchMenu(index)"
                     >
                         <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
