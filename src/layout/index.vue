@@ -88,7 +88,7 @@ function reload() {
 
 provide('switchMenu', switchMenu)
 function switchMenu(index) {
-    menuStore.switchHeaderActived(index)
+    menuStore.setActived(index)
     if (settingsStore.menu.switchMainMenuAndPageJump) {
         if (isExternalLink(menuStore.sidebarMenusFirstDeepestPath)) {
             window.open(menuStore.sidebarMenusFirstDeepestPath, '_blank')
