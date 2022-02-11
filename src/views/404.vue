@@ -1,14 +1,3 @@
-<template>
-    <div class="notfound">
-        <svg-icon name="404" />
-        <div class="content">
-            <h1>404</h1>
-            <div class="desc">抱歉，你访问的页面不存在</div>
-            <el-button type="primary" @click="goBack">{{ data.countdown }} 秒后，返回首页</el-button>
-        </div>
-    </div>
-</template>
-
 <script setup>
 import { onBeforeRouteLeave } from 'vue-router'
 const router = useRouter()
@@ -36,6 +25,17 @@ function goBack() {
     router.push('/')
 }
 </script>
+
+<template>
+    <div class="notfound">
+        <svg-icon name="404" />
+        <div class="content">
+            <h1>404</h1>
+            <div class="desc">抱歉，你访问的页面不存在</div>
+            <el-button type="primary" @click="goBack">{{ data.countdown }} 秒后，返回首页</el-button>
+        </div>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .notfound {

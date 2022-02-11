@@ -1,31 +1,4 @@
-<template>
-    <div v-if="item.meta.sidebar !== false" class="sidebar-item">
-        <el-sub-menu v-if="item.path == undefined" :title="item.meta.title" :index="JSON.stringify(item)">
-            <template #title>
-                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
-                <span class="title">{{ item.meta.title }}</span>
-            </template>
-            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" />
-        </el-sub-menu>
-        <router-link v-else-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
-            <a :href="isExternalLink(resolveRoutePath(basePath, item.path)) ? resolveRoutePath(basePath, item.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternalLink(resolveRoutePath(basePath, item.path)) ? '_blank' : '_self'" @click="navigate">
-                <el-menu-item :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
-                    <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
-                    <span class="title">{{ item.meta.title }}</span>
-                </el-menu-item>
-            </a>
-        </router-link>
-        <el-sub-menu v-else :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
-            <template #title>
-                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
-                <span class="title">{{ item.meta.title }}</span>
-            </template>
-            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path)" />
-        </el-sub-menu>
-    </div>
-</template>
-
-<script setup>
+<script setup name="SidebarItem">
 import SidebarItem from './index.vue'
 import { isExternalLink, resolveRoutePath } from '@/util'
 
@@ -52,6 +25,33 @@ const hasChildren = computed(() => {
     return flag
 })
 </script>
+
+<template>
+    <div v-if="item.meta.sidebar !== false" class="sidebar-item">
+        <el-sub-menu v-if="item.path == undefined" :title="item.meta.title" :index="JSON.stringify(item)">
+            <template #title>
+                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                <span class="title">{{ item.meta.title }}</span>
+            </template>
+            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" />
+        </el-sub-menu>
+        <router-link v-else-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
+            <a :href="isExternalLink(resolveRoutePath(basePath, item.path)) ? resolveRoutePath(basePath, item.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternalLink(resolveRoutePath(basePath, item.path)) ? '_blank' : '_self'" @click="navigate">
+                <el-menu-item :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
+                    <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                    <span class="title">{{ item.meta.title }}</span>
+                </el-menu-item>
+            </a>
+        </router-link>
+        <el-sub-menu v-else :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
+            <template #title>
+                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                <span class="title">{{ item.meta.title }}</span>
+            </template>
+            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path)" />
+        </el-sub-menu>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 :deep(.el-menu-item),

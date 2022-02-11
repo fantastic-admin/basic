@@ -1,51 +1,4 @@
-<template>
-    <div class="upload-container">
-        <el-upload
-            :show-file-list="false"
-            :headers="headers"
-            :action="action"
-            :data="data"
-            :name="name"
-            :before-upload="beforeUpload"
-            :on-progress="onProgress"
-            :on-success="onSuccess"
-            drag
-        >
-            <el-image v-if="url === ''" :src="url === '' ? placeholder : url" :style="`width:${width}px;height:${height}px;`" fit="fill">
-                <template #error>
-                    <div class="image-slot">
-                        <svg-icon name="el-icon-plus" />
-                    </div>
-                </template>
-            </el-image>
-            <div v-else class="image">
-                <el-image :src="url" :style="`width:${width}px;height:${height}px;`" fit="fill" />
-                <div class="mask">
-                    <div class="actions">
-                        <span title="预览" @click.stop="preview">
-                            <el-icon><el-icon-zoom-in /></el-icon>
-                        </span>
-                        <span title="移除" @click.stop="remove">
-                            <el-icon><el-icon-delete /></el-icon>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div v-show="url === '' && uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
-                <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
-                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="uploadData.progress.percent" />
-            </div>
-        </el-upload>
-        <div v-if="!notip" class="el-upload__tip">
-            <div style="display: inline-block;">
-                <el-alert :title="`上传图片支持 ${ ext.join(' / ') } 格式，且图片大小不超过 ${ size }MB，建议图片尺寸为 ${width}*${height}`" type="info" show-icon :closable="false" />
-            </div>
-        </div>
-        <el-image-viewer v-if="uploadData.imageViewerVisible" :url-list="[url]" @close="previewClose" />
-    </div>
-</template>
-
-<script setup>
+<script setup name="ImageUpload">
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({
@@ -142,6 +95,53 @@ function onSuccess(res) {
     emit('on-success', res)
 }
 </script>
+
+<template>
+    <div class="upload-container">
+        <el-upload
+            :show-file-list="false"
+            :headers="headers"
+            :action="action"
+            :data="data"
+            :name="name"
+            :before-upload="beforeUpload"
+            :on-progress="onProgress"
+            :on-success="onSuccess"
+            drag
+        >
+            <el-image v-if="url === ''" :src="url === '' ? placeholder : url" :style="`width:${width}px;height:${height}px;`" fit="fill">
+                <template #error>
+                    <div class="image-slot">
+                        <svg-icon name="el-icon-plus" />
+                    </div>
+                </template>
+            </el-image>
+            <div v-else class="image">
+                <el-image :src="url" :style="`width:${width}px;height:${height}px;`" fit="fill" />
+                <div class="mask">
+                    <div class="actions">
+                        <span title="预览" @click.stop="preview">
+                            <el-icon><el-icon-zoom-in /></el-icon>
+                        </span>
+                        <span title="移除" @click.stop="remove">
+                            <el-icon><el-icon-delete /></el-icon>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div v-show="url === '' && uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
+                <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
+                <el-progress type="circle" :width="Math.min(width, height) * 0.8" :percentage="uploadData.progress.percent" />
+            </div>
+        </el-upload>
+        <div v-if="!notip" class="el-upload__tip">
+            <div style="display: inline-block;">
+                <el-alert :title="`上传图片支持 ${ ext.join(' / ') } 格式，且图片大小不超过 ${ size }MB，建议图片尺寸为 ${width}*${height}`" type="info" show-icon :closable="false" />
+            </div>
+        </div>
+        <el-image-viewer v-if="uploadData.imageViewerVisible" :url-list="[url]" @close="previewClose" />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .upload-container {

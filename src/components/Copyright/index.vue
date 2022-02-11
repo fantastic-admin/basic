@@ -1,3 +1,8 @@
+<script setup name="Copyright">
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+</script>
+
 <template>
     <footer class="copyright">
         Copyright © {{ settingsStore.copyright.dates }}
@@ -6,11 +11,6 @@
         All Rights Reserved
     </footer>
 </template>
-
-<script setup>
-import { useSettingsStore } from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-</script>
 
 <style lang="scss" scoped>
 footer {

@@ -1,10 +1,4 @@
-<template>
-    <div class="editor">
-        <TinymceEditor v-model="myValue" :init="completeSetting" :disabled="disabled" />
-    </div>
-</template>
-
-<script setup>
+<script setup name="Editor">
 import tinymce from 'tinymce/tinymce'
 import TinymceEditor from '@tinymce/tinymce-vue'
 import 'tinymce/themes/silver/theme'
@@ -87,6 +81,12 @@ onMounted(() => {
     tinymce.init({})
 })
 </script>
+
+<template>
+    <div class="editor">
+        <TinymceEditor v-model="myValue" :init="completeSetting" :disabled="disabled" />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 :deep(.tox-tinymce) {

@@ -1,3 +1,15 @@
+<script setup name="Header">
+import Logo from '../Logo/index.vue'
+import Tools from '../Tools/index.vue'
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
+
+const switchMenu = inject('switchMenu')
+</script>
+
 <template>
     <transition name="header">
         <header v-if="settingsStore.mode === 'pc' && settingsStore.menu.menuMode === 'head'">
@@ -19,18 +31,6 @@
         </header>
     </transition>
 </template>
-
-<script setup>
-import Logo from '../Logo/index.vue'
-import Tools from '../Tools/index.vue'
-
-import { useSettingsStore } from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-import { useMenuStore } from '@/store/modules/menu'
-const menuStore = useMenuStore()
-
-const switchMenu = inject('switchMenu')
-</script>
 
 <style lang="scss" scoped>
 // 头部动画

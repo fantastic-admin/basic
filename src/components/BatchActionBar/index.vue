@@ -1,14 +1,4 @@
-<template>
-    <div class="batch-action-bar">
-        <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" :disabled="!data.length">当页全选</el-checkbox>
-        <div v-if="selectionData.length" class="tips">已选 {{ selectionData.length }} 项</div>
-        <el-form :disabled="!selectionData.length">
-            <slot />
-        </el-form>
-    </div>
-</template>
-
-<script setup>
+<script setup name="BatchActionBar">
 const props = defineProps({
     data: {
         type: Array,
@@ -43,6 +33,16 @@ const isIndeterminate = computed(() => {
     return flag
 })
 </script>
+
+<template>
+    <div class="batch-action-bar">
+        <el-checkbox v-model="checkAll" :indeterminate="isIndeterminate" :disabled="!data.length">当页全选</el-checkbox>
+        <div v-if="selectionData.length" class="tips">已选 {{ selectionData.length }} 项</div>
+        <el-form :disabled="!selectionData.length">
+            <slot />
+        </el-form>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .batch-action-bar {

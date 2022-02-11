@@ -1,3 +1,19 @@
+<script setup name="SubSidebar">
+import Logo from '../Logo/index.vue'
+import SidebarItem from '../SidebarItem/index.vue'
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
+
+const sidebarScrollTop = ref(0)
+
+function onSidebarScroll(e) {
+    sidebarScrollTop.value = e.target.scrollTop
+}
+</script>
+
 <template>
     <div v-if="['side', 'head', 'single'].includes(settingsStore.menu.menuMode) || settingsStore.mode === 'mobile'" class="sub-sidebar-container" :class="{'is-collapse': settingsStore.mode === 'pc' && settingsStore.menu.subMenuCollapse}" @scroll="onSidebarScroll">
         <Logo
@@ -21,22 +37,6 @@
         </el-menu>
     </div>
 </template>
-
-<script setup>
-import Logo from '../Logo/index.vue'
-import SidebarItem from '../SidebarItem/index.vue'
-
-import { useSettingsStore } from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-import { useMenuStore } from '@/store/modules/menu'
-const menuStore = useMenuStore()
-
-const sidebarScrollTop = ref(0)
-
-function onSidebarScroll(e) {
-    sidebarScrollTop.value = e.target.scrollTop
-}
-</script>
 
 <style lang="scss" scoped>
 // 次侧边栏动画

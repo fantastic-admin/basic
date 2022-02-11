@@ -1,9 +1,3 @@
-<template>
-    <div class="adaption-container">
-        <slot />
-    </div>
-</template>
-
 <script setup name="TableHeightAdaption">
 onMounted(() => {
     nextTick(() => {
@@ -17,6 +11,12 @@ onMounted(() => {
     })
 })
 </script>
+
+<template>
+    <div class="adaption-container">
+        <slot />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .adaption-container {

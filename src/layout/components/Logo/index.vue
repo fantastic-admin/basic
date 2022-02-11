@@ -1,11 +1,4 @@
-<template>
-    <router-link :to="to" class="title" :class="{'is-link': settingsStore.dashboard.enable}" :title="title">
-        <img v-if="showLogo" :src="logo" class="logo">
-        <span v-if="showTitle">{{ title }}</span>
-    </router-link>
-</template>
-
-<script setup>
+<script setup name="Logo">
 import imgLogo from '@/assets/images/logo.png'
 
 import { useSettingsStore } from '@/store/modules/settings'
@@ -33,6 +26,13 @@ const to = computed(() => {
     return rtn
 })
 </script>
+
+<template>
+    <router-link :to="to" class="title" :class="{'is-link': settingsStore.dashboard.enable}" :title="title">
+        <img v-if="showLogo" :src="logo" class="logo">
+        <span v-if="showTitle">{{ title }}</span>
+    </router-link>
+</template>
 
 <style lang="scss" scoped>
 .title {

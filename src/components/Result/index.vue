@@ -1,3 +1,21 @@
+<script setup name="Result">
+defineProps({
+    type: {
+        type: String,
+        validator: val => ['success', 'warning', 'error'].includes(val),
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    desc: {
+        type: String,
+        default: ''
+    }
+})
+</script>
+
 <template>
     <div class="result">
         <div v-if="type === 'success'" class="icon icon-success">
@@ -19,24 +37,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-defineProps({
-    type: {
-        type: String,
-        validator: val => ['success', 'warning', 'error'].includes(val),
-        required: true
-    },
-    title: {
-        type: String,
-        required: true
-    },
-    desc: {
-        type: String,
-        default: ''
-    }
-})
-</script>
 
 <style lang="scss" scoped>
 $success: #67c23a;

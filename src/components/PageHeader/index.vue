@@ -1,3 +1,16 @@
+<script setup name="PageHeader">
+defineProps({
+    title: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        default: ''
+    }
+})
+</script>
+
 <template>
     <div class="header">
         <div class="main">
@@ -11,19 +24,6 @@
         </div>
     </div>
 </template>
-
-<script setup>
-defineProps({
-    title: {
-        type: String,
-        required: true
-    },
-    content: {
-        type: String,
-        default: ''
-    }
-})
-</script>
 
 <style lang="scss" scoped>
 .header {

@@ -1,3 +1,38 @@
+<script setup name="Tools">
+const reload = inject('reload')
+const router = useRouter()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
+
+import { useFullscreen } from '@vueuse/core'
+const { isFullscreen, toggle } = useFullscreen()
+
+function userCommand(command) {
+    switch (command) {
+        case 'dashboard':
+            router.push({
+                name: 'dashboard'
+            })
+            break
+        case 'setting':
+            router.push({
+                name: 'personalSetting'
+            })
+            break
+        case 'logout':
+            userStore.logout().then(() => {
+                router.push({
+                    name: 'login'
+                })
+            })
+            break
+    }
+}
+</script>
+
 <template>
     <div class="tools">
         <div class="buttons">
@@ -32,41 +67,6 @@
         </el-dropdown>
     </div>
 </template>
-
-<script setup>
-const reload = inject('reload')
-const router = useRouter()
-
-import { useSettingsStore } from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-import { useUserStore } from '@/store/modules/user'
-const userStore = useUserStore()
-
-import { useFullscreen } from '@vueuse/core'
-const { isFullscreen, toggle } = useFullscreen()
-
-function userCommand(command) {
-    switch (command) {
-        case 'dashboard':
-            router.push({
-                name: 'dashboard'
-            })
-            break
-        case 'setting':
-            router.push({
-                name: 'personalSetting'
-            })
-            break
-        case 'logout':
-            userStore.logout().then(() => {
-                router.push({
-                    name: 'login'
-                })
-            })
-            break
-    }
-}
-</script>
 
 <style lang="scss" scoped>
 .tools {

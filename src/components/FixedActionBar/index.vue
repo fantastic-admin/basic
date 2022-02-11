@@ -1,10 +1,4 @@
-<template>
-    <div class="actionbar" :class="{'shadow': !data.isBottom}" data-fixed-calc-width>
-        <slot />
-    </div>
-</template>
-
-<script setup>
+<script setup name="FixedActionBar">
 const data = ref({
     isBottom: true
 })
@@ -33,6 +27,12 @@ function onScroll() {
     }
 }
 </script>
+
+<template>
+    <div class="actionbar" :class="{'shadow': !data.isBottom}" data-fixed-calc-width>
+        <slot />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .actionbar {

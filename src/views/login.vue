@@ -1,89 +1,3 @@
-<template>
-    <div>
-        <div class="bg-banner" />
-        <div id="login-box">
-            <div class="login-banner" />
-            <el-form v-show="formType == 'login'" ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
-                <div class="title-container">
-                    <h3 class="title">{{ title }}管理后台</h3>
-                </div>
-                <div>
-                    <el-form-item prop="account">
-                        <el-input ref="name" v-model="loginForm.account" placeholder="用户名" type="text" tabindex="1" autocomplete="on">
-                            <template #prefix>
-                                <svg-icon name="user" />
-                            </template>
-                        </el-input>
-                    </el-form-item>
-                    <el-form-item prop="password">
-                        <el-input ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2" autocomplete="on" @keyup.enter="handleLogin">
-                            <template #prefix>
-                                <svg-icon name="password" />
-                            </template>
-                            <template #suffix>
-                                <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
-                            </template>
-                        </el-input>
-                    </el-form-item>
-                </div>
-                <div class="flex-bar">
-                    <el-checkbox v-model="loginForm.remember">记住我</el-checkbox>
-                    <el-button type="text" @click="formType = 'reset'">忘记密码</el-button>
-                </div>
-                <el-button :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleLogin">登 录</el-button>
-                <div style="margin-top: 20px; margin-bottom: -10px; color: #666; font-size: 14px; text-align: center; font-weight: bold;">
-                    <span style="margin-right: 5px;">演示帐号一键登录：</span>
-                    <el-button type="danger" size="small" @click="testAccount('admin')">admin</el-button>
-                    <el-button type="danger" size="small" plain @click="testAccount('test')">test</el-button>
-                </div>
-            </el-form>
-            <el-form v-show="formType == 'reset'" ref="resetFormRef" :model="resetForm" :rules="resetRules" class="login-form" auto-complete="on" label-position="left">
-                <div class="title-container">
-                    <h3 class="title">重置密码</h3>
-                </div>
-                <div>
-                    <el-form-item prop="account">
-                        <el-input ref="name" v-model="resetForm.account" placeholder="用户名" type="text" tabindex="1" autocomplete="on">
-                            <template #prefix>
-                                <svg-icon name="user" />
-                            </template>
-                        </el-input>
-                    </el-form-item>
-                    <el-form-item prop="captcha">
-                        <el-input ref="captcha" v-model="resetForm.captcha" placeholder="验证码" type="text" tabindex="2" autocomplete="on">
-                            <template #prefix>
-                                <svg-icon name="captcha" />
-                            </template>
-                            <template #append>
-                                <el-button>发送验证码</el-button>
-                            </template>
-                        </el-input>
-                    </el-form-item>
-                    <el-form-item prop="newPassword">
-                        <el-input ref="newPassword" v-model="resetForm.newPassword" :type="passwordType" placeholder="新密码" tabindex="3" autocomplete="on">
-                            <template #prefix>
-                                <svg-icon name="password" />
-                            </template>
-                            <template #suffix>
-                                <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
-                            </template>
-                        </el-input>
-                    </el-form-item>
-                </div>
-                <el-row :gutter="15" style="padding-top: 20px;">
-                    <el-col :md="6">
-                        <el-button size="large" style="width: 100%;" @click="formType = 'login'">去登录</el-button>
-                    </el-col>
-                    <el-col :md="18">
-                        <el-button :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleFind">确 认</el-button>
-                    </el-col>
-                </el-row>
-            </el-form>
-        </div>
-        <Copyright v-if="settingsStore.copyright.enable" />
-    </div>
-</template>
-
 <script setup name="Login">
 const { proxy } = getCurrentInstance()
 const route = useRoute(), router = useRouter()
@@ -183,6 +97,92 @@ function testAccount(account) {
     handleLogin()
 }
 </script>
+
+<template>
+    <div>
+        <div class="bg-banner" />
+        <div id="login-box">
+            <div class="login-banner" />
+            <el-form v-show="formType == 'login'" ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
+                <div class="title-container">
+                    <h3 class="title">{{ title }}管理后台</h3>
+                </div>
+                <div>
+                    <el-form-item prop="account">
+                        <el-input ref="name" v-model="loginForm.account" placeholder="用户名" type="text" tabindex="1" autocomplete="on">
+                            <template #prefix>
+                                <svg-icon name="user" />
+                            </template>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item prop="password">
+                        <el-input ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2" autocomplete="on" @keyup.enter="handleLogin">
+                            <template #prefix>
+                                <svg-icon name="password" />
+                            </template>
+                            <template #suffix>
+                                <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
+                            </template>
+                        </el-input>
+                    </el-form-item>
+                </div>
+                <div class="flex-bar">
+                    <el-checkbox v-model="loginForm.remember">记住我</el-checkbox>
+                    <el-button type="text" @click="formType = 'reset'">忘记密码</el-button>
+                </div>
+                <el-button :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleLogin">登 录</el-button>
+                <div style="margin-top: 20px; margin-bottom: -10px; color: #666; font-size: 14px; text-align: center; font-weight: bold;">
+                    <span style="margin-right: 5px;">演示帐号一键登录：</span>
+                    <el-button type="danger" size="small" @click="testAccount('admin')">admin</el-button>
+                    <el-button type="danger" size="small" plain @click="testAccount('test')">test</el-button>
+                </div>
+            </el-form>
+            <el-form v-show="formType == 'reset'" ref="resetFormRef" :model="resetForm" :rules="resetRules" class="login-form" auto-complete="on" label-position="left">
+                <div class="title-container">
+                    <h3 class="title">重置密码</h3>
+                </div>
+                <div>
+                    <el-form-item prop="account">
+                        <el-input ref="name" v-model="resetForm.account" placeholder="用户名" type="text" tabindex="1" autocomplete="on">
+                            <template #prefix>
+                                <svg-icon name="user" />
+                            </template>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item prop="captcha">
+                        <el-input ref="captcha" v-model="resetForm.captcha" placeholder="验证码" type="text" tabindex="2" autocomplete="on">
+                            <template #prefix>
+                                <svg-icon name="captcha" />
+                            </template>
+                            <template #append>
+                                <el-button>发送验证码</el-button>
+                            </template>
+                        </el-input>
+                    </el-form-item>
+                    <el-form-item prop="newPassword">
+                        <el-input ref="newPassword" v-model="resetForm.newPassword" :type="passwordType" placeholder="新密码" tabindex="3" autocomplete="on">
+                            <template #prefix>
+                                <svg-icon name="password" />
+                            </template>
+                            <template #suffix>
+                                <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
+                            </template>
+                        </el-input>
+                    </el-form-item>
+                </div>
+                <el-row :gutter="15" style="padding-top: 20px;">
+                    <el-col :md="6">
+                        <el-button size="large" style="width: 100%;" @click="formType = 'login'">去登录</el-button>
+                    </el-col>
+                    <el-col :md="18">
+                        <el-button :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleFind">确 认</el-button>
+                    </el-col>
+                </el-row>
+            </el-form>
+        </div>
+        <Copyright v-if="settingsStore.copyright.enable" />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 [data-mode="mobile"] {
