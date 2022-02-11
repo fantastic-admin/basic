@@ -1,14 +1,3 @@
-<template>
-    <el-config-provider :size="settingsStore.app.elementSize">
-        <RouterView
-            :style="{
-                '--g-main-sidebar-actual-width': mainSidebarActualWidth,
-                '--g-sub-sidebar-actual-width': subSidebarActualWidth
-            }"
-        />
-    </el-config-provider>
-</template>
-
 <script setup>
 import { useSettingsStore } from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
@@ -75,3 +64,14 @@ onMounted(() => {
     window.onresize()
 })
 </script>
+
+<template>
+    <el-config-provider :size="settingsStore.app.elementSize">
+        <RouterView
+            :style="{
+                '--g-main-sidebar-actual-width': mainSidebarActualWidth,
+                '--g-sub-sidebar-actual-width': subSidebarActualWidth
+            }"
+        />
+    </el-config-provider>
+</template>

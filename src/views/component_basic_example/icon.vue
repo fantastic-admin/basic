@@ -1,3 +1,12 @@
+<script setup>
+import Alert from './components/alert.vue'
+import { Search } from '@element-plus/icons-vue'
+import * as ElementIcons from '@element-plus/icons-vue'
+import { hyphen } from 'naming-style'
+
+const icon = Object.keys(ElementIcons)
+</script>
+
 <template>
     <div>
         <Alert />
@@ -19,15 +28,6 @@
         </page-main>
     </div>
 </template>
-
-<script setup>
-import Alert from './components/alert.vue'
-import { Search } from '@element-plus/icons-vue'
-import * as ElementIcons from '@element-plus/icons-vue'
-import { hyphen } from 'naming-style'
-
-const icon = Object.keys(ElementIcons)
-</script>
 
 <style lang="scss" scoped>
 .demo {

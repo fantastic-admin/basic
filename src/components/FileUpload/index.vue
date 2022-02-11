@@ -1,30 +1,4 @@
-<template>
-    <el-upload
-        :action="action"
-        :data="data"
-        :name="name"
-        :before-upload="beforeUpload"
-        :on-exceed="onExceed"
-        :on-success="onSuccess"
-        :file-list="files"
-        :limit="max"
-        drag
-    >
-        <div class="slot">
-            <el-icon class="el-icon--upload"><el-icon-upload-filled /></el-icon>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-        </div>
-        <template #tip>
-            <div v-if="!notip" class="el-upload__tip">
-                <div style="display: inline-block;">
-                    <el-alert :title="`上传文件支持 ${ ext.join(' / ') } 格式，单个文件大小不超过 ${ size }MB，且文件数量不超过 ${ max } 个`" type="info" show-icon :closable="false" />
-                </div>
-            </div>
-        </template>
-    </el-upload>
-</template>
-
-<script setup>
+<script setup name="FileUpload">
 const { proxy } = getCurrentInstance()
 
 const props = defineProps({
@@ -88,6 +62,32 @@ function onSuccess(res, file) {
     emit('on-success', res, file)
 }
 </script>
+
+<template>
+    <el-upload
+        :action="action"
+        :data="data"
+        :name="name"
+        :before-upload="beforeUpload"
+        :on-exceed="onExceed"
+        :on-success="onSuccess"
+        :file-list="files"
+        :limit="max"
+        drag
+    >
+        <div class="slot">
+            <el-icon class="el-icon--upload"><el-icon-upload-filled /></el-icon>
+            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+        </div>
+        <template #tip>
+            <div v-if="!notip" class="el-upload__tip">
+                <div style="display: inline-block;">
+                    <el-alert :title="`上传文件支持 ${ ext.join(' / ') } 格式，单个文件大小不超过 ${ size }MB，且文件数量不超过 ${ max } 个`" type="info" show-icon :closable="false" />
+                </div>
+            </div>
+        </template>
+    </el-upload>
+</template>
 
 <style lang="scss" scoped>
 :deep(.el-upload-dragger) {

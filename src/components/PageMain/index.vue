@@ -1,21 +1,4 @@
-<template>
-    <div
-        :class="{
-            'page-main': true,
-            'is-collaspe': collaspeData
-        }" :style="{
-            'height': collaspeData ? height : ''
-        }"
-    >
-        <div v-if="title" class="title-container">{{ title }}</div>
-        <slot />
-        <div v-if="collaspeData" class="collaspe" title="展开" @click="unCollaspe">
-            <el-icon><el-icon-arrow-down /></el-icon>
-        </div>
-    </div>
-</template>
-
-<script setup>
+<script setup name="PageMain">
 const props = defineProps({
     title: {
         type: String,
@@ -37,6 +20,23 @@ function unCollaspe() {
     collaspeData.value = false
 }
 </script>
+
+<template>
+    <div
+        :class="{
+            'page-main': true,
+            'is-collaspe': collaspeData
+        }" :style="{
+            'height': collaspeData ? height : ''
+        }"
+    >
+        <div v-if="title" class="title-container">{{ title }}</div>
+        <slot />
+        <div v-if="collaspeData" class="collaspe" title="展开" @click="unCollaspe">
+            <el-icon><el-icon-arrow-down /></el-icon>
+        </div>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .page-main {

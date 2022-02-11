@@ -1,18 +1,3 @@
-<template>
-    <div>
-        <page-header title="上传" content="ImageUpload / ImagesUpload / FileUpload" />
-        <page-main title="单图上传">
-            <image-upload v-model:url="image" action="http://scrm.1daas.com/api/upload/upload" name="image" :width="250" :height="150" :data="{'token':'TKE615916022101558'}" @on-success="handleSuccess1" />
-        </page-main>
-        <page-main title="多图上传（默认最多3张）">
-            <images-upload v-model:url="images" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{'token':'TKE615916022101558'}" @on-success="handleSuccess2" />
-        </page-main>
-        <page-main title="文件上传（默认最多3个）">
-            <file-upload :files="files" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{'token':'TKE615916022101558'}" @on-success="handleSuccess3" />
-        </page-main>
-    </div>
-</template>
-
 <script>
 export default {
     data() {
@@ -65,3 +50,18 @@ export default {
     }
 }
 </script>
+
+<template>
+    <div>
+        <page-header title="上传" content="ImageUpload / ImagesUpload / FileUpload" />
+        <page-main title="单图上传">
+            <image-upload v-model:url="image" action="http://scrm.1daas.com/api/upload/upload" name="image" :width="250" :height="150" :data="{'token':'TKE615916022101558'}" @on-success="handleSuccess1" />
+        </page-main>
+        <page-main title="多图上传（默认最多3张）">
+            <images-upload v-model:url="images" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{'token':'TKE615916022101558'}" @on-success="handleSuccess2" />
+        </page-main>
+        <page-main title="文件上传（默认最多3个）">
+            <file-upload :files="files" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{'token':'TKE615916022101558'}" @on-success="handleSuccess3" />
+        </page-main>
+    </div>
+</template>

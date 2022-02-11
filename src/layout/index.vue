@@ -1,37 +1,4 @@
-<template>
-    <div class="layout">
-        <div id="app-main">
-            <Header />
-            <div class="wrapper">
-                <div class="sidebar-container" :class="{'show': settingsStore.mode === 'mobile' && !settingsStore.menu.subMenuCollapse}">
-                    <MainSidebar />
-                    <SubSidebar />
-                </div>
-                <div class="sidebar-mask" :class="{'show': settingsStore.mode === 'mobile' && !settingsStore.menu.subMenuCollapse}" @click="settingsStore.toggleSidebarCollapse()" />
-                <div class="main-container" :style="{'padding-bottom': $route.meta.paddingBottom}">
-                    <Topbar v-if="!(settingsStore.menu.menuMode === 'head' && !settingsStore.topbar.enableSidebarCollapse && !settingsStore.topbar.enableBreadcrumb)" />
-                    <div class="main">
-                        <router-view v-slot="{ Component, route }">
-                            <transition name="main" mode="out-in" appear>
-                                <!-- BUG https://github.com/vuejs/vue-next/issues/4984 -->
-                                <keep-alive :include="[...keepAliveStore.list]">
-                                    <component :is="Component" :key="route.fullPath" />
-                                </keep-alive>
-                            </transition>
-                        </router-view>
-                    </div>
-                    <Copyright v-if="showCopyright" />
-                </div>
-            </div>
-            <el-backtop :right="20" :bottom="20" title="回到顶部" />
-        </div>
-        <Search />
-        <AppSetting />
-        <BuyIt />
-    </div>
-</template>
-
-<script setup>
+<script setup name="Layout">
 import Header from './components/Header/index.vue'
 import MainSidebar from './components/MainSidebar/index.vue'
 import SubSidebar from './components/SubSidebar/index.vue'
@@ -100,6 +67,39 @@ function switchMenu(index) {
     }
 }
 </script>
+
+<template>
+    <div class="layout">
+        <div id="app-main">
+            <Header />
+            <div class="wrapper">
+                <div class="sidebar-container" :class="{'show': settingsStore.mode === 'mobile' && !settingsStore.menu.subMenuCollapse}">
+                    <MainSidebar />
+                    <SubSidebar />
+                </div>
+                <div class="sidebar-mask" :class="{'show': settingsStore.mode === 'mobile' && !settingsStore.menu.subMenuCollapse}" @click="settingsStore.toggleSidebarCollapse()" />
+                <div class="main-container" :style="{'padding-bottom': $route.meta.paddingBottom}">
+                    <Topbar v-if="!(settingsStore.menu.menuMode === 'head' && !settingsStore.topbar.enableSidebarCollapse && !settingsStore.topbar.enableBreadcrumb)" />
+                    <div class="main">
+                        <router-view v-slot="{ Component, route }">
+                            <transition name="main" mode="out-in" appear>
+                                <!-- BUG https://github.com/vuejs/vue-next/issues/4984 -->
+                                <keep-alive :include="[...keepAliveStore.list]">
+                                    <component :is="Component" :key="route.fullPath" />
+                                </keep-alive>
+                            </transition>
+                        </router-view>
+                    </div>
+                    <Copyright v-if="showCopyright" />
+                </div>
+            </div>
+            <el-backtop :right="20" :bottom="20" title="回到顶部" />
+        </div>
+        <Search />
+        <AppSetting />
+        <BuyIt />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 [data-mode="mobile"] {

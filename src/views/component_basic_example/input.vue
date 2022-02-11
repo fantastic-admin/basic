@@ -1,3 +1,21 @@
+<script>
+import Alert from './components/alert.vue'
+
+export default {
+    components: {
+        Alert
+    },
+    data() {
+        return {
+            input: '',
+            input1: '',
+            input2: '',
+            textarea: ''
+        }
+    }
+}
+</script>
+
 <template>
     <div>
         <Alert />
@@ -17,12 +35,12 @@
         <page-main title="带 icon 的输入框" class="demo">
             <el-input v-model="input1" placeholder="请选择日期">
                 <template #suffix>
-                    <el-icon><el-icon-calendar /></el-icon>
+                    <el-icon class="el-input__icon"><el-icon-calendar /></el-icon>
                 </template>
             </el-input>
             <el-input v-model="input2" placeholder="请输入内容">
                 <template #prefix>
-                    <el-icon><el-icon-search /></el-icon>
+                    <el-icon class="el-input__icon"><el-icon-search /></el-icon>
                 </template>
             </el-input>
         </page-main>
@@ -31,21 +49,3 @@
         </page-main>
     </div>
 </template>
-
-<script>
-import Alert from './components/alert.vue'
-
-export default {
-    components: {
-        Alert
-    },
-    data() {
-        return {
-            input: '',
-            input1: '',
-            input2: '',
-            textarea: ''
-        }
-    }
-}
-</script>

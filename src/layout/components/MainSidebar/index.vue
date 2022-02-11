@@ -1,3 +1,14 @@
+<script setup name="MainSidebar">
+import Logo from '../Logo/index.vue'
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
+
+const switchMenu = inject('switchMenu')
+</script>
+
 <template>
     <transition name="main-sidebar">
         <div v-if="settingsStore.menu.menuMode === 'side' || (settingsStore.mode === 'mobile' && settingsStore.menu.menuMode !== 'single')" class="main-sidebar-container">
@@ -19,17 +30,6 @@
         </div>
     </transition>
 </template>
-
-<script setup>
-import Logo from '../Logo/index.vue'
-
-import { useSettingsStore } from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-import { useMenuStore } from '@/store/modules/menu'
-const menuStore = useMenuStore()
-
-const switchMenu = inject('switchMenu')
-</script>
 
 <style lang="scss" scoped>
 // 主侧边栏动画

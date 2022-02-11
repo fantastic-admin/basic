@@ -1,14 +1,4 @@
-<template>
-    <el-image :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]">
-        <template #error>
-            <div class="image-slot">
-                <svg-icon name="image-load-fail" />
-            </div>
-        </template>
-    </el-image>
-</template>
-
-<script setup>
+<script setup name="ImagePreview">
 const props = defineProps({
     src: {
         type: String,
@@ -32,6 +22,16 @@ const realHeight = computed(() => {
     return typeof props.height == 'string' ? props.height : `${props.height}px`
 })
 </script>
+
+<template>
+    <el-image :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]">
+        <template #error>
+            <div class="image-slot">
+                <svg-icon name="image-load-fail" />
+            </div>
+        </template>
+    </el-image>
+</template>
 
 <style lang="scss" scoped>
 .el-image {

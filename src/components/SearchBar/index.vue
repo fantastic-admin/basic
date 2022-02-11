@@ -1,13 +1,4 @@
-<template>
-    <div class="search-container">
-        <slot />
-        <div v-if="showMore" class="more">
-            <el-button type="text" size="small" :icon="isUnfold ? 'el-icon-caret-top' : 'el-icon-caret-bottom'" @click="toggle">{{ isUnfold ? '收起' : '展开' }}</el-button>
-        </div>
-    </div>
-</template>
-
-<script setup>
+<script setup name="SearchBar">
 const props = defineProps({
     showMore: {
         type: Boolean,
@@ -32,6 +23,15 @@ function toggle() {
     emit('toggle', isUnfold.value)
 }
 </script>
+
+<template>
+    <div class="search-container">
+        <slot />
+        <div v-if="showMore" class="more">
+            <el-button type="text" size="small" :icon="isUnfold ? 'el-icon-caret-top' : 'el-icon-caret-bottom'" @click="toggle">{{ isUnfold ? '收起' : '展开' }}</el-button>
+        </div>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .search-container {

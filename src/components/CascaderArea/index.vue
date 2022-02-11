@@ -1,10 +1,4 @@
-<template>
-    <div>
-        <el-cascader v-model="myValue" :options="data.options" :props="data.props" :size="size" :disabled="disabled" clearable filterable />
-    </div>
-</template>
-
-<script setup>
+<script setup name="CascaderArea">
 import area from '@/util/area'
 
 const props = defineProps({
@@ -83,6 +77,12 @@ const myValue = computed({
     }
 })
 </script>
+
+<template>
+    <div>
+        <el-cascader v-model="myValue" :options="data.options" :props="data.props" :size="size" :disabled="disabled" clearable filterable />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 :deep(.el-cascader) {

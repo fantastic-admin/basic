@@ -1,3 +1,45 @@
+<script setup name="AppSetting">
+const { proxy } = getCurrentInstance()
+const route = useRoute()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
+
+const isShow = ref(false)
+
+import globalSettings from '@/settings'
+const settings = ref(globalSettings)
+
+watch(() => settings, () => {
+    settingsStore.updateThemeSetting(settings.value)
+    menuStore.setActived(0)
+    settings.value.menu.menuMode !== 'single' && menuStore.setActived(route.fullPath)
+}, {
+    deep: true
+})
+
+onMounted(() => {
+    proxy.$eventBus.on('global-theme-toggle', () => {
+        isShow.value = !isShow.value
+    })
+})
+
+import { useClipboard } from '@vueuse/core'
+const { copy, copied, isSupported } = useClipboard()
+
+watch(copied, val => {
+    if (val) {
+        proxy.$message.success('复制成功，请粘贴到 src/settings.custom.json 文件中！')
+    }
+})
+
+function handleCopy() {
+    copy(JSON.stringify(settings.value, null, 4))
+}
+</script>
+
 <template>
     <div>
         <el-drawer v-model="isShow" title="应用配置" direction="rtl" :size="350" custom-class="flex-container">
@@ -162,48 +204,6 @@
         </el-drawer>
     </div>
 </template>
-
-<script setup>
-const { proxy } = getCurrentInstance()
-const route = useRoute()
-
-import { useSettingsStore } from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-import { useMenuStore } from '@/store/modules/menu'
-const menuStore = useMenuStore()
-
-const isShow = ref(false)
-
-import globalSettings from '@/settings'
-const settings = ref(globalSettings)
-
-watch(() => settings, () => {
-    settingsStore.updateThemeSetting(settings.value)
-    menuStore.setActived(0)
-    settings.value.menu.menuMode !== 'single' && menuStore.setActived(route.fullPath)
-}, {
-    deep: true
-})
-
-onMounted(() => {
-    proxy.$eventBus.on('global-theme-toggle', () => {
-        isShow.value = !isShow.value
-    })
-})
-
-import { useClipboard } from '@vueuse/core'
-const { copy, copied, isSupported } = useClipboard()
-
-watch(copied, val => {
-    if (val) {
-        proxy.$message.success('复制成功，请粘贴到 src/settings.custom.json 文件中！')
-    }
-})
-
-function handleCopy() {
-    copy(JSON.stringify(settings.value, null, 4))
-}
-</script>
 
 <style lang="scss" scoped>
 :deep(.el-drawer__body) {

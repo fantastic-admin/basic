@@ -1,3 +1,22 @@
+<script>
+import Alert from './components/alert.vue'
+
+export default {
+    components: {
+        Alert
+    },
+    data() {
+        return {
+            radio: '1',
+            radio2: '选中且禁用',
+            radio3: 3,
+            radio4: '上海',
+            radio5: '1'
+        }
+    }
+}
+</script>
+
 <template>
     <div>
         <Alert />
@@ -31,22 +50,3 @@
         </page-main>
     </div>
 </template>
-
-<script>
-import Alert from './components/alert.vue'
-
-export default {
-    components: {
-        Alert
-    },
-    data() {
-        return {
-            radio: '1',
-            radio2: '选中且禁用',
-            radio3: 3,
-            radio4: '上海',
-            radio5: '1'
-        }
-    }
-}
-</script>

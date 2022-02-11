@@ -1,13 +1,4 @@
-<template>
-    <div :class="`trend ${isUp ? 'up' : 'down'}`">
-        <span v-if="prefix" class="prefix">{{ prefix }}</span>
-        <span class="text">{{ value }}</span>
-        <span v-if="suffix" class="suffix">{{ suffix }}</span>
-        <svg-icon :name="`${isUp ? 'el-icon-caret-top' : 'el-icon-caret-bottom'}`" />
-    </div>
-</template>
-
-<script setup>
+<script setup name="Trend">
 const props = defineProps({
     value: {
         type: String,
@@ -40,6 +31,15 @@ const isUp = computed(() => {
     return isUp
 })
 </script>
+
+<template>
+    <div :class="`trend ${isUp ? 'up' : 'down'}`">
+        <span v-if="prefix" class="prefix">{{ prefix }}</span>
+        <span class="text">{{ value }}</span>
+        <span v-if="suffix" class="suffix">{{ suffix }}</span>
+        <svg-icon :name="`${isUp ? 'el-icon-caret-top' : 'el-icon-caret-bottom'}`" />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .trend {

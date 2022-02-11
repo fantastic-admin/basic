@@ -1,3 +1,28 @@
+<script>
+import Alert from './components/alert.vue'
+
+const cityOptions = ['上海', '北京', '广州', '深圳']
+
+export default {
+    components: {
+        Alert
+    },
+    data() {
+        return {
+            checked: true,
+            checked1: false,
+            checked2: true,
+            checkList: ['选中且禁用', '复选框 A'],
+            checkedCities: ['上海', '北京'],
+            cities: cityOptions,
+            checkboxGroup1: ['上海'],
+            checked3: true,
+            checked4: false
+        }
+    }
+}
+</script>
+
 <template>
     <div>
         <Alert />
@@ -34,28 +59,3 @@
         </page-main>
     </div>
 </template>
-
-<script>
-import Alert from './components/alert.vue'
-
-const cityOptions = ['上海', '北京', '广州', '深圳']
-
-export default {
-    components: {
-        Alert
-    },
-    data() {
-        return {
-            checked: true,
-            checked1: false,
-            checked2: true,
-            checkList: ['选中且禁用', '复选框 A'],
-            checkedCities: ['上海', '北京'],
-            cities: cityOptions,
-            checkboxGroup1: ['上海'],
-            checked3: true,
-            checked4: false
-        }
-    }
-}
-</script>

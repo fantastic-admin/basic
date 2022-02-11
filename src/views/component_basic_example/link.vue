@@ -1,3 +1,8 @@
+<script setup>
+import Alert from './components/alert.vue'
+import { Edit } from '@element-plus/icons-vue'
+</script>
+
 <template>
     <div>
         <Alert />
@@ -31,11 +36,6 @@
         </page-main>
     </div>
 </template>
-
-<script setup>
-import Alert from './components/alert.vue'
-import { Edit } from '@element-plus/icons-vue'
-</script>
 
 <style lang="scss" scoped>
 .demo {

@@ -1,3 +1,31 @@
+<script>
+import Alert from './components/alert.vue'
+
+export default {
+    components: {
+        Alert
+    },
+    data() {
+        return {
+            value1: 0,
+            value2: 50,
+            value3: 36,
+            value4: 48,
+            value5: 42,
+            value6: 0,
+            value7: 0,
+            value8: [4, 8],
+            value9: 0
+        }
+    },
+    methods: {
+        formatTooltip(val) {
+            return val / 100
+        }
+    }
+}
+</script>
+
 <template>
     <div>
         <Alert />
@@ -31,31 +59,3 @@
         </page-main>
     </div>
 </template>
-
-<script>
-import Alert from './components/alert.vue'
-
-export default {
-    components: {
-        Alert
-    },
-    data() {
-        return {
-            value1: 0,
-            value2: 50,
-            value3: 36,
-            value4: 48,
-            value5: 42,
-            value6: 0,
-            value7: 0,
-            value8: [4, 8],
-            value9: 0
-        }
-    },
-    methods: {
-        formatTooltip(val) {
-            return val / 100
-        }
-    }
-}
-</script>

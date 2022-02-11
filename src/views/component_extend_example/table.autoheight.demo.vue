@@ -1,25 +1,3 @@
-<template>
-    <div class="absolute-container">
-        <page-header title="表格高度自适应">
-            <template #content>
-                <p>TableHeightAdaption</p>
-                <p style="margin-bottom: 0;">该组件必须包裹 ElTable 使用，并且需要对上级元素设置高度后才会生效</p>
-            </template>
-        </page-header>
-        <page-main>
-            <TableHeightAdaption>
-                <el-table :data="dataList" border stripe highlight-current-row>
-                    <el-table-column type="index" width="50" />
-                    <el-table-column prop="date" label="日期" width="180" />
-                    <el-table-column prop="name" label="姓名" width="180" />
-                    <el-table-column prop="address" label="地址" />
-                </el-table>
-            </TableHeightAdaption>
-            <el-button type="primary">按钮</el-button>
-        </page-main>
-    </div>
-</template>
-
 <script>
 export default {
     name: 'ComponentExampleTableHeightAdaption',
@@ -132,6 +110,28 @@ export default {
     }
 }
 </script>
+
+<template>
+    <div class="absolute-container">
+        <page-header title="表格高度自适应">
+            <template #content>
+                <p>TableHeightAdaption</p>
+                <p style="margin-bottom: 0;">该组件必须包裹 ElTable 使用，并且需要对上级元素设置高度后才会生效</p>
+            </template>
+        </page-header>
+        <page-main>
+            <TableHeightAdaption>
+                <el-table :data="dataList" border stripe highlight-current-row>
+                    <el-table-column type="index" width="50" />
+                    <el-table-column prop="date" label="日期" width="180" />
+                    <el-table-column prop="name" label="姓名" width="180" />
+                    <el-table-column prop="address" label="地址" />
+                </el-table>
+            </TableHeightAdaption>
+            <el-button type="primary">按钮</el-button>
+        </page-main>
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .absolute-container {

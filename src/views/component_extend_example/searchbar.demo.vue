@@ -1,3 +1,22 @@
+<script>
+export default {
+    data() {
+        return {
+            search: {
+                name: '',
+                department_id: '',
+                department_job_id: '',
+                role_id: '',
+                check1: true,
+                check2: false
+            },
+            searchMore: false,
+            searchMore2: false
+        }
+    }
+}
+</script>
+
 <template>
     <div>
         <page-header title="搜索面板" content="SearchBar" />
@@ -111,22 +130,3 @@
         </page-main>
     </div>
 </template>
-
-<script>
-export default {
-    data() {
-        return {
-            search: {
-                name: '',
-                department_id: '',
-                department_job_id: '',
-                role_id: '',
-                check1: true,
-                check2: false
-            },
-            searchMore: false,
-            searchMore2: false
-        }
-    }
-}
-</script>

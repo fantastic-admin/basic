@@ -1,3 +1,8 @@
+<script setup name="TabExampleNested2">
+import { useKeepAliveStore } from '@/store/modules/keepAlive'
+const keepAliveStore = useKeepAliveStore()
+</script>
+
 <template>
     <div>
         <page-main>
@@ -10,8 +15,3 @@
         </page-main>
     </div>
 </template>
-
-<script setup name="TabExampleNested2">
-import { useKeepAliveStore } from '@/store/modules/keepAlive'
-const keepAliveStore = useKeepAliveStore()
-</script>

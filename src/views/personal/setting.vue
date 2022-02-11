@@ -1,3 +1,29 @@
+<script setup name="PersonalSetting">
+const router = useRouter()
+const { proxy } = getCurrentInstance()
+
+const form = ref({
+    headimg: '',
+    mobile: '',
+    name: '',
+    qq: '',
+    wechat: ''
+})
+
+function handleSuccess(res) {
+    if (res.error == '') {
+        form.value.headimg = res.data.path
+    } else {
+        proxy.$message.warning(res.error)
+    }
+}
+function editPassword() {
+    router.push({
+        name: 'personalEditPassword'
+    })
+}
+</script>
+
 <template>
     <div>
         <!-- 页面：Setting -->
@@ -66,32 +92,6 @@
         </page-main>
     </div>
 </template>
-
-<script setup name="PersonalSetting">
-const router = useRouter()
-const { proxy } = getCurrentInstance()
-
-const form = ref({
-    headimg: '',
-    mobile: '',
-    name: '',
-    qq: '',
-    wechat: ''
-})
-
-function handleSuccess(res) {
-    if (res.error == '') {
-        form.value.headimg = res.data.path
-    } else {
-        proxy.$message.warning(res.error)
-    }
-}
-function editPassword() {
-    router.push({
-        name: 'personalEditPassword'
-    })
-}
-</script>
 
 <style lang="scss" scoped>
 :deep(.el-tabs) {

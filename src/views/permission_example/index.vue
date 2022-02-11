@@ -1,3 +1,42 @@
+<script setup>
+const { proxy } = getCurrentInstance()
+
+import { useSettingsStore } from '@/store/modules/settings'
+const settingsStore = useSettingsStore()
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
+
+function accountChange(val) {
+    proxy.$loading({
+        lock: true,
+        text: '帐号切换中',
+        background: 'rgba(0, 0, 0, 0.7)'
+    })
+    userStore.login({
+        account: val,
+        password: ''
+    }).then(() => {
+        setTimeout(() => {
+            location.reload()
+        }, 1000)
+    })
+}
+function permissionCheck(permissions) {
+    if (proxy.$auth(permissions)) {
+        proxy.$message.success('校验通过')
+    } else {
+        proxy.$message.error('校验不通过')
+    }
+}
+function permissionCheck2(permissions) {
+    if (proxy.$authAll(permissions)) {
+        proxy.$message.success('校验通过')
+    } else {
+        proxy.$message.error('校验不通过')
+    }
+}
+</script>
+
 <template>
     <div>
         <page-header title="权限验证" />
@@ -68,42 +107,3 @@
         </page-main>
     </div>
 </template>
-
-<script setup>
-const { proxy } = getCurrentInstance()
-
-import { useSettingsStore } from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-import { useUserStore } from '@/store/modules/user'
-const userStore = useUserStore()
-
-function accountChange(val) {
-    proxy.$loading({
-        lock: true,
-        text: '帐号切换中',
-        background: 'rgba(0, 0, 0, 0.7)'
-    })
-    userStore.login({
-        account: val,
-        password: ''
-    }).then(() => {
-        setTimeout(() => {
-            location.reload()
-        }, 1000)
-    })
-}
-function permissionCheck(permissions) {
-    if (proxy.$auth(permissions)) {
-        proxy.$message.success('校验通过')
-    } else {
-        proxy.$message.error('校验不通过')
-    }
-}
-function permissionCheck2(permissions) {
-    if (proxy.$authAll(permissions)) {
-        proxy.$message.success('校验通过')
-    } else {
-        proxy.$message.error('校验不通过')
-    }
-}
-</script>

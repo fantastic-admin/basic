@@ -1,3 +1,22 @@
+<script>
+import Alert from './components/alert.vue'
+
+export default {
+    components: {
+        Alert
+    },
+    data() {
+        return {
+            num: 1,
+            num2: 1,
+            num3: 5,
+            num4: 1,
+            num5: 1
+        }
+    }
+}
+</script>
+
 <template>
     <div>
         <Alert />
@@ -19,22 +38,3 @@
         </page-main>
     </div>
 </template>
-
-<script>
-import Alert from './components/alert.vue'
-
-export default {
-    components: {
-        Alert
-    },
-    data() {
-        return {
-            num: 1,
-            num2: 1,
-            num3: 5,
-            num4: 1,
-            num5: 1
-        }
-    }
-}
-</script>

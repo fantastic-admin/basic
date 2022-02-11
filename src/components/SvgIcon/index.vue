@@ -1,13 +1,4 @@
-<template>
-    <el-icon v-if="name.indexOf('el-icon-') === 0 || name.indexOf('ElIcon') === 0" class="svg-icon" :style="transformStyle">
-        <Component :is="name" />
-    </el-icon>
-    <svg v-else class="svg-icon" :style="transformStyle" aria-hidden="true">
-        <use :xlink:href="`#icon-${name}`" />
-    </svg>
-</template>
-
-<script setup>
+<script setup name="SvgIcon">
 const props = defineProps({
     name: {
         type: String,
@@ -52,12 +43,21 @@ const transformStyle = computed(() => {
 })
 </script>
 
+<template>
+    <el-icon v-if="name.indexOf('el-icon-') === 0 || name.indexOf('ElIcon') === 0" class="svg-icon" :style="transformStyle">
+        <Component :is="name" />
+    </el-icon>
+    <svg v-else class="svg-icon" :style="transformStyle" aria-hidden="true">
+        <use :xlink:href="`#icon-${name}`" />
+    </svg>
+</template>
+
 <style scoped>
 .svg-icon {
     width: 1em;
     height: 1em;
     vertical-align: -0.15em;
-    fill: currentColor;
+    fill: currentcolor;
     overflow: hidden;
 }
 </style>

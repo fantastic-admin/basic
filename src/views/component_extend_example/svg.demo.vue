@@ -1,3 +1,14 @@
+<script>
+export default {
+    data() {
+        return {
+            flip: '',
+            rotate: 0
+        }
+    }
+}
+</script>
+
 <template>
     <div>
         <page-header title="SVG Icon" content="除了使用 Element Plus 提供的图标外，你还可以使用自己的 SVG 图标" />
@@ -28,17 +39,6 @@
         </page-main>
     </div>
 </template>
-
-<script>
-export default {
-    data() {
-        return {
-            flip: '',
-            rotate: 0
-        }
-    }
-}
-</script>
 
 <style scoped>
 .example-icon {

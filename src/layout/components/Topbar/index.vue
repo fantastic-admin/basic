@@ -1,32 +1,4 @@
-<template>
-    <div
-        class="topbar-container" :class="{
-            'fixed': settingsStore.topbar.fixed,
-            'shadow': scrollTop
-        }" data-fixed-calc-width
-    >
-        <div class="left-box">
-            <div v-if="enableSidebarCollapse" class="sidebar-collapse" :class="{'is-collapse': settingsStore.menu.subMenuCollapse}" @click="settingsStore.toggleSidebarCollapse()">
-                <svg-icon name="toolbar-collapse" />
-            </div>
-            <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc'" separator-class="el-icon-arrow-right">
-                <transition-group name="breadcrumb">
-                    <template v-for="(item, index) in breadcrumbList">
-                        <el-breadcrumb-item v-if="index < breadcrumbList.length - 1" :key="item.path" :to="pathCompile(item.path)">
-                            {{ item.title }}
-                        </el-breadcrumb-item>
-                        <el-breadcrumb-item v-else :key="item.path">
-                            {{ item.title }}
-                        </el-breadcrumb-item>
-                    </template>
-                </transition-group>
-            </el-breadcrumb>
-        </div>
-        <Tools />
-    </div>
-</template>
-
-<script setup>
+<script setup name="Topbar">
 import { compile } from 'path-to-regexp'
 import { deepClone } from '@/util'
 import Tools from '../Tools/index.vue'
@@ -73,6 +45,34 @@ function pathCompile(path) {
     return toPath(route.params)
 }
 </script>
+
+<template>
+    <div
+        class="topbar-container" :class="{
+            'fixed': settingsStore.topbar.fixed,
+            'shadow': scrollTop
+        }" data-fixed-calc-width
+    >
+        <div class="left-box">
+            <div v-if="enableSidebarCollapse" class="sidebar-collapse" :class="{'is-collapse': settingsStore.menu.subMenuCollapse}" @click="settingsStore.toggleSidebarCollapse()">
+                <svg-icon name="toolbar-collapse" />
+            </div>
+            <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc'" separator-class="el-icon-arrow-right">
+                <transition-group name="breadcrumb">
+                    <template v-for="(item, index) in breadcrumbList">
+                        <el-breadcrumb-item v-if="index < breadcrumbList.length - 1" :key="item.path" :to="pathCompile(item.path)">
+                            {{ item.title }}
+                        </el-breadcrumb-item>
+                        <el-breadcrumb-item v-else :key="item.path">
+                            {{ item.title }}
+                        </el-breadcrumb-item>
+                    </template>
+                </transition-group>
+            </el-breadcrumb>
+        </div>
+        <Tools />
+    </div>
+</template>
 
 <style lang="scss" scoped>
 .topbar-container {
