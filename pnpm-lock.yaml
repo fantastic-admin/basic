@@ -32,12 +32,9 @@ specifiers:
   qs: ^6.10.3
   sass: ^1.49.7
   stylelint: ^14.5.0
-  stylelint-config-html: ^1.0.0
-  stylelint-config-recommended: ^7.0.0
   stylelint-config-recommended-scss: ^5.0.2
   stylelint-config-recommended-vue: ^1.3.0
   stylelint-config-standard: ^25.0.0
-  stylelint-config-standard-scss: ^3.0.0
   stylelint-scss: ^4.1.0
   svgo: ^2.8.0
   tinymce: ^5.10.3
@@ -93,12 +90,9 @@ devDependencies:
   postcss-scss: 4.0.3
   sass: 1.49.7
   stylelint: 14.5.0
-  stylelint-config-html: 1.0.0_2fdfe057bbf58b3dfbbb46d8950182ee
-  stylelint-config-recommended: 7.0.0_stylelint@14.5.0
   stylelint-config-recommended-scss: 5.0.2_stylelint@14.5.0
   stylelint-config-recommended-vue: 1.3.0_2fdfe057bbf58b3dfbbb46d8950182ee
   stylelint-config-standard: 25.0.0_stylelint@14.5.0
-  stylelint-config-standard-scss: 3.0.0_stylelint@14.5.0
   stylelint-scss: 4.1.0_stylelint@14.5.0
   svgo: 2.8.0
   unplugin-auto-import: 0.5.11_@vueuse+core@7.6.2+vite@2.8.2
@@ -5319,27 +5313,6 @@ packages:
       stylelint: ^14.4.0
     dependencies:
       stylelint: 14.5.0
-    dev: true
-
-  /stylelint-config-standard-scss/3.0.0_stylelint@14.5.0:
-    resolution: {integrity: sha512-zt3ZbzIbllN1iCmc94e4pDxqpkzeR6CJo5DDXzltshuXr+82B8ylHyMMARNnUYrZH80B7wgY7UkKTYCFM0UUyw==}
-    peerDependencies:
-      stylelint: ^14.0.0
-    dependencies:
-      stylelint: 14.5.0
-      stylelint-config-recommended-scss: 5.0.2_stylelint@14.5.0
-      stylelint-config-standard: 24.0.0_stylelint@14.5.0
-    transitivePeerDependencies:
-      - postcss
-    dev: true
-
-  /stylelint-config-standard/24.0.0_stylelint@14.5.0:
-    resolution: {integrity: sha512-+RtU7fbNT+VlNbdXJvnjc3USNPZRiRVp/d2DxOF/vBDDTi0kH5RX2Ny6errdtZJH3boO+bmqIYEllEmok4jiuw==}
-    peerDependencies:
-      stylelint: ^14.0.0
-    dependencies:
-      stylelint: 14.5.0
-      stylelint-config-recommended: 6.0.0_stylelint@14.5.0
     dev: true
 
   /stylelint-config-standard/25.0.0_stylelint@14.5.0:
