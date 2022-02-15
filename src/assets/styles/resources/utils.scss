@@ -12,7 +12,8 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-    } @else {
+    }
+    @else {
         /* stylelint-disable-next-line value-no-vendor-prefix */
         display: -webkit-box;
         -webkit-box-orient: vertical;
