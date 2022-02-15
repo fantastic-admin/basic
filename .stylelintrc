@@ -1,8 +1,9 @@
 {
     "extends": [
         "stylelint-config-standard",
-        "stylelint-config-recommended-scss",
-        "stylelint-config-recommended-vue"
+        "stylelint-config-standard-scss",
+        "stylelint-config-recommended",
+        "stylelint-config-recommended-vue/scss"
     ],
     "overrides": [
         {
@@ -26,6 +27,16 @@
         "selector-class-pattern": null,
         "scss/no-global-function-names": null,
         "scss/at-import-partial-extension": null,
+        "scss/double-slash-comment-empty-line-before": null,
+        "function-no-unknown": [
+            true,
+            {
+                "ignoreFunctions": [
+                    "lighten",
+                    "darken"
+                ]
+            }
+        ],
         "max-line-length": null
     }
 }
