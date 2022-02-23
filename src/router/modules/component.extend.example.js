@@ -35,14 +35,6 @@ export default {
             }
         },
         {
-            path: 'result',
-            name: 'componentExtendExampleResult',
-            component: () => import('@/views/component_extend_example/result.demo.vue'),
-            meta: {
-                title: '处理结果'
-            }
-        },
-        {
             path: 'actionbar',
             name: 'componentExtendExampleActionbar',
             component: () => import('@/views/component_extend_example/actionbar.demo.vue'),
