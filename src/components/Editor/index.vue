@@ -43,6 +43,7 @@ const defaultSetting = ref({
     language_url: 'tinymce/langs/zh_CN.js',
     language: 'zh_CN',
     skin_url: 'tinymce/skins/ui/oxide',
+    content_css: 'tinymce/skins/content/default/content.min.css',
     min_height: 250,
     max_height: 600,
     selector: 'textarea',
