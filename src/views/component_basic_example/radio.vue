@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <script>
 import Alert from './components/alert.vue'
 

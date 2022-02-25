@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        title: "修改密码"
+    }
+}
+</route>
+
 <script setup name="PersonalEditPassword">
 const route = useRoute(), router = useRouter()
 const { proxy } = getCurrentInstance()

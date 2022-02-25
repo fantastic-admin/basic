@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <script setup>
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'

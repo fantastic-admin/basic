@@ -10,7 +10,7 @@ import { useNProgress } from '@vueuse/integrations/useNProgress'
 const { isLoading } = useNProgress()
 
 // 固定路由
-const constantRoutes = [
+let constantRoutes = [
     {
         path: '/login',
         name: 'login',
@@ -81,7 +81,7 @@ import EcologyExample from './modules/ecology.example'
 import CooperationExample from './modules/cooperation.example'
 
 // 动态路由（异步路由、导航栏路由）
-const asyncRoutes = [
+let asyncRoutes = [
     {
         meta: {
             title: '演示',
@@ -129,11 +129,24 @@ const asyncRoutes = [
 ]
 
 const lastRoute = {
-    path: '/:pathMatch(.*)*',
-    component: () => import('@/views/404.vue'),
+    path: '/:all(.*)*',
+    name: 'notFound',
+    component: () => import('@/views/[...all].vue'),
     meta: {
         title: '找不到页面'
     }
+}
+
+import { setupLayouts } from 'virtual:generated-layouts'
+import generatedRoutes from 'virtual:generated-pages'
+
+if (useSettingsOutsideStore().app.routeBaseOn === 'filesystem') {
+    constantRoutes = generatedRoutes.filter(item => {
+        return item.meta?.enabled !== false && item.meta?.constant === true
+    })
+    asyncRoutes = setupLayouts(generatedRoutes.filter(item => {
+        return item.meta?.enabled !== false && item.meta?.constant !== true && item.meta?.layout !== false
+    }))
 }
 
 const router = createRouter({
@@ -184,10 +197,24 @@ router.beforeEach(async(to, from, next) => {
                 next()
             }
         } else {
-            if (!settingsOutsideStore.app.enableBackendReturnRoute) {
-                await routeOutsideStore.generateRoutesAtFront(asyncRoutes)
-            } else {
-                await routeOutsideStore.generateRoutesAtBack()
+            switch (settingsOutsideStore.app.routeBaseOn) {
+                case 'frontend':
+                    await routeOutsideStore.generateRoutesAtFront(asyncRoutes)
+                    break
+                case 'backend':
+                    await routeOutsideStore.generateRoutesAtBack()
+                    break
+                case 'filesystem':
+                    await routeOutsideStore.generateRoutesAtFilesystem(asyncRoutes)
+                    switch (settingsOutsideStore.menu.baseOn) {
+                        case 'frontend':
+                            await menuOutsideStore.generateMenusAtFront()
+                            break
+                        case 'backend':
+                            await menuOutsideStore.generateMenusAtBack()
+                            break
+                    }
+                    break
             }
             let removeRoutes = []
             routeOutsideStore.flatRoutes.forEach(route => {
@@ -195,7 +222,12 @@ router.beforeEach(async(to, from, next) => {
                     removeRoutes.push(router.addRoute(route))
                 }
             })
-            removeRoutes.push(router.addRoute(lastRoute))
+            if (settingsOutsideStore.app.routeBaseOn === 'filesystem') {
+                const otherRoutes = generatedRoutes.filter(item => item.meta?.constant !== true && item.meta?.layout === false)
+                otherRoutes.length && removeRoutes.push(router.addRoute(...otherRoutes))
+            } else {
+                removeRoutes.push(router.addRoute(lastRoute))
+            }
             // 记录的 accessRoutes 路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
             routeOutsideStore.setCurrentRemoveRoutes(removeRoutes)
             next({ ...to, replace: true })

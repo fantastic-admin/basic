@@ -1,3 +1,12 @@
+<route>
+{
+    meta: {
+        constant: true,
+        layout: false
+    }
+}
+</route>
+
 <script setup>
 const router = useRouter()
 

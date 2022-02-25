@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <template>
     <div>
         <page-header title="内容块" content="PageMain" />

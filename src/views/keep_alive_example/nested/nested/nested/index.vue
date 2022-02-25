@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <script>
 export default {
     name: 'TabExampleNestedTest',

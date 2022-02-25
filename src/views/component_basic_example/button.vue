@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <script setup>
 import Alert from './components/alert.vue'
 import { Search, Edit, Check, Message, Star, Delete, Share, ArrowLeft } from '@element-plus/icons-vue'

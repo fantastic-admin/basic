@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <script setup>
 import Alert from './components/alert.vue'
 import { Edit } from '@element-plus/icons-vue'

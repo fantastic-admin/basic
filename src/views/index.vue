@@ -1,3 +1,12 @@
+<route>
+{
+    name: 'dashboard',
+    meta: {
+        title: "控制台"
+    }
+}
+</route>
+
 <script setup>
 const locationOrigin = location.origin
 

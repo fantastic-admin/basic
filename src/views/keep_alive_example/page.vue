@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <script setup name="KeepAliveExamplePage">
 import { onBeforeRouteLeave } from 'vue-router'
 

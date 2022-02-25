@@ -1,9 +1,12 @@
 import { defineStore } from 'pinia'
 import { piniaStore } from '@/store'
-import { resolveRoutePath } from '@/util'
+import { deepClone, resolveRoutePath } from '@/util'
 import path from 'path-browserify'
+import api from '@/api'
+import menu from '@/menu'
 
 import { useSettingsStore } from './settings'
+import { useUserStore } from './user'
 import { useRouteStore } from './route'
 
 function getDeepestPath(routes, rootPath = '') {
@@ -29,28 +32,67 @@ function getDeepestPath(routes, rootPath = '') {
     return retnPath
 }
 
+function hasPermission(permissions, route) {
+    let isAuth = false
+    if (route.meta && route.meta.auth) {
+        isAuth = permissions.some(auth => {
+            if (typeof route.meta.auth == 'string') {
+                return route.meta.auth === auth
+            } else {
+                return route.meta.auth.some(routeAuth => {
+                    return routeAuth === auth
+                })
+            }
+        })
+    } else {
+        isAuth = true
+    }
+    return isAuth
+}
+
+function filterAsyncMenus(menus, permissions) {
+    const res = []
+    menus.forEach(menu => {
+        let tmpMenu = deepClone(menu)
+        if (hasPermission(permissions, tmpMenu)) {
+            if (tmpMenu.children) {
+                tmpMenu.children = filterAsyncMenus(tmpMenu.children, permissions)
+                tmpMenu.children.length && res.push(tmpMenu)
+            } else {
+                res.push(tmpMenu)
+            }
+        }
+    })
+    return res
+}
+
 export const useMenuStore = defineStore(
     // 唯一ID
     'menu',
     {
         state: () => ({
+            menus: [],
             actived: 0
         }),
         getters: {
             // 完整导航数据
             allMenus() {
                 const settingsStore = useSettingsStore()
-                const routeStore = useRouteStore()
-                let routes
-                if (settingsStore.menu.menuMode === 'single') {
-                    routes = [{ children: [] }]
-                    routeStore.routes.map(item => {
-                        routes[0].children.push(...item.children)
-                    })
+                let menus
+                if (settingsStore.app.routeBaseOn !== 'filesystem') {
+                    const routeStore = useRouteStore()
+                    if (settingsStore.menu.menuMode === 'single') {
+                        menus = [{ children: [] }]
+                        routeStore.routes.map(item => {
+                            menus[0].children.push(...item.children)
+                        })
+                    } else {
+                        menus = routeStore.routes
+                    }
                 } else {
-                    routes = routeStore.routes
+                    menus = this.menus
                 }
-                return routes
+                return menus
             },
             // 次导航数据
             sidebarMenus() {
@@ -61,18 +103,60 @@ export const useMenuStore = defineStore(
                 return this.allMenus.length > 0 ? getDeepestPath(this.sidebarMenus[0]) : '/'
             },
             defaultOpenedPaths() {
-                const routeStore = useRouteStore()
+                const settingsStore = useSettingsStore()
                 let defaultOpenedPaths = []
-                routeStore.routes.map(item => {
-                    item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
-                    item.children && item.children.map(child => {
-                        child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
+                if (settingsStore.app.routeBaseOn !== 'filesystem') {
+                    const routeStore = useRouteStore()
+                    routeStore.routes.map(item => {
+                        item.meta.defaultOpened && defaultOpenedPaths.push(item.path)
+                        item.children && item.children.map(child => {
+                            child.meta.defaultOpened && defaultOpenedPaths.push(path.resolve(item.path, child.path))
+                        })
                     })
-                })
+                }
                 return defaultOpenedPaths
             }
         },
         actions: {
+            // 生成导航（前端生成）
+            generateMenusAtFront() {
+                // eslint-disable-next-line no-async-promise-executor
+                return new Promise(async resolve => {
+                    const settingsStore = useSettingsStore()
+                    const userStore = useUserStore()
+                    let accessedMenus
+                    // 如果权限功能开启，则需要对导航数据进行筛选过滤
+                    if (settingsStore.app.enablePermission) {
+                        const permissions = await userStore.getPermissions()
+                        accessedMenus = filterAsyncMenus(menu, permissions)
+                    } else {
+                        accessedMenus = deepClone(menu)
+                    }
+                    this.menus = accessedMenus.filter(item => item.children.length != 0)
+                    resolve()
+                })
+            },
+            // 生成导航（后端生成）
+            generateMenusAtBack() {
+                return new Promise(resolve => {
+                    api.get('menu/list', {
+                        baseURL: '/mock/'
+                    }).then(async res => {
+                        const settingsStore = useSettingsStore()
+                        const userStore = useUserStore()
+                        let accessedMenus
+                        // 如果权限功能开启，则需要对导航数据进行筛选过滤
+                        if (settingsStore.app.enablePermission) {
+                            const permissions = await userStore.getPermissions()
+                            accessedMenus = filterAsyncMenus(res.data, permissions)
+                        } else {
+                            accessedMenus = deepClone(res.data)
+                        }
+                        this.menus = accessedMenus.filter(item => item.children.length != 0)
+                        resolve()
+                    })
+                })
+            },
             // 切换主导航
             setActived(data) {
                 if (typeof data === 'number') {

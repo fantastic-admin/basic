@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        enabled: false
+    }
+}
+</route>
+
 <script setup name="TabExampleNested1">
 import { useKeepAliveStore } from '@/store/modules/keepAlive'
 const keepAliveStore = useKeepAliveStore()
