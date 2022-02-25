@@ -23,7 +23,7 @@
         "@vueuse/integrations": "^7.6.2",
         "axios": "^0.26.0",
         "dayjs": "^1.10.7",
-        "element-plus": "^2.0.2",
+        "element-plus": "^2.0.3",
         "hotkeys-js": "^3.8.7",
         "js-cookie": "^3.0.1",
         "mavon-editor": "^3.0.0-beta",
