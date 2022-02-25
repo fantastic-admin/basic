@@ -59,14 +59,9 @@ function pathCompile(path) {
             </div>
             <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc'" separator-class="el-icon-arrow-right">
                 <transition-group name="breadcrumb">
-                    <template v-for="(item, index) in breadcrumbList">
-                        <el-breadcrumb-item v-if="index < breadcrumbList.length - 1" :key="item.path" :to="pathCompile(item.path)">
-                            {{ item.title }}
-                        </el-breadcrumb-item>
-                        <el-breadcrumb-item v-else :key="item.path">
-                            {{ item.title }}
-                        </el-breadcrumb-item>
-                    </template>
+                    <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path" :to="index < breadcrumbList.length - 1 ? pathCompile(item.path) : ''">
+                        {{ item.title }}
+                    </el-breadcrumb-item>
                 </transition-group>
             </el-breadcrumb>
         </div>
