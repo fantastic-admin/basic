@@ -10,7 +10,7 @@ specifiers:
   '@vueuse/integrations': ^7.6.2
   axios: ^0.26.0
   dayjs: ^1.10.7
-  element-plus: ^2.0.2
+  element-plus: ^2.0.3
   eslint: ^8.9.0
   eslint-plugin-vue: ^8.5.0
   hotkeys-js: ^3.8.7
@@ -60,7 +60,7 @@ dependencies:
   '@vueuse/integrations': 7.6.2_cee5aa3826cb92439bb32adc5ffb6d94
   axios: 0.26.0
   dayjs: 1.10.7
-  element-plus: 2.0.2_vue@3.2.31
+  element-plus: 2.0.3_vue@3.2.31
   hotkeys-js: 3.8.7
   js-cookie: 3.0.1
   mitt: 3.0.0
@@ -1924,8 +1924,8 @@ packages:
     resolution: {integrity: sha512-cId+QwWrV8R1UawO6b9BR1hnkJ4EJPCPAr4h315vliHUtVUJDk39Sg1PMNnaWKfj5x+93ssjeJ9LKL6r8LaMiA==}
     dev: true
 
-  /element-plus/2.0.2_vue@3.2.31:
-    resolution: {integrity: sha512-URjC0HwwiqtlLxqTmHXQ31WXrdAq4ChWyyn52OcQs3PRsnMPfahGVq2AWnfzzlzlhVeI5lY3HQiuB1zDathS+g==}
+  /element-plus/2.0.3_vue@3.2.31:
+    resolution: {integrity: sha512-k+b4V4sGmgOpOYjrAWyp0k+N1mVaIZQ9LpbXWvmJNzE+j21DYOe9m1zGn5mFDPgeLOZcUS7QzzwYAommhwFj0g==}
     peerDependencies:
       vue: ^3.2.0
     dependencies:
@@ -1937,7 +1937,7 @@ packages:
       dayjs: 1.10.7
       lodash: 4.17.21
       lodash-es: 4.17.21
-      lodash-unified: 1.0.1_lodash-es@4.17.21+lodash@4.17.21
+      lodash-unified: 1.0.2_lodash-es@4.17.21+lodash@4.17.21
       memoize-one: 6.0.0
       normalize-wheel-es: 1.1.1
       vue: 3.2.31
@@ -3860,8 +3860,8 @@ packages:
     resolution: {integrity: sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==}
     dev: false
 
-  /lodash-unified/1.0.1_lodash-es@4.17.21+lodash@4.17.21:
-    resolution: {integrity: sha512-Py+twfpWn+2dFQWCuGcp21WiQRwZwnm1cyE3piSt/VtBVKVyxlR58WgOVRzXtmdmDRGJKH8F8GPaA29WK/yK8g==}
+  /lodash-unified/1.0.2_lodash-es@4.17.21+lodash@4.17.21:
+    resolution: {integrity: sha512-OGbEy+1P+UT26CYi4opY4gebD8cWRDxAT6MAObIVQMiqYdxZr1g3QHWCToVsm31x2NkLS4K3+MC2qInaRMa39g==}
     peerDependencies:
       '@types/lodash-es': '*'
       lodash: '*'
