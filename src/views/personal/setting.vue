@@ -1,3 +1,12 @@
+<route>
+{
+    meta: {
+        title: "个人设置",
+        cache: "personal-edit.password"
+    }
+}
+</route>
+
 <script setup name="PersonalSetting">
 const router = useRouter()
 const { proxy } = getCurrentInstance()
@@ -26,7 +35,6 @@ function editPassword() {
 
 <template>
     <div>
-        <!-- 页面：Setting -->
         <page-main>
             <el-tabs tab-position="left" style="height: 600px;">
                 <el-tab-pane label="基本设置" class="basic">

@@ -1,3 +1,13 @@
+<route>
+{
+    meta: {
+        title: "登录",
+        constant: true,
+        layout: false
+    }
+}
+</route>
+
 <script setup name="Login">
 const { proxy } = getCurrentInstance()
 const route = useRoute(), router = useRouter()

@@ -1,3 +1,11 @@
+<route>
+{
+    meta: {
+        title: '导航2-2-2'
+    }
+}
+</route>
+
 <template>
     <div>
         <page-main>

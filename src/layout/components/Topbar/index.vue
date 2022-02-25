@@ -57,7 +57,7 @@ function pathCompile(path) {
             <div v-if="enableSidebarCollapse" class="sidebar-collapse" :class="{'is-collapse': settingsStore.menu.subMenuCollapse}" @click="settingsStore.toggleSidebarCollapse()">
                 <svg-icon name="toolbar-collapse" />
             </div>
-            <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc'" separator-class="el-icon-arrow-right">
+            <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc' && settingsStore.app.routeBaseOn !== 'filesystem'" separator-class="el-icon-arrow-right">
                 <transition-group name="breadcrumb">
                     <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path" :to="index < breadcrumbList.length - 1 ? pathCompile(item.path) : ''">
                         {{ item.title }}

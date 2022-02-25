@@ -7,6 +7,8 @@ import { useSettingsStore } from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
 import { useRouteStore } from '@/store/modules/route'
 const routeStore = useRouteStore()
+import { useMenuStore } from '@/store/modules/menu'
+const menuStore = useMenuStore()
 
 const isShow = ref(false)
 const searchInput = ref('')
@@ -68,9 +70,15 @@ onMounted(() => {
             isShow.value = true
         }
     })
-    routeStore.routes.map(item => {
-        getSourceList(item.children)
-    })
+    if (settingsStore.app.routeBaseOn !== 'filesystem') {
+        routeStore.routes.map(item => {
+            getSourceList(item.children)
+        })
+    } else {
+        menuStore.menus.map(item => {
+            getSourceList(item.children)
+        })
+    }
 })
 
 function hasChildren(item) {
