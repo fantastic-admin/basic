@@ -32,6 +32,14 @@ onMounted(() => {
             duration: 0
         })
     }, 0)
+    proxy.$messageBox.confirm('据了解，在市面上各种后台框架里，我们是第一个推出 <b>基于文件系统的路由</b> 特性。所以我们迫不及待地希望所有开发者都可以尽快使用上该特性，因为这意味着，手动编写路由数据将成为过去式！', '重磅更新', {
+        dangerouslyUseHTMLString: true,
+        confirmButtonText: '去看看',
+        cancelButtonText: '知道了',
+        type: 'success'
+    }).then(() => {
+        open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/guide/file-system-route.html`)
+    })
 })
 
 function open(url) {
