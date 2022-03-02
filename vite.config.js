@@ -39,6 +39,7 @@ export default ({ mode, command }) => {
         build: {
             outDir: mode == 'production' ? 'dist' : `dist-${mode}`,
             sourcemap: env.VITE_BUILD_SOURCEMAP == 'true',
+            minify: 'terser',
             terserOptions: {
                 compress: {
                     drop_console: env.VITE_BUILD_DROP_CONSOLE == 'true'
