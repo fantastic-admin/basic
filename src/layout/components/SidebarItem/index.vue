@@ -27,13 +27,15 @@ const hasChildren = computed(() => {
 </script>
 
 <template>
-    <div v-if="item.meta.sidebar !== false" class="sidebar-item">
+    <div class="sidebar-item">
         <el-sub-menu v-if="item.path == undefined" :title="item.meta.title" :index="JSON.stringify(item)">
             <template #title>
                 <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                 <span class="title">{{ item.meta.title }}</span>
             </template>
-            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" />
+            <template v-for="route in item.children">
+                <SidebarItem v-if="route.meta.sidebar !== false" :key="route.path" :item="route" />
+            </template>
         </el-sub-menu>
         <router-link v-else-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
             <a :href="isExternalLink(resolveRoutePath(basePath, item.path)) ? resolveRoutePath(basePath, item.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternalLink(resolveRoutePath(basePath, item.path)) ? '_blank' : '_self'" @click="navigate">
@@ -48,7 +50,9 @@ const hasChildren = computed(() => {
                 <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
                 <span class="title">{{ item.meta.title }}</span>
             </template>
-            <SidebarItem v-for="route in item.children" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path)" />
+            <template v-for="route in item.children">
+                <SidebarItem v-if="route.meta.sidebar !== false" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path)" />
+            </template>
         </el-sub-menu>
     </div>
 </template>
@@ -66,6 +70,7 @@ const hasChildren = computed(() => {
 :deep(.el-sub-menu__title) {
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 :deep(.el-sub-menu),
 :deep(.el-menu-item) {

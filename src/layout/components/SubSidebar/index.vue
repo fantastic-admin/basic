@@ -113,12 +113,9 @@ function onSidebarScroll(e) {
             }
             :deep(.el-menu-item),
             :deep(.el-sub-menu__title) {
-                span {
-                    display: none;
-                }
+                span,
                 .el-sub-menu__icon-arrow {
-                    right: 7px;
-                    margin-top: -5px;
+                    display: none;
                 }
             }
         }
