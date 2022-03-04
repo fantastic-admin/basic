@@ -10,12 +10,17 @@ let globalSettings = {
          * 4、鉴权函数：this.$auth()、this.$authAll()
          */
         enablePermission: false,
-        // 是否开启后端返回路由数据
-        enableBackendReturnRoute: false,
         // 是否开启载入进度条
         enableProgress: true,
         // 是否开启动态标题
-        enableDynamicTitle: false
+        enableDynamicTitle: false,
+        /**
+         * 路由数据来源
+         * frontend 前端
+         * backend 后端
+         * filesystem 文件系统
+         */
+        routeBaseOn: 'frontend'
     },
     // 控制台
     dashboard: {
@@ -31,6 +36,12 @@ let globalSettings = {
     },
     // 导航栏
     menu: {
+        /**
+         * 数据来源，当 app.routeBaseOn 为 filesystem 时生效
+         * frontend 前端
+         * backend 后端
+         */
+        baseOn: 'frontend',
         /**
          * 导航栏模式
          * side 侧边栏模式（含主导航）

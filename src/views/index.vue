@@ -1,3 +1,12 @@
+<route>
+{
+    name: 'dashboard',
+    meta: {
+        title: "控制台"
+    }
+}
+</route>
+
 <template>
     <div>
         <page-header title="欢迎使用 Fantastic-admin（基础版）">

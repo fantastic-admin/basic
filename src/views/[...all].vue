@@ -1,3 +1,13 @@
+<route>
+{
+    name: 'notFound',
+    meta: {
+        title: "找不到页面",
+        layout: false
+    }
+}
+</route>
+
 <script setup>
 import { onBeforeRouteLeave } from 'vue-router'
 const router = useRouter()

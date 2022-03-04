@@ -130,19 +130,26 @@ export const useRouteStore = defineStore(
         getters: {
             // 扁平化路由（将三级及以上路由数据拍平成二级）
             flatRoutes: state => {
+                const settingsStore = useSettingsStore()
                 let routes = []
                 if (state.routes) {
-                    state.routes.map(item => {
-                        routes.push(...deepClone(item.children))
-                    })
-                    routes.map(item => {
-                        if (item.children) {
-                            item.children = flatAsyncRoutes(item.children, [{
-                                path: item.path,
-                                title: item.meta.title
-                            }], item.path)
-                        }
-                    })
+                    if (settingsStore.app.routeBaseOn !== 'filesystem') {
+                        state.routes.map(item => {
+                            routes.push(...deepClone(item.children))
+                        })
+                        routes.map(item => {
+                            if (item.children) {
+                                item.children = flatAsyncRoutes(item.children, [{
+                                    path: item.path,
+                                    title: item.meta.title
+                                }], item.path)
+                            }
+                        })
+                    } else {
+                        state.routes.map(item => {
+                            routes.push(deepClone(item))
+                        })
+                    }
                 }
                 return routes
             }
@@ -190,6 +197,26 @@ export const useRouteStore = defineStore(
                         this.routes = accessedRoutes.filter(item => item.children.length != 0)
                         resolve()
                     })
+                })
+            },
+            // 根据权限动态生成路由（文件系统生成）
+            generateRoutesAtFilesystem(asyncRoutes) {
+                // eslint-disable-next-line no-async-promise-executor
+                return new Promise(async resolve => {
+                    const settingsStore = useSettingsStore()
+                    const userStore = useUserStore()
+                    let accessedRoutes
+                    // 如果权限功能开启，则需要对路由数据进行筛选过滤
+                    if (settingsStore.app.enablePermission) {
+                        const permissions = await userStore.getPermissions()
+                        accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+                    } else {
+                        accessedRoutes = deepClone(asyncRoutes)
+                    }
+                    // 设置 routes 数据
+                    this.isGenerate = true
+                    this.routes = accessedRoutes.filter(item => item.children.length != 0)
+                    resolve()
                 })
             },
             // 记录 accessRoutes 路由，用于登出时删除路由
