@@ -150,8 +150,7 @@ const oneStepAdminInfo = ref({
 
 <style lang="scss" scoped>
 .text-emphasis {
-    /* stylelint-disable-next-line property-no-vendor-prefix */
-    -webkit-text-emphasis-style: "❤";
+    text-emphasis-style: "❤";
 }
 .ecology {
     padding: 10px 0 0;
