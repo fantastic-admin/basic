@@ -92,8 +92,8 @@ function pathCompile(path) {
         align-items: center;
         padding-right: 50px;
         overflow: hidden;
-        /* stylelint-disable-next-line property-no-vendor-prefix */
         -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 50px), transparent);
+        mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 50px), transparent);
         .sidebar-collapse {
             display: flex;
             align-items: center;

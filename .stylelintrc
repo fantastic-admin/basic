@@ -35,6 +35,14 @@
                 ]
             }
         ],
+        "property-no-vendor-prefix": [
+            true,
+            {
+                "ignoreProperties": [
+                    "mask-image"
+                ]
+            }
+        ],
         "max-line-length": null
     }
 }
