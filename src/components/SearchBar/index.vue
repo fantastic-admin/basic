@@ -43,7 +43,7 @@ function toggle() {
         margin-top: 0;
     }
     :deep(.el-form) {
-        margin-bottom: -18px;
+        margin-bottom: -10px;
         .el-select {
             width: 100%;
         }
@@ -52,6 +52,7 @@ function toggle() {
         }
     }
     .more {
+        position: relative;
         text-align: center;
         margin-bottom: -10px;
     }
