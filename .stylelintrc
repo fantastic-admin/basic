@@ -25,16 +25,6 @@
         "selector-class-pattern": null,
         "scss/no-global-function-names": null,
         "scss/at-import-partial-extension": null,
-        "function-no-unknown": [
-            true,
-            {
-                "ignoreFunctions": [
-                    "v-bind",
-                    "lighten",
-                    "darken"
-                ]
-            }
-        ],
         "property-no-vendor-prefix": [
             true,
             {
