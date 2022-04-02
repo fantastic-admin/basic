@@ -96,8 +96,25 @@
                 </div>
                 <div class="text"><%= title %>载入中…</div>
             </div>
-            <script>
-                const Loading = document.querySelector('.loading')
+            <div id="browser-upgrade">
+                <div class="title">为了您的体验，推荐使用以下浏览器</div>
+                <div class="browsers">
+                    <a href="https://www.microsoft.com/edge" target="_blank" class="browser">
+                        <img class="browser-icon" src="/browser_upgrade/edge.png" />
+                        <div class="browser-name">Mircosoft Edge</div>
+                    </a>
+                    <a href="https://www.google.cn/chrome/" target="_blank" class="browser">
+                        <img class="browser-icon" src="/browser_upgrade/chrome.png" />
+                        <div class="browser-name">Google Chrome</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script>
+            if(!!window.ActiveXObject || "ActiveXObject" in window) {
+                document.getElementById('browser-upgrade').style.display = 'block'
+            } else {
+                var Loading = document.querySelector('.loading')
                 Loading.classList.add('animate')
                 Loading.addEventListener('animationend', function() {
                     setTimeout(function() {
@@ -107,8 +124,8 @@
                         Loading.classList.add('animate')
                     }, 1000)
                 })
-            </script>
-        </div>
+            }
+        </script>
         <script type="module" src="/src/main.js"></script>
         <% if (debugTool == 'eruda') { %>
             <script src="//cdn.jsdelivr.net/npm/eruda/eruda.min.js"></script>
