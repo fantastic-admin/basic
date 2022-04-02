@@ -82,6 +82,48 @@
                 font-size: 24px;
                 margin-top: 20px;
             }
+            #browser-upgrade {
+                position: absolute;
+                z-index: 10001;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                display: none;
+                user-select: none;
+                color: #736477;
+                background-color: snow;
+            }
+            #browser-upgrade .title {
+                margin: 40px 0;
+                text-align: center;
+                font-size: 24px;
+            }
+            #browser-upgrade .browsers {
+                text-align: center;
+            }
+            #browser-upgrade .browsers .browser {
+                display: inline-block;
+                margin: 0 20px;
+                cursor: pointer;
+                text-decoration: none;
+            }
+            #browser-upgrade .browsers .browser .browser-icon {
+                display: block;
+                width: 50px;
+                height: 50px;
+                margin: 0 auto;
+            }
+            #browser-upgrade .browsers .browser .browser-name {
+                text-align: center;
+                margin-top: 10px;
+                padding-bottom: 2px;
+                color: #736477;
+                border-bottom: 1px solid transparent;
+            }
+            #browser-upgrade .browsers .browser:hover .browser-name {
+                border-bottom: 1px solid #736477;
+            }
         </style>
         <%- copyrightScript %>
         <% if (appMode == 'example') { %>
@@ -116,8 +158,25 @@
                 </div>
                 <div class="text"><%= title %>载入中…</div>
             </div>
-            <script>
-                const Loading = document.querySelector('.loading')
+            <div id="browser-upgrade">
+                <div class="title">为了您的体验，推荐使用以下浏览器</div>
+                <div class="browsers">
+                    <a href="https://www.microsoft.com/edge" target="_blank" class="browser">
+                        <img class="browser-icon" src="/browser_upgrade/edge.png" />
+                        <div class="browser-name">Mircosoft Edge</div>
+                    </a>
+                    <a href="https://www.google.cn/chrome/" target="_blank" class="browser">
+                        <img class="browser-icon" src="/browser_upgrade/chrome.png" />
+                        <div class="browser-name">Google Chrome</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <script>
+            if(!!window.ActiveXObject || "ActiveXObject" in window) {
+                document.getElementById('browser-upgrade').style.display = 'block'
+            } else {
+                var Loading = document.querySelector('.loading')
                 Loading.classList.add('animate')
                 Loading.addEventListener('animationend', function() {
                     setTimeout(function() {
@@ -127,8 +186,8 @@
                         Loading.classList.add('animate')
                     }, 1000)
                 })
-            </script>
-        </div>
+            }
+        </script>
         <script type="module" src="/src/main.js"></script>
         <% if (debugTool == 'eruda') { %>
             <script src="//cdn.jsdelivr.net/npm/eruda/eruda.min.js"></script>
