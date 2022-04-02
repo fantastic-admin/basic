@@ -14,30 +14,11 @@ onMounted(() => {
         title: '温馨提示',
         dangerouslyUseHTMLString: true,
         message: `
-                <p>当前访问的是<b>基础版</b> (Vue3)</p>
-                <p>你可以点<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro/" target="_blank"><b>这里</b></a>访问专业版 (Vue3)</p>
-            `,
+            <p>当前访问的是<b>基础版</b> (Vue3)</p>
+            <p>你可以点<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro/" target="_blank"><b>这里</b></a>访问专业版 (Vue3)</p>
+        `,
         position: 'bottom-right',
         duration: 5000
-    })
-    setTimeout(() => {
-        proxy.$notify({
-            type: 'warning',
-            title: '点⭐领取专业版源码',
-            dangerouslyUseHTMLString: true,
-            message: `
-                <p>给项目仓库点⭐就可以领取专业版源码，点<a href="https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/buy" target="_blank"><b>这里</b></a>了解一下</p>
-            `,
-            position: 'bottom-right',
-            duration: 0
-        })
-    }, 0)
-    proxy.$messageBox.confirm('<p>做为本框架的作者，我一直秉持着 <b>人无我有，人有我优</b> 的准则要求自己，用心去打造每一个功能。</p><p>这一次，我又带来了一个全新的功能，那就是 <b>基于文件系统的路由</b>，并且(目前)在市面上各种后台框架中，我们是唯一一款提供该功能的。</p><p>我已经迫不及待地希望你们可以尽快了解并使用上，因为这意味着，<b>手动编写路由数据的开发模式将成为过去式</b>！</p>', '作者寄语', {
-        dangerouslyUseHTMLString: true,
-        confirmButtonText: '去看看',
-        cancelButtonText: '知道了'
-    }).then(() => {
-        open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/guide/file-system-route.html`)
     })
 })
 
