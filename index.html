@@ -113,6 +113,7 @@
                 width: 50px;
                 height: 50px;
                 margin: 0 auto;
+                border: none;
             }
             #browser-upgrade .browsers .browser .browser-name {
                 text-align: center;
@@ -172,22 +173,22 @@
                 </div>
             </div>
         </div>
-        <script>
-            if(!!window.ActiveXObject || "ActiveXObject" in window) {
-                document.getElementById('browser-upgrade').style.display = 'block'
-            } else {
-                var Loading = document.querySelector('.loading')
-                Loading.classList.add('animate')
-                Loading.addEventListener('animationend', function() {
-                    setTimeout(function() {
-                        Loading.classList.remove('animate')
-                    }, 600)
-                    setTimeout(function() {
-                        Loading.classList.add('animate')
-                    }, 1000)
-                })
-            }
-        </script>
+		<script>
+			if(!!window.ActiveXObject || "ActiveXObject" in window) {
+				document.getElementById('browser-upgrade').style.display = 'block'
+			} else {
+				var Loading = document.querySelector('.loading')
+				Loading.classList.add('animate')
+				Loading.addEventListener('animationend', function() {
+					setTimeout(function() {
+						Loading.classList.remove('animate')
+					}, 600)
+					setTimeout(function() {
+						Loading.classList.add('animate')
+					}, 1000)
+				})
+			}
+		</script>
         <script type="module" src="/src/main.js"></script>
         <% if (debugTool == 'eruda') { %>
             <script src="//cdn.jsdelivr.net/npm/eruda/eruda.min.js"></script>
