@@ -221,6 +221,7 @@ function onSuccess(res) {
 }
 .images-upload {
     display: inline-block;
+    vertical-align: top;
 }
 :deep(.el-upload) {
     .el-upload-dragger {
