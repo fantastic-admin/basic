@@ -29,25 +29,21 @@ function open(url) {
 
 <template>
     <div class="buy-it" :class="{'actived': isActived}">
-        <div class="item" @click="open('https://wpa.qq.com/msgrd?v=3&uin=304327508&site=qq&menu=yes')">
-            <svg-icon name="fixed-right-qq" />
-            <span class="title">在线<br>咨询</span>
-        </div>
-        <div class="item chat" @click="open('https://qm.qq.com/cgi-bin/qm/qr?k=WoDBYN0S9r94f9oBZkxlGbiYxu3dEzgt&jump_from=webapi')">
-            <svg-icon name="fixed-right-chat" />
-            <span class="title">加入<br>QQ群</span>
-        </div>
-        <div class="item buy" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/buy.html`)">
+        <div class="item" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/buy.html`)">
             <svg-icon name="fixed-right-buy" />
             <span class="title">购买<br>专业版</span>
         </div>
-        <div class="item doc" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/`)">
+        <div class="item" @click="open(`https://${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.com/hooray/fantastic-admin/`)">
+            <svg-icon name="fixed-right-code" />
+            <span class="title">下载<br>基础版</span>
+        </div>
+        <div class="item" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/`)">
             <svg-icon name="fixed-right-doc" />
             <span class="title">开发<br>文档</span>
         </div>
-        <div class="item code" @click="open(`https://${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.com/hooray/fantastic-admin/`)">
-            <svg-icon name="fixed-right-code" />
-            <span class="title">下载<br>基础版</span>
+        <div class="item" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/support.html`)">
+            <svg-icon name="fixed-right-chat" />
+            <span class="title">技术<br>支持</span>
         </div>
     </div>
 </template>
@@ -58,7 +54,7 @@ function open(url) {
     z-index: 10;
     right: -58px;
     top: 50%;
-    margin-top: -170px;
+    transform: translateY(-50%);
     width: 70px;
     display: flex;
     flex-direction: column;
@@ -74,7 +70,6 @@ function open(url) {
         height: 70px;
         text-align: center;
         color: #fff;
-        background-color: #409eff;
         border-bottom: 1px solid #fff;
         transition: 0.3s;
         opacity: 0.7;
@@ -89,16 +84,16 @@ function open(url) {
             border-bottom-left-radius: 5px;
             border-bottom: 0;
         }
-        &.chat {
-            background-color: #0fcc1a;
-        }
-        &.buy {
+        &:nth-child(1) {
             background-color: #ff4200;
         }
-        &.doc {
-            background-color: #727272;
+        &:nth-child(2) {
+            background-color: #409eff;
         }
-        &.code {
+        &:nth-child(3) {
+            background-color: #0fcc1a;
+        }
+        &:nth-child(4) {
             background-color: #343b42;
         }
         .svg-icon {
