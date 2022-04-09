@@ -6,6 +6,10 @@
 
 <p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架</p>
 
+## 官网
+
+[访问](https://hooray.gitee.io/fantastic-admin) ([备份地址](https://hooray.github.io/fantastic-admin))
+
 ## 特点
 
 - 丰富的布局与主题，覆盖市面上各种中后台应用场景，兼容PC、平板和移动端
@@ -48,14 +52,6 @@
 - `template` Vue3 版本模版分支，移除演示代码，可直接用于实际开发
 - `vue2` Vue2 版本演示分支，同演示站
 - `template-vue2` Vue2 版本模版分支，移除演示代码，可直接用于实际开发
-
-## 技术支持
-
-[开发文档](https://hooray.gitee.io/fantastic-admin) ([备份地址](https://hooray.github.io/fantastic-admin))
-
-[Vue2版本视频教程](https://space.bilibili.com/3079082/channel/detail?cid=156985)
-
-技术交流QQ群：1001394973
 
 ## 预览
 
