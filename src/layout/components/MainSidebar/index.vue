@@ -22,7 +22,9 @@ const switchMenu = inject('switchMenu')
                             'active': index === menuStore.actived
                         }" :title="item.meta.title" @click="switchMenu(index)"
                     >
-                        <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                        <el-icon>
+                            <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                        </el-icon>
                         <span>{{ item.meta.title }}</span>
                     </div>
                 </template>
@@ -80,7 +82,7 @@ const switchMenu = inject('switchMenu')
                 color: $g-main-sidebar-menu-active-color;
                 background-color: $g-main-sidebar-menu-active-bg;
             }
-            .svg-icon {
+            .el-icon {
                 margin: 0 auto;
                 font-size: 24px;
             }

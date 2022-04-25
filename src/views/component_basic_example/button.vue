@@ -8,7 +8,6 @@
 
 <script setup>
 import Alert from './components/alert.vue'
-import { Search, Edit, Check, Message, Star, Delete, Share, ArrowLeft } from '@element-plus/icons-vue'
 </script>
 
 <template>
@@ -41,12 +40,48 @@ import { Search, Edit, Check, Message, Star, Delete, Share, ArrowLeft } from '@e
                 <el-button type="danger" round>危险按钮</el-button>
             </el-row>
             <el-row>
-                <el-button :icon="Search" circle />
-                <el-button type="primary" :icon="Edit" circle />
-                <el-button type="success" :icon="Check" circle />
-                <el-button type="info" :icon="Message" circle />
-                <el-button type="warning" :icon="Star" circle />
-                <el-button type="danger" :icon="Delete" circle />
+                <el-button circle>
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:search" />
+                        </el-icon>
+                    </template>
+                </el-button>
+                <el-button type="primary" circle>
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:edit" />
+                        </el-icon>
+                    </template>
+                </el-button>
+                <el-button type="success" circle>
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:check" />
+                        </el-icon>
+                    </template>
+                </el-button>
+                <el-button type="info" circle>
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:message" />
+                        </el-icon>
+                    </template>
+                </el-button>
+                <el-button type="warning" circle>
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:star" />
+                        </el-icon>
+                    </template>
+                </el-button>
+                <el-button type="danger" circle>
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:delete" />
+                        </el-icon>
+                    </template>
+                </el-button>
             </el-row>
         </page-main>
         <page-main title="禁用状态" class="demo">
@@ -72,24 +107,81 @@ import { Search, Edit, Check, Message, Star, Delete, Share, ArrowLeft } from '@e
             <el-button type="text" disabled>文字按钮</el-button>
         </page-main>
         <page-main title="图标按钮" class="demo">
-            <el-button type="primary" :icon="Edit" />
-            <el-button type="primary" :icon="Share" />
-            <el-button type="primary" :icon="Delete" />
-            <el-button type="primary" :icon="Search">搜索</el-button>
+            <el-button type="primary">
+                <template #icon>
+                    <el-icon>
+                        <svg-icon name="ep:edit" />
+                    </el-icon>
+                </template>
+            </el-button>
+            <el-button type="primary">
+                <template #icon>
+                    <el-icon>
+                        <svg-icon name="ep:share" />
+                    </el-icon>
+                </template>
+            </el-button>
+            <el-button type="primary">
+                <template #icon>
+                    <el-icon>
+                        <svg-icon name="ep:delete" />
+                    </el-icon>
+                </template>
+            </el-button>
+            <el-button type="primary">
+                <template #icon>
+                    <el-icon>
+                        <svg-icon name="ep:search" />
+                    </el-icon>
+                </template>
+                搜索
+            </el-button>
             <el-button type="primary">
                 上传
-                <el-icon class="el-icon--right"><el-icon-upload /></el-icon>
+                <el-icon class="el-icon--right">
+                    <svg-icon name="ep:upload" />
+                </el-icon>
             </el-button>
         </page-main>
         <page-main title="按钮组" class="demo">
             <el-button-group style="margin-right: 10px;">
-                <el-button type="primary" :icon="ArrowLeft">上一页</el-button>
-                <el-button type="primary">下一页<el-icon class="el-icon--right"><el-icon-arrow-right /></el-icon></el-button>
+                <el-button type="primary">
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:arrow-left" />
+                        </el-icon>
+                    </template>
+                    上一页
+                </el-button>
+                <el-button type="primary">
+                    下一页
+                    <el-icon class="el-icon--right">
+                        <svg-icon name="ep:arrow-right" />
+                    </el-icon>
+                </el-button>
             </el-button-group>
             <el-button-group>
-                <el-button type="primary" :icon="Edit" />
-                <el-button type="primary" :icon="Share" />
-                <el-button type="primary" :icon="Delete" />
+                <el-button type="primary">
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:edit" />
+                        </el-icon>
+                    </template>
+                </el-button>
+                <el-button type="primary">
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:share" />
+                        </el-icon>
+                    </template>
+                </el-button>
+                <el-button type="primary">
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:delete" />
+                        </el-icon>
+                    </template>
+                </el-button>
             </el-button-group>
         </page-main>
         <page-main title="加载中" class="demo">

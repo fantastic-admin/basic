@@ -75,7 +75,14 @@ export default {
                         </el-col>
                     </el-row>
                     <el-form-item>
-                        <el-button type="primary" icon="el-icon-search">筛选</el-button>
+                        <el-button type="primary">
+                            <template #icon>
+                                <el-icon>
+                                    <svg-icon name="ep:search" />
+                                </el-icon>
+                            </template>
+                            筛选
+                        </el-button>
                         <el-button>导出</el-button>
                         <el-button type="text">查看已导出记录</el-button>
                     </el-form-item>
@@ -129,7 +136,14 @@ export default {
                         </el-col>
                     </el-row>
                     <el-form-item>
-                        <el-button type="primary" icon="el-icon-search">筛选</el-button>
+                        <el-button type="primary">
+                            <template #icon>
+                                <el-icon>
+                                    <svg-icon name="ep:search" />
+                                </el-icon>
+                            </template>
+                            筛选
+                        </el-button>
                         <el-button>导出</el-button>
                         <el-button type="text">查看已导出记录</el-button>
                     </el-form-item>

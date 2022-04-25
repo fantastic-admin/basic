@@ -40,29 +40,43 @@ function pro() {
     <div class="tools">
         <div class="buttons">
             <span v-if="settingsStore.mode == 'pc'" class="item item-pro" @click="pro">
-                <svg-icon name="pro" />
+                <el-icon>
+                    <svg-icon name="pro" />
+                </el-icon>
                 <span class="title">查看专业版</span>
             </span>
             <span v-if="settingsStore.topbar.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
-                <svg-icon name="search" />
+                <el-icon>
+                    <svg-icon name="search" />
+                </el-icon>
             </span>
             <span v-if="settingsStore.mode === 'pc' && settingsStore.topbar.enableFullscreen" class="item" @click="toggle">
-                <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
+                <el-icon>
+                    <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
+                </el-icon>
             </span>
             <span v-if="settingsStore.topbar.enablePageReload" class="item" @click="reload()">
-                <svg-icon name="toolbar-reload" />
+                <el-icon>
+                    <svg-icon name="toolbar-reload" />
+                </el-icon>
             </span>
             <span v-if="settingsStore.topbar.enableAppSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
-                <svg-icon name="toolbar-theme" />
+                <el-icon>
+                    <svg-icon name="toolbar-theme" />
+                </el-icon>
             </span>
         </div>
         <el-dropdown class="user-container" size="default" @command="userCommand">
             <div class="user-wrapper">
                 <el-avatar size="small">
-                    <el-icon><el-icon-user-filled /></el-icon>
+                    <el-icon>
+                        <svg-icon name="ep:user-filled" />
+                    </el-icon>
                 </el-avatar>
                 {{ userStore.account }}
-                <el-icon><el-icon-caret-bottom /></el-icon>
+                <el-icon>
+                    <svg-icon name="ep:caret-bottom" />
+                </el-icon>
             </div>
             <template #dropdown>
                 <el-dropdown-menu class="user-dropdown">

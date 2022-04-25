@@ -75,7 +75,14 @@ const oneStepAdminInfo = ref({
                             <img src="https://v3.cn.vuejs.org/logo.png" style="width: 30%;">
                             <h1>Fantastic-template</h1>
                             <h2>一款开箱即用的 Vue 项目模版</h2>
-                            <el-button plain icon="el-icon-link" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-template`)">访问官网</el-button>
+                            <el-button plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-template`)">
+                                <template #icon>
+                                    <el-icon>
+                                        <svg-icon name="ep:link" />
+                                    </el-icon>
+                                </template>
+                                访问官网
+                            </el-button>
                         </div>
                         <el-divider border-style="dashed" />
                         <ul>
@@ -91,7 +98,14 @@ const oneStepAdminInfo = ref({
                             <img :src="`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/logo.png`" style="width: 30%;">
                             <h1>Fantastic-admin</h1>
                             <h2>一款开箱即用的 Vue 中后台管理系统框架</h2>
-                            <el-button plain icon="el-icon-link" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin`)">访问官网</el-button>
+                            <el-button plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin`)">
+                                <template #icon>
+                                    <el-icon>
+                                        <svg-icon name="ep:link" />
+                                    </el-icon>
+                                </template>
+                                访问官网
+                            </el-button>
                         </div>
                         <el-divider border-style="dashed" />
                         <el-carousel trigger="click" indicator-position="none" :interval="5000" height="250px">
@@ -110,7 +124,14 @@ const oneStepAdminInfo = ref({
                             <img :src="`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/logo.png`" style="width: 30%;">
                             <h1>One-step-admin</h1>
                             <h2>一款干啥都快人一步的 Vue 中后台系统框架</h2>
-                            <el-button plain icon="el-icon-link" @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin`)">访问官网</el-button>
+                            <el-button plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin`)">
+                                <template #icon>
+                                    <el-icon>
+                                        <svg-icon name="ep:link" />
+                                    </el-icon>
+                                </template>
+                                访问官网
+                            </el-button>
                         </div>
                         <el-divider border-style="dashed" />
                         <el-carousel trigger="click" indicator-position="none" :interval="5000" height="250px">

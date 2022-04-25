@@ -8,11 +8,6 @@
 
 <script setup>
 import Alert from './components/alert.vue'
-import { Search } from '@element-plus/icons-vue'
-import * as ElementIcons from '@element-plus/icons-vue'
-import { hyphen } from 'naming-style'
-
-const icon = Object.keys(ElementIcons)
 </script>
 
 <template>
@@ -20,19 +15,23 @@ const icon = Object.keys(ElementIcons)
         <Alert />
         <page-header title="图标" />
         <page-main class="demo">
-            <el-icon><el-icon-edit /></el-icon>
-            <el-icon><el-icon-share /></el-icon>
-            <el-icon><el-icon-delete /></el-icon>
-            <el-button type="primary" :icon="Search">
+            <el-icon>
+                <svg-icon name="ep:edit" />
+            </el-icon>
+            <el-icon>
+                <svg-icon name="ep:share" />
+            </el-icon>
+            <el-icon>
+                <svg-icon name="ep:delete" />
+            </el-icon>
+            <el-button type="primary">
+                <template #icon>
+                    <el-icon>
+                        <svg-icon name="ep:search" />
+                    </el-icon>
+                </template>
                 搜索
             </el-button>
-        </page-main>
-        <page-main title="图标集合">
-            <div v-for="(item, index) in icon" :key="index" class="list-icon">
-                <el-tooltip class="item" effect="dark" :content="hyphen(`ElIcon${item}`)" placement="top">
-                    <svg-icon :name="hyphen(`ElIcon${item}`)" />
-                </el-tooltip>
-            </div>
         </page-main>
     </div>
 </template>

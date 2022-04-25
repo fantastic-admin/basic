@@ -31,7 +31,7 @@ const { copy, copied, isSupported } = useClipboard()
 
 watch(copied, val => {
     if (val) {
-        proxy.$message.success('复制成功，请粘贴到 src/settings.custom.json 文件中！')
+        ElMessage.success('复制成功，请粘贴到 src/settings.custom.json 文件中！')
     }
 })
 
@@ -49,17 +49,23 @@ function handleCopy() {
                 <div v-if="settingsStore.mode === 'pc'" class="menu-mode">
                     <el-tooltip content="侧边栏模式（含主导航）" placement="top" :show-after="500">
                         <div class="mode mode-side" :class="{'active': settings.menu.menuMode === 'side'}" @click="settings.menu.menuMode = 'side'">
-                            <svg-icon name="el-icon-check" />
+                            <el-icon>
+                                <svg-icon name="ep:check" />
+                            </el-icon>
                         </div>
                     </el-tooltip>
                     <el-tooltip content="顶部模式" placement="top" :show-after="500">
                         <div class="mode mode-head" :class="{'active': settings.menu.menuMode === 'head'}" @click="settings.menu.menuMode = 'head'">
-                            <svg-icon name="el-icon-check" />
+                            <el-icon>
+                                <svg-icon name="ep:check" />
+                            </el-icon>
                         </div>
                     </el-tooltip>
                     <el-tooltip content="侧边栏模式（不含主导航）" placement="top" :show-after="500">
                         <div class="mode mode-single" :class="{'active': settings.menu.menuMode === 'single'}" @click="settings.menu.menuMode = 'single'">
-                            <svg-icon name="el-icon-check" />
+                            <el-icon>
+                                <svg-icon name="ep:check" />
+                            </el-icon>
                         </div>
                     </el-tooltip>
                 </div>
@@ -72,7 +78,9 @@ function handleCopy() {
                     <div class="label">
                         切换跳转
                         <el-tooltip content="开启该功能后，切换侧边栏时，页面自动跳转至该侧边栏导航下第一个路由地址" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.menu.switchMainMenuAndPageJump" :disabled="['single'].includes(settings.menu.menuMode)" />
@@ -81,7 +89,9 @@ function handleCopy() {
                     <div class="label">
                         保持展开一个
                         <el-tooltip content="开启该功能后，侧边栏只保持一个子菜单的展开" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.menu.subMenuUniqueOpened" />
@@ -103,7 +113,9 @@ function handleCopy() {
                     <div class="label">
                         导航栏搜索
                         <el-tooltip content="对导航栏进行快捷搜索" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.topbar.enableNavSearch" />
@@ -112,7 +124,9 @@ function handleCopy() {
                     <div class="label">
                         全屏
                         <el-tooltip content="该功能使用场景极少，用户习惯于通过窗口“最大化”功能来扩大显示区域，以显示更多内容，并且使用 F11 键也可以进入全屏效果" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.topbar.enableFullscreen" />
@@ -121,7 +135,9 @@ function handleCopy() {
                     <div class="label">
                         页面刷新
                         <el-tooltip content="开启时会阻止原生 F5 键刷新功能，并采用框架提供的刷新模式进行页面刷新" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.topbar.enablePageReload" />
@@ -148,7 +164,9 @@ function handleCopy() {
                     <div class="label">
                         是否开启
                         <el-tooltip content="该功能开启时，登录成功默认进入控制台页面，反之则默认进入导航栏里第一个导航页面" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.dashboard.enable" />
@@ -162,7 +180,9 @@ function handleCopy() {
                     <div class="label">
                         组件尺寸
                         <el-tooltip content="全局设置 Element Plus 组件的默认尺寸大小" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-radio-group v-model="settings.app.elementSize" size="small">
@@ -179,7 +199,9 @@ function handleCopy() {
                     <div class="label">
                         载入进度条
                         <el-tooltip content="该功能开启时，跳转路由会看到页面顶部有进度条" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.app.enableProgress" />
@@ -188,14 +210,23 @@ function handleCopy() {
                     <div class="label">
                         动态标题
                         <el-tooltip content="该功能开启时，页面标题会显示当前路由标题，格式为“页面标题 - 网站名称”；关闭时则显示网站名称，网站名称在项目根目录下 .env.* 文件里配置" placement="top">
-                            <svg-icon name="el-icon-question-filled" />
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.app.enableDynamicTitle" />
                 </div>
             </div>
             <div v-if="isSupported" class="action-buttons">
-                <el-button icon="el-icon-document-copy" type="primary" @click="handleCopy">复制配置</el-button>
+                <el-button type="primary" @click="handleCopy">
+                    <template #icon>
+                        <el-icon>
+                            <svg-icon name="ep:document-copy" />
+                        </el-icon>
+                    </template>
+                    复制配置
+                </el-button>
             </div>
         </el-drawer>
     </div>

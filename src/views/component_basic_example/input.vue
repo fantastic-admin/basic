@@ -43,12 +43,16 @@ export default {
         <page-main title="带 icon 的输入框" class="demo">
             <el-input v-model="input1" placeholder="请选择日期">
                 <template #suffix>
-                    <el-icon class="el-input__icon"><el-icon-calendar /></el-icon>
+                    <el-icon>
+                        <svg-icon name="ep:calendar" />
+                    </el-icon>
                 </template>
             </el-input>
             <el-input v-model="input2" placeholder="请输入内容">
                 <template #prefix>
-                    <el-icon class="el-input__icon"><el-icon-search /></el-icon>
+                    <el-icon>
+                        <svg-icon name="ep:search" />
+                    </el-icon>
                 </template>
             </el-input>
         </page-main>

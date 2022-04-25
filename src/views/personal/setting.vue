@@ -9,7 +9,6 @@
 
 <script setup name="PersonalSetting">
 const router = useRouter()
-const { proxy } = getCurrentInstance()
 
 const form = ref({
     headimg: '',
@@ -23,7 +22,7 @@ function handleSuccess(res) {
     if (res.error == '') {
         form.value.headimg = res.data.path
     } else {
-        proxy.$message.warning(res.error)
+        ElMessage.warning(res.error)
     }
 }
 function editPassword() {

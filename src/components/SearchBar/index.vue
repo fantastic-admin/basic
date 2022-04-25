@@ -28,7 +28,14 @@ function toggle() {
     <div class="search-container">
         <slot />
         <div v-if="showMore" class="more">
-            <el-button type="text" size="small" :icon="isUnfold ? 'el-icon-caret-top' : 'el-icon-caret-bottom'" @click="toggle">{{ isUnfold ? '收起' : '展开' }}</el-button>
+            <el-button type="text" size="small" @click="toggle">
+                <template #icon>
+                    <el-icon>
+                        <svg-icon :name="isUnfold ? 'ep:caret-top' : 'ep:caret-bottom'" />
+                    </el-icon>
+                </template>
+                {{ isUnfold ? '收起' : '展开' }}
+            </el-button>
         </div>
     </div>
 </template>

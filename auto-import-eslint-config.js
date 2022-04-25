@@ -46,6 +46,11 @@ module.exports = {
         withDefaults: 'readonly',
         // vue-router
         useRoute: 'readonly',
-        useRouter: 'readonly'
+        useRouter: 'readonly',
+        // element plus
+        ElMessage: 'readonly',
+        ElNotification: 'readonly',
+        ElMessageBox: 'readonly',
+        ElLoading: 'readonly'
     }
 }

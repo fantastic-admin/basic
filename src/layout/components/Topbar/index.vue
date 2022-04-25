@@ -55,9 +55,11 @@ function pathCompile(path) {
     >
         <div class="left-box">
             <div v-if="enableSidebarCollapse" class="sidebar-collapse" :class="{'is-collapse': settingsStore.menu.subMenuCollapse}" @click="settingsStore.toggleSidebarCollapse()">
-                <svg-icon name="toolbar-collapse" />
+                <el-icon>
+                    <svg-icon name="toolbar-collapse" />
+                </el-icon>
             </div>
-            <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc' && settingsStore.app.routeBaseOn !== 'filesystem'" separator-class="el-icon-arrow-right">
+            <el-breadcrumb v-if="settingsStore.topbar.enableBreadcrumb && settingsStore.mode === 'pc' && settingsStore.app.routeBaseOn !== 'filesystem'">
                 <transition-group name="breadcrumb">
                     <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path" :to="index < breadcrumbList.length - 1 ? pathCompile(item.path) : ''">
                         {{ item.title }}
@@ -101,13 +103,13 @@ function pathCompile(path) {
             height: 50px;
             cursor: pointer;
             transition: 0.3s;
-            .svg-icon {
+            .el-icon {
                 transition: 0.3s;
             }
-            &:hover .svg-icon {
+            &:hover .el-icon {
                 color: #5482ee;
             }
-            &.is-collapse .svg-icon {
+            &.is-collapse .el-icon {
                 transform: rotateZ(-180deg);
             }
             & + .el-breadcrumb {
