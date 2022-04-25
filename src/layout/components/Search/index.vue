@@ -42,8 +42,8 @@ watch(() => isShow.value, val => {
         proxy.$hotkeys('down', keyDown)
         proxy.$hotkeys('enter', keyEnter)
         setTimeout(() => {
-            proxy.$refs.input.$el.children[0].focus()
-        }, 100)
+            proxy.$refs.input.focus()
+        }, 500)
     } else {
         document.querySelector('body').classList.remove('hidden')
         proxy.$hotkeys.unbind('up', keyUp)
@@ -57,7 +57,7 @@ watch(() => isShow.value, val => {
 })
 watch(() => resultList.value, () => {
     actived.value = -1
-    scrollTo(0)
+    handleScroll()
 })
 
 onMounted(() => {
@@ -68,6 +68,12 @@ onMounted(() => {
         if (settingsStore.topbar.enableNavSearch) {
             e.preventDefault()
             isShow.value = true
+        }
+    })
+    proxy.$hotkeys('esc', e => {
+        if (settingsStore.topbar.enableNavSearch) {
+            e.preventDefault()
+            proxy.$eventBus.emit('global-search-toggle')
         }
     })
     if (settingsStore.app.routeBaseOn !== 'filesystem') {
@@ -134,7 +140,7 @@ function keyUp() {
         if (actived.value < 0) {
             actived.value = resultList.value.length - 1
         }
-        scrollTo(proxy.$refs[`search-item-${actived.value}`][0].offsetTop)
+        handleScroll()
     }
 }
 function keyDown() {
@@ -143,7 +149,7 @@ function keyDown() {
         if (actived.value > resultList.value.length - 1) {
             actived.value = 0
         }
-        scrollTo(proxy.$refs[`search-item-${actived.value}`][0].offsetTop)
+        handleScroll()
     }
 }
 function keyEnter() {
@@ -151,18 +157,23 @@ function keyEnter() {
         proxy.$refs[`search-item-${actived.value}`][0].click()
     }
 }
-function scrollTo(offsetTop) {
+function handleScroll() {
+    let scrollTo = 0
     if (actived.value !== -1) {
-        if (
-            offsetTop + proxy.$refs[`search-item-${actived.value}`][0].clientHeight > proxy.$refs['search'].scrollTop + proxy.$refs['search'].clientHeight ||
-            offsetTop + proxy.$refs[`search-item-${actived.value}`][0].clientHeight <= proxy.$refs['search'].scrollTop
-        ) {
-            proxy.$refs['search'].scrollTo({
-                top: offsetTop,
-                behavior: 'smooth'
-            })
+        scrollTo = proxy.$refs['search'].scrollTop
+        const activedOffsetTop = proxy.$refs[`search-item-${actived.value}`][0].offsetTop
+        const activedClientHeight = proxy.$refs[`search-item-${actived.value}`][0].clientHeight
+        const searchScrollTop = proxy.$refs['search'].scrollTop
+        const searchClientHeight = proxy.$refs['search'].clientHeight
+        if (activedOffsetTop + activedClientHeight > searchScrollTop + searchClientHeight) {
+            scrollTo = activedOffsetTop + activedClientHeight - searchClientHeight
+        } else if (activedOffsetTop <= searchScrollTop) {
+            scrollTo = activedOffsetTop
         }
     }
+    proxy.$refs['search'].scrollTo({
+        top: scrollTo
+    })
 }
 </script>
 
