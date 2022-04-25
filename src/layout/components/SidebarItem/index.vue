@@ -30,7 +30,9 @@ const hasChildren = computed(() => {
     <div class="sidebar-item">
         <el-sub-menu v-if="item.path == undefined" :title="item.meta.title" :index="JSON.stringify(item)">
             <template #title>
-                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                <el-icon v-if="item.meta.icon" class="title-icon">
+                    <svg-icon :name="item.meta.icon" />
+                </el-icon>
                 <span class="title">{{ item.meta.title }}</span>
             </template>
             <template v-for="route in item.children">
@@ -40,14 +42,18 @@ const hasChildren = computed(() => {
         <router-link v-else-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
             <a :href="isExternalLink(resolveRoutePath(basePath, item.path)) ? resolveRoutePath(basePath, item.path) : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternalLink(resolveRoutePath(basePath, item.path)) ? '_blank' : '_self'" @click="navigate">
                 <el-menu-item :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
-                    <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                    <el-icon v-if="item.meta.icon" class="title-icon">
+                        <svg-icon :name="item.meta.icon" />
+                    </el-icon>
                     <span class="title">{{ item.meta.title }}</span>
                 </el-menu-item>
             </a>
         </router-link>
         <el-sub-menu v-else :title="item.meta.title" :index="resolveRoutePath(basePath, item.path)">
             <template #title>
-                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                <el-icon v-if="item.meta.icon" class="title-icon">
+                    <svg-icon :name="item.meta.icon" />
+                </el-icon>
                 <span class="title">{{ item.meta.title }}</span>
             </template>
             <template v-for="route in item.children">
@@ -74,22 +80,18 @@ const hasChildren = computed(() => {
 }
 :deep(.el-sub-menu),
 :deep(.el-menu-item) {
-    .svg-icon {
+    .title-icon {
         width: 20px;
         font-size: 20px;
         vertical-align: -0.25em;
         transition: transform 0.3s;
         color: unset;
-        &[class^="el-icon-"],
-        &[class*=" el-icon-"] {
-            vertical-align: middle;
-        }
     }
-    .svg-icon + .title {
+    .title-icon + .title {
         margin-left: 10px;
     }
-    &:hover > .svg-icon,
-    .el-sub-menu__title:hover > .svg-icon {
+    &:hover > .title-icon,
+    .el-sub-menu__title:hover > .title-icon {
         transform: scale(1.2);
     }
 }

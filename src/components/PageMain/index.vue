@@ -33,7 +33,9 @@ function unCollaspe() {
         <div v-if="title" class="title-container">{{ title }}</div>
         <slot />
         <div v-if="collaspeData" class="collaspe" title="展开" @click="unCollaspe">
-            <el-icon><el-icon-arrow-down /></el-icon>
+            <el-icon>
+                <svg-icon name="ep:arrow-down" />
+            </el-icon>
         </div>
     </div>
 </template>

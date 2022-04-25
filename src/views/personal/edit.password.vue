@@ -45,7 +45,7 @@ function onSubmit() {
     proxy.$refs['formRef'].validate(valid => {
         if (valid) {
             userStore.editPassword(form.value).then(() => {
-                proxy.$message({
+                ElMessage({
                     type: 'success',
                     message: '模拟修改成功，请重新登录'
                 })

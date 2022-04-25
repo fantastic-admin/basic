@@ -1,15 +1,6 @@
-<template>
-    <el-config-provider :size="settingsStore.app.elementSize">
-        <RouterView
-            :style="{
-                '--g-main-sidebar-actual-width': mainSidebarActualWidth,
-                '--g-sub-sidebar-actual-width': subSidebarActualWidth
-            }"
-        />
-    </el-config-provider>
-</template>
-
 <script setup>
+import zhCn from 'element-plus/es/locale/lang/zh-cn'
+
 import { useSettingsStore } from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
 
@@ -75,3 +66,14 @@ onMounted(() => {
     window.onresize()
 })
 </script>
+
+<template>
+    <el-config-provider :locale="zhCn" :size="settingsStore.app.elementSize">
+        <RouterView
+            :style="{
+                '--g-main-sidebar-actual-width': mainSidebarActualWidth,
+                '--g-sub-sidebar-actual-width': subSidebarActualWidth
+            }"
+        />
+    </el-config-provider>
+</template>

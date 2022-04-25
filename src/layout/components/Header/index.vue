@@ -20,7 +20,9 @@ const switchMenu = inject('switchMenu')
                     <div class="nav">
                         <template v-for="(item, index) in menuStore.allMenus">
                             <div v-if="item.children && item.children.length !== 0" :key="index" class="item" :class="{'active': index == menuStore.actived}" @click="switchMenu(index)">
-                                <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                                <el-icon>
+                                    <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                                </el-icon>
                                 <span v-if="item.meta.title">{{ item.meta.title }}</span>
                             </div>
                         </template>
@@ -109,7 +111,7 @@ header {
                 color: $g-header-menu-active-color;
                 background-color: $g-header-menu-active-bg;
             }
-            .svg-icon {
+            .el-icon {
                 font-size: 24px;
                 vertical-align: middle;
                 & + span {

@@ -27,7 +27,9 @@ const realHeight = computed(() => {
     <el-image :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]">
         <template #error>
             <div class="image-slot">
-                <svg-icon name="image-load-fail" />
+                <el-icon>
+                    <svg-icon name="image-load-fail" />
+                </el-icon>
             </div>
         </template>
     </el-image>

@@ -1,6 +1,4 @@
 <script setup name="ImageUpload">
-const { proxy } = getCurrentInstance()
-
 const props = defineProps({
     action: {
         type: String,
@@ -76,10 +74,10 @@ function beforeUpload(file) {
     const isTypeOk = props.ext.indexOf(fileExt) >= 0
     const isSizeOk = file.size / 1024 / 1024 < props.size
     if (!isTypeOk) {
-        proxy.$message.error(`上传图片只支持 ${ props.ext.join(' / ') } 格式！`)
+        ElMessage.error(`上传图片只支持 ${ props.ext.join(' / ') } 格式！`)
     }
     if (!isSizeOk) {
-        proxy.$message.error(`上传图片大小不能超过 ${props.size}MB！`)
+        ElMessage.error(`上传图片大小不能超过 ${props.size}MB！`)
     }
     if (isTypeOk && isSizeOk) {
         uploadData.value.progress.preview = URL.createObjectURL(file)
@@ -112,7 +110,9 @@ function onSuccess(res) {
             <el-image v-if="url === ''" :src="url === '' ? placeholder : url" :style="`width:${width}px;height:${height}px;`" fit="fill">
                 <template #error>
                     <div class="image-slot">
-                        <svg-icon name="el-icon-plus" />
+                        <el-icon>
+                            <svg-icon name="ep:plus" />
+                        </el-icon>
                     </div>
                 </template>
             </el-image>
@@ -121,10 +121,14 @@ function onSuccess(res) {
                 <div class="mask">
                     <div class="actions">
                         <span title="预览" @click.stop="preview">
-                            <el-icon><el-icon-zoom-in /></el-icon>
+                            <el-icon>
+                                <svg-icon name="ep:zoom-in" />
+                            </el-icon>
                         </span>
                         <span title="移除" @click.stop="remove">
-                            <el-icon><el-icon-delete /></el-icon>
+                            <el-icon>
+                                <svg-icon name="ep:delete" />
+                            </el-icon>
                         </span>
                     </div>
                 </div>

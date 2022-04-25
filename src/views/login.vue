@@ -90,7 +90,7 @@ function handleLogin() {
 }
 
 function handleFind() {
-    proxy.$message({
+    ElMessage({
         message: '重置密码仅提供界面演示，无实际功能，需开发者自行扩展',
         type: 'info'
     })
@@ -121,17 +121,23 @@ function testAccount(account) {
                     <el-form-item prop="account">
                         <el-input ref="name" v-model="loginForm.account" placeholder="用户名" type="text" tabindex="1" autocomplete="on">
                             <template #prefix>
-                                <svg-icon name="user" />
+                                <el-icon>
+                                    <svg-icon name="user" />
+                                </el-icon>
                             </template>
                         </el-input>
                     </el-form-item>
                     <el-form-item prop="password">
                         <el-input ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2" autocomplete="on" @keyup.enter="handleLogin">
                             <template #prefix>
-                                <svg-icon name="password" />
+                                <el-icon>
+                                    <svg-icon name="password" />
+                                </el-icon>
                             </template>
                             <template #suffix>
-                                <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
+                                <el-icon>
+                                    <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
+                                </el-icon>
                             </template>
                         </el-input>
                     </el-form-item>
@@ -155,14 +161,18 @@ function testAccount(account) {
                     <el-form-item prop="account">
                         <el-input ref="name" v-model="resetForm.account" placeholder="用户名" type="text" tabindex="1" autocomplete="on">
                             <template #prefix>
-                                <svg-icon name="user" />
+                                <el-icon>
+                                    <svg-icon name="user" />
+                                </el-icon>
                             </template>
                         </el-input>
                     </el-form-item>
                     <el-form-item prop="captcha">
                         <el-input ref="captcha" v-model="resetForm.captcha" placeholder="验证码" type="text" tabindex="2" autocomplete="on">
                             <template #prefix>
-                                <svg-icon name="captcha" />
+                                <el-icon>
+                                    <svg-icon name="captcha" />
+                                </el-icon>
                             </template>
                             <template #append>
                                 <el-button>发送验证码</el-button>
@@ -172,10 +182,14 @@ function testAccount(account) {
                     <el-form-item prop="newPassword">
                         <el-input ref="newPassword" v-model="resetForm.newPassword" :type="passwordType" placeholder="新密码" tabindex="3" autocomplete="on">
                             <template #prefix>
-                                <svg-icon name="password" />
+                                <el-icon>
+                                    <svg-icon name="password" />
+                                </el-icon>
                             </template>
                             <template #suffix>
-                                <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
+                                <el-icon>
+                                    <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword" />
+                                </el-icon>
                             </template>
                         </el-input>
                     </el-form-item>

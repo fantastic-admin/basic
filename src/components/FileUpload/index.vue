@@ -1,6 +1,4 @@
 <script setup name="FileUpload">
-const { proxy } = getCurrentInstance()
-
 const props = defineProps({
     action: {
         type: String,
@@ -48,15 +46,15 @@ function beforeUpload(file) {
     const isTypeOk = props.ext.indexOf(fileExt) >= 0
     const isSizeOk = file.size / 1024 / 1024 < props.size
     if (!isTypeOk) {
-        proxy.$message.error(`上传文件只支持 ${ props.ext.join(' / ') } 格式！`)
+        ElMessage.error(`上传文件只支持 ${ props.ext.join(' / ') } 格式！`)
     }
     if (!isSizeOk) {
-        proxy.$message.error(`上传文件大小不能超过 ${props.size}MB！`)
+        ElMessage.error(`上传文件大小不能超过 ${props.size}MB！`)
     }
     return isTypeOk && isSizeOk
 }
 function onExceed() {
-    proxy.$message.warning('文件上传超过限制')
+    ElMessage.warning('文件上传超过限制')
 }
 function onSuccess(res, file) {
     emit('on-success', res, file)
@@ -76,7 +74,9 @@ function onSuccess(res, file) {
         drag
     >
         <div class="slot">
-            <el-icon class="el-icon--upload"><el-icon-upload-filled /></el-icon>
+            <el-icon class="el-icon--upload">
+                <svg-icon name="ep:upload-filled" />
+            </el-icon>
             <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
         </div>
         <template #tip>

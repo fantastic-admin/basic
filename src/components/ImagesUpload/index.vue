@@ -1,6 +1,4 @@
 <script setup name="ImagesUpload">
-const { proxy } = getCurrentInstance()
-
 const props = defineProps({
     action: {
         type: String,
@@ -95,10 +93,10 @@ function beforeUpload(file) {
     const isTypeOk = props.ext.indexOf(fileExt) >= 0
     const isSizeOk = file.size / 1024 / 1024 < props.size
     if (!isTypeOk) {
-        proxy.$message.error(`上传图片只支持 ${ props.ext.join(' / ') } 格式！`)
+        ElMessage.error(`上传图片只支持 ${ props.ext.join(' / ') } 格式！`)
     }
     if (!isSizeOk) {
-        proxy.$message.error(`上传图片大小不能超过 ${props.size}MB！`)
+        ElMessage.error(`上传图片大小不能超过 ${props.size}MB！`)
     }
     if (isTypeOk && isSizeOk) {
         uploadData.value.progress.preview = URL.createObjectURL(file)
@@ -122,16 +120,24 @@ function onSuccess(res) {
             <div class="mask">
                 <div class="actions">
                     <span title="预览" @click="preview(index)">
-                        <el-icon><el-icon-zoom-in /></el-icon>
+                        <el-icon>
+                            <svg-icon name="ep:zoom-in" />
+                        </el-icon>
                     </span>
                     <span title="移除" @click="remove(index)">
-                        <el-icon><el-icon-delete /></el-icon>
+                        <el-icon>
+                            <svg-icon name="ep:delete" />
+                        </el-icon>
                     </span>
                     <span v-show="url.length > 1" title="左移" :class="{'disabled': index == 0}" @click="move(index, 'left')">
-                        <el-icon><el-icon-back /></el-icon>
+                        <el-icon>
+                            <svg-icon name="ep:back" />
+                        </el-icon>
                     </span>
                     <span v-show="url.length > 1" title="右移" :class="{'disabled': index == url.length - 1}" @click="move(index, 'right')">
-                        <el-icon><el-icon-right /></el-icon>
+                        <el-icon>
+                            <svg-icon name="ep:right" />
+                        </el-icon>
                     </span>
                 </div>
             </div>
@@ -150,7 +156,9 @@ function onSuccess(res) {
             class="images-upload"
         >
             <div class="image-slot" :style="`width:${width}px;height:${height}px;`">
-                <svg-icon name="el-icon-plus" />
+                <el-icon>
+                    <svg-icon name="ep:plus" />
+                </el-icon>
             </div>
             <div v-show="uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
                 <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
