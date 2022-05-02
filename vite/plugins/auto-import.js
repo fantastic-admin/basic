@@ -5,8 +5,21 @@ export default function createAutoImport() {
     return autoImport({
         imports: [
             'vue',
-            'vue-router'
+            'vue-router',
+            {
+                'vue': [
+                    'defineProps',
+                    'defineEmits',
+                    'defineExpose',
+                    'withDefaults'
+                ]
+            }
         ],
+        eslintrc: {
+            enabled: true,
+            filepath: './.eslintrc-auto-import.json',
+            globalsPropValue: true
+        },
         resolvers: [
             ElementPlusResolver()
         ],
