@@ -9,9 +9,6 @@ export default function createRestart() {
         }
     })
     return ViteRestart({
-        restart: [
-            ...pluginsFile,
-            '.env.development'
-        ]
+        restart: pluginsFile
     })
 }
