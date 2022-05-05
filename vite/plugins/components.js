@@ -7,6 +7,7 @@ export default function createComponents() {
             ElementPlusResolver()
         ],
         dirs: ['src/components'],
-        include: [/\.vue$/, /\.vue\?vue/, /\.jsx$/]
+        include: [/\.vue$/, /\.vue\?vue/, /\.jsx$/],
+        dts: false
     })
 }
