@@ -21,6 +21,15 @@ export default ({ mode, command }) => {
             scssResources.push(`@import "src/assets/sprites/_${dirname}.scss";`)
         }
     })
+    // BUG https://github.com/element-plus/element-plus/issues/4916
+    const optimizeDepsElementPlusIncludes = ['element-plus/es']
+    fs.readdirSync('node_modules/element-plus/es/components').map(dirname => {
+        fs.access(`node_modules/element-plus/es/components/${dirname}/style/css.mjs`, err => {
+            if (!err) {
+                optimizeDepsElementPlusIncludes.push(`element-plus/es/components/${dirname}/style/css`)
+            }
+        })
+    })
     return defineConfig({
         base: './',
         // 开发服务器选项 https://cn.vitejs.dev/config/#server-options
@@ -45,6 +54,9 @@ export default ({ mode, command }) => {
                     drop_console: env.VITE_BUILD_DROP_CONSOLE == 'true'
                 }
             }
+        },
+        optimizeDeps: {
+            include: optimizeDepsElementPlusIncludes
         },
         plugins: createVitePlugins(env, command === 'build'),
         resolve: {
