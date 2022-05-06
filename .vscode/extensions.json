@@ -4,6 +4,6 @@
         "mikestead.dotenv",
         "dbaeumer.vscode-eslint",
         "stylelint.vscode-stylelint",
-        "johnsoncodehk.volar"
+        "vue.volar"
     ]
 }
