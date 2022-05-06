@@ -9,7 +9,11 @@ module.exports = {
         process: true,
         require: true,
         module: true,
-        AMap: true
+        // element-plus
+        ElMessage: true,
+        ElMessageBox: true,
+        ElNotification: true,
+        ElLoading: true
     },
     extends: [
         'plugin:vue/vue3-recommended',
