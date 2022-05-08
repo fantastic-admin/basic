@@ -82,7 +82,7 @@ let globalSettings = {
         // 版权信息配置，格式为：Copyright © [dates] <company>, All Rights Reserved
         dates: '2020-2022',
         company: 'Fantastic-admin',
-        website: 'https://hooray.github.io/fantastic-admin'
+        website: 'https://fantastic-admin.netlify.app'
     }
 }
 
