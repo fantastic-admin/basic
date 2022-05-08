@@ -32,7 +32,7 @@ function userCommand(command) {
     }
 }
 function pro() {
-    window.open(`https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/vue3/pro`, 'top')
+    window.open('https://fantastic-admin.netlify.app/vue3/pro', 'top')
 }
 </script>
 

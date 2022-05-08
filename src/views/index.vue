@@ -8,8 +8,6 @@
 </route>
 
 <script setup>
-const locationOrigin = location.origin
-
 function open(url) {
     window.open(url, 'top')
 }
@@ -30,12 +28,12 @@ const fantasticAdminInfo = ref({
     imageVisible: false,
     index: 0,
     data: [
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/preview1.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/preview2.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/preview3.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/preview4.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/preview5.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/preview6.png`
+        'https://fantastic-admin.netlify.app/preview1.png',
+        'https://fantastic-admin.netlify.app/preview2.png',
+        'https://fantastic-admin.netlify.app/preview3.png',
+        'https://fantastic-admin.netlify.app/preview4.png',
+        'https://fantastic-admin.netlify.app/preview5.png',
+        'https://fantastic-admin.netlify.app/preview6.png'
     ]
 })
 
@@ -43,12 +41,12 @@ const oneStepAdminInfo = ref({
     imageVisible: false,
     index: 0,
     data: [
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/preview1.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/preview2.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/preview3.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/preview4.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/preview5.png`,
-        `https://hooray.${location.origin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/preview6.png`
+        'https://one-step-admin.netlify.app/preview1.png',
+        'https://one-step-admin.netlify.app/preview2.png',
+        'https://one-step-admin.netlify.app/preview3.png',
+        'https://one-step-admin.netlify.app/preview4.png',
+        'https://one-step-admin.netlify.app/preview5.png',
+        'https://one-step-admin.netlify.app/preview6.png'
     ]
 })
 </script>
@@ -63,8 +61,21 @@ const oneStepAdminInfo = ref({
                 </div>
             </template>
             <el-button-group style="margin-right: 10px;">
-                <el-button type="success" size="large" plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin`)">开发文档</el-button>
-                <el-button type="primary" size="large" @click="open(`https://${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.com/hooray/fantastic-admin`)">代码仓库</el-button>
+                <el-button type="success" size="large" plain @click="open('https://fantastic-admin.netlify.app')">开发文档</el-button>
+                <el-dropdown>
+                    <el-button type="primary" size="large">
+                        代码仓库
+                        <el-icon class="el-icon--right">
+                            <svg-icon name="ep:arrow-down" />
+                        </el-icon>
+                    </el-button>
+                    <template #dropdown>
+                        <el-dropdown-menu>
+                            <el-dropdown-item @click="open('https://gitee.com/hooray/fantastic-admin')">Gitee</el-dropdown-item>
+                            <el-dropdown-item @click="open('https://github.com/hooray/fantastic-admin')">Github</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </template>
+                </el-dropdown>
             </el-button-group>
         </page-header>
         <el-row :gutter="20" style="margin: 0 10px;">
@@ -75,7 +86,7 @@ const oneStepAdminInfo = ref({
                             <img src="https://v3.cn.vuejs.org/logo.png" style="width: 30%;">
                             <h1>Fantastic-template</h1>
                             <h2>一款开箱即用的 Vue 项目模版</h2>
-                            <el-button plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-template`)">
+                            <el-button plain @click="open('https://fantastic-template.netlify.app')">
                                 <template #icon>
                                     <el-icon>
                                         <svg-icon name="ep:link" />
@@ -95,10 +106,10 @@ const oneStepAdminInfo = ref({
                 <page-main style="margin: 0;">
                     <div class="ecology fa">
                         <div class="main">
-                            <img :src="`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin/logo.png`" style="width: 30%;">
+                            <img src="https://fantastic-admin.netlify.app/logo.png" style="width: 30%;">
                             <h1>Fantastic-admin</h1>
                             <h2>一款开箱即用的 Vue 中后台管理系统框架</h2>
-                            <el-button plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/fantastic-admin`)">
+                            <el-button plain @click="open('https://fantastic-admin.netlify.app')">
                                 <template #icon>
                                     <el-icon>
                                         <svg-icon name="ep:link" />
@@ -121,10 +132,10 @@ const oneStepAdminInfo = ref({
                 <page-main style="margin: 0;">
                     <div class="ecology osa">
                         <div class="main">
-                            <img :src="`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin/logo.png`" style="width: 30%;">
+                            <img src="https://one-step-admin.netlify.app/logo.png" style="width: 30%;">
                             <h1>One-step-admin</h1>
                             <h2>一款干啥都快人一步的 Vue 中后台系统框架</h2>
-                            <el-button plain @click="open(`https://hooray.${locationOrigin.includes('gitee') ? 'gitee' : 'github'}.io/one-step-admin`)">
+                            <el-button plain @click="open('https://one-step-admin.netlify.app')">
                                 <template #icon>
                                     <el-icon>
                                         <svg-icon name="ep:link" />
