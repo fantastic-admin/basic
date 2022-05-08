@@ -6,9 +6,17 @@
 
 <p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架</p>
 
-## 官网
-
-[访问](https://fantastic-admin.netlify.app)
+<p align="center">
+    <a href="https://fantastic-admin.netlify.app" target="_blank">官网</a>
+    <span>&nbsp;|&nbsp;</span>
+    演示
+    ( <a href="https://fantastic-admin.netlify.app/vue3/basic" target="_blank">基础版</a>
+    <a href="https://fantastic-admin.netlify.app/vue3/pro" target="_blank">专业版</a> )
+    <span>&nbsp;|&nbsp;</span>
+    <a href="https://fantastic-admin.netlify.app/support.html" target="_blank">技术支持</a>
+    <span>&nbsp;|&nbsp;</span>
+    <a href="https://fantastic-admin.netlify.app/buy.html" target="_blank">购买</a>
+<p>
 
 ## 特点
 
@@ -22,31 +30,11 @@
 - 轻松实现国际化多语言适配
 - 提供接近于浏览器原生标签栏操作体验的标签页功能
 
-## 演示
-
-**Vue3 版本**
-
-[基础版](https://fantastic-admin.netlify.app/vue3/basic)
-
-[专业版](https://fantastic-admin.netlify.app/vue3/pro)
-
-**Vue2 版本**
-
-[基础版](https://fantastic-admin.netlify.app/vue2/basic)
-
-[专业版](https://fantastic-admin.netlify.app/vue2/pro)
-
-## 下载 & 购买
-
-- 基础版（免费，可商用）
-  - 去 [Gitee](https://gitee.com/hooray/fantastic-admin) 下载
-  - 去 [Github](https://github.com/hooray/fantastic-admin) 下载
-- 专业版（付费，可商用）
-  - [去购买](https://fantastic-admin.netlify.app/buy.html)
-
 ## 分支说明
 
-> 建议开发时，在本地同时下载演示分支和模版分支，模版分支用于项目开发，演示分支做为示例参考。
+> 基础版可免费下载用于商业使用。
+> 
+> 建议刚接触的开发者，可以在本地同时下载并运行演示分支和模版分支，模版分支用于项目开发，演示分支可做为示例参考。
 
 - `master` Vue3 版本演示分支，同演示站
 - `template` Vue3 版本模版分支，移除演示代码，可直接用于实际开发
