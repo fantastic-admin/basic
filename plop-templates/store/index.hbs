@@ -1,7 +1,4 @@
-import { defineStore } from 'pinia'
-import { piniaStore } from '@/store'
-
-export const use{{ properCase name }}Store = defineStore(
+const use{{ properCase name }}Store = defineStore(
     // 唯一ID
     '{{ camelCase name }}',
     {
@@ -11,6 +8,4 @@ export const use{{ properCase name }}Store = defineStore(
     }
 )
 
-export function use{{ properCase name }}OutsideStore() {
-    return use{{ properCase name }}Store(piniaStore)
-}
+export default use{{ properCase name }}Store

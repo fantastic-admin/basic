@@ -2,9 +2,9 @@
 const reload = inject('reload')
 const router = useRouter()
 
-import { useSettingsStore } from '@/store/modules/settings'
+import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import { useUserStore } from '@/store/modules/user'
+import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 import { useFullscreen } from '@vueuse/core'

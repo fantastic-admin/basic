@@ -11,7 +11,7 @@ import { onBeforeRouteLeave } from 'vue-router'
 
 const router = useRouter()
 
-import { useKeepAliveStore } from '@/store/modules/keepAlive'
+import useKeepAliveStore from '@/store/modules/keepAlive'
 const keepAliveStore = useKeepAliveStore()
 
 const openKeepAlive = ref(false)

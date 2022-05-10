@@ -1,8 +1,6 @@
-import { defineStore } from 'pinia'
-import { piniaStore } from '@/store'
 import settings from '@/settings'
 
-export const useSettingsStore = defineStore(
+const useSettingsStore = defineStore(
     // 唯一ID
     'settings',
     {
@@ -53,6 +51,4 @@ export const useSettingsStore = defineStore(
     }
 )
 
-export function useSettingsOutsideStore() {
-    return useSettingsStore(piniaStore)
-}
+export default useSettingsStore

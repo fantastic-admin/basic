@@ -5,7 +5,7 @@ import Tools from '../Tools/index.vue'
 
 const route = useRoute()
 
-import { useSettingsStore } from '@/store/modules/settings'
+import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
 
 const enableSidebarCollapse = computed(() => {

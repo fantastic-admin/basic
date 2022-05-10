@@ -7,7 +7,7 @@
 </route>
 
 <script setup name="TabExampleNested2">
-import { useKeepAliveStore } from '@/store/modules/keepAlive'
+import useKeepAliveStore from '@/store/modules/keepAlive'
 const keepAliveStore = useKeepAliveStore()
 </script>
 

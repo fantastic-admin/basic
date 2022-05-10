@@ -12,9 +12,9 @@
 const { proxy } = getCurrentInstance()
 const route = useRoute(), router = useRouter()
 
-import { useSettingsStore } from '@/store/modules/settings'
+import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import { useUserStore } from '@/store/modules/user'
+import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 const title = import.meta.env.VITE_APP_TITLE
