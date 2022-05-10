@@ -13,7 +13,8 @@ export default function createAutoImport() {
                     'defineExpose',
                     'withDefaults'
                 ]
-            }
+            },
+            'pinia'
         ],
         eslintrc: {
             enabled: true,

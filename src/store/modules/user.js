@@ -1,11 +1,9 @@
-import { defineStore } from 'pinia'
-import { piniaStore } from '@/store'
 import api from '@/api'
 
-import { useRouteStore } from './route'
-import { useMenuStore } from './menu'
+import useRouteStore from './route'
+import useMenuStore from './menu'
 
-export const useUserStore = defineStore(
+const useUserStore = defineStore(
     // 唯一ID
     'user',
     {
@@ -92,6 +90,4 @@ export const useUserStore = defineStore(
     }
 )
 
-export function useUserOutsideStore() {
-    return useUserStore(piniaStore)
-}
+export default useUserStore

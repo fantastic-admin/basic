@@ -1,9 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import { useSettingsOutsideStore } from '@/store/modules/settings'
-import { useKeepAliveOutsideStore } from '@/store/modules/keepAlive'
-import { useUserOutsideStore } from '@/store/modules/user'
-import { useMenuOutsideStore } from '@/store/modules/menu'
-import { useRouteOutsideStore } from '@/store/modules/route'
+import useSettingsStore from '@/store/modules/settings'
+import useKeepAliveStore from '@/store/modules/keepAlive'
+import useUserStore from '@/store/modules/user'
+import useMenuStore from '@/store/modules/menu'
+import useRouteStore from '@/store/modules/route'
 
 import '@/assets/styles/nprogress.scss'
 import { useNProgress } from '@vueuse/integrations/useNProgress'
@@ -30,8 +30,8 @@ let constantRoutes = [
                 component: () => import('@/views/index.vue'),
                 meta: {
                     title: () => {
-                        const settingsOutsideStore = useSettingsOutsideStore()
-                        return settingsOutsideStore.dashboard.title
+                        const settingsStore = useSettingsStore()
+                        return settingsStore.dashboard.title
                     }
                 }
             },
@@ -96,7 +96,7 @@ const lastRoute = {
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 
-if (useSettingsOutsideStore().app.routeBaseOn === 'filesystem') {
+if (useSettingsStore(createPinia()).app.routeBaseOn === 'filesystem') {
     constantRoutes = generatedRoutes.filter(item => {
         return item.meta?.enabled !== false && item.meta?.constant === true
     })
@@ -111,17 +111,17 @@ const router = createRouter({
 })
 
 router.beforeEach(async(to, from, next) => {
-    const settingsOutsideStore = useSettingsOutsideStore()
-    const userOutsideStore = useUserOutsideStore()
-    const menuOutsideStore = useMenuOutsideStore()
-    const routeOutsideStore = useRouteOutsideStore()
-    settingsOutsideStore.app.enableProgress && (isLoading.value = true)
+    const settingsStore = useSettingsStore()
+    const userStore = useUserStore()
+    const menuStore = useMenuStore()
+    const routeStore = useRouteStore()
+    settingsStore.app.enableProgress && (isLoading.value = true)
     // 是否已登录
-    if (userOutsideStore.isLogin) {
+    if (userStore.isLogin) {
         // 是否已根据权限动态生成并挂载路由
-        if (routeOutsideStore.isGenerate) {
+        if (routeStore.isGenerate) {
             // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
-            settingsOutsideStore.menu.menuMode !== 'single' && menuOutsideStore.setActived(to.path)
+            settingsStore.menu.menuMode !== 'single' && menuStore.setActived(to.path)
             if (to.name) {
                 if (to.matched.length !== 0) {
                     // 如果已登录状态下，进入登录页会强制跳转到控制台页面
@@ -130,11 +130,11 @@ router.beforeEach(async(to, from, next) => {
                             name: 'dashboard',
                             replace: true
                         })
-                    } else if (!settingsOutsideStore.dashboard.enable && to.name == 'dashboard') {
+                    } else if (!settingsStore.dashboard.enable && to.name == 'dashboard') {
                         // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
-                        if (menuOutsideStore.sidebarMenus.length > 0) {
+                        if (menuStore.sidebarMenus.length > 0) {
                             next({
-                                path: menuOutsideStore.sidebarMenusFirstDeepestPath,
+                                path: menuStore.sidebarMenusFirstDeepestPath,
                                 replace: true
                             })
                         } else {
@@ -153,39 +153,39 @@ router.beforeEach(async(to, from, next) => {
                 next()
             }
         } else {
-            switch (settingsOutsideStore.app.routeBaseOn) {
+            switch (settingsStore.app.routeBaseOn) {
                 case 'frontend':
-                    await routeOutsideStore.generateRoutesAtFront(asyncRoutes)
+                    await routeStore.generateRoutesAtFront(asyncRoutes)
                     break
                 case 'backend':
-                    await routeOutsideStore.generateRoutesAtBack()
+                    await routeStore.generateRoutesAtBack()
                     break
                 case 'filesystem':
-                    await routeOutsideStore.generateRoutesAtFilesystem(asyncRoutes)
-                    switch (settingsOutsideStore.menu.baseOn) {
+                    await routeStore.generateRoutesAtFilesystem(asyncRoutes)
+                    switch (settingsStore.menu.baseOn) {
                         case 'frontend':
-                            await menuOutsideStore.generateMenusAtFront()
+                            await menuStore.generateMenusAtFront()
                             break
                         case 'backend':
-                            await menuOutsideStore.generateMenusAtBack()
+                            await menuStore.generateMenusAtBack()
                             break
                     }
                     break
             }
             let removeRoutes = []
-            routeOutsideStore.flatRoutes.forEach(route => {
+            routeStore.flatRoutes.forEach(route => {
                 if (!/^(https?:|mailto:|tel:)/.test(route.path)) {
                     removeRoutes.push(router.addRoute(route))
                 }
             })
-            if (settingsOutsideStore.app.routeBaseOn === 'filesystem') {
+            if (settingsStore.app.routeBaseOn === 'filesystem') {
                 const otherRoutes = generatedRoutes.filter(item => item.meta?.constant !== true && item.meta?.layout === false)
                 otherRoutes.length && removeRoutes.push(router.addRoute(...otherRoutes))
             } else {
                 removeRoutes.push(router.addRoute(lastRoute))
             }
             // 记录的 accessRoutes 路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
-            routeOutsideStore.setCurrentRemoveRoutes(removeRoutes)
+            routeStore.setCurrentRemoveRoutes(removeRoutes)
             next({ ...to, replace: true })
         }
     } else {
@@ -203,16 +203,16 @@ router.beforeEach(async(to, from, next) => {
 })
 
 router.afterEach((to, from) => {
-    const settingsOutsideStore = useSettingsOutsideStore()
-    const keepAliveOutsideStore = useKeepAliveOutsideStore()
-    settingsOutsideStore.app.enableProgress && (isLoading.value = false)
+    const settingsStore = useSettingsStore()
+    const keepAliveStore = useKeepAliveStore()
+    settingsStore.app.enableProgress && (isLoading.value = false)
     // 设置页面 title
-    to.meta.title && settingsOutsideStore.setTitle(typeof to.meta.title === 'function' ? to.meta.title() : to.meta.title)
+    to.meta.title && settingsStore.setTitle(typeof to.meta.title === 'function' ? to.meta.title() : to.meta.title)
     // 判断当前页面是否开启缓存，如果开启，则将当前页面的 name 信息存入 keep-alive 全局状态
     if (to.meta.cache) {
         let componentName = to.matched[to.matched.length - 1].components.default.name
         if (componentName) {
-            keepAliveOutsideStore.add(componentName)
+            keepAliveStore.add(componentName)
         } else {
             console.warn('该页面组件未设置组件名，会导致缓存失效，请检查')
         }
@@ -224,18 +224,18 @@ router.afterEach((to, from) => {
         switch (typeof from.meta.cache) {
             case 'string':
                 if (from.meta.cache != to.name) {
-                    keepAliveOutsideStore.remove(componentName)
+                    keepAliveStore.remove(componentName)
                 }
                 break
             case 'object':
                 if (!from.meta.cache.includes(to.name)) {
-                    keepAliveOutsideStore.remove(componentName)
+                    keepAliveStore.remove(componentName)
                 }
                 break
         }
         // 如果进入的是 reload 页面，则也将离开页面的缓存清空
         if (to.name == 'reload') {
-            keepAliveOutsideStore.remove(componentName)
+            keepAliveStore.remove(componentName)
         }
     }
 })

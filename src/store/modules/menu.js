@@ -1,13 +1,11 @@
-import { defineStore } from 'pinia'
-import { piniaStore } from '@/store'
 import { deepClone, resolveRoutePath } from '@/util'
 import path from 'path-browserify'
 import api from '@/api'
 import menu from '@/menu'
 
-import { useSettingsStore } from './settings'
-import { useUserStore } from './user'
-import { useRouteStore } from './route'
+import useSettingsStore from './settings'
+import useUserStore from './user'
+import useRouteStore from './route'
 
 function getDeepestPath(routes, rootPath = '') {
     let retnPath
@@ -66,7 +64,7 @@ function filterAsyncMenus(menus, permissions) {
     return res
 }
 
-export const useMenuStore = defineStore(
+const useMenuStore = defineStore(
     // 唯一ID
     'menu',
     {
@@ -179,6 +177,4 @@ export const useMenuStore = defineStore(
     }
 )
 
-export function useMenuOutsideStore() {
-    return useMenuStore(piniaStore)
-}
+export default useMenuStore

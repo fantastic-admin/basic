@@ -2,9 +2,9 @@
 const { proxy } = getCurrentInstance()
 const route = useRoute()
 
-import { useSettingsStore } from '@/store/modules/settings'
+import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import { useMenuStore } from '@/store/modules/menu'
+import useMenuStore from '@/store/modules/menu'
 const menuStore = useMenuStore()
 
 const isShow = ref(false)

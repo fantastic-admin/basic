@@ -2,9 +2,9 @@
 import Logo from '../Logo/index.vue'
 import Tools from '../Tools/index.vue'
 
-import { useSettingsStore } from '@/store/modules/settings'
+import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import { useMenuStore } from '@/store/modules/menu'
+import useMenuStore from '@/store/modules/menu'
 const menuStore = useMenuStore()
 
 const switchMenu = inject('switchMenu')

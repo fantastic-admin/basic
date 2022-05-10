@@ -1,6 +1,6 @@
 import path from 'path-browserify'
-import { useSettingsOutsideStore } from '@/store/modules/settings'
-import { useUserOutsideStore } from '@/store/modules/user'
+import useSettingsStore from '@/store/modules/settings'
+import useUserStore from '@/store/modules/user'
 
 export function deepClone(target) {
     // 定义一个变量
@@ -36,10 +36,10 @@ export function deepClone(target) {
 }
 
 function hasPermission(permission) {
-    const settingsOutsideStore = useSettingsOutsideStore()
-    const userOutsideStore = useUserOutsideStore()
-    if (settingsOutsideStore.app.enablePermission) {
-        return userOutsideStore.permissions.some(v => {
+    const settingsStore = useSettingsStore()
+    const userStore = useUserStore()
+    if (settingsStore.app.enablePermission) {
+        return userStore.permissions.some(v => {
             return v === permission
         })
     } else {
