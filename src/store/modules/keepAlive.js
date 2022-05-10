@@ -1,7 +1,4 @@
-import { defineStore } from 'pinia'
-import { piniaStore } from '@/store'
-
-export const useKeepAliveStore = defineStore(
+const useKeepAliveStore = defineStore(
     // 唯一ID
     'keepAlive',
     {
@@ -36,6 +33,4 @@ export const useKeepAliveStore = defineStore(
     }
 )
 
-export function useKeepAliveOutsideStore() {
-    return useKeepAliveStore(piniaStore)
-}
+export default useKeepAliveStore

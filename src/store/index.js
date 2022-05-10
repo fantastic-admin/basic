@@ -1,2 +1,3 @@
-import { createPinia } from 'pinia'
-export const piniaStore = createPinia()
+const pinia = createPinia()
+
+export default pinia

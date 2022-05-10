@@ -1,10 +1,8 @@
-import { defineStore } from 'pinia'
-import { piniaStore } from '@/store'
 import { deepClone, isExternalLink } from '@/util'
 import api from '@/api'
 
-import { useSettingsStore } from './settings'
-import { useUserStore } from './user'
+import useSettingsStore from './settings'
+import useUserStore from './user'
 
 function hasPermission(permissions, route) {
     let isAuth = false
@@ -118,7 +116,7 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
     return res
 }
 
-export const useRouteStore = defineStore(
+const useRouteStore = defineStore(
     // 唯一ID
     'route',
     {
@@ -236,6 +234,4 @@ export const useRouteStore = defineStore(
     }
 )
 
-export function useRouteOutsideStore() {
-    return useRouteStore(piniaStore)
-}
+export default useRouteStore

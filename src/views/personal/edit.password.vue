@@ -10,7 +10,7 @@
 const route = useRoute(), router = useRouter()
 const { proxy } = getCurrentInstance()
 
-import { useUserStore } from '@/store/modules/user'
+import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 const validatePassword = (rule, value, callback) => {

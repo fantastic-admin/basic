@@ -3,11 +3,11 @@ import { deepClone, isExternalLink } from '@/util'
 
 const { proxy } = getCurrentInstance()
 
-import { useSettingsStore } from '@/store/modules/settings'
+import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import { useRouteStore } from '@/store/modules/route'
+import useRouteStore from '@/store/modules/route'
 const routeStore = useRouteStore()
-import { useMenuStore } from '@/store/modules/menu'
+import useMenuStore from '@/store/modules/menu'
 const menuStore = useMenuStore()
 
 const isShow = ref(false)

@@ -9,9 +9,9 @@
 <script setup>
 const { proxy } = getCurrentInstance()
 
-import { useSettingsStore } from '@/store/modules/settings'
+import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import { useUserStore } from '@/store/modules/user'
+import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 function accountChange(val) {
