@@ -8,6 +8,7 @@
 
 <p align="center">
     <a href="https://fantastic-admin.netlify.app" target="_blank">官网</a>
+    ( <a href="https://gitee.com/hooray/fantastic-admin/tree/docs" target="_blank">备用</a> )
     <span>&nbsp;|&nbsp;</span>
     演示
     ( <a href="https://fantastic-admin.netlify.app/vue3/basic" target="_blank">基础版</a>
