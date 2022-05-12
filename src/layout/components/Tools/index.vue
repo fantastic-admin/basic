@@ -47,7 +47,7 @@ function pro() {
             </span>
             <span v-if="settingsStore.topbar.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
                 <el-icon>
-                    <svg-icon name="search" />
+                    <svg-icon name="ep:search" />
                 </el-icon>
             </span>
             <span v-if="settingsStore.mode === 'pc' && settingsStore.topbar.enableFullscreen" class="item" @click="toggle">
@@ -57,12 +57,12 @@ function pro() {
             </span>
             <span v-if="settingsStore.topbar.enablePageReload" class="item" @click="reload()">
                 <el-icon>
-                    <svg-icon name="toolbar-reload" />
+                    <svg-icon name="ep:refresh-right" />
                 </el-icon>
             </span>
             <span v-if="settingsStore.topbar.enableAppSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
                 <el-icon>
-                    <svg-icon name="toolbar-theme" />
+                    <svg-icon name="ep:setting" />
                 </el-icon>
             </span>
         </div>
@@ -125,6 +125,9 @@ function pro() {
                 100% {
                     transform: scale(1);
                 }
+            }
+            .el-icon {
+                vertical-align: middle;
             }
             .title {
                 padding-left: 5px;
