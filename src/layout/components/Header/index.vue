@@ -114,10 +114,12 @@ header {
             .el-icon {
                 font-size: 24px;
                 vertical-align: middle;
-                & + span {
-                    vertical-align: middle;
-                    @include text-overflow(1, false);
-                }
+            }
+            span {
+                text-align: center;
+                vertical-align: middle;
+                word-break: break-all;
+                @include text-overflow(1, false);
             }
         }
     }
