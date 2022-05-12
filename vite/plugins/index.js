@@ -23,7 +23,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
     vitePlugins.push(createComponents())
     vitePlugins.push(createSetupExtend())
     vitePlugins.push(createSvgIcon(isBuild))
-    vitePlugins.push(createMock())
+    vitePlugins.push(createMock(viteEnv, isBuild))
     vitePlugins.push(createLayouts())
     vitePlugins.push(createPages())
     isBuild && vitePlugins.push(...createCompression(viteEnv))
