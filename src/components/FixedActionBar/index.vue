@@ -40,11 +40,11 @@ function onScroll() {
     bottom: 0;
     padding: 20px;
     text-align: center;
-    background-color: #fff;
-    transition: all 0.3s, box-shadow 0.5s;
-    box-shadow: 0 0 1px 0 #ccc;
+    background-color: var(--g-app-bg);
+    box-shadow: 0 0 1px 0 var(--g-box-shadow-color);
+    transition: all 0.3s, var(--el-transition-box-shadow);
     &.shadow {
-        box-shadow: 0 -10px 10px -10px #ccc;
+        box-shadow: 0 -10px 10px -10px var(--g-box-shadow-color);
     }
 }
 :deep(.el-form-item) {

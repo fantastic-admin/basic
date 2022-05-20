@@ -28,7 +28,7 @@ function toggle() {
     <div class="search-container">
         <slot />
         <div v-if="showMore" class="more">
-            <el-button type="text" size="small" @click="toggle">
+            <el-button text size="small" @click="toggle">
                 <template #icon>
                     <el-icon>
                         <svg-icon :name="isUnfold ? 'ep:caret-top' : 'ep:caret-bottom'" />
@@ -45,9 +45,13 @@ function toggle() {
     position: relative;
     margin: 20px 0;
     padding: 20px;
-    background-color: #f7f8fa;
+    background-color: var(--el-fill-color);
+    transition: background-color 0.3s;
     &:first-child {
         margin-top: 0;
+    }
+    &:last-child {
+        margin-bottom: 0;
     }
     :deep(.el-form) {
         margin-bottom: -10px;

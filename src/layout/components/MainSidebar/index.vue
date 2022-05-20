@@ -55,11 +55,12 @@ const switchMenu = inject('switchMenu')
     position: relative;
     z-index: 1;
     width: var(--g-main-sidebar-width);
-    color: $g-main-sidebar-menu-color;
-    background-color: $g-main-sidebar-bg;
+    color: var(--g-main-sidebar-menu-color);
+    background-color: var(--g-main-sidebar-bg);
+    transition: background-color 0.3s, var(--el-transition-color);
     .sidebar-logo {
         transition: 0.3s;
-        background-color: $g-main-sidebar-bg;
+        background-color: var(--g-main-sidebar-bg);
     }
     .nav {
         width: inherit;
@@ -73,14 +74,16 @@ const switchMenu = inject('switchMenu')
             height: 60px;
             padding: 0 5px;
             cursor: pointer;
-            transition: all 0.3s;
+            color: var(--g-main-sidebar-menu-color);
+            background-color: var(--g-main-sidebar-bg);
+            transition: background-color 0.3s, var(--el-transition-color);
             &:hover {
-                color: $g-main-sidebar-menu-hover-color;
-                background-color: $g-main-sidebar-menu-hover-bg;
+                color: var(--g-main-sidebar-menu-hover-color);
+                background-color: var(--g-main-sidebar-menu-hover-bg);
             }
             &.active {
-                color: $g-main-sidebar-menu-active-color;
-                background-color: $g-main-sidebar-menu-active-bg;
+                color: var(--g-main-sidebar-menu-active-color);
+                background-color: var(--g-main-sidebar-menu-active-bg);
             }
             .el-icon {
                 margin: 0 auto;

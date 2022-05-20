@@ -11,14 +11,14 @@ export default ({ mode, command }) => {
     const scssResources = []
     fs.readdirSync('src/assets/styles/resources').map(dirname => {
         if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) {
-            scssResources.push(`@import "src/assets/styles/resources/${dirname}";`)
+            scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`)
         }
     })
     // css 精灵图相关
     fs.readdirSync('src/assets/sprites').map(dirname => {
         if (fs.statSync(`src/assets/sprites/${dirname}`).isDirectory()) {
             // css 精灵图生成的 scss 文件也需要放入全局 scss 资源
-            scssResources.push(`@import "src/assets/sprites/_${dirname}.scss";`)
+            scssResources.push(`@use "src/assets/sprites/_${dirname}.scss" as *;`)
         }
     })
     // BUG https://github.com/element-plus/element-plus/issues/4916

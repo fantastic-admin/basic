@@ -24,6 +24,16 @@ const subSidebarActualWidth = computed(() => {
     return `${actualWidth}px`
 })
 
+watch(() => settingsStore.app.colorScheme, () => {
+    if (settingsStore.app.colorScheme === 'dark') {
+        document.documentElement.classList.add('dark')
+    } else {
+        document.documentElement.classList.remove('dark')
+    }
+}, {
+    immediate: true
+})
+
 watch(() => settingsStore.mode, () => {
     if (settingsStore.mode === 'pc') {
         settingsStore.$patch(state => {
@@ -68,7 +78,7 @@ onMounted(() => {
 </script>
 
 <template>
-    <el-config-provider :locale="zhCn" :size="settingsStore.app.elementSize">
+    <el-config-provider :locale="zhCn" :size="settingsStore.app.elementSize" :button="{autoInsertSpace: true}">
         <RouterView
             :style="{
                 '--g-main-sidebar-actual-width': mainSidebarActualWidth,

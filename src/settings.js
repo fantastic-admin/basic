@@ -1,5 +1,7 @@
 let globalSettings = {
     app: {
+        // 颜色方案，可选值为 light、dark
+        colorScheme: 'light',
         // Element 组件默认尺寸，支持：large、default、small
         elementSize: 'default',
         // 是否将 iconify 图标集中的 Element Plus 图标下载到本地，以便在离线环境下使用
@@ -72,6 +74,8 @@ let globalSettings = {
         enableFullscreen: false,
         // 是否开启页面刷新
         enablePageReload: false,
+        // 是否开启颜色主题
+        enableColorScheme: false,
         // 是否开启应用配置（建议在生产环境关闭）
         enableAppSetting: false
     },

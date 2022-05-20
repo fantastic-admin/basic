@@ -45,10 +45,20 @@ function handleCopy() {
         <el-drawer v-model="isShow" title="应用配置" direction="rtl" :size="350" custom-class="flex-container">
             <div class="container">
                 <el-alert title="应用配置可实时预览效果，但仅是临时生效，要想真正作用于项目，可以点击下方的“复制配置”按钮，将配置粘贴到 src/settings.custom.json 中即可，或者也可在 src/settings.js 中直接修改默认配置。同时建议在生产环境隐藏应用配置功能。" type="error" :closable="false" />
+                <el-divider>颜色主题</el-divider>
+                <div class="color-scheme">
+                    <div class="switch" :class="settings.app.colorScheme" @click="settings.app.colorScheme = settings.app.colorScheme === 'dark' ? 'light' : 'dark'">
+                        <el-icon class="icon">
+                            <svg-icon v-show="settings.app.colorScheme === 'light'" name="ep:sunny" />
+                            <svg-icon v-show="settings.app.colorScheme === 'dark'" name="ep:moon" />
+                        </el-icon>
+                    </div>
+                </div>
                 <el-divider v-if="settingsStore.mode === 'pc'">导航栏模式</el-divider>
                 <div v-if="settingsStore.mode === 'pc'" class="menu-mode">
                     <el-tooltip content="侧边栏模式（含主导航）" placement="top" :show-after="500">
                         <div class="mode mode-side" :class="{'active': settings.menu.menuMode === 'side'}" @click="settings.menu.menuMode = 'side'">
+                            <div class="mode-container" />
                             <el-icon>
                                 <svg-icon name="ep:check" />
                             </el-icon>
@@ -56,6 +66,7 @@ function handleCopy() {
                     </el-tooltip>
                     <el-tooltip content="顶部模式" placement="top" :show-after="500">
                         <div class="mode mode-head" :class="{'active': settings.menu.menuMode === 'head'}" @click="settings.menu.menuMode = 'head'">
+                            <div class="mode-container" />
                             <el-icon>
                                 <svg-icon name="ep:check" />
                             </el-icon>
@@ -63,6 +74,7 @@ function handleCopy() {
                     </el-tooltip>
                     <el-tooltip content="侧边栏模式（不含主导航）" placement="top" :show-after="500">
                         <div class="mode mode-single" :class="{'active': settings.menu.menuMode === 'single'}" @click="settings.menu.menuMode = 'single'">
+                            <div class="mode-container" />
                             <el-icon>
                                 <svg-icon name="ep:check" />
                             </el-icon>
@@ -141,6 +153,17 @@ function handleCopy() {
                         </el-tooltip>
                     </div>
                     <el-switch v-model="settings.topbar.enablePageReload" />
+                </div>
+                <div class="setting-item">
+                    <div class="label">
+                        颜色主题
+                        <el-tooltip content="开启后可在明亮/暗黑模式中切换" placement="top">
+                            <el-icon>
+                                <svg-icon name="ep:question-filled" />
+                            </el-icon>
+                        </el-tooltip>
+                    </div>
+                    <el-switch v-model="settings.topbar.enableColorScheme" />
                 </div>
                 <el-divider>底部版权</el-divider>
                 <div class="setting-item">
@@ -242,7 +265,7 @@ function handleCopy() {
 :deep(.el-drawer__header) {
     margin-bottom: initial;
     padding-bottom: 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--el-border-color);
 }
 .flex-container {
     .container {
@@ -253,8 +276,7 @@ function handleCopy() {
     .action-buttons {
         padding: 15px;
         text-align: center;
-        background-color: #fff;
-        border-top: 1px solid #ddd;
+        border-top: 1px solid var(--el-border-color);
         .el-button {
             width: 100%;
         }
@@ -263,91 +285,152 @@ function handleCopy() {
 :deep(.el-divider) {
     margin: 36px 0 24px;
 }
-.menu-mode {
+.color-scheme {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    padding-bottom: 10px;
+    $width: 50px;
+    .switch {
+        width: $width;
+        height: 30px;
+        border-radius: 15px;
+        cursor: pointer;
+        background-color: var(--el-fill-color-darker);
+        transition: background-color 0.3s;
+        &.dark {
+            .icon {
+                margin-left: calc($width - 24px - 3px);
+            }
+        }
+        .icon {
+            margin: 3px;
+            padding: 5px;
+            font-size: 24px;
+            border-radius: 50%;
+            background-color: var(--el-fill-color-lighter);
+            transition: margin-left 0.3s, background-color 0.3s;
+        }
+    }
+}
+.menu-mode {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
     padding-bottom: 10px;
     .mode {
         position: relative;
-        width: 50px;
-        height: 40px;
-        border-radius: 4px;
+        width: 80px;
+        height: 55px;
+        margin: 10px;
+        border-radius: 5px;
         overflow: hidden;
         cursor: pointer;
-        background-color: #e1e3e6;
-        box-shadow: 0 0 15px 1px #aaa;
-        transition: 0.3s;
+        background-color: var(--g-app-bg);
+        box-shadow: 0 0 5px 1px var(--el-border-color-lighter);
+        transition: 0.2s;
         &:hover {
-            box-shadow: 0 0 15px 1px #666;
+            box-shadow: 0 0 5px 1px var(--el-border-color-darker);
         }
         &.active {
-            box-shadow: 0 0 0 2px #409eff;
+            box-shadow: 0 0 0 2px var(--el-color-primary);
         }
         &::before,
-        &::after {
+        &::after,
+        .mode-container {
             pointer-events: none;
+            position: absolute;
+            border-radius: 3px;
+        }
+        .mode-container::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: var(--g-sub-sidebar-menu-active-bg);
+            opacity: 0.2;
         }
         &-side {
             &::before {
                 content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
+                top: 5px;
+                left: 5px;
+                bottom: 5px;
                 width: 10px;
-                height: 100%;
-                background-color: #222b45;
+                background-color: var(--g-sub-sidebar-menu-active-bg);
             }
             &::after {
                 content: "";
-                position: absolute;
-                top: 0;
-                left: 10px;
+                top: 5px;
+                left: 20px;
+                bottom: 5px;
                 width: 15px;
-                height: 100%;
-                background-color: #fff;
+                background-color: var(--g-sub-sidebar-menu-active-bg);
+                opacity: 0.5;
+            }
+            .mode-container {
+                top: 5px;
+                left: 40px;
+                right: 5px;
+                bottom: 5px;
+                border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
             }
         }
         &-head {
             &::before {
                 content: "";
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
+                top: 5px;
+                left: 5px;
+                right: 5px;
                 height: 10px;
-                background-color: #222b45;
+                background-color: var(--g-sub-sidebar-menu-active-bg);
             }
             &::after {
                 content: "";
-                position: absolute;
-                top: 10px;
-                left: 0;
+                top: 20px;
+                left: 5px;
+                bottom: 5px;
                 width: 15px;
-                height: calc(100% - 10px);
-                background-color: #fff;
+                background-color: var(--g-sub-sidebar-menu-active-bg);
+                opacity: 0.5;
+            }
+            .mode-container {
+                top: 20px;
+                left: 25px;
+                right: 5px;
+                bottom: 5px;
+                border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
             }
         }
         &-single {
             &::before {
                 content: "";
                 position: absolute;
-                top: 0;
-                left: 0;
+                top: 5px;
+                left: 5px;
+                bottom: 5px;
                 width: 15px;
-                height: 100%;
-                background-color: #fff;
+                background-color: var(--g-sub-sidebar-menu-active-bg);
+                opacity: 0.5;
+            }
+            .mode-container {
+                top: 5px;
+                left: 25px;
+                right: 5px;
+                bottom: 5px;
+                border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
             }
         }
         i {
             position: absolute;
-            right: 2px;
-            bottom: 2px;
+            right: 10px;
+            bottom: 10px;
             display: none;
         }
         &.active i {
             display: block;
-            color: #409eff;
+            color: var(--el-color-primary);
         }
     }
 }
@@ -360,17 +443,17 @@ function handleCopy() {
     border-radius: 5px;
     transition: all 0.3s;
     &:hover {
-        background: #f1f1f1;
+        background: var(--el-fill-color);
     }
     .label {
         font-size: 14px;
-        color: #666;
+        color: var(--el-text-color-regular);
         display: flex;
         align-items: center;
         i {
             margin-left: 4px;
             font-size: 17px;
-            color: #e6a23c;
+            color: var(--el-color-warning);
             cursor: help;
         }
     }

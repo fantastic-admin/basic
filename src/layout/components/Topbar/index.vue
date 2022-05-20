@@ -80,13 +80,12 @@ function pathCompile(path) {
     align-items: center;
     justify-content: space-between;
     height: $g-topbar-height;
-    background-color: #fff;
-    transition: 0.3s, box-shadow 0.2s;
-    box-shadow: 0 0 1px 0 #ccc;
+    background-color: var(--g-toolbar-bg);
+    transition: width 0.3s, transform 0.3s, background-color 0.3s, var(--el-transition-box-shadow);
     &.fixed {
         position: fixed;
         &.shadow {
-            box-shadow: 0 10px 10px -10px #ccc;
+            box-shadow: 0 10px 10px -10px var(--g-box-shadow-color);
         }
     }
     .left-box {
@@ -102,12 +101,12 @@ function pathCompile(path) {
             padding: 0 20px;
             height: 50px;
             cursor: pointer;
-            transition: 0.3s;
             .el-icon {
-                transition: 0.3s;
+                color: var(--el-text-color-primary);
+                transition: var(--el-transition-color), var(--el-transition-md-fade);
             }
             &:hover .el-icon {
-                color: #5482ee;
+                color: var(--el-color-primary);
             }
             &.is-collapse .el-icon {
                 transform: rotateZ(-180deg);

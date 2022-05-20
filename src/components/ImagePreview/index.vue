@@ -38,8 +38,9 @@ const realHeight = computed(() => {
 <style lang="scss" scoped>
 .el-image {
     border-radius: 5px;
-    background-color: #ebeef5;
-    box-shadow: 0 0 5px 1px #ccc;
+    background-color: var(--el-fill-color);
+    box-shadow: var(--el-box-shadow-light);
+    transition: background-color 0.3s, var(--el-transition-box-shadow);
     :deep(.el-image__inner) {
         transition: all 0.3s;
         cursor: pointer;
