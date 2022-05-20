@@ -114,31 +114,31 @@ a {
 
 <style lang="scss">
 .el-menu--inline {
-    background-color: $g-sub-sidebar-menu-bg !important;
+    background-color: var(--g-sub-sidebar-menu-bg) !important;
     .el-menu-item,
     .el-sub-menu > .el-sub-menu__title {
-        color: $g-sub-sidebar-menu-color;
-        background-color: $g-sub-sidebar-menu-bg !important;
+        color: var(--g-sub-sidebar-menu-color);
+        background-color: var(--g-sub-sidebar-menu-bg) !important;
         &:hover {
-            color: $g-sub-sidebar-menu-hover-color !important;
-            background-color: $g-sub-sidebar-menu-hover-bg !important;
+            color: var(--g-sub-sidebar-menu-hover-color) !important;
+            background-color: var(--g-sub-sidebar-menu-hover-bg) !important;
         }
     }
 }
 .el-menu-item,
 .el-sub-menu__title {
-    color: $g-sub-sidebar-menu-color !important;
+    color: var(--g-sub-sidebar-menu-color) !important;
     background: transparent !important;
     &:hover {
-        color: $g-sub-sidebar-menu-hover-color !important;
-        background-color: $g-sub-sidebar-menu-hover-bg !important;
+        color: var(--g-sub-sidebar-menu-hover-color) !important;
+        background-color: var(--g-sub-sidebar-menu-hover-bg) !important;
     }
 }
 .el-menu-item.is-active,
 .el-menu--collapse .el-sub-menu.is-active > .el-sub-menu__title,
 .el-sub-menu .el-menu--inline .el-menu-item.is-active {
-    color: $g-sub-sidebar-menu-active-color !important;
-    background-color: $g-sub-sidebar-menu-active-bg !important;
+    color: var(--g-sub-sidebar-menu-active-color) !important;
+    background-color: var(--g-sub-sidebar-menu-active-bg) !important;
     .icon,
     .el-sub-menu__icon-arrow {
         color: unset;

@@ -60,6 +60,12 @@ function pro() {
                     <svg-icon name="ep:refresh-right" />
                 </el-icon>
             </span>
+            <span v-if="settingsStore.topbar.enableColorScheme" class="item" @click="settingsStore.setColorScheme(settingsStore.app.colorScheme === 'dark' ? 'light' : 'dark')">
+                <el-icon>
+                    <svg-icon v-show="settingsStore.app.colorScheme === 'light'" name="ep:sunny" />
+                    <svg-icon v-show="settingsStore.app.colorScheme === 'dark'" name="ep:moon" />
+                </el-icon>
+            </span>
             <span v-if="settingsStore.topbar.enableAppSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
                 <el-icon>
                     <svg-icon name="ep:setting" />
@@ -105,7 +111,10 @@ function pro() {
             width: 34px;
             cursor: pointer;
             vertical-align: middle;
-            transition: all 0.3s;
+            .el-icon {
+                color: var(--el-text-color-primary);
+                transition: var(--el-transition-color);
+            }
         }
         .item-pro {
             display: inline-block;

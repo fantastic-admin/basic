@@ -72,7 +72,7 @@ function editPassword() {
                                 <div class="desc">当前密码强度：强</div>
                             </div>
                             <div class="action">
-                                <el-button type="text" @click="editPassword">修改</el-button>
+                                <el-button text @click="editPassword">修改</el-button>
                             </div>
                         </div>
                         <div class="item">
@@ -81,7 +81,7 @@ function editPassword() {
                                 <div class="desc">已绑定手机：187****3441</div>
                             </div>
                             <div class="action">
-                                <el-button type="text">修改</el-button>
+                                <el-button text>修改</el-button>
                             </div>
                         </div>
                         <div class="item">
@@ -90,7 +90,7 @@ function editPassword() {
                                 <div class="desc">当前未绑定备用邮箱</div>
                             </div>
                             <div class="action">
-                                <el-button type="text">绑定</el-button>
+                                <el-button text>绑定</el-button>
                             </div>
                         </div>
                     </div>
@@ -106,8 +106,9 @@ function editPassword() {
         .el-tabs__active-bar {
             z-index: 0;
             width: 100%;
-            background-color: #e1f0ff;
-            border-right: 2px solid #409eff;
+            background-color: var(--el-color-primary-light-9);
+            border-right: 2px solid var(--el-color-primary);
+            transition: transform 0.3s, background-color 0.3s, var(--el-transition-border);
         }
         .el-tabs__item {
             text-align: left;
@@ -125,9 +126,7 @@ h2 {
 }
 .basic {
     :deep(.headimg-upload) {
-        > div {
-            text-align: center;
-        }
+        text-align: center;
         .el-upload-dragger {
             border-radius: 50%;
         }
@@ -140,15 +139,18 @@ h2 {
             align-items: center;
             justify-content: space-between;
             padding: 10px 0;
-            border-bottom: 1px solid #e8e8e8;
+            border-bottom: 1px solid var(--el-border-color-lighter);
+            transition: var(--el-transition-border);
             .content {
                 .title {
                     margin-bottom: 5px;
-                    color: #666;
+                    color: var(--el-text-color-primary);
+                    transition: var(--el-transition-color);
                 }
                 .desc {
                     font-size: 14px;
-                    color: #999;
+                    color: var(--el-text-color-secondary);
+                    transition: var(--el-transition-color);
                 }
             }
             &:last-child {

@@ -1,0 +1,9 @@
+// 暗黑模式
+@forward "element-plus/theme-chalk/src/dark/var.scss" with (
+    $bg-color: (
+        "page": #0a0a0a,
+        "": #141414,
+        "overlay": #1d1e1f,
+    )
+);
+@use "element-plus/theme-chalk/src/dark/css-vars.scss" as *;

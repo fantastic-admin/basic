@@ -90,16 +90,17 @@ function onSuccess(res, file) {
 </template>
 
 <style lang="scss" scoped>
-:deep(.el-upload-dragger) {
-    width: auto;
-    height: auto;
-    overflow: unset;
+:deep(.el-upload) {
+    display: inline-block;
+    .el-upload-dragger {
+        padding: 0;
+    }
     &.is-dragover {
         border-width: 1px;
     }
-}
-.slot {
-    width: 300px;
-    height: 160px;
+    .slot {
+        width: 300px;
+        padding: 40px 0;
+    }
 }
 </style>

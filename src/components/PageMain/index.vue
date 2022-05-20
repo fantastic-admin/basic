@@ -45,7 +45,8 @@ function unCollaspe() {
     position: relative;
     margin: 20px;
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--g-app-bg);
+    transition: background-color 0.3s;
     &.is-collaspe {
         overflow: hidden;
         .collaspe {
@@ -56,13 +57,13 @@ function unCollaspe() {
             padding: 40px 0 10px;
             text-align: center;
             font-size: 24px;
-            color: #ccc;
-            text-shadow: 0 0 1px #fff;
-            background: linear-gradient(to bottom, transparent, #fff);
+            color: var(--el-text-color-primary);
+            text-shadow: 0 0 1px var(--el-text-color-primary);
+            background: linear-gradient(to bottom, transparent, var(--g-app-bg));
+            transition: background 0.3s, var(--el-transition-color);
             cursor: pointer;
-            transition: 0.3s;
             &:hover {
-                color: #333;
+                color: var(--el-text-color-secondary);
             }
         }
     }
@@ -72,7 +73,8 @@ function unCollaspe() {
         margin-left: -20px;
         margin-top: -20px;
         margin-bottom: 20px;
-        border-bottom: 1px solid #eee;
+        border-bottom: 1px solid var(--el-border-color-lighter);
+        transition: var(--el-transition-border);
     }
 }
 </style>

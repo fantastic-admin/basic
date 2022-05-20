@@ -106,10 +106,11 @@ function onSuccess(res) {
             :on-progress="onProgress"
             :on-success="onSuccess"
             drag
+            class="image-upload"
         >
             <el-image v-if="url === ''" :src="url === '' ? placeholder : url" :style="`width:${width}px;height:${height}px;`" fit="fill">
                 <template #error>
-                    <div class="image-slot">
+                    <div class="image-slot" :style="`width:${width}px;height:${height}px;`">
                         <el-icon>
                             <svg-icon name="ep:plus" />
                         </el-icon>
@@ -151,16 +152,21 @@ function onSuccess(res) {
 .upload-container {
     line-height: initial;
 }
+.el-image {
+    display: block;
+}
 .image {
     position: relative;
+    border-radius: 6px;
+    overflow: hidden;
     .mask {
         opacity: 0;
         position: absolute;
         top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgb(0 0 0 / 50%);
-        transition: all 0.3s;
+        background-color: var(--el-overlay-color-lighter);
+        transition: opacity 0.3s;
         .actions {
             width: 100px;
             height: 100px;
@@ -172,14 +178,10 @@ function onSuccess(res) {
             span {
                 width: 50%;
                 text-align: center;
-                color: #fff;
                 cursor: pointer;
-                transition: all 0.1s;
-                &.disabled {
-                    color: #999;
-                    cursor: not-allowed;
-                }
-                &:hover:not(.disabled) {
+                color: var(--el-color-white);
+                transition: color 0.1s, transform 0.1s;
+                &:hover {
                     transform: scale(1.5);
                 }
                 .el-icon {
@@ -192,26 +194,27 @@ function onSuccess(res) {
         opacity: 1;
     }
 }
+.image-upload {
+    display: inline-block;
+    vertical-align: top;
+}
 :deep(.el-upload) {
     .el-upload-dragger {
-        width: auto;
-        height: auto;
+        display: inline-block;
+        padding: 0;
         &.is-dragover {
             border-width: 1px;
         }
-        .el-image {
-            display: block;
-            .image-slot {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 100%;
-                height: 100%;
-                color: #909399;
-                background-color: transparent;
-                i {
-                    font-size: 30px;
-                }
+        .image-slot {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            color: var(--el-text-color-placeholder);
+            background-color: transparent;
+            i {
+                font-size: 30px;
             }
         }
         .progress {
@@ -224,13 +227,13 @@ function onSuccess(res) {
                 height: 100%;
                 left: 0;
                 top: 0;
-                background-color: rgb(0 0 0 / 20%);
+                background-color: var(--el-overlay-color-lighter);
             }
             .el-progress {
                 z-index: 1;
                 @include position-center(xy);
                 .el-progress__text {
-                    color: #fff;
+                    color: var(--el-text-color-placeholder);
                 }
             }
         }

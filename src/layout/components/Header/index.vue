@@ -52,8 +52,9 @@ header {
     align-items: center;
     padding: 0 20px;
     height: $g-header-height;
-    color: $g-header-color;
-    background-color: $g-header-bg;
+    color: var(--g-header-color);
+    background-color: var(--g-header-bg);
+    transition: background-color 0.3s, var(--el-transition-color);
     .header-container {
         width: $g-header-width;
         height: 100%;
@@ -85,7 +86,7 @@ header {
         span {
             font-size: 24px;
             letter-spacing: 1px;
-            color: $g-header-color;
+            color: var(--g-header-color);
         }
     }
     .nav {
@@ -100,16 +101,16 @@ header {
             padding: 0 5px;
             width: 80px;
             cursor: pointer;
-            transition: all 0.3s;
-            background-color: $g-header-bg;
-            color: $g-header-menu-color;
+            color: var(--g-header-menu-color);
+            background-color: var(--g-header-bg);
+            transition: background-color 0.3s, var(--el-transition-color);
             &:hover {
-                color: $g-header-menu-hover-color;
-                background-color: $g-header-menu-hover-bg;
+                color: var(--g-header-menu-hover-color);
+                background-color: var(--g-header-menu-hover-bg);
             }
             &.active {
-                color: $g-header-menu-active-color;
-                background-color: $g-header-menu-active-bg;
+                color: var(--g-header-menu-active-color);
+                background-color: var(--g-header-menu-active-bg);
             }
             .el-icon {
                 font-size: 24px;
@@ -125,9 +126,12 @@ header {
     }
     :deep(.tools) {
         padding: 0;
+        .buttons .item .el-icon {
+            color: var(--g-header-color);
+        }
         .user-container {
             font-size: 16px;
-            color: $g-header-color;
+            color: var(--g-header-color);
         }
     }
 }

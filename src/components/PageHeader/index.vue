@@ -32,18 +32,21 @@ defineProps({
     justify-content: space-between;
     margin-bottom: 20px;
     padding: 16px 20px;
-    background: #fff;
-    border-bottom: 1px solid #e8eaec;
+    background-color: var(--g-app-bg);
+    transition: background-color 0.3s;
     .main {
         flex: 1;
         margin-right: 20px;
         .title {
             font-size: 22px;
+            color: var(--el-text-color-primary);
+            transition: var(--el-transition-color);
         }
         .content {
-            color: #909399;
-            font-size: 14px;
             margin-top: 10px;
+            font-size: 14px;
+            color: var(--el-text-color-secondary);
+            transition: var(--el-transition-color);
             &:empty {
                 display: none;
             }

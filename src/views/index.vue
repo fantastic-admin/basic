@@ -214,12 +214,13 @@ const oneStepAdminInfo = ref({
         h2 {
             font-size: 16px;
             font-weight: normal;
-            color: #666;
+            color: var(--el-text-color-secondary);
             text-align: center;
         }
     }
     .el-carousel {
-        box-shadow: 0 0 5px 1px #ccc;
+        box-shadow: var(--el-box-shadow-light);
+        transition: var(--el-transition-box-shadow);
     }
     ul li {
         line-height: 28px;
@@ -230,7 +231,7 @@ const oneStepAdminInfo = ref({
         margin: 20px 0 0;
         padding-left: 20px;
         font-size: 16px;
-        color: #aaa;
+        color: var(--el-text-color-secondary);
         li {
             margin-bottom: 10px;
             line-height: 1.5;
@@ -239,7 +240,7 @@ const oneStepAdminInfo = ref({
             }
         }
         span {
-            color: #666;
+            color: var(--el-text-color-primary);
             font-weight: bold;
         }
     }

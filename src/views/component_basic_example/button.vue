@@ -103,8 +103,8 @@ import Alert from './components/alert.vue'
             </el-row>
         </page-main>
         <page-main title="文字按钮" class="demo">
-            <el-button type="text">文字按钮</el-button>
-            <el-button type="text" disabled>文字按钮</el-button>
+            <el-button text>文字按钮</el-button>
+            <el-button text disabled>文字按钮</el-button>
         </page-main>
         <page-main title="图标按钮" class="demo">
             <el-button type="primary">

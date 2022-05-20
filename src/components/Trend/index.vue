@@ -38,22 +38,28 @@ const isUp = computed(() => {
         <span class="text">{{ value }}</span>
         <span v-if="suffix" class="suffix">{{ suffix }}</span>
         <el-icon>
-            <svg-icon :name="`${isUp ? 'ep:caret-top' : 'ep:caret-bottom'}`" />
+            <svg-icon name="ep:caret-top" />
         </el-icon>
     </div>
 </template>
 
 <style lang="scss" scoped>
 .trend {
-    display: inline-block;
+    display: flex;
+    align-items: center;
+    transition: var(--el-transition-color);
     &.up {
-        color: #67c23a;
+        color: var(--el-color-success);
     }
     &.down {
-        color: #f56c6c;
+        color: var(--el-color-danger);
+        .el-icon {
+            transform: rotate(180deg);
+        }
     }
-    i {
+    .el-icon {
         margin-left: 5px;
+        transition: transform 0.3s;
     }
 }
 </style>

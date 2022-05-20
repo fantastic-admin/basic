@@ -134,7 +134,7 @@ function switchMenu(index) {
     position: relative;
     width: 100%;
     height: 100%;
-    box-shadow: -1px 0 0 0 darken($g-main-bg, 10);
+    box-shadow: -1px 0 0 0 var(--g-box-shadow-color);
     .sidebar-container {
         position: fixed;
         z-index: 1010;
@@ -169,10 +169,9 @@ function switchMenu(index) {
         display: flex;
         flex-direction: column;
         min-height: 100%;
-        transition: margin-left 0.3s;
-        background-color: $g-main-bg;
-        box-shadow: 1px 0 0 0 darken($g-main-bg, 10);
         margin-left: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
+        background-color: var(--g-main-bg);
+        transition: margin-left 0.3s, background-color 0.3s;
         .topbar-container {
             top: 0;
             z-index: 998;

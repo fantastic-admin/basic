@@ -68,8 +68,8 @@ function onSidebarScroll(e) {
     top: 0;
     bottom: 0;
     transition: 0.3s;
-    background-color: $g-sub-sidebar-bg;
-    box-shadow: 10px 0 10px -10px darken($g-sub-sidebar-bg, 20);
+    background-color: var(--g-sub-sidebar-bg);
+    box-shadow: 10px 0 10px -10px var(--g-box-shadow-color);
     &.is-collapse {
         width: 64px;
         .sidebar-logo {
@@ -83,24 +83,24 @@ function onSidebarScroll(e) {
     }
     .sidebar-logo {
         transition: box-shadow 0.2s, background-color 0.3s, color 0.3s;
-        background-color: $g-sub-sidebar-bg;
+        background-color: var(--g-sub-sidebar-bg);
         &:not(.sidebar-logo-bg) {
             :deep(span) {
-                color: $g-sub-sidebar-menu-color;
+                color: var(--g-sub-sidebar-menu-color);
             }
         }
         &.sidebar-logo-bg {
-            background-color: $g-main-sidebar-bg;
+            background-color: var(--g-main-sidebar-bg);
         }
         &.shadow {
-            box-shadow: 0 10px 10px -10px darken($g-sub-sidebar-bg, 20);
+            box-shadow: 0 10px 10px -10px var(--g-box-shadow-color);
         }
     }
     .el-menu {
         border-right: 0;
         padding-top: $g-sidebar-logo-height;
         transition: border-color 0.3s, background-color 0.3s, color 0.3s;
-        background-color: $g-sub-sidebar-bg;
+        background-color: var(--g-sub-sidebar-bg);
         &:not(.el-menu--collapse) {
             width: inherit;
         }
@@ -108,7 +108,7 @@ function onSidebarScroll(e) {
             padding-top: 0;
         }
         &.el-menu--collapse {
-            :deep(.icon) {
+            :deep(.title-icon) {
                 margin-right: 0;
             }
             :deep(.el-menu-item),
