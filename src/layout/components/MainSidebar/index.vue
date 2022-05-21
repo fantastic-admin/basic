@@ -34,13 +34,6 @@ const switchMenu = inject('switchMenu')
 </template>
 
 <style lang="scss" scoped>
-// 主侧边栏动画
-.main-sidebar-enter-active {
-    transition: 0.3s;
-}
-.main-sidebar-enter-from {
-    transform: translateX(calc(var(--g-main-sidebar-width) * -1));
-}
 .main-sidebar-container {
     overflow-x: hidden;
     overflow-y: auto;
@@ -96,5 +89,14 @@ const switchMenu = inject('switchMenu')
             }
         }
     }
+}
+// 主侧边栏动画
+.main-sidebar-enter-active,
+.main-sidebar-leave-active {
+    transition: transform 0.3s;
+}
+.main-sidebar-enter-from,
+.main-sidebar-leave-to {
+    transform: translateX(calc(var(--g-main-sidebar-width) * -1));
 }
 </style>

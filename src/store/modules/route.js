@@ -1,5 +1,6 @@
 import { deepClone, isExternalLink } from '@/util'
 import api from '@/api'
+import { systemRoutes } from '@/router/routes'
 
 import useSettingsStore from './settings'
 import useUserStore from './user'
@@ -57,7 +58,7 @@ function formatBackRoutes(routes, views = import.meta.glob('../../views/**/*.vue
 }
 
 // 将多层嵌套路由处理成平级
-function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
+function flatAsyncRoutes(routes, breadcrumb = [], baseUrl = '') {
     let res = []
     routes.forEach(route => {
         if (route.children) {
@@ -71,7 +72,8 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
             if (route.meta.breadcrumb !== false) {
                 childrenBreadcrumb.push({
                     path: childrenBaseUrl,
-                    title: route.meta.title
+                    title: route.meta.title,
+                    hide: !route.meta.breadcrumb && route.meta.breadcrumb === false
                 })
             }
             let tmpRoute = deepClone(route)
@@ -103,12 +105,11 @@ function flatAsyncRoutes(routes, breadcrumb, baseUrl = '') {
             }
             // 处理面包屑导航
             let tmpBreadcrumb = deepClone(breadcrumb)
-            if (tmpRoute.meta.breadcrumb !== false) {
-                tmpBreadcrumb.push({
-                    path: tmpRoute.path,
-                    title: tmpRoute.meta.title
-                })
-            }
+            tmpBreadcrumb.push({
+                path: tmpRoute.path,
+                title: tmpRoute.meta.title,
+                hide: !tmpRoute.meta.breadcrumb && tmpRoute.meta.breadcrumb === false
+            })
             tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
             res.push(tmpRoute)
         }
@@ -137,10 +138,7 @@ const useRouteStore = defineStore(
                         })
                         routes.map(item => {
                             if (item.children) {
-                                item.children = flatAsyncRoutes(item.children, [{
-                                    path: item.path,
-                                    title: item.meta.title
-                                }], item.path)
+                                item.children = flatAsyncRoutes(item.children, [], item.path)
                             }
                         })
                     } else {
@@ -149,6 +147,18 @@ const useRouteStore = defineStore(
                         })
                     }
                 }
+                return routes
+            },
+            flatSystemRoutes: () => {
+                let routes = []
+                systemRoutes.map(item => {
+                    routes.push(deepClone(item))
+                })
+                routes.map(item => {
+                    if (item.children) {
+                        item.children = flatAsyncRoutes(item.children, [], item.path)
+                    }
+                })
                 return routes
             }
         },

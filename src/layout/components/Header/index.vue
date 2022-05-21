@@ -35,13 +35,6 @@ const switchMenu = inject('switchMenu')
 </template>
 
 <style lang="scss" scoped>
-// 头部动画
-.header-enter-active {
-    transition: 0.2s;
-}
-.header-enter-from {
-    transform: translateY(-#{$g-header-height});
-}
 header {
     position: fixed;
     z-index: 1000;
@@ -134,5 +127,14 @@ header {
             color: var(--g-header-color);
         }
     }
+}
+// 头部动画
+.header-enter-active,
+.header-leave-active {
+    transition: transform 0.3s;
+}
+.header-enter-from,
+.header-leave-to {
+    transform: translateY(-#{$g-header-height});
 }
 </style>
