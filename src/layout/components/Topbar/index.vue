@@ -1,6 +1,5 @@
 <script setup name="Topbar">
 import { compile } from 'path-to-regexp'
-import { deepClone } from '@/util'
 import Tools from '../Tools/index.vue'
 
 const route = useRoute()
@@ -24,7 +23,7 @@ const breadcrumbList = computed(() => {
         })
     }
     if (route.meta.breadcrumbNeste) {
-        breadcrumbList.push(...deepClone(route.meta.breadcrumbNeste))
+        breadcrumbList.push(...route.meta.breadcrumbNeste.filter(item => item.hide === false))
     }
     return breadcrumbList
 })

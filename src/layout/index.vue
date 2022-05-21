@@ -135,13 +135,14 @@ function switchMenu(index) {
     width: 100%;
     height: 100%;
     box-shadow: -1px 0 0 0 var(--g-box-shadow-color);
+    transition: padding-top 0.3s;
     .sidebar-container {
         position: fixed;
         z-index: 1010;
         top: 0;
         bottom: 0;
         display: flex;
-        transition: transform 0.3s;
+        transition: transform 0.3s, top 0.3s;
         width: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
     }
     .sidebar-mask {
@@ -162,7 +163,7 @@ function switchMenu(index) {
             visibility: visible;
         }
     }
-    .main-sidebar-container + .sub-sidebar-container {
+    .main-sidebar-container:not(.main-sidebar-leave-active) + .sub-sidebar-container {
         left: var(--g-main-sidebar-width);
     }
     .main-container {
@@ -188,7 +189,7 @@ function switchMenu(index) {
         }
     }
 }
-header + .wrapper {
+header:not(.header-leave-active) + .wrapper {
     padding-top: $g-header-height;
     .sidebar-container {
         top: $g-header-height;

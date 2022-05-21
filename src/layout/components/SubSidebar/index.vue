@@ -39,18 +39,6 @@ function onSidebarScroll(e) {
 </template>
 
 <style lang="scss" scoped>
-// 次侧边栏动画
-.sub-sidebar-enter-active {
-    transition: 0.3s;
-}
-.sub-sidebar-enter-from,
-.sub-sidebar-leave-active {
-    opacity: 0;
-    transform: translateY(30px) skewY(10deg);
-}
-.sub-sidebar-leave-active {
-    position: absolute;
-}
 .sub-sidebar-container {
     overflow-x: hidden;
     overflow-y: auto;
@@ -67,9 +55,9 @@ function onSidebarScroll(e) {
     left: 0;
     top: 0;
     bottom: 0;
-    transition: 0.3s;
     background-color: var(--g-sub-sidebar-bg);
     box-shadow: 10px 0 10px -10px var(--g-box-shadow-color);
+    transition: background-color 0.3s, var(--el-transition-box-shadow), left 0.3s;
     &.is-collapse {
         width: 64px;
         .sidebar-logo {
@@ -99,7 +87,7 @@ function onSidebarScroll(e) {
     .el-menu {
         border-right: 0;
         padding-top: $g-sidebar-logo-height;
-        transition: border-color 0.3s, background-color 0.3s, color 0.3s;
+        transition: border-color 0.3s, background-color 0.3s, color 0.3s, padding-top 0.3s;
         background-color: var(--g-sub-sidebar-bg);
         &:not(.el-menu--collapse) {
             width: inherit;
@@ -136,5 +124,17 @@ function onSidebarScroll(e) {
             }
         }
     }
+}
+// 次侧边栏动画
+.sub-sidebar-enter-active {
+    transition: opacity 0.3s, transform 0.3s;
+}
+.sub-sidebar-enter-from,
+.sub-sidebar-leave-active {
+    opacity: 0;
+    transform: translateY(30px) skewY(10deg);
+}
+.sub-sidebar-leave-active {
+    position: absolute;
 }
 </style>
