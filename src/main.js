@@ -8,6 +8,9 @@ app.use(pinia)
 import router from './router'
 app.use(router)
 
+import importElementPlus from '@/elementPlusServer'
+importElementPlus(app)
+
 import globalProperties from '@/util/global.properties'
 globalProperties(app)
 

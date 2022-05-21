@@ -20,7 +20,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
     vitePlugins.push(createJsx())
     vitePlugins.push(createHtml(viteEnv, isBuild))
     vitePlugins.push(createAutoImport())
-    vitePlugins.push(createComponents())
+    vitePlugins.push(createComponents(isBuild))
     vitePlugins.push(createSetupExtend())
     vitePlugins.push(createSvgIcon(isBuild))
     vitePlugins.push(createMock(viteEnv, isBuild))
