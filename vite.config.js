@@ -21,15 +21,6 @@ export default ({ mode, command }) => {
             scssResources.push(`@use "src/assets/sprites/_${dirname}.scss" as *;`)
         }
     })
-    // BUG https://github.com/element-plus/element-plus/issues/4916
-    const optimizeDepsElementPlusIncludes = ['element-plus/es']
-    fs.readdirSync('node_modules/element-plus/es/components').map(dirname => {
-        fs.access(`node_modules/element-plus/es/components/${dirname}/style/css.mjs`, err => {
-            if (!err) {
-                optimizeDepsElementPlusIncludes.push(`element-plus/es/components/${dirname}/style/css`)
-            }
-        })
-    })
     return defineConfig({
         base: './',
         // 开发服务器选项 https://cn.vitejs.dev/config/#server-options
@@ -56,9 +47,34 @@ export default ({ mode, command }) => {
             }
         },
         optimizeDeps: {
-            include: optimizeDepsElementPlusIncludes
+            include: [
+                'element-plus/es',
+                'element-plus/es/components/message/style/css',
+                'element-plus/es/components/notification/style/css',
+                'element-plus/es/components/message-box/style/css'
+            ]
         },
-        plugins: createVitePlugins(env, command === 'build'),
+        plugins: [
+            ...createVitePlugins(env, command === 'build'),
+            // BUG https://github.com/antfu/unplugin-vue-components/issues/361
+            {
+                name: 'dev-auto-import-element-plus',
+                transform(code, id) {
+                    if (command === 'serve' && /src\/elementPlusServer.js$/.test(id)) {
+                        return {
+                            code: `
+import ElementPlus from 'element-plus';
+import 'element-plus/dist/index.css';
+export default function importElementPlus(app) {
+    app.use(ElementPlus);
+}
+`,
+                            map: null
+                        }
+                    }
+                }
+            }
+        ],
         resolve: {
             alias: {
                 '@': path.resolve(__dirname, 'src')

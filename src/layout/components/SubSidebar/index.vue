@@ -57,7 +57,7 @@ function onSidebarScroll(e) {
     bottom: 0;
     background-color: var(--g-sub-sidebar-bg);
     box-shadow: 10px 0 10px -10px var(--g-box-shadow-color);
-    transition: background-color 0.3s, var(--el-transition-box-shadow), left 0.3s;
+    transition: background-color 0.3s, var(--el-transition-box-shadow), left 0.3s, width 0.3s;
     &.is-collapse {
         width: 64px;
         .sidebar-logo {
