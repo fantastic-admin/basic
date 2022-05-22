@@ -60,15 +60,13 @@ export default ({ mode, command }) => {
             {
                 name: 'dev-auto-import-element-plus',
                 transform(code, id) {
-                    if (command === 'serve' && /src\/elementPlusServer.js$/.test(id)) {
+                    if (command === 'serve' && /src\/main.js$/.test(id)) {
                         return {
-                            code: `
-import ElementPlus from 'element-plus';
-import 'element-plus/dist/index.css';
-export default function importElementPlus(app) {
-    app.use(ElementPlus);
-}
-`,
+                            code: code.replace('/* importElementPlusPlaceholder */', `
+                                import ElementPlus from 'element-plus';
+                                import 'element-plus/dist/index.css';
+                                app.use(ElementPlus);
+                            `),
                             map: null
                         }
                     }
