@@ -80,7 +80,7 @@ function pathCompile(path) {
     justify-content: space-between;
     height: $g-topbar-height;
     background-color: var(--g-toolbar-bg);
-    transition: width 0.3s, transform 0.3s, background-color 0.3s, var(--el-transition-box-shadow);
+    transition: width 0.3s, top 0.3s, transform 0.3s, background-color 0.3s, var(--el-transition-box-shadow);
     &.fixed {
         position: fixed;
         &.shadow {
