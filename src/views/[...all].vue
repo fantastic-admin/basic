@@ -62,12 +62,12 @@ function goBack() {
         h1 {
             margin: 0;
             font-size: 72px;
-            color: #303133;
+            color: var(--el-text-color-primary);
         }
         .desc {
             margin: 20px 0 30px;
             font-size: 20px;
-            color: #606266;
+            color: var(--el-text-color-secondary);
         }
     }
 }
