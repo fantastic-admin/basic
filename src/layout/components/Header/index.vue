@@ -44,12 +44,12 @@ header {
     display: flex;
     align-items: center;
     padding: 0 20px;
-    height: $g-header-height;
+    height: var(--g-header-height);
     color: var(--g-header-color);
     background-color: var(--g-header-bg);
     transition: background-color 0.3s, var(--el-transition-color);
     .header-container {
-        width: $g-header-width;
+        width: var(--g-header-width);
         height: 100%;
         margin: 0 auto;
         display: flex;
@@ -61,7 +61,7 @@ header {
             height: 100%;
         }
     }
-    @media screen and (max-width: $g-header-width) {
+    @media screen and (max-width: var(--g-header-width)) {
         .header-container {
             width: 100%;
         }
@@ -135,6 +135,6 @@ header {
 }
 .header-enter-from,
 .header-leave-to {
-    transform: translateY(-#{$g-header-height});
+    transform: translateY(calc(var(--g-header-height) * -1));
 }
 </style>

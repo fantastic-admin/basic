@@ -86,7 +86,7 @@ function onSidebarScroll(e) {
     }
     .el-menu {
         border-right: 0;
-        padding-top: $g-sidebar-logo-height;
+        padding-top: var(--g-sidebar-logo-height);
         transition: border-color 0.3s, background-color 0.3s, color 0.3s, padding-top 0.3s;
         background-color: var(--g-sub-sidebar-bg);
         &:not(.el-menu--collapse) {
