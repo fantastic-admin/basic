@@ -78,7 +78,7 @@ function pathCompile(path) {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: $g-topbar-height;
+    height: var(--g-topbar-height);
     background-color: var(--g-toolbar-bg);
     transition: width 0.3s, top 0.3s, transform 0.3s, background-color 0.3s, var(--el-transition-box-shadow);
     &.fixed {

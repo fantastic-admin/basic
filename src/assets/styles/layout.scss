@@ -1,0 +1,14 @@
+// 全局变量
+:root {
+    // 头部宽度（默认自适应宽度，可固定宽度，固定宽度后为居中显示）
+    --g-header-width: 100%;
+    // 头部高度
+    --g-header-height: 70px;
+    // 侧边栏宽度
+    --g-main-sidebar-width: 70px;
+    --g-sub-sidebar-width: 220px;
+    // 侧边栏Logo高度
+    --g-sidebar-logo-height: 50px;
+    // 顶栏高度
+    --g-topbar-height: 50px;
+}

@@ -57,7 +57,7 @@ const switchMenu = inject('switchMenu')
     }
     .nav {
         width: inherit;
-        padding-top: $g-sidebar-logo-height;
+        padding-top: var(--g-sidebar-logo-height);
         .item {
             display: flex;
             align-items: center;

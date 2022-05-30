@@ -1,3 +1,6 @@
+@use "./layout.scss" as *;
+@use "./themes.scss" as *;
+
 // 全局样式
 ::-webkit-scrollbar {
     width: 12px;
