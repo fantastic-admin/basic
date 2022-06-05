@@ -8,9 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  docs:
+  sync-to-gitee:
     runs-on: ubuntu-latest
-
     steps:
       - name: Sync to Gitee
         uses: wearerequired/git-mirror-action@master
