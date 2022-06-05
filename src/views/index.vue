@@ -12,7 +12,7 @@ function open(url) {
     window.open(url, 'top')
 }
 
-const fantasticTemplateInfo = ref({
+const fantasticStartkitInfo = ref({
     feature: [
         '默认集成 vue-router 和 pinia',
         '全局 SCSS 资源引入',
@@ -84,20 +84,30 @@ const oneStepAdminInfo = ref({
                     <div class="ecology vue">
                         <div class="main">
                             <img src="https://v3.cn.vuejs.org/logo.png" style="width: 30%;">
-                            <h1>Fantastic-template</h1>
-                            <h2>一款开箱即用的 Vue 项目模版</h2>
-                            <el-button plain @click="open('https://fantastic-template.netlify.app')">
-                                <template #icon>
-                                    <el-icon>
-                                        <svg-icon name="ep:link" />
-                                    </el-icon>
-                                </template>
-                                访问官网
-                            </el-button>
+                            <h1>Fantastic-startkit</h1>
+                            <h2>一款开箱即用的 Vue 项目启动套件</h2>
+                            <div>
+                                <el-button plain @click="open('https://hooray.gitee.io/fantastic-startkit/')">
+                                    <template #icon>
+                                        <el-icon>
+                                            <svg-icon name="ep:link" />
+                                        </el-icon>
+                                    </template>
+                                    访问官网
+                                </el-button>
+                                <el-button plain @click="open('https://hooray.github.io/fantastic-startkit/')">
+                                    <template #icon>
+                                        <el-icon>
+                                            <svg-icon name="ep:link" />
+                                        </el-icon>
+                                    </template>
+                                    备用地址
+                                </el-button>
+                            </div>
                         </div>
                         <el-divider border-style="dashed" />
                         <ul>
-                            <li v-for="item in fantasticTemplateInfo.feature" :key="item">{{ item }}</li>
+                            <li v-for="item in fantasticStartkitInfo.feature" :key="item">{{ item }}</li>
                         </ul>
                     </div>
                 </page-main>
