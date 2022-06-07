@@ -68,12 +68,12 @@
 <table>
     <tr>
         <th colspan="3" align="center">
-            <a href="https://fantastic-template.netlify.app" target="_blank">Fantastic-template</a>
+            <a href="https://hooray.gitee.io/fantastic-startkit/" target="_blank">Fantastic-startkit</a>
         </th>
     </tr>
     <tr>
         <th colspan="3" align="center">
-            一款开箱即用的 Vue 项目模版
+            一款开箱即用的 Vue 项目启动套件
         </th>
     </tr>
 </table>
