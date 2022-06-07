@@ -51,11 +51,11 @@
         </script>
         <script type="module" src="/src/main.js"></script>
         <% if (debugTool == 'eruda') { %>
-            <script src="//cdn.jsdelivr.net/npm/eruda/eruda.min.js"></script>
+            <script src="//unpkg.com/eruda/eruda.js"></script>
             <script>eruda.init();</script>
         <% } %>
         <% if (debugTool == 'vconsole') { %>
-            <script src="//cdn.jsdelivr.net/npm/vconsole/dist/vconsole.min.js"></script>
+            <script src="//unpkg.com/vconsole/dist/vconsole.min.js"></script>
             <script>new VConsole();</script>
         <% } %>
     </body>
