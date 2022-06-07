@@ -1,3 +1,4 @@
+import pinia from '@/store'
 import useSettingsStore from '@/store/modules/settings'
 
 // 固定路由（默认路由）
@@ -98,7 +99,7 @@ let asyncRoutes = [
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 
-if (useSettingsStore(createPinia()).app.routeBaseOn === 'filesystem') {
+if (useSettingsStore(pinia).app.routeBaseOn === 'filesystem') {
     constantRoutes = generatedRoutes.filter(item => {
         return item.meta?.enabled !== false && item.meta?.constant === true
     })
