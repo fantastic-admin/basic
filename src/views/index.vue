@@ -87,7 +87,7 @@ const oneStepAdminInfo = ref({
                             <h1>Fantastic-startkit</h1>
                             <h2>一款开箱即用的 Vue 项目启动套件</h2>
                             <div>
-                                <el-button plain @click="open('https://hooray.gitee.io/fantastic-startkit/')">
+                                <el-button type="primary" plain @click="open('https://hooray.gitee.io/fantastic-startkit/')">
                                     <template #icon>
                                         <el-icon>
                                             <svg-icon name="ep:link" />
