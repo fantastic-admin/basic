@@ -181,6 +181,10 @@ function handleCopy() {
                 <div class="label">网址</div>
                 <el-input v-model="settings.copyright.website" size="small" :disabled="!settings.copyright.enable" />
             </div>
+            <div class="setting-item">
+                <div class="label">备案</div>
+                <el-input v-model="settings.copyright.beian" size="small" :disabled="!settings.copyright.enable" />
+            </div>
             <el-divider>控制台</el-divider>
             <div class="setting-item">
                 <div class="label">
