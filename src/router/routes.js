@@ -22,6 +22,12 @@ let systemRoutes = [
     {
         path: '/dashboard',
         component: () => import('@/layout/index.vue'),
+        meta: {
+            title: () => {
+                return useSettingsStore().dashboard.title
+            },
+            breadcrumb: false
+        },
         children: [
             {
                 path: '',
@@ -40,6 +46,10 @@ let systemRoutes = [
         path: '/personal',
         component: () => import('@/layout/index.vue'),
         redirect: '/personal/setting',
+        meta: {
+            title: '个人中心',
+            breadcrumb: false
+        },
         children: [
             {
                 path: 'setting',
@@ -65,6 +75,10 @@ let systemRoutes = [
     {
         path: '/reload',
         component: () => import('@/layout/index.vue'),
+        meta: {
+            title: '重新加载',
+            breadcrumb: false
+        },
         children: [
             {
                 path: '',
