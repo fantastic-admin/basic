@@ -1,4 +1,4 @@
-import { deepClone, isExternalLink } from '@/util'
+import { deepClone, resolveRoutePath } from '@/util'
 import api from '@/api'
 import { systemRoutes } from '@/router/routes'
 
@@ -57,64 +57,64 @@ function formatBackRoutes(routes, views = import.meta.glob('../../views/**/*.vue
     })
 }
 
-// 将多层嵌套路由处理成平级
-function flatAsyncRoutes(routes, breadcrumb = [], baseUrl = '') {
-    let res = []
-    routes.forEach(route => {
-        if (route.children) {
-            let childrenBaseUrl = ''
-            if (baseUrl == '') {
-                childrenBaseUrl = route.path
-            } else if (route.path != '') {
-                childrenBaseUrl = `${baseUrl}/${route.path}`
-            }
-            let childrenBreadcrumb = deepClone(breadcrumb)
-            if (route.meta.breadcrumb !== false) {
-                childrenBreadcrumb.push({
-                    path: childrenBaseUrl,
-                    title: route.meta.title,
-                    hide: !route.meta.breadcrumb && route.meta.breadcrumb === false
-                })
-            }
-            let tmpRoute = deepClone(route)
-            tmpRoute.path = childrenBaseUrl
-            tmpRoute.meta.breadcrumbNeste = childrenBreadcrumb
-            delete tmpRoute.children
-            res.push(tmpRoute)
-            let childrenRoutes = flatAsyncRoutes(route.children, childrenBreadcrumb, childrenBaseUrl)
-            childrenRoutes.map(item => {
-                // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
-                if (res.some(v => v.path == item.path)) {
-                    res.forEach((v, i) => {
-                        if (v.path == item.path) {
-                            res[i] = item
-                        }
-                    })
-                } else {
-                    res.push(item)
-                }
-            })
-        } else {
-            let tmpRoute = deepClone(route)
-            if (baseUrl != '' && !isExternalLink(tmpRoute.path)) {
-                if (tmpRoute.path != '') {
-                    tmpRoute.path = `${baseUrl}/${tmpRoute.path}`
-                } else {
-                    tmpRoute.path = baseUrl
-                }
-            }
-            // 处理面包屑导航
-            let tmpBreadcrumb = deepClone(breadcrumb)
-            tmpBreadcrumb.push({
-                path: tmpRoute.path,
-                title: tmpRoute.meta.title,
-                hide: !tmpRoute.meta.breadcrumb && tmpRoute.meta.breadcrumb === false
-            })
-            tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
-            res.push(tmpRoute)
+// 将多层嵌套路由处理成两层，保留顶层和最子层路由，中间层级将被拍平
+function flatAsyncRoutes(routes, breadcrumb = [], baseUrl = '', isRoot = true) {
+    if (isRoot) {
+        if (routes.children) {
+            routes.children = flatAsyncRoutes(routes.children, [{
+                path: routes.path,
+                title: routes.meta.title,
+                hide: !routes.meta.breadcrumb && routes.meta.breadcrumb === false
+            }], routes.path, false)
         }
-    })
-    return res
+        return routes
+    } else {
+        let res = []
+        routes.forEach(route => {
+            if (route.children) {
+                let childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
+                let childrenBreadcrumb = deepClone(breadcrumb)
+                if (route.meta.breadcrumb !== false) {
+                    childrenBreadcrumb.push({
+                        path: childrenBaseUrl,
+                        title: route.meta.title,
+                        hide: !route.meta.breadcrumb && route.meta.breadcrumb === false
+                    })
+                }
+                let tmpRoute = deepClone(route)
+                tmpRoute.path = childrenBaseUrl
+                tmpRoute.meta.breadcrumbNeste = childrenBreadcrumb
+                delete tmpRoute.children
+                res.push(tmpRoute)
+                let childrenRoutes = flatAsyncRoutes(route.children, childrenBreadcrumb, childrenBaseUrl, false)
+                childrenRoutes.map(item => {
+                    // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
+                    if (res.some(v => v.path == item.path)) {
+                        res.forEach((v, i) => {
+                            if (v.path == item.path) {
+                                res[i] = item
+                            }
+                        })
+                    } else {
+                        res.push(item)
+                    }
+                })
+            } else {
+                let tmpRoute = deepClone(route)
+                tmpRoute.path = resolveRoutePath(baseUrl, tmpRoute.path)
+                // 处理面包屑导航
+                let tmpBreadcrumb = deepClone(breadcrumb)
+                tmpBreadcrumb.push({
+                    path: tmpRoute.path,
+                    title: tmpRoute.meta.title,
+                    hide: !tmpRoute.meta.breadcrumb && tmpRoute.meta.breadcrumb === false
+                })
+                tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
+                res.push(tmpRoute)
+            }
+        })
+        return res
+    }
 }
 
 const useRouteStore = defineStore(
@@ -136,11 +136,7 @@ const useRouteStore = defineStore(
                         state.routes.map(item => {
                             routes.push(...deepClone(item.children))
                         })
-                        routes.map(item => {
-                            if (item.children) {
-                                item.children = flatAsyncRoutes(item.children, [], item.path)
-                            }
-                        })
+                        routes.map(item => flatAsyncRoutes(item))
                     } else {
                         state.routes.map(item => {
                             routes.push(deepClone(item))
@@ -154,11 +150,7 @@ const useRouteStore = defineStore(
                 systemRoutes.map(item => {
                     routes.push(deepClone(item))
                 })
-                routes.map(item => {
-                    if (item.children) {
-                        item.children = flatAsyncRoutes(item.children, [], item.path)
-                    }
-                })
+                routes.map(item => flatAsyncRoutes(item))
                 return routes
             }
         },
