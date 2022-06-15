@@ -82,8 +82,7 @@ function switchMenu(index) {
                     <div class="main">
                         <router-view v-slot="{ Component, route }">
                             <transition name="main" mode="out-in" appear>
-                                <!-- BUG https://github.com/vuejs/vue-next/issues/4984 -->
-                                <keep-alive :include="[...keepAliveStore.list]">
+                                <keep-alive :include="keepAliveStore.list">
                                     <component :is="Component" :key="route.fullPath" />
                                 </keep-alive>
                             </transition>
