@@ -1,9 +1,9 @@
 name: branches-sync
 
 on:
-  # 每当 push 到 master 分支时触发部署
-  push:
-    branches: [master]
+  # 自动同步，每 6 小时执行一次
+  schedule:
+    - cron: '0 */6 * * *'
   # 手动触发部署
   workflow_dispatch:
 
