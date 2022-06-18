@@ -178,75 +178,73 @@ function handleScroll() {
 </script>
 
 <template>
-    <teleport to="#app">
-        <div id="search" :class="{'searching': isShow}" @click="isShow && $eventBus.emit('global-search-toggle')">
-            <div class="container">
-                <div class="search-box" @click.stop>
-                    <el-input ref="input" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
-                        <template #prefix>
+    <div id="search" :class="{'searching': isShow}" @click="isShow && $eventBus.emit('global-search-toggle')">
+        <div class="container">
+            <div class="search-box" @click.stop>
+                <el-input ref="input" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
+                    <template #prefix>
+                        <el-icon>
+                            <svg-icon name="ep:search" />
+                        </el-icon>
+                    </template>
+                </el-input>
+                <div v-if="settingsStore.mode === 'pc'" class="tips">
+                    <div class="tip">
+                        <span>Alt</span>+<span>S</span>
+                        唤醒搜索面板
+                    </div>
+                    <div class="tip">
+                        <span>
                             <el-icon>
-                                <svg-icon name="ep:search" />
+                                <svg-icon name="search-up" />
                             </el-icon>
-                        </template>
-                    </el-input>
-                    <div v-if="settingsStore.mode === 'pc'" class="tips">
-                        <div class="tip">
-                            <span>Alt</span>+<span>S</span>
-                            唤醒搜索面板
-                        </div>
-                        <div class="tip">
-                            <span>
-                                <el-icon>
-                                    <svg-icon name="search-up" />
-                                </el-icon>
-                            </span>
-                            <span>
-                                <el-icon>
-                                    <svg-icon name="search-down" />
-                                </el-icon>
-                            </span>
-                            切换搜索结果
-                        </div>
-                        <div class="tip">
-                            <span>
-                                <el-icon>
-                                    <svg-icon name="search-enter" />
-                                </el-icon>
-                            </span>
-                            访问页面
-                        </div>
-                        <div class="tip">
-                            <span>ESC</span>
-                            退出
-                        </div>
+                        </span>
+                        <span>
+                            <el-icon>
+                                <svg-icon name="search-down" />
+                            </el-icon>
+                        </span>
+                        切换搜索结果
+                    </div>
+                    <div class="tip">
+                        <span>
+                            <el-icon>
+                                <svg-icon name="search-enter" />
+                            </el-icon>
+                        </span>
+                        访问页面
+                    </div>
+                    <div class="tip">
+                        <span>ESC</span>
+                        退出
                     </div>
                 </div>
-                <div ref="search" class="result" :class="{'mobile': settingsStore.mode === 'mobile'}">
-                    <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
-                        <a :ref="`search-item-${index}`" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
-                            <el-icon class="icon">
-                                <svg-icon v-if="item.icon" :name="item.icon" />
-                            </el-icon>
-                            <div class="info">
-                                <div class="title">
-                                    {{ item.title }}
-                                </div>
-                                <div class="breadcrumb">
-                                    <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
-                                        {{ bc }}
-                                        <el-icon>
-                                            <svg-icon name="ep:arrow-right" />
-                                        </el-icon>
-                                    </span>
-                                </div>
-                                <div class="path">{{ item.path }}</div>
+            </div>
+            <div ref="search" class="result" :class="{'mobile': settingsStore.mode === 'mobile'}">
+                <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
+                    <a :ref="`search-item-${index}`" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
+                        <el-icon class="icon">
+                            <svg-icon v-if="item.icon" :name="item.icon" />
+                        </el-icon>
+                        <div class="info">
+                            <div class="title">
+                                {{ item.title }}
                             </div>
-                        </a>
-                    </router-link>
-                </div>
+                            <div class="breadcrumb">
+                                <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
+                                    {{ bc }}
+                                    <el-icon>
+                                        <svg-icon name="ep:arrow-right" />
+                                    </el-icon>
+                                </span>
+                            </div>
+                            <div class="path">{{ item.path }}</div>
+                        </div>
+                    </a>
+                </router-link>
             </div>
         </div>
-    </teleport>
+    </div>
 </template>
 
 <style lang="scss" scoped>
