@@ -14,8 +14,9 @@ const props = defineProps({
     }
 })
 
-const collaspeData = ref(props.collaspe)
+const titleSlot = !!useSlots().title
 
+const collaspeData = ref(props.collaspe)
 function unCollaspe() {
     collaspeData.value = false
 }
@@ -30,7 +31,10 @@ function unCollaspe() {
             'height': collaspeData ? height : ''
         }"
     >
-        <div v-if="title" class="title-container">{{ title }}</div>
+        <div v-if="titleSlot || title" class="title-container">
+            <slot v-if="titleSlot" name="title" />
+            <template v-else>{{ title }}</template>
+        </div>
         <slot />
         <div v-if="collaspeData" class="collaspe" title="展开" @click="unCollaspe">
             <el-icon>
