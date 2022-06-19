@@ -15,6 +15,15 @@
         <page-main title="你可以设置一个自定义的标题">
             这里放页面内容
         </page-main>
+        <page-main>
+            <template #title>
+                <div style="display: flex; align-item: center; justify-content: space-between;">
+                    通过 slot 设置标题
+                    <el-button size="small">还可以放置自定义按钮</el-button>
+                </div>
+            </template>
+            这里放页面内容
+        </page-main>
         <el-row :gutter="20" style="margin: -10px 10px;">
             <el-col :md="8">
                 <page-main style="margin: 10px 0;">
