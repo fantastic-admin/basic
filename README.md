@@ -81,7 +81,7 @@
 <table>
     <tr>
         <th colspan="3" align="center">
-            <a href="https://one-step-admin.netlify.app" target="_blank">One-step-admin</a>
+            <a href="https://hooray.gitee.io/one-step-admin/" target="_blank">One-step-admin</a>
         </th>
     </tr>
     <tr>
@@ -90,13 +90,13 @@
         </th>
     </tr>
     <tr>
-        <td><img src="https://one-step-admin.netlify.app/preview1.png" /></td>
-        <td><img src="https://one-step-admin.netlify.app/preview2.png" /></td>
-        <td><img src="https://one-step-admin.netlify.app/preview3.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview1.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview2.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview3.png" /></td>
     </tr>
     <tr>
-        <td><img src="https://one-step-admin.netlify.app/preview4.png" /></td>
-        <td><img src="https://one-step-admin.netlify.app/preview5.png" /></td>
-        <td><img src="https://one-step-admin.netlify.app/preview6.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview4.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview5.png" /></td>
+        <td><img src="https://hooray.gitee.io/one-step-admin/preview6.png" /></td>
     </tr>
 </table>
