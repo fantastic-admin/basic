@@ -3,24 +3,24 @@ import tinymce from 'tinymce/tinymce'
 import TinymceEditor from '@tinymce/tinymce-vue'
 import 'tinymce/themes/silver/theme'
 import 'tinymce/icons/default/icons'
+import 'tinymce/models/dom'
 import 'tinymce/plugins/autolink'
 import 'tinymce/plugins/autoresize'
-import 'tinymce/plugins/colorpicker'
-import 'tinymce/plugins/contextmenu'
 import 'tinymce/plugins/fullscreen'
-import 'tinymce/plugins/hr'
 import 'tinymce/plugins/image'
-import 'tinymce/plugins/imagetools'
 import 'tinymce/plugins/insertdatetime'
 import 'tinymce/plugins/link'
 import 'tinymce/plugins/lists'
 import 'tinymce/plugins/media'
 import 'tinymce/plugins/preview'
 import 'tinymce/plugins/table'
-import 'tinymce/plugins/textcolor'
 import 'tinymce/plugins/wordcount'
 import 'tinymce/plugins/code'
 import 'tinymce/plugins/searchreplace'
+
+import useSettingsStore from '@/store/modules/settings'
+
+const settingsStore = useSettingsStore()
 
 const props = defineProps({
     modelValue: {
@@ -40,15 +40,15 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const defaultSetting = ref({
-    language_url: 'tinymce/langs/zh_CN.js',
-    language: 'zh_CN',
-    skin_url: 'tinymce/skins/ui/oxide',
-    content_css: 'tinymce/skins/content/default/content.min.css',
+    language_url: 'tinymce/langs/zh-Hans.js',
+    language: 'zh-Hans',
+    skin_url: settingsStore.app.colorScheme === 'light' ? 'tinymce/skins/ui/oxide' : 'tinymce/skins/ui/oxide-dark',
+    content_css: settingsStore.app.colorScheme === 'light' ? 'tinymce/skins/content/default/content.min.css' : 'tinymce/skins/content/dark/content.min.css',
     min_height: 250,
     max_height: 600,
     selector: 'textarea',
-    plugins: 'autolink autoresize contextmenu fullscreen hr image imagetools insertdatetime link lists media preview table textcolor wordcount code searchreplace',
-    toolbar: 'undo redo | formatselect | bold italic strikethrough forecolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | hr link image media table insertdatetime searchreplace removeformat | preview code fullscreen',
+    plugins: 'autolink autoresize fullscreen image insertdatetime link lists media preview table wordcount code searchreplace',
+    toolbar: 'undo redo | blocks | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | forecolor backcolor removeformat | link image media table insertdatetime searchreplace | preview code fullscreen',
     branding: false,
     menubar: false,
     toolbar_mode: 'sliding',
@@ -91,7 +91,6 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 :deep(.tox-tinymce) {
-    border: 1px solid #dcdfe6;
     border-radius: 4px;
 }
 </style>
