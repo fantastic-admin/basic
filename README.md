@@ -1,5 +1,5 @@
 <p align="center">
-    <img src="https://fantastic-admin.netlify.app/logo.png" width="200" height="200" />
+    <img src="https://hooray.gitee.io/fantastic-admin/logo.png" width="200" height="200" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>
@@ -7,16 +7,16 @@
 <p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架</p>
 
 <p align="center">
-    <a href="https://fantastic-admin.netlify.app" target="_blank">官网</a>
-    ( <a href="https://gitee.com/hooray/fantastic-admin/tree/docs" target="_blank">备用</a> )
+    <a href="https://hooray.gitee.io/fantastic-admin/" target="_blank">官网</a>
+    ( <a href="https://hooray.github.io/fantastic-admin" target="_blank">备用</a> )
     <span>&nbsp;|&nbsp;</span>
     演示
-    ( <a href="https://fantastic-admin.netlify.app/vue3/basic" target="_blank">基础版</a>
-    <a href="https://fantastic-admin.netlify.app/vue3/pro" target="_blank">专业版</a> )
+    ( <a href="https://hooray.gitee.io/fantastic-admin/vue3/basic" target="_blank">基础版</a>
+    <a href="https://hooray.gitee.io/fantastic-admin/vue3/pro" target="_blank">专业版</a> )
     <span>&nbsp;|&nbsp;</span>
-    <a href="https://fantastic-admin.netlify.app/support.html" target="_blank">技术支持</a>
+    <a href="https://hooray.gitee.io/fantastic-admin/support.html" target="_blank">技术支持</a>
     <span>&nbsp;|&nbsp;</span>
-    <a href="https://fantastic-admin.netlify.app/buy.html" target="_blank">购买</a>
+    <a href="https://hooray.gitee.io/fantastic-admin/buy.html" target="_blank">购买</a>
 <p>
 
 ## 特点
@@ -44,14 +44,14 @@
 
 <table>
     <tr>
-        <td><img src="https://fantastic-admin.netlify.app/preview1.png" /></td>
-        <td><img src="https://fantastic-admin.netlify.app/preview2.png" /></td>
-        <td><img src="https://fantastic-admin.netlify.app/preview3.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview1.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview2.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview3.png" /></td>
     </tr>
     <tr>
-        <td><img src="https://fantastic-admin.netlify.app/preview4.png" /></td>
-        <td><img src="https://fantastic-admin.netlify.app/preview5.png" /></td>
-        <td><img src="https://fantastic-admin.netlify.app/preview6.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview4.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview5.png" /></td>
+        <td><img src="https://hooray.gitee.io/fantastic-admin/preview6.png" /></td>
     </tr>
 </table>
 
