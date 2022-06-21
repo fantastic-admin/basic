@@ -3,7 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@iconify-json/ep': ^1.1.5
   '@iconify/vue': ^3.2.1
-  '@tinymce/tinymce-vue': ^4.0.7
+  '@tinymce/tinymce-vue': ^5.0.0
   '@vitejs/plugin-vue': ^2.3.3
   '@vitejs/plugin-vue-jsx': ^1.3.10
   '@vue/compiler-sfc': ^3.2.37
@@ -39,7 +39,7 @@ specifiers:
   stylelint-config-standard: ^26.0.0
   stylelint-scss: ^4.2.0
   svgo: ^2.8.0
-  tinymce: ^5.10.5
+  tinymce: ^6.0.3
   unplugin-auto-import: ^0.8.8
   unplugin-vue-components: ^0.19.6
   vite: ^2.9.12
@@ -58,7 +58,7 @@ specifiers:
   vue-router: ^4.0.16
 
 dependencies:
-  '@tinymce/tinymce-vue': 4.0.7_vue@3.2.37
+  '@tinymce/tinymce-vue': 5.0.0_vue@3.2.37
   '@vueuse/core': 8.7.4_vue@3.2.37
   '@vueuse/integrations': 8.7.4_khosuxbgrc57nlgxhejqutw6o4
   axios: 0.27.2
@@ -74,7 +74,7 @@ dependencies:
   path-to-regexp: 6.2.1
   pinia: 2.0.14_vue@3.2.37
   qs: 6.10.5
-  tinymce: 5.10.5
+  tinymce: 6.0.3
   vue: 3.2.37
   vue-router: 4.0.16_vue@3.2.37
 
@@ -707,12 +707,12 @@ packages:
     resolution: {integrity: sha512-Ccy0NlLkzr0Ex2FKvh2X+OyERHXJ88XJ1MXtsI9y9fGexlaXaVTPzBCRBwIxFkORuOb+uBqeu+RqnpgYTEZRUQ==}
     dev: false
 
-  /@tinymce/tinymce-vue/4.0.7_vue@3.2.37:
-    resolution: {integrity: sha512-1esB8wGWrjPCY+rK8vy3QB1cxwXo7HLJWuNrcyPl6LOVR+QJjub0OiV/C+TUEsLN6OpCtRv+QnIqMC5vXz783Q==}
+  /@tinymce/tinymce-vue/5.0.0_vue@3.2.37:
+    resolution: {integrity: sha512-1HRCNa2eGdztOKShYAiHIry50LTU6YJG//qSP9AJElrXhb3BIBN0Bef6E56nZObVgwCgSmI4cnX35VU9D49aow==}
     peerDependencies:
       vue: ^3.0.0
     dependencies:
-      tinymce: 5.10.5
+      tinymce: 6.0.3
       vue: 3.2.37
     dev: false
 
@@ -6357,8 +6357,8 @@ packages:
       xtend: 4.0.2
     dev: true
 
-  /tinymce/5.10.5:
-    resolution: {integrity: sha512-nFKtLhmoRtExBxUfv06JlkbQWux5D+d115vxSRAqUmccZdrtpFvOIYwZmikvulLdM9pfEpvO0B+RQ2qFV/+R7w==}
+  /tinymce/6.0.3:
+    resolution: {integrity: sha512-4cu80kWF7nRGhviE10poZtjTkl3jNL+lycilCMfdm3KU5V7FtiQQrKbEo6GInXT05RY78Ha/NFP0gOBELcSpfg==}
     dev: false
 
   /title-case/3.0.3:

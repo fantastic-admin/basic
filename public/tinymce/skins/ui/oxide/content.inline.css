@@ -1,11 +1,7 @@
-/**
- * Copyright (c) Tiny Technologies, Inc. All rights reserved.
- * Licensed under the LGPL or a commercial license.
- * For LGPL see License.txt in the project root for license information.
- * For commercial licenses see https://www.tiny.cloud/
- */
 .mce-content-body .mce-item-anchor {
   background: transparent url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D'8'%20height%3D'12'%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%3E%3Cpath%20d%3D'M0%200L8%200%208%2012%204.09117821%209%200%2012z'%2F%3E%3C%2Fsvg%3E%0A") no-repeat center;
+}
+.mce-content-body .mce-item-anchor:empty {
   cursor: default;
   display: inline-block;
   height: 12px !important;
@@ -14,9 +10,13 @@
   -moz-user-modify: read-only;
   -webkit-user-select: all;
   -moz-user-select: all;
-  -ms-user-select: all;
-      user-select: all;
+  user-select: all;
   width: 8px !important;
+}
+.mce-content-body .mce-item-anchor:not(:empty) {
+  background-position-x: 2px;
+  display: inline-block;
+  padding-left: 12px;
 }
 .mce-content-body .mce-item-anchor[data-mce-selected] {
   outline-offset: 1px;
@@ -24,7 +24,7 @@
 .tox-comments-visible .tox-comment {
   background-color: #fff0b7;
 }
-.tox-comments-visible .tox-comment--active {
+.tox-comments-visible .tox-comment[data-mce-annotation-active="true"]:not([data-mce-selected="inline-boundary"]) {
   background-color: #ffe168;
 }
 .tox-checklist > li:not(.tox-checklist--hidden) {
@@ -70,7 +70,6 @@ pre[class*="language-"] {
   -moz-tab-size: 4;
   tab-size: 4;
   -webkit-hyphens: none;
-  -ms-hyphens: none;
   hyphens: none;
 }
 pre[class*="language-"]::-moz-selection,
@@ -118,7 +117,7 @@ pre[class*="language-"] {
 .token.punctuation {
   color: #999;
 }
-.namespace {
+.token.namespace {
   opacity: 0.7;
 }
 .token.property,
@@ -144,6 +143,7 @@ pre[class*="language-"] {
 .language-css .token.string,
 .style .token.string {
   color: #9a6e3a;
+  /* This background color was intended by the author of this theme. */
   background: hsla(0, 0%, 100%, 0.5);
 }
 .token.atrule,
@@ -323,7 +323,7 @@ pre[class*="language-"] {
   height: 10px;
   position: absolute;
   width: 10px;
-  z-index: 10000;
+  z-index: 1298;
 }
 .mce-content-body div.mce-resizehandle:hover {
   background-color: #4099ff;
@@ -505,7 +505,6 @@ pre[class*="language-"] {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
      -moz-user-select: none;
-      -ms-user-select: none;
           user-select: none;
 }
 .mce-content-body td[data-mce-selected]::after,
@@ -537,7 +536,6 @@ pre[class*="language-"] {
   opacity: 0;
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
 }
 .ephox-snooker-resizer-cols {
