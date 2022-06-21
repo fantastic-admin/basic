@@ -4,9 +4,6 @@ setTimeout(() => {
     isActived.value = false
 }, 5000)
 
-import useSettingsStore from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
-
 onMounted(() => {
     ElNotification({
         type: 'success',
@@ -19,15 +16,6 @@ onMounted(() => {
         position: 'bottom-right',
         duration: 5000
     })
-    if (settingsStore.app.colorScheme !== 'dark') {
-        ElMessageBox.confirm('<p>Fantastic-admin 已正式推出<b>暗黑模式</b>，是否马上体验？</p>', '温馨提醒', {
-            dangerouslyUseHTMLString: true,
-            confirmButtonText: '切换到暗黑模式',
-            cancelButtonText: '先不用'
-        }).then(() => {
-            useSettingsStore().setColorScheme('dark')
-        })
-    }
 })
 
 function open(url) {
