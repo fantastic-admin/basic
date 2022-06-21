@@ -6,3 +6,4 @@ dist-ssr
 .eslintrc-auto-import.json
 public/icons
 src/assets/sprites/*.*
+!src/assets/sprites/.gitkeep
