@@ -28,12 +28,12 @@ const fantasticAdminInfo = ref({
     imageVisible: false,
     index: 0,
     data: [
-        'https://fantastic-admin.netlify.app/preview1.png',
-        'https://fantastic-admin.netlify.app/preview2.png',
-        'https://fantastic-admin.netlify.app/preview3.png',
-        'https://fantastic-admin.netlify.app/preview4.png',
-        'https://fantastic-admin.netlify.app/preview5.png',
-        'https://fantastic-admin.netlify.app/preview6.png'
+        'https://hooray.gitee.io/fantastic-admin/preview1.png',
+        'https://hooray.gitee.io/fantastic-admin/preview2.png',
+        'https://hooray.gitee.io/fantastic-admin/preview3.png',
+        'https://hooray.gitee.io/fantastic-admin/preview4.png',
+        'https://hooray.gitee.io/fantastic-admin/preview5.png',
+        'https://hooray.gitee.io/fantastic-admin/preview6.png'
     ]
 })
 
@@ -41,12 +41,12 @@ const oneStepAdminInfo = ref({
     imageVisible: false,
     index: 0,
     data: [
-        'https://one-step-admin.netlify.app/preview1.png',
-        'https://one-step-admin.netlify.app/preview2.png',
-        'https://one-step-admin.netlify.app/preview3.png',
-        'https://one-step-admin.netlify.app/preview4.png',
-        'https://one-step-admin.netlify.app/preview5.png',
-        'https://one-step-admin.netlify.app/preview6.png'
+        'https://hooray.gitee.io/one-step-admin/preview1.png',
+        'https://hooray.gitee.io/one-step-admin/preview2.png',
+        'https://hooray.gitee.io/one-step-admin/preview3.png',
+        'https://hooray.gitee.io/one-step-admin/preview4.png',
+        'https://hooray.gitee.io/one-step-admin/preview5.png',
+        'https://hooray.gitee.io/one-step-admin/preview6.png'
     ]
 })
 </script>
@@ -61,7 +61,7 @@ const oneStepAdminInfo = ref({
                 </div>
             </template>
             <el-button-group style="margin-right: 10px;">
-                <el-button type="success" size="large" plain @click="open('https://fantastic-admin.netlify.app')">开发文档</el-button>
+                <el-button type="success" size="large" plain @click="open('https://hooray.gitee.io/fantastic-admin/')">开发文档</el-button>
                 <el-dropdown>
                     <el-button type="primary" size="large">
                         代码仓库
