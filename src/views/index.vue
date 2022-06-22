@@ -159,7 +159,7 @@ const oneStepAdminInfo = ref({
                                 <el-button type="primary" plain @click="open('https://hooray.gitee.io/one-step-admin/')">
                                     <template #icon>
                                         <el-icon>
-                                            <svg-icon name="i-ep:link" />
+                                            <svg-icon name="ep:link" />
                                         </el-icon>
                                     </template>
                                     访问官网
@@ -167,7 +167,7 @@ const oneStepAdminInfo = ref({
                                 <el-button plain @click="open('https://hooray.github.io/one-step-admin/')">
                                     <template #icon>
                                         <el-icon>
-                                            <svg-icon name="i-ep:link" />
+                                            <svg-icon name="ep:link" />
                                         </el-icon>
                                     </template>
                                     备用地址
