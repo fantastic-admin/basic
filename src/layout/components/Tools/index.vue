@@ -32,7 +32,7 @@ function userCommand(command) {
     }
 }
 function pro() {
-    window.open('https://fantastic-admin.netlify.app/vue3/pro', 'top')
+    window.open('https://hooray.gitee.io/fantastic-admin-pro-example/', 'top')
 }
 </script>
 

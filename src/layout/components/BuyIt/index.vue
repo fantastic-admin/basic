@@ -11,7 +11,7 @@ onMounted(() => {
         dangerouslyUseHTMLString: true,
         message: `
             <p>当前访问的是<b>基础版</b> (Vue3)</p>
-            <p>你可以点<a href="https://fantastic-admin.netlify.app/vue3/pro/" target="_blank"><b>这里</b></a>访问专业版 (Vue3)</p>
+            <p>你可以点<a href="https://hooray.gitee.io/fantastic-admin-pro-example/" target="_blank"><b>这里</b></a>访问专业版 (Vue3)</p>
         `,
         position: 'bottom-right',
         duration: 5000
@@ -25,7 +25,7 @@ function open(url) {
 
 <template>
     <div class="buy-it" :class="{'actived': isActived}">
-        <div class="item" @click="open(`https://fantastic-admin.netlify.app/buy.html`)">
+        <div class="item" @click="open(`https://hooray.gitee.io/fantastic-admin/buy.html`)">
             <el-icon>
                 <svg-icon name="fixed-right-buy" />
             </el-icon>
@@ -37,13 +37,13 @@ function open(url) {
             </el-icon>
             <span class="title">下载<br>基础版</span>
         </div>
-        <div class="item" @click="open(`https://fantastic-admin.netlify.app/`)">
+        <div class="item" @click="open(`https://hooray.gitee.io/fantastic-admin/`)">
             <el-icon>
                 <svg-icon name="fixed-right-doc" />
             </el-icon>
             <span class="title">开发<br>文档</span>
         </div>
-        <div class="item" @click="open(`https://fantastic-admin.netlify.app/support.html`)">
+        <div class="item" @click="open(`https://hooray.gitee.io/fantastic-admin/support.html`)">
             <el-icon>
                 <svg-icon name="fixed-right-chat" />
             </el-icon>
