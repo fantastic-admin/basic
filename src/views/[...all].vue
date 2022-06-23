@@ -3,6 +3,7 @@
     name: 'notFound',
     meta: {
         title: "找不到页面",
+        constant: true,
         layout: false
     }
 }

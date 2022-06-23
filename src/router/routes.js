@@ -14,6 +14,14 @@ let constantRoutes = [
         meta: {
             title: '登录'
         }
+    },
+    {
+        path: '/:all(.*)*',
+        name: 'notFound',
+        component: () => import('@/views/[...all].vue'),
+        meta: {
+            title: '找不到页面'
+        }
     }
 ]
 
@@ -166,19 +174,8 @@ if (useSettingsStore(pinia).app.routeBaseOn === 'filesystem') {
     }))
 }
 
-// 404路由
-const notFoundRoute = {
-    path: '/:all(.*)*',
-    name: 'notFound',
-    component: () => import('@/views/[...all].vue'),
-    meta: {
-        title: '找不到页面'
-    }
-}
-
 export {
     constantRoutes,
     systemRoutes,
-    asyncRoutes,
-    notFoundRoute
+    asyncRoutes
 }
