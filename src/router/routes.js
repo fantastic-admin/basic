@@ -110,9 +110,7 @@ import PermissionExample from './modules/permission.example'
 import MockExample from './modules/mock.example'
 import JsxExample from './modules/jsx.example'
 import ExternalLinkExample from './modules/external.link.example'
-// import VideosExample from './modules/videos.example'
 import EcologyExample from './modules/ecology.example'
-import CooperationExample from './modules/cooperation.example'
 
 // 动态路由（异步路由、导航栏路由）
 let asyncRoutes = [
@@ -133,15 +131,6 @@ let asyncRoutes = [
             ExternalLinkExample
         ]
     },
-    // {
-    //     meta: {
-    //         title: '教程',
-    //         icon: 'sidebar-videos'
-    //     },
-    //     children: [
-    //         ...VideosExample
-    //     ]
-    // },
     {
         meta: {
             title: '生态',
@@ -149,15 +138,6 @@ let asyncRoutes = [
         },
         children: [
             ...EcologyExample
-        ]
-    },
-    {
-        meta: {
-            title: '战略合作',
-            icon: 'sidebar-cooperation'
-        },
-        children: [
-            ...CooperationExample
         ]
     }
 ]
