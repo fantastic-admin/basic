@@ -1,9 +1,6 @@
 <route>
 {
-    meta: {
-        constant: true,
-        layout: false
-    }
+    name: 'reload'
 }
 </route>
 
