@@ -1,4 +1,4 @@
-name: branches-sync
+name: repo-sync
 
 on:
   # 自动同步，每 6 小时执行一次
