@@ -58,63 +58,61 @@ function formatBackRoutes(routes, views = import.meta.glob('../../views/**/*.vue
 }
 
 // 将多层嵌套路由处理成两层，保留顶层和最子层路由，中间层级将被拍平
-function flatAsyncRoutes(routes, breadcrumb = [], baseUrl = '', isRoot = true) {
-    if (isRoot) {
-        if (routes.children) {
-            routes.children = flatAsyncRoutes(routes.children, [{
-                path: routes.path,
-                title: routes.meta.title,
-                hide: !routes.meta.breadcrumb && routes.meta.breadcrumb === false
-            }], routes.path, false)
-        }
-        return routes
-    } else {
-        let res = []
-        routes.forEach(route => {
-            if (route.children) {
-                let childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
-                let childrenBreadcrumb = deepClone(breadcrumb)
-                if (route.meta.breadcrumb !== false) {
-                    childrenBreadcrumb.push({
-                        path: childrenBaseUrl,
-                        title: route.meta.title,
-                        hide: !route.meta.breadcrumb && route.meta.breadcrumb === false
-                    })
-                }
-                let tmpRoute = deepClone(route)
-                tmpRoute.path = childrenBaseUrl
-                tmpRoute.meta.breadcrumbNeste = childrenBreadcrumb
-                delete tmpRoute.children
-                res.push(tmpRoute)
-                let childrenRoutes = flatAsyncRoutes(route.children, childrenBreadcrumb, childrenBaseUrl, false)
-                childrenRoutes.map(item => {
-                    // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
-                    if (res.some(v => v.path == item.path)) {
-                        res.forEach((v, i) => {
-                            if (v.path == item.path) {
-                                res[i] = item
-                            }
-                        })
-                    } else {
-                        res.push(item)
-                    }
-                })
-            } else {
-                let tmpRoute = deepClone(route)
-                tmpRoute.path = resolveRoutePath(baseUrl, tmpRoute.path)
-                // 处理面包屑导航
-                let tmpBreadcrumb = deepClone(breadcrumb)
-                tmpBreadcrumb.push({
-                    path: tmpRoute.path,
-                    title: tmpRoute.meta.title,
-                    hide: !tmpRoute.meta.breadcrumb && tmpRoute.meta.breadcrumb === false
-                })
-                tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
-                res.push(tmpRoute)
-            }
-        })
-        return res
+function flatAsyncRoutes(routes) {
+    if (routes.children) {
+        routes.children = flatAsyncRoutesRecursive(routes.children, [{
+            path: routes.path,
+            title: routes.meta.title,
+            hide: !routes.meta.breadcrumb && routes.meta.breadcrumb === false
+        }], routes.path)
     }
+    return routes
+}
+function flatAsyncRoutesRecursive(routes, breadcrumb, baseUrl) {
+    let res = []
+    routes.forEach(route => {
+        if (route.children) {
+            let childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
+            if (route.meta.breadcrumb !== false) {
+                breadcrumb.push({
+                    path: childrenBaseUrl,
+                    title: route.meta.title,
+                    hide: !route.meta.breadcrumb && route.meta.breadcrumb === false
+                })
+            }
+            let tmpRoute = deepClone(route)
+            tmpRoute.path = childrenBaseUrl
+            tmpRoute.meta.breadcrumbNeste = deepClone(breadcrumb)
+            delete tmpRoute.children
+            res.push(tmpRoute)
+            let childrenRoutes = flatAsyncRoutesRecursive(route.children, breadcrumb, childrenBaseUrl)
+            childrenRoutes.map(item => {
+                // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
+                if (res.some(v => v.path == item.path)) {
+                    res.forEach((v, i) => {
+                        if (v.path == item.path) {
+                            res[i] = item
+                        }
+                    })
+                } else {
+                    res.push(item)
+                }
+            })
+        } else {
+            let tmpRoute = deepClone(route)
+            tmpRoute.path = resolveRoutePath(baseUrl, tmpRoute.path)
+            // 处理面包屑导航
+            let tmpBreadcrumb = deepClone(breadcrumb)
+            tmpBreadcrumb.push({
+                path: tmpRoute.path,
+                title: tmpRoute.meta.title,
+                hide: !tmpRoute.meta.breadcrumb && tmpRoute.meta.breadcrumb === false
+            })
+            tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
+            res.push(tmpRoute)
+        }
+    })
+    return res
 }
 
 const useRouteStore = defineStore(
@@ -138,18 +136,13 @@ const useRouteStore = defineStore(
                         })
                         routes.map(item => flatAsyncRoutes(item))
                     } else {
-                        state.routes.map(item => {
-                            routes.push(deepClone(item))
-                        })
+                        routes.push(...deepClone(state.routes))
                     }
                 }
                 return routes
             },
             flatSystemRoutes: () => {
-                let routes = []
-                systemRoutes.map(item => {
-                    routes.push(deepClone(item))
-                })
+                let routes = [...systemRoutes]
                 routes.map(item => flatAsyncRoutes(item))
                 return routes
             }
