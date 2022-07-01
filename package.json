@@ -21,7 +21,7 @@
         "@vueuse/integrations": "^8.7.5",
         "axios": "^0.27.2",
         "dayjs": "^1.11.3",
-        "element-plus": "^2.2.6",
+        "element-plus": "^2.2.7",
         "hotkeys-js": "^3.9.4",
         "js-cookie": "^3.0.1",
         "mitt": "^3.0.0",
