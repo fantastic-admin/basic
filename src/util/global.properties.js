@@ -1,5 +1,5 @@
 import api from '@/api'
-import { auth, authAll } from '@/util'
+import { useAuth } from '@/util/composables'
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import Cookies from 'js-cookie'
@@ -10,6 +10,7 @@ export default function globalProperties(app) {
     // 请求
     app.config.globalProperties.$api = api
     // 鉴权
+    const { auth, authAll } = useAuth()
     app.config.globalProperties.$auth = auth
     app.config.globalProperties.$authAll = authAll
     dayjs.locale('zh-cn')

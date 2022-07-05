@@ -1,5 +1,5 @@
 <script setup name="Auth">
-import { auth } from '@/util'
+import { useAuth } from '@/util/composables'
 
 const props = defineProps({
     value: {
@@ -9,7 +9,7 @@ const props = defineProps({
 })
 
 function check() {
-    return auth(props.value)
+    return useAuth().auth(props.value)
 }
 </script>
 
