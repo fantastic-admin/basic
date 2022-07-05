@@ -1,6 +1,4 @@
 import path from 'path-browserify'
-import useSettingsStore from '@/store/modules/settings'
-import useUserStore from '@/store/modules/user'
 
 export function deepClone(target) {
     // 定义一个变量
@@ -33,37 +31,6 @@ export function deepClone(target) {
     }
     // 返回最终结果
     return result
-}
-
-function hasPermission(permission) {
-    const settingsStore = useSettingsStore()
-    const userStore = useUserStore()
-    if (settingsStore.app.enablePermission) {
-        return userStore.permissions.some(v => {
-            return v === permission
-        })
-    } else {
-        return true
-    }
-}
-
-export function auth(value) {
-    let auth
-    if (typeof value === 'string') {
-        auth = hasPermission(value)
-    } else {
-        auth = value.some(item => {
-            return hasPermission(item)
-        })
-    }
-    return auth
-}
-
-export function authAll(value) {
-    const auth = value.every(item => {
-        return hasPermission(item)
-    })
-    return auth
 }
 
 export function isExternalLink(path) {
