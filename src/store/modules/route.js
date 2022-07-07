@@ -73,8 +73,9 @@ function flatAsyncRoutesRecursive(routes, breadcrumb, baseUrl) {
     routes.forEach(route => {
         if (route.children) {
             let childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
+            let tmpBreadcrumb = deepClone(breadcrumb)
             if (route.meta.breadcrumb !== false) {
-                breadcrumb.push({
+                tmpBreadcrumb.push({
                     path: childrenBaseUrl,
                     title: route.meta.title,
                     hide: !route.meta.breadcrumb && route.meta.breadcrumb === false
@@ -82,10 +83,10 @@ function flatAsyncRoutesRecursive(routes, breadcrumb, baseUrl) {
             }
             let tmpRoute = deepClone(route)
             tmpRoute.path = childrenBaseUrl
-            tmpRoute.meta.breadcrumbNeste = deepClone(breadcrumb)
+            tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
             delete tmpRoute.children
             res.push(tmpRoute)
-            let childrenRoutes = flatAsyncRoutesRecursive(route.children, breadcrumb, childrenBaseUrl)
+            let childrenRoutes = flatAsyncRoutesRecursive(route.children, tmpBreadcrumb, childrenBaseUrl)
             childrenRoutes.map(item => {
                 // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
                 if (res.some(v => v.path == item.path)) {
