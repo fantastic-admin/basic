@@ -48,6 +48,9 @@ onMounted(() => {
         }
     })
 })
+onUnmounted(() => {
+    proxy.$hotkeys.unbind('f5')
+})
 provide('reload', reload)
 function reload() {
     router.push({
