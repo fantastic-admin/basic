@@ -357,7 +357,7 @@ function testAccount(account) {
     display: none;
 }
 .bg-banner {
-    position: absolute;
+    position: fixed;
     z-index: 0;
     width: 100%;
     height: 100%;
@@ -378,9 +378,9 @@ function testAccount(account) {
         position: relative;
         width: 450px;
         background-color: var(--el-fill-color-light);
+        overflow: hidden;
         .banner {
-            width: calc(100% + 100px);
-            right: -50px;
+            width: 100%;
             @include position-center(y);
         }
         .logo {
