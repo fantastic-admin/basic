@@ -63,6 +63,7 @@ function onSuccess(res, file) {
 
 <template>
     <el-upload
+        :headers="headers"
         :action="action"
         :data="data"
         :name="name"
