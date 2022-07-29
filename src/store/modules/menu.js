@@ -1,4 +1,4 @@
-import { deepClone, resolveRoutePath } from '@/util'
+import { deepClone, resolveRoutePath } from '@/utils'
 import path from 'path-browserify'
 import api from '@/api'
 import menu from '@/menu'

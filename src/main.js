@@ -11,7 +11,7 @@ app.use(router)
 /* importElementPlusPlaceholder */
 
 // 自定义指令
-import directive from '@/util/directive'
+import directive from '@/utils/directive'
 directive(app)
 
 // 加载 svg 图标

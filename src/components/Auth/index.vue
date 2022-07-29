@@ -1,5 +1,5 @@
 <script setup name="Auth">
-import { useAuth } from '@/util/composables'
+import { useAuth } from '@/utils/composables'
 
 const props = defineProps({
     value: {

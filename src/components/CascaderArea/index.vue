@@ -1,5 +1,5 @@
 <script setup name="CascaderArea">
-import area from '@/util/area'
+import area from '@/utils/area'
 
 const props = defineProps({
     // 传入数据为中文数组，例如：['河北省', '唐山市', '市辖区']

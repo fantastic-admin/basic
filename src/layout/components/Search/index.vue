@@ -1,7 +1,7 @@
 <script setup name="Search">
 import hotkeys from 'hotkeys-js'
-import { deepClone, isExternalLink } from '@/util'
-import eventBus from '@/util/eventBus'
+import { deepClone, isExternalLink } from '@/utils'
+import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useRouteStore from '@/store/modules/route'
 import useMenuStore from '@/store/modules/menu'

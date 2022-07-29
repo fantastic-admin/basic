@@ -3,7 +3,7 @@ import Logo from '../Logo/index.vue'
 import Tools from '../Tools/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
-import { useMenu } from '@/util/composables'
+import { useMenu } from '@/utils/composables'
 
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()

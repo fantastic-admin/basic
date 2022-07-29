@@ -1,7 +1,7 @@
 import router from '@/router'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
-import { isExternalLink } from '@/util'
+import { isExternalLink } from '@/utils'
 
 export default function useMenu() {
     const settingsStore = useSettingsStore()
