@@ -1,9 +1,10 @@
 <script setup name="Tools">
 import { useFullscreen } from '@vueuse/core'
+import eventBus from '@/util/eventBus'
+import { useMainPage } from '@/util/composables'
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 
-const reload = inject('reload')
 const router = useRouter()
 
 const settingsStore = useSettingsStore()
@@ -46,7 +47,7 @@ function pro() {
                 </el-icon>
                 <span class="title">查看专业版</span>
             </span>
-            <span v-if="settingsStore.topbar.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
+            <span v-if="settingsStore.topbar.enableNavSearch" class="item" @click="eventBus.emit('global-search-toggle')">
                 <el-icon>
                     <svg-icon name="ep:search" />
                 </el-icon>
@@ -56,7 +57,7 @@ function pro() {
                     <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
                 </el-icon>
             </span>
-            <span v-if="settingsStore.topbar.enablePageReload" class="item" @click="reload()">
+            <span v-if="settingsStore.topbar.enablePageReload" class="item" @click="useMainPage().reload()">
                 <el-icon>
                     <svg-icon name="ep:refresh-right" />
                 </el-icon>
@@ -67,7 +68,7 @@ function pro() {
                     <svg-icon v-show="settingsStore.app.colorScheme === 'dark'" name="ep:moon" />
                 </el-icon>
             </span>
-            <span v-if="settingsStore.topbar.enableAppSetting" class="item" @click="$eventBus.emit('global-theme-toggle')">
+            <span v-if="settingsStore.topbar.enableAppSetting" class="item" @click="eventBus.emit('global-theme-toggle')">
                 <el-icon>
                     <svg-icon name="ep:setting" />
                 </el-icon>

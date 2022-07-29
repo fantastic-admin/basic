@@ -9,11 +9,11 @@
 <script setup>
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
-
-const { proxy } = getCurrentInstance()
+import { useAuth } from '@/util/composables'
 
 const settingsStore = useSettingsStore()
 const userStore = useUserStore()
+const { auth, authAll } = useAuth()
 
 function accountChange(val) {
     ElLoading.service({
@@ -31,14 +31,14 @@ function accountChange(val) {
     })
 }
 function permissionCheck(permissions) {
-    if (proxy.$auth(permissions)) {
+    if (auth(permissions)) {
         ElMessage.success('校验通过')
     } else {
         ElMessage.error('校验不通过')
     }
 }
 function permissionCheck2(permissions) {
-    if (proxy.$authAll(permissions)) {
+    if (authAll(permissions)) {
         ElMessage.success('校验通过')
     } else {
         ElMessage.error('校验不通过')

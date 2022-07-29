@@ -10,6 +10,7 @@
 <script setup name="PersonalSetting">
 const router = useRouter()
 
+const formRef = ref()
 const form = ref({
     headimg: '',
     mobile: '',
