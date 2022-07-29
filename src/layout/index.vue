@@ -9,7 +9,7 @@ import AppSetting from './components/AppSetting/index.vue'
 import BuyIt from './components/BuyIt/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useKeepAliveStore from '@/store/modules/keepAlive'
-import { useMainPage } from '@/util/composables'
+import { useMainPage } from '@/utils/composables'
 
 const routeInfo = useRoute()
 

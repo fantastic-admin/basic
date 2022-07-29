@@ -1,4 +1,4 @@
-import { useAuth } from '@/util/composables'
+import { useAuth } from '@/utils/composables'
 
 export default function directive(app) {
     // 注册 v-auth 和 v-auth-all 指令

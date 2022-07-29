@@ -1,6 +1,6 @@
 <script setup name="AppSetting">
 import { useClipboard } from '@vueuse/core'
-import eventBus from '@/util/eventBus'
+import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
 import globalSettings from '@/settings'

@@ -9,7 +9,7 @@
 <script setup>
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
-import { useAuth } from '@/util/composables'
+import { useAuth } from '@/utils/composables'
 
 const settingsStore = useSettingsStore()
 const userStore = useUserStore()

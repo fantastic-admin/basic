@@ -1,6 +1,6 @@
 <script setup name="SidebarItem">
 import SidebarItem from './index.vue'
-import { isExternalLink, resolveRoutePath } from '@/util'
+import { isExternalLink, resolveRoutePath } from '@/utils'
 
 const props = defineProps({
     item: {

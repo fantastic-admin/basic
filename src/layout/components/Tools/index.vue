@@ -1,7 +1,7 @@
 <script setup name="Tools">
 import { useFullscreen } from '@vueuse/core'
-import eventBus from '@/util/eventBus'
-import { useMainPage } from '@/util/composables'
+import eventBus from '@/utils/eventBus'
+import { useMainPage } from '@/utils/composables'
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 

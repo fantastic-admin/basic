@@ -1,4 +1,4 @@
-import { deepClone, resolveRoutePath } from '@/util'
+import { deepClone, resolveRoutePath } from '@/utils'
 import api from '@/api'
 import { systemRoutes } from '@/router/routes'
 
