@@ -1,13 +1,14 @@
 <script setup name="Tools">
+import { useFullscreen } from '@vueuse/core'
+import useSettingsStore from '@/store/modules/settings'
+import useUserStore from '@/store/modules/user'
+
 const reload = inject('reload')
 const router = useRouter()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
-import { useFullscreen } from '@vueuse/core'
 const { isFullscreen, toggle } = useFullscreen()
 
 function userCommand(command) {
@@ -31,11 +32,20 @@ function userCommand(command) {
             break
     }
 }
+function pro() {
+    window.open('https://hooray.gitee.io/fantastic-admin-pro-example/', 'top')
+}
 </script>
 
 <template>
     <div class="tools">
         <div class="buttons">
+            <span v-if="settingsStore.mode == 'pc'" class="item item-pro" @click="pro">
+                <el-icon>
+                    <svg-icon name="pro" />
+                </el-icon>
+                <span class="title">查看专业版</span>
+            </span>
             <span v-if="settingsStore.topbar.enableNavSearch" class="item" @click="$eventBus.emit('global-search-toggle')">
                 <el-icon>
                     <svg-icon name="ep:search" />
@@ -105,6 +115,38 @@ function userCommand(command) {
             .el-icon {
                 color: var(--el-text-color-primary);
                 transition: var(--el-transition-color);
+            }
+        }
+        .item-pro {
+            display: inline-block;
+            width: auto;
+            padding: 0 10px;
+            transform-origin: right center;
+            animation: pro-text 3s ease-out infinite;
+            @keyframes pro-text {
+                0%,
+                20% {
+                    transform: scale(1);
+                }
+                50%,
+                70% {
+                    transform: scale(1.2);
+                }
+                100% {
+                    transform: scale(1);
+                }
+            }
+            .el-icon {
+                vertical-align: middle;
+            }
+            .title {
+                padding-left: 5px;
+                font-weight: bold;
+                font-size: 14px;
+                background-image: linear-gradient(to right, #ffa237, #fc455d);
+                /* stylelint-disable-next-line property-no-vendor-prefix */
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
             }
         }
     }

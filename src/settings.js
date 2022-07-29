@@ -6,13 +6,7 @@ let globalSettings = {
         elementSize: 'default',
         // 是否将 iconify 图标集中的 Element Plus 图标下载到本地，以便在离线环境下使用
         iconifyOfflineUse: false,
-        /**
-         * 是否开启权限功能，权限功能提供以下鉴权支持：
-         * 1、路由鉴权
-         * 2、鉴权组件：<Auth></Auth>、<AuthAll></AuthAll>
-         * 3、鉴权指令：v-auth、v-auth-all
-         * 4、鉴权函数：this.$auth()、this.$authAll()
-         */
+        // 是否开启权限功能
         enablePermission: false,
         // 是否开启载入进度条
         enableProgress: true,

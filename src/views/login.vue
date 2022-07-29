@@ -9,12 +9,13 @@
 </route>
 
 <script setup name="Login">
+import useSettingsStore from '@/store/modules/settings'
+import useUserStore from '@/store/modules/user'
+
 const { proxy } = getCurrentInstance()
 const route = useRoute(), router = useRouter()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 const banner = new URL('../assets/images/login-banner.png', import.meta.url).href

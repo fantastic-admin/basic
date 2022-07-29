@@ -6,15 +6,15 @@ import Topbar from './components/Topbar/index.vue'
 import Search from './components/Search/index.vue'
 import AppSetting from './components/AppSetting/index.vue'
 import { isExternalLink } from '@/util'
+import useSettingsStore from '@/store/modules/settings'
+import useKeepAliveStore from '@/store/modules/keepAlive'
+import useMenuStore from '@/store/modules/menu'
 
 const { proxy } = getCurrentInstance()
 const routeInfo = useRoute(), router = useRouter()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import useKeepAliveStore from '@/store/modules/keepAlive'
 const keepAliveStore = useKeepAliveStore()
-import useMenuStore from '@/store/modules/menu'
 const menuStore = useMenuStore()
 
 const showCopyright = computed(() => {

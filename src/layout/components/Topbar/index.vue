@@ -1,10 +1,10 @@
 <script setup name="Topbar">
 import { compile } from 'path-to-regexp'
+import useSettingsStore from '@/store/modules/settings'
 import Tools from '../Tools/index.vue'
 
 const route = useRoute()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
 
 const enableSidebarCollapse = computed(() => {

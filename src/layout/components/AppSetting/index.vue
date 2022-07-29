@@ -1,15 +1,17 @@
 <script setup name="AppSetting">
+import { useClipboard } from '@vueuse/core'
+import useSettingsStore from '@/store/modules/settings'
+import useMenuStore from '@/store/modules/menu'
+import globalSettings from '@/settings'
+
 const { proxy } = getCurrentInstance()
 const route = useRoute()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import useMenuStore from '@/store/modules/menu'
 const menuStore = useMenuStore()
 
 const isShow = ref(false)
 
-import globalSettings from '@/settings'
 const settings = ref(globalSettings)
 
 watch(() => settings, () => {
@@ -26,7 +28,6 @@ onMounted(() => {
     })
 })
 
-import { useClipboard } from '@vueuse/core'
 const { copy, copied, isSupported } = useClipboard()
 
 watch(copied, val => {
@@ -180,6 +181,10 @@ function handleCopy() {
             <div class="setting-item">
                 <div class="label">网址</div>
                 <el-input v-model="settings.copyright.website" size="small" :disabled="!settings.copyright.enable" />
+            </div>
+            <div class="setting-item">
+                <div class="label">备案</div>
+                <el-input v-model="settings.copyright.beian" size="small" :disabled="!settings.copyright.enable" />
             </div>
             <el-divider>控制台</el-divider>
             <div class="setting-item">

@@ -1,7 +1,7 @@
 <script setup name="Logo">
 import imgLogo from '@/assets/images/logo.png'
-
 import useSettingsStore from '@/store/modules/settings'
+
 const settingsStore = useSettingsStore()
 
 defineProps({

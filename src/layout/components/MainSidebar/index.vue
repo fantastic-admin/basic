@@ -1,9 +1,9 @@
 <script setup name="MainSidebar">
 import Logo from '../Logo/index.vue'
-
 import useSettingsStore from '@/store/modules/settings'
-const settingsStore = useSettingsStore()
 import useMenuStore from '@/store/modules/menu'
+
+const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
 const switchMenu = inject('switchMenu')
