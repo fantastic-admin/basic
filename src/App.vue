@@ -1,7 +1,7 @@
 <script setup>
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
-
 import useSettingsStore from '@/store/modules/settings'
+
 const settingsStore = useSettingsStore()
 
 // 侧边栏主导航当前实际宽度

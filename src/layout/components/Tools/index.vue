@@ -1,13 +1,14 @@
 <script setup name="Tools">
+import { useFullscreen } from '@vueuse/core'
+import useSettingsStore from '@/store/modules/settings'
+import useUserStore from '@/store/modules/user'
+
 const reload = inject('reload')
 const router = useRouter()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
-import { useFullscreen } from '@vueuse/core'
 const { isFullscreen, toggle } = useFullscreen()
 
 function userCommand(command) {

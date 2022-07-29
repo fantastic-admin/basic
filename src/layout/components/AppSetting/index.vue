@@ -1,15 +1,17 @@
 <script setup name="AppSetting">
+import { useClipboard } from '@vueuse/core'
+import useSettingsStore from '@/store/modules/settings'
+import useMenuStore from '@/store/modules/menu'
+import globalSettings from '@/settings'
+
 const { proxy } = getCurrentInstance()
 const route = useRoute()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import useMenuStore from '@/store/modules/menu'
 const menuStore = useMenuStore()
 
 const isShow = ref(false)
 
-import globalSettings from '@/settings'
 const settings = ref(globalSettings)
 
 watch(() => settings, () => {
@@ -26,7 +28,6 @@ onMounted(() => {
     })
 })
 
-import { useClipboard } from '@vueuse/core'
 const { copy, copied, isSupported } = useClipboard()
 
 watch(copied, val => {

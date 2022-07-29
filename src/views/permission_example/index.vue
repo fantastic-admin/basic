@@ -7,11 +7,12 @@
 </route>
 
 <script setup>
+import useSettingsStore from '@/store/modules/settings'
+import useUserStore from '@/store/modules/user'
+
 const { proxy } = getCurrentInstance()
 
-import useSettingsStore from '@/store/modules/settings'
 const settingsStore = useSettingsStore()
-import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 function accountChange(val) {

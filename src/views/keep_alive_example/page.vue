@@ -7,11 +7,10 @@
 </route>
 
 <script setup name="KeepAliveExamplePage">
+import useKeepAliveStore from '@/store/modules/keepAlive'
 import { onBeforeRouteLeave } from 'vue-router'
 
 const router = useRouter()
-
-import useKeepAliveStore from '@/store/modules/keepAlive'
 const keepAliveStore = useKeepAliveStore()
 
 const openKeepAlive = ref(false)
@@ -46,7 +45,7 @@ onBeforeRouteLeave((to, from) => {
 
 <template>
     <div>
-        <page-header title="页面缓存" content="除了可以在路由里配置页面是否需要缓存外，你也可以不使用框架提供的方法，而是在页面里自行实现，该方法目前仅支持在 Options API 中实现。" />
+        <page-header title="页面缓存" content="除了可以在路由里配置页面是否需要缓存外，你也可以不使用框架提供的方法，而是在页面里自行实现。" />
         <page-main>
             <div class="block">
                 <el-switch v-model="openKeepAlive" active-text="开启缓存" inactive-text="关闭缓存" />

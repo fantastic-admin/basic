@@ -7,10 +7,11 @@
 </route>
 
 <script setup name="PersonalEditPassword">
+import useUserStore from '@/store/modules/user'
+
 const route = useRoute(), router = useRouter()
 const { proxy } = getCurrentInstance()
 
-import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 const validatePassword = (rule, value, callback) => {
