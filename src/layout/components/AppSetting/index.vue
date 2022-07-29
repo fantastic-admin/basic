@@ -1,10 +1,10 @@
 <script setup name="AppSetting">
 import { useClipboard } from '@vueuse/core'
+import eventBus from '@/util/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
 import globalSettings from '@/settings'
 
-const { proxy } = getCurrentInstance()
 const route = useRoute()
 
 const settingsStore = useSettingsStore()
@@ -23,7 +23,7 @@ watch(() => settings, () => {
 })
 
 onMounted(() => {
-    proxy.$eventBus.on('global-theme-toggle', () => {
+    eventBus.on('global-theme-toggle', () => {
         isShow.value = !isShow.value
     })
 })

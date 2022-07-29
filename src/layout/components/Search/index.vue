@@ -1,10 +1,10 @@
 <script setup name="Search">
+import hotkeys from 'hotkeys-js'
 import { deepClone, isExternalLink } from '@/util'
+import eventBus from '@/util/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useRouteStore from '@/store/modules/route'
 import useMenuStore from '@/store/modules/menu'
-
-const { proxy } = getCurrentInstance()
 
 const settingsStore = useSettingsStore()
 const routeStore = useRouteStore()
@@ -14,6 +14,14 @@ const isShow = ref(false)
 const searchInput = ref('')
 const sourceList = ref([])
 const actived = ref(-1)
+
+const inputRef = ref()
+const resultRef = ref()
+const resultItemRef = ref([])
+const setResultItemRef = el => resultItemRef.value.push(el)
+onBeforeUpdate(() => {
+    resultItemRef.value = []
+})
 
 const resultList = computed(() => {
     let result = []
@@ -36,19 +44,19 @@ const resultList = computed(() => {
 watch(() => isShow.value, val => {
     if (val) {
         document.querySelector('body').classList.add('hidden')
-        proxy.$refs.search.scrollTop = 0
+        resultRef.value.scrollTop = 0
         // 当搜索显示的时候绑定上、下、回车快捷键，隐藏的时候再解绑。另外当 input 处于 focus 状态时，采用 vue 来绑定键盘事件
-        proxy.$hotkeys('up', keyUp)
-        proxy.$hotkeys('down', keyDown)
-        proxy.$hotkeys('enter', keyEnter)
+        hotkeys('up', keyUp)
+        hotkeys('down', keyDown)
+        hotkeys('enter', keyEnter)
         setTimeout(() => {
-            proxy.$refs.input.focus()
+            inputRef.value.focus()
         }, 500)
     } else {
         document.querySelector('body').classList.remove('hidden')
-        proxy.$hotkeys.unbind('up', keyUp)
-        proxy.$hotkeys.unbind('down', keyDown)
-        proxy.$hotkeys.unbind('enter', keyEnter)
+        hotkeys.unbind('up', keyUp)
+        hotkeys.unbind('down', keyDown)
+        hotkeys.unbind('enter', keyEnter)
         setTimeout(() => {
             searchInput.value = ''
             actived.value = -1
@@ -61,16 +69,16 @@ watch(() => resultList.value, () => {
 })
 
 onMounted(() => {
-    proxy.$eventBus.on('global-search-toggle', () => {
+    eventBus.on('global-search-toggle', () => {
         isShow.value = !isShow.value
     })
-    proxy.$hotkeys('alt+s', e => {
+    hotkeys('alt+s', e => {
         if (settingsStore.topbar.enableNavSearch) {
             e.preventDefault()
             isShow.value = true
         }
     })
-    proxy.$hotkeys('esc', e => {
+    hotkeys('esc', e => {
         if (settingsStore.topbar.enableNavSearch) {
             e.preventDefault()
             isShow.value = false
@@ -154,34 +162,34 @@ function keyDown() {
 }
 function keyEnter() {
     if (actived.value !== -1) {
-        proxy.$refs[`search-item-${actived.value}`][0].click()
+        resultItemRef.value[actived.value].click()
     }
 }
 function handleScroll() {
     let scrollTo = 0
     if (actived.value !== -1) {
-        scrollTo = proxy.$refs['search'].scrollTop
-        const activedOffsetTop = proxy.$refs[`search-item-${actived.value}`][0].offsetTop
-        const activedClientHeight = proxy.$refs[`search-item-${actived.value}`][0].clientHeight
-        const searchScrollTop = proxy.$refs['search'].scrollTop
-        const searchClientHeight = proxy.$refs['search'].clientHeight
+        scrollTo = resultRef.value.scrollTop
+        const activedOffsetTop = resultItemRef.value[actived.value].offsetTop
+        const activedClientHeight = resultItemRef.value[actived.value].clientHeight
+        const searchScrollTop = resultRef.value.scrollTop
+        const searchClientHeight = resultRef.value.clientHeight
         if (activedOffsetTop + activedClientHeight > searchScrollTop + searchClientHeight) {
             scrollTo = activedOffsetTop + activedClientHeight - searchClientHeight
         } else if (activedOffsetTop <= searchScrollTop) {
             scrollTo = activedOffsetTop
         }
     }
-    proxy.$refs['search'].scrollTo({
+    resultRef.value.scrollTo({
         top: scrollTo
     })
 }
 </script>
 
 <template>
-    <div id="search" :class="{'searching': isShow}" @click="isShow && $eventBus.emit('global-search-toggle')">
+    <div id="search" :class="{'searching': isShow}" @click="isShow && eventBus.emit('global-search-toggle')">
         <div class="container">
             <div class="search-box" @click.stop>
-                <el-input ref="input" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="$eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
+                <el-input ref="inputRef" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
                     <template #prefix>
                         <el-icon>
                             <svg-icon name="ep:search" />
@@ -220,9 +228,9 @@ function handleScroll() {
                     </div>
                 </div>
             </div>
-            <div ref="search" class="result" :class="{'mobile': settingsStore.mode === 'mobile'}">
+            <div ref="resultRef" class="result" :class="{'mobile': settingsStore.mode === 'mobile'}">
                 <router-link v-for="(item, index) in resultList" :key="item.path" v-slot="{ href, navigate }" custom :to="isShow ? item.path : ''">
-                    <a :ref="`search-item-${index}`" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
+                    <a :ref="setResultItemRef" :href="isExternalLink(item.path) ? item.path : href" class="item" :class="{'actived': index === actived}" :target="isExternalLink(item.path) ? '_blank' : '_self'" @click="navigate" @mouseover="actived = index">
                         <el-icon class="icon">
                             <svg-icon v-if="item.icon" :name="item.icon" />
                         </el-icon>

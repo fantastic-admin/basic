@@ -1,21 +1,19 @@
 <script setup name="Layout">
+import hotkeys from 'hotkeys-js'
 import Header from './components/Header/index.vue'
 import MainSidebar from './components/MainSidebar/index.vue'
 import SubSidebar from './components/SubSidebar/index.vue'
 import Topbar from './components/Topbar/index.vue'
 import Search from './components/Search/index.vue'
 import AppSetting from './components/AppSetting/index.vue'
-import { isExternalLink } from '@/util'
 import useSettingsStore from '@/store/modules/settings'
 import useKeepAliveStore from '@/store/modules/keepAlive'
-import useMenuStore from '@/store/modules/menu'
+import { useMainPage } from '@/util/composables'
 
-const { proxy } = getCurrentInstance()
-const routeInfo = useRoute(), router = useRouter()
+const routeInfo = useRoute()
 
 const settingsStore = useSettingsStore()
 const keepAliveStore = useKeepAliveStore()
-const menuStore = useMenuStore()
 
 const showCopyright = computed(() => {
     return typeof routeInfo.meta.copyright !== 'undefined' ? routeInfo.meta.copyright : settingsStore.copyright.enable
@@ -40,34 +38,16 @@ watch(() => routeInfo.path, () => {
 })
 
 onMounted(() => {
-    proxy.$hotkeys('f5', e => {
+    hotkeys('f5', e => {
         if (settingsStore.topbar.enablePageReload) {
             e.preventDefault()
-            reload()
+            useMainPage().reload()
         }
     })
 })
 onUnmounted(() => {
-    proxy.$hotkeys.unbind('f5')
+    hotkeys.unbind('f5')
 })
-provide('reload', reload)
-function reload() {
-    router.push({
-        name: 'reload'
-    })
-}
-
-provide('switchMenu', switchMenu)
-function switchMenu(index) {
-    menuStore.setActived(index)
-    if (settingsStore.menu.switchMainMenuAndPageJump) {
-        if (isExternalLink(menuStore.sidebarMenusFirstDeepestPath)) {
-            window.open(menuStore.sidebarMenusFirstDeepestPath, '_blank')
-        } else {
-            router.push(menuStore.sidebarMenusFirstDeepestPath)
-        }
-    }
-}
 </script>
 
 <template>

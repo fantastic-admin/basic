@@ -9,8 +9,8 @@
 <script setup name="PersonalEditPassword">
 import useUserStore from '@/store/modules/user'
 
-const route = useRoute(), router = useRouter()
-const { proxy } = getCurrentInstance()
+const route = useRoute()
+const router = useRouter()
 
 const userStore = useUserStore()
 
@@ -22,6 +22,7 @@ const validatePassword = (rule, value, callback) => {
     }
 }
 
+const formRef = ref()
 const form = ref({
     password: '',
     newpassword: '',
@@ -43,7 +44,7 @@ const rules = ref({
 })
 
 function onSubmit() {
-    proxy.$refs['formRef'].validate(valid => {
+    formRef.value.validate(valid => {
         if (valid) {
             userStore.editPassword(form.value).then(() => {
                 ElMessage({

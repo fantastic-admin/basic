@@ -12,7 +12,6 @@
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 
-const { proxy } = getCurrentInstance()
 const route = useRoute(), router = useRouter()
 
 const settingsStore = useSettingsStore()
@@ -25,6 +24,7 @@ const title = import.meta.env.VITE_APP_TITLE
 const formType = ref('login')
 
 // 登录
+const loginFormRef = ref()
 const loginForm = ref({
     account: localStorage.login_account || '',
     password: '',
@@ -40,7 +40,7 @@ const loginRules = ref({
     ]
 })
 function handleLogin() {
-    proxy.$refs.loginFormRef.validate(valid => {
+    loginFormRef.value.validate(valid => {
         if (valid) {
             loading.value = true
             userStore.login(loginForm.value).then(() => {
@@ -59,6 +59,7 @@ function handleLogin() {
 }
 
 // 注册
+const registerFormRef = ref()
 const registerForm = ref({
     account: '',
     captcha: '',
@@ -92,7 +93,7 @@ function handleRegister() {
         message: '注册模块仅提供界面演示，无实际功能，需开发者自行扩展',
         type: 'warning'
     })
-    proxy.$refs.registerFormRef.validate(valid => {
+    registerFormRef.value.validate(valid => {
         if (valid) {
             // 这里编写业务代码
         }
@@ -100,6 +101,7 @@ function handleRegister() {
 }
 
 // 重置密码
+const resetFormRef = ref()
 const resetForm = ref({
     account: localStorage.login_account || '',
     captcha: '',
@@ -122,7 +124,7 @@ function handleReset() {
         message: '重置密码模块仅提供界面演示，无实际功能，需开发者自行扩展',
         type: 'warning'
     })
-    proxy.$refs.resetFormRef.validate(valid => {
+    resetFormRef.value.validate(valid => {
         if (valid) {
             // 这里编写业务代码
         }
@@ -132,6 +134,7 @@ function handleReset() {
 const loading = ref(false)
 const passwordType = ref('password')
 const redirect = ref(null)
+const passwordRef = ref()
 
 onMounted(() => {
     redirect.value = route.query.redirect ?? '/'
@@ -140,7 +143,7 @@ onMounted(() => {
 function showPassword() {
     passwordType.value = passwordType.value === 'password' ? '' : 'password'
     nextTick(() => {
-        proxy.$refs.password.focus()
+        passwordRef.value.focus()
     })
 }
 
@@ -174,7 +177,7 @@ function testAccount(account) {
                         </el-input>
                     </el-form-item>
                     <el-form-item prop="password">
-                        <el-input ref="password" v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2" autocomplete="on" @keyup.enter="handleLogin">
+                        <el-input ref="passwordRef" v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2" autocomplete="on" @keyup.enter="handleLogin">
                             <template #prefix>
                                 <el-icon>
                                     <svg-icon name="password" />
@@ -230,7 +233,7 @@ function testAccount(account) {
                         </el-input>
                     </el-form-item>
                     <el-form-item prop="password">
-                        <el-input ref="password" v-model="registerForm.password" :type="passwordType" placeholder="密码" tabindex="3" autocomplete="on">
+                        <el-input ref="passwordRef" v-model="registerForm.password" :type="passwordType" placeholder="密码" tabindex="3" autocomplete="on">
                             <template #prefix>
                                 <el-icon>
                                     <svg-icon name="password" />

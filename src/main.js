@@ -10,9 +10,6 @@ app.use(router)
 
 /* importElementPlusPlaceholder */
 
-import globalProperties from '@/util/global.properties'
-globalProperties(app)
-
 // 自定义指令
 import directive from '@/util/directive'
 directive(app)
