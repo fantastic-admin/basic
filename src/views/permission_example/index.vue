@@ -61,30 +61,30 @@ function permissionCheck2(permissions) {
                 <div>{{ userStore.permissions }}</div>
                 <h3>鉴权组件（请对照代码查看）</h3>
                 <div>
-                    <auth value="permission.browse" style="margin-bottom: 10px;">
+                    <Auth value="permission.browse" style="margin-bottom: 10px;">
                         <el-tag>你有 permission.browse 权限</el-tag>
                         <template #no-auth>
                             <el-tag type="danger">你没有 permission.browse 权限</el-tag>
                         </template>
-                    </auth>
-                    <auth value="permission.create" style="margin-bottom: 10px;">
+                    </Auth>
+                    <Auth value="permission.create" style="margin-bottom: 10px;">
                         <el-tag>你有 permission.create 权限</el-tag>
                         <template #no-auth>
                             <el-tag type="danger">你没有 permission.create 权限</el-tag>
                         </template>
-                    </auth>
-                    <auth :value="['permission.browse', 'permission.create']" style="margin-bottom: 10px;">
+                    </Auth>
+                    <Auth :value="['permission.browse', 'permission.create']" style="margin-bottom: 10px;">
                         <el-tag>你有 permission.browse 或 permission.create 权限</el-tag>
                         <template #no-auth>
                             <el-tag type="danger">你没有 permission.browse 或 permission.create 权限</el-tag>
                         </template>
-                    </auth>
-                    <auth-all :value="['permission.browse', 'permission.create']">
+                    </Auth>
+                    <AuthAll :value="['permission.browse', 'permission.create']">
                         <el-tag>你有 permission.browse 和 permission.create 权限</el-tag>
                         <template #no-auth>
                             <el-tag type="danger">你没有 permission.browse 和 permission.create 权限</el-tag>
                         </template>
-                    </auth-all>
+                    </AuthAll>
                 </div>
                 <h3>鉴权指令（请对照代码查看）</h3>
                 <div>
