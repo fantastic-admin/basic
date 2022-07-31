@@ -23,7 +23,7 @@ export default [
         ]
     },
     {
-        path: '/plugin',
+        path: '/cooperation',
         meta: {
             title: '战略合作',
             icon: 'sidebar-cooperation'
@@ -33,6 +33,12 @@ export default [
                 path: 'https://www.vform666.com',
                 meta: {
                     title: 'VForm 低代码表单'
+                }
+            },
+            {
+                path: 'https://gitee.com/sciqtw/quickadmin',
+                meta: {
+                    title: 'QuickAdmin 快速开发管理框架'
                 }
             }
         ]
