@@ -91,11 +91,11 @@ export default {
             }
         },
         {
-            path: 'area',
-            name: 'componentExtendExampleArea',
-            component: () => import('@/views/component_extend_example/area.demo.vue'),
+            path: 'pcas',
+            name: 'componentExtendExamplePcas',
+            component: () => import('@/views/component_extend_example/pcas.demo.vue'),
             meta: {
-                title: '省市区联动'
+                title: '省市区街道联动'
             }
         },
         {
