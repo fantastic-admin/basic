@@ -14,6 +14,7 @@ function open(url) {
 
 const fantasticStartkitInfo = ref({
     feature: [
+        '支持 TypeScript',
         '默认集成 vue-router 和 pinia',
         '全局 SCSS 资源引入',
         '全局组件自动注册',
@@ -83,7 +84,7 @@ const oneStepAdminInfo = ref({
                 <page-main style="margin: 0;">
                     <div class="ecology vue">
                         <div class="main">
-                            <img src="https://v3.cn.vuejs.org/logo.png" style="width: 30%;">
+                            <img src="https://cn.vuejs.org/logo.svg" style="width: 30%;">
                             <h1>Fantastic-startkit</h1>
                             <h2>一款开箱即用的 Vue 项目启动套件</h2>
                             <div>
