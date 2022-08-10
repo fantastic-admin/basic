@@ -56,8 +56,8 @@ function beforeUpload(file) {
 function onExceed() {
     ElMessage.warning('文件上传超过限制')
 }
-function onSuccess(res, file) {
-    emit('on-success', res, file)
+function onSuccess(res, file, fileList) {
+    emit('on-success', res, file, fileList)
 }
 </script>
 
