@@ -57,7 +57,7 @@ function handleSuccess3(res, file, fileList) {
             <images-upload v-model:url="images" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{'token':'TKE615916022101558'}" @on-success="handleSuccess2" />
         </page-main>
         <page-main title="文件上传（默认最多3个）">
-            <file-upload :files="files" action="https://run.mocky.io/v3/e868a535-2569-4ba1-acad-fa10be2cef9e" @on-success="handleSuccess3" />
+            <file-upload :files="files" action="https://console-mock.apipost.cn/app/mock/project/1f50f1da-5189-4282-d3c7-c133a514c5a8/upload/file" @on-success="handleSuccess3" />
         </page-main>
     </div>
 </template>
