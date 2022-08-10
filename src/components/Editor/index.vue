@@ -58,10 +58,11 @@ const defaultSetting = ref({
         '%Y-%m-%d',
         '%H:%M:%S'
     ],
-    images_upload_handler: (blobInfo, success) => {
-        const img = 'data:image/jpeg;base64,' + blobInfo.base64()
-        success(img)
-    }
+    // https://www.tiny.cloud/docs/tinymce/6/file-image-upload/#images_upload_handler
+    images_upload_handler: blobInfo => new Promise(resolve => {
+        const img = `data:image/jpeg;base64,${blobInfo.base64()}`
+        resolve(img)
+    })
 })
 
 const myValue = ref(props.modelValue)
