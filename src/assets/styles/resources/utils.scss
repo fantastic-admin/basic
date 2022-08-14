@@ -1,11 +1,3 @@
-@use "sass:math";
-
-// @mixin 通过 @include 调用使用
-// % 通过 @extend 调用使用
-@function division($a, $b) {
-    @return math.div($a, $b);
-}
-
 // 文字超出隐藏，默认为单行超出隐藏，可设置多行
 @mixin text-overflow($line: 1, $fixed-width: true) {
     @if ($line == 1 and $fixed-width == true) {

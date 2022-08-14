@@ -64,7 +64,6 @@ export default ({ mode, command }) => {
                         return {
                             code: code.replace('/* importElementPlusPlaceholder */', `
                                 import ElementPlus from 'element-plus';
-                                import 'element-plus/dist/index.css';
                                 app.use(ElementPlus);
                             `),
                             map: null
