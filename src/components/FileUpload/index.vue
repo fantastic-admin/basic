@@ -91,7 +91,7 @@ function onSuccess(res, file, fileList) {
 </template>
 
 <style lang="scss" scoped>
-:deep(.el-upload) {
+:deep(.el-upload.is-drag) {
     display: inline-block;
     .el-upload-dragger {
         padding: 0;
