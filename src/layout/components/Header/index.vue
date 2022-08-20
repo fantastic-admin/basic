@@ -7,6 +7,27 @@ import { useMenu } from '@/utils/composables'
 
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
+
+// 顶部模式鼠标滚动
+const navRef = ref()
+watch(() => settingsStore.menu.menuMode, val => {
+    nextTick(() => {
+        if (val === 'head') {
+            navRef.value.addEventListener('DOMMouseScroll', handlerMouserScroll, false)
+            navRef.value.addEventListener('mousewheel', handlerMouserScroll, false)
+        } else {
+            navRef.value.removeEventListener('DOMMouseScroll', handlerMouserScroll)
+            navRef.value.removeEventListener('mousewheel', handlerMouserScroll)
+        }
+    })
+}, {
+    immediate: true
+})
+function handlerMouserScroll(event) {
+    navRef.value.scrollBy({
+        left: (event.deltaY || event.detail) > 0 ? 50 : -50
+    })
+}
 </script>
 
 <template>
@@ -16,13 +37,15 @@ const menuStore = useMenuStore()
                 <div class="main">
                     <Logo />
                     <!-- 顶部模式 -->
-                    <div class="nav">
-                        <template v-for="(item, index) in menuStore.allMenus">
-                            <div v-if="item.children && item.children.length !== 0" :key="index" class="item" :class="{'active': index == menuStore.actived}" @click="useMenu().switchTo(index)">
-                                <el-icon>
-                                    <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
-                                </el-icon>
-                                <span v-if="item.meta.title">{{ item.meta.title }}</span>
+                    <div ref="navRef" class="nav" @mousewheel.prevent>
+                        <template v-for="(item, index) in menuStore.allMenus" :key="index">
+                            <div v-if="item.children && item.children.length !== 0" class="item-container" :class="{'active': index == menuStore.actived}">
+                                <div class="item" @click="useMenu().switchTo(index)">
+                                    <el-icon>
+                                        <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                                    </el-icon>
+                                    <span v-if="item.meta.title">{{ item.meta.title }}</span>
+                                </div>
                             </div>
                         </template>
                     </div>
@@ -55,7 +78,9 @@ header {
         align-items: center;
         justify-content: space-between;
         .main {
+            flex: 1;
             display: flex;
+            flex-wrap: wrap;
             align-items: center;
             height: 100%;
         }
@@ -82,37 +107,55 @@ header {
         }
     }
     .nav {
+        flex: 1;
         display: flex;
+        width: 0;
         height: 100%;
-        margin-left: 50px;
-        .item {
+        margin: 0 30px;
+        padding: 0 20px;
+        overflow-x: auto;
+        mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
+        // firefox隐藏滚动条
+        scrollbar-width: none;
+        // chrome隐藏滚动条
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        .item-container {
+            position: relative;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-direction: column;
-            padding: 0 5px;
-            width: 80px;
-            cursor: pointer;
-            color: var(--g-header-menu-color);
-            background-color: var(--g-header-bg);
-            transition: background-color 0.3s, var(--el-transition-color);
-            &:hover {
-                color: var(--g-header-menu-hover-color);
-                background-color: var(--g-header-menu-hover-bg);
+            width: initial;
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                padding: 0 5px;
+                width: 80px;
+                height: 100%;
+                cursor: pointer;
+                color: var(--g-header-menu-color);
+                background-color: var(--g-header-bg);
+                transition: background-color 0.3s, var(--el-transition-color);
+                &:hover {
+                    color: var(--g-header-menu-hover-color);
+                    background-color: var(--g-header-menu-hover-bg);
+                }
+                .el-icon {
+                    font-size: 24px;
+                    vertical-align: middle;
+                }
+                span {
+                    text-align: center;
+                    vertical-align: middle;
+                    word-break: break-all;
+                    @include text-overflow(1, false);
+                }
             }
-            &.active {
+            &.active .item {
                 color: var(--g-header-menu-active-color);
                 background-color: var(--g-header-menu-active-bg);
-            }
-            .el-icon {
-                font-size: 24px;
-                vertical-align: middle;
-            }
-            span {
-                text-align: center;
-                vertical-align: middle;
-                word-break: break-all;
-                @include text-overflow(1, false);
             }
         }
     }
