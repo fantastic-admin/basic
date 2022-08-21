@@ -8,21 +8,9 @@ import { useMenu } from '@/utils/composables'
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
-// 顶部模式鼠标滚动
 const navRef = ref()
-watch(() => settingsStore.menu.menuMode, val => {
-    nextTick(() => {
-        if (val === 'head') {
-            navRef.value.addEventListener('DOMMouseScroll', handlerMouserScroll, false)
-            navRef.value.addEventListener('mousewheel', handlerMouserScroll, false)
-        } else {
-            navRef.value.removeEventListener('DOMMouseScroll', handlerMouserScroll)
-            navRef.value.removeEventListener('mousewheel', handlerMouserScroll)
-        }
-    })
-}, {
-    immediate: true
-})
+
+// 顶部模式鼠标滚动
 function handlerMouserScroll(event) {
     navRef.value.scrollBy({
         left: (event.deltaY || event.detail) > 0 ? 50 : -50
@@ -37,7 +25,7 @@ function handlerMouserScroll(event) {
                 <div class="main">
                     <Logo />
                     <!-- 顶部模式 -->
-                    <div ref="navRef" class="nav" @mousewheel.prevent>
+                    <div ref="navRef" class="nav" @wheel.prevent="handlerMouserScroll">
                         <template v-for="(item, index) in menuStore.allMenus" :key="index">
                             <div v-if="item.children && item.children.length !== 0" class="item-container" :class="{'active': index == menuStore.actived}">
                                 <div class="item" @click="useMenu().switchTo(index)">
