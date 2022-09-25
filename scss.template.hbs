@@ -1,7 +1,7 @@
 {
-    // Default options
-    'functions': true,
-    'variableNameTransforms': ['dasherize']
+  // Default options
+  'functions': true,
+  'variableNameTransforms': ['dasherize']
 }
 
 {{#block "sprites"}}
@@ -19,35 +19,35 @@ ${{spritesheet_info.strings.name}}-sprites: (
 {{#block "sprite-functions"}}
 {{#if options.functions}}
 @mixin {{spritesheet_info.strings.name}}-sprite-width($sprite) {
-    width: nth($sprite, 5);
+  width: nth($sprite, 5);
 }
 
 @mixin {{spritesheet_info.strings.name}}-sprite-height($sprite) {
-    height: nth($sprite, 6);
+  height: nth($sprite, 6);
 }
 
 @mixin {{spritesheet_info.strings.name}}-sprite-position($sprite) {
-    $sprite-offset-x: nth($sprite, 3);
-    $sprite-offset-y: nth($sprite, 4);
-    background-position: $sprite-offset-x $sprite-offset-y;
+  $sprite-offset-x: nth($sprite, 3);
+  $sprite-offset-y: nth($sprite, 4);
+  background-position: $sprite-offset-x $sprite-offset-y;
 }
 
 @mixin {{spritesheet_info.strings.name}}-sprite-size($sprite) {
-    background-size: nth($sprite, 7) nth($sprite, 8);
+  background-size: nth($sprite, 7) nth($sprite, 8);
 }
 
 @mixin {{spritesheet_info.strings.name}}-sprite-image($sprite) {
-    $sprite-image: nth($sprite, 9);
-    background-image: url(#{$sprite-image});
+  $sprite-image: nth($sprite, 9);
+  background-image: url(#{$sprite-image});
 }
 
 @mixin {{spritesheet_info.strings.name}}-sprite($name) {
-    @include {{spritesheet_info.strings.name}}-sprite-image(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
-    @include {{spritesheet_info.strings.name}}-sprite-position(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
-    @include {{spritesheet_info.strings.name}}-sprite-size(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
-    @include {{spritesheet_info.strings.name}}-sprite-width(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
-    @include {{spritesheet_info.strings.name}}-sprite-height(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
-    background-repeat: no-repeat;
+  @include {{spritesheet_info.strings.name}}-sprite-image(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+  @include {{spritesheet_info.strings.name}}-sprite-position(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+  @include {{spritesheet_info.strings.name}}-sprite-size(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+  @include {{spritesheet_info.strings.name}}-sprite-width(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+  @include {{spritesheet_info.strings.name}}-sprite-height(map-get(${{spritesheet_info.strings.name}}-sprites, #{$name}));
+  background-repeat: no-repeat;
 }
 {{/if}}
 {{/block}}
@@ -55,12 +55,12 @@ ${{spritesheet_info.strings.name}}-sprites: (
 {{#block "spritesheet-functions"}}
 {{#if options.functions}}
 @mixin all-{{spritesheet_info.strings.name}}-sprites() {
-    @each $key, $val in ${{spritesheet_info.strings.name}}-sprites {
-        $sprite-name: nth($val, 10);
-        .{{spritesheet_info.strings.name}}-#{$sprite-name}-sprites {
-            @include {{spritesheet_info.strings.name}}-sprite($key);
-        }
+  @each $key, $val in ${{spritesheet_info.strings.name}}-sprites {
+    $sprite-name: nth($val, 10);
+    .{{spritesheet_info.strings.name}}-#{$sprite-name}-sprites {
+      @include {{spritesheet_info.strings.name}}-sprite($key);
     }
+  }
 }
 {{/if}}
 {{/block}}

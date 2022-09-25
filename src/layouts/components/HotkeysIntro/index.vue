@@ -1,0 +1,51 @@
+<script setup lang="ts">
+import eventBus from '@/utils/eventBus'
+import useSettingsStore from '@/store/modules/settings'
+
+const isShow = ref(false)
+
+const settingsStore = useSettingsStore()
+
+onMounted(() => {
+  eventBus.on('global-hotkeys-intro-toggle', () => {
+    isShow.value = !isShow.value
+  })
+})
+</script>
+
+<template>
+  <div>
+    <el-drawer v-model="isShow" title="快捷键介绍" direction="rtl" :size="360">
+      <el-descriptions title="全局" :column="1" border>
+        <el-descriptions-item label="查看系统信息">
+          Alt + I
+        </el-descriptions-item>
+        <el-descriptions-item v-if="settingsStore.navSearch.enable && settingsStore.navSearch.enableHotkeys" label="唤起导航搜索">
+          Alt + S
+        </el-descriptions-item>
+      </el-descriptions>
+      <el-descriptions v-if="settingsStore.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.menu.menuMode)" title="主导航" :column="1" border>
+        <el-descriptions-item label="激活下一个主导航">
+          Alt + `
+        </el-descriptions-item>
+      </el-descriptions>
+    </el-drawer>
+  </div>
+</template>
+
+<style lang="scss" scoped>
+:deep(.el-drawer__header) {
+  margin-bottom: initial;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--el-border-color);
+  transition: var(--el-transition-border);
+}
+
+:deep(.el-descriptions) {
+  margin-bottom: 20px;
+
+  .el-descriptions__label {
+    width: 200px;
+  }
+}
+</style>

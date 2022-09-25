@@ -1,43 +1,36 @@
-<route>
-{
-    meta: {
-        enabled: false
-    }
-}
+<route lang="yaml">
+meta:
+  enabled: false
 </route>
 
-<script setup>
-import { mavonEditor } from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
-
-const content1 = ref('<h1>Fantastic-admin</h1>')
-const content2 = ref('# Fantastic-admin')
-
-const mdContent2 = computed(() => {
-    const mdit = mavonEditor.getMarkdownIt()
-    return mdit.render(content2.value)
-})
+<script lang="ts" setup name="ComponentExampleEditor">
+const content = ref('<h1>Fantastic-admin</h1>')
 </script>
 
 <template>
-    <div>
-        <page-main title="富文本编辑器">
-            <editor v-model="content1" />
-            <div class="preview" v-html="content1" />
-        </page-main>
-        <page-main title="markdown 编辑器">
-            <mavon-editor v-model="content2" style="z-index: 9;" />
-            <div class="preview" v-html="mdContent2" />
-        </page-main>
-    </div>
+  <div>
+    <page-header title="富文本编辑器">
+      <template #content>
+        <p>Editor</p>
+        <p style="margin-bottom: 0;">
+          基于 TinyMCE 并做了简单封装
+        </p>
+      </template>
+    </page-header>
+    <page-main title="富文本编辑器">
+      <editor v-model="content" />
+      <div class="preview" v-html="content" />
+    </page-main>
+  </div>
 </template>
 
 <style lang="scss" scoped>
 .preview {
-    margin-top: 10px;
-    &::before {
-        content: "预览：";
-        display: block;
-    }
+  margin-top: 10px;
+
+  &::before {
+    content: "预览：";
+    display: block;
+  }
 }
 </style>

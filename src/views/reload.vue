@@ -1,17 +1,15 @@
-<route>
-{
-    name: 'reload'
-}
+<route lang="yaml">
+name: reload
 </route>
 
-<script setup>
+<script lang="ts" setup>
 const router = useRouter()
 
 onMounted(() => {
-    router.go(-1)
+  router.go(-1)
 })
 </script>
 
 <template>
-    <div />
+  <div />
 </template>

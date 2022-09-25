@@ -1,78 +1,40 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="stylesheet" href="/index.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title><%= title %></title>
-        <%- copyrightScript %>
-        <% if (appMode == 'example') { %>
-            <script>
-                var _hmt = _hmt || [];
-                _hmt.push(['_requirePlugin', 'UrlChangeTracker', {
-                    shouldTrackUrlChange: function(newPath, oldPath) {
-                        return newPath && oldPath;
-                    }
-                }]);
-                (function() {
-                    var hm = document.createElement("script");
-                    hm.src = "https://hm.baidu.com/hm.js?c31a3e8267162de8420bc73e06d62463";
-                    var s = document.getElementsByTagName("script")[0];
-                    s.parentNode.insertBefore(hm, s);
-                })();
-            </script>
-        <% } %>
-    </head>
-    <body>
-        <div id="app">
-            <div class="fantastic-admin-home">
-                <div class="loading">
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square"></div>
-                    <div class="square"></div>
-                </div>
-                <div class="text"><%= title %>载入中…</div>
-            </div>
-            <div id="browser-upgrade">
-                <div class="title">为了您的体验，推荐使用以下浏览器</div>
-                <div class="browsers">
-                    <a href="https://www.microsoft.com/edge" target="_blank" class="browser">
-                        <img class="browser-icon" src="/browser_upgrade/edge.png" />
-                        <div class="browser-name">Mircosoft Edge</div>
-                    </a>
-                    <a href="https://www.google.cn/chrome/" target="_blank" class="browser">
-                        <img class="browser-icon" src="/browser_upgrade/chrome.png" />
-                        <div class="browser-name">Google Chrome</div>
-                    </a>
-                </div>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/browser_upgrade/index.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= title %></title>
+    <%- copyrightScript %>
+  </head>
+  <body>
+    <div id="app">
+      <div class="fantastic-admin-home">
+        <div class="loading">
+          <div class="square"></div>
+          <div class="square"></div>
+          <div class="square"></div>
+          <div class="square"></div>
         </div>
-        <script>
-            if(!!window.ActiveXObject || "ActiveXObject" in window) {
-                document.getElementById('browser-upgrade').style.display = 'block'
-            } else {
-                var Loading = document.querySelector('.loading')
-                Loading.classList.add('animate')
-                Loading.addEventListener('animationend', function() {
-                    setTimeout(function() {
-                        Loading.classList.remove('animate')
-                    }, 600)
-                    setTimeout(function() {
-                        Loading.classList.add('animate')
-                    }, 1000)
-                })
-            }
-        </script>
-        <script type="module" src="/src/main.js"></script>
-        <% if (debugTool == 'eruda') { %>
-            <script src="//unpkg.com/eruda/eruda.js"></script>
-            <script>eruda.init();</script>
-        <% } %>
-        <% if (debugTool == 'vconsole') { %>
-            <script src="//unpkg.com/vconsole/dist/vconsole.min.js"></script>
-            <script>new VConsole();</script>
-        <% } %>
-    </body>
+        <div class="text"><%= title %>载入中…</div>
+      </div>
+      <div id="browser-upgrade">
+        <div class="title">为了您的体验，推荐使用以下浏览器</div>
+        <div class="browsers">
+          <a href="https://www.microsoft.com/edge" target="_blank" class="browser">
+            <img class="browser-icon" src="/browser_upgrade/edge.png" />
+            <div class="browser-name">Mircosoft Edge</div>
+          </a>
+          <a href="https://www.google.cn/chrome/" target="_blank" class="browser">
+            <img class="browser-icon" src="/browser_upgrade/chrome.png" />
+            <div class="browser-name">Google Chrome</div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <%- loadingScript %>
+    <script type="module" src="/src/main.ts"></script>
+    <%- devtoolScript %>
+  </body>
 </html>

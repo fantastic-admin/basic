@@ -1,21 +1,16 @@
-<script setup name="Auth">
-import { useAuth } from '@/utils/composables'
-
-const props = defineProps({
-    value: {
-        type: [String, Array],
-        default: ''
-    }
-})
+<script lang="ts" setup name="Auth">
+const props = defineProps<{
+  value: string | string[]
+}>()
 
 function check() {
-    return useAuth().auth(props.value)
+  return useAuth().auth(props.value)
 }
 </script>
 
 <template>
-    <div>
-        <slot v-if="check()" />
-        <slot v-else name="no-auth" />
-    </div>
+  <div>
+    <slot v-if="check()" />
+    <slot v-else name="no-auth" />
+  </div>
 </template>
