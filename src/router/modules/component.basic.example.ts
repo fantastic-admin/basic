@@ -13,6 +13,14 @@ const routes: Route.recordRaw = {
   },
   children: [
     {
+      path: 'icon',
+      name: 'componentBasicExampleIcon',
+      component: () => import('@/views/component_basic_example/icon.vue'),
+      meta: {
+        title: '图标',
+      },
+    },
+    {
       path: 'button',
       name: 'componentBasicExampleButton',
       component: () => import('@/views/component_basic_example/button.vue'),
@@ -57,7 +65,7 @@ const routes: Route.recordRaw = {
       name: 'componentBasicExampleInputnumber',
       component: () => import('@/views/component_basic_example/inputnumber.vue'),
       meta: {
-        title: '计数器',
+        title: '数字输入框',
       },
     },
     {

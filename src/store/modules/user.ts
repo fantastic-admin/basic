@@ -10,7 +10,7 @@ const useUserStore = defineStore(
       account: localStorage.account || '',
       token: localStorage.token || '',
       failure_time: localStorage.failure_time || '',
-      permissions: [],
+      permissions: [] as string[],
     }),
     getters: {
       isLogin: (state) => {

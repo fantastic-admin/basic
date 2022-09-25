@@ -74,42 +74,42 @@ import Alert from './components/alert.vue'
         <el-button circle>
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:search" />
+              <svg-icon name="ep:search" />
             </el-icon>
           </template>
         </el-button>
         <el-button type="primary" circle>
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:edit" />
+              <svg-icon name="ep:edit" />
             </el-icon>
           </template>
         </el-button>
         <el-button type="success" circle>
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:check" />
+              <svg-icon name="ep:check" />
             </el-icon>
           </template>
         </el-button>
         <el-button type="info" circle>
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:message" />
+              <svg-icon name="ep:message" />
             </el-icon>
           </template>
         </el-button>
         <el-button type="warning" circle>
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:star" />
+              <svg-icon name="ep:star" />
             </el-icon>
           </template>
         </el-button>
         <el-button type="danger" circle>
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:delete" />
+              <svg-icon name="ep:delete" />
             </el-icon>
           </template>
         </el-button>
@@ -181,28 +181,28 @@ import Alert from './components/alert.vue'
       <el-button type="primary">
         <template #icon>
           <el-icon>
-            <svg-icon name="i-ep:edit" />
+            <svg-icon name="ep:edit" />
           </el-icon>
         </template>
       </el-button>
       <el-button type="primary">
         <template #icon>
           <el-icon>
-            <svg-icon name="i-ep:share" />
+            <svg-icon name="ep:share" />
           </el-icon>
         </template>
       </el-button>
       <el-button type="primary">
         <template #icon>
           <el-icon>
-            <svg-icon name="i-ep:delete" />
+            <svg-icon name="ep:delete" />
           </el-icon>
         </template>
       </el-button>
       <el-button type="primary">
         <template #icon>
           <el-icon>
-            <svg-icon name="i-ep:search" />
+            <svg-icon name="ep:search" />
           </el-icon>
         </template>
         搜索
@@ -210,7 +210,7 @@ import Alert from './components/alert.vue'
       <el-button type="primary">
         上传
         <el-icon class="el-icon--right">
-          <svg-icon name="i-ep:upload" />
+          <svg-icon name="ep:upload" />
         </el-icon>
       </el-button>
     </page-main>
@@ -218,14 +218,14 @@ import Alert from './components/alert.vue'
       <el-button-group style="margin-right: 10px;">
         <el-button type="primary">
           <el-icon class="el-icon--left">
-            <svg-icon name="i-ep:arrow-left" />
+            <svg-icon name="ep:arrow-left" />
           </el-icon>
           上一页
         </el-button>
         <el-button type="primary">
           下一页
           <el-icon class="el-icon--right">
-            <svg-icon name="i-ep:arrow-right" />
+            <svg-icon name="ep:arrow-right" />
           </el-icon>
         </el-button>
       </el-button-group>
@@ -233,21 +233,21 @@ import Alert from './components/alert.vue'
         <el-button type="primary">
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:edit" />
+              <svg-icon name="ep:edit" />
             </el-icon>
           </template>
         </el-button>
         <el-button type="primary">
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:share" />
+              <svg-icon name="ep:share" />
             </el-icon>
           </template>
         </el-button>
         <el-button type="primary">
           <template #icon>
             <el-icon>
-              <svg-icon name="i-ep:delete" />
+              <svg-icon name="ep:delete" />
             </el-icon>
           </template>
         </el-button>

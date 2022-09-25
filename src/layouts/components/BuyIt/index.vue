@@ -16,6 +16,16 @@ onMounted(() => {
     position: 'bottom-right',
     duration: 5000,
   })
+
+  setTimeout(() => {
+    ElNotification({
+      type: 'info',
+      title: 'TypeScript 支持',
+      message: 'Fantastic-admin 现已支持 TypeScript',
+      position: 'bottom-right',
+      duration: 3000,
+    })
+  }, 0)
 })
 
 function open(url: string) {
