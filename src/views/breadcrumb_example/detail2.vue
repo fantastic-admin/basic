@@ -1,15 +1,12 @@
-<route>
-{
-    meta: {
-        enabled: false
-    }
-}
+<route lang="yaml">
+meta:
+  enabled: false
 </route>
 
 <template>
-    <div>
-        <page-main>
-            注意看面包屑导航的变化
-        </page-main>
-    </div>
+  <div>
+    <page-main>
+      注意看面包屑导航的变化
+    </page-main>
+  </div>
 </template>

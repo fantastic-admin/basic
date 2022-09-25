@@ -1,5 +1,5 @@
 {
-    "src/**/*.{js,jsx}": "eslint --fix",
-    "src/**/*.{css,scss}": "stylelint --fix --allow-empty-input",
-    "src/**/*.vue": ["eslint --fix", "stylelint --fix --allow-empty-input"]
+  "src/**/*.{js,jsx,ts,tsx}": "eslint --fix",
+  "src/**/*.{css,scss}": "stylelint --fix --allow-empty-input",
+  "src/**/*.vue": ["eslint --fix", "stylelint --fix --allow-empty-input"]
 }

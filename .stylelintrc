@@ -1,48 +1,23 @@
 {
-    "extends": [
-        "stylelint-config-standard",
-        "stylelint-config-recommended-vue/scss"
-    ],
-    "overrides": [
-        {
-            "files": ["**/*.scss"],
-            "customSyntax": "postcss-scss"
-        }
-    ],
-    "plugins": [
-        "stylelint-scss"
-    ],
-    "rules": {
-        "indentation": 4,
-        "rule-empty-line-before": "never",
-        "at-rule-empty-line-before": "never",
-        "at-rule-no-unknown": null,
-        "no-descending-specificity": null,
-        "selector-pseudo-class-no-unknown": null,
-        "property-no-unknown": null,
-        "font-family-no-missing-generic-family-keyword": null,
-        "selector-id-pattern": null,
-        "selector-class-pattern": null,
-        "scss/no-global-function-names": null,
-        "scss/at-import-partial-extension": null,
-        "function-no-unknown": [
-            true,
-            {
-                "ignoreFunctions": [
-                    "v-bind",
-                    "lighten",
-                    "darken"
-                ]
-            }
-        ],
-        "property-no-vendor-prefix": [
-            true,
-            {
-                "ignoreProperties": [
-                    "mask-image"
-                ]
-            }
-        ],
-        "max-line-length": null
+  "extends": [
+    "stylelint-config-standard",
+    "stylelint-config-standard-vue/scss"
+  ],
+  "overrides": [
+    {
+      "files": ["**/*.scss"],
+      "customSyntax": "postcss-scss"
     }
+  ],
+  "plugins": [
+    "stylelint-scss"
+  ],
+  "rules": {
+    "at-rule-no-unknown": null,
+    "no-descending-specificity": null,
+    "property-no-unknown": null,
+    "font-family-no-missing-generic-family-keyword": null,
+    "selector-class-pattern": null,
+    "max-line-length": null
+  }
 }
