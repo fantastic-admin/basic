@@ -140,7 +140,6 @@ const useRouteStore = defineStore(
             routes.forEach(item => flatAsyncRoutes(item))
           }
           else {
-            // @ts-expect-error: ignore
             routes.push(...cloneDeep(state.fileSystemRoutes))
           }
         }
