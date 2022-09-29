@@ -18,7 +18,7 @@ module.exports = {
     const actions = [
       {
         type: 'add',
-        path: 'src/store/modules/{{camelCase name}}.js',
+        path: 'src/store/modules/{{camelCase name}}.ts',
         templateFile: 'plop-templates/store/index.hbs',
       },
     ]
