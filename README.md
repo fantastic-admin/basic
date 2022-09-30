@@ -11,8 +11,8 @@
     ( <a href="https://hooray.github.io/fantastic-admin" target="_blank">备用</a> )
     <span>&nbsp;|&nbsp;</span>
     演示
-    ( <a href="https://hooray.gitee.io/fantastic-admin/vue3/basic" target="_blank">基础版</a>
-    <a href="https://hooray.gitee.io/fantastic-admin/vue3/pro" target="_blank">专业版</a> )
+    ( <a href="https://hooray.gitee.io/fantastic-admin-example" target="_blank">基础版</a>
+    <a href="https://hooray.gitee.io/fantastic-admin-pro-example" target="_blank">专业版</a> )
     <span>&nbsp;|&nbsp;</span>
     <a href="https://hooray.gitee.io/fantastic-admin/support.html" target="_blank">技术支持</a>
     <span>&nbsp;|&nbsp;</span>
