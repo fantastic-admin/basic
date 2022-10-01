@@ -10,11 +10,12 @@ export default function useMenu() {
   function switchTo(index: number | string) {
     menuStore.setActived(index)
     if (settingsStore.menu.switchMainMenuAndPageJump) {
-      if (isExternalLink(menuStore.sidebarMenusFirstDeepestPath))
+      if (isExternalLink(menuStore.sidebarMenusFirstDeepestPath)) {
         window.open(menuStore.sidebarMenusFirstDeepestPath, '_blank')
-
-      else
+      }
+      else {
         router.push(menuStore.sidebarMenusFirstDeepestPath)
+      }
     }
   }
 

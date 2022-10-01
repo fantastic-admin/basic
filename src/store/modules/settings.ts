@@ -40,11 +40,7 @@ const useSettingsStore = defineStore(
           }
           else {
             // 如果为桌面设备，再根据页面宽度判断是否需要切换为移动端展示
-            if (width < 992)
-              this.mode = 'mobile'
-
-            else
-              this.mode = 'pc'
+            this.mode = width < 992 ? 'mobile' : 'pc'
           }
         }
         else {
@@ -54,8 +50,9 @@ const useSettingsStore = defineStore(
       // 切换侧边栏导航展开/收起
       toggleSidebarCollapse() {
         this.menu.subMenuCollapse = !this.menu.subMenuCollapse
-        if (this.mode === 'pc')
+        if (this.mode === 'pc') {
           this.subMenuCollapseLastStatus = !this.subMenuCollapseLastStatus
+        }
       },
       // 设置主题颜色模式
       setColorScheme(color: Required<Settings.app>['colorScheme']) {

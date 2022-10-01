@@ -75,15 +75,15 @@ const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const fileExt = fileName.at(-1)
   const isTypeOk = props.ext.includes(fileExt)
   const isSizeOk = file.size / 1024 / 1024 < props.size
-  if (!isTypeOk)
+  if (!isTypeOk) {
     ElMessage.error(`上传图片只支持 ${props.ext.join(' / ')} 格式！`)
-
-  if (!isSizeOk)
+  }
+  if (!isSizeOk) {
     ElMessage.error(`上传图片大小不能超过 ${props.size}MB！`)
-
-  if (isTypeOk && isSizeOk)
+  }
+  if (isTypeOk && isSizeOk) {
     uploadData.value.progress.preview = URL.createObjectURL(file)
-
+  }
   return isTypeOk && isSizeOk
 }
 const onProgress: UploadProps['onProgress'] = (file) => {

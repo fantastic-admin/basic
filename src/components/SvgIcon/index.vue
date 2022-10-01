@@ -32,9 +32,9 @@ const transformStyle = computed(() => {
         break
     }
   }
-  if (props.rotate !== 0)
+  if (props.rotate !== 0) {
     style.push(`rotate(${props.rotate}deg)`)
-
+  }
   return `transform: ${style.join(' ')};`
 })
 </script>

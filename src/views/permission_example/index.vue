@@ -27,18 +27,20 @@ function accountChange(val: any) {
   })
 }
 function permissionCheck(permissions: string | string[]) {
-  if (auth(permissions))
+  if (auth(permissions)) {
     ElMessage.success('校验通过')
-
-  else
+  }
+  else {
     ElMessage.error('校验不通过')
+  }
 }
 function permissionCheck2(permissions: string[]) {
-  if (authAll(permissions))
+  if (authAll(permissions)) {
     ElMessage.success('校验通过')
-
-  else
+  }
+  else {
     ElMessage.error('校验不通过')
+  }
 }
 </script>
 

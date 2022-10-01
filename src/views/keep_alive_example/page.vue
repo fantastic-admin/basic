@@ -30,11 +30,12 @@ onBeforeRouteLeave((to, from) => {
   if (openKeepAlive.value) {
     // 因为并不是所有的路由跳转都需要将当前页面进行缓存，例如最常见的情况，从列表页进入详情页，则需要将列表页缓存，而从列表页跳转到其它页面，则不需要将列表页缓存
     // 所以下面的代码意思就是，如果目标路由的 name 是 keepAliveExampleDetail 或者 keepAliveExampleNestedDetail ，则将当前页面组件的 name 添加进 keep-alive 中，否则则删除
-    if (['keepAliveExampleDetail', 'keepAliveExampleNestedDetail'].includes(to.name as string))
+    if (['keepAliveExampleDetail', 'keepAliveExampleNestedDetail'].includes(to.name as string)) {
       componentName && keepAliveStore.add(componentName)
-
-    else
+    }
+    else {
       componentName && keepAliveStore.remove(componentName)
+    }
   }
   else {
     componentName && keepAliveStore.remove(componentName)

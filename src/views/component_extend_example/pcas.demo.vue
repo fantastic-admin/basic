@@ -28,8 +28,9 @@ const rules = ref<FormRules>({
 })
 function submitForm() {
   formRef.value?.validate((valid) => {
-    if (valid)
+    if (valid) {
       ElMessage('提交成功')
+    }
   })
 }
 </script>

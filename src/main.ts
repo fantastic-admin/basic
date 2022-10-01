@@ -13,8 +13,9 @@ import 'virtual:svg-icons-register'
 import '@/assets/styles/globals.scss'
 // 加载 iconify 图标（element plus）
 import { downloadAndInstall } from '@/iconify-ep'
-if (useSettingsStore().app.iconifyOfflineUse)
+if (useSettingsStore().app.iconifyOfflineUse) {
   downloadAndInstall()
+}
 
 const app = createApp(App)
 app.use(ElementPlus)

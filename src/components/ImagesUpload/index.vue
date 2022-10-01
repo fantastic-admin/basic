@@ -81,12 +81,12 @@ function remove(index: number) {
 // 移动
 function move(index: number, type: 'left' | 'right') {
   const url = props.url
-  if (type === 'left' && index !== 0)
+  if (type === 'left' && index !== 0) {
     url[index] = url.splice(index - 1, 1, url[index])[0]
-
-  if (type === 'right' && index !== url.length - 1)
+  }
+  if (type === 'right' && index !== url.length - 1) {
     url[index] = url.splice(index + 1, 1, url[index])[0]
-
+  }
   emit('update:url', url)
 }
 
@@ -95,15 +95,15 @@ const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const fileExt = fileName.at(-1)
   const isTypeOk = props.ext.includes(fileExt)
   const isSizeOk = file.size / 1024 / 1024 < props.size
-  if (!isTypeOk)
+  if (!isTypeOk) {
     ElMessage.error(`上传图片只支持 ${props.ext.join(' / ')} 格式！`)
-
-  if (!isSizeOk)
+  }
+  if (!isSizeOk) {
     ElMessage.error(`上传图片大小不能超过 ${props.size}MB！`)
-
-  if (isTypeOk && isSizeOk)
+  }
+  if (isTypeOk && isSizeOk) {
     uploadData.value.progress.preview = URL.createObjectURL(file)
-
+  }
   return isTypeOk && isSizeOk
 }
 const onProgress: UploadProps['onProgress'] = (file) => {

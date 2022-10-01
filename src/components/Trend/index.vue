@@ -24,9 +24,9 @@ const props = defineProps({
 
 const isUp = computed(() => {
   let isUp = props.type === 'up'
-  if (props.reverse)
+  if (props.reverse) {
     isUp = !isUp
-
+  }
   return isUp
 })
 </script>

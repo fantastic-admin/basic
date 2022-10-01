@@ -17,8 +17,9 @@ const props = defineProps({
 const hasChildren = computed(() => {
   let flag = true
   if (props.item.children) {
-    if (props.item.children.every(item => item.meta.sidebar === false))
+    if (props.item.children.every(item => item.meta.sidebar === false)) {
       flag = false
+    }
   }
   else {
     flag = false

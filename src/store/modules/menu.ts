@@ -75,8 +75,9 @@ function getDefaultOpenedPaths(menus: Menu.recordRaw[], rootPath = '') {
     if (item.path && item.meta.defaultOpened && item.children) {
       defaultOpenedPaths.push(resolveRoutePath(rootPath, item.path))
       const childrenDefaultOpenedPaths = getDefaultOpenedPaths(item.children, resolveRoutePath(rootPath, item.path))
-      if (childrenDefaultOpenedPaths.length > 0)
+      if (childrenDefaultOpenedPaths.length > 0) {
         defaultOpenedPaths.push(...childrenDefaultOpenedPaths)
+      }
     }
   })
   return defaultOpenedPaths
@@ -133,9 +134,9 @@ const useMenuStore = defineStore(
       defaultOpenedPaths() {
         const settingsStore = useSettingsStore()
         let defaultOpenedPaths: string[] = []
-        if (settingsStore.app.routeBaseOn !== 'filesystem')
+        if (settingsStore.app.routeBaseOn !== 'filesystem') {
           defaultOpenedPaths = getDefaultOpenedPaths(this.sidebarMenus)
-
+        }
         return defaultOpenedPaths
       },
     },
@@ -194,8 +195,9 @@ const useMenuStore = defineStore(
               item.children.some((r) => {
                 return data.indexOf(`${r.path}/`) === 0 || data === r.path
               })
-            )
+            ) {
               this.actived = index
+            }
           })
         }
       },

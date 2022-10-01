@@ -20,18 +20,20 @@ const files = ref([
 ])
 
 const handleSuccess1: UploadProps['onSuccess'] = (res) => {
-  if (res.error === '')
+  if (res.error === '') {
     image.value = res.data.path
-
-  else
+  }
+  else {
     ElMessage.warning(res.error)
+  }
 }
 const handleSuccess2: UploadProps['onSuccess'] = (res) => {
-  if (res.error === '')
+  if (res.error === '') {
     images.value.push(res.data.path)
-
-  else
+  }
+  else {
     ElMessage.warning(res.error)
+  }
 }
 const handleSuccess3: UploadProps['onSuccess'] = (res, file, fileList) => {
   if (res.error === '') {

@@ -8,9 +8,9 @@ import Alert from './components/alert.vue'
 
 const makeRange = (start: number, end: number) => {
   const result: number[] = []
-  for (let i = start; i <= end; i++)
+  for (let i = start; i <= end; i++) {
     result.push(i)
-
+  }
   return result
 }
 
@@ -24,20 +24,23 @@ const disabledHours = () => {
   return makeRange(0, 16).concat(makeRange(19, 23))
 }
 const disabledMinutes = (hour: number) => {
-  if (hour === 17)
+  if (hour === 17) {
     return makeRange(0, 29)
-
-  else if (hour === 18)
+  }
+  else if (hour === 18) {
     return makeRange(31, 59)
-
-  else
+  }
+  else {
     return makeRange(0, 59)
+  }
 }
 const disabledSeconds = (hour: number, minute: number) => {
-  if (hour === 18 && minute === 30)
+  if (hour === 18 && minute === 30) {
     return makeRange(1, 59)
-  else
+  }
+  else {
     return makeRange(0, 59)
+  }
 }
 </script>
 

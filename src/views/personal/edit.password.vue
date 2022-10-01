@@ -32,11 +32,12 @@ const rules = ref<FormRules>({
     { required: true, message: '请输入新密码', trigger: 'blur' },
     {
       validator: (rule: any, value: any, callback: any) => {
-        if (value !== form.value.newpassword)
+        if (value !== form.value.newpassword) {
           callback(new Error('请确认新密码'))
-
-        else
+        }
+        else {
           callback()
+        }
       },
     },
   ],

@@ -91,18 +91,20 @@ function anyToCode(value: any[], dictionarie: any[] = pcasData.value) {
   const input: string[] = []
   if (value.length > 0) {
     const findItem = dictionarie.find((item) => {
-      if (props.format === 'code')
+      if (props.format === 'code') {
         return item.code === value[0]
-
-      else if (props.format === 'name')
+      }
+      else if (props.format === 'name') {
         return item.name === value[0]
-
-      else
+      }
+      else {
         return item.name === value[0].name && item.code === value[0].code
+      }
     })
     input.push(findItem.code)
-    if (findItem.children)
+    if (findItem.children) {
       input.push(...anyToCode(value.slice(1 - value.length), findItem.children))
+    }
   }
   return input
 }
@@ -125,8 +127,9 @@ function codeToAny(codes: string[], dictionarie: any[] = pcasData.value): any {
         })
     }
     const newCodes = codes.slice(1 - codes.length)
-    if (newCodes.length > 0 && findItem.children)
+    if (newCodes.length > 0 && findItem.children) {
       output.push(...codeToAny(newCodes, findItem.children))
+    }
   }
   return output
 }

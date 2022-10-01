@@ -22,9 +22,9 @@ const breadcrumbList = computed(() => {
       title: settingsStore.dashboard.title,
     })
   }
-  if (route.meta.breadcrumbNeste)
+  if (route.meta.breadcrumbNeste) {
     breadcrumbList.push(...route.meta.breadcrumbNeste.filter(item => item.hide === false))
-
+  }
   return breadcrumbList
 })
 

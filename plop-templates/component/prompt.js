@@ -36,22 +36,23 @@ module.exports = {
       name: 'name',
       message: '请输入组件名称',
       validate: (v) => {
-        if (!v || v.trim === '')
+        if (!v || v.trim === '') {
           return '组件名称不能为空'
-
-        else
+        }
+        else {
           return true
+        }
       },
     },
   ],
   actions: (data) => {
     let path = ''
-    if (data.isGlobal)
+    if (data.isGlobal) {
       path = 'src/components/{{properCase name}}/index.vue'
-
-    else
+    }
+    else {
       path = `${data.path}/components/{{properCase name}}/index.vue`
-
+    }
     const actions = [
       {
         type: 'add',
