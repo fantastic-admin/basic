@@ -19,11 +19,12 @@ const menuStore = useMenuStore()
 
 watch(() => settingsStore.menu.subMenuCollapse, (val) => {
   if (settingsStore.mode === 'mobile') {
-    if (!val)
+    if (!val) {
       document.body.classList.add('hidden')
-
-    else
+    }
+    else {
       document.body.classList.remove('hidden')
+    }
   }
 })
 

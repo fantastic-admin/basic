@@ -31,8 +31,9 @@ onMounted(() => {
 const { copy, copied, isSupported } = useClipboard()
 
 watch(copied, (val) => {
-  if (val)
+  if (val) {
     ElMessage.success('复制成功，请粘贴到 src/settings.ts 文件中！')
+  }
 })
 
 function handleCopy() {

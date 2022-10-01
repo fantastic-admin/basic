@@ -19,11 +19,12 @@ const form = ref({
 })
 
 const handleSuccess: UploadProps['onSuccess'] = (res) => {
-  if (res.error === '')
+  if (res.error === '') {
     form.value.headimg = res.data.path
-
-  else
+  }
+  else {
     ElMessage.warning(res.error)
+  }
 }
 const editPassword = () => {
   router.push({

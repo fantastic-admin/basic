@@ -47,12 +47,13 @@ function formatBackRoutes(routes: any, views = import.meta.glob('../../views/**/
         route.component = () => import('@/layouts/index.vue')
         break
       default:
-        if (route.component)
+        if (route.component) {
           route.component = views[`../../views/${route.component}`]
+        }
     }
-    if (route.children)
+    if (route.children) {
       route.children = formatBackRoutes(route.children, views)
-
+    }
     return route
   })
 }
@@ -91,8 +92,9 @@ function flatAsyncRoutesRecursive(routes: Route.recordRaw[], breadcrumb: Route.b
         // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
         if (res.some(v => v.path === item.path)) {
           res.forEach((v, i) => {
-            if (v.path === item.path)
+            if (v.path === item.path) {
               res[i] = item
+            }
           })
         }
         else {

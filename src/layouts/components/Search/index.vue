@@ -38,15 +38,15 @@ const resultList = computed(() => {
   let result = []
   result = sourceList.value.filter((item) => {
     let flag = false
-    if (item.title.includes(searchInput.value))
+    if (item.title.includes(searchInput.value)) {
       flag = true
-
-    if (item.path.includes(searchInput.value))
+    }
+    if (item.path.includes(searchInput.value)) {
       flag = true
-
-    if (item.breadcrumb.some(b => b.includes(searchInput.value)))
+    }
+    if (item.breadcrumb.some(b => b.includes(searchInput.value))) {
       flag = true
-
+    }
     return flag
   })
   return result
@@ -111,9 +111,9 @@ onMounted(() => {
 
 function hasChildren(item: Route.recordRaw) {
   let flag = true
-  if (item.children && item.children.every(i => i.meta.sidebar === false))
+  if (item.children && item.children.every(i => i.meta.sidebar === false)) {
     flag = false
-
+  }
   return flag
 }
 function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string, breadcrumb?: string[]) {
@@ -127,12 +127,12 @@ function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string,
       else {
         breadcrumbTemp.push(typeof item.meta.title === 'function' ? item.meta.title() : item.meta.title)
         let path = ''
-        if (isExternalLink(item.path))
+        if (isExternalLink(item.path)) {
           path = item.path
-
-        else
+        }
+        else {
           path = basePath ? [basePath, item.path].join('/') : item.path
-
+        }
         sourceList.value.push({
           icon: item.meta.icon || icon,
           title: typeof item.meta.title === 'function' ? item.meta.title() : item.meta.title,
@@ -165,24 +165,25 @@ function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?:
 function keyUp() {
   if (resultList.value.length) {
     actived.value -= 1
-    if (actived.value < 0)
+    if (actived.value < 0) {
       actived.value = resultList.value.length - 1
-
+    }
     handleScroll()
   }
 }
 function keyDown() {
   if (resultList.value.length) {
     actived.value += 1
-    if (actived.value > resultList.value.length - 1)
+    if (actived.value > resultList.value.length - 1) {
       actived.value = 0
-
+    }
     handleScroll()
   }
 }
 function keyEnter() {
-  if (actived.value !== -1)
+  if (actived.value !== -1) {
     searchResultItemRef.value[actived.value].click()
+  }
 }
 function handleScroll() {
   let scrollTo = 0
@@ -192,11 +193,12 @@ function handleScroll() {
     const activedClientHeight = searchResultItemRef.value[actived.value].clientHeight
     const searchScrollTop = searchResultRef.value.scrollTop
     const searchClientHeight = searchResultRef.value.clientHeight
-    if (activedOffsetTop + activedClientHeight > searchScrollTop + searchClientHeight)
+    if (activedOffsetTop + activedClientHeight > searchScrollTop + searchClientHeight) {
       scrollTo = activedOffsetTop + activedClientHeight - searchClientHeight
-
-    else if (activedOffsetTop <= searchScrollTop)
+    }
+    else if (activedOffsetTop <= searchScrollTop) {
       scrollTo = activedOffsetTop
+    }
   }
   searchResultRef.value.scrollTo({
     top: scrollTo,
@@ -204,11 +206,12 @@ function handleScroll() {
 }
 
 function pageJump(url: string) {
-  if (isExternalLink(url))
+  if (isExternalLink(url)) {
     window.open(url, 'top')
-
-  else
+  }
+  else {
     router.push(url)
+  }
 }
 </script>
 

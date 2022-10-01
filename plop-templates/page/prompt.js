@@ -28,11 +28,12 @@ module.exports = {
       name: 'name',
       message: '请输入文件名',
       validate: (v) => {
-        if (!v || v.trim === '')
+        if (!v || v.trim === '') {
           return '文件名不能为空'
-
-        else
+        }
+        else {
           return true
+        }
       },
     },
   ],

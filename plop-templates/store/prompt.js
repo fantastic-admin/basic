@@ -6,11 +6,12 @@ module.exports = {
       name: 'name',
       message: '请输入模块名称',
       validate: (v) => {
-        if (!v || v.trim === '')
+        if (!v || v.trim === '') {
           return '模块名称不能为空'
-
-        else
+        }
+        else {
           return true
+        }
       },
     },
   ],

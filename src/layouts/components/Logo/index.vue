@@ -22,9 +22,9 @@ const to = computed(() => {
   const rtn: {
     name?: string
   } = {}
-  if (settingsStore.dashboard.enable)
+  if (settingsStore.dashboard.enable) {
     rtn.name = 'dashboard'
-
+  }
   return rtn
 })
 </script>

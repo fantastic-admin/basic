@@ -16,8 +16,9 @@ const useUserStore = defineStore(
       isLogin: (state) => {
         let retn = false
         if (state.token) {
-          if (new Date().getTime() < parseInt(state.failure_time) * 1000)
+          if (new Date().getTime() < parseInt(state.failure_time) * 1000) {
             retn = true
+          }
         }
         return retn
       },

@@ -14,27 +14,28 @@ const buttonConfig = ref({
 // 侧边栏主导航当前实际宽度
 const mainSidebarActualWidth = computed(() => {
   let actualWidth = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width'))
-  if (['head', 'single'].includes(settingsStore.menu.menuMode))
+  if (['head', 'single'].includes(settingsStore.menu.menuMode)) {
     actualWidth = 0
-
+  }
   return `${actualWidth}px`
 })
 
 // 侧边栏次导航当前实际宽度
 const subSidebarActualWidth = computed(() => {
   let actualWidth = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width'))
-  if (settingsStore.menu.subMenuCollapse)
+  if (settingsStore.menu.subMenuCollapse) {
     actualWidth = 64
-
+  }
   return `${actualWidth}px`
 })
 
 watch(() => settingsStore.app.colorScheme, () => {
-  if (settingsStore.app.colorScheme === 'dark')
+  if (settingsStore.app.colorScheme === 'dark') {
     document.documentElement.classList.add('dark')
-
-  else
+  }
+  else {
     document.documentElement.classList.remove('dark')
+  }
 }, {
   immediate: true,
 })

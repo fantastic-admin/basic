@@ -15,9 +15,9 @@ const emit = defineEmits(['checkAll', 'checkNull'])
 const checkAll = computed({
   get() {
     let flag = false
-    if (props.data.length !== 0 && props.data.length === props.selectionData.length)
+    if (props.data.length !== 0 && props.data.length === props.selectionData.length) {
       flag = true
-
+    }
     return flag
   },
   set(newVal) {
@@ -27,9 +27,9 @@ const checkAll = computed({
 
 const isIndeterminate = computed(() => {
   let flag = false
-  if (props.selectionData.length > 0 && props.selectionData.length < props.data.length)
+  if (props.selectionData.length > 0 && props.selectionData.length < props.data.length) {
     flag = true
-
+  }
   return flag
 })
 </script>

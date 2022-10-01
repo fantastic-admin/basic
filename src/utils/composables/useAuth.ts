@@ -5,11 +5,12 @@ export default function useAuth() {
   function hasPermission(permission: string) {
     const settingsStore = useSettingsStore()
     const userStore = useUserStore()
-    if (settingsStore.app.enablePermission)
+    if (settingsStore.app.enablePermission) {
       return userStore.permissions.includes(permission)
-
-    else
+    }
+    else {
       return true
+    }
   }
 
   function auth(value: string | string[]) {

@@ -4,8 +4,9 @@ import spritesmith from 'vite-plugin-spritesmith'
 export default function createSpritesmith(isBuild) {
   const spriteDirnames: string[] = []
   fs.readdirSync('src/assets/sprites').forEach((dirname) => {
-    if (fs.statSync(`src/assets/sprites/${dirname}`).isDirectory())
+    if (fs.statSync(`src/assets/sprites/${dirname}`).isDirectory()) {
       spriteDirnames.push(dirname)
+    }
   })
   const plugin: any[] = []
   spriteDirnames.forEach((item) => {

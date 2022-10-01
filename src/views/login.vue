@@ -46,12 +46,12 @@ function handleLogin() {
       loading.value = true
       userStore.login(loginForm.value).then(() => {
         loading.value = false
-        if (loginForm.value.remember)
+        if (loginForm.value.remember) {
           localStorage.setItem('login_account', loginForm.value.account)
-
-        else
+        }
+        else {
           localStorage.removeItem('login_account')
-
+        }
         router.push(redirect.value)
       }).catch(() => {
         loading.value = false
@@ -85,11 +85,12 @@ const registerRules = ref<FormRules>({
     { required: true, trigger: 'blur', message: '请再次输入密码' },
     {
       validator: (rule, value, callback) => {
-        if (value !== registerForm.value.password)
+        if (value !== registerForm.value.password) {
           callback(new Error('两次输入的密码不一致'))
-
-        else
+        }
+        else {
           callback()
+        }
       },
     },
   ],

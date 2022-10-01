@@ -5,11 +5,11 @@ export function isExternalLink(path: string) {
 }
 
 export function resolveRoutePath(basePath: string, routePath: string) {
-  if (isExternalLink(routePath))
+  if (isExternalLink(routePath)) {
     return routePath
-
-  if (isExternalLink(basePath))
+  }
+  if (isExternalLink(basePath)) {
     return basePath
-
+  }
   return basePath ? path.resolve(basePath, routePath) : routePath
 }
