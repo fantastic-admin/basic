@@ -1,12 +1,10 @@
 // 文字超出隐藏，默认为单行超出隐藏，可设置多行
 @mixin text-overflow($line: 1, $fixed-width: true) {
-  @if ($line == 1 and $fixed-width == true) {
+  @if $line == 1 and $fixed-width == true {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-  }
-
-  @else {
+  } @else {
     /* stylelint-disable-next-line value-no-vendor-prefix */
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -19,17 +17,17 @@
 @mixin position-center($type: x) {
   position: absolute;
 
-  @if ($type == x) {
+  @if $type == x {
     left: 50%;
     transform: translateX(-50%);
   }
 
-  @if ($type == y) {
+  @if $type == y {
     top: 50%;
     transform: translateY(-50%);
   }
 
-  @if ($type == xy) {
+  @if $type == xy {
     left: 50%;
     top: 50%;
     transform: translateX(-50%) translateY(-50%);
