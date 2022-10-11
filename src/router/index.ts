@@ -30,38 +30,27 @@ router.beforeEach(async (to, from, next) => {
     if (routeStore.isGenerate) {
       // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
       settingsStore.menu.menuMode !== 'single' && menuStore.setActived(to.path)
-      if (to.name) {
-        if (to.matched.length !== 0) {
-          // 如果已登录状态下，进入登录页会强制跳转到控制台页面
-          if (to.name === 'login') {
-            next({
-              name: 'dashboard',
-              replace: true,
-            })
-          }
-          else if (!settingsStore.dashboard.enable && to.name === 'dashboard') {
-            // 如果未开启控制台页面，则默认进入侧边栏导航第一个模块
-            if (menuStore.sidebarMenus.length > 0) {
-              next({
-                path: menuStore.sidebarMenusFirstDeepestPath,
-                replace: true,
-              })
-            }
-            else {
-              next()
-            }
-          }
-          else {
-            next()
-          }
-        }
-        else {
-          // 如果是通过 name 跳转，并且 name 对应的路由没有权限时，需要做这步处理，手动指向到 404 页面
+      // 如果已登录状态下，进入登录页会强制跳转到控制台页面
+      if (to.name === 'login') {
+        next({
+          name: 'dashboard',
+          replace: true,
+        })
+      }
+      // 如果未开启控制台，但进入的是控制台页面，则会进入侧边栏导航第一个模块
+      else if (!settingsStore.dashboard.enable && to.name === 'dashboard') {
+        if (menuStore.sidebarMenus.length > 0) {
           next({
-            path: '/404',
+            path: menuStore.sidebarMenusFirstDeepestPath,
+            replace: true,
           })
         }
+        // 如果侧边栏导航第一个模块无法命中，则还是进入控制台页面
+        else {
+          next()
+        }
       }
+      // 正常访问页面
       else {
         next()
       }
