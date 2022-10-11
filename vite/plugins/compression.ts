@@ -7,19 +7,17 @@ export default function createCompression(env) {
   if (compressList.includes('gzip')) {
     plugin.push(
       compression({
-        filter: /\.(js|mjs|json|css)$/i,
         ext: '.gz',
-        deleteOriginFile: true,
+        deleteOriginFile: false,
       }),
     )
   }
   if (compressList.includes('brotli')) {
     plugin.push(
       compression({
-        filter: /\.(js|mjs|json|css)$/i,
         ext: '.br',
         algorithm: 'brotliCompress',
-        deleteOriginFile: true,
+        deleteOriginFile: false,
       }),
     )
   }
