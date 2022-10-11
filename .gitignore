@@ -5,3 +5,4 @@ dist-ssr
 *.local
 src/assets/sprites/*.*
 !src/assets/sprites/.gitkeep
+public/icons
