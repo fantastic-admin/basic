@@ -10,7 +10,7 @@ import menu from '@/menu'
 
 function getDeepestPath(menu: Menu.recordRaw, rootPath = '') {
   let retnPath = ''
-  if (menu.path) {
+  if (menu.path !== undefined) {
     if (menu.children) {
       if (
         menu.children.some((item) => {
