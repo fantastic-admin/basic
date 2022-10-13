@@ -190,15 +190,10 @@ const useMenuStore = defineStore(
         }
         else {
           // 如果是 string 类型，则认为是路由，需要查找对应的主导航索引
-          this.allMenus.forEach((item, index) => {
-            if (
-              item.children.some((r) => {
-                return data.indexOf(`${r.path}/`) === 0 || data === r.path
-              })
-            ) {
-              this.actived = index
-            }
-          })
+          const findIndex = this.allMenus.findIndex(item => item.children.some(r => data.indexOf(`${r.path}/`) === 0 || data === r.path))
+          if (findIndex >= 0) {
+            this.actived = findIndex
+          }
         }
       },
     },
