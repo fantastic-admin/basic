@@ -26,7 +26,7 @@ router.beforeEach(async (to, from, next) => {
   settingsStore.app.enableProgress && (isLoading.value = true)
   // 是否已登录
   if (userStore.isLogin) {
-    // 是否已根据权限动态生成并挂载路由
+    // 是否已根据权限动态生成并注册路由
     if (routeStore.isGenerate) {
       // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
       settingsStore.menu.menuMode !== 'single' && menuStore.setActived(to.path)
@@ -56,6 +56,7 @@ router.beforeEach(async (to, from, next) => {
       }
     }
     else {
+      // 生成动态路由
       switch (settingsStore.app.routeBaseOn) {
         case 'frontend':
           await routeStore.generateRoutesAtFront(asyncRoutes)
@@ -65,6 +66,7 @@ router.beforeEach(async (to, from, next) => {
           break
         case 'filesystem':
           await routeStore.generateRoutesAtFilesystem(asyncRoutesByFilesystem)
+          // 文件系统生成的路由，需要手动生成导航数据
           switch (settingsStore.menu.baseOn) {
             case 'frontend':
               await menuStore.generateMenusAtFront()
@@ -75,6 +77,8 @@ router.beforeEach(async (to, from, next) => {
           }
           break
       }
+      // 注册并记录路由数据
+      // 记录的数据会在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
       const removeRoutes: Function[] = []
       routeStore.flatRoutes.forEach((route) => {
         if (!/^(https?:|mailto:|tel:)/.test(route.path)) {
@@ -86,8 +90,8 @@ router.beforeEach(async (to, from, next) => {
           removeRoutes.push(router.addRoute(route as RouteRecordRaw))
         })
       }
-      // 记录路由数据，在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
       routeStore.setCurrentRemoveRoutes(removeRoutes)
+      // 动态路由生成并注册后，重新进入当前路由
       next({
         path: to.path,
         query: to.query,
@@ -149,7 +153,6 @@ router.afterEach((to, from) => {
       }
     }
   }
-  document.body.scrollTop = 0
   document.documentElement.scrollTop = 0
 })
 
