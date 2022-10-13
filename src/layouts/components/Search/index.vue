@@ -286,7 +286,7 @@ function pageJump(url: string) {
 <style lang="scss" scoped>
 #search {
   position: fixed;
-  z-index: 4000;
+  z-index: 2000;
   top: 0;
   left: 0;
   width: 100%;
