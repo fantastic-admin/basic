@@ -73,7 +73,7 @@ function pathCompile(path: string) {
 <style lang="scss" scoped>
 .topbar-container {
   position: absolute;
-  z-index: 999;
+  z-index: 3000;
   top: 0;
   display: flex;
   align-items: center;
