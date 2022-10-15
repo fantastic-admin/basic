@@ -4,6 +4,7 @@ import router from '@/router/index'
 import useUserStore from '@/store/modules/user'
 
 const toLogin = () => {
+  useUserStore().logout()
   router.push({
     path: '/login',
     query: {
@@ -14,7 +15,7 @@ const toLogin = () => {
 
 const api = axios.create({
   baseURL: import.meta.env.DEV && import.meta.env.VITE_OPEN_PROXY === 'true' ? '/proxy/' : import.meta.env.VITE_APP_API_BASEURL,
-  timeout: 10000,
+  timeout: 1000 * 60,
   responseType: 'json',
 })
 
@@ -47,11 +48,7 @@ api.interceptors.response.use(
      * 请求出错时 error 会返回错误信息
      */
     if (response.data.status === 1) {
-      if (response.data.error === '') {
-        // 请求成功并且没有报错
-        return Promise.resolve(response.data)
-      }
-      else {
+      if (response.data.error !== '') {
         // 这里做错误提示，如果使用了 element plus 则可以使用 Message 进行提示
         // ElMessage.error(options)
         return Promise.reject(response.data)
@@ -60,6 +57,7 @@ api.interceptors.response.use(
     else {
       toLogin()
     }
+    return Promise.resolve(response.data)
   },
   (error) => {
     let message = error.message
