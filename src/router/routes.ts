@@ -10,6 +10,7 @@ import MockExample from './modules/mock.example'
 import JsxExample from './modules/jsx.example'
 import ExternalLinkExample from './modules/external.link.example'
 import EcologyExample from './modules/ecology.example'
+import DataTable from "@/router/modules/data.table";
 import type { Route } from '@/global'
 import useSettingsStore from '@/store/modules/settings'
 
@@ -118,6 +119,7 @@ const asyncRoutes: Route.recordMainRaw[] = [
       icon: 'sidebar-default',
     },
     children: [
+      DataTable,
       MultilevelMenuExample,
       BreadcrumbExample,
       KeepAliveExample,
