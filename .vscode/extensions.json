@@ -4,6 +4,7 @@
     "mikestead.dotenv",
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
-    "vue.volar"
+    "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
   ]
 }
