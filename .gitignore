@@ -3,6 +3,8 @@ node_modules
 dist*
 dist-ssr
 *.local
+.eslintcache
+.stylelintcache
 src/assets/sprites/*.*
 !src/assets/sprites/.gitkeep
 public/icons
