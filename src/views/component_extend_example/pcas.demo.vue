@@ -5,6 +5,7 @@ meta:
 
 <script lang="ts" setup name="ComponentExampleArea">
 import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 const pcas1 = ref([])
 const pcas2 = ref([])

@@ -1,5 +1,4 @@
 {
-  "version": "1.0.0",
   "scripts": {
     "dev": "vite",
     "build:example": "vue-tsc --noEmit && vite build --mode example",

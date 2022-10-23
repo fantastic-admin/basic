@@ -11,8 +11,7 @@ export default ({ mode, command }) => {
   // 全局 scss 资源
   const scssResources = []
   fs.readdirSync('src/assets/styles/resources').forEach((dirname) => {
-    if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile())
-      scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`)
+    if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) { scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`) }
   })
   // css 精灵图相关
   fs.readdirSync('src/assets/sprites').forEach((dirname) => {
@@ -43,22 +42,11 @@ export default ({ mode, command }) => {
     define: {
       __SYSTEM_INFO__: JSON.stringify({
         pkg: {
-          version: pkg.version,
           dependencies: pkg.dependencies,
           devDependencies: pkg.devDependencies,
         },
         lastBuildTime: dayjs().format('YYYY-MM-DD HH:mm:ss'),
       }),
-    },
-    optimizeDeps: {
-      include: [
-        'element-plus',
-        'element-plus/es',
-        'element-plus/es/components/message/style/css',
-        'element-plus/es/components/notification/style/css',
-        'element-plus/es/components/message-box/style/css',
-        'element-plus/es/components/loading/style/css',
-      ],
     },
     plugins: createVitePlugins(env, command === 'build'),
     resolve: {

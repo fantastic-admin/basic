@@ -7,6 +7,7 @@ meta:
 
 <script lang="ts" setup name="Login">
 import type { FormInstance, FormRules } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
 
 const route = useRoute()
