@@ -18,7 +18,7 @@ jobs:
         with:
           # 选择要使用的 node 版本
           node-version: 16.x
-          registry-url: https://registry.npmmirror.com/
+          # registry-url: https://registry.npmmirror.com/
 
       - uses: pnpm/action-setup@v2.2.2
         name: Install pnpm
