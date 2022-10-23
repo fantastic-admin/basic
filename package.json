@@ -8,8 +8,8 @@
     "new": "plop",
     "lint": "npm-run-all -s lint:tsc lint:eslint lint:stylelint",
     "lint:tsc": "vue-tsc --noEmit",
-    "lint:eslint": "eslint src/**/*.{ts,tsx,vue} --fix",
-    "lint:stylelint": "stylelint src/**/*.{css,scss,vue} --fix",
+    "lint:eslint": "eslint src/**/*.{ts,tsx,vue} --cache --fix",
+    "lint:stylelint": "stylelint src/**/*.{css,scss,vue} --cache --fix",
     "prepare": "husky install",
     "postinstall": "esno scripts/prepare.js",
     "preinstall": "npx only-allow pnpm"
