@@ -1,5 +1,6 @@
 <script lang="ts" setup name="ImagesUpload">
 import type { UploadProps } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   action: {

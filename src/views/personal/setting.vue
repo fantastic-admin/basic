@@ -7,6 +7,7 @@ meta:
 
 <script lang="ts" setup name="PersonalSetting">
 import type { UploadProps } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
 const router = useRouter()
 
