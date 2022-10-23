@@ -60,7 +60,7 @@ declare global {
   const useAuth: typeof import('./utils/composables/useAuth')['default']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
-  const useCurrentInstance: typeof import('./utils/composables/useCurrentInstance')['default']
+  const useGlobalProperties: typeof import('./utils/composables/useGlobalProperties')['default']
   const useMainPage: typeof import('./utils/composables/useMainPage')['default']
   const useMenu: typeof import('./utils/composables/useMenu')['default']
   const useRoute: typeof import('vue-router')['useRoute']
