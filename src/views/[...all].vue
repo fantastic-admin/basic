@@ -7,7 +7,6 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import { onBeforeRouteLeave } from 'vue-router'
 const router = useRouter()
 
 const data = ref({
