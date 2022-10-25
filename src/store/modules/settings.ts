@@ -1,3 +1,4 @@
+import { defaultsDeep } from 'lodash-es'
 import type { RecursiveRequired, Settings } from '@/global'
 import settings from '@/settings'
 import settingsDefault from '@/settings.default'
@@ -8,17 +9,13 @@ interface SettingsStore extends RecursiveRequired<Settings.all> {
   title: string
 }
 
-// 合并配置
-Object.keys(settingsDefault).forEach((key) => {
-  Object.assign(settingsDefault[key as keyof Settings.all], settings[key as keyof Settings.all])
-})
-
 const useSettingsStore = defineStore(
   // 唯一ID
   'settings',
   {
     state: (): SettingsStore => ({
-      ...settingsDefault,
+      // 合并配置
+      ...defaultsDeep(settings, settingsDefault),
       // 侧边栏是否收起（用于记录 pc 模式下最后的状态）
       subMenuCollapseLastStatus: settingsDefault.menu.subMenuCollapse,
       // 显示模式，支持：mobile、pc
@@ -60,7 +57,9 @@ const useSettingsStore = defineStore(
       },
       // 更新应用配置
       updateSettings(data: Settings.all) {
-        Object.assign(this, data)
+        Object.keys(data).forEach((key) => {
+          this[key as keyof Settings.all] = defaultsDeep(data[key as keyof Settings.all], this[key as keyof Settings.all])
+        })
       },
     },
   },
