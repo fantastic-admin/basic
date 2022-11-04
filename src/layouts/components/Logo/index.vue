@@ -58,6 +58,7 @@ const to = computed(() => {
   .logo {
     width: 30px;
     height: 30px;
+    object-fit: contain;
 
     & + span {
       margin-left: 10px;
