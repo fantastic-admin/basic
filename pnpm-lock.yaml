@@ -21,7 +21,6 @@ specifiers:
   fs-extra: ^10.1.0
   hotkeys-js: ^3.10.0
   http-server: ^14.1.1
-  husky: ^8.0.1
   lint-staged: ^13.0.3
   lodash-es: ^4.17.21
   mitt: ^3.0.0
@@ -35,6 +34,7 @@ specifiers:
   postcss-html: ^1.5.0
   qs: ^6.11.0
   sass: ^1.56.0
+  simple-git-hooks: ^2.8.1
   stylelint: ^14.14.1
   stylelint-config-standard: ^29.0.0
   stylelint-config-standard-scss: ^6.1.0
@@ -93,12 +93,12 @@ devDependencies:
   esno: 0.16.3
   fs-extra: 10.1.0
   http-server: 14.1.1
-  husky: 8.0.1
   lint-staged: 13.0.3
   npm-run-all: 4.1.5
   plop: 3.1.1
   postcss-html: 1.5.0
   sass: 1.56.0
+  simple-git-hooks: 2.8.1
   stylelint: 14.14.1
   stylelint-config-standard: 29.0.0_stylelint@14.14.1
   stylelint-config-standard-scss: 6.1.0_stylelint@14.14.1
@@ -4017,12 +4017,6 @@ packages:
     engines: {node: '>=12.20.0'}
     dev: true
 
-  /husky/8.0.1:
-    resolution: {integrity: sha512-xs7/chUH/CKdOCs7Zy0Aev9e/dKOMZf3K1Az1nar3tzlv0jfqnYtu235bstsWTmXOR0EfINrPa97yy4Lz6RiKw==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dev: true
-
   /iconv-lite/0.4.24:
     resolution: {integrity: sha512-v3MXnZAcvnywkTUEZomIActle7RXXeedOR31wwl7VlyoXO4Qi9arvSenNQWne1TcRwhCL1HwLI21bEqdpj8/rA==}
     engines: {node: '>=0.10.0'}
@@ -6358,6 +6352,12 @@ packages:
 
   /signal-exit/3.0.7:
     resolution: {integrity: sha512-wnD2ZE+l+SPC/uoS0vXeE9L1+0wuaMqKlfz9AMUo38JsyLSBWSFcHR1Rri62LZc12vLr1gb3jl7iwQhgwpAbGQ==}
+    dev: true
+
+  /simple-git-hooks/2.8.1:
+    resolution: {integrity: sha512-DYpcVR1AGtSfFUNzlBdHrQGPsOhuuEJ/FkmPOOlFysP60AHd3nsEpkGq/QEOdtUyT1Qhk7w9oLmFoMG+75BDog==}
+    hasBin: true
+    requiresBuild: true
     dev: true
 
   /slash/3.0.0:
