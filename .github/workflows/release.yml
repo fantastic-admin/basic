@@ -20,3 +20,68 @@ jobs:
       - run: npx changelogithub # or changelogithub@0.12 if ensure the stable result
         env:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+
+  upload-archive:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Get Release
+        id: last_release
+        uses: joutvhu/get-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          latest: true
+
+      - name: Create Archive
+        uses: thedoctor0/zip-release@main
+        with:
+          type: 'zip'
+          filename: fantastic-admin.${{ steps.last_release.outputs.tag_name }}.zip
+          exclusions: '*.git*'
+
+      - name: Upload Archive To Release
+        uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.last_release.outputs.id }}
+          draft: false
+          file: fantastic-admin.${{ steps.last_release.outputs.tag_name }}.zip
+
+  upload-archive-example:
+    needs: release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: example
+
+      - name: Get Release
+        id: last_release
+        uses: joutvhu/get-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          latest: true
+
+      - name: Create Archive
+        uses: thedoctor0/zip-release@main
+        with:
+          type: 'zip'
+          filename: fantastic-admin.example.${{ steps.last_release.outputs.tag_name }}.zip
+          exclusions: '*.git*'
+
+      - name: Upload Archive To Release
+        uses: xresloader/upload-to-github-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          release_id: ${{ steps.last_release.outputs.id }}
+          draft: false
+          file: fantastic-admin.example.${{ steps.last_release.outputs.tag_name }}.zip
