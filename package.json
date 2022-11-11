@@ -1,5 +1,5 @@
 {
-  "version": "2.1.1",
+  "version": "2.1.3",
   "scripts": {
     "dev": "vite",
     "build:test": "vue-tsc --noEmit && vite build --mode test",
