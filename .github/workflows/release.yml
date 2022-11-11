@@ -42,7 +42,7 @@ jobs:
         with:
           type: 'zip'
           filename: fantastic-admin.${{ steps.last_release.outputs.tag_name }}.zip
-          exclusions: '*.git*'
+          exclusions: '/.git/* /.github/*'
 
       - name: Upload Archive To Release
         uses: xresloader/upload-to-github-release@v1
@@ -75,7 +75,7 @@ jobs:
         with:
           type: 'zip'
           filename: fantastic-admin.example.${{ steps.last_release.outputs.tag_name }}.zip
-          exclusions: '*.git*'
+          exclusions: '/.git/* /.github/*'
 
       - name: Upload Archive To Release
         uses: xresloader/upload-to-github-release@v1
