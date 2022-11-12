@@ -9,6 +9,8 @@ defineProps({
     default: '',
   },
 })
+
+const slots = useSlots()
 </script>
 
 <template>
@@ -23,7 +25,7 @@ defineProps({
         </slot>
       </div>
     </div>
-    <div class="sub">
+    <div v-if="slots.default" class="sub">
       <slot />
     </div>
   </div>
@@ -63,6 +65,17 @@ defineProps({
 
   .sub {
     flex: none;
+  }
+}
+
+[data-mode="mobile"] {
+  .header {
+    flex-direction: column;
+
+    .main {
+      margin-right: auto;
+      margin-bottom: 20px;
+    }
   }
 }
 </style>
