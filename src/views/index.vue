@@ -60,7 +60,7 @@ const oneStepAdminInfo = ref({
           <div>注：在作者就职的公司，本框架已在电商、直播、OA、ERP等多个不同领域的中后台系统中应用并稳定运行</div>
         </div>
       </template>
-      <el-button-group style="margin-right: 10px;">
+      <el-button-group>
         <el-button type="success" size="large" plain @click="open('https://hooray.gitee.io/fantastic-admin/')">
           开发文档
         </el-button>
