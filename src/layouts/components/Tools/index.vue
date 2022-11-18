@@ -12,11 +12,11 @@ const userStore = useUserStore()
 const mainPage = useMainPage()
 const { isFullscreen, toggle } = useFullscreen()
 
-function userCommand(command: 'dashboard' | 'setting' | 'hotkeys' | 'logout') {
+function userCommand(command: 'home' | 'setting' | 'hotkeys' | 'logout') {
   switch (command) {
-    case 'dashboard':
+    case 'home':
       router.push({
-        name: 'dashboard',
+        name: 'home',
       })
       break
     case 'setting':
@@ -85,8 +85,8 @@ function pro() {
       </div>
       <template #dropdown>
         <el-dropdown-menu class="user-dropdown">
-          <el-dropdown-item v-if="settingsStore.dashboard.enable" command="dashboard">
-            控制台
+          <el-dropdown-item v-if="settingsStore.home.enable" command="home">
+            {{ settingsStore.home.title }}
           </el-dropdown-item>
           <el-dropdown-item command="setting">
             个人设置

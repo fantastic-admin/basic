@@ -1,7 +1,7 @@
 <route lang="yaml">
-name: dashboard
+name: home
 meta:
-  title: 控制台
+  title: 主页
 </route>
 
 <script lang="ts" setup>

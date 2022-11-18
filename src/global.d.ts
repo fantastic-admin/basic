@@ -52,15 +52,15 @@ declare namespace Settings {
      */
     routeBaseOn?: 'frontend' | 'backend' | 'filesystem'
   }
-  interface dashboard {
+  interface home {
     /**
-     * 是否开启控制台页面
+     * 是否开启主页页面
      * @默认值 `true`
      */
     enable?: boolean
     /**
-     * 控制台名称
-     * @默认值 `'控制台'`
+     * 主页名称
+     * @默认值 `'主页'`
      */
     title?: string
   }
@@ -189,8 +189,8 @@ declare namespace Settings {
   interface all {
     /** 应用设置 */
     app?: app
-    /** 控制台设置 */
-    dashboard?: dashboard
+    /** 主页设置 */
+    home?: home
     /** 布局设置 */
     layout?: layout
     /** 导航栏设置 */

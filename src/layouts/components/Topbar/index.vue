@@ -16,10 +16,10 @@ const enableSubMenuCollapseButton = computed(() => {
 
 const breadcrumbList = computed(() => {
   const breadcrumbList = []
-  if (settingsStore.dashboard.enable) {
+  if (settingsStore.home.enable) {
     breadcrumbList.push({
-      path: '/dashboard',
-      title: settingsStore.dashboard.title,
+      path: '/',
+      title: settingsStore.home.title,
     })
   }
   if (route.meta.breadcrumbNeste) {
