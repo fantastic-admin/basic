@@ -30,22 +30,22 @@ router.beforeEach(async (to, from, next) => {
     if (routeStore.isGenerate) {
       // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
       settingsStore.menu.menuMode !== 'single' && menuStore.setActived(to.path)
-      // 如果已登录状态下，进入登录页会强制跳转到控制台页面
+      // 如果已登录状态下，进入登录页会强制跳转到主页
       if (to.name === 'login') {
         next({
-          name: 'dashboard',
+          name: 'home',
           replace: true,
         })
       }
-      // 如果未开启控制台，但进入的是控制台页面，则会进入侧边栏导航第一个模块
-      else if (!settingsStore.dashboard.enable && to.name === 'dashboard') {
+      // 如果未开启主页，但进入的是主页，则会进入侧边栏导航第一个模块
+      else if (!settingsStore.home.enable && to.name === 'home') {
         if (menuStore.sidebarMenus.length > 0) {
           next({
             path: menuStore.sidebarMenusFirstDeepestPath,
             replace: true,
           })
         }
-        // 如果侧边栏导航第一个模块无法命中，则还是进入控制台页面
+        // 如果侧边栏导航第一个模块无法命中，则还是进入主页
         else {
           next()
         }
@@ -104,7 +104,7 @@ router.beforeEach(async (to, from, next) => {
       next({
         name: 'login',
         query: {
-          redirect: to.fullPath,
+          redirect: to.fullPath !== '/' ? to.fullPath : undefined,
         },
       })
     }

@@ -12,9 +12,9 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
     enableDynamicTitle: false,
     routeBaseOn: 'frontend',
   },
-  dashboard: {
+  home: {
     enable: true,
-    title: '控制台',
+    title: '主页',
   },
   layout: {
     enableMobileAdaptation: false,

@@ -16,13 +16,6 @@ import useSettingsStore from '@/store/modules/settings'
 // 固定路由（默认路由）
 const constantRoutes: Route.recordRaw[] = [
   {
-    path: '/',
-    redirect: '/dashboard',
-    meta: {
-      title: '',
-    },
-  },
-  {
     path: '/login',
     name: 'login',
     component: () => import('@/views/login.vue'),
@@ -43,33 +36,31 @@ const constantRoutes: Route.recordRaw[] = [
 // 系统路由
 const systemRoutes: Route.recordRaw[] = [
   {
-    path: '/dashboard',
+    path: '/',
     component: () => import('@/layouts/index.vue'),
     meta: {
-      title: () => useSettingsStore().dashboard.title,
+      title: () => useSettingsStore().home.title,
       breadcrumb: false,
     },
     children: [
       {
         path: '',
-        name: 'dashboard',
+        name: 'home',
         component: () => import('@/views/index.vue'),
         meta: {
-          title: () => useSettingsStore().dashboard.title,
+          title: () => useSettingsStore().home.title,
           breadcrumb: false,
         },
       },
-    ],
-  },
-  {
-    path: '/personal',
-    component: () => import('@/layouts/index.vue'),
-    redirect: '/personal/setting',
-    meta: {
-      title: '个人中心',
-      breadcrumb: false,
-    },
-    children: [
+      {
+        path: 'reload',
+        name: 'reload',
+        component: () => import('@/views/reload.vue'),
+        meta: {
+          title: '重新加载',
+          breadcrumb: false,
+        },
+      },
       {
         path: 'setting',
         name: 'personalSetting',
@@ -85,25 +76,6 @@ const systemRoutes: Route.recordRaw[] = [
         component: () => import('@/views/personal/edit.password.vue'),
         meta: {
           title: '修改密码',
-        },
-      },
-    ],
-  },
-  {
-    path: '/reload',
-    component: () => import('@/layouts/index.vue'),
-    meta: {
-      title: '重新加载',
-      breadcrumb: false,
-    },
-    children: [
-      {
-        path: '',
-        name: 'reload',
-        component: () => import('@/views/reload.vue'),
-        meta: {
-          title: '重新加载',
-          breadcrumb: false,
         },
       },
     ],

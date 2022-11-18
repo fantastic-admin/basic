@@ -22,15 +22,15 @@ const to = computed(() => {
   const rtn: {
     name?: string
   } = {}
-  if (settingsStore.dashboard.enable) {
-    rtn.name = 'dashboard'
+  if (settingsStore.home.enable) {
+    rtn.name = 'home'
   }
   return rtn
 })
 </script>
 
 <template>
-  <router-link :to="to" class="title" :class="{ 'is-link': settingsStore.dashboard.enable }" :title="title">
+  <router-link :to="to" class="title" :class="{ 'is-link': settingsStore.home.enable }" :title="title">
     <img v-if="showLogo" :src="logo" class="logo">
     <span v-if="showTitle">{{ title }}</span>
   </router-link>

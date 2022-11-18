@@ -226,23 +226,23 @@ function handleCopy() {
         </div>
         <el-input v-model="settingsStore.copyright.beian" size="small" :disabled="!settingsStore.copyright.enable" />
       </div>
-      <el-divider>控制台</el-divider>
+      <el-divider>主页</el-divider>
       <div class="setting-item">
         <div class="label">
           是否开启
-          <el-tooltip content="该功能开启时，登录成功默认进入控制台页面，反之则默认进入导航栏里第一个导航页面" placement="top">
+          <el-tooltip content="该功能开启时，登录成功默认进入主页，反之则默认进入导航栏里第一个导航页面" placement="top">
             <el-icon>
               <svg-icon name="ep:question-filled" />
             </el-icon>
           </el-tooltip>
         </div>
-        <el-switch v-model="settingsStore.dashboard.enable" />
+        <el-switch v-model="settingsStore.home.enable" />
       </div>
       <div class="setting-item">
         <div class="label">
-          控制台名称
+          主页名称
         </div>
-        <el-input v-model="settingsStore.dashboard.title" size="small" />
+        <el-input v-model="settingsStore.home.title" size="small" />
       </div>
       <el-divider>其它</el-divider>
       <div class="setting-item">
