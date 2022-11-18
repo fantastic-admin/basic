@@ -1,6 +1,7 @@
 <script lang="ts" setup name="SidebarItem">
 // import SidebarItem from './index.vue'
 import { isExternalLink, resolveRoutePath } from '@/utils'
+import useSettingsStore from '@/store/modules/settings'
 import type { Menu } from '@/global'
 
 const props = defineProps({
@@ -13,6 +14,8 @@ const props = defineProps({
     default: '',
   },
 })
+
+const settingsStore = useSettingsStore()
 
 const hasChildren = computed(() => {
   let flag = true
@@ -40,7 +43,7 @@ const hasChildren = computed(() => {
         </el-menu-item>
       </a>
     </router-link>
-    <el-sub-menu v-else :title="item.meta.title" :index="resolveRoutePath(basePath, item.path || '')">
+    <el-sub-menu v-else :title="item.meta.title" :index="settingsStore.app.routeBaseOn !== 'filesystem' ? resolveRoutePath(basePath, item.path || '') : JSON.stringify(item)">
       <template #title>
         <el-icon v-if="item.meta.icon" class="title-icon">
           <svg-icon :name="item.meta.icon" />
