@@ -73,8 +73,6 @@ watch([
   else {
     document.title = import.meta.env.VITE_APP_TITLE
   }
-}, {
-  immediate: true,
 })
 
 onMounted(() => {
