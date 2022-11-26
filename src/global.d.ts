@@ -210,7 +210,7 @@ declare namespace Settings {
 
 declare module 'vue-router' {
   interface RouteMeta {
-    title: string | Function
+    title?: string | Function
     i18n?: string
     icon?: string
     activeIcon?: string
@@ -239,7 +239,7 @@ declare namespace Route {
   }
   interface breadcrumb {
     path: string
-    title: string | Function
+    title?: string | Function
     hide: boolean
   }
 }
@@ -249,7 +249,7 @@ declare namespace Menu {
   interface recordRaw {
     path?: string
     meta: {
-      title: string
+      title?: string
       icon?: string
       defaultOpened?: boolean
       auth?: string | string[]

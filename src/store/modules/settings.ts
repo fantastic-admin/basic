@@ -1,4 +1,5 @@
 import { defaultsDeep } from 'lodash-es'
+import type { RouteMeta } from 'vue-router'
 import type { RecursiveRequired, Settings } from '@/global'
 import settings from '@/settings'
 import settingsDefault from '@/settings.default'
@@ -6,7 +7,7 @@ import settingsDefault from '@/settings.default'
 interface SettingsStore extends RecursiveRequired<Settings.all> {
   subMenuCollapseLastStatus: boolean
   mode: 'pc' | 'mobile'
-  title: string
+  title?: RouteMeta['title']
 }
 
 const useSettingsStore = defineStore(
@@ -25,7 +26,7 @@ const useSettingsStore = defineStore(
     }),
     actions: {
       // 设置网页标题
-      setTitle(title: string) {
+      setTitle(title: SettingsStore['title']) {
         this.title = title
       },
       // 设置访问模式

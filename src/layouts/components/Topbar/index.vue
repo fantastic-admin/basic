@@ -61,7 +61,7 @@ function pathCompile(path: string) {
       <el-breadcrumb v-if="settingsStore.breadcrumb.enable && settingsStore.mode === 'pc' && settingsStore.app.routeBaseOn !== 'filesystem'">
         <transition-group name="breadcrumb">
           <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path" :to="index < breadcrumbList.length - 1 ? pathCompile(item.path) : ''">
-            {{ item.title }}
+            {{ item.title ?? '[ 无标题 ]' }}
           </el-breadcrumb-item>
         </transition-group>
       </el-breadcrumb>

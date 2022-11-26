@@ -119,7 +119,12 @@ router.afterEach((to, from) => {
   const keepAliveStore = useKeepAliveStore()
   settingsStore.app.enableProgress && (isLoading.value = false)
   // 设置页面 title
-  to.meta.title && settingsStore.setTitle(typeof to.meta.title === 'function' ? to.meta.title() : to.meta.title)
+  if (settingsStore.app.routeBaseOn !== 'filesystem') {
+    settingsStore.setTitle(to.meta.breadcrumbNeste?.at(-1)?.title)
+  }
+  else {
+    settingsStore.setTitle(to.meta.title)
+  }
   // 判断当前页面是否开启缓存，如果开启，则将当前页面的 name 信息存入 keep-alive 全局状态
   if (to.meta.cache) {
     const componentName = to.matched.at(-1)?.components?.default.name

@@ -16,8 +16,8 @@ const menuStore = useMenuStore()
 
 interface listTypes {
   icon?: string
-  title: string
-  breadcrumb: string[]
+  title?: string | Function
+  breadcrumb: (string | Function | undefined)[]
   path: string
 }
 
@@ -38,13 +38,37 @@ const resultList = computed(() => {
   let result = []
   result = sourceList.value.filter((item) => {
     let flag = false
-    if (item.title.includes(searchInput.value)) {
-      flag = true
+    if (item.title) {
+      if (typeof item.title === 'function') {
+        if (item.title().includes(searchInput.value)) {
+          flag = true
+        }
+      }
+      else {
+        if (item.title.includes(searchInput.value)) {
+          flag = true
+        }
+      }
     }
     if (item.path.includes(searchInput.value)) {
       flag = true
     }
-    if (item.breadcrumb.some(b => b.includes(searchInput.value))) {
+    if (item.breadcrumb.some((b) => {
+      let flag = false
+      if (b) {
+        if (typeof b === 'function') {
+          if (b().includes(searchInput.value)) {
+            flag = true
+          }
+        }
+        else {
+          if (b.includes(searchInput.value)) {
+            flag = true
+          }
+        }
+      }
+      return flag
+    })) {
       flag = true
     }
     return flag
@@ -116,16 +140,16 @@ function hasChildren(item: Route.recordRaw) {
   }
   return flag
 }
-function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string, breadcrumb?: string[]) {
+function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string, breadcrumb?: (string | Function | undefined)[]) {
   arr.forEach((item) => {
     if (item.meta.sidebar !== false) {
       const breadcrumbTemp = cloneDeep(breadcrumb) || []
       if (item.children && hasChildren(item)) {
-        breadcrumbTemp.push(typeof item.meta.title === 'function' ? item.meta.title() : item.meta.title)
+        breadcrumbTemp.push(item.meta.title)
         getSourceList(item.children, basePath ? [basePath, item.path].join('/') : item.path, item.meta.icon || icon, breadcrumbTemp)
       }
       else {
-        breadcrumbTemp.push(typeof item.meta.title === 'function' ? item.meta.title() : item.meta.title)
+        breadcrumbTemp.push(item.meta.title)
         let path = ''
         if (isExternalLink(item.path)) {
           path = item.path
@@ -135,7 +159,7 @@ function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string,
         }
         sourceList.value.push({
           icon: item.meta.icon || icon,
-          title: typeof item.meta.title === 'function' ? item.meta.title() : item.meta.title,
+          title: item.meta.title,
           breadcrumb: breadcrumbTemp,
           path,
         })
@@ -143,7 +167,7 @@ function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string,
     }
   })
 }
-function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?: string[]) {
+function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?: (string | Function | undefined)[]) {
   arr.forEach((item) => {
     const breadcrumbTemp = cloneDeep(breadcrumb) || []
     if (item.children && item.children.length > 0) {
@@ -265,11 +289,11 @@ function pageJump(url: string) {
           </el-icon>
           <div class="info">
             <div class="title">
-              {{ item.title }}
+              {{ item.title ?? '[ 无标题 ]' }}
             </div>
             <div class="breadcrumb">
               <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
-                {{ bc }}
+                {{ bc ?? '[ 无标题 ]' }}
                 <el-icon>
                   <svg-icon name="ep:arrow-right" />
                 </el-icon>
