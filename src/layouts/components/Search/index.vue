@@ -146,7 +146,7 @@ function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string,
       const breadcrumbTemp = cloneDeep(breadcrumb) || []
       if (item.children && hasChildren(item)) {
         breadcrumbTemp.push(item.meta.title)
-        getSourceList(item.children, basePath ? [basePath, item.path].join('/') : item.path, item.meta.icon || icon, breadcrumbTemp)
+        getSourceList(item.children, basePath ? [basePath, item.path].join('/') : item.path, item.meta.icon ?? icon, breadcrumbTemp)
       }
       else {
         breadcrumbTemp.push(item.meta.title)
@@ -158,7 +158,7 @@ function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string,
           path = basePath ? [basePath, item.path].join('/') : item.path
         }
         sourceList.value.push({
-          icon: item.meta.icon || icon,
+          icon: item.meta.icon ?? icon,
           title: item.meta.title,
           breadcrumb: breadcrumbTemp,
           path,
@@ -172,12 +172,12 @@ function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?:
     const breadcrumbTemp = cloneDeep(breadcrumb) || []
     if (item.children && item.children.length > 0) {
       breadcrumbTemp.push(item.meta.title)
-      getSourceListByMenus(item.children, item.meta.icon, breadcrumbTemp)
+      getSourceListByMenus(item.children, item.meta.icon ?? icon, breadcrumbTemp)
     }
     else {
       breadcrumbTemp.push(item.meta.title)
       sourceList.value.push({
-        icon: item.meta.icon || icon,
+        icon: item.meta.icon ?? icon,
         title: item.meta.title,
         path: item.path as string,
         breadcrumb: breadcrumbTemp,
