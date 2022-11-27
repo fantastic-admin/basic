@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash-es'
+import type { RouteRecordRaw } from 'vue-router'
 import useSettingsStore from './settings'
 import useUserStore from './user'
 import api from '@/api'
@@ -6,13 +7,13 @@ import { resolveRoutePath } from '@/utils'
 import { systemRoutes } from '@/router/routes'
 import type { Route } from '@/global'
 
-function hasPermission(permissions: string[], route: Route.recordMainRaw | Route.recordRaw) {
+function hasPermission(permissions: string[], route: Route.recordMainRaw | RouteRecordRaw) {
   let isAuth = false
   if (route.meta?.auth) {
     isAuth = permissions.some((auth) => {
-      return typeof route.meta.auth === 'string'
+      return typeof route.meta?.auth === 'string'
         ? route.meta.auth === auth
-        : typeof route.meta.auth === 'object'
+        : typeof route.meta?.auth === 'object'
           ? route.meta.auth.includes(auth)
           : false
     })
@@ -23,7 +24,7 @@ function hasPermission(permissions: string[], route: Route.recordMainRaw | Route
   return isAuth
 }
 
-function filterAsyncRoutes<T extends Route.recordMainRaw[] | Route.recordRaw[]>(routes: T, permissions: string[]): T {
+function filterAsyncRoutes<T extends Route.recordMainRaw[] | RouteRecordRaw[]>(routes: T, permissions: string[]): T {
   const res: any = []
   routes.forEach((route) => {
     if (hasPermission(permissions, route)) {
@@ -59,31 +60,34 @@ function formatBackRoutes(routes: any, views = import.meta.glob('../../views/**/
 }
 
 // 将多层嵌套路由处理成两层，保留顶层和最子层路由，中间层级将被拍平
-function flatAsyncRoutes<T extends Route.recordRaw>(routes: T): T {
+function flatAsyncRoutes<T extends RouteRecordRaw>(routes: T): T {
   if (routes.children) {
     routes.children = flatAsyncRoutesRecursive(routes.children, [{
       path: routes.path,
-      title: routes.meta.title,
-      hide: !routes.meta.breadcrumb && routes.meta.breadcrumb === false,
+      title: routes.meta?.title,
+      hide: !routes.meta?.breadcrumb && routes.meta?.breadcrumb === false,
     }], routes.path)
   }
   return routes
 }
-function flatAsyncRoutesRecursive(routes: Route.recordRaw[], breadcrumb: Route.breadcrumb[] = [], baseUrl = ''): Route.recordRaw[] {
-  const res: Route.recordRaw[] = []
+function flatAsyncRoutesRecursive(routes: RouteRecordRaw[], breadcrumb: Route.breadcrumb[] = [], baseUrl = ''): RouteRecordRaw[] {
+  const res: RouteRecordRaw[] = []
   routes.forEach((route) => {
     if (route.children) {
       const childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
       const tmpBreadcrumb = cloneDeep(breadcrumb)
-      if (route.meta.breadcrumb !== false) {
+      if (route.meta?.breadcrumb !== false) {
         tmpBreadcrumb.push({
           path: childrenBaseUrl,
-          title: route.meta.title,
-          hide: !route.meta.breadcrumb && route.meta.breadcrumb === false,
+          title: route.meta?.title,
+          hide: !route.meta?.breadcrumb,
         })
       }
       const tmpRoute = cloneDeep(route)
       tmpRoute.path = childrenBaseUrl
+      if (!tmpRoute.meta) {
+        tmpRoute.meta = {}
+      }
       tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
       delete tmpRoute.children
       res.push(tmpRoute)
@@ -109,9 +113,12 @@ function flatAsyncRoutesRecursive(routes: Route.recordRaw[], breadcrumb: Route.b
       const tmpBreadcrumb = cloneDeep(breadcrumb)
       tmpBreadcrumb.push({
         path: tmpRoute.path,
-        title: tmpRoute.meta.title,
-        hide: !tmpRoute.meta.breadcrumb && tmpRoute.meta.breadcrumb === false,
+        title: tmpRoute.meta?.title,
+        hide: !tmpRoute.meta?.breadcrumb && tmpRoute.meta?.breadcrumb === false,
       })
+      if (!tmpRoute.meta) {
+        tmpRoute.meta = {}
+      }
       tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
       res.push(tmpRoute)
     }
@@ -126,14 +133,14 @@ const useRouteStore = defineStore(
     state: () => ({
       isGenerate: false,
       routes: [] as Route.recordMainRaw[],
-      fileSystemRoutes: [] as Route.recordRaw[],
+      fileSystemRoutes: [] as RouteRecordRaw[],
       currentRemoveRoutes: [] as Function[],
     }),
     getters: {
       // 扁平化路由（将三级及以上路由数据拍平成二级）
       flatRoutes: (state) => {
         const settingsStore = useSettingsStore()
-        const routes: Route.recordRaw[] = []
+        const routes: RouteRecordRaw[] = []
         if (state.routes) {
           if (settingsStore.app.routeBaseOn !== 'filesystem') {
             state.routes.forEach((item) => {
@@ -171,7 +178,7 @@ const useRouteStore = defineStore(
           }
           // 设置 routes 数据
           this.isGenerate = true
-          this.routes = accessedRoutes.filter(item => item.children?.length !== 0)
+          this.routes = accessedRoutes.filter(item => item.children?.length !== 0) as any
           resolve()
         })
       },
@@ -195,13 +202,13 @@ const useRouteStore = defineStore(
             }
             // 设置 routes 数据
             this.isGenerate = true
-            this.routes = accessedRoutes.filter(item => item.children.length !== 0)
+            this.routes = accessedRoutes.filter(item => item.children.length !== 0) as any
             resolve()
           })
         })
       },
       // 根据权限动态生成路由（文件系统生成）
-      generateRoutesAtFilesystem(asyncRoutes: Route.recordRaw[]) {
+      generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {
         // eslint-disable-next-line no-async-promise-executor
         return new Promise<void>(async (resolve) => {
           const settingsStore = useSettingsStore()
@@ -217,7 +224,7 @@ const useRouteStore = defineStore(
           }
           // 设置 routes 数据
           this.isGenerate = true
-          this.fileSystemRoutes = accessedRoutes.filter(item => item.children?.length !== 0)
+          this.fileSystemRoutes = accessedRoutes.filter(item => item.children?.length !== 0) as any
           resolve()
         })
       },

@@ -1,8 +1,8 @@
-import type { Route } from '@/global'
+import type { RouteRecordRaw } from 'vue-router'
 
 const Layout = () => import('@/layouts/index.vue')
 
-const routes: Route.recordRaw[] = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/official',
     meta: {
@@ -12,12 +12,14 @@ const routes: Route.recordRaw[] = [
     children: [
       {
         path: 'https://hooray.gitee.io/fantastic-startkit/',
+        redirect: '',
         meta: {
           title: 'Fantastic-startkit 项目启动套件',
         },
       },
       {
         path: 'https://hooray.gitee.io/one-step-admin/',
+        redirect: '',
         meta: {
           title: 'One-step-admin 干啥都快人一步的中后台框架',
         },
@@ -33,12 +35,14 @@ const routes: Route.recordRaw[] = [
     children: [
       {
         path: 'https://www.vform666.com',
+        redirect: '',
         meta: {
           title: 'VForm 低代码表单',
         },
       },
       {
         path: 'https://gitee.com/sciqtw/quickadmin',
+        redirect: '',
         meta: {
           title: 'QuickAdmin 快速开发管理框架',
         },

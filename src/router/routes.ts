@@ -1,5 +1,6 @@
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
+import type { RouteRecordRaw } from 'vue-router'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
 import BreadcrumbExample from './modules/breadcrumb.example'
 import KeepAliveExample from './modules/keep.alive.example'
@@ -14,7 +15,7 @@ import type { Route } from '@/global'
 import useSettingsStore from '@/store/modules/settings'
 
 // 固定路由（默认路由）
-const constantRoutes: Route.recordRaw[] = [
+const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/login',
     name: 'login',
@@ -34,7 +35,7 @@ const constantRoutes: Route.recordRaw[] = [
 ]
 
 // 系统路由
-const systemRoutes: Route.recordRaw[] = [
+const systemRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     component: () => import('@/layouts/index.vue'),
@@ -118,7 +119,7 @@ const constantRoutesByFilesystem = generatedRoutes.filter((item) => {
 
 const asyncRoutesByFilesystem = setupLayouts(generatedRoutes.filter((item) => {
   return item.meta?.enabled !== false && item.meta?.constant !== true && item.meta?.layout !== false
-})) as Route.recordRaw[]
+}))
 
 export {
   constantRoutes,

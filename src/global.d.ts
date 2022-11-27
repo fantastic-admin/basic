@@ -225,12 +225,8 @@ declare module 'vue-router' {
 }
 
 declare namespace Route {
-  interface recordRaw extends Omit<RouteRecordRaw, 'meta' | 'children'> {
-    meta: RouteMeta
-    children?: recordRaw[]
-  }
   interface recordMainRaw {
-    meta: {
+    meta?: {
       title?: string | Function
       icon?: string
       auth?: string | string[]

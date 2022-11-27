@@ -1,8 +1,8 @@
-import type { Route } from '@/global'
+import type { RouteRecordRaw } from 'vue-router'
 
 const Layout = () => import('@/layouts/index.vue')
 
-const routes: Route.recordRaw = {
+const routes: RouteRecordRaw = {
   path: '/link',
   component: Layout,
   name: 'externalLinkExample',
@@ -13,12 +13,14 @@ const routes: Route.recordRaw = {
   children: [
     {
       path: 'https://gitee.com/hooray/fantastic-admin',
+      redirect: '',
       meta: {
         title: 'Gitee 仓库',
       },
     },
     {
       path: 'https://github.com/hooray/fantastic-admin',
+      redirect: '',
       meta: {
         title: 'Github 仓库',
       },
