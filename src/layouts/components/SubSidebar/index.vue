@@ -30,7 +30,7 @@ function onSidebarScroll(e: Event) {
     >
       <transition-group name="sub-sidebar">
         <template v-for="(route, index) in menuStore.sidebarMenus">
-          <SidebarItem v-if="route.meta.sidebar !== false" :key="route.path || index" :item="route" :base-path="route.path" />
+          <SidebarItem v-if="route.meta?.sidebar !== false" :key="route.path || index" :item="route" :base-path="route.path" />
         </template>
       </transition-group>
     </el-menu>
