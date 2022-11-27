@@ -1,6 +1,7 @@
 <script lang="ts" setup name="Search">
 import { cloneDeep } from 'lodash-es'
 import hotkeys from 'hotkeys-js'
+import type { RouteRecordRaw } from 'vue-router'
 import { isExternalLink } from '@/utils'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
@@ -133,23 +134,23 @@ onMounted(() => {
   }
 })
 
-function hasChildren(item: Route.recordRaw) {
+function hasChildren(item: RouteRecordRaw) {
   let flag = true
-  if (item.children && item.children.every(i => i.meta.sidebar === false)) {
+  if (item.children?.every(i => i.meta?.sidebar === false)) {
     flag = false
   }
   return flag
 }
-function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string, breadcrumb?: (string | Function | undefined)[]) {
+function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, breadcrumb?: (string | Function | undefined)[]) {
   arr.forEach((item) => {
-    if (item.meta.sidebar !== false) {
+    if (item.meta?.sidebar !== false) {
       const breadcrumbTemp = cloneDeep(breadcrumb) || []
       if (item.children && hasChildren(item)) {
-        breadcrumbTemp.push(item.meta.title)
-        getSourceList(item.children, basePath ? [basePath, item.path].join('/') : item.path, item.meta.icon ?? icon, breadcrumbTemp)
+        breadcrumbTemp.push(item.meta?.title)
+        getSourceList(item.children, basePath ? [basePath, item.path].join('/') : item.path, item.meta?.icon ?? icon, breadcrumbTemp)
       }
       else {
-        breadcrumbTemp.push(item.meta.title)
+        breadcrumbTemp.push(item.meta?.title)
         let path = ''
         if (isExternalLink(item.path)) {
           path = item.path
@@ -158,8 +159,8 @@ function getSourceList(arr: Route.recordRaw[], basePath?: string, icon?: string,
           path = basePath ? [basePath, item.path].join('/') : item.path
         }
         sourceList.value.push({
-          icon: item.meta.icon ?? icon,
-          title: item.meta.title,
+          icon: item.meta?.icon ?? icon,
+          title: item.meta?.title,
           breadcrumb: breadcrumbTemp,
           path,
         })

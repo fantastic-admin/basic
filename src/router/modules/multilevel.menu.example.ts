@@ -1,8 +1,8 @@
-import type { Route } from '@/global'
+import type { RouteRecordRaw } from 'vue-router'
 
 const Layout = () => import('@/layouts/index.vue')
 
-const routes: Route.recordRaw = {
+const routes: RouteRecordRaw = {
   path: '/multilevel_menu_example',
   component: Layout,
   redirect: '/multilevel_menu_example/page',
