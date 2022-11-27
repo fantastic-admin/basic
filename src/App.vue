@@ -67,7 +67,7 @@ watch([
   () => settingsStore.title,
 ], () => {
   if (settingsStore.app.enableDynamicTitle && settingsStore.title) {
-    const title = settingsStore.title
+    const title = typeof settingsStore.title === 'function' ? settingsStore.title() : settingsStore.title
     document.title = `${title} - ${import.meta.env.VITE_APP_TITLE}`
   }
   else {
