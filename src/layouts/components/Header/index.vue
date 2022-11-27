@@ -30,10 +30,10 @@ function handlerMouserScroll(event: WheelEvent) {
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
               <div v-if="item.children && item.children.length !== 0" class="item-container" :class="{ active: index === menuStore.actived }">
                 <div class="item" @click="switchTo(index)">
-                  <el-icon>
-                    <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+                  <el-icon v-if="item.meta?.icon">
+                    <svg-icon :name="item.meta.icon" />
                   </el-icon>
-                  <span v-if="item.meta.title">{{ item.meta.title }}</span>
+                  <span v-if="item.meta?.title">{{ item.meta.title }}</span>
                 </div>
               </div>
             </template>

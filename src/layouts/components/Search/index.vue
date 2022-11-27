@@ -172,14 +172,14 @@ function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?:
   arr.forEach((item) => {
     const breadcrumbTemp = cloneDeep(breadcrumb) || []
     if (item.children && item.children.length > 0) {
-      breadcrumbTemp.push(item.meta.title)
-      getSourceListByMenus(item.children, item.meta.icon ?? icon, breadcrumbTemp)
+      breadcrumbTemp.push(item.meta?.title)
+      getSourceListByMenus(item.children, item.meta?.icon ?? icon, breadcrumbTemp)
     }
     else {
-      breadcrumbTemp.push(item.meta.title)
+      breadcrumbTemp.push(item.meta?.title)
       sourceList.value.push({
-        icon: item.meta.icon ?? icon,
-        title: item.meta.title,
+        icon: item.meta?.icon ?? icon,
+        title: item.meta?.title,
         path: item.path as string,
         breadcrumb: breadcrumbTemp,
       })

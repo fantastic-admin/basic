@@ -20,7 +20,7 @@ const settingsStore = useSettingsStore()
 const hasChildren = computed(() => {
   let flag = true
   if (props.item.children) {
-    if (props.item.children.every(item => item.meta.sidebar === false)) {
+    if (props.item.children.every(item => item.meta?.sidebar === false)) {
       flag = false
     }
   }
@@ -35,23 +35,23 @@ const hasChildren = computed(() => {
   <div class="sidebar-item">
     <router-link v-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path || '')">
       <a :href="isExternalLink(resolveRoutePath(basePath, item.path || '')) ? resolveRoutePath(basePath, item.path || '') : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="isExternalLink(resolveRoutePath(basePath, item.path || '')) ? '_blank' : '_self'" @click="navigate">
-        <el-menu-item :title="item.meta.title ?? '[ 无标题 ]'" :index="resolveRoutePath(basePath, item.path || '')">
-          <el-icon v-if="item.meta.icon" class="title-icon">
+        <el-menu-item :title="item.meta?.title ?? '[ 无标题 ]'" :index="resolveRoutePath(basePath, item.path || '')">
+          <el-icon v-if="item.meta?.icon" class="title-icon">
             <svg-icon :name="item.meta.icon" />
           </el-icon>
-          <span class="title">{{ item.meta.title ?? '[ 无标题 ]' }}</span>
+          <span class="title">{{ item.meta?.title ?? '[ 无标题 ]' }}</span>
         </el-menu-item>
       </a>
     </router-link>
-    <el-sub-menu v-else :title="item.meta.title ?? '[ 无标题 ]'" :index="settingsStore.app.routeBaseOn !== 'filesystem' ? resolveRoutePath(basePath, item.path || '') : JSON.stringify(item)">
+    <el-sub-menu v-else :title="item.meta?.title ?? '[ 无标题 ]'" :index="settingsStore.app.routeBaseOn !== 'filesystem' ? resolveRoutePath(basePath, item.path || '') : JSON.stringify(item)">
       <template #title>
-        <el-icon v-if="item.meta.icon" class="title-icon">
+        <el-icon v-if="item.meta?.icon" class="title-icon">
           <svg-icon :name="item.meta.icon" />
         </el-icon>
-        <span class="title">{{ item.meta.title ?? '[ 无标题 ]' }}</span>
+        <span class="title">{{ item.meta?.title ?? '[ 无标题 ]' }}</span>
       </template>
       <template v-for="route in item.children">
-        <SidebarItem v-if="route.meta.sidebar !== false" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path || '')" />
+        <SidebarItem v-if="route.meta?.sidebar !== false" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path || '')" />
       </template>
     </el-sub-menu>
   </div>

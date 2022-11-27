@@ -19,12 +19,12 @@ const { switchTo } = useMenu()
           <div
             v-if="item.children && item.children.length !== 0" :key="index" class="item" :class="{
               active: index === menuStore.actived,
-            }" :title="item.meta.title ?? '[ 无标题 ]'" @click="switchTo(index)"
+            }" :title="item.meta?.title ?? '[ 无标题 ]'" @click="switchTo(index)"
           >
-            <el-icon>
-              <svg-icon v-if="item.meta.icon" :name="item.meta.icon" />
+            <el-icon v-if="item.meta?.icon">
+              <svg-icon :name="item.meta.icon" />
             </el-icon>
-            <span>{{ item.meta.title ?? '[ 无标题 ]' }}</span>
+            <span>{{ item.meta?.title ?? '[ 无标题 ]' }}</span>
           </div>
         </template>
       </div>
