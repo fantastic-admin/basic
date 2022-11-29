@@ -16,8 +16,12 @@ const num = ref(1)
 function go(type: number) {
   let routerName
   switch (type) {
-    case 1: routerName = 'keepAliveExampleDetail'; break
-    case 2: routerName = 'keepAliveExampleNestedDetail'; break
+    case 1:
+      routerName = 'keepAliveExampleDetail'
+      break
+    case 2:
+      routerName = 'keepAliveExampleNestedDetail'
+      break
   }
   router.push({
     name: routerName,

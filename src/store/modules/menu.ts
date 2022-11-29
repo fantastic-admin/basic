@@ -138,45 +138,38 @@ const useMenuStore = defineStore(
     },
     actions: {
       // 生成导航（前端生成）
-      generateMenusAtFront() {
-        // eslint-disable-next-line no-async-promise-executor
-        return new Promise<void>(async (resolve) => {
+      async generateMenusAtFront() {
+        const settingsStore = useSettingsStore()
+        const userStore = useUserStore()
+        let accessedMenus
+        // 如果权限功能开启，则需要对导航数据进行筛选过滤
+        if (settingsStore.app.enablePermission) {
+          const permissions = await userStore.getPermissions()
+          accessedMenus = filterAsyncMenus(menu, permissions)
+        }
+        else {
+          accessedMenus = cloneDeep(menu)
+        }
+        this.menus = accessedMenus.filter(item => item.children.length !== 0)
+      },
+      // 生成导航（后端生成）
+      async generateMenusAtBack() {
+        await api.get('menu/list', {
+          baseURL: '/mock/',
+        }).then(async (res) => {
           const settingsStore = useSettingsStore()
           const userStore = useUserStore()
-          let accessedMenus
+          let accessedMenus: Menu.recordMainRaw[]
           // 如果权限功能开启，则需要对导航数据进行筛选过滤
           if (settingsStore.app.enablePermission) {
             const permissions = await userStore.getPermissions()
-            accessedMenus = filterAsyncMenus(menu, permissions)
+            accessedMenus = filterAsyncMenus(res.data, permissions)
           }
           else {
-            accessedMenus = cloneDeep(menu)
+            accessedMenus = cloneDeep(res.data)
           }
           this.menus = accessedMenus.filter(item => item.children.length !== 0)
-          resolve()
-        })
-      },
-      // 生成导航（后端生成）
-      generateMenusAtBack() {
-        return new Promise<void>((resolve) => {
-          api.get('menu/list', {
-            baseURL: '/mock/',
-          }).then(async (res) => {
-            const settingsStore = useSettingsStore()
-            const userStore = useUserStore()
-            let accessedMenus: Menu.recordMainRaw[]
-            // 如果权限功能开启，则需要对导航数据进行筛选过滤
-            if (settingsStore.app.enablePermission) {
-              const permissions = await userStore.getPermissions()
-              accessedMenus = filterAsyncMenus(res.data, permissions)
-            }
-            else {
-              accessedMenus = cloneDeep(res.data)
-            }
-            this.menus = accessedMenus.filter(item => item.children.length !== 0)
-            resolve()
-          })
-        })
+        }).catch(() => {})
       },
       // 切换主导航
       setActived(data: number | string) {
