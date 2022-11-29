@@ -61,34 +61,27 @@ const useUserStore = defineStore(
         })
       },
       // 获取我的权限
-      getPermissions() {
-        return new Promise<string[]>((resolve) => {
-          // 通过 mock 获取权限
-          api.get('member/permission', {
-            baseURL: '/mock/',
-            params: {
-              account: this.account,
-            },
-          }).then((res) => {
-            this.permissions = res.data.permissions
-            resolve(res.data.permissions)
-          })
+      async getPermissions() {
+        // 通过 mock 获取权限
+        const res = await api.get('member/permission', {
+          baseURL: '/mock/',
+          params: {
+            account: this.account,
+          },
         })
+        this.permissions = res.data.permissions
+        return this.permissions
       },
-      editPassword(data: {
+      async editPassword(data: {
         password: string
         newpassword: string
       }) {
-        return new Promise<void>((resolve) => {
-          api.post('member/edit/password', {
-            account: this.account,
-            password: data.password,
-            newpassword: data.newpassword,
-          }, {
-            baseURL: '/mock/',
-          }).then(() => {
-            resolve()
-          })
+        await api.post('member/edit/password', {
+          account: this.account,
+          password: data.password,
+          newpassword: data.newpassword,
+        }, {
+          baseURL: '/mock/',
         })
       },
     },

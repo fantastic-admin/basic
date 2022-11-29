@@ -162,57 +162,30 @@ const useRouteStore = defineStore(
     },
     actions: {
       // 根据权限动态生成路由（前端生成）
-      generateRoutesAtFront(asyncRoutes: Route.recordMainRaw[]) {
-        // eslint-disable-next-line no-async-promise-executor
-        return new Promise<void>(async (resolve) => {
-          const settingsStore = useSettingsStore()
-          const userStore = useUserStore()
-          let accessedRoutes
-          // 如果权限功能开启，则需要对路由数据进行筛选过滤
-          if (settingsStore.app.enablePermission) {
-            const permissions = await userStore.getPermissions()
-            accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
-          }
-          else {
-            accessedRoutes = cloneDeep(asyncRoutes)
-          }
-          // 设置 routes 数据
-          this.isGenerate = true
-          this.routes = accessedRoutes.filter(item => item.children?.length !== 0) as any
-          resolve()
-        })
+      async generateRoutesAtFront(asyncRoutes: Route.recordMainRaw[]) {
+        const settingsStore = useSettingsStore()
+        const userStore = useUserStore()
+        let accessedRoutes
+        // 如果权限功能开启，则需要对路由数据进行筛选过滤
+        if (settingsStore.app.enablePermission) {
+          const permissions = await userStore.getPermissions()
+          accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+        }
+        else {
+          accessedRoutes = cloneDeep(asyncRoutes)
+        }
+        // 设置 routes 数据
+        this.isGenerate = true
+        this.routes = accessedRoutes.filter(item => item.children?.length !== 0) as any
       },
       // 根据权限动态生成路由（后端获取）
-      generateRoutesAtBack() {
-        return new Promise<void>((resolve) => {
-          api.get('route/list', {
-            baseURL: '/mock/',
-          }).then(async (res) => {
-            const settingsStore = useSettingsStore()
-            const userStore = useUserStore()
-            const asyncRoutes = formatBackRoutes(res.data)
-            let accessedRoutes
-            // 如果权限功能开启，则需要对路由数据进行筛选过滤
-            if (settingsStore.app.enablePermission) {
-              const permissions = await userStore.getPermissions()
-              accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
-            }
-            else {
-              accessedRoutes = cloneDeep(asyncRoutes)
-            }
-            // 设置 routes 数据
-            this.isGenerate = true
-            this.routes = accessedRoutes.filter(item => item.children.length !== 0) as any
-            resolve()
-          })
-        })
-      },
-      // 根据权限动态生成路由（文件系统生成）
-      generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {
-        // eslint-disable-next-line no-async-promise-executor
-        return new Promise<void>(async (resolve) => {
+      async generateRoutesAtBack() {
+        await api.get('route/list', {
+          baseURL: '/mock/',
+        }).then(async (res) => {
           const settingsStore = useSettingsStore()
           const userStore = useUserStore()
+          const asyncRoutes = formatBackRoutes(res.data)
           let accessedRoutes
           // 如果权限功能开启，则需要对路由数据进行筛选过滤
           if (settingsStore.app.enablePermission) {
@@ -224,9 +197,25 @@ const useRouteStore = defineStore(
           }
           // 设置 routes 数据
           this.isGenerate = true
-          this.fileSystemRoutes = accessedRoutes.filter(item => item.children?.length !== 0) as any
-          resolve()
-        })
+          this.routes = accessedRoutes.filter(item => item.children.length !== 0) as any
+        }).catch(() => {})
+      },
+      // 根据权限动态生成路由（文件系统生成）
+      async generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {
+        const settingsStore = useSettingsStore()
+        const userStore = useUserStore()
+        let accessedRoutes
+        // 如果权限功能开启，则需要对路由数据进行筛选过滤
+        if (settingsStore.app.enablePermission) {
+          const permissions = await userStore.getPermissions()
+          accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+        }
+        else {
+          accessedRoutes = cloneDeep(asyncRoutes)
+        }
+        // 设置 routes 数据
+        this.isGenerate = true
+        this.fileSystemRoutes = accessedRoutes.filter(item => item.children?.length !== 0) as any
       },
       // 记录 accessRoutes 路由，用于登出时删除路由
       setCurrentRemoveRoutes(routes: Function[]) {

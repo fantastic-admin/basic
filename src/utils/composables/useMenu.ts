@@ -14,7 +14,7 @@ export default function useMenu() {
         window.open(menuStore.sidebarMenusFirstDeepestPath, '_blank')
       }
       else {
-        router.push(menuStore.sidebarMenusFirstDeepestPath)
+        void router.push(menuStore.sidebarMenusFirstDeepestPath)
       }
     }
   }

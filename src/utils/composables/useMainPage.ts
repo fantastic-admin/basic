@@ -2,7 +2,7 @@ import router from '@/router'
 
 export default function useMainPage() {
   function reload() {
-    router.push({
+    void router.push({
       name: 'reload',
     })
   }

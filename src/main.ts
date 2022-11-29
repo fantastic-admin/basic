@@ -14,7 +14,7 @@ import '@/assets/styles/globals.scss'
 // 加载 iconify 图标（element plus）
 import { downloadAndInstall } from '@/iconify-ep'
 if (useSettingsStore().app.iconifyOfflineUse) {
-  downloadAndInstall()
+  await downloadAndInstall()
 }
 
 const app = createApp(App)
