@@ -13,14 +13,14 @@ import 'virtual:svg-icons-register'
 import '@/assets/styles/globals.scss'
 // 加载 iconify 图标（element plus）
 import { downloadAndInstall } from '@/iconify-ep'
-if (useSettingsStore().app.iconifyOfflineUse) {
-  await downloadAndInstall()
-}
 
 const app = createApp(App)
 app.use(ElementPlus)
 app.use(pinia)
 app.use(router)
 directive(app)
+if (useSettingsStore().app.iconifyOfflineUse) {
+  void downloadAndInstall()
+}
 
 app.mount('#app')
