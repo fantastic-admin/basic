@@ -37,7 +37,7 @@ function userCommand(command: 'home' | 'setting' | 'hotkeys' | 'logout') {
   }
 }
 function pro() {
-  window.open('https://hooray.gitee.io/fantastic-admin-pro-example/', 'top')
+  window.open('https://hooray.gitee.io/fantastic-admin-pro-example/', '_blank')
 }
 </script>
 

@@ -1,5 +1,6 @@
 <script lang="ts" setup name="Layout">
 import hotkeys from 'hotkeys-js'
+import LinkView from './components/views/link.vue'
 import Header from './components/Header/index.vue'
 import MainSidebar from './components/MainSidebar/index.vue'
 import SubSidebar from './components/SubSidebar/index.vue'
@@ -16,6 +17,8 @@ const routeInfo = useRoute()
 const settingsStore = useSettingsStore()
 const keepAliveStore = useKeepAliveStore()
 const menuStore = useMenuStore()
+
+const isLink = computed(() => !!routeInfo.meta.link)
 
 watch(() => settingsStore.menu.subMenuCollapse, (val) => {
   if (settingsStore.mode === 'mobile') {
@@ -72,10 +75,11 @@ onUnmounted(() => {
             <router-view v-slot="{ Component, route }">
               <transition name="main" mode="out-in" appear>
                 <keep-alive :include="keepAliveStore.list">
-                  <component :is="Component" :key="route.fullPath" />
+                  <component :is="Component" v-show="!isLink" :key="route.fullPath" />
                 </keep-alive>
               </transition>
             </router-view>
+            <LinkView v-if="isLink" />
           </div>
           <Copyright />
         </div>

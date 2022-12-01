@@ -2,7 +2,6 @@
 import { cloneDeep } from 'lodash-es'
 import hotkeys from 'hotkeys-js'
 import type { RouteRecordRaw } from 'vue-router'
-import { isExternalLink } from '@/utils'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useRouteStore from '@/store/modules/route'
@@ -16,10 +15,11 @@ const routeStore = useRouteStore()
 const menuStore = useMenuStore()
 
 interface listTypes {
+  path: string
   icon?: string
   title?: string | Function
+  link?: string
   breadcrumb: (string | Function | undefined)[]
-  path: string
 }
 
 const isShow = ref(false)
@@ -151,18 +151,12 @@ function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, 
       }
       else {
         breadcrumbTemp.push(item.meta?.title)
-        let path = ''
-        if (isExternalLink(item.path)) {
-          path = item.path
-        }
-        else {
-          path = basePath ? [basePath, item.path].join('/') : item.path
-        }
         sourceList.value.push({
+          path: basePath ? [basePath, item.path].join('/') : item.path,
           icon: item.meta?.icon ?? icon,
           title: item.meta?.title,
+          link: item.meta?.link,
           breadcrumb: breadcrumbTemp,
-          path,
         })
       }
     }
@@ -230,12 +224,12 @@ function handleScroll() {
   })
 }
 
-function pageJump(url: string) {
-  if (isExternalLink(url)) {
-    window.open(url, 'top')
+function pageJump(path: listTypes['path'], link: listTypes['link']) {
+  if (link) {
+    window.open(link, '_blank')
   }
   else {
-    router.push(url)
+    router.push(path)
   }
 }
 </script>
@@ -284,7 +278,7 @@ function pageJump(url: string) {
         </div>
       </div>
       <div ref="searchResultRef" class="result" :class="{ mobile: settingsStore.mode === 'mobile' }">
-        <a v-for="(item, index) in resultList" :key="item.path" :ref="setSearchResultItemRef" class="item" :class="{ actived: index === actived }" @click="pageJump(item.path)" @mouseover="actived = index">
+        <a v-for="(item, index) in resultList" :key="item.path" :ref="setSearchResultItemRef" class="item" :class="{ actived: index === actived }" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
           <el-icon class="icon">
             <svg-icon v-if="item.icon" :name="item.icon" />
           </el-icon>

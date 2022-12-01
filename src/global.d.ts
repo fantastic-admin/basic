@@ -220,6 +220,7 @@ declare module 'vue-router' {
     breadcrumb?: boolean
     activeMenu?: string
     cache?: boolean | string | string[]
+    link?: string
     breadcrumbNeste?: Route.breadcrumb[]
   }
 }
@@ -250,6 +251,7 @@ declare namespace Menu {
       defaultOpened?: boolean
       auth?: string | string[]
       sidebar?: boolean
+      link?: string
     }
     children?: recordRaw[]
   }

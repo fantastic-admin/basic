@@ -10,23 +10,17 @@ import menu from '@/menu'
 
 function getDeepestPath(menu: Menu.recordRaw, rootPath = '') {
   let retnPath = ''
-  if (menu.path !== undefined) {
-    if (menu.children) {
-      if (menu.children.some(item => item.meta?.sidebar !== false)) {
-        for (let i = 0; i < menu.children.length; i++) {
-          if (menu.children[i].meta?.sidebar !== false) {
-            retnPath = getDeepestPath(menu.children[i], resolveRoutePath(rootPath, menu.path))
-            break
-          }
-        }
-      }
-      else {
-        retnPath = getDeepestPath(menu.children[0], resolveRoutePath(rootPath, menu.path))
-      }
+  if (menu.children) {
+    const item = menu.children.find(item => item.meta?.sidebar !== false)
+    if (item) {
+      retnPath = getDeepestPath(item, resolveRoutePath(rootPath, menu.path))
     }
     else {
-      retnPath = resolveRoutePath(rootPath, menu.path)
+      retnPath = getDeepestPath(menu.children[0], resolveRoutePath(rootPath, menu.path))
     }
+  }
+  else {
+    retnPath = resolveRoutePath(rootPath, menu.path)
   }
   return retnPath
 }
@@ -68,7 +62,7 @@ function filterAsyncMenus<T extends Menu.recordMainRaw[] | Menu.recordRaw[]>(men
 function getDefaultOpenedPaths(menus: Menu.recordRaw[], rootPath = '') {
   const defaultOpenedPaths: string[] = []
   menus.forEach((item) => {
-    if (item.path && item.meta?.defaultOpened && item.children) {
+    if (item.meta?.defaultOpened && item.children) {
       defaultOpenedPaths.push(resolveRoutePath(rootPath, item.path))
       const childrenDefaultOpenedPaths = getDefaultOpenedPaths(item.children, resolveRoutePath(rootPath, item.path))
       if (childrenDefaultOpenedPaths.length > 0) {
