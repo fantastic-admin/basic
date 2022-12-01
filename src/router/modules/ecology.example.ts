@@ -5,46 +5,56 @@ const Layout = () => import('@/layouts/index.vue')
 const routes: RouteRecordRaw[] = [
   {
     path: '/official',
+    redirect: '/official/fantastic-startkit',
     meta: {
       title: '官方周边',
       icon: 'ep:grid',
     },
     children: [
       {
-        path: 'https://hooray.gitee.io/fantastic-startkit/',
+        path: 'fantastic-startkit',
         redirect: '',
+        name: 'officialFantasticStartkit',
         meta: {
           title: 'Fantastic-startkit 项目启动套件',
+          link: 'https://hooray.gitee.io/fantastic-startkit/',
         },
       },
       {
-        path: 'https://hooray.gitee.io/one-step-admin/',
+        path: 'one-step-admin',
         redirect: '',
+        name: 'officialOneStepAdmin',
         meta: {
           title: 'One-step-admin 干啥都快人一步的中后台框架',
+          link: 'https://hooray.gitee.io/one-step-admin/',
         },
       },
     ],
   },
   {
     path: '/cooperation',
+    redirect: '/cooperation/vform',
     meta: {
       title: '战略合作',
       icon: 'sidebar-cooperation',
     },
     children: [
       {
-        path: 'https://www.vform666.com',
+        path: 'vform',
         redirect: '',
+        name: 'cooperationVform',
         meta: {
           title: 'VForm 低代码表单',
+          link: 'https://www.vform666.com',
         },
       },
       {
-        path: 'https://gitee.com/sciqtw/quickadmin',
+        path: 'quickadmin',
         redirect: '',
+        name: 'cooperationQuickadmin',
         meta: {
           title: 'QuickAdmin 快速开发管理框架',
+          link: 'https://gitee.com/sciqtw/quickadmin',
         },
       },
     ],

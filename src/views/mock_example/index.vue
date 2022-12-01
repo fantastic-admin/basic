@@ -19,7 +19,7 @@ function getPermission() {
 }
 
 function open(url: string) {
-  window.open(url, 'top')
+  window.open(url, '_blank')
 }
 </script>
 

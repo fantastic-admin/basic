@@ -5,6 +5,7 @@ const Layout = () => import('@/layouts/index.vue')
 const routes: RouteRecordRaw = {
   path: '/link',
   component: Layout,
+  redirect: '/link/gitee',
   name: 'externalLinkExample',
   meta: {
     title: '外链',
@@ -12,17 +13,21 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
-      path: 'https://gitee.com/hooray/fantastic-admin',
+      path: 'gitee',
       redirect: '',
+      name: 'externalLinkGitee',
       meta: {
         title: 'Gitee 仓库',
+        link: 'https://gitee.com/hooray/fantastic-admin',
       },
     },
     {
-      path: 'https://github.com/hooray/fantastic-admin',
+      path: 'github',
       redirect: '',
+      name: 'externalLinkGithub',
       meta: {
         title: 'Github 仓库',
+        link: 'https://github.com/hooray/fantastic-admin',
       },
     },
   ],

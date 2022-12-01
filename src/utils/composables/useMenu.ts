@@ -1,7 +1,6 @@
 import router from '@/router'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
-import { isExternalLink } from '@/utils'
 
 export default function useMenu() {
   const settingsStore = useSettingsStore()
@@ -10,12 +9,7 @@ export default function useMenu() {
   function switchTo(index: number | string) {
     menuStore.setActived(index)
     if (settingsStore.menu.switchMainMenuAndPageJump) {
-      if (isExternalLink(menuStore.sidebarMenusFirstDeepestPath)) {
-        window.open(menuStore.sidebarMenusFirstDeepestPath, '_blank')
-      }
-      else {
-        void router.push(menuStore.sidebarMenusFirstDeepestPath)
-      }
+      void router.push(menuStore.sidebarMenusFirstDeepestPath)
     }
   }
 

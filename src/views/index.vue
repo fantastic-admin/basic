@@ -6,7 +6,7 @@ meta:
 
 <script lang="ts" setup>
 function open(url: string) {
-  window.open(url, 'top')
+  window.open(url, '_blank')
 }
 
 const fantasticStartkitInfo = ref({
