@@ -21,12 +21,10 @@ const title = import.meta.env.VITE_APP_TITLE
 // 表单类型，login 登录，reset 重置密码
 const formType = ref('login')
 const loading = ref(false)
-const passwordType = ref('password')
 const redirect = ref(route.query.redirect?.toString() ?? '/')
 
 // 登录
 const loginFormRef = ref<FormInstance>()
-const loginPasswordRef = ref<HTMLElement>()
 const loginForm = ref({
   account: localStorage.login_account || '',
   password: '',
@@ -63,8 +61,6 @@ function handleLogin() {
 
 // 注册
 const registerFormRef = ref<FormInstance>()
-const registerPasswordRef = ref<HTMLElement>()
-const registerCheckPasswordRef = ref<HTMLElement>()
 const registerForm = ref({
   account: '',
   captcha: '',
@@ -110,7 +106,6 @@ function handleRegister() {
 
 // 重置密码
 const resetFormRef = ref<FormInstance>()
-const resetNewPasswordRef = ref<HTMLElement>()
 const resetForm = ref({
   account: localStorage.login_account || '',
   captcha: '',
@@ -140,13 +135,6 @@ function handleReset() {
   })
 }
 
-function showPassword(passwordEl: HTMLElement | undefined) {
-  passwordType.value = passwordType.value === 'password' ? '' : 'password'
-  nextTick(() => {
-    passwordEl?.focus()
-  })
-}
-
 function testAccount(account: string) {
   loginForm.value.account = account
   loginForm.value.password = '123456'
@@ -170,7 +158,7 @@ function testAccount(account: string) {
         </div>
         <div>
           <el-form-item prop="account">
-            <el-input ref="name" v-model="loginForm.account" placeholder="用户名" text tabindex="1" autocomplete="on">
+            <el-input v-model="loginForm.account" placeholder="用户名" text tabindex="1" autocomplete="on">
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:user" />
@@ -179,15 +167,10 @@ function testAccount(account: string) {
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input ref="loginPasswordRef" v-model="loginForm.password" :type="passwordType" placeholder="密码" tabindex="2" autocomplete="on" @keyup.enter="handleLogin">
+            <el-input v-model="loginForm.password" type="password" placeholder="密码" tabindex="2" autocomplete="on" show-password @keyup.enter="handleLogin">
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:lock" />
-                </el-icon>
-              </template>
-              <template #suffix>
-                <el-icon>
-                  <svg-icon :name="passwordType === 'password' ? 'eye' : 'eye-open'" @click="showPassword(loginPasswordRef)" />
                 </el-icon>
               </template>
             </el-input>
@@ -228,7 +211,7 @@ function testAccount(account: string) {
         </div>
         <div>
           <el-form-item prop="account">
-            <el-input ref="name" v-model="registerForm.account" placeholder="用户名" tabindex="1" autocomplete="on">
+            <el-input v-model="registerForm.account" placeholder="用户名" tabindex="1" autocomplete="on">
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:user" />
@@ -249,29 +232,19 @@ function testAccount(account: string) {
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
-            <el-input ref="registerPasswordRef" v-model="registerForm.password" :type="passwordType" placeholder="密码" tabindex="3" autocomplete="on">
+            <el-input v-model="registerForm.password" type="password" placeholder="密码" tabindex="3" autocomplete="on" show-password>
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:lock" />
-                </el-icon>
-              </template>
-              <template #suffix>
-                <el-icon>
-                  <svg-icon :name="passwordType === 'password' ? 'ep:hide' : 'ep:view'" @click="showPassword(registerPasswordRef)" />
                 </el-icon>
               </template>
             </el-input>
           </el-form-item>
           <el-form-item prop="checkPassword">
-            <el-input ref="registerCheckPasswordRef" v-model="registerForm.checkPassword" :type="passwordType" placeholder="确认密码" tabindex="4" autocomplete="on">
+            <el-input v-model="registerForm.checkPassword" type="password" placeholder="确认密码" tabindex="4" autocomplete="on" show-password>
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:lock" />
-                </el-icon>
-              </template>
-              <template #suffix>
-                <el-icon>
-                  <svg-icon :name="passwordType === 'password' ? 'ep:hide' : 'ep:view'" @click="showPassword(registerCheckPasswordRef)" />
                 </el-icon>
               </template>
             </el-input>
@@ -295,7 +268,7 @@ function testAccount(account: string) {
         </div>
         <div>
           <el-form-item prop="account">
-            <el-input ref="name" v-model="resetForm.account" placeholder="用户名" tabindex="1" autocomplete="on">
+            <el-input v-model="resetForm.account" placeholder="用户名" tabindex="1" autocomplete="on">
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:user" />
@@ -316,15 +289,10 @@ function testAccount(account: string) {
             </el-input>
           </el-form-item>
           <el-form-item prop="newPassword">
-            <el-input ref="resetNewPasswordRef" v-model="resetForm.newPassword" :type="passwordType" placeholder="新密码" tabindex="3" autocomplete="on">
+            <el-input v-model="resetForm.newPassword" type="password" placeholder="新密码" tabindex="3" autocomplete="on" show-password>
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:lock" />
-                </el-icon>
-              </template>
-              <template #suffix>
-                <el-icon>
-                  <svg-icon :name="passwordType === 'password' ? 'ep:hide' : 'ep:view'" @click="showPassword(resetNewPasswordRef)" />
                 </el-icon>
               </template>
             </el-input>
