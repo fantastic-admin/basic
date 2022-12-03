@@ -20,7 +20,7 @@ app.use(pinia)
 app.use(router)
 directive(app)
 if (useSettingsStore().app.iconifyOfflineUse) {
-  void downloadAndInstall()
+  downloadAndInstall()
 }
 
 app.mount('#app')
