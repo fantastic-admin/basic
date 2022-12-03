@@ -74,13 +74,13 @@ function onSubmit() {
         <el-col :md="24" :lg="12">
           <el-form ref="formRef" :model="form" :rules="rules" label-width="120px">
             <el-form-item label="原密码" prop="password">
-              <el-input v-model="form.password" type="password" placeholder="请输入原密码" />
+              <el-input v-model="form.password" type="password" placeholder="请输入原密码" show-password />
             </el-form-item>
             <el-form-item label="新密码" prop="newpassword">
-              <el-input v-model="form.newpassword" type="password" placeholder="请输入原密码" />
+              <el-input v-model="form.newpassword" type="password" placeholder="请输入原密码" show-password />
             </el-form-item>
             <el-form-item label="确认新密码" prop="checkpassword">
-              <el-input v-model="form.checkpassword" type="password" placeholder="请输入原密码" />
+              <el-input v-model="form.checkpassword" type="password" placeholder="请输入原密码" show-password />
             </el-form-item>
           </el-form>
         </el-col>
