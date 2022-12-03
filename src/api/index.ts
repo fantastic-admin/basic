@@ -5,8 +5,8 @@ import router from '@/router/index'
 import useUserStore from '@/store/modules/user'
 
 const toLogin = () => {
-  void useUserStore().logout().then(() => {
-    void router.push({
+  useUserStore().logout().then(() => {
+    router.push({
       path: '/login',
       query: {
         redirect: router.currentRoute.value.path !== '/login' ? router.currentRoute.value.fullPath : undefined,
