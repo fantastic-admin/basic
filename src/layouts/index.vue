@@ -152,10 +152,10 @@ onUnmounted(() => {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(0 0 0 / 50%);
-    backdrop-filter: blur(2px);
+    background-image: radial-gradient(transparent 1px, rgb(0 0 0 / 30%) 1px);
+    background-size: 4px 4px;
+    backdrop-filter: saturate(50%) blur(4px);
     transition: all 0.2s;
-    transform: translateZ(0);
     opacity: 0;
     visibility: hidden;
 
