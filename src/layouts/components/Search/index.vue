@@ -310,10 +310,10 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--el-overlay-color-lighter);
-  backdrop-filter: blur(10px);
+  background-image: radial-gradient(transparent 1px, rgb(0 0 0 / 30%) 1px);
+  background-size: 4px 4px;
+  backdrop-filter: saturate(50%) blur(4px);
   transition: all 0.2s;
-  transform: translateZ(0);
   opacity: 0;
   visibility: hidden;
 
