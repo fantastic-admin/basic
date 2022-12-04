@@ -113,10 +113,12 @@ declare namespace Settings {
   }
   interface topbar {
     /**
-     * 是否固定顶栏
-     * @默认值 `true`
+     * 模式
+     * @默认值 `'static'` 静止，跟随页面滚动
+     * @可选值 `'fixed'` 固定，不跟随页面滚动，始终固定在顶部
+     * @可选值 `'sticky'` 粘性，页面往下滚动时隐藏，往上滚动时显示
      */
-    fixed?: boolean
+    mode?: 'static' | 'fixed' | 'sticky'
   }
   interface toolbar {
     /**

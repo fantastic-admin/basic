@@ -29,6 +29,7 @@ const breadcrumbList = computed(() => {
 })
 
 const scrollTop = ref(0)
+const scrollOnHide = ref(false)
 onMounted(() => {
   window.addEventListener('scroll', onScroll)
 })
@@ -36,8 +37,12 @@ onUnmounted(() => {
   window.removeEventListener('scroll', onScroll)
 })
 function onScroll() {
-  scrollTop.value = document.documentElement.scrollTop || document.body.scrollTop
+  scrollTop.value = (document.documentElement || document.body).scrollTop
 }
+watch(scrollTop, (val, oldVal) => {
+  const topbarHeight = parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-topbar-height'))
+  scrollOnHide.value = settingsStore.topbar.mode === 'sticky' && val > oldVal && val > topbarHeight
+})
 
 function pathCompile(path: string) {
   const toPath = compile(path)
@@ -48,8 +53,9 @@ function pathCompile(path: string) {
 <template>
   <div
     class="topbar-container" :class="{
-      fixed: settingsStore.topbar.fixed,
+      [`topbar-${settingsStore.topbar.mode}`]: true,
       shadow: scrollTop,
+      hide: scrollOnHide,
     }" data-fixed-calc-width
   >
     <div class="left-box">
@@ -82,12 +88,17 @@ function pathCompile(path: string) {
   background-color: var(--g-toolbar-bg);
   transition: width 0.3s, top 0.3s, transform 0.3s, background-color 0.3s, var(--el-transition-box-shadow);
 
-  &.fixed {
+  &.topbar-fixed,
+  &.topbar-sticky {
     position: fixed;
 
     &.shadow {
       box-shadow: 0 10px 10px -10px var(--g-box-shadow-color);
     }
+  }
+
+  &.topbar-sticky.hide {
+    top: calc(var(--g-topbar-height) * -1) !important;
   }
 
   .left-box {
