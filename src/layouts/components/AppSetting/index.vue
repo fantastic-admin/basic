@@ -130,9 +130,19 @@ function handleCopy() {
       <el-divider>顶栏</el-divider>
       <div class="setting-item">
         <div class="label">
-          是否固定
+          模式
         </div>
-        <el-switch v-model="settingsStore.topbar.fixed" />
+        <el-radio-group v-model="settingsStore.topbar.mode" size="small">
+          <el-radio-button label="static">
+            静止
+          </el-radio-button>
+          <el-radio-button label="fixed">
+            固定
+          </el-radio-button>
+          <el-radio-button label="sticky">
+            粘性
+          </el-radio-button>
+        </el-radio-group>
       </div>
       <el-divider>工具栏</el-divider>
       <div v-if="settingsStore.mode === 'pc'" class="setting-item">

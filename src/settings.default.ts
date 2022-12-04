@@ -29,7 +29,7 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
     enableHotkeys: false,
   },
   topbar: {
-    fixed: true,
+    mode: 'static',
   },
   toolbar: {
     enableFullscreen: false,

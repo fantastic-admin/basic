@@ -12,6 +12,9 @@ const globalSettings: Settings.all = {
     enableSubMenuCollapseButton: true,
     enableHotkeys: true,
   },
+  topbar: {
+    mode: 'fixed',
+  },
   toolbar: {
     enableFullscreen: true,
     enablePageReload: true,
