@@ -359,7 +359,9 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
         margin-top: 20px;
         line-height: 24px;
         font-size: 14px;
-        color: #fff;
+        font-weight: bold;
+        color: var(--el-text-color-primary);
+        text-shadow: -1px -1px 1px var(--el-mask-color-extra-light);
 
         span {
           margin: 0 5px;
@@ -367,7 +369,6 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
           border-radius: 5px;
           font-size: 12px;
           font-weight: bold;
-          color: var(--el-text-color-primary);
           background-color: var(--el-fill-color);
           box-shadow: inset 0 -2px var(--el-fill-color-lighter), inset 0 0 1px 1px var(--el-fill-color-darker);
         }
