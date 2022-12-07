@@ -1,6 +1,6 @@
 import MultilevelMenuExample from './modules/multilevel.menu.example'
 
-import type { Menu } from '@/global'
+import type { Menu } from '@/types/global'
 
 const menu: Menu.recordMainRaw[] = [
   {

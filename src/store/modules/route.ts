@@ -5,7 +5,7 @@ import useUserStore from './user'
 import api from '@/api'
 import { resolveRoutePath } from '@/utils'
 import { systemRoutes } from '@/router/routes'
-import type { Route } from '@/global'
+import type { Route } from '@/types/global'
 
 function hasPermission(permissions: string[], route: Route.recordMainRaw | RouteRecordRaw) {
   let isAuth = false
