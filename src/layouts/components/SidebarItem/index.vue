@@ -33,8 +33,8 @@ const hasChildren = computed(() => {
 
 <template>
   <div class="sidebar-item">
-    <router-link v-if="!hasChildren" v-slot="{ navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
-      <a :href="item.meta?.link ? item.meta.link : resolveRoutePath(basePath, item.path)" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="item.meta?.link ? '_blank' : '_self'" @click="navigate">
+    <router-link v-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
+      <a :href="item.meta?.link ? item.meta.link : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="item.meta?.link ? '_blank' : '_self'" @click="navigate">
         <el-menu-item :title="item.meta?.title ?? '[ 无标题 ]'" :index="resolveRoutePath(basePath, item.path || '')">
           <el-icon v-if="item.meta?.icon" class="title-icon">
             <svg-icon :name="item.meta.icon" />
