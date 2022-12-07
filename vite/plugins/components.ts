@@ -4,6 +4,6 @@ export default function createComponents() {
   return components({
     dirs: ['src/components'],
     include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],
-    dts: 'src/components.d.ts',
+    dts: './src/types/components.d.ts',
   })
 }

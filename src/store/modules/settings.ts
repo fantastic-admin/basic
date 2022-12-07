@@ -1,6 +1,6 @@
 import { defaultsDeep } from 'lodash-es'
 import type { RouteMeta } from 'vue-router'
-import type { RecursiveRequired, Settings } from '@/global'
+import type { RecursiveRequired, Settings } from '@/types/global'
 import settings from '@/settings'
 import settingsDefault from '@/settings.default'
 

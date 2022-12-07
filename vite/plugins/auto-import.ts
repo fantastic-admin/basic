@@ -7,7 +7,7 @@ export default function createAutoImport() {
       'vue-router',
       'pinia',
     ],
-    dts: 'src/auto-imports.d.ts',
+    dts: './src/types/auto-imports.d.ts',
     dirs: [
       './src/utils/composables/**',
     ],

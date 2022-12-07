@@ -3,7 +3,7 @@ import generatedRoutes from 'virtual:generated-pages'
 import type { RouteRecordRaw } from 'vue-router'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
 import BreadcrumbExample from './modules/breadcrumb.example'
-import type { Route } from '@/global'
+import type { Route } from '@/types/global'
 import useSettingsStore from '@/store/modules/settings'
 
 // 固定路由（默认路由）
