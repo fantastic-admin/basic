@@ -2,7 +2,7 @@ import { cloneDeep } from 'lodash-es'
 import useSettingsStore from './settings'
 import useUserStore from './user'
 import useRouteStore from './route'
-import type { Menu } from '@/types/global'
+import type { Menu } from '#/global'
 
 import { resolveRoutePath } from '@/utils'
 import api from '@/api'

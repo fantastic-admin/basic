@@ -1,4 +1,4 @@
-import type { Settings } from '@/types/global'
+import type { Settings } from '#/global'
 
 const globalSettings: Settings.all = {}
 

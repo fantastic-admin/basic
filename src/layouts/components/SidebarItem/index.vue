@@ -2,7 +2,7 @@
 // import SidebarItem from './index.vue'
 import { resolveRoutePath } from '@/utils'
 import useSettingsStore from '@/store/modules/settings'
-import type { Menu } from '@/types/global'
+import type { Menu } from '#/global'
 
 const props = defineProps({
   item: {

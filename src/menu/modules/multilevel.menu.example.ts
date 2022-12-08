@@ -1,4 +1,4 @@
-import type { Menu } from '@/types/global'
+import type { Menu } from '#/global'
 
 const menus: Menu.recordRaw = {
   meta: {
