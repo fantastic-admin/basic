@@ -11,7 +11,7 @@ import MockExample from './modules/mock.example'
 import JsxExample from './modules/jsx.example'
 import ExternalLinkExample from './modules/external.link.example'
 import EcologyExample from './modules/ecology.example'
-import type { Route } from '@/types/global'
+import type { Route } from '#/global'
 import useSettingsStore from '@/store/modules/settings'
 
 // 固定路由（默认路由）
