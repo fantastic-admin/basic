@@ -247,37 +247,49 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
         </el-input>
         <div v-if="settingsStore.mode === 'pc'" class="tips">
           <div class="tip">
-            <span>Alt</span>+<span>S</span>
-            唤醒搜索面板
+            <el-tag type="info" size="large">
+              Alt + S
+            </el-tag>
+            <el-tag type="info" size="large">
+              唤醒搜索面板
+            </el-tag>
           </div>
           <div class="tip">
-            <span>
+            <el-tag type="info" size="large">
               <el-icon>
                 <svg-icon name="search-up" />
               </el-icon>
-            </span>
-            <span>
+            </el-tag>
+            <el-tag type="info" size="large">
               <el-icon>
                 <svg-icon name="search-down" />
               </el-icon>
-            </span>
-            切换搜索结果
+            </el-tag>
+            <el-tag type="info" size="large">
+              切换搜索结果
+            </el-tag>
           </div>
           <div class="tip">
-            <span>
+            <el-tag type="info" size="large">
               <el-icon>
                 <svg-icon name="search-enter" />
               </el-icon>
-            </span>
-            访问页面
+            </el-tag>
+            <el-tag type="info" size="large">
+              访问页面
+            </el-tag>
           </div>
           <div class="tip">
-            <span>ESC</span>
-            退出
+            <el-tag type="info" size="large">
+              ESC
+            </el-tag>
+            <el-tag type="info" size="large">
+              退出
+            </el-tag>
           </div>
         </div>
       </div>
-      <div ref="searchResultRef" class="result" :class="{ mobile: settingsStore.mode === 'mobile' }">
+      <div ref="searchResultRef" class="result">
         <a v-for="(item, index) in resultList" :key="item.path" :ref="setSearchResultItemRef" class="item" :class="{ actived: index === actived }" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
           <el-icon class="icon">
             <svg-icon v-if="item.icon" :name="item.icon" />
@@ -338,7 +350,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
     filter: blur(10px);
 
     .search-box {
-      margin: 50px 20px 40px;
+      margin: 50px 20px 20px;
 
       :deep(.el-input__inner) {
         height: 52px;
@@ -354,39 +366,38 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
 
       .tips {
         display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        margin-top: 20px;
-        line-height: 24px;
-        font-size: 14px;
+        justify-content: center;
+        padding-top: 20px;
         font-weight: bold;
-        color: var(--el-text-color-primary);
-        text-shadow: -1px -1px 1px var(--el-mask-color-extra-light);
 
-        span {
-          margin: 0 5px;
-          padding: 3px 8px 5px;
-          border-radius: 5px;
-          font-size: 12px;
-          font-weight: bold;
-          background-color: var(--el-fill-color);
-          box-shadow: inset 0 -2px var(--el-fill-color-lighter), inset 0 0 1px 1px var(--el-fill-color-darker);
+        .tip {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 0 20px;
+
+          .el-tag {
+            margin: 0 5px;
+
+            &:first-child {
+              margin-left: 0;
+            }
+
+            &:last-child {
+              margin-right: 0;
+            }
+          }
         }
       }
     }
 
     .result {
       position: relative;
-      margin: 0 20px;
-      max-height: calc(100% - 250px);
+      margin: 0 20px 50px;
       border-radius: 5px;
       overflow: auto;
       background-color: var(--el-bg-color);
       box-shadow: 0 0 0 1px var(--el-border-color-darker);
-
-      &.mobile {
-        max-height: calc(100% - 200px);
-      }
 
       .item {
         display: flex;
