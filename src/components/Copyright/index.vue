@@ -6,15 +6,15 @@ const settingsStore = useSettingsStore()
 </script>
 
 <template>
-  <footer v-if="route.meta.copyright ?? settingsStore.copyright.enable" class="copyright">
+  <footer v-if="route.meta.copyright ?? settingsStore.settings.copyright.enable" class="copyright">
     <span>Copyright</span>
     <span class="icon">©</span>
-    <span v-if="settingsStore.copyright.dates">{{ settingsStore.copyright.dates }}</span>
-    <template v-if="settingsStore.copyright.company">
-      <a v-if="settingsStore.copyright.website" :href="settingsStore.copyright.website" target="_blank" rel="noopener">{{ settingsStore.copyright.company }}</a>
-      <span v-else>{{ settingsStore.copyright.company }}</span>
+    <span v-if="settingsStore.settings.copyright.dates">{{ settingsStore.settings.copyright.dates }}</span>
+    <template v-if="settingsStore.settings.copyright.company">
+      <a v-if="settingsStore.settings.copyright.website" :href="settingsStore.settings.copyright.website" target="_blank" rel="noopener">{{ settingsStore.settings.copyright.company }}</a>
+      <span v-else>{{ settingsStore.settings.copyright.company }}</span>
     </template>
-    <a v-if="settingsStore.copyright.beian" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">{{ settingsStore.copyright.beian }}</a>
+    <a v-if="settingsStore.settings.copyright.beian" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">{{ settingsStore.settings.copyright.beian }}</a>
   </footer>
 </template>
 

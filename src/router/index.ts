@@ -15,7 +15,7 @@ const { isLoading } = useNProgress()
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: useSettingsStore(pinia).app.routeBaseOn === 'filesystem' ? constantRoutesByFilesystem : constantRoutes as RouteRecordRaw[],
+  routes: useSettingsStore(pinia).settings.app.routeBaseOn === 'filesystem' ? constantRoutesByFilesystem : constantRoutes as RouteRecordRaw[],
 })
 
 router.beforeEach(async (to, from, next) => {
@@ -23,13 +23,13 @@ router.beforeEach(async (to, from, next) => {
   const userStore = useUserStore()
   const menuStore = useMenuStore()
   const routeStore = useRouteStore()
-  settingsStore.app.enableProgress && (isLoading.value = true)
+  settingsStore.settings.app.enableProgress && (isLoading.value = true)
   // 是否已登录
   if (userStore.isLogin) {
     // 是否已根据权限动态生成并注册路由
     if (routeStore.isGenerate) {
       // 导航栏如果不是 single 模式，则需要根据 path 定位主导航的选中状态
-      settingsStore.menu.menuMode !== 'single' && menuStore.setActived(to.path)
+      settingsStore.settings.menu.menuMode !== 'single' && menuStore.setActived(to.path)
       // 如果已登录状态下，进入登录页会强制跳转到主页
       if (to.name === 'login') {
         next({
@@ -38,7 +38,7 @@ router.beforeEach(async (to, from, next) => {
         })
       }
       // 如果未开启主页，但进入的是主页，则会进入侧边栏导航第一个模块
-      else if (!settingsStore.home.enable && to.name === 'home') {
+      else if (!settingsStore.settings.home.enable && to.name === 'home') {
         if (menuStore.sidebarMenus.length > 0) {
           next({
             path: menuStore.sidebarMenusFirstDeepestPath,
@@ -57,7 +57,7 @@ router.beforeEach(async (to, from, next) => {
     }
     else {
       // 生成动态路由
-      switch (settingsStore.app.routeBaseOn) {
+      switch (settingsStore.settings.app.routeBaseOn) {
         case 'frontend':
           await routeStore.generateRoutesAtFront(asyncRoutes)
           break
@@ -67,7 +67,7 @@ router.beforeEach(async (to, from, next) => {
         case 'filesystem':
           await routeStore.generateRoutesAtFilesystem(asyncRoutesByFilesystem)
           // 文件系统生成的路由，需要手动生成导航数据
-          switch (settingsStore.menu.baseOn) {
+          switch (settingsStore.settings.menu.baseOn) {
             case 'frontend':
               await menuStore.generateMenusAtFront()
               break
@@ -85,7 +85,7 @@ router.beforeEach(async (to, from, next) => {
           removeRoutes.push(router.addRoute(route as RouteRecordRaw))
         }
       })
-      if (settingsStore.app.routeBaseOn !== 'filesystem') {
+      if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
         routeStore.flatSystemRoutes.forEach((route) => {
           removeRoutes.push(router.addRoute(route as RouteRecordRaw))
         })
@@ -117,9 +117,9 @@ router.beforeEach(async (to, from, next) => {
 router.afterEach((to, from) => {
   const settingsStore = useSettingsStore()
   const keepAliveStore = useKeepAliveStore()
-  settingsStore.app.enableProgress && (isLoading.value = false)
+  settingsStore.settings.app.enableProgress && (isLoading.value = false)
   // 设置页面 title
-  if (settingsStore.app.routeBaseOn !== 'filesystem') {
+  if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
     settingsStore.setTitle(to.meta.breadcrumbNeste?.at(-1)?.title)
   }
   else {

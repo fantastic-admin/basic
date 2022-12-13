@@ -50,28 +50,28 @@ function pro() {
         </el-icon>
         <span class="title">查看专业版</span>
       </span>
-      <span v-if="settingsStore.navSearch.enable" class="item" @click="eventBus.emit('global-search-toggle')">
+      <span v-if="settingsStore.settings.navSearch.enable" class="item" @click="eventBus.emit('global-search-toggle')">
         <el-icon>
           <svg-icon name="ep:search" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.mode === 'pc' && settingsStore.toolbar.enableFullscreen" class="item" @click="toggle">
+      <span v-if="settingsStore.mode === 'pc' && settingsStore.settings.toolbar.enableFullscreen" class="item" @click="toggle">
         <el-icon>
           <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.toolbar.enablePageReload" class="item" @click="mainPage.reload()">
+      <span v-if="settingsStore.settings.toolbar.enablePageReload" class="item" @click="mainPage.reload()">
         <el-icon>
           <svg-icon name="ep:refresh-right" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.toolbar.enableColorScheme" class="item" @click="settingsStore.setColorScheme(settingsStore.app.colorScheme === 'dark' ? 'light' : 'dark')">
+      <span v-if="settingsStore.settings.toolbar.enableColorScheme" class="item" @click="settingsStore.setColorScheme(settingsStore.settings.app.colorScheme === 'dark' ? 'light' : 'dark')">
         <el-icon>
-          <svg-icon v-show="settingsStore.app.colorScheme === 'light'" name="ep:sunny" />
-          <svg-icon v-show="settingsStore.app.colorScheme === 'dark'" name="ep:moon" />
+          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'light'" name="ep:sunny" />
+          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'dark'" name="ep:moon" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.toolbar.enableAppSetting" class="item" @click="eventBus.emit('global-theme-toggle')">
+      <span v-if="settingsStore.settings.toolbar.enableAppSetting" class="item" @click="eventBus.emit('global-theme-toggle')">
         <el-icon>
           <svg-icon name="ep:setting" />
         </el-icon>
@@ -91,8 +91,8 @@ function pro() {
       </div>
       <template #dropdown>
         <el-dropdown-menu class="user-dropdown">
-          <el-dropdown-item v-if="settingsStore.home.enable" command="home">
-            {{ settingsStore.home.title }}
+          <el-dropdown-item v-if="settingsStore.settings.home.enable" command="home">
+            {{ settingsStore.settings.home.title }}
           </el-dropdown-item>
           <el-dropdown-item command="setting">
             个人设置
@@ -135,7 +135,8 @@ function pro() {
     }
 
     .item-pro {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
       width: auto;
       padding: 0 10px;
       transform-origin: right center;
@@ -157,17 +158,12 @@ function pro() {
         }
       }
 
-      .el-icon {
-        vertical-align: middle;
-      }
-
       .title {
         padding-left: 5px;
         font-weight: bold;
         font-size: 14px;
         background-image: linear-gradient(to right, #ffa237, #fc455d);
-        /* stylelint-disable-next-line property-no-vendor-prefix */
-        -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
       }
     }

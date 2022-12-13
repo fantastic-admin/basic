@@ -40,7 +40,7 @@ const systemRoutes: RouteRecordRaw[] = [
     path: '/',
     component: () => import('@/layouts/index.vue'),
     meta: {
-      title: () => useSettingsStore().home.title,
+      title: () => useSettingsStore().settings.home.title,
       breadcrumb: false,
     },
     children: [
@@ -49,7 +49,7 @@ const systemRoutes: RouteRecordRaw[] = [
         name: 'home',
         component: () => import('@/views/index.vue'),
         meta: {
-          title: () => useSettingsStore().home.title,
+          title: () => useSettingsStore().settings.home.title,
           breadcrumb: false,
         },
       },

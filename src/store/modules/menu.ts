@@ -8,178 +8,182 @@ import { resolveRoutePath } from '@/utils'
 import api from '@/api'
 import menu from '@/menu'
 
-function getDeepestPath(menu: Menu.recordRaw, rootPath = '') {
-  let retnPath = ''
-  if (menu.children) {
-    const item = menu.children.find(item => item.meta?.sidebar !== false)
-    if (item) {
-      retnPath = getDeepestPath(item, resolveRoutePath(rootPath, menu.path))
-    }
-    else {
-      retnPath = getDeepestPath(menu.children[0], resolveRoutePath(rootPath, menu.path))
-    }
-  }
-  else {
-    retnPath = resolveRoutePath(rootPath, menu.path)
-  }
-  return retnPath
-}
-
-function hasPermission(permissions: string[], menu: Menu.recordMainRaw | Menu.recordRaw) {
-  let isAuth = false
-  if (menu.meta && menu.meta.auth) {
-    isAuth = permissions.some((auth) => {
-      return typeof menu.meta?.auth === 'string'
-        ? menu.meta.auth === auth
-        : typeof menu.meta?.auth === 'object'
-          ? menu.meta.auth.includes(auth)
-          : false
-    })
-  }
-  else {
-    isAuth = true
-  }
-  return isAuth
-}
-
-function filterAsyncMenus<T extends Menu.recordMainRaw[] | Menu.recordRaw[]>(menus: T, permissions: string[]): T {
-  const res: any = []
-  menus.forEach((menu) => {
-    const tmpMenu = cloneDeep(menu)
-    if (hasPermission(permissions, tmpMenu)) {
-      if (tmpMenu.children) {
-        tmpMenu.children = filterAsyncMenus(tmpMenu.children, permissions) as Menu.recordRaw[]
-        tmpMenu.children.length && res.push(tmpMenu)
-      }
-      else {
-        res.push(tmpMenu)
-      }
-    }
-  })
-  return res
-}
-
-function getDefaultOpenedPaths(menus: Menu.recordRaw[], rootPath = '') {
-  const defaultOpenedPaths: string[] = []
-  menus.forEach((item) => {
-    if (item.meta?.defaultOpened && item.children) {
-      defaultOpenedPaths.push(resolveRoutePath(rootPath, item.path))
-      const childrenDefaultOpenedPaths = getDefaultOpenedPaths(item.children, resolveRoutePath(rootPath, item.path))
-      if (childrenDefaultOpenedPaths.length > 0) {
-        defaultOpenedPaths.push(...childrenDefaultOpenedPaths)
-      }
-    }
-  })
-  return defaultOpenedPaths
-}
-
 const useMenuStore = defineStore(
   // 唯一ID
   'menu',
-  {
-    state: () => ({
-      menus: [{
+  () => {
+    const settingsStore = useSettingsStore()
+    const userStore = useUserStore()
+    const routeStore = useRouteStore()
+
+    const menus = ref<Menu.recordMainRaw[]>([{
+      meta: {},
+      children: [],
+    }])
+    const actived = ref(0)
+
+    // 完整导航数据
+    const allMenus = computed(() => {
+      let returnMenus: Menu.recordMainRaw[] = [{
         meta: {},
         children: [],
-      }] as Menu.recordMainRaw[],
-      actived: 0,
-    }),
-    getters: {
-      // 完整导航数据
-      allMenus() {
-        const settingsStore = useSettingsStore()
-        let menus: Menu.recordMainRaw[] = [{
-          meta: {},
-          children: [],
-        }]
-        if (settingsStore.app.routeBaseOn !== 'filesystem') {
-          const routeStore = useRouteStore()
-          if (settingsStore.menu.menuMode === 'single') {
-            menus[0].children = []
-            routeStore.routes.forEach((item) => {
-              menus[0].children?.push(...item.children as Menu.recordRaw[])
-            })
-          }
-          else {
-            menus = routeStore.routes as Menu.recordMainRaw[]
-          }
+      }]
+      if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
+        if (settingsStore.settings.menu.menuMode === 'single') {
+          returnMenus[0].children = []
+          routeStore.routes.forEach((item) => {
+            returnMenus[0].children?.push(...item.children as Menu.recordRaw[])
+          })
         }
         else {
-          menus = this.menus
+          returnMenus = routeStore.routes as Menu.recordMainRaw[]
         }
-        return menus
-      },
-      // 次导航数据
-      sidebarMenus(): Menu.recordMainRaw['children'] {
-        return this.allMenus.length > 0
-          ? this.allMenus[this.actived].children
-          : []
-      },
-      // 次导航里第一个导航的路径
-      sidebarMenusFirstDeepestPath(): string {
-        return this.allMenus.length > 0
-          ? getDeepestPath(this.sidebarMenus[0])
-          : '/'
-      },
-      defaultOpenedPaths() {
-        const settingsStore = useSettingsStore()
-        let defaultOpenedPaths: string[] = []
-        if (settingsStore.app.routeBaseOn !== 'filesystem') {
-          defaultOpenedPaths = getDefaultOpenedPaths(this.sidebarMenus)
+      }
+      else {
+        returnMenus = menus.value
+      }
+      return returnMenus
+    })
+    // 次导航数据
+    const sidebarMenus = computed<Menu.recordMainRaw['children']>(() => {
+      return allMenus.value.length > 0
+        ? allMenus.value[actived.value].children
+        : []
+    })
+    // 次导航第一层最深路径
+    const sidebarMenusFirstDeepestPath = computed(() => {
+      return allMenus.value.length > 0
+        ? getDeepestPath(sidebarMenus.value[0])
+        : '/'
+    })
+    function getDeepestPath(menu: Menu.recordRaw, rootPath = '') {
+      let retnPath = ''
+      if (menu.children) {
+        const item = menu.children.find(item => item.meta?.sidebar !== false)
+        if (item) {
+          retnPath = getDeepestPath(item, resolveRoutePath(rootPath, menu.path))
         }
-        return defaultOpenedPaths
-      },
-    },
-    actions: {
-      // 生成导航（前端生成）
-      async generateMenusAtFront() {
-        const settingsStore = useSettingsStore()
-        const userStore = useUserStore()
-        let accessedMenus
+        else {
+          retnPath = getDeepestPath(menu.children[0], resolveRoutePath(rootPath, menu.path))
+        }
+      }
+      else {
+        retnPath = resolveRoutePath(rootPath, menu.path)
+      }
+      return retnPath
+    }
+    // 默认展开的导航路径
+    const defaultOpenedPaths = computed(() => {
+      let defaultOpenedPaths: string[] = []
+      if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
+        defaultOpenedPaths = getDefaultOpenedPaths(sidebarMenus.value)
+      }
+      return defaultOpenedPaths
+    })
+    function getDefaultOpenedPaths(menus: Menu.recordRaw[], rootPath = '') {
+      const defaultOpenedPaths: string[] = []
+      menus.forEach((item) => {
+        if (item.meta?.defaultOpened && item.children) {
+          defaultOpenedPaths.push(resolveRoutePath(rootPath, item.path))
+          const childrenDefaultOpenedPaths = getDefaultOpenedPaths(item.children, resolveRoutePath(rootPath, item.path))
+          if (childrenDefaultOpenedPaths.length > 0) {
+            defaultOpenedPaths.push(...childrenDefaultOpenedPaths)
+          }
+        }
+      })
+      return defaultOpenedPaths
+    }
+
+    // 判断是否有权限
+    function hasPermission(permissions: string[], menu: Menu.recordMainRaw | Menu.recordRaw) {
+      let isAuth = false
+      if (menu.meta && menu.meta.auth) {
+        isAuth = permissions.some((auth) => {
+          return typeof menu.meta?.auth === 'string'
+            ? menu.meta.auth === auth
+            : typeof menu.meta?.auth === 'object'
+              ? menu.meta.auth.includes(auth)
+              : false
+        })
+      }
+      else {
+        isAuth = true
+      }
+      return isAuth
+    }
+    // 根据权限过滤导航
+    function filterAsyncMenus<T extends Menu.recordMainRaw[] | Menu.recordRaw[]>(menus: T, permissions: string[]): T {
+      const res: any = []
+      menus.forEach((menu) => {
+        const tmpMenu = cloneDeep(menu)
+        if (hasPermission(permissions, tmpMenu)) {
+          if (tmpMenu.children) {
+            tmpMenu.children = filterAsyncMenus(tmpMenu.children, permissions) as Menu.recordRaw[]
+            tmpMenu.children.length && res.push(tmpMenu)
+          }
+          else {
+            res.push(tmpMenu)
+          }
+        }
+      })
+      return res
+    }
+    // 生成导航（前端生成）
+    async function generateMenusAtFront() {
+      let accessedMenus
+      // 如果权限功能开启，则需要对导航数据进行筛选过滤
+      if (settingsStore.settings.app.enablePermission) {
+        const permissions = await userStore.getPermissions()
+        accessedMenus = filterAsyncMenus(menu, permissions)
+      }
+      else {
+        accessedMenus = cloneDeep(menu)
+      }
+      menus.value = accessedMenus.filter(item => item.children.length !== 0)
+    }
+    // 生成导航（后端生成）
+    async function generateMenusAtBack() {
+      await api.get('menu/list', {
+        baseURL: '/mock/',
+      }).then(async (res) => {
+        let accessedMenus: Menu.recordMainRaw[]
         // 如果权限功能开启，则需要对导航数据进行筛选过滤
-        if (settingsStore.app.enablePermission) {
+        if (settingsStore.settings.app.enablePermission) {
           const permissions = await userStore.getPermissions()
-          accessedMenus = filterAsyncMenus(menu, permissions)
+          accessedMenus = filterAsyncMenus(res.data, permissions)
         }
         else {
-          accessedMenus = cloneDeep(menu)
+          accessedMenus = cloneDeep(res.data)
         }
-        this.menus = accessedMenus.filter(item => item.children.length !== 0)
-      },
-      // 生成导航（后端生成）
-      async generateMenusAtBack() {
-        await api.get('menu/list', {
-          baseURL: '/mock/',
-        }).then(async (res) => {
-          const settingsStore = useSettingsStore()
-          const userStore = useUserStore()
-          let accessedMenus: Menu.recordMainRaw[]
-          // 如果权限功能开启，则需要对导航数据进行筛选过滤
-          if (settingsStore.app.enablePermission) {
-            const permissions = await userStore.getPermissions()
-            accessedMenus = filterAsyncMenus(res.data, permissions)
-          }
-          else {
-            accessedMenus = cloneDeep(res.data)
-          }
-          this.menus = accessedMenus.filter(item => item.children.length !== 0)
-        }).catch(() => {})
-      },
-      // 切换主导航
-      setActived(data: number | string) {
-        if (typeof data === 'number') {
-          // 如果是 number 类型，则认为是主导航的索引
-          this.actived = data
+        menus.value = accessedMenus.filter(item => item.children.length !== 0)
+      }).catch(() => {})
+    }
+    // 切换主导航
+    function setActived(data: number | string) {
+      if (typeof data === 'number') {
+        // 如果是 number 类型，则认为是主导航的索引
+        actived.value = data
+      }
+      else {
+        // 如果是 string 类型，则认为是路由，需要查找对应的主导航索引
+        const findIndex = allMenus.value.findIndex(item => item.children.some(r => data.indexOf(`${r.path}/`) === 0 || data === r.path))
+        if (findIndex >= 0) {
+          actived.value = findIndex
         }
-        else {
-          // 如果是 string 类型，则认为是路由，需要查找对应的主导航索引
-          const findIndex = this.allMenus.findIndex(item => item.children.some(r => data.indexOf(`${r.path}/`) === 0 || data === r.path))
-          if (findIndex >= 0) {
-            this.actived = findIndex
-          }
-        }
-      },
-    },
+      }
+    }
+
+    return {
+      menus,
+      actived,
+      allMenus,
+      sidebarMenus,
+      sidebarMenusFirstDeepestPath,
+      defaultOpenedPaths,
+      generateMenusAtFront,
+      generateMenusAtBack,
+      setActived,
+    }
   },
 )
 

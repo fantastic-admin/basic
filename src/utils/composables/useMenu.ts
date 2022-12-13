@@ -8,7 +8,7 @@ export default function useMenu() {
 
   function switchTo(index: number | string) {
     menuStore.setActived(index)
-    if (settingsStore.menu.switchMainMenuAndPageJump) {
+    if (settingsStore.settings.menu.switchMainMenuAndPageJump) {
       router.push(menuStore.sidebarMenusFirstDeepestPath)
     }
   }

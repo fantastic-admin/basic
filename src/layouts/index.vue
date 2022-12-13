@@ -21,7 +21,7 @@ const menuStore = useMenuStore()
 
 const isLink = computed(() => !!routeInfo.meta.link)
 
-watch(() => settingsStore.menu.subMenuCollapse, (val) => {
+watch(() => settingsStore.settings.menu.subMenuCollapse, (val) => {
   if (settingsStore.mode === 'mobile') {
     if (!val) {
       document.body.classList.add('hidden')
@@ -35,20 +35,20 @@ watch(() => settingsStore.menu.subMenuCollapse, (val) => {
 watch(() => routeInfo.path, () => {
   if (settingsStore.mode === 'mobile') {
     settingsStore.$patch((state) => {
-      state.menu.subMenuCollapse = true
+      state.settings.menu.subMenuCollapse = true
     })
   }
 })
 
 onMounted(() => {
   hotkeys('f5', (e) => {
-    if (settingsStore.toolbar.enablePageReload) {
+    if (settingsStore.settings.toolbar.enablePageReload) {
       e.preventDefault()
       useMainPage().reload()
     }
   })
   hotkeys('alt+`', (e) => {
-    if (settingsStore.menu.enableHotkeys) {
+    if (settingsStore.settings.menu.enableHotkeys) {
       e.preventDefault()
       useMenu().switchTo(menuStore.actived + 1 < menuStore.allMenus.length ? menuStore.actived + 1 : 0)
     }
@@ -65,13 +65,13 @@ onUnmounted(() => {
     <div id="app-main">
       <Header />
       <div class="wrapper">
-        <div class="sidebar-container" :class="{ show: settingsStore.mode === 'mobile' && !settingsStore.menu.subMenuCollapse }">
+        <div class="sidebar-container" :class="{ show: settingsStore.mode === 'mobile' && !settingsStore.settings.menu.subMenuCollapse }">
           <MainSidebar />
           <SubSidebar />
         </div>
-        <div class="sidebar-mask" :class="{ show: settingsStore.mode === 'mobile' && !settingsStore.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()" />
+        <div class="sidebar-mask" :class="{ show: settingsStore.mode === 'mobile' && !settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()" />
         <div class="main-container" :style="{ 'padding-bottom': $route.meta.paddingBottom } as any">
-          <Topbar v-if="!(settingsStore.menu.menuMode === 'head' && !settingsStore.menu.enableSubMenuCollapseButton && !settingsStore.breadcrumb.enable)" />
+          <Topbar v-if="!(settingsStore.settings.menu.menuMode === 'head' && !settingsStore.settings.menu.enableSubMenuCollapseButton && !settingsStore.settings.breadcrumb.enable)" />
           <div class="main">
             <router-view v-slot="{ Component, route }">
               <transition name="main" mode="out-in" appear>

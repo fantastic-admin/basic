@@ -20,11 +20,11 @@ onMounted(() => {
         <el-descriptions-item label="查看系统信息">
           Alt + I
         </el-descriptions-item>
-        <el-descriptions-item v-if="settingsStore.navSearch.enable && settingsStore.navSearch.enableHotkeys" label="唤起导航搜索">
+        <el-descriptions-item v-if="settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys" label="唤起导航搜索">
           Alt + S
         </el-descriptions-item>
       </el-descriptions>
-      <el-descriptions v-if="settingsStore.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.menu.menuMode)" title="主导航" :column="1" border>
+      <el-descriptions v-if="settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.menuMode)" title="主导航" :column="1" border>
         <el-descriptions-item label="激活下一个主导航">
           Alt + `
         </el-descriptions-item>
