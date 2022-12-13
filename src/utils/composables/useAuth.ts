@@ -5,7 +5,7 @@ export default function useAuth() {
   function hasPermission(permission: string) {
     const settingsStore = useSettingsStore()
     const userStore = useUserStore()
-    if (settingsStore.app.enablePermission) {
+    if (settingsStore.settings.app.enablePermission) {
       return userStore.permissions.includes(permission)
     }
     else {

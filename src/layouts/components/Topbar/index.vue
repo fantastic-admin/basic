@@ -9,17 +9,17 @@ const settingsStore = useSettingsStore()
 
 const enableSubMenuCollapseButton = computed(() => {
   return settingsStore.mode === 'mobile' || (
-    ['side', 'head', 'single'].includes(settingsStore.menu.menuMode)
-      && settingsStore.menu.enableSubMenuCollapseButton
+    ['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode)
+      && settingsStore.settings.menu.enableSubMenuCollapseButton
   )
 })
 
 const breadcrumbList = computed(() => {
   const breadcrumbList = []
-  if (settingsStore.home.enable) {
+  if (settingsStore.settings.home.enable) {
     breadcrumbList.push({
       path: '/',
-      title: settingsStore.home.title,
+      title: settingsStore.settings.home.title,
     })
   }
   if (route.meta.breadcrumbNeste) {
@@ -41,7 +41,7 @@ function onScroll() {
 }
 watch(scrollTop, (val, oldVal) => {
   const topbarHeight = parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-topbar-height'))
-  scrollOnHide.value = settingsStore.topbar.mode === 'sticky' && val > oldVal && val > topbarHeight
+  scrollOnHide.value = settingsStore.settings.topbar.mode === 'sticky' && val > oldVal && val > topbarHeight
 })
 
 function pathCompile(path: string) {
@@ -53,18 +53,18 @@ function pathCompile(path: string) {
 <template>
   <div
     class="topbar-container" :class="{
-      [`topbar-${settingsStore.topbar.mode}`]: true,
+      [`topbar-${settingsStore.settings.topbar.mode}`]: true,
       shadow: scrollTop,
       hide: scrollOnHide,
     }" data-fixed-calc-width
   >
     <div class="left-box">
-      <div v-if="enableSubMenuCollapseButton" class="sidebar-collapse" :class="{ 'is-collapse': settingsStore.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
+      <div v-if="enableSubMenuCollapseButton" class="sidebar-collapse" :class="{ 'is-collapse': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
         <el-icon>
           <svg-icon name="toolbar-collapse" />
         </el-icon>
       </div>
-      <el-breadcrumb v-if="settingsStore.breadcrumb.enable && settingsStore.mode === 'pc' && settingsStore.app.routeBaseOn !== 'filesystem'">
+      <el-breadcrumb v-if="settingsStore.settings.breadcrumb.enable && settingsStore.mode === 'pc' && settingsStore.settings.app.routeBaseOn !== 'filesystem'">
         <transition-group name="breadcrumb">
           <el-breadcrumb-item v-for="(item, index) in breadcrumbList" :key="item.path" :to="index < breadcrumbList.length - 1 ? pathCompile(item.path) : ''">
             {{ item.title ?? '[ 无标题 ]' }}

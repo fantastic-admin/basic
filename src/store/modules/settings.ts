@@ -1,68 +1,106 @@
 import { defaultsDeep } from 'lodash-es'
 import type { RouteMeta } from 'vue-router'
 import type { RecursiveRequired, Settings } from '#/global'
-import settings from '@/settings'
+import settingsCustom from '@/settings'
 import settingsDefault from '@/settings.default'
-
-interface SettingsStore extends RecursiveRequired<Settings.all> {
-  subMenuCollapseLastStatus: boolean
-  mode: 'pc' | 'mobile'
-  title?: RouteMeta['title']
-}
 
 const useSettingsStore = defineStore(
   // 唯一ID
   'settings',
-  {
-    state: (): SettingsStore => ({
-      // 合并配置
-      ...defaultsDeep(settings, settingsDefault),
-      // 侧边栏是否收起（用于记录 pc 模式下最后的状态）
-      subMenuCollapseLastStatus: settingsDefault.menu.subMenuCollapse,
-      // 显示模式，支持：mobile、pc
-      mode: 'pc',
-      // 页面标题
-      title: '',
-    }),
-    actions: {
-      // 设置网页标题
-      setTitle(title: SettingsStore['title']) {
-        this.title = title
-      },
-      // 设置访问模式
-      setMode(width: number) {
-        if (this.layout.enableMobileAdaptation) {
-          // 先判断 UA 是否为移动端设备（手机&平板）
-          if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-            this.mode = 'mobile'
-          }
-          else {
-            // 如果为桌面设备，再根据页面宽度判断是否需要切换为移动端展示
-            this.mode = width < 992 ? 'mobile' : 'pc'
-          }
+  () => {
+    const mergeSettings: RecursiveRequired<Settings.all> = defaultsDeep(settingsCustom, settingsDefault)
+    const settings = ref(mergeSettings)
+    watch(() => settings.value.app.colorScheme, (val) => {
+      if (val === '') {
+        val = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      }
+      switch (val) {
+        case 'dark':
+          document.documentElement.classList.add('dark')
+          break
+        case 'light':
+          document.documentElement.classList.remove('dark')
+          break
+      }
+    }, {
+      immediate: true,
+    })
+    watch(() => settings.value.menu.menuMode, (val) => {
+      document.body.setAttribute('data-menu-mode', val)
+    }, {
+      immediate: true,
+    })
+
+    // 页面标题
+    const title = ref<RouteMeta['title']>()
+    // 设置网页标题
+    function setTitle(_title: RouteMeta['title']) {
+      title.value = _title
+    }
+
+    // 显示模式
+    const mode = ref<'pc' | 'mobile'>('pc')
+    // 设置访问模式
+    function setMode(width: number) {
+      if (settings.value.layout.enableMobileAdaptation) {
+        // 先判断 UA 是否为移动端设备（手机&平板）
+        if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+          mode.value = 'mobile'
         }
         else {
-          this.mode = 'pc'
+          // 如果为桌面设备，再根据页面宽度判断是否需要切换为移动端展示
+          mode.value = width < 992 ? 'mobile' : 'pc'
         }
-      },
-      // 切换侧边栏导航展开/收起
-      toggleSidebarCollapse() {
-        this.menu.subMenuCollapse = !this.menu.subMenuCollapse
-        if (this.mode === 'pc') {
-          this.subMenuCollapseLastStatus = !this.subMenuCollapseLastStatus
-        }
-      },
-      // 设置主题颜色模式
-      setColorScheme(color: Required<Settings.app>['colorScheme']) {
-        this.app.colorScheme = color
-      },
-      // 更新应用配置
-      updateSettings(data: Settings.all) {
-        Object.keys(data).forEach((key) => {
-          this[key as keyof Settings.all] = defaultsDeep(data[key as keyof Settings.all], this[key as keyof Settings.all])
-        })
-      },
-    },
+      }
+      else {
+        mode.value = 'pc'
+      }
+    }
+
+    // 侧边栏是否收起（用于记录 pc 模式下最后的状态）
+    const subMenuCollapseLastStatus = ref(mergeSettings.menu.subMenuCollapse)
+    // 切换侧边栏导航展开/收起
+    function toggleSidebarCollapse() {
+      settings.value.menu.subMenuCollapse = !settings.value.menu.subMenuCollapse
+      if (mode.value === 'pc') {
+        subMenuCollapseLastStatus.value = !subMenuCollapseLastStatus.value
+      }
+    }
+
+    watch(mode, (val) => {
+      switch (val) {
+        case 'pc':
+          settings.value.menu.subMenuCollapse = subMenuCollapseLastStatus.value
+          break
+        case 'mobile':
+          settings.value.menu.subMenuCollapse = true
+          break
+      }
+      document.body.setAttribute('data-mode', val)
+    }, {
+      immediate: true,
+    })
+
+    // 设置主题颜色模式
+    function setColorScheme(color: Required<Settings.app>['colorScheme']) {
+      settings.value.app.colorScheme = color
+    }
+    // 更新应用配置
+    function updateSettings(data: Settings.all) {
+      settings.value = defaultsDeep(data, settings.value)
+    }
+
+    return {
+      settings,
+      title,
+      setTitle,
+      mode,
+      setMode,
+      subMenuCollapseLastStatus,
+      toggleSidebarCollapse,
+      setColorScheme,
+      updateSettings,
+    }
   },
 )
 

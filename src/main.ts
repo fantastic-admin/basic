@@ -19,7 +19,7 @@ app.use(ElementPlus)
 app.use(pinia)
 app.use(router)
 directive(app)
-if (useSettingsStore().app.iconifyOfflineUse) {
+if (useSettingsStore().settings.app.iconifyOfflineUse) {
   downloadAndInstall()
 }
 

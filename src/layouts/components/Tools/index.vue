@@ -44,28 +44,28 @@ function pro() {
 <template>
   <div class="tools">
     <div class="buttons">
-      <span v-if="settingsStore.navSearch.enable" class="item" @click="eventBus.emit('global-search-toggle')">
+      <span v-if="settingsStore.settings.navSearch.enable" class="item" @click="eventBus.emit('global-search-toggle')">
         <el-icon>
           <svg-icon name="ep:search" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.mode === 'pc' && settingsStore.toolbar.enableFullscreen" class="item" @click="toggle">
+      <span v-if="settingsStore.mode === 'pc' && settingsStore.settings.toolbar.enableFullscreen" class="item" @click="toggle">
         <el-icon>
           <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.toolbar.enablePageReload" class="item" @click="mainPage.reload()">
+      <span v-if="settingsStore.settings.toolbar.enablePageReload" class="item" @click="mainPage.reload()">
         <el-icon>
           <svg-icon name="ep:refresh-right" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.toolbar.enableColorScheme" class="item" @click="settingsStore.setColorScheme(settingsStore.app.colorScheme === 'dark' ? 'light' : 'dark')">
+      <span v-if="settingsStore.settings.toolbar.enableColorScheme" class="item" @click="settingsStore.setColorScheme(settingsStore.settings.app.colorScheme === 'dark' ? 'light' : 'dark')">
         <el-icon>
-          <svg-icon v-show="settingsStore.app.colorScheme === 'light'" name="ep:sunny" />
-          <svg-icon v-show="settingsStore.app.colorScheme === 'dark'" name="ep:moon" />
+          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'light'" name="ep:sunny" />
+          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'dark'" name="ep:moon" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.toolbar.enableAppSetting" class="item" @click="eventBus.emit('global-theme-toggle')">
+      <span v-if="settingsStore.settings.toolbar.enableAppSetting" class="item" @click="eventBus.emit('global-theme-toggle')">
         <el-icon>
           <svg-icon name="ep:setting" />
         </el-icon>
@@ -85,8 +85,8 @@ function pro() {
       </div>
       <template #dropdown>
         <el-dropdown-menu class="user-dropdown">
-          <el-dropdown-item v-if="settingsStore.home.enable" command="home">
-            {{ settingsStore.home.title }}
+          <el-dropdown-item v-if="settingsStore.settings.home.enable" command="home">
+            {{ settingsStore.settings.home.title }}
           </el-dropdown-item>
           <el-dropdown-item command="setting">
             个人设置

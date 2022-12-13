@@ -43,7 +43,7 @@ const hasChildren = computed(() => {
         </el-menu-item>
       </a>
     </router-link>
-    <el-sub-menu v-else :title="item.meta?.title ?? '[ 无标题 ]'" :index="settingsStore.app.routeBaseOn !== 'filesystem' ? resolveRoutePath(basePath, item.path) : JSON.stringify(item)">
+    <el-sub-menu v-else :title="item.meta?.title ?? '[ 无标题 ]'" :index="settingsStore.settings.app.routeBaseOn !== 'filesystem' ? resolveRoutePath(basePath, item.path) : JSON.stringify(item)">
       <template #title>
         <el-icon v-if="item.meta?.icon" class="title-icon">
           <svg-icon :name="item.meta.icon" />

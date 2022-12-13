@@ -111,18 +111,18 @@ onMounted(() => {
     isShow.value = !isShow.value
   })
   hotkeys('alt+s', (e) => {
-    if (settingsStore.navSearch.enable && settingsStore.navSearch.enableHotkeys) {
+    if (settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys) {
       e.preventDefault()
       isShow.value = true
     }
   })
   hotkeys('esc', (e) => {
-    if (settingsStore.navSearch.enable && settingsStore.navSearch.enableHotkeys) {
+    if (settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys) {
       e.preventDefault()
       isShow.value = false
     }
   })
-  if (settingsStore.app.routeBaseOn !== 'filesystem') {
+  if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
     routeStore.routes.forEach((item) => {
       item.children && getSourceList(item.children)
     })

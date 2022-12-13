@@ -42,8 +42,8 @@ const settingsStore = useSettingsStore()
 const defaultSetting = ref({
   language_url: 'tinymce/langs/zh-Hans.js',
   language: 'zh-Hans',
-  skin_url: settingsStore.app.colorScheme === 'light' ? 'tinymce/skins/ui/oxide' : 'tinymce/skins/ui/oxide-dark',
-  content_css: settingsStore.app.colorScheme === 'light' ? 'tinymce/skins/content/default/content.min.css' : 'tinymce/skins/content/dark/content.min.css',
+  skin_url: settingsStore.settings.app.colorScheme === 'light' ? 'tinymce/skins/ui/oxide' : 'tinymce/skins/ui/oxide-dark',
+  content_css: settingsStore.settings.app.colorScheme === 'light' ? 'tinymce/skins/content/default/content.min.css' : 'tinymce/skins/content/dark/content.min.css',
   min_height: 250,
   max_height: 600,
   selector: 'textarea',
