@@ -40,13 +40,6 @@ export default ({ mode, command }) => {
     build: {
       outDir: mode === 'production' ? 'dist' : `dist-${mode}`,
       sourcemap: env.VITE_BUILD_SOURCEMAP === 'true',
-      rollupOptions: {
-        output: {
-          sanitizeFileName: (name) => {
-            return name.startsWith('\0') ? name.slice(1) : name
-          },
-        },
-      },
     },
     define: {
       __SYSTEM_INFO__: JSON.stringify({
