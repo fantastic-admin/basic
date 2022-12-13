@@ -11,7 +11,9 @@ export default ({ mode, command }) => {
   // 全局 scss 资源
   const scssResources = []
   fs.readdirSync('src/assets/styles/resources').forEach((dirname) => {
-    if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) { scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`) }
+    if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) {
+      scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`)
+    }
   })
   // css 精灵图相关
   fs.readdirSync('src/assets/sprites').forEach((dirname) => {
@@ -38,6 +40,13 @@ export default ({ mode, command }) => {
     build: {
       outDir: mode === 'production' ? 'dist' : `dist-${mode}`,
       sourcemap: env.VITE_BUILD_SOURCEMAP === 'true',
+      rollupOptions: {
+        output: {
+          sanitizeFileName: (name) => {
+            return name.startsWith('\0') ? name.slice(1) : name
+          },
+        },
+      },
     },
     define: {
       __SYSTEM_INFO__: JSON.stringify({
