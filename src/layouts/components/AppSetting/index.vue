@@ -37,11 +37,7 @@ watch(copied, (val) => {
 })
 
 function handleCopy() {
-  const settings: any = cloneDeep(settingsStore.$state)
-  delete settings.subMenuCollapseLastStatus
-  delete settings.mode
-  delete settings.title
-  copy(JSON.stringify(settings, null, 2))
+  copy(JSON.stringify(settingsStore.settings, null, 2))
 }
 </script>
 
