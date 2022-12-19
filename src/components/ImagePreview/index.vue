@@ -24,7 +24,7 @@ const realHeight = computed(() => {
 </script>
 
 <template>
-  <el-image :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]">
+  <el-image :src="src" fit="cover" :style="`width:${realWidth};height:${realHeight};`" :preview-src-list="[src]" preview-teleported>
     <template #error>
       <div class="image-slot">
         <el-icon>

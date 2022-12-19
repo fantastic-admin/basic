@@ -174,7 +174,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
         <el-alert :title="`上传图片支持 ${ext.join(' / ')} 格式，单张图片大小不超过 ${size}MB，建议图片尺寸为 ${width}*${height}，且图片数量不超过 ${max} 张`" type="info" show-icon :closable="false" />
       </div>
     </div>
-    <el-image-viewer v-if="uploadData.imageViewerVisible" :url-list="url as string[]" :initial-index="uploadData.dialogImageIndex" @close="previewClose" />
+    <el-image-viewer v-if="uploadData.imageViewerVisible" :url-list="url as string[]" :initial-index="uploadData.dialogImageIndex" teleported @close="previewClose" />
   </div>
 </template>
 
