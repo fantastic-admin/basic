@@ -46,7 +46,7 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
   },
   copyright: {
     enable: true,
-    dates: '2020-2022',
+    dates: '2020-2023',
     company: 'Fantastic-admin',
     website: 'https://hooray.gitee.io/fantastic-admin/',
     beian: '',
