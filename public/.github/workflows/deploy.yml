@@ -10,6 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          # “最近更新时间” 等 git 日志相关信息，需要拉取全部提交记录
+          fetch-depth: 0
+
+      - name: Clean git history
+        run: |
+          git config --global user.email "304327508@qq.com"
+          git config --global user.name "hooray"
+          git checkout --orphan new_branch
+          git add -A
+          git commit -m "deploy"
+          git branch -D master
+          git branch -m master
+          git push -f origin master
+
       - name: Sync to Gitee
         uses: wearerequired/git-mirror-action@master
         env:
