@@ -36,13 +36,11 @@ const useRouteStore = defineStore(
         if (route.children) {
           const childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
           const tmpBreadcrumb = cloneDeep(breadcrumb)
-          if (route.meta?.breadcrumb !== false) {
-            tmpBreadcrumb.push({
-              path: childrenBaseUrl,
-              title: route.meta?.title,
-              hide: !route.meta?.breadcrumb,
-            })
-          }
+          tmpBreadcrumb.push({
+            path: childrenBaseUrl,
+            title: route.meta?.title,
+            hide: !route.meta?.breadcrumb && route.meta?.breadcrumb === false,
+          })
           const tmpRoute = cloneDeep(route)
           tmpRoute.path = childrenBaseUrl
           if (!tmpRoute.meta) {
