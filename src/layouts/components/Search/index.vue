@@ -6,7 +6,7 @@ import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useRouteStore from '@/store/modules/route'
 import useMenuStore from '@/store/modules/menu'
-import type { Menu, Route } from '#/global'
+import type { Menu } from '#/global'
 
 const router = useRouter()
 

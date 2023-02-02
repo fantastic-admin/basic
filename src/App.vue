@@ -3,7 +3,6 @@ import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import hotkeys from 'hotkeys-js'
 import eventBus from './utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
-import useMenuStore from '@/store/modules/menu'
 
 const settingsStore = useSettingsStore()
 
