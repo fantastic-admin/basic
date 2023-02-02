@@ -1,7 +1,6 @@
 <script lang="ts" setup name="AppSetting">
 import { useClipboard } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
-import { cloneDeep } from 'lodash-es'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'

@@ -59,7 +59,7 @@ const defaultSetting = ref({
     '%H:%M:%S',
   ],
   // https://www.tiny.cloud/docs/tinymce/6/file-image-upload/#images_upload_handler
-  images_upload_handler: (blobInfo: any, progress: any) => new Promise((resolve, reject) => {
+  images_upload_handler: (blobInfo: any) => new Promise((resolve) => {
     const img = `data:image/jpeg;base64,${blobInfo.base64()}`
     resolve(img)
   }),
