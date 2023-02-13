@@ -13,7 +13,6 @@
     "property-no-unknown": null,
     "font-family-no-missing-generic-family-keyword": null,
     "selector-class-pattern": null,
-    "max-line-length": null,
     "scss/double-slash-comment-empty-line-before": null,
     "scss/no-global-function-names": null
   }
