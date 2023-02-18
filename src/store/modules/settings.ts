@@ -31,6 +31,21 @@ const useSettingsStore = defineStore(
       immediate: true,
     })
 
+    // 操作系统
+    const os = ref<'mac' | 'windows' | 'linux' | 'other'>('other')
+    const agent = navigator.userAgent.toLowerCase()
+    switch (true) {
+      case agent.includes('mac os'):
+        os.value = 'mac'
+        break
+      case agent.includes('windows'):
+        os.value = 'windows'
+        break
+      case agent.includes('linux'):
+        os.value = 'linux'
+        break
+    }
+
     // 页面标题
     const title = ref<RouteMeta['title']>()
     // 设置网页标题
@@ -92,6 +107,7 @@ const useSettingsStore = defineStore(
 
     return {
       settings,
+      os,
       title,
       setTitle,
       mode,

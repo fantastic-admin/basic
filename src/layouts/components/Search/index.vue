@@ -248,7 +248,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
         <div v-if="settingsStore.mode === 'pc'" class="tips">
           <div class="tip">
             <el-tag type="info" size="large">
-              Alt + S
+              {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + S
             </el-tag>
             <el-tag type="info" size="large">
               唤醒搜索面板
