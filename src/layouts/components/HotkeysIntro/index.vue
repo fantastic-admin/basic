@@ -18,15 +18,15 @@ onMounted(() => {
     <el-drawer v-model="isShow" title="快捷键介绍" direction="rtl" :size="360">
       <el-descriptions title="全局" :column="1" border>
         <el-descriptions-item label="查看系统信息">
-          Alt + I
+          {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + I
         </el-descriptions-item>
         <el-descriptions-item v-if="settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys" label="唤起导航搜索">
-          Alt + S
+          {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + S
         </el-descriptions-item>
       </el-descriptions>
       <el-descriptions v-if="settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.menuMode)" title="主导航" :column="1" border>
         <el-descriptions-item label="激活下一个主导航">
-          Alt + `
+          {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + `
         </el-descriptions-item>
       </el-descriptions>
     </el-drawer>
