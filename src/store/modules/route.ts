@@ -111,11 +111,15 @@ const useRouteStore = defineStore(
       let isAuth = false
       if (route.meta?.auth) {
         isAuth = permissions.some((auth) => {
-          return typeof route.meta?.auth === 'string'
-            ? route.meta.auth === auth
-            : typeof route.meta?.auth === 'object'
-              ? route.meta.auth.includes(auth)
-              : false
+          if (typeof route.meta?.auth === 'string') {
+            return route.meta.auth !== '' ? route.meta.auth === auth : true
+          }
+          else if (typeof route.meta?.auth === 'object') {
+            return route.meta.auth.length > 0 ? route.meta.auth.includes(auth) : true
+          }
+          else {
+            return false
+          }
         })
       }
       else {
