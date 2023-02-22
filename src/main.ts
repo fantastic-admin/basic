@@ -1,4 +1,4 @@
-import { createApp } from 'vue'
+import './utils/system.copyright'
 import ElementPlus from 'element-plus'
 import App from './App.vue'
 import pinia from './store'

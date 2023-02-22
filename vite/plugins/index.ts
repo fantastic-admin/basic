@@ -3,7 +3,6 @@ import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 
 import createInspector from './inspector'
-import createHtml from './html'
 import createAutoImport from './auto-import'
 import createComponents from './components'
 import createSetupExtend from './setup-extend'
@@ -23,7 +22,6 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
     vueJsx(),
   ]
   vitePlugins.push(createInspector())
-  vitePlugins.push(createHtml(viteEnv, isBuild))
   vitePlugins.push(createAutoImport())
   vitePlugins.push(createComponents())
   vitePlugins.push(createSetupExtend())
