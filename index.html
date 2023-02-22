@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="/loading.css" />
     <link rel="stylesheet" href="/browser_upgrade/index.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%= title %></title>
-    <%- copyrightScript %>
+    <title>载入中…</title>
   </head>
   <body>
     <div id="app">
@@ -17,7 +17,7 @@
           <div class="square"></div>
           <div class="square"></div>
         </div>
-        <div class="text"><%= title %>载入中…</div>
+        <div class="text">载入中</div>
       </div>
       <div id="browser-upgrade">
         <div class="title">为了您的体验，推荐使用以下浏览器</div>
@@ -33,8 +33,11 @@
         </div>
       </div>
     </div>
-    <%- loadingScript %>
+    <script>
+      if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+        document.getElementById('browser-upgrade').style.display = 'block'
+      }
+    </script>
     <script type="module" src="/src/main.ts"></script>
-    <%- devtoolScript %>
   </body>
 </html>
