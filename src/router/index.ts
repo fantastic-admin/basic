@@ -120,7 +120,7 @@ router.afterEach((to, from) => {
   settingsStore.settings.app.enableProgress && (isLoading.value = false)
   // 设置页面 title
   if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
-    settingsStore.setTitle(to.meta.breadcrumbNeste?.at(-1)?.title)
+    settingsStore.setTitle(to.meta.breadcrumbNeste?.at(-1)?.title ?? to.meta.title)
   }
   else {
     settingsStore.setTitle(to.meta.title)
