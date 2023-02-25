@@ -36,6 +36,12 @@ module.exports = {
         }
       },
     },
+    {
+      type: 'confirm',
+      name: 'isFilesystem',
+      message: '是否为基于文件系统的路由页面',
+      default: false,
+    },
   ],
   actions: (data) => {
     const relativePath = path.relative('src/views', data.path)
