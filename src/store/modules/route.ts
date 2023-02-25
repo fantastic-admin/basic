@@ -16,6 +16,7 @@ const useRouteStore = defineStore(
 
     const isGenerate = ref(false)
     const routes = ref<Route.recordMainRaw[]>([])
+    const routesUnallowed = ref<Route.recordMainRaw[]>([])
     const fileSystemRoutes = ref<RouteRecordRaw[]>([])
     const currentRemoveRoutes = ref<Function[]>([])
 
@@ -100,6 +101,32 @@ const useRouteStore = defineStore(
       }
       return returnRoutes
     })
+    const flatRoutesUnallowed = computed(() => {
+      const twoLevelRoutes: RouteRecordRaw[] = []
+      if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
+        if (routesUnallowed.value) {
+          routesUnallowed.value.forEach((item) => {
+            twoLevelRoutes.push(...cloneDeep(item.children) as RouteRecordRaw[])
+          })
+          twoLevelRoutes.forEach(item => flatAsyncRoutes(item))
+        }
+      }
+      else {
+        twoLevelRoutes.push(...cloneDeep(routesUnallowed.value) as RouteRecordRaw[])
+      }
+      const returnRoutes: RouteRecordRaw[] = []
+      twoLevelRoutes.forEach((item) => {
+        if (item.children) {
+          item.children.forEach((child) => {
+            const tmpChild = cloneDeep(child)
+            tmpChild.path = resolveRoutePath(item.path, tmpChild.path)
+            tmpChild.component = () => import('@/views/403.vue')
+            returnRoutes.push(tmpChild)
+          })
+        }
+      })
+      return returnRoutes
+    })
     const flatSystemRoutes = computed(() => {
       const routes = [...systemRoutes]
       routes.forEach(item => flatAsyncRoutes(item))
@@ -144,20 +171,40 @@ const useRouteStore = defineStore(
       })
       return res
     }
+    // 根据权限过滤路由（过滤出没有权限的路由）
+    function filterAsyncRoutesNoAuth<T extends Route.recordMainRaw[] | RouteRecordRaw[]>(routes: T, permissions: string[]): T {
+      const res: any = []
+      routes.forEach((route) => {
+        const tmpRoute = cloneDeep(route)
+        if (tmpRoute.children) {
+          tmpRoute.children = filterAsyncRoutesNoAuth(tmpRoute.children, permissions)
+          tmpRoute.children.length && res.push(tmpRoute)
+        }
+        else {
+          if (!hasPermission(permissions, route)) {
+            res.push(tmpRoute)
+          }
+        }
+      })
+      return res
+    }
     // 根据权限动态生成路由（前端生成）
     async function generateRoutesAtFront(asyncRoutes: Route.recordMainRaw[]) {
-      let accessedRoutes
+      let allowedRoutes
+      let unallowedRoutes: Route.recordMainRaw[] = []
       // 如果权限功能开启，则需要对路由数据进行筛选过滤
       if (settingsStore.settings.app.enablePermission) {
         const permissions = await userStore.getPermissions()
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+        allowedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+        unallowedRoutes = filterAsyncRoutesNoAuth(asyncRoutes, permissions)
       }
       else {
-        accessedRoutes = cloneDeep(asyncRoutes)
+        allowedRoutes = cloneDeep(asyncRoutes)
       }
       // 设置 routes 数据
       isGenerate.value = true
-      routes.value = accessedRoutes.filter(item => item.children?.length !== 0) as any
+      routes.value = allowedRoutes.filter(item => item.children?.length !== 0) as any
+      routesUnallowed.value = unallowedRoutes as any
     }
     // 格式化后端路由数据
     function formatBackRoutes(routes: any, views = import.meta.glob('../../views/**/*.vue')): Route.recordMainRaw[] {
@@ -183,34 +230,40 @@ const useRouteStore = defineStore(
         baseURL: '/mock/',
       }).then(async (res) => {
         const asyncRoutes = formatBackRoutes(res.data)
-        let accessedRoutes
+        let allowedRoutes
+        let unallowedRoutes: Route.recordMainRaw[] = []
         // 如果权限功能开启，则需要对路由数据进行筛选过滤
         if (settingsStore.settings.app.enablePermission) {
           const permissions = await userStore.getPermissions()
-          accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+          allowedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+          unallowedRoutes = filterAsyncRoutesNoAuth(asyncRoutes, permissions)
         }
         else {
-          accessedRoutes = cloneDeep(asyncRoutes)
+          allowedRoutes = cloneDeep(asyncRoutes)
         }
         // 设置 routes 数据
         isGenerate.value = true
-        routes.value = accessedRoutes.filter(item => item.children.length !== 0) as any
+        routes.value = allowedRoutes.filter(item => item.children.length !== 0) as any
+        routesUnallowed.value = unallowedRoutes as any
       }).catch(() => {})
     }
     // 根据权限动态生成路由（文件系统生成）
     async function generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {
-      let accessedRoutes
+      let allowedRoutes
+      let unallowedRoutes: RouteRecordRaw[] = []
       // 如果权限功能开启，则需要对路由数据进行筛选过滤
       if (settingsStore.settings.app.enablePermission) {
         const permissions = await userStore.getPermissions()
-        accessedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+        allowedRoutes = filterAsyncRoutes(asyncRoutes, permissions)
+        unallowedRoutes = filterAsyncRoutesNoAuth(asyncRoutes, permissions)
       }
       else {
-        accessedRoutes = cloneDeep(asyncRoutes)
+        allowedRoutes = cloneDeep(asyncRoutes)
       }
       // 设置 routes 数据
       isGenerate.value = true
-      fileSystemRoutes.value = accessedRoutes.filter(item => item.children?.length !== 0) as any
+      fileSystemRoutes.value = allowedRoutes.filter(item => item.children?.length !== 0) as any
+      routesUnallowed.value = unallowedRoutes as any
     }
     // 记录 accessRoutes 路由，用于登出时删除路由
     function setCurrentRemoveRoutes(routes: Function[]) {
@@ -231,6 +284,7 @@ const useRouteStore = defineStore(
       routes,
       fileSystemRoutes,
       flatRoutes,
+      flatRoutesUnallowed,
       flatSystemRoutes,
       generateRoutesAtFront,
       generateRoutesAtBack,
