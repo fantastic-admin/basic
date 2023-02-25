@@ -176,14 +176,14 @@ const useRouteStore = defineStore(
       const res: any = []
       routes.forEach((route) => {
         const tmpRoute = cloneDeep(route)
-        if (tmpRoute.children) {
-          tmpRoute.children = filterAsyncRoutesNoAuth(tmpRoute.children, permissions)
-          tmpRoute.children.length && res.push(tmpRoute)
+        if (hasPermission(permissions, route)) {
+          if (tmpRoute.children) {
+            tmpRoute.children = filterAsyncRoutesNoAuth(tmpRoute.children, permissions)
+            tmpRoute.children.length && res.push(tmpRoute)
+          }
         }
         else {
-          if (!hasPermission(permissions, route)) {
-            res.push(tmpRoute)
-          }
+          res.push(tmpRoute)
         }
       })
       return res
