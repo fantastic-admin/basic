@@ -22,11 +22,10 @@ onMounted(() => {
   setTimeout(() => {
     ElNotification({
       type: 'info',
-      title: '「 限时低价 」倒计时',
+      title: '「 专业版限时优惠 」',
       dangerouslyUseHTMLString: true,
       message: `
-        <p>专业版将于 2023/03/01 涨价为 1099.00 元，现在购买价格依旧为 <b style="font-size: 18px; color: #ff4400;">796.00</b> 元！</p>
-        <p>有专业版使用需求的，抓紧时间购买，买到就是赚到，现在<a href="https://hooray.gitee.io/fantastic-admin/buy.html" target="_blank">去购买</a>！</p>
+        <p>原价 1099.00 元，现价 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元！点击立即<a href="https://hooray.gitee.io/fantastic-admin/buy.html" target="_blank">去购买</a>！</p>
       `,
       position: 'bottom-right',
       duration: 0,
