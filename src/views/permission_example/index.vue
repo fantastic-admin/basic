@@ -57,6 +57,9 @@ function permissionCheck2(permissions: string[]) {
         <el-radio-group v-model="userStore.account" @change="accountChange">
           <el-radio-button label="admin" />
           <el-radio-button label="test" />
+          <el-radio-button label="hooray">
+            hooray(无权限)
+          </el-radio-button>
         </el-radio-group>
         <h3>帐号权限</h3>
         <div>{{ userStore.permissions }}</div>
