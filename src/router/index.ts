@@ -90,11 +90,6 @@ router.beforeEach(async (to, from, next) => {
           removeRoutes.push(router.addRoute(route as RouteRecordRaw))
         })
       }
-      routeStore.flatRoutesUnallowed.forEach((route) => {
-        if (!/^(https?:|mailto:|tel:)/.test(route.path)) {
-          removeRoutes.push(router.addRoute(route as RouteRecordRaw))
-        }
-      })
       routeStore.setCurrentRemoveRoutes(removeRoutes)
       // 动态路由生成并注册后，重新进入当前路由
       next({

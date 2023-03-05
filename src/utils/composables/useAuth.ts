@@ -16,21 +16,16 @@ export default function useAuth() {
   function auth(value: string | string[]) {
     let auth
     if (typeof value === 'string') {
-      auth = hasPermission(value)
+      auth = value !== '' ? hasPermission(value) : true
     }
     else {
-      auth = value.some((item) => {
-        return hasPermission(item)
-      })
+      auth = value.length > 0 ? value.some(item => hasPermission(item)) : true
     }
     return auth
   }
 
   function authAll(value: string[]) {
-    const auth = value.every((item) => {
-      return hasPermission(item)
-    })
-    return auth
+    return value.length > 0 ? value.every(item => hasPermission(item)) : true
   }
 
   return {

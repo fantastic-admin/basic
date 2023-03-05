@@ -77,6 +77,43 @@ export default [
                   },
                 ],
               },
+              {
+                path: '/permission_example',
+                component: 'Layout',
+                redirect: '/permission_example/index',
+                name: 'permissionExample',
+                meta: {
+                  title: '权限验证',
+                  i18n: 'route.permission',
+                  icon: 'ri:shield-keyhole-line',
+                },
+                children: [
+                  {
+                    path: 'index',
+                    name: 'permissionExampleIndex',
+                    component: 'permission_example/index.vue',
+                    meta: {
+                      title: '权限验证',
+                      i18n: 'route.permission',
+                      sidebar: false,
+                      breadcrumb: false,
+                      activeMenu: '/permission_example',
+                    },
+                  },
+                  {
+                    path: 'test',
+                    name: 'permissionExampleTest',
+                    component: 'permission_example/test.vue',
+                    meta: {
+                      title: '测试页面',
+                      auth: ['permission.browse'],
+                      sidebar: false,
+                      breadcrumb: false,
+                      activeMenu: '/permission_example',
+                    },
+                  },
+                ],
+              },
             ],
           },
         ],

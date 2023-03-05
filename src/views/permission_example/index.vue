@@ -4,27 +4,27 @@ meta:
 </route>
 
 <script lang="ts" setup>
-import { ElLoading, ElMessage } from 'element-plus'
+import { ElMessage } from 'element-plus'
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 
+const router = useRouter()
 const { auth, authAll } = useAuth()
 const settingsStore = useSettingsStore()
 const userStore = useUserStore()
 
-function accountChange(val: any) {
-  ElLoading.service({
-    lock: true,
-    text: '帐号切换中',
-    background: 'rgba(0, 0, 0, 0.7)',
-  })
-  userStore.login({
+// 模拟账号切换
+async function accountChange(val: any) {
+  await userStore.login({
     account: val,
     password: '',
-  }).then(() => {
-    setTimeout(() => {
-      location.reload()
-    }, 1000)
+  })
+  await userStore.getPermissions()
+  useMainPage().reload()
+}
+function goTest() {
+  router.push({
+    name: 'permissionExampleTest',
   })
 }
 function permissionCheck(permissions: string | string[]) {
@@ -63,6 +63,12 @@ function permissionCheck2(permissions: string[]) {
         </el-radio-group>
         <h3>帐号权限</h3>
         <div>{{ userStore.permissions }}</div>
+        <h3>访问鉴权页面</h3>
+        <div>
+          <el-button @click="goTest">
+            点击访问
+          </el-button>
+        </div>
         <h3>鉴权组件（请对照代码查看）</h3>
         <div>
           <Auth value="permission.browse" style="margin-bottom: 10px;">

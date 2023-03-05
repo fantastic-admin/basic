@@ -18,6 +18,17 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/permission_example/index.vue'),
       meta: {
         title: '权限验证',
+        sidebar: false,
+        breadcrumb: false,
+        activeMenu: '/permission_example',
+      },
+    },
+    {
+      path: 'test',
+      name: 'permissionExampleTest',
+      component: () => import('@/views/permission_example/test.vue'),
+      meta: {
+        title: '测试页面',
         auth: ['permission.browse'],
         sidebar: false,
         breadcrumb: false,
