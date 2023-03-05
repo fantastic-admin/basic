@@ -1,8 +1,3 @@
-<route lang="yaml">
-meta:
-  enabled: false
-</route>
-
 <script lang="ts" setup>
 const router = useRouter()
 
@@ -11,15 +6,15 @@ const data = ref({
   countdown: 5,
 })
 
-onBeforeRouteLeave(() => {
-  data.value.inter && clearInterval(data.value.inter)
+onUnmounted(() => {
+  data.value.inter && window.clearInterval(data.value.inter)
 })
 
 onMounted(() => {
-  data.value.inter = setInterval(() => {
+  data.value.inter = window.setInterval(() => {
     data.value.countdown--
     if (data.value.countdown === 0) {
-      data.value.inter && clearInterval(data.value.inter)
+      data.value.inter && window.clearInterval(data.value.inter)
       goBack()
     }
   }, 1000)
