@@ -1,17 +1,10 @@
-<route lang="yaml">
-meta:
-  enabled: false
-</route>
-
 <script lang="ts" setup>
-import Alert from './components/alert.vue'
+import { icons } from '@iconify-json/ep'
 </script>
 
 <template>
   <div>
-    <Alert />
-    <page-header title="图标" />
-    <page-main class="demo">
+    <div class="demo">
       <el-icon><svg-icon name="ep:edit" /></el-icon>
       <el-icon><svg-icon name="ep:share" /></el-icon>
       <el-icon><svg-icon name="ep:delete" /></el-icon>
@@ -23,7 +16,17 @@ import Alert from './components/alert.vue'
         </template>
         搜索
       </el-button>
-    </page-main>
+    </div>
+    <el-divider content-position="left">
+      图标集合
+    </el-divider>
+    <div v-for="(item, index) in icons.icons" :key="index" class="list-icon">
+      <el-tooltip class="item" effect="dark" :content="`ep:${index}`" placement="top">
+        <el-icon>
+          <svg-icon :name="`ep:${index}`" />
+        </el-icon>
+      </el-tooltip>
+    </div>
   </div>
 </template>
 
@@ -45,7 +48,7 @@ import Alert from './components/alert.vue'
   display: inline-block;
   margin: 10px;
 
-  i {
+  .el-icon {
     font-size: 32px;
     color: #606266;
   }
