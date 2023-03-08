@@ -6,8 +6,6 @@ import hotkeys from 'hotkeys-js'
 import eventBus from './utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 
-const route = useRoute()
-
 const settingsStore = useSettingsStore()
 const { auth } = useAuth()
 
@@ -65,13 +63,15 @@ import.meta.env.VITE_APP_DEBUG_TOOL === 'vconsole' && new VConsole()
 <template>
   <el-config-provider :locale="zhCn" :size="settingsStore.settings.app.elementSize" :button="buttonConfig">
     <RouterView
-      v-if="auth(route.meta.auth ?? '')"
+      v-slot="{ Component, route }"
       :style="{
         '--g-main-sidebar-actual-width': mainSidebarActualWidth,
         '--g-sub-sidebar-actual-width': subSidebarActualWidth,
       }"
-    />
-    <not-allowed v-else />
+    >
+      <component :is="Component" v-if="auth(route.meta.auth ?? '')" />
+      <not-allowed v-else />
+    </RouterView>
     <system-info />
   </el-config-provider>
 </template>
