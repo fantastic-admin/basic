@@ -23,10 +23,10 @@ const isLink = computed(() => !!routeInfo.meta.link)
 watch(() => settingsStore.settings.menu.subMenuCollapse, (val) => {
   if (settingsStore.mode === 'mobile') {
     if (!val) {
-      document.body.classList.add('hidden')
+      document.body.classList.add('overflow-hidden')
     }
     else {
-      document.body.classList.remove('hidden')
+      document.body.classList.remove('overflow-hidden')
     }
   }
 })
