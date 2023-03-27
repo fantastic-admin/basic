@@ -1,6 +1,7 @@
 {
   "extends": "@antfu",
   "rules": {
+    "eslint-comments/no-unlimited-disable": "off",
     "curly": ["error", "all"],
     "vue/component-tags-order": ["error", {
       "order": ["route", "script", "template", "style"]

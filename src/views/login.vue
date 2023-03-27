@@ -220,7 +220,7 @@ function testAccount(account: string) {
             </el-input>
           </el-form-item>
           <el-form-item prop="captcha">
-            <el-input ref="captcha" v-model="registerForm.captcha" placeholder="验证码" tabindex="2" autocomplete="on">
+            <el-input v-model="registerForm.captcha" placeholder="验证码" tabindex="2" autocomplete="on">
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:key" />
@@ -277,7 +277,7 @@ function testAccount(account: string) {
             </el-input>
           </el-form-item>
           <el-form-item prop="captcha">
-            <el-input ref="captcha" v-model="resetForm.captcha" placeholder="验证码" tabindex="2" autocomplete="on">
+            <el-input v-model="resetForm.captcha" placeholder="验证码" tabindex="2" autocomplete="on">
               <template #prefix>
                 <el-icon>
                   <svg-icon name="ep:key" />
