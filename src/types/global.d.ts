@@ -1,5 +1,4 @@
-import type { StyleValue } from "vue"
-import type { RouteRecordRaw, RouteMeta, NavigationGuard } from 'vue-router'
+import type { RouteRecordRaw } from 'vue-router'
 
 type RecursiveRequired<T> = {
   [P in keyof T]-?: RecursiveRequired<T[P]>
@@ -234,7 +233,7 @@ declare namespace Route {
       icon?: string
       auth?: string | string[]
     }
-    children: recordRaw[]
+    children: RouteRecordRaw[]
   }
   interface breadcrumb {
     path: string

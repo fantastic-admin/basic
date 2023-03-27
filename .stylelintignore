@@ -1,3 +1,3 @@
-dist/
-node_modules/
-src/assets/sprites/
+dist
+node_modules
+src/assets/sprites
