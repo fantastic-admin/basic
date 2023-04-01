@@ -100,14 +100,6 @@ const routes: RouteRecordRaw = {
         title: '省市区街道联动',
       },
     },
-    {
-      path: 'editor',
-      name: 'componentExtendExampleEditor',
-      component: () => import('@/views/component_extend_example/editor.demo.vue'),
-      meta: {
-        title: '编辑器',
-      },
-    },
   ],
 }
 
