@@ -1,4 +1,4 @@
-import { setupLayouts } from 'virtual:generated-layouts'
+import { setupLayouts } from 'virtual:meta-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import type { RouteRecordRaw } from 'vue-router'
 import MultilevelMenuExample from './modules/multilevel.menu.example'

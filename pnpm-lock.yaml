@@ -174,9 +174,9 @@ devDependencies:
   vite-plugin-vue-inspector:
     specifier: ^3.4.0
     version: 3.4.0(vite@4.2.1)
-  vite-plugin-vue-layouts:
-    specifier: ^0.8.0
-    version: 0.8.0(vite@4.2.1)(vue-router@4.1.6)(vue@3.2.47)
+  vite-plugin-vue-meta-layouts:
+    specifier: ^0.2.2
+    version: 0.2.2(vite@4.2.1)(vue-router@4.1.6)
   vite-plugin-vue-setup-extend:
     specifier: ^0.4.0
     version: 0.4.0(vite@4.2.1)
@@ -8414,21 +8414,15 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-vue-layouts@0.8.0(vite@4.2.1)(vue-router@4.1.6)(vue@3.2.47):
-    resolution: {integrity: sha512-UZW2nSV2LraTSe7gsAL46hfdi7a0X1RvkGGoJVtA2O8beu7anzpXFwQLou8+kHy31CzVycT4gIPySBsHhtBN5g==}
+  /vite-plugin-vue-meta-layouts@0.2.2(vite@4.2.1)(vue-router@4.1.6):
+    resolution: {integrity: sha512-u3WHlSzqE7tfOFFN7IygkQXDgnhVYD+GSfSXeMk1m/xI/gMtJtLeVwjBTow4kOn3oEkJcj/I9yCZoWpQeRHTFw==}
     peerDependencies:
-      vite: ^2.5.0 || ^3.0.0-0 || ^4.0.0
-      vue: ^2.6.12 || ^3.2.4
-      vue-router: ^3.5.1 || ^4.0.11
+      vite: '>=2.0.0'
+      vue-router: '>=4.0.14'
     dependencies:
-      '@vue/compiler-sfc': 3.2.47
-      debug: 4.3.4
-      fast-glob: 3.2.12
+      local-pkg: 0.4.3
       vite: 4.2.1(sass@1.60.0)(terser@5.16.8)
-      vue: 3.2.47
       vue-router: 4.1.6(vue@3.2.47)
-    transitivePeerDependencies:
-      - supports-color
     dev: true
 
   /vite-plugin-vue-setup-extend@0.4.0(vite@4.2.1):
