@@ -1,4 +1,4 @@
 {
-  "src/**/*.{ts,tsx,vue}": "eslint --cache --fix --no-ignore --no-error-on-unmatched-pattern",
-  "src/**/*.{css,scss,vue}": "stylelint --cache --fix --allow-empty-input"
+  "*.{ts,tsx,vue}": "eslint --cache --fix --no-ignore --no-error-on-unmatched-pattern --ext .ts,.tsx,.vue src/",
+  "*.{css,scss,vue}": "stylelint src/**/*.{css,scss,vue} --cache --fix --allow-empty-input"
 }

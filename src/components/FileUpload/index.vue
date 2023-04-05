@@ -1,6 +1,6 @@
 <script lang="ts" setup name="FileUpload">
-import { ElMessage, UploadUserFile } from 'element-plus'
-import type { UploadProps } from 'element-plus'
+import { ElMessage } from 'element-plus'
+import type { UploadProps, UploadUserFile } from 'element-plus'
 
 const props = defineProps({
   action: {
