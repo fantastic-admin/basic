@@ -1,6 +1,8 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-const Layout = () => import('@/layouts/index.vue')
+function Layout() {
+  return import('@/layouts/index.vue')
+}
 
 const routes: RouteRecordRaw = {
   path: '/link',

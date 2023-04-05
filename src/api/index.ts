@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 import router from '@/router/index'
 import useUserStore from '@/store/modules/user'
 
-const toLogin = () => {
+function toLogin() {
   useUserStore().logout().then(() => {
     router.push({
       path: '/login',

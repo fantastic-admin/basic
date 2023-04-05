@@ -30,7 +30,9 @@ const actived = ref(-1)
 const searchInputRef = ref()
 const searchResultRef = ref()
 const searchResultItemRef = ref<any>([])
-const setSearchResultItemRef = (el: any) => searchResultItemRef.value.push(el)
+function setSearchResultItemRef(el: any) {
+  return searchResultItemRef.value.push(el)
+}
 onBeforeUpdate(() => {
   searchResultItemRef.value = []
 })

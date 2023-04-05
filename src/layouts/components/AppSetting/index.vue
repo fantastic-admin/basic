@@ -432,10 +432,7 @@ function handleCopy() {
       }
 
       .mode-container {
-        top: 5px;
-        left: 40px;
-        right: 5px;
-        bottom: 5px;
+        inset: 5px 5px 5px 40px;
         border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
       }
     }
@@ -461,10 +458,7 @@ function handleCopy() {
       }
 
       .mode-container {
-        top: 20px;
-        left: 25px;
-        right: 5px;
-        bottom: 5px;
+        inset: 20px 5px 5px 25px;
         border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
       }
     }
@@ -482,10 +476,7 @@ function handleCopy() {
       }
 
       .mode-container {
-        top: 5px;
-        left: 25px;
-        right: 5px;
-        bottom: 5px;
+        inset: 5px 5px 5px 25px;
         border: 1px dashed var(--g-sub-sidebar-menu-active-bg);
       }
     }
