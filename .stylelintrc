@@ -11,11 +11,11 @@
   "rules": {
     "stylistic/max-line-length": null,
     "stylistic/block-closing-brace-newline-after": [
-			"always",
-			{
-				"ignoreAtRules": ["if", "else"]
-			}
-		],
+      "always",
+      {
+        "ignoreAtRules": ["if", "else"]
+      }
+    ],
     "at-rule-no-unknown": null,
     "no-descending-specificity": null,
     "property-no-unknown": null,

@@ -8,7 +8,7 @@ export default [
         status: 1,
         data: {
           account: option.body.account,
-          token: '@string',
+          token: `${option.body.account}_@string`,
           failure_time: Math.ceil(new Date().getTime() / 1000) + 24 * 60 * 60,
         },
       }
@@ -19,7 +19,7 @@ export default [
     method: 'get',
     response: (option: any) => {
       let permissions: string[] = []
-      if (option.query.account === 'admin') {
+      if (option.headers.token.indexOf('admin') === 0) {
         permissions = [
           'permission.browse',
           'permission.create',
@@ -27,7 +27,7 @@ export default [
           'permission.remove',
         ]
       }
-      else if (option.query.account === 'test') {
+      else if (option.headers.token.indexOf('test') === 0) {
         permissions = [
           'permission.browse',
         ]
