@@ -22,7 +22,7 @@ watch(() => settingsStore.settings.menu.menuMode, (value) => {
 })
 
 onMounted(() => {
-  eventBus.on('global-theme-toggle', () => {
+  eventBus.on('global-app-setting-toggle', () => {
     isShow.value = !isShow.value
   })
 })

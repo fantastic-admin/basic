@@ -4,6 +4,7 @@ const globalSettings: Settings.all = {
   app: {
     enablePermission: true,
     enableDynamicTitle: true,
+    enableAppSetting: true,
   },
   layout: {
     enableMobileAdaptation: true,
@@ -19,7 +20,6 @@ const globalSettings: Settings.all = {
     enableFullscreen: true,
     enablePageReload: true,
     enableColorScheme: true,
-    enableAppSetting: true,
   },
 }
 

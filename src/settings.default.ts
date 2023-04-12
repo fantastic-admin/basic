@@ -11,6 +11,7 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
     enableProgress: true,
     enableDynamicTitle: false,
     routeBaseOn: 'frontend',
+    enableAppSetting: false,
   },
   home: {
     enable: true,
@@ -35,7 +36,6 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
     enableFullscreen: false,
     enablePageReload: false,
     enableColorScheme: false,
-    enableAppSetting: false,
   },
   breadcrumb: {
     enable: true,
