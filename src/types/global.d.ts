@@ -50,6 +50,11 @@ declare namespace Settings {
      * @可选值 `'filesystem'` 文件系统
      */
     routeBaseOn?: 'frontend' | 'backend' | 'filesystem'
+    /**
+     * 是否开启应用配置，强烈建议在生产环境中关闭
+     * @默认值 `false`
+     */
+    enableAppSetting?: boolean
   }
   interface home {
     /**
@@ -135,11 +140,6 @@ declare namespace Settings {
      * @默认值 `false`
      */
     enableColorScheme?: boolean
-    /**
-     * 是否开启应用配置，强烈建议在生产环境中关闭
-     * @默认值 `false`
-     */
-    enableAppSetting?: boolean
   }
   interface breadcrumb {
     /**

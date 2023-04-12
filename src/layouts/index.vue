@@ -6,11 +6,12 @@ import MainSidebar from './components/MainSidebar/index.vue'
 import SubSidebar from './components/SubSidebar/index.vue'
 import Topbar from './components/Topbar/index.vue'
 import Search from './components/Search/index.vue'
-import AppSetting from './components/AppSetting/index.vue'
 import HotkeysIntro from './components/HotkeysIntro/index.vue'
+import AppSetting from './components/AppSetting/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useKeepAliveStore from '@/store/modules/keepAlive'
 import useMenuStore from '@/store/modules/menu'
+import eventBus from '@/utils/eventBus'
 
 const routeInfo = useRoute()
 
@@ -87,8 +88,13 @@ onUnmounted(() => {
       <el-backtop :right="20" :bottom="20" title="回到顶部" />
     </div>
     <Search />
-    <AppSetting />
     <HotkeysIntro />
+    <div v-if="settingsStore.settings.app.enableAppSetting">
+      <el-icon class="app-setting" @click="eventBus.emit('global-app-setting-toggle')">
+        <svg-icon name="ep:setting" />
+      </el-icon>
+      <AppSetting />
+    </div>
   </div>
 </template>
 
@@ -218,6 +224,35 @@ header:not(.header-leave-active) + .wrapper {
       :deep(.tools) {
         display: none;
       }
+    }
+  }
+}
+
+.app-setting {
+  position: fixed;
+  z-index: 10;
+  right: 0;
+  top: calc(50% + 250px);
+  width: 50px;
+  height: 50px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  font-size: 24px;
+  color: #fff;
+  background-color: var(--el-color-primary);
+  cursor: pointer;
+
+  svg {
+    animation: rotate 5s linear infinite;
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+
+    to {
+      transform: rotate(360deg);
     }
   }
 }

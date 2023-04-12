@@ -62,11 +62,6 @@ function userCommand(command: 'home' | 'setting' | 'hotkeys' | 'logout') {
           <svg-icon v-show="settingsStore.settings.app.colorScheme === 'dark'" name="ep:moon" />
         </el-icon>
       </span>
-      <span v-if="settingsStore.settings.toolbar.enableAppSetting" class="item" @click="eventBus.emit('global-theme-toggle')">
-        <el-icon>
-          <svg-icon name="ep:setting" />
-        </el-icon>
-      </span>
     </div>
     <el-dropdown class="user-container" size="default" @command="userCommand">
       <div class="user-wrapper">
