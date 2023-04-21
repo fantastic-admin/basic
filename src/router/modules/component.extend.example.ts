@@ -55,14 +55,6 @@ const routes: RouteRecordRaw = {
       },
     },
     {
-      path: 'batchactionbar',
-      name: 'componentExtendExampleBatchactionbar',
-      component: () => import('@/views/component_extend_example/batchactionbar.demo.vue'),
-      meta: {
-        title: '批量操作栏',
-      },
-    },
-    {
       path: 'tableautoheight',
       name: 'componentExtendExampleTableautoheight',
       component: () => import('@/views/component_extend_example/table.autoheight.demo.vue'),
