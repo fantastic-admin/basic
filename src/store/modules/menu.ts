@@ -2,11 +2,10 @@ import { cloneDeep } from 'lodash-es'
 import useSettingsStore from './settings'
 import useUserStore from './user'
 import useRouteStore from './route'
-import type { Menu } from '#/global'
-
 import { resolveRoutePath } from '@/utils'
-import api from '@/api'
+import apiApp from '@/api/modules/app'
 import menu from '@/menu'
+import type { Menu } from '#/global'
 
 const useMenuStore = defineStore(
   // 唯一ID
@@ -147,9 +146,7 @@ const useMenuStore = defineStore(
     }
     // 生成导航（后端生成）
     async function generateMenusAtBack() {
-      await api.get('menu/list', {
-        baseURL: '/mock/',
-      }).then(async (res) => {
+      await apiApp.menuList().then(async (res) => {
         let accessedMenus: Menu.recordMainRaw[]
         // 如果权限功能开启，则需要对导航数据进行筛选过滤
         if (settingsStore.settings.app.enablePermission) {

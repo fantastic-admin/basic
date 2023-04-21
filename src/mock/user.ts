@@ -1,25 +1,25 @@
 export default [
   {
-    url: '/mock/member/login',
+    url: '/mock/user/login',
     method: 'post',
-    response: (option: any) => {
+    response: ({ body }: any) => {
       return {
         error: '',
         status: 1,
         data: {
-          account: option.body.account,
-          token: `${option.body.account}_@string`,
+          account: body.account,
+          token: `${body.account}_@string`,
           failure_time: Math.ceil(new Date().getTime() / 1000) + 24 * 60 * 60,
         },
       }
     },
   },
   {
-    url: '/mock/member/permission',
+    url: '/mock/user/permission',
     method: 'get',
-    response: (option: any) => {
+    response: ({ headers }: any) => {
       let permissions: string[] = []
-      if (option.headers.token.indexOf('admin') === 0) {
+      if (headers.token.indexOf('admin') === 0) {
         permissions = [
           'permission.browse',
           'permission.create',
@@ -27,7 +27,7 @@ export default [
           'permission.remove',
         ]
       }
-      else if (option.headers.token.indexOf('test') === 0) {
+      else if (headers.token.indexOf('test') === 0) {
         permissions = [
           'permission.browse',
         ]
@@ -42,7 +42,7 @@ export default [
     },
   },
   {
-    url: '/mock/member/edit/password',
+    url: '/mock/user/password/edit',
     method: 'post',
     response: {
       error: '',
