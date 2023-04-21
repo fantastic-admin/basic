@@ -33,11 +33,11 @@ export default defineComponent({
         <p>这是两个 Svg Icon 图标</p>
         {icons}
         <el-divider />
-        <div className={styles.test1}>
-          <div className={styles.a}></div>
+        <div class={styles.test1}>
+          <div class={styles.a}></div>
         </div>
-        <div className={styles.test2}>
-          <div className={styles.a}></div>
+        <div class={styles.test2}>
+          <div class={styles.a}></div>
         </div>
         <el-divider />
         <el-button onClick={() => onPlus(10)}>点我：{ count.value }</el-button>

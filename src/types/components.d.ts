@@ -11,9 +11,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     Auth: typeof import('./../components/Auth/index.vue')['default']
     AuthAll: typeof import('./../components/AuthAll/index.vue')['default']
-    BatchActionBar: typeof import('./../components/BatchActionBar/index.vue')['default']
     Copyright: typeof import('./../components/Copyright/index.vue')['default']
-    Editor: typeof import('./../components/Editor/index.vue')['default']
     FileUpload: typeof import('./../components/FileUpload/index.vue')['default']
     FixedActionBar: typeof import('./../components/FixedActionBar/index.vue')['default']
     ImagePreview: typeof import('./../components/ImagePreview/index.vue')['default']
