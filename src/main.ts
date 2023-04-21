@@ -7,10 +7,13 @@ import useSettingsStore from './store/modules/settings'
 
 // 自定义指令
 import directive from '@/utils/directive'
+
 // 加载 svg 图标
 import 'virtual:svg-icons-register'
+
 // 全局样式
 import '@/assets/styles/globals.scss'
+
 // 加载 iconify 图标（element plus）
 import { downloadAndInstall } from '@/iconify-ep'
 
