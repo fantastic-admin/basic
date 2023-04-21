@@ -2,9 +2,9 @@ import { cloneDeep } from 'lodash-es'
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 import useSettingsStore from './settings'
 import useUserStore from './user'
-import api from '@/api'
 import { resolveRoutePath } from '@/utils'
 import { systemRoutes } from '@/router/routes'
+import apiApp from '@/api/modules/app'
 import type { Route } from '#/global'
 
 const useRouteStore = defineStore(
@@ -196,9 +196,7 @@ const useRouteStore = defineStore(
     }
     // 根据权限动态生成路由（后端获取）
     async function generateRoutesAtBack() {
-      await api.get('route/list', {
-        baseURL: '/mock/',
-      }).then(async (res) => {
+      await apiApp.routeList().then(async (res) => {
         // 设置 routes 数据
         routesRaw.value = formatBackRoutes(res.data)
         if (settingsStore.settings.app.enablePermission) {
