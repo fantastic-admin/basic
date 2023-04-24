@@ -2,19 +2,7 @@ import axios from 'axios'
 
 // import qs from 'qs'
 import { ElMessage } from 'element-plus'
-import router from '@/router/index'
 import useUserStore from '@/store/modules/user'
-
-function toLogin() {
-  useUserStore().logout().then(() => {
-    router.push({
-      path: '/login',
-      query: {
-        redirect: router.currentRoute.value.path !== '/login' ? router.currentRoute.value.fullPath : undefined,
-      },
-    })
-  })
-}
 
 const api = axios.create({
   baseURL: (import.meta.env.DEV && import.meta.env.VITE_OPEN_PROXY === 'true') ? '/proxy/' : import.meta.env.VITE_APP_API_BASEURL,
@@ -58,7 +46,7 @@ api.interceptors.response.use(
       }
     }
     else {
-      toLogin()
+      useUserStore().logout()
     }
     return Promise.resolve(response.data)
   },
