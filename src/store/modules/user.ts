@@ -1,5 +1,6 @@
 import useRouteStore from './route'
 import useMenuStore from './menu'
+import router from '@/router'
 import apiUser from '@/api/modules/user'
 
 const useUserStore = defineStore(
@@ -38,7 +39,7 @@ const useUserStore = defineStore(
       failure_time.value = res.data.failure_time
     }
     // 登出
-    async function logout() {
+    async function logout(redirect = router.currentRoute.value.fullPath) {
       localStorage.removeItem('account')
       localStorage.removeItem('token')
       localStorage.removeItem('failure_time')
@@ -47,6 +48,12 @@ const useUserStore = defineStore(
       failure_time.value = ''
       routeStore.removeRoutes()
       menuStore.setActived(0)
+      router.push({
+        name: 'login',
+        query: {
+          ...(router.currentRoute.value.path !== '/' && router.currentRoute.value.name !== 'login' && { redirect }),
+        },
+      })
     }
     // 获取我的权限
     async function getPermissions() {

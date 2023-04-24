@@ -28,11 +28,7 @@ function userCommand(command: 'home' | 'setting' | 'hotkeys' | 'logout') {
       eventBus.emit('global-hotkeys-intro-toggle')
       break
     case 'logout':
-      userStore.logout().then(() => {
-        router.push({
-          name: 'login',
-        })
-      })
+      userStore.logout()
       break
   }
 }
