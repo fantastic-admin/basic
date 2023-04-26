@@ -9,9 +9,6 @@ import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
 
-const route = useRoute()
-const router = useRouter()
-
 const userStore = useUserStore()
 
 const formRef = ref<FormInstance>()
