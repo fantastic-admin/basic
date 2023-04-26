@@ -81,7 +81,7 @@ const resultList = computed(() => {
 
 watch(() => isShow.value, (val) => {
   if (val) {
-    document.body.classList.add('hidden')
+    document.body.classList.add('overflow-hidden')
     searchResultRef.value.scrollTop = 0
     // 当搜索显示的时候绑定上、下、回车快捷键，隐藏的时候再解绑。另外当 input 处于 focus 状态时，采用 vue 来绑定键盘事件
     hotkeys('up', keyUp)
@@ -92,7 +92,7 @@ watch(() => isShow.value, (val) => {
     }, 500)
   }
   else {
-    document.body.classList.remove('hidden')
+    document.body.classList.remove('overflow-hidden')
     hotkeys.unbind('up', keyUp)
     hotkeys.unbind('down', keyDown)
     hotkeys.unbind('enter', keyEnter)
