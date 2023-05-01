@@ -50,7 +50,7 @@ const hasChildren = computed(() => {
         </el-icon>
         <span class="title">{{ item.meta?.title ?? '[ 无标题 ]' }}</span>
       </template>
-      <template v-for="route in item.children">
+      <template v-for="route in (item.children as Menu.recordRaw[])">
         <SidebarItem v-if="route.meta?.sidebar !== false" :key="route.path" :item="route" :base-path="resolveRoutePath(basePath, item.path)" />
       </template>
     </el-sub-menu>
