@@ -309,7 +309,7 @@ function toggle(fold: boolean) {
       <search-bar :fold="isFold2" :show-toggle="false">
         <template #default="{ fold }">
           <el-form :model="search" size="default" label-width="120px" inline class="search-form">
-            <el-form-item label="姓名 / 手机号">
+            <el-form-item label="姓名 / 手机号" class="search-form-item-name">
               <el-input v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
             </el-form-item>
             <el-form-item v-show="!fold" label="部门">
@@ -442,7 +442,11 @@ function toggle(fold: boolean) {
   flex-wrap: wrap;
 
   :deep(.el-form-item) {
-    width: calc(25% - 32px);
+    flex: 1 1 300px;
+
+    &.search-form-item-name {
+      flex-basis: 450px;
+    }
 
     &:last-child {
       margin-left: auto;
