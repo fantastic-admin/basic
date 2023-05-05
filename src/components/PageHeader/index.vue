@@ -14,7 +14,7 @@ const slots = useSlots()
 </script>
 
 <template>
-  <div class="header">
+  <div class="page-header">
     <div class="main">
       <div class="title">
         {{ title }}
@@ -32,18 +32,19 @@ const slots = useSlots()
 </template>
 
 <style lang="scss" scoped>
-.header {
+.page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
   margin-bottom: 20px;
   padding: 16px 20px;
   background-color: var(--g-app-bg);
   transition: background-color 0.3s;
 
   .main {
-    flex: 1;
-    margin-right: 20px;
+    flex: 1 1 70%;
 
     .title {
       font-size: 22px;
@@ -65,17 +66,7 @@ const slots = useSlots()
 
   .sub {
     flex: none;
-  }
-}
-
-[data-mode="mobile"] {
-  .header {
-    flex-direction: column;
-
-    .main {
-      margin-right: auto;
-      margin-bottom: 20px;
-    }
+    margin-left: auto;
   }
 }
 </style>
