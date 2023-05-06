@@ -22,18 +22,21 @@ function onSidebarScroll(e: Event) {
         'shadow': sidebarScrollTop,
       }"
     />
-    <!-- 侧边栏模式（无主导航） -->
-    <el-menu
-      :unique-opened="settingsStore.settings.menu.subMenuUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" :collapse-transition="false" :class="{
-        'is-collapse-without-logo': settingsStore.settings.menu.menuMode !== 'single' && settingsStore.settings.menu.subMenuCollapse,
-      }"
-    >
-      <transition-group name="sub-sidebar">
-        <template v-for="(route, index) in menuStore.sidebarMenus">
-          <SidebarItem v-if="route.meta?.sidebar !== false" :key="route.path || index" :item="route" :base-path="route.path" />
-        </template>
-      </transition-group>
-    </el-menu>
+    <transition-group name="sub-sidebar">
+      <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
+        <div v-show="mainIndex === menuStore.actived">
+          <el-menu
+            :unique-opened="settingsStore.settings.menu.subMenuUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" :collapse-transition="false" :class="{
+              'is-collapse-without-logo': settingsStore.settings.menu.menuMode !== 'single' && settingsStore.settings.menu.subMenuCollapse,
+            }"
+          >
+            <template v-for="(route, index) in mainItem.children">
+              <SidebarItem v-if="route.meta?.sidebar !== false" :key="route.path || index" :item="route" :base-path="route.path" />
+            </template>
+          </el-menu>
+        </div>
+      </template>
+    </transition-group>
   </div>
 </template>
 
