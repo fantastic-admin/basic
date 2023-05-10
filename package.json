@@ -39,6 +39,7 @@
     "@types/nprogress": "^0.2.0",
     "@types/path-browserify": "^1.0.0",
     "@types/qs": "^6.9.7",
+    "@vitejs/plugin-legacy": "^4.0.3",
     "@vitejs/plugin-vue": "^4.2.1",
     "@vitejs/plugin-vue-jsx": "^3.0.1",
     "autoprefixer": "^10.4.14",
