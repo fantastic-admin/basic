@@ -1,6 +1,7 @@
 import type { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import vueLegacy from '@vitejs/plugin-legacy'
 
 import createInspector from './inspector'
 import createAutoImport from './auto-import'
@@ -18,6 +19,13 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     vue(),
     vueJsx(),
+    vueLegacy({
+      renderLegacyChunks: false,
+      modernPolyfills: [
+        'es.array.at',
+        'es.array.find-last',
+      ],
+    }),
   ]
   vitePlugins.push(createInspector())
   vitePlugins.push(createAutoImport())
