@@ -1,4 +1,4 @@
-<script lang="ts" setup name="Trend">
+<script lang="ts" setup>
 const props = defineProps({
   value: {
     type: String,
@@ -20,6 +20,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+})
+
+defineOptions({
+  name: 'Trend',
 })
 
 const isUp = computed(() => {

@@ -3,9 +3,13 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="ComponentExampleUpload">
+<script lang="ts" setup>
 import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
+
+defineOptions({
+  name: 'ComponentExampleUpload',
+})
 
 const image = ref('https://picsum.photos/750/450')
 const images = ref([

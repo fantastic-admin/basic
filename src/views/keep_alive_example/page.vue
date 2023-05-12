@@ -3,8 +3,12 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="KeepAliveExamplePage">
+<script lang="ts" setup>
 import useKeepAliveStore from '@/store/modules/keepAlive'
+
+defineOptions({
+  name: 'KeepAliveExamplePage',
+})
 
 const router = useRouter()
 

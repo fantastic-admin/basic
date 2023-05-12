@@ -3,10 +3,12 @@
 meta:
   title: 页面标题
 </route>
-{{/if}}
 
-<script lang="ts" setup name="{{ properCase componentName }}">
-// 逻辑代码
+{{/if}}
+<script lang="ts" setup>
+defineOptions({
+  name: '{{ properCase componentName }}',
+})
 </script>
 
 <template>

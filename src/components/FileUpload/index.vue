@@ -1,4 +1,4 @@
-<script lang="ts" setup name="FileUpload">
+<script lang="ts" setup>
 import { ElMessage } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
 
@@ -42,6 +42,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['onSuccess'])
+
+defineOptions({
+  name: 'FileUpload',
+})
 
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const fileName = file.name.split('.')

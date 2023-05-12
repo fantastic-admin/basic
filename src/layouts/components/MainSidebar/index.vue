@@ -1,7 +1,11 @@
-<script lang="ts" setup name="MainSidebar">
+<script lang="ts" setup>
 import Logo from '../Logo/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
+
+defineOptions({
+  name: 'MainSidebar',
+})
 
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()

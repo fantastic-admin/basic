@@ -1,4 +1,8 @@
-<script lang="ts" setup name="LinkView">
+<script lang="ts" setup>
+defineOptions({
+  name: 'LinkView',
+})
+
 const route = useRoute()
 
 function open() {

@@ -1,4 +1,4 @@
-<script lang="ts" setup name="PcasCascader">
+<script lang="ts" setup>
 // 行政区划数据来源于 https://github.com/modood/Administrative-divisions-of-China
 import pcasRaw from './pcas-code.json'
 
@@ -22,6 +22,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
+
+defineOptions({
+  name: 'PcasCascader',
+})
 
 interface pcasItem {
   code: string

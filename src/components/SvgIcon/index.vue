@@ -1,4 +1,4 @@
-<script lang="ts" setup name="SvgIcon">
+<script lang="ts" setup>
 import { Icon } from '@iconify/vue'
 
 const props = defineProps({
@@ -14,6 +14,10 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+})
+
+defineOptions({
+  name: 'SvgIcon',
 })
 
 const transformStyle = computed(() => {

@@ -1,5 +1,9 @@
-<script lang="ts" setup name="BuyIt">
+<script lang="ts" setup>
 import { ElNotification } from 'element-plus'
+
+defineOptions({
+  name: 'BuyIt',
+})
 
 const isActived = ref(true)
 setTimeout(() => {

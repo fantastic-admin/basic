@@ -3,8 +3,12 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="ComponentExampleSearchbar">
+<script lang="ts" setup>
 import { ElMessage } from 'element-plus'
+
+defineOptions({
+  name: 'ComponentExampleSearchbar',
+})
 
 const search = ref({
   name: '',

@@ -1,4 +1,4 @@
-<script lang="ts" setup name="Search">
+<script lang="ts" setup>
 import { cloneDeep } from 'lodash-es'
 import hotkeys from 'hotkeys-js'
 import type { RouteRecordRaw } from 'vue-router'
@@ -7,6 +7,10 @@ import useSettingsStore from '@/store/modules/settings'
 import useRouteStore from '@/store/modules/route'
 import useMenuStore from '@/store/modules/menu'
 import type { Menu } from '#/global'
+
+defineOptions({
+  name: 'Search',
+})
 
 const router = useRouter()
 

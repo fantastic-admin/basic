@@ -3,7 +3,11 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="ComponentExampleActionbar">
+<script lang="ts" setup>
+defineOptions({
+  name: 'ComponentExampleActionbar',
+})
+
 const form = ref({
   name: '',
   region: '',

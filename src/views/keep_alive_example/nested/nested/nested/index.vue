@@ -3,7 +3,11 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="TabExampleNestedTest">
+<script lang="ts" setup>
+defineOptions({
+  name: 'TabExampleNestedTest',
+})
+
 const val = ref('')
 </script>
 

@@ -3,7 +3,11 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="ComponentExampleTableHeightAdaption">
+<script lang="ts" setup>
+defineOptions({
+  name: 'ComponentExampleTableHeightAdaption',
+})
+
 const dataList = ref([
   {
     date: '2016-05-02',

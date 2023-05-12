@@ -3,9 +3,13 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="ComponentExampleArea">
+<script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
+
+defineOptions({
+  name: 'ComponentExampleArea',
+})
 
 const pcas1 = ref([])
 const pcas2 = ref([])

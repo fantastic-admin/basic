@@ -1,4 +1,4 @@
-<script lang="ts" setup name="ImagePreview">
+<script lang="ts" setup>
 const props = defineProps({
   src: {
     type: String,
@@ -12,6 +12,10 @@ const props = defineProps({
     type: [Number, String],
     default: '',
   },
+})
+
+defineOptions({
+  name: 'ImagePreview',
 })
 
 const realWidth = computed(() => {

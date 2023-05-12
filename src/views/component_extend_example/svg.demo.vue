@@ -3,7 +3,11 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup name="ComponentExampleSvg">
+<script lang="ts" setup>
+defineOptions({
+  name: 'ComponentExampleSvg',
+})
+
 const flip = ref<'horizontal' | 'vertical' | 'both' | ''>('')
 const rotate = ref(0)
 </script>
