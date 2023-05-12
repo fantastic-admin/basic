@@ -2,52 +2,31 @@
 import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
-const props = defineProps({
-  action: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    action: UploadProps['action']
+    headers?: UploadProps['headers']
+    data?: UploadProps['data']
+    name?: UploadProps['name']
+    url?: string
+    size?: number
+    width?: number
+    height?: number
+    placeholder?: string
+    notip?: boolean
+    ext?: string[]
+  }>(),
+  {
+    name: 'file',
+    url: '',
+    size: 2,
+    width: 150,
+    height: 150,
+    placeholder: '',
+    notip: false,
+    ext: () => ['jpg', 'png', 'gif', 'bmp'],
   },
-  headers: {
-    type: Object,
-    default: () => {},
-  },
-  data: {
-    type: Object,
-    default: () => {},
-  },
-  name: {
-    type: String,
-    default: 'file',
-  },
-  url: {
-    type: String,
-    default: '',
-  },
-  size: {
-    type: Number,
-    default: 2,
-  },
-  width: {
-    type: Number,
-    default: 150,
-  },
-  height: {
-    type: Number,
-    default: 150,
-  },
-  placeholder: {
-    type: String,
-    default: '',
-  },
-  notip: {
-    type: Boolean,
-    default: false,
-  },
-  ext: {
-    type: Array,
-    default: () => ['jpg', 'png', 'gif', 'bmp'],
-  },
-})
+)
 
 const emit = defineEmits(['update:url', 'onSuccess'])
 
@@ -77,7 +56,7 @@ function remove() {
 }
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const fileName = file.name.split('.')
-  const fileExt = fileName.at(-1)
+  const fileExt = fileName.at(-1) ?? ''
   const isTypeOk = props.ext.includes(fileExt)
   const isSizeOk = file.size / 1024 / 1024 < props.size
   if (!isTypeOk) {

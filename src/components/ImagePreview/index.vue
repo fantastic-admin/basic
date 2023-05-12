@@ -1,18 +1,15 @@
 <script lang="ts" setup>
-const props = defineProps({
-  src: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    src: string
+    width?: number | string
+    height?: number | string
+  }>(),
+  {
+    width: 200,
+    height: 200,
   },
-  width: {
-    type: [Number, String],
-    default: '',
-  },
-  height: {
-    type: [Number, String],
-    default: '',
-  },
-})
+)
 
 defineOptions({
   name: 'ImagePreview',

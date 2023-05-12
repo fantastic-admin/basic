@@ -1,26 +1,19 @@
 <script lang="ts" setup>
-const props = defineProps({
-  value: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    value: string
+    type?: 'up' | 'down'
+    prefix?: string
+    suffix?: string
+    reverse?: boolean
+  }>(),
+  {
+    type: 'up',
+    prefix: '',
+    suffix: '',
+    reverse: false,
   },
-  type: {
-    type: String as () => 'up' | 'down',
-    default: 'up',
-  },
-  prefix: {
-    type: String,
-    default: '',
-  },
-  suffix: {
-    type: String,
-    default: '',
-  },
-  reverse: {
-    type: Boolean,
-    default: false,
-  },
-})
+)
 
 defineOptions({
   name: 'Trend',

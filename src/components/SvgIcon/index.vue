@@ -1,20 +1,17 @@
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
 
-const props = defineProps({
-  name: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    name: string
+    flip?: 'horizontal' | 'vertical' | 'both' | ''
+    rotate?: number
+  }>(),
+  {
+    flip: '',
+    rotate: 0,
   },
-  flip: {
-    type: String as () => 'horizontal' | 'vertical' | 'both' | '',
-    default: '',
-  },
-  rotate: {
-    type: Number,
-    default: 0,
-  },
-})
+)
 
 defineOptions({
   name: 'SvgIcon',

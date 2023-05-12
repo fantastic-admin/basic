@@ -1,18 +1,16 @@
 <script lang="ts" setup>
-const props = defineProps({
-  title: {
-    type: String,
-    default: '',
+const props = withDefaults(
+  defineProps<{
+    title?: string
+    collaspe?: boolean
+    height?: string
+  }>(),
+  {
+    title: '',
+    collaspe: false,
+    height: '',
   },
-  collaspe: {
-    type: Boolean,
-    default: false,
-  },
-  height: {
-    type: String,
-    default: '',
-  },
-})
+)
 
 defineOptions({
   name: 'PageMain',

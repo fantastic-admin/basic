@@ -1,45 +1,28 @@
 <script lang="ts" setup>
-import { ElMessage } from 'element-plus'
 import type { UploadProps, UploadUserFile } from 'element-plus'
+import { ElMessage } from 'element-plus'
 
-const props = defineProps({
-  action: {
-    type: String,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    action: UploadProps['action']
+    headers?: UploadProps['headers']
+    data?: UploadProps['data']
+    name?: UploadProps['name']
+    size?: number
+    max?: number
+    files?: UploadUserFile[]
+    notip?: boolean
+    ext?: string[]
+  }>(),
+  {
+    name: 'file',
+    size: 2,
+    max: 3,
+    files: () => [],
+    notip: false,
+    ext: () => ['zip', 'rar'],
   },
-  headers: {
-    type: Object,
-    default: () => {},
-  },
-  data: {
-    type: Object,
-    default: () => {},
-  },
-  name: {
-    type: String,
-    default: 'file',
-  },
-  size: {
-    type: Number,
-    default: 2,
-  },
-  max: {
-    type: Number,
-    default: 3,
-  },
-  files: {
-    type: Array,
-    default: () => [],
-  },
-  notip: {
-    type: Boolean,
-    default: false,
-  },
-  ext: {
-    type: Array,
-    default: () => ['zip', 'rar'],
-  },
-})
+)
 
 const emit = defineEmits(['onSuccess'])
 
@@ -49,7 +32,7 @@ defineOptions({
 
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const fileName = file.name.split('.')
-  const fileExt = fileName.at(-1)
+  const fileExt = fileName.at(-1) ?? ''
   const isTypeOk = props.ext.includes(fileExt)
   const isSizeOk = file.size / 1024 / 1024 < props.size
   if (!isTypeOk) {
