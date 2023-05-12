@@ -74,7 +74,7 @@ onUnmounted(() => {
           <SubSidebar />
         </div>
         <div class="sidebar-mask" :class="{ show: settingsStore.mode === 'mobile' && !settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()" />
-        <div class="main-container" :style="{ 'padding-bottom': $route.meta.paddingBottom } as any">
+        <div class="main-container" :style="{ 'padding-bottom': routeInfo.meta.paddingBottom } as any">
           <Topbar v-if="!(settingsStore.settings.menu.menuMode === 'head' && !settingsStore.settings.menu.enableSubMenuCollapseButton && !settingsStore.settings.breadcrumb.enable)" />
           <div class="main">
             <router-view v-slot="{ Component, route }">
