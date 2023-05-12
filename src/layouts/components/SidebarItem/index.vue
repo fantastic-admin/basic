@@ -3,16 +3,15 @@ import { resolveRoutePath } from '@/utils'
 import useSettingsStore from '@/store/modules/settings'
 import type { Menu } from '#/global'
 
-const props = defineProps({
-  item: {
-    type: Object as () => Menu.recordRaw,
-    required: true,
+const props = withDefaults(
+  defineProps<{
+    item: Menu.recordRaw
+    basePath?: string
+  }>(),
+  {
+    basePath: '',
   },
-  basePath: {
-    type: String,
-    default: '',
-  },
-})
+)
 
 defineOptions({
   name: 'SidebarItem',

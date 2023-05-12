@@ -1,14 +1,13 @@
 <script lang="ts" setup>
-defineProps({
-  title: {
-    type: String,
-    required: true,
+withDefaults(
+  defineProps<{
+    title: string
+    content?: string
+  }>(),
+  {
+    content: '',
   },
-  content: {
-    type: String,
-    default: '',
-  },
-})
+)
 
 defineOptions({
   name: 'PageHeader',

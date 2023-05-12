@@ -1,18 +1,16 @@
 <script lang="ts" setup>
-const props = defineProps({
-  fold: {
-    type: Boolean,
-    default: true,
+const props = withDefaults(
+  defineProps<{
+    fold?: boolean
+    showToggle?: boolean
+    background?: boolean
+  }>(),
+  {
+    fold: true,
+    showToggle: true,
+    background: false,
   },
-  showToggle: {
-    type: Boolean,
-    default: true,
-  },
-  background: {
-    type: Boolean,
-    default: false,
-  },
-})
+)
 
 const emit = defineEmits<{
   (event: 'update:fold', value: boolean): void
