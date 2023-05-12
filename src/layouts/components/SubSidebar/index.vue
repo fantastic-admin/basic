@@ -8,6 +8,8 @@ defineOptions({
   name: 'SubSidebar',
 })
 
+const route = useRoute()
+
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
@@ -30,12 +32,12 @@ function onSidebarScroll(e: Event) {
       <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
         <div v-show="mainIndex === menuStore.actived">
           <el-menu
-            :unique-opened="settingsStore.settings.menu.subMenuUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="$route.meta.activeMenu || $route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" :collapse-transition="false" :class="{
+            :unique-opened="settingsStore.settings.menu.subMenuUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="route.meta.activeMenu || route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" :collapse-transition="false" :class="{
               'is-collapse-without-logo': settingsStore.settings.menu.menuMode !== 'single' && settingsStore.settings.menu.subMenuCollapse,
             }"
           >
-            <template v-for="(route, index) in mainItem.children">
-              <SidebarItem v-if="route.meta?.sidebar !== false" :key="route.path || index" :item="route" :base-path="route.path" />
+            <template v-for="(item, index) in mainItem.children">
+              <SidebarItem v-if="item.meta?.sidebar !== false" :key="item.path || index" :item="item" :base-path="item.path" />
             </template>
           </el-menu>
         </div>
