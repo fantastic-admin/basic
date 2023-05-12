@@ -16,9 +16,6 @@ onMounted(() => {
   <div>
     <el-drawer v-model="isShow" title="系统信息" direction="rtl" :size="360">
       <el-descriptions direction="vertical" :column="1" border>
-        <el-descriptions-item label="版本号" align="center">
-          {{ pkg.version }}
-        </el-descriptions-item>
         <el-descriptions-item label="最后编译时间" align="center">
           {{ lastBuildTime }}
         </el-descriptions-item>

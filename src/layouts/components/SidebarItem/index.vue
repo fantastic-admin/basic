@@ -1,5 +1,4 @@
-<script lang="ts" setup name="SidebarItem">
-// import SidebarItem from './index.vue'
+<script lang="ts" setup>
 import { resolveRoutePath } from '@/utils'
 import useSettingsStore from '@/store/modules/settings'
 import type { Menu } from '#/global'
@@ -13,6 +12,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+})
+
+defineOptions({
+  name: 'SidebarItem',
 })
 
 const settingsStore = useSettingsStore()

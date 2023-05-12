@@ -1,5 +1,9 @@
-<script lang="ts" setup{{#if isGlobal}} name="{{ properCase name }}"{{/if}}>
-// 逻辑代码
+<script lang="ts" setup>
+{{#if isGlobal}}
+defineOptions({
+  name: '{{ properCase name }}',
+})
+{{/if}}
 </script>
 
 <template>

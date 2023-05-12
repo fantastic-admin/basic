@@ -5,9 +5,13 @@ meta:
   cache: personal-edit.password
 </route>
 
-<script lang="ts" setup name="PersonalSetting">
+<script lang="ts" setup>
 import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
+
+defineOptions({
+  name: 'PersonalSetting',
+})
 
 const router = useRouter()
 

@@ -1,8 +1,12 @@
-<script lang="ts" setup name="SubSidebar">
+<script lang="ts" setup>
 import Logo from '../Logo/index.vue'
 import SidebarItem from '../SidebarItem/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
+
+defineOptions({
+  name: 'SubSidebar',
+})
 
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()

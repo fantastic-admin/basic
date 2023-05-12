@@ -4,10 +4,14 @@ meta:
   title: 修改密码
 </route>
 
-<script lang="ts" setup name="PersonalEditPassword">
+<script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
+
+defineOptions({
+  name: 'PersonalEditPassword',
+})
 
 const userStore = useUserStore()
 

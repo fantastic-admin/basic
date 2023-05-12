@@ -1,5 +1,9 @@
-<script lang="ts" setup name="Copyright">
+<script lang="ts" setup>
 import useSettingsStore from '@/store/modules/settings'
+
+defineOptions({
+  name: 'Copyright',
+})
 
 const route = useRoute()
 const settingsStore = useSettingsStore()

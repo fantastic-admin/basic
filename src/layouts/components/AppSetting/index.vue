@@ -1,9 +1,13 @@
-<script lang="ts" setup name="AppSetting">
+<script lang="ts" setup>
 import { useClipboard } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
+
+defineOptions({
+  name: 'AppSetting',
+})
 
 const route = useRoute()
 

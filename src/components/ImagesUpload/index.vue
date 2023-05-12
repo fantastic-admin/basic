@@ -1,4 +1,4 @@
-<script lang="ts" setup name="ImagesUpload">
+<script lang="ts" setup>
 import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
@@ -54,6 +54,10 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:url', 'onSuccess'])
+
+defineOptions({
+  name: 'ImagesUpload',
+})
 
 const uploadData = ref({
   dialogImageIndex: 0,

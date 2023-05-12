@@ -1,8 +1,12 @@
-<script lang="ts" setup name="Header">
+<script lang="ts" setup>
 import Logo from '../Logo/index.vue'
 import Tools from '../Tools/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
+
+defineOptions({
+  name: 'Header',
+})
 
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()

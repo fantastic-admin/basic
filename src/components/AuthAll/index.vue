@@ -1,7 +1,11 @@
-<script lang="ts" setup name="AuthAll">
+<script lang="ts" setup>
 const props = defineProps<{
   value: string[]
 }>()
+
+defineOptions({
+  name: 'AuthAll',
+})
 
 function check() {
   return useAuth().authAll(props.value)

@@ -1,4 +1,8 @@
 <script lang="ts" setup>
+defineOptions({
+  name: 'NotAllowed',
+})
+
 const router = useRouter()
 
 const data = ref({

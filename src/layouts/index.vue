@@ -1,4 +1,4 @@
-<script lang="ts" setup name="Layout">
+<script lang="ts" setup>
 import hotkeys from 'hotkeys-js'
 import LinkView from './components/views/link.vue'
 import Header from './components/Header/index.vue'
@@ -12,6 +12,10 @@ import useSettingsStore from '@/store/modules/settings'
 import useKeepAliveStore from '@/store/modules/keepAlive'
 import useMenuStore from '@/store/modules/menu'
 import eventBus from '@/utils/eventBus'
+
+defineOptions({
+  name: 'Layout',
+})
 
 const routeInfo = useRoute()
 

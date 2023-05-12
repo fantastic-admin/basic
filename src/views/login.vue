@@ -5,10 +5,14 @@ meta:
   layout: false
 </route>
 
-<script lang="ts" setup name="Login">
+<script lang="ts" setup>
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'
+
+defineOptions({
+  name: 'Login',
+})
 
 const route = useRoute()
 const router = useRouter()

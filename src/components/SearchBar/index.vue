@@ -1,4 +1,4 @@
-<script lang="ts" setup name="SearchBar">
+<script lang="ts" setup>
 const props = defineProps({
   fold: {
     type: Boolean,
@@ -18,6 +18,10 @@ const emit = defineEmits<{
   (event: 'update:fold', value: boolean): void
   (event: 'toggle', value: boolean): void
 }>()
+
+defineOptions({
+  name: 'SearchBar',
+})
 
 const isFold = ref(props.fold)
 

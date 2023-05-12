@@ -1,7 +1,11 @@
-<script lang="ts" setup name="Topbar">
+<script lang="ts" setup>
 import { compile } from 'path-to-regexp'
 import Tools from '../Tools/index.vue'
 import useSettingsStore from '@/store/modules/settings'
+
+defineOptions({
+  name: 'Topbar',
+})
 
 const route = useRoute()
 

@@ -1,8 +1,12 @@
-<script lang="ts" setup name="Tools">
+<script lang="ts" setup>
 import { useFullscreen } from '@vueuse/core'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
+
+defineOptions({
+  name: 'Tools',
+})
 
 const router = useRouter()
 

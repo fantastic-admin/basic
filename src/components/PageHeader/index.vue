@@ -1,4 +1,4 @@
-<script lang="ts" setup name="PageHeader">
+<script lang="ts" setup>
 defineProps({
   title: {
     type: String,
@@ -8,6 +8,10 @@ defineProps({
     type: String,
     default: '',
   },
+})
+
+defineOptions({
+  name: 'PageHeader',
 })
 
 const slots = useSlots()

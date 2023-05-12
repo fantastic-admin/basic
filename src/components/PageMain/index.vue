@@ -1,4 +1,4 @@
-<script lang="ts" setup name="PageMain">
+<script lang="ts" setup>
 const props = defineProps({
   title: {
     type: String,
@@ -12,6 +12,10 @@ const props = defineProps({
     type: String,
     default: '',
   },
+})
+
+defineOptions({
+  name: 'PageMain',
 })
 
 const titleSlot = !!useSlots().title

@@ -1,7 +1,11 @@
-<script lang="ts" setup name="Auth">
+<script lang="ts" setup>
 const props = defineProps<{
   value: string | string[]
 }>()
+
+defineOptions({
+  name: 'Auth',
+})
 
 function check() {
   return useAuth().auth(props.value)

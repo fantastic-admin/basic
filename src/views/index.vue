@@ -86,110 +86,89 @@ const oneStepAdminInfo = ref({
     </page-header>
     <el-row :gutter="20" style="margin: 0 10px;">
       <el-col :lg="8">
-        <page-main style="margin: 0;">
-          <div class="ecology vue">
-            <div class="main">
-              <img src="https://cn.vuejs.org/logo.svg" style="width: 30%;">
-              <h1>Fantastic-startkit</h1>
-              <h2>一款开箱即用的 Vue 项目启动套件</h2>
+        <page-main class="ecology vue">
+          <template #title>
+            <div class="title-info">
+              <img src="https://cn.vuejs.org/logo.svg">
               <div>
-                <el-button type="primary" plain @click="open('https://hooray.gitee.io/fantastic-startkit/')">
-                  <template #icon>
-                    <el-icon>
-                      <svg-icon name="ep:link" />
-                    </el-icon>
-                  </template>
-                  访问官网
-                </el-button>
-                <el-button plain @click="open('https://hooray.github.io/fantastic-startkit/')">
-                  <template #icon>
-                    <el-icon>
-                      <svg-icon name="ep:link" />
-                    </el-icon>
-                  </template>
-                  备用地址
-                </el-button>
+                <h1>Fantastic-startkit</h1>
+                <h2>一款开箱即用的 Vue 项目启动套件</h2>
               </div>
             </div>
-            <el-divider border-style="dashed" />
-            <ul>
-              <li v-for="item in fantasticStartkitInfo.feature" :key="item">
-                {{ item }}
-              </li>
-            </ul>
-          </div>
+            <el-dropdown split-button type="primary" @click="open('https://hooray.gitee.io/fantastic-startkit/')">
+              访问官网
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item @click="open('https://hooray.github.io/fantastic-startkit/')">
+                    备用地址
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </template>
+          <ul>
+            <li v-for="item in fantasticStartkitInfo.feature" :key="item">
+              {{ item }}
+            </li>
+          </ul>
         </page-main>
       </el-col>
       <el-col :lg="8">
-        <page-main style="margin: 0;">
-          <div class="ecology fa">
-            <div class="main">
-              <img src="https://hooray.gitee.io/fantastic-admin/logo.png" style="width: 30%;">
-              <h1>Fantastic-admin</h1>
-              <h2>一款开箱即用的 Vue 中后台管理系统框架</h2>
+        <page-main class="ecology fa">
+          <template #title>
+            <div class="title-info">
+              <img src="https://hooray.gitee.io/fantastic-admin/logo.png">
               <div>
-                <el-button type="primary" plain @click="open('https://hooray.gitee.io/fantastic-admin/')">
-                  <template #icon>
-                    <el-icon>
-                      <svg-icon name="ep:link" />
-                    </el-icon>
-                  </template>
-                  访问官网
-                </el-button>
-                <el-button plain @click="open('https://hooray.github.io/fantastic-admin/')">
-                  <template #icon>
-                    <el-icon>
-                      <svg-icon name="ep:link" />
-                    </el-icon>
-                  </template>
-                  备用地址
-                </el-button>
+                <h1>Fantastic-admin</h1>
+                <h2>一款开箱即用的 Vue 中后台管理系统框架</h2>
               </div>
             </div>
-            <el-divider border-style="dashed" />
-            <el-carousel trigger="click" indicator-position="none" :interval="5000" height="250px">
-              <el-carousel-item v-for="(item, index) in fantasticAdminInfo.data" :key="item">
-                <el-image :src="item" fit="cover" style="cursor: pointer; width: 100%; height: 250px; margin: auto;" @click="fantasticAdminInfo.imageVisible = true; fantasticAdminInfo.index = index" />
-              </el-carousel-item>
-            </el-carousel>
-            <el-image-viewer v-if="fantasticAdminInfo.imageVisible" :url-list="fantasticAdminInfo.data" :initial-index="fantasticAdminInfo.index" @close="fantasticAdminInfo.imageVisible = false" />
-          </div>
+            <el-dropdown split-button type="primary" @click="open('https://hooray.gitee.io/fantastic-admin/')">
+              访问官网
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item @click="open('https://hooray.github.io/fantastic-admin/')">
+                    备用地址
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </template>
+          <el-carousel trigger="click" indicator-position="none" :interval="5000" height="250px">
+            <el-carousel-item v-for="(item, index) in fantasticAdminInfo.data" :key="item">
+              <el-image :src="item" fit="cover" style="cursor: pointer; width: 100%; height: 250px; margin: auto;" @click="fantasticAdminInfo.imageVisible = true; fantasticAdminInfo.index = index" />
+            </el-carousel-item>
+          </el-carousel>
+          <el-image-viewer v-if="fantasticAdminInfo.imageVisible" :url-list="fantasticAdminInfo.data" :initial-index="fantasticAdminInfo.index" @close="fantasticAdminInfo.imageVisible = false" />
         </page-main>
       </el-col>
       <el-col :lg="8">
-        <page-main style="margin: 0;">
-          <div class="ecology osa">
-            <div class="main">
-              <img src="https://hooray.gitee.io/one-step-admin/logo.png" style="width: 30%;">
-              <h1>One-step-admin</h1>
-              <h2>一款干啥都快人一步的 Vue 中后台系统框架</h2>
+        <page-main class="ecology osa">
+          <template #title>
+            <div class="title-info">
+              <img src="https://hooray.gitee.io/one-step-admin/logo.png">
               <div>
-                <el-button type="primary" plain @click="open('https://hooray.gitee.io/one-step-admin/')">
-                  <template #icon>
-                    <el-icon>
-                      <svg-icon name="ep:link" />
-                    </el-icon>
-                  </template>
-                  访问官网
-                </el-button>
-                <el-button plain @click="open('https://hooray.github.io/one-step-admin/')">
-                  <template #icon>
-                    <el-icon>
-                      <svg-icon name="ep:link" />
-                    </el-icon>
-                  </template>
-                  备用地址
-                </el-button>
+                <h1>One-step-admin</h1>
+                <h2>一款干啥都快人一步的 Vue 中后台系统框架</h2>
               </div>
             </div>
-            <el-divider border-style="dashed" />
-            <el-carousel trigger="click" indicator-position="none" :interval="5000" height="250px">
-              <el-carousel-item v-for="(item, index) in oneStepAdminInfo.data" :key="item">
-                <el-image :src="item" fit="cover" style="cursor: pointer; width: 100%; height: 250px; margin: auto;" @click="oneStepAdminInfo.imageVisible = true; oneStepAdminInfo.index = index" />
-              </el-carousel-item>
-            </el-carousel>
-            <el-image-viewer v-if="oneStepAdminInfo.imageVisible" :url-list="oneStepAdminInfo.data" :initial-index="oneStepAdminInfo.index" @close="oneStepAdminInfo.imageVisible = false" />
-          </div>
+            <el-dropdown split-button type="primary" @click="open('https://hooray.gitee.io/one-step-admin/')">
+              访问官网
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item @click="open('https://hooray.github.io/one-step-admin/')">
+                    备用地址
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </template>
+          <el-carousel trigger="click" indicator-position="none" :interval="5000" height="250px">
+            <el-carousel-item v-for="(item, index) in oneStepAdminInfo.data" :key="item">
+              <el-image :src="item" fit="cover" style="cursor: pointer; width: 100%; height: 250px; margin: auto;" @click="oneStepAdminInfo.imageVisible = true; oneStepAdminInfo.index = index" />
+            </el-carousel-item>
+          </el-carousel>
+          <el-image-viewer v-if="oneStepAdminInfo.imageVisible" :url-list="oneStepAdminInfo.data" :initial-index="oneStepAdminInfo.index" @close="oneStepAdminInfo.imageVisible = false" />
         </page-main>
       </el-col>
     </el-row>
@@ -224,7 +203,44 @@ const oneStepAdminInfo = ref({
 }
 
 .ecology {
-  padding: 10px 0 0;
+  margin: 0;
+  height: 100%;
+
+  :deep(.title-container) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    .title-info {
+      flex: 1 1 400px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      img {
+        width: 50px;
+        display: block;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      h2 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: normal;
+        color: var(--el-text-color-secondary);
+      }
+    }
+
+    .el-dropdown {
+      margin-left: auto;
+    }
+  }
 
   &.vue {
     h1 {
@@ -241,27 +257,6 @@ const oneStepAdminInfo = ref({
   &.osa {
     h1 {
       color: #67c23a;
-    }
-  }
-
-  .main {
-    text-align: center;
-
-    img {
-      display: block;
-      margin: 0 auto;
-    }
-
-    h1 {
-      margin: 10px auto 0;
-      text-align: center;
-    }
-
-    h2 {
-      font-size: 16px;
-      font-weight: normal;
-      color: var(--el-text-color-secondary);
-      text-align: center;
     }
   }
 
