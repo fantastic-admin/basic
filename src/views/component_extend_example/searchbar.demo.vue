@@ -3,7 +3,7 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ElMessage } from 'element-plus'
 
 defineOptions({

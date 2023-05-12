@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const radio = ref('1')
 const radio2 = ref('选中且禁用')
 const radio3 = ref(3)

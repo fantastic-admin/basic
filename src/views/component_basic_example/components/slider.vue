@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const value1 = ref(0)
 const value2 = ref(50)
 const value3 = ref(36)

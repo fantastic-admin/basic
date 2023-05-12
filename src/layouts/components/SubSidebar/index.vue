@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import Logo from '../Logo/index.vue'
 import SidebarItem from '../SidebarItem/index.vue'
 import useSettingsStore from '@/store/modules/settings'

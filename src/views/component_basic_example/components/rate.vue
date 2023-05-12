@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const value1 = ref()
 const value2 = ref()
 const value3 = ref(3.7)

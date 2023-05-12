@@ -6,7 +6,7 @@ meta:
   layout: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 const router = useRouter()
 
 const data = ref({

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { cloneDeep } from 'lodash-es'
 import hotkeys from 'hotkeys-js'
 import type { RouteRecordRaw } from 'vue-router'

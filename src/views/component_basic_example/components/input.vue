@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const input = ref('')
 const input1 = ref('')
 const input2 = ref('')

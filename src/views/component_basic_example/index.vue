@@ -3,7 +3,7 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import Icon from './components/icon.vue'
 import Button from './components/button.vue'
 import Link from './components/link.vue'

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { compile } from 'path-to-regexp'
 import Tools from '../Tools/index.vue'
 import useSettingsStore from '@/store/modules/settings'

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { resolveRoutePath } from '@/utils'
 import useSettingsStore from '@/store/modules/settings'
 import type { Menu } from '#/global'

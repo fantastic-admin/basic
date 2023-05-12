@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const num = ref(1)
 const num2 = ref(1)
 const num3 = ref(5)

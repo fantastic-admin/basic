@@ -3,7 +3,7 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import useKeepAliveStore from '@/store/modules/keepAlive'
 
 defineOptions({

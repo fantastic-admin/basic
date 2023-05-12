@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useFullscreen } from '@vueuse/core'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'

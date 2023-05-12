@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const checked = ref(true)
 const checked1 = ref(false)
 const checked2 = ref(true)

@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const props = withDefaults(
   defineProps<{
     src: string

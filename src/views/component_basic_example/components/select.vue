@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 const options1 = ref([
   { value: '选项1', label: '黄金糕' },
   { value: '选项2', label: '双皮奶' },
