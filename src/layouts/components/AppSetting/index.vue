@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
 import eventBus from '@/utils/eventBus'

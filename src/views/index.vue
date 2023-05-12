@@ -4,7 +4,7 @@ meta:
   title: 主页
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 function open(url: string) {
   window.open(url, '_blank')
 }

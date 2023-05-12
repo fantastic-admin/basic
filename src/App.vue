@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import eruda from 'eruda'
 import VConsole from 'vconsole'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'

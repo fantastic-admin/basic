@@ -5,7 +5,7 @@ meta:
   layout: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import useUserStore from '@/store/modules/user'

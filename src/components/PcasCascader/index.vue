@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 // 行政区划数据来源于 https://github.com/modood/Administrative-divisions-of-China
 import pcasRaw from './pcas-code.json'
 

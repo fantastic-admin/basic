@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import hotkeys from 'hotkeys-js'
 import LinkView from './components/views/link.vue'
 import Header from './components/Header/index.vue'
