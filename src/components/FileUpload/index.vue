@@ -24,7 +24,13 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits(['onSuccess'])
+const emits = defineEmits<{
+  'onSuccess': [
+    res: any,
+    file: UploadUserFile,
+    fileList: UploadUserFile[],
+  ]
+}>()
 
 defineOptions({
   name: 'FileUpload',
@@ -49,7 +55,7 @@ const onExceed: UploadProps['onExceed'] = () => {
 }
 
 const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
-  emit('onSuccess', res, file, fileList)
+  emits('onSuccess', res, file, fileList)
 }
 </script>
 

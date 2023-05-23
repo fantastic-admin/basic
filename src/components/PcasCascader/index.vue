@@ -19,7 +19,14 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits(['update:modelValue'])
+const emits = defineEmits<{
+  'update:modelValue': [
+    value: string[] | {
+      code: string
+      name: string
+    }[],
+  ]
+}>()
 
 defineOptions({
   name: 'PcasCascader',
@@ -85,7 +92,7 @@ const myValue = computed({
   },
   // 将 code 码转成出参数据
   set: (value) => {
-    emit('update:modelValue', value ? codeToAny(value) : [])
+    emits('update:modelValue', value ? codeToAny(value) : [])
   },
 })
 
