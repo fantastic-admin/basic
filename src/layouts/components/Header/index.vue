@@ -5,7 +5,7 @@ import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
 
 defineOptions({
-  name: 'Header',
+  name: 'LayoutHeader',
 })
 
 const settingsStore = useSettingsStore()
