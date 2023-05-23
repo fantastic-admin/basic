@@ -30,7 +30,14 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits(['update:url', 'onSuccess'])
+const emits = defineEmits<{
+  'update:url': [
+    value: string[],
+  ]
+  'onSuccess': [
+    res: any,
+  ]
+}>()
 
 defineOptions({
   name: 'ImagesUpload',
@@ -58,7 +65,7 @@ function previewClose() {
 function remove(index: number) {
   const url = props.url
   url.splice(index, 1)
-  emit('update:url', url)
+  emits('update:url', url)
 }
 // 移动
 function move(index: number, type: 'left' | 'right') {
@@ -69,7 +76,7 @@ function move(index: number, type: 'left' | 'right') {
   if (type === 'right' && index !== url.length - 1) {
     url[index] = url.splice(index + 1, 1, url[index])[0]
   }
-  emit('update:url', url)
+  emits('update:url', url)
 }
 
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
@@ -94,7 +101,7 @@ const onProgress: UploadProps['onProgress'] = (file) => {
 const onSuccess: UploadProps['onSuccess'] = (res) => {
   uploadData.value.progress.preview = ''
   uploadData.value.progress.percent = 0
-  emit('onSuccess', res)
+  emits('onSuccess', res)
 }
 </script>
 

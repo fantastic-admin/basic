@@ -28,7 +28,14 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits(['update:url', 'onSuccess'])
+const emits = defineEmits<{
+  'update:url': [
+    url: string,
+  ]
+  'onSuccess': [
+    res: any,
+  ]
+}>()
 
 defineOptions({
   name: 'ImageUpload',
@@ -52,7 +59,7 @@ function previewClose() {
 }
 // 移除
 function remove() {
-  emit('update:url', '')
+  emits('update:url', '')
 }
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const fileName = file.name.split('.')
@@ -76,7 +83,7 @@ const onProgress: UploadProps['onProgress'] = (file) => {
 const onSuccess: UploadProps['onSuccess'] = (res) => {
   uploadData.value.progress.preview = ''
   uploadData.value.progress.percent = 0
-  emit('onSuccess', res)
+  emits('onSuccess', res)
 }
 </script>
 

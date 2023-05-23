@@ -12,9 +12,13 @@ const props = withDefaults(
   },
 )
 
-const emit = defineEmits<{
-  (event: 'update:fold', value: boolean): void
-  (event: 'toggle', value: boolean): void
+const emits = defineEmits<{
+  'update:fold': [
+    value: boolean,
+  ]
+  'toggle': [
+    value: boolean,
+  ]
 }>()
 
 defineOptions({
@@ -25,12 +29,12 @@ const isFold = ref(props.fold)
 
 watch(() => props.fold, (value) => {
   isFold.value = value
-  emit('update:fold', value)
+  emits('update:fold', value)
 })
 
 function toggle() {
   isFold.value = !isFold.value
-  emit('toggle', isFold.value)
+  emits('toggle', isFold.value)
 }
 </script>
 
