@@ -120,8 +120,8 @@ const useMenuStore = defineStore(
     function filterAsyncMenus<T extends Menu.recordMainRaw[] | Menu.recordRaw[]>(menus: T, permissions: string[]): T {
       const res: any = []
       menus.forEach((menu) => {
-        const tmpMenu = cloneDeep(menu)
-        if (hasPermission(permissions, tmpMenu)) {
+        if (hasPermission(permissions, menu)) {
+          const tmpMenu = cloneDeep(menu)
           if (tmpMenu.children) {
             tmpMenu.children = filterAsyncMenus(tmpMenu.children, permissions) as Menu.recordRaw[]
             tmpMenu.children.length && res.push(tmpMenu)
