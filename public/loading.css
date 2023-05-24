@@ -86,7 +86,7 @@
 }
 
 .fantastic-admin-home .text::after {
-  content: '…';
+  content: "…";
   position: absolute;
   padding-left: 5px;
 }
