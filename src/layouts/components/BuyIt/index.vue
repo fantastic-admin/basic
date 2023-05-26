@@ -29,7 +29,7 @@ onMounted(() => {
       title: '「 专业版限时优惠 」',
       dangerouslyUseHTMLString: true,
       message: `
-        <p>原价 1099.00 元，现价 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元！点击立即<a href="https://hooray.gitee.io/fantastic-admin/buy.html" target="_blank">去购买</a>！</p>
+        <p>原价 1099.00 元，现价 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元，更有超值优惠合集，立减 <b style="color: #ff4400;">799.00</b> 元，点击<a href="https://hooray.gitee.io/fantastic-admin/buy.html" target="_blank">查看详情</a>！</p>
       `,
       position: 'bottom-right',
       duration: 0,
