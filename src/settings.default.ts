@@ -45,10 +45,10 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
     enableHotkeys: true,
   },
   copyright: {
-    enable: true,
-    dates: '2020-2023',
-    company: 'Fantastic-admin',
-    website: 'https://hooray.gitee.io/fantastic-admin/',
+    enable: false,
+    dates: '',
+    company: '',
+    website: '',
     beian: '',
   },
 }
