@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://hooray.gitee.io/fantastic-admin/logo.png" width="200" height="200" />
+  <img src="https://fantastic-admin.gitee.io/logo.png" width="200" height="200" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>
@@ -7,21 +7,21 @@
 <p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架</p>
 
 <p align="center">
-  <a href="https://hooray.gitee.io/fantastic-admin" target="_blank">官网</a>
-  ( <a href="https://hooray.github.io/fantastic-admin" target="_blank">备用</a> )
+  <a href="https://fantastic-admin.gitee.io" target="_blank">官网</a>
+  ( <a href="https://fantastic-admin.github.io" target="_blank">备用</a> )
   <span>&nbsp;|&nbsp;</span>
   演示
-  ( <a href="https://hooray.gitee.io/fantastic-admin-example" target="_blank">基础版</a>
-  <a href="https://hooray.gitee.io/fantastic-admin-pro-example" target="_blank">专业版</a> )
+  ( <a href="https://fantastic-admin.gitee.io/basic-example" target="_blank">基础版</a>
+  <a href="https://fantastic-admin.gitee.io/pro-example" target="_blank">专业版</a> )
   <span>&nbsp;|&nbsp;</span>
-  <a href="https://hooray.gitee.io/fantastic-admin/support.html" target="_blank">技术支持</a>
+  <a href="https://fantastic-admin.gitee.io/support.html" target="_blank">技术支持</a>
   <span>&nbsp;|&nbsp;</span>
-  <a href="https://hooray.gitee.io/fantastic-admin/buy.html" target="_blank">购买</a>
+  <a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">购买</a>
 <p>
 
 <p align="center">
-  <a href="###"><img src="https://img.shields.io/github/license/hooray/fantastic-admin?label=%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE&style=flat-square" /></a>
-  <a href="https://github.com/hooray/fantastic-admin/releases" target="_blank"><img src="https://img.shields.io/github/v/release/hooray/fantastic-admin?label=%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC&style=flat-square" /></a>
+  <a href="###"><img src="https://img.shields.io/github/license/fantastic-admin/basic?label=%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE&style=flat-square" /></a>
+  <a href="https://github.com/fantastic-admin/basic/releases" target="_blank"><img src="https://img.shields.io/github/v/release/fantastic-admin/basic?label=%E5%BD%93%E5%89%8D%E7%89%88%E6%9C%AC&style=flat-square" /></a>
 </p>
 
 ## 特点
@@ -43,7 +43,7 @@
 - `vue2` Vue2 版本框架源码分支，不含示例代码，可直接用于实际开发（停止维护）
 - `vue2-example` Vue2 版本演示源码分支，包含大量示例，可用于参考学习（停止维护）
 
-如果你更注重使用时的稳定性，推荐去 [Github Releases](https://github.com/hooray/fantastic-admin/releases) 页面下载最新稳定版本的压缩包。
+如果你更注重使用时的稳定性，推荐去 [Github Releases](https://github.com/fantastic-admin/basic/releases) 页面下载最新稳定版本的压缩包。
 
 ## 预览
 
@@ -51,14 +51,14 @@
 
 <table>
   <tr>
-    <td><img src="https://hooray.gitee.io/fantastic-admin/preview1.png" /></td>
-    <td><img src="https://hooray.gitee.io/fantastic-admin/preview2.png" /></td>
-    <td><img src="https://hooray.gitee.io/fantastic-admin/preview3.png" /></td>
+    <td><img src="https://fantastic-admin.gitee.io/preview1.png" /></td>
+    <td><img src="https://fantastic-admin.gitee.io/preview2.png" /></td>
+    <td><img src="https://fantastic-admin.gitee.io/preview3.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://hooray.gitee.io/fantastic-admin/preview4.png" /></td>
-    <td><img src="https://hooray.gitee.io/fantastic-admin/preview5.png" /></td>
-    <td><img src="https://hooray.gitee.io/fantastic-admin/preview6.png" /></td>
+    <td><img src="https://fantastic-admin.gitee.io/preview4.png" /></td>
+    <td><img src="https://fantastic-admin.gitee.io/preview5.png" /></td>
+    <td><img src="https://fantastic-admin.gitee.io/preview6.png" /></td>
   </tr>
 </table>
 
@@ -66,9 +66,9 @@
 
 如果觉得 Fantastic-admin 这个框架不错，或者已经在使用了，希望你可以在 **Github** 或者 **Gitee(码云)** 帮我点个 ⭐ ，这将对我是极大的鼓励。
 
-[![star](https://img.shields.io/github/stars/hooray/fantastic-admin?style=social)](https://github.com/hooray/fantastic-admin/stargazers)
+[![star](https://img.shields.io/github/stars/fantastic-admin/basic?style=social)](https://github.com/fantastic-admin/basic)
 
-[![star](https://gitee.com/hooray/fantastic-admin/badge/star.svg?theme=dark)](https://gitee.com/hooray/fantastic-admin/stargazers)
+[![star](https://gitee.com/fantastic-admin/basic/badge/star.svg?theme=dark)](https://gitee.com/fantastic-admin/basic)
 
 ## 生态
 
@@ -88,7 +88,7 @@
 <table>
   <tr>
     <th colspan="3" align="center">
-      <a href="https://hooray.gitee.io/one-step-admin/" target="_blank">One-step-admin</a>
+      <a href="https://one-step-admin.gitee.io" target="_blank">One-step-admin</a>
     </th>
   </tr>
   <tr>
@@ -97,13 +97,13 @@
     </th>
   </tr>
   <tr>
-    <td><img src="https://hooray.gitee.io/one-step-admin/preview1.png" /></td>
-    <td><img src="https://hooray.gitee.io/one-step-admin/preview2.png" /></td>
-    <td><img src="https://hooray.gitee.io/one-step-admin/preview3.png" /></td>
+    <td><img src="https://one-step-admin.gitee.io/preview1.png" /></td>
+    <td><img src="https://one-step-admin.gitee.io/preview2.png" /></td>
+    <td><img src="https://one-step-admin.gitee.io/preview3.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://hooray.gitee.io/one-step-admin/preview4.png" /></td>
-    <td><img src="https://hooray.gitee.io/one-step-admin/preview5.png" /></td>
-    <td><img src="https://hooray.gitee.io/one-step-admin/preview6.png" /></td>
+    <td><img src="https://one-step-admin.gitee.io/preview4.png" /></td>
+    <td><img src="https://one-step-admin.gitee.io/preview5.png" /></td>
+    <td><img src="https://one-step-admin.gitee.io/preview6.png" /></td>
   </tr>
 </table>
