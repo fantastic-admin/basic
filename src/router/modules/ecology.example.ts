@@ -28,7 +28,7 @@ const routes: RouteRecordRaw[] = [
         name: 'officialOneStepAdmin',
         meta: {
           title: 'One-step-admin 干啥都快人一步的中后台框架',
-          link: 'https://hooray.gitee.io/one-step-admin/',
+          link: 'https://one-step-admin.gitee.io',
         },
       },
     ],

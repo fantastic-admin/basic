@@ -20,7 +20,7 @@ const routes: RouteRecordRaw = {
       name: 'externalLinkGitee',
       meta: {
         title: 'Gitee 仓库',
-        link: 'https://gitee.com/hooray/fantastic-admin',
+        link: 'https://gitee.com/fantastic-admin/basic',
       },
     },
     {
@@ -29,7 +29,7 @@ const routes: RouteRecordRaw = {
       name: 'externalLinkGithub',
       meta: {
         title: 'Github 仓库',
-        link: 'https://github.com/hooray/fantastic-admin',
+        link: 'https://github.com/fantastic-admin/basic',
       },
     },
   ],

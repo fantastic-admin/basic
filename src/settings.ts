@@ -23,9 +23,9 @@ const globalSettings: Settings.all = {
   },
   copyright: {
     enable: true,
-    dates: '2020-2023',
+    dates: '2020-present',
     company: 'Fantastic-admin',
-    website: 'https://hooray.gitee.io/fantastic-admin/',
+    website: 'https://fantastic-admin.gitee.io',
     beian: '',
   },
 }

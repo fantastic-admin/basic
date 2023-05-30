@@ -9,25 +9,25 @@ const tableData = [
     date: '2016-05-03',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://hooray.gitee.io/fantastic-admin/logo.png',
+    src: 'https://fantastic-admin.gitee.io/logo.png',
   },
   {
     date: '2016-05-02',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://hooray.gitee.io/fantastic-admin/logo.png',
+    src: 'https://fantastic-admin.gitee.io/logo.png',
   },
   {
     date: '2016-05-04',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://hooray.gitee.io/fantastic-admin/logo.png',
+    src: 'https://fantastic-admin.gitee.io/logo.png',
   },
   {
     date: '2016-05-01',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://hooray.gitee.io/fantastic-admin/logo.png',
+    src: 'https://fantastic-admin.gitee.io/logo.png',
   },
 ]
 </script>
@@ -36,7 +36,7 @@ const tableData = [
   <div>
     <page-header title="图片预览" content="ImagePreview" />
     <page-main>
-      <image-preview src="https://hooray.gitee.io/fantastic-admin/logo.png" :width="200" />
+      <image-preview src="https://fantastic-admin.gitee.io/logo.png" :width="200" />
     </page-main>
     <page-main title="图片加载失败时">
       <image-preview src="http://www.baidu.com" width="100px" height="100px" />

@@ -26,12 +26,12 @@ const fantasticAdminInfo = ref({
   imageVisible: false,
   index: 0,
   data: [
-    'https://hooray.gitee.io/fantastic-admin/preview1.png',
-    'https://hooray.gitee.io/fantastic-admin/preview2.png',
-    'https://hooray.gitee.io/fantastic-admin/preview3.png',
-    'https://hooray.gitee.io/fantastic-admin/preview4.png',
-    'https://hooray.gitee.io/fantastic-admin/preview5.png',
-    'https://hooray.gitee.io/fantastic-admin/preview6.png',
+    'https://fantastic-admin.gitee.io/preview1.png',
+    'https://fantastic-admin.gitee.io/preview2.png',
+    'https://fantastic-admin.gitee.io/preview3.png',
+    'https://fantastic-admin.gitee.io/preview4.png',
+    'https://fantastic-admin.gitee.io/preview5.png',
+    'https://fantastic-admin.gitee.io/preview6.png',
   ],
 })
 
@@ -39,12 +39,12 @@ const oneStepAdminInfo = ref({
   imageVisible: false,
   index: 0,
   data: [
-    'https://hooray.gitee.io/one-step-admin/preview1.png',
-    'https://hooray.gitee.io/one-step-admin/preview2.png',
-    'https://hooray.gitee.io/one-step-admin/preview3.png',
-    'https://hooray.gitee.io/one-step-admin/preview4.png',
-    'https://hooray.gitee.io/one-step-admin/preview5.png',
-    'https://hooray.gitee.io/one-step-admin/preview6.png',
+    'https://one-step-admin.gitee.io/preview1.png',
+    'https://one-step-admin.gitee.io/preview2.png',
+    'https://one-step-admin.gitee.io/preview3.png',
+    'https://one-step-admin.gitee.io/preview4.png',
+    'https://one-step-admin.gitee.io/preview5.png',
+    'https://one-step-admin.gitee.io/preview6.png',
   ],
 })
 </script>
@@ -61,7 +61,7 @@ const oneStepAdminInfo = ref({
         </div>
       </template>
       <el-button-group>
-        <el-button type="success" size="large" plain @click="open('https://hooray.gitee.io/fantastic-admin/')">
+        <el-button type="success" size="large" plain @click="open('https://fantastic-admin.gitee.io')">
           开发文档
         </el-button>
         <el-dropdown>
@@ -73,10 +73,10 @@ const oneStepAdminInfo = ref({
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item @click="open('https://gitee.com/hooray/fantastic-admin')">
+              <el-dropdown-item @click="open('https://gitee.com/fantastic-admin/basic')">
                 Gitee
               </el-dropdown-item>
-              <el-dropdown-item @click="open('https://github.com/hooray/fantastic-admin')">
+              <el-dropdown-item @click="open('https://github.com/fantastic-admin/basic')">
                 Github
               </el-dropdown-item>
             </el-dropdown-menu>
@@ -117,17 +117,17 @@ const oneStepAdminInfo = ref({
         <page-main class="ecology fa">
           <template #title>
             <div class="title-info">
-              <img src="https://hooray.gitee.io/fantastic-admin/logo.png">
+              <img src="https://fantastic-admin.gitee.io/logo.png">
               <div>
                 <h1>Fantastic-admin</h1>
                 <h2>一款开箱即用的 Vue 中后台管理系统框架</h2>
               </div>
             </div>
-            <el-dropdown split-button type="primary" @click="open('https://hooray.gitee.io/fantastic-admin/')">
+            <el-dropdown split-button type="primary" @click="open('https://fantastic-admin.gitee.io')">
               访问官网
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item @click="open('https://hooray.github.io/fantastic-admin/')">
+                  <el-dropdown-item @click="open('https://fantastic-admin.github.io')">
                     备用地址
                   </el-dropdown-item>
                 </el-dropdown-menu>
@@ -146,17 +146,17 @@ const oneStepAdminInfo = ref({
         <page-main class="ecology osa">
           <template #title>
             <div class="title-info">
-              <img src="https://hooray.gitee.io/one-step-admin/logo.png">
+              <img src="https://one-step-admin.gitee.io/logo.png">
               <div>
                 <h1>One-step-admin</h1>
                 <h2>一款干啥都快人一步的 Vue 中后台系统框架</h2>
               </div>
             </div>
-            <el-dropdown split-button type="primary" @click="open('https://hooray.gitee.io/one-step-admin/')">
+            <el-dropdown split-button type="primary" @click="open('https://one-step-admin.gitee.io')">
               访问官网
               <template #dropdown>
                 <el-dropdown-menu>
-                  <el-dropdown-item @click="open('https://hooray.github.io/one-step-admin/')">
+                  <el-dropdown-item @click="open('https://one-step-admin.github.io')">
                     备用地址
                   </el-dropdown-item>
                 </el-dropdown-menu>
