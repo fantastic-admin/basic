@@ -1,48 +1,68 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
-const props = withDefaults(
-  defineProps<{
-    name: string
-    flip?: 'horizontal' | 'vertical' | 'both' | ''
-    rotate?: number
-  }>(),
-  {
-    flip: '',
-    rotate: 0,
-  },
-)
+const props = defineProps<{
+  name: string
+  flip?: 'horizontal' | 'vertical' | 'both'
+  rotate?: number
+  color?: string
+  size?: string | number
+}>()
 
 defineOptions({
   name: 'SvgIcon',
 })
 
-const transformStyle = computed(() => {
-  const style = []
-  if (props.flip !== '') {
+const style = computed(() => {
+  const transform = []
+  if (props.flip) {
     switch (props.flip) {
       case 'horizontal':
-        style.push('rotateY(180deg)')
+        transform.push('rotateY(180deg)')
         break
       case 'vertical':
-        style.push('rotateX(180deg)')
+        transform.push('rotateX(180deg)')
         break
       case 'both':
-        style.push('rotateX(180deg)')
-        style.push('rotateY(180deg)')
+        transform.push('rotateX(180deg)')
+        transform.push('rotateY(180deg)')
         break
     }
   }
-  if (props.rotate !== 0) {
-    style.push(`rotate(${props.rotate}deg)`)
+  if (props.rotate) {
+    transform.push(`rotate(${props.rotate % 360}deg)`)
   }
-  return `transform: ${style.join(' ')};`
+  return {
+    ...(props.color && { color: props.color }),
+    ...(props.size && { fontSize: typeof props.size === 'number' ? `${props.size}px` : props.size }),
+    ...(transform.length && { transform: transform.join(' ') }),
+  }
 })
 </script>
 
 <template>
-  <Icon v-if="name.indexOf('ep:') === 0" :icon="name" :style="transformStyle" />
-  <svg v-else :style="transformStyle" aria-hidden="true">
-    <use :xlink:href="`#icon-${name}`" />
-  </svg>
+  <i class="icon" :style="style">
+    <Icon v-if="name.indexOf('ep:') === 0" :icon="name" />
+    <svg v-else aria-hidden="true">
+      <use :xlink:href="`#icon-${name}`" />
+    </svg>
+  </i>
 </template>
+
+<style lang="scss" scoped>
+.icon {
+  height: 1em;
+  width: 1em;
+  line-height: 1em;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  fill: currentcolor;
+
+  svg {
+    height: 1em;
+    width: 1em;
+  }
+}
+</style>

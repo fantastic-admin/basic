@@ -44,9 +44,7 @@ function toggle() {
     <div v-if="showToggle" class="toggle">
       <el-button text size="small" @click="toggle">
         <template #icon>
-          <el-icon>
-            <svg-icon :name="isFold ? 'ep:caret-bottom' : 'ep:caret-top' " />
-          </el-icon>
+          <svg-icon :name="isFold ? 'ep:caret-bottom' : 'ep:caret-top' " />
         </template>
         {{ isFold ? '展开' : '收起' }}
       </el-button>

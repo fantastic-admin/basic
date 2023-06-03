@@ -67,9 +67,7 @@ const oneStepAdminInfo = ref({
         <el-dropdown>
           <el-button type="primary" size="large">
             代码仓库
-            <el-icon class="el-icon--right">
-              <svg-icon name="ep:arrow-down" />
-            </el-icon>
+            <svg-icon name="ep:arrow-down" class="el-icon--right" />
           </el-button>
           <template #dropdown>
             <el-dropdown-menu>

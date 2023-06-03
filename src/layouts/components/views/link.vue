@@ -23,9 +23,7 @@ function open() {
           </div>
           <el-button type="primary" plain round @click="open">
             <template #icon>
-              <el-icon>
-                <svg-icon name="ep:link" />
-              </el-icon>
+              <svg-icon name="ep:link" />
             </template>
             立即访问
           </el-button>

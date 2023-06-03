@@ -45,27 +45,19 @@ function open(url: string) {
 <template>
   <div class="buy-it" :class="{ actived: isActived }">
     <div class="item" @click="open(`https://fantastic-admin.gitee.io/buy.html`)">
-      <el-icon>
-        <svg-icon name="fixed-right-buy" />
-      </el-icon>
+      <svg-icon name="fixed-right-buy" />
       <span class="title">购买<br>专业版</span>
     </div>
     <div class="item" @click="open('https://gitee.com/fantastic-admin/basic')">
-      <el-icon>
-        <svg-icon name="fixed-right-code" />
-      </el-icon>
+      <svg-icon name="fixed-right-code" />
       <span class="title">下载<br>基础版</span>
     </div>
     <div class="item" @click="open(`https://fantastic-admin.gitee.io`)">
-      <el-icon>
-        <svg-icon name="fixed-right-doc" />
-      </el-icon>
+      <svg-icon name="fixed-right-doc" />
       <span class="title">开发<br>文档</span>
     </div>
     <div class="item" @click="open(`https://fantastic-admin.gitee.io/support.html`)">
-      <el-icon>
-        <svg-icon name="fixed-right-chat" />
-      </el-icon>
+      <svg-icon name="fixed-right-chat" />
       <span class="title">技术<br>支持</span>
     </div>
   </div>
@@ -129,7 +121,7 @@ function open(url: string) {
       background-color: #343b42;
     }
 
-    .el-icon {
+    .icon {
       display: block;
       margin: 0 auto;
       font-size: 20px;

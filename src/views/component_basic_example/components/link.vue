@@ -53,16 +53,12 @@
       图标
     </el-divider>
     <el-link>
-      <el-icon class="el-icon--left">
-        <svg-icon name="i-ep:edit" />
-      </el-icon>
+      <svg-icon name="i-ep:edit" class="el-icon--left" />
       编辑
     </el-link>
     <el-link>
       查看
-      <el-icon class="el-icon--right">
-        <svg-icon name="i-ep:view" />
-      </el-icon>
+      <svg-icon name="i-ep:view" class="el-icon--right" />
     </el-link>
   </div>
 </template>

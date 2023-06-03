@@ -13,9 +13,7 @@ meta:
       </template>
       <el-button round>
         <template #icon>
-          <el-icon>
-            <svg-icon name="ep:arrow-left" />
-          </el-icon>
+          <svg-icon name="ep:arrow-left" />
         </template>
         返回
       </el-button>

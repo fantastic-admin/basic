@@ -246,9 +246,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
       <div class="search-box" @click.stop>
         <el-input ref="searchInputRef" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
           <template #prefix>
-            <el-icon>
-              <svg-icon name="ep:search" />
-            </el-icon>
+            <svg-icon name="ep:search" />
           </template>
         </el-input>
         <div v-if="settingsStore.mode === 'pc'" class="tips">
@@ -262,14 +260,10 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
           </div>
           <div class="tip">
             <el-tag type="info" size="large">
-              <el-icon>
-                <svg-icon name="search-up" />
-              </el-icon>
+              <svg-icon name="search-up" />
             </el-tag>
             <el-tag type="info" size="large">
-              <el-icon>
-                <svg-icon name="search-down" />
-              </el-icon>
+              <svg-icon name="search-down" />
             </el-tag>
             <el-tag type="info" size="large">
               切换搜索结果
@@ -277,9 +271,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
           </div>
           <div class="tip">
             <el-tag type="info" size="large">
-              <el-icon>
-                <svg-icon name="search-enter" />
-              </el-icon>
+              <svg-icon name="search-enter" />
             </el-tag>
             <el-tag type="info" size="large">
               访问页面
@@ -297,9 +289,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
       </div>
       <div ref="searchResultRef" class="result">
         <a v-for="(item, index) in resultList" :key="item.path" :ref="setSearchResultItemRef" class="item" :class="{ actived: index === actived }" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
-          <el-icon class="icon">
-            <svg-icon v-if="item.icon" :name="item.icon" />
-          </el-icon>
+          <svg-icon v-if="item.icon" :name="item.icon" />
           <div class="info">
             <div class="title">
               {{ item.title ?? '[ 无标题 ]' }}
@@ -307,9 +297,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
             <div class="breadcrumb">
               <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
                 {{ bc ?? '[ 无标题 ]' }}
-                <el-icon>
-                  <svg-icon name="ep:arrow-right" />
-                </el-icon>
+                <svg-icon name="ep:arrow-right" />
               </span>
             </div>
             <div class="path">{{ item.path }}</div>

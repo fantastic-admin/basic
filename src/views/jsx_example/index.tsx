@@ -11,9 +11,7 @@ export default defineComponent({
     const icons = (
       iconsArr.value.map((v) => {
         return (
-          <el-icon key={v} class={styles['example-icon']}>
-            <svg-icon name={v} />
-          </el-icon>
+          <svg-icon name={v} key={v} class={styles['example-icon']} />
         )
       })
     )

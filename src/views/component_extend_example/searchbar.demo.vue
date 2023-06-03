@@ -87,9 +87,7 @@ function toggle(fold: boolean) {
             <el-form-item>
               <el-button type="primary">
                 <template #icon>
-                  <el-icon>
-                    <svg-icon name="ep:search" />
-                  </el-icon>
+                  <svg-icon name="ep:search" />
                 </template>
                 筛选
               </el-button>
@@ -156,9 +154,7 @@ function toggle(fold: boolean) {
             <el-form-item>
               <el-button type="primary">
                 <template #icon>
-                  <el-icon>
-                    <svg-icon name="ep:search" />
-                  </el-icon>
+                  <svg-icon name="ep:search" />
                 </template>
                 筛选
               </el-button>
@@ -225,9 +221,7 @@ function toggle(fold: boolean) {
             <el-form-item>
               <el-button type="primary">
                 <template #icon>
-                  <el-icon>
-                    <svg-icon name="ep:search" />
-                  </el-icon>
+                  <svg-icon name="ep:search" />
                 </template>
                 筛选
               </el-button>
@@ -294,9 +288,7 @@ function toggle(fold: boolean) {
             <el-form-item>
               <el-button type="primary">
                 <template #icon>
-                  <el-icon>
-                    <svg-icon name="ep:search" />
-                  </el-icon>
+                  <svg-icon name="ep:search" />
                 </template>
                 筛选
               </el-button>
@@ -347,17 +339,13 @@ function toggle(fold: boolean) {
             <el-form-item>
               <el-button type="primary">
                 <template #icon>
-                  <el-icon>
-                    <svg-icon name="ep:search" />
-                  </el-icon>
+                  <svg-icon name="ep:search" />
                 </template>
                 筛选
               </el-button>
               <el-button link @click="isFold2 = !fold">
                 <template #icon>
-                  <el-icon>
-                    <svg-icon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
-                  </el-icon>
+                  <svg-icon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
                 </template>
                 {{ fold ? '展开' : '收起' }}
               </el-button>
@@ -416,17 +404,13 @@ function toggle(fold: boolean) {
                 <el-form-item label-width="0" class="action-box">
                   <el-button type="primary">
                     <template #icon>
-                      <el-icon>
-                        <svg-icon name="ep:search" />
-                      </el-icon>
+                      <svg-icon name="ep:search" />
                     </template>
                     筛选
                   </el-button>
                   <el-button link @click="isFold3 = !fold">
                     <template #icon>
-                      <el-icon>
-                        <svg-icon :name="fold ? 'epcaret-bottom' : 'ep:caret-top' " />
-                      </el-icon>
+                      <svg-icon :name="fold ? 'epcaret-bottom' : 'ep:caret-top' " />
                     </template>
                     {{ fold ? '展开' : '收起' }}
                   </el-button>

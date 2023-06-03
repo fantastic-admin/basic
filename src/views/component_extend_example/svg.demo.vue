@@ -8,7 +8,7 @@ defineOptions({
   name: 'ComponentExampleSvg',
 })
 
-const flip = ref<'horizontal' | 'vertical' | 'both' | ''>('')
+const flip = ref<'horizontal' | 'vertical' | 'both'>()
 const rotate = ref(0)
 </script>
 
@@ -16,25 +16,13 @@ const rotate = ref(0)
   <div>
     <page-header title="SVG Icon" content="除了使用 Element Plus 提供的图标外，你还可以使用自己的 SVG 图标" />
     <page-main>
-      <el-icon class="example-icon">
-        <svg-icon name="example-emotion-line" :flip="flip" :rotate="rotate" />
-      </el-icon>
-      <el-icon class="example-icon">
-        <svg-icon name="example-emotion-laugh-line" :flip="flip" :rotate="rotate" />
-      </el-icon>
-      <el-icon class="example-icon">
-        <svg-icon name="example-emotion-unhappy-line" :flip="flip" :rotate="rotate" />
-      </el-icon>
+      <svg-icon name="example-emotion-line" :flip="flip" :rotate="rotate" />
+      <svg-icon name="example-emotion-laugh-line" :flip="flip" :rotate="rotate" />
+      <svg-icon name="example-emotion-unhappy-line" :flip="flip" :rotate="rotate" />
       <p>也支持彩色 SVG Icon</p>
-      <el-icon class="example-icon">
-        <svg-icon name="example-crown" :flip="flip" :rotate="rotate" />
-      </el-icon>
-      <el-icon class="example-icon">
-        <svg-icon name="example-star" :flip="flip" :rotate="rotate" />
-      </el-icon>
-      <el-icon class="example-icon">
-        <svg-icon name="example-vip" :flip="flip" :rotate="rotate" />
-      </el-icon>
+      <svg-icon name="example-crown" :flip="flip" :rotate="rotate" />
+      <svg-icon name="example-star" :flip="flip" :rotate="rotate" />
+      <svg-icon name="example-vip" :flip="flip" :rotate="rotate" />
       <div>
         <p>翻转：</p>
         <el-radio-group v-model="flip">
@@ -64,7 +52,7 @@ const rotate = ref(0)
 </template>
 
 <style scoped>
-.example-icon {
+.icon {
   font-size: 48px;
 }
 </style>

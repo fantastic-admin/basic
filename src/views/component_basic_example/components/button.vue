@@ -64,44 +64,32 @@
     <el-row>
       <el-button circle>
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:search" />
-          </el-icon>
+          <svg-icon name="ep:search" />
         </template>
       </el-button>
       <el-button type="primary" circle>
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:edit" />
-          </el-icon>
+          <svg-icon name="ep:edit" />
         </template>
       </el-button>
       <el-button type="success" circle>
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:check" />
-          </el-icon>
+          <svg-icon name="ep:check" />
         </template>
       </el-button>
       <el-button type="info" circle>
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:message" />
-          </el-icon>
+          <svg-icon name="ep:message" />
         </template>
       </el-button>
       <el-button type="warning" circle>
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:star" />
-          </el-icon>
+          <svg-icon name="ep:star" />
         </template>
       </el-button>
       <el-button type="danger" circle>
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:delete" />
-          </el-icon>
+          <svg-icon name="ep:delete" />
         </template>
       </el-button>
     </el-row>
@@ -174,76 +162,56 @@
     </el-divider>
     <el-button type="primary">
       <template #icon>
-        <el-icon>
-          <svg-icon name="i-ep:edit" />
-        </el-icon>
+        <svg-icon name="ep:edit" />
       </template>
     </el-button>
     <el-button type="primary">
       <template #icon>
-        <el-icon>
-          <svg-icon name="i-ep:share" />
-        </el-icon>
+        <svg-icon name="ep:share" />
       </template>
     </el-button>
     <el-button type="primary">
       <template #icon>
-        <el-icon>
-          <svg-icon name="i-ep:delete" />
-        </el-icon>
+        <svg-icon name="ep:delete" />
       </template>
     </el-button>
     <el-button type="primary">
       <template #icon>
-        <el-icon>
-          <svg-icon name="i-ep:search" />
-        </el-icon>
+        <svg-icon name="ep:search" />
       </template>
       搜索
     </el-button>
     <el-button type="primary">
       上传
-      <el-icon class="el-icon--right">
-        <svg-icon name="i-ep:upload" />
-      </el-icon>
+      <svg-icon name="ep:upload" class="el-icon--right" />
     </el-button>
     <el-divider content-position="left">
       按钮组
     </el-divider>
     <el-button-group style="margin-right: 10px;">
       <el-button type="primary">
-        <el-icon class="el-icon--left">
-          <svg-icon name="i-ep:arrow-left" />
-        </el-icon>
+        <svg-icon name="ep:arrow-left" class="el-icon--left" />
         上一页
       </el-button>
       <el-button type="primary">
         下一页
-        <el-icon class="el-icon--right">
-          <svg-icon name="i-ep:arrow-right" />
-        </el-icon>
+        <svg-icon name="ep:arrow-right" class="el-icon--right" />
       </el-button>
     </el-button-group>
     <el-button-group>
       <el-button type="primary">
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:edit" />
-          </el-icon>
+          <svg-icon name="ep:edit" />
         </template>
       </el-button>
       <el-button type="primary">
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:share" />
-          </el-icon>
+          <svg-icon name="ep:share" />
         </template>
       </el-button>
       <el-button type="primary">
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:delete" />
-          </el-icon>
+          <svg-icon name="ep:delete" />
         </template>
       </el-button>
     </el-button-group>

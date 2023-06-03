@@ -112,24 +112,16 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
       <div class="mask">
         <div class="actions">
           <span title="预览" @click="preview(index)">
-            <el-icon>
-              <svg-icon name="ep:zoom-in" />
-            </el-icon>
+            <svg-icon name="ep:zoom-in" />
           </span>
           <span title="移除" @click="remove(index)">
-            <el-icon>
-              <svg-icon name="ep:delete" />
-            </el-icon>
+            <svg-icon name="ep:delete" />
           </span>
           <span v-show="url.length > 1" title="左移" :class="{ disabled: index === 0 }" @click="move(index, 'left')">
-            <el-icon>
-              <svg-icon name="ep:back" />
-            </el-icon>
+            <svg-icon name="ep:back" />
           </span>
           <span v-show="url.length > 1" title="右移" :class="{ disabled: index === url.length - 1 }" @click="move(index, 'right')">
-            <el-icon>
-              <svg-icon name="ep:right" />
-            </el-icon>
+            <svg-icon name="ep:right" />
           </span>
         </div>
       </div>
@@ -148,9 +140,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
       class="images-upload"
     >
       <div class="image-slot" :style="`width:${width}px;height:${height}px;`">
-        <el-icon>
-          <svg-icon name="ep:plus" />
-        </el-icon>
+        <svg-icon name="ep:plus" />
       </div>
       <div v-show="uploadData.progress.percent" class="progress" :style="`width:${width}px;height:${height}px;`">
         <el-image :src="uploadData.progress.preview" :style="`width:${width}px;height:${height}px;`" fit="fill" />
@@ -218,7 +208,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
           transform: scale(1.5);
         }
 
-        .el-icon {
+        .icon {
           font-size: 24px;
         }
       }

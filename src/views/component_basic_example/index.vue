@@ -40,9 +40,7 @@ function open(url: string) {
     <page-header title="基础组件" content="由 Element Plus 提供，本页仅展示部分组件，更多组件及使用说明请查看 Element Plus 官网">
       <el-button @click="open('https://element-plus.org/#/zh-CN')">
         <template #icon>
-          <el-icon>
-            <svg-icon name="i-ep:link" />
-          </el-icon>
+          <svg-icon name="ep:link" />
         </template>
         Element Plus 官网
       </el-button>

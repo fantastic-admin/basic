@@ -165,18 +165,14 @@ function testAccount(account: string) {
           <el-form-item prop="account">
             <el-input v-model="loginForm.account" placeholder="用户名" text tabindex="1" autocomplete="on">
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:user" />
-                </el-icon>
+                <svg-icon name="ep:user" />
               </template>
             </el-input>
           </el-form-item>
           <el-form-item prop="password">
             <el-input v-model="loginForm.password" type="password" placeholder="密码" tabindex="2" autocomplete="on" show-password @keyup.enter="handleLogin">
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:lock" />
-                </el-icon>
+                <svg-icon name="ep:lock" />
               </template>
             </el-input>
           </el-form-item>
@@ -218,18 +214,14 @@ function testAccount(account: string) {
           <el-form-item prop="account">
             <el-input v-model="registerForm.account" placeholder="用户名" tabindex="1" autocomplete="on">
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:user" />
-                </el-icon>
+                <svg-icon name="ep:user" />
               </template>
             </el-input>
           </el-form-item>
           <el-form-item prop="captcha">
             <el-input v-model="registerForm.captcha" placeholder="验证码" tabindex="2" autocomplete="on">
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:key" />
-                </el-icon>
+                <svg-icon name="ep:key" />
               </template>
               <template #append>
                 <el-button>发送验证码</el-button>
@@ -239,18 +231,14 @@ function testAccount(account: string) {
           <el-form-item prop="password">
             <el-input v-model="registerForm.password" type="password" placeholder="密码" tabindex="3" autocomplete="on" show-password>
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:lock" />
-                </el-icon>
+                <svg-icon name="ep:lock" />
               </template>
             </el-input>
           </el-form-item>
           <el-form-item prop="checkPassword">
             <el-input v-model="registerForm.checkPassword" type="password" placeholder="确认密码" tabindex="4" autocomplete="on" show-password>
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:lock" />
-                </el-icon>
+                <svg-icon name="ep:lock" />
               </template>
             </el-input>
           </el-form-item>
@@ -275,18 +263,14 @@ function testAccount(account: string) {
           <el-form-item prop="account">
             <el-input v-model="resetForm.account" placeholder="用户名" tabindex="1" autocomplete="on">
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:user" />
-                </el-icon>
+                <svg-icon name="ep:user" />
               </template>
             </el-input>
           </el-form-item>
           <el-form-item prop="captcha">
             <el-input v-model="resetForm.captcha" placeholder="验证码" tabindex="2" autocomplete="on">
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:key" />
-                </el-icon>
+                <svg-icon name="ep:key" />
               </template>
               <template #append>
                 <el-button>发送验证码</el-button>
@@ -296,9 +280,7 @@ function testAccount(account: string) {
           <el-form-item prop="newPassword">
             <el-input v-model="resetForm.newPassword" type="password" placeholder="新密码" tabindex="3" autocomplete="on" show-password>
               <template #prefix>
-                <el-icon>
-                  <svg-icon name="ep:lock" />
-                </el-icon>
+                <svg-icon name="ep:lock" />
               </template>
             </el-input>
           </el-form-item>

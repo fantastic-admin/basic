@@ -34,9 +34,7 @@ function handlerMouserScroll(event: WheelEvent) {
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
               <div v-if="item.children && item.children.length !== 0" class="item-container" :class="{ active: index === menuStore.actived }">
                 <div class="item" @click="switchTo(index)">
-                  <el-icon v-if="item.meta?.icon">
-                    <svg-icon :name="item.meta.icon" />
-                  </el-icon>
+                  <svg-icon v-if="item.meta?.icon" :name="item.meta.icon" />
                   <span v-if="item.meta?.title">{{ item.meta.title }}</span>
                 </div>
               </div>
@@ -147,7 +145,7 @@ header {
           background-color: var(--g-header-menu-hover-bg);
         }
 
-        .el-icon {
+        .icon {
           font-size: 24px;
           vertical-align: middle;
         }
@@ -171,7 +169,7 @@ header {
   :deep(.tools) {
     padding: 0;
 
-    .buttons .item .el-icon {
+    .buttons .item .icon {
       color: var(--g-header-color);
     }
 

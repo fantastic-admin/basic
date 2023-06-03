@@ -5,14 +5,12 @@ import { icons } from '@iconify-json/ep'
 <template>
   <div>
     <div class="demo">
-      <el-icon><svg-icon name="ep:edit" /></el-icon>
-      <el-icon><svg-icon name="ep:share" /></el-icon>
-      <el-icon><svg-icon name="ep:delete" /></el-icon>
+      <svg-icon name="ep:edit" />
+      <svg-icon name="ep:share" />
+      <svg-icon name="ep:delete" />
       <el-button type="primary">
         <template #icon>
-          <el-icon>
-            <svg-icon name="ep:search" />
-          </el-icon>
+          <svg-icon name="ep:search" />
         </template>
         搜索
       </el-button>
@@ -22,9 +20,7 @@ import { icons } from '@iconify-json/ep'
     </el-divider>
     <div v-for="(item, index) in icons.icons" :key="index" class="list-icon">
       <el-tooltip class="item" effect="dark" :content="`ep:${index}`" placement="top">
-        <el-icon>
-          <svg-icon :name="`ep:${index}`" />
-        </el-icon>
+        <svg-icon :name="`ep:${index}`" />
       </el-tooltip>
     </div>
   </div>
@@ -32,7 +28,7 @@ import { icons } from '@iconify-json/ep'
 
 <style lang="scss" scoped>
 .demo {
-  > .el-icon {
+  > .icon {
     color: #606266;
     margin: 0 20px;
     font-size: 1.5em;
@@ -48,7 +44,7 @@ import { icons } from '@iconify-json/ep'
   display: inline-block;
   margin: 10px;
 
-  .el-icon {
+  .icon {
     font-size: 32px;
     color: #606266;
   }

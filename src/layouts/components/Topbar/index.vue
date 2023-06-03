@@ -64,9 +64,7 @@ function pathCompile(path: string) {
   >
     <div class="left-box">
       <div v-if="enableSubMenuCollapseButton" class="sidebar-collapse" :class="{ 'is-collapse': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
-        <el-icon>
-          <svg-icon name="toolbar-collapse" />
-        </el-icon>
+        <svg-icon name="toolbar-collapse" />
       </div>
       <el-breadcrumb v-if="settingsStore.settings.breadcrumb.enable && settingsStore.mode === 'pc' && settingsStore.settings.app.routeBaseOn !== 'filesystem'">
         <transition-group name="breadcrumb">
@@ -119,16 +117,16 @@ function pathCompile(path: string) {
       height: 50px;
       cursor: pointer;
 
-      .el-icon {
+      .icon {
         color: var(--el-text-color-primary);
         transition: var(--el-transition-color), var(--el-transition-md-fade);
       }
 
-      &:hover .el-icon {
+      &:hover .icon {
         color: var(--el-color-primary);
       }
 
-      &.is-collapse .el-icon {
+      &.is-collapse .icon {
         transform: rotateZ(-180deg);
       }
 

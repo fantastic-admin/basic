@@ -33,9 +33,7 @@ const isUp = computed(() => {
     <span v-if="prefix" class="prefix">{{ prefix }}</span>
     <span class="text">{{ value }}</span>
     <span v-if="suffix" class="suffix">{{ suffix }}</span>
-    <el-icon>
-      <svg-icon name="ep:caret-top" />
-    </el-icon>
+    <svg-icon name="ep:caret-top" />
   </div>
 </template>
 
@@ -52,12 +50,12 @@ const isUp = computed(() => {
   &.down {
     color: var(--el-color-danger);
 
-    .el-icon {
+    .icon {
       transform: rotate(180deg);
     }
   }
 
-  .el-icon {
+  .icon {
     margin-left: 5px;
     transition: transform 0.3s;
   }

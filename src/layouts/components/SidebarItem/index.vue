@@ -38,18 +38,14 @@ const hasChildren = computed(() => {
     <router-link v-if="!hasChildren" v-slot="{ href, navigate, isActive, isExactActive }" custom :to="resolveRoutePath(basePath, item.path)">
       <a :href="item.meta?.link ? item.meta.link : href" :class="[isActive && 'router-link-active', isExactActive && 'router-link-exact-active']" :target="item.meta?.link ? '_blank' : '_self'" @click="navigate">
         <el-menu-item :title="item.meta?.title ?? '[ 无标题 ]'" :index="resolveRoutePath(basePath, item.path || '')">
-          <el-icon v-if="item.meta?.icon" class="title-icon">
-            <svg-icon :name="item.meta.icon" />
-          </el-icon>
+          <svg-icon v-if="item.meta?.icon" :name="item.meta.icon" class="title-icon" />
           <span class="title">{{ item.meta?.title ?? '[ 无标题 ]' }}</span>
         </el-menu-item>
       </a>
     </router-link>
     <el-sub-menu v-else :title="item.meta?.title ?? '[ 无标题 ]'" :index="settingsStore.settings.app.routeBaseOn !== 'filesystem' ? resolveRoutePath(basePath, item.path) : JSON.stringify(item)">
       <template #title>
-        <el-icon v-if="item.meta?.icon" class="title-icon">
-          <svg-icon :name="item.meta.icon" />
-        </el-icon>
+        <svg-icon v-if="item.meta?.icon" :name="item.meta.icon" class="title-icon" />
         <span class="title">{{ item.meta?.title ?? '[ 无标题 ]' }}</span>
       </template>
       <template v-for="route in (item.children as Menu.recordRaw[])">

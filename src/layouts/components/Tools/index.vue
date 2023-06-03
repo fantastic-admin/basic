@@ -36,53 +36,32 @@ function userCommand(command: 'home' | 'setting' | 'hotkeys' | 'logout') {
       break
   }
 }
-function pro() {
-  window.open('https://fantastic-admin.gitee.io/pro-example/', '_blank')
-}
 </script>
 
 <template>
   <div class="tools">
     <div class="buttons">
-      <span v-if="settingsStore.mode === 'pc'" class="item item-pro" @click="pro">
-        <el-icon>
-          <svg-icon name="pro" />
-        </el-icon>
-        <span class="title">查看专业版</span>
-      </span>
       <span v-if="settingsStore.settings.navSearch.enable" class="item" @click="eventBus.emit('global-search-toggle')">
-        <el-icon>
-          <svg-icon name="ep:search" />
-        </el-icon>
+        <svg-icon name="ep:search" />
       </span>
       <span v-if="settingsStore.mode === 'pc' && settingsStore.settings.toolbar.enableFullscreen" class="item" @click="toggle">
-        <el-icon>
-          <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
-        </el-icon>
+        <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
       </span>
       <span v-if="settingsStore.settings.toolbar.enablePageReload" class="item" @click="mainPage.reload()">
-        <el-icon>
-          <svg-icon name="ep:refresh-right" />
-        </el-icon>
+        <svg-icon name="ep:refresh-right" />
       </span>
       <span v-if="settingsStore.settings.toolbar.enableColorScheme" class="item" @click="settingsStore.setColorScheme(settingsStore.settings.app.colorScheme === 'dark' ? 'light' : 'dark')">
-        <el-icon>
-          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'light'" name="ep:sunny" />
-          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'dark'" name="ep:moon" />
-        </el-icon>
+        <svg-icon v-show="settingsStore.settings.app.colorScheme === 'light'" name="ep:sunny" />
+        <svg-icon v-show="settingsStore.settings.app.colorScheme === 'dark'" name="ep:moon" />
       </span>
     </div>
     <el-dropdown class="user-container" size="default" @command="userCommand">
       <div class="user-wrapper">
         <el-avatar size="small">
-          <el-icon>
-            <svg-icon name="ep:user-filled" />
-          </el-icon>
+          <svg-icon name="ep:user-filled" />
         </el-avatar>
         {{ userStore.account }}
-        <el-icon>
-          <svg-icon name="ep:caret-bottom" />
-        </el-icon>
+        <svg-icon name="ep:caret-bottom" />
       </div>
       <template #dropdown>
         <el-dropdown-menu class="user-dropdown">
@@ -123,43 +102,9 @@ function pro() {
       cursor: pointer;
       vertical-align: middle;
 
-      .el-icon {
+      .icon {
         color: var(--el-text-color-primary);
         transition: var(--el-transition-color);
-      }
-    }
-
-    .item-pro {
-      display: inline-flex;
-      align-items: center;
-      width: auto;
-      padding: 0 10px;
-      transform-origin: right center;
-      animation: pro-text 3s ease-out infinite;
-
-      @keyframes pro-text {
-        0%,
-        20% {
-          transform: scale(1);
-        }
-
-        50%,
-        70% {
-          transform: scale(1.2);
-        }
-
-        100% {
-          transform: scale(1);
-        }
-      }
-
-      .title {
-        padding-left: 5px;
-        font-weight: bold;
-        font-size: 14px;
-        background-image: linear-gradient(to right, #ffa237, #fc455d);
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
       }
     }
   }
