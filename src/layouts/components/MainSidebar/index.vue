@@ -25,9 +25,7 @@ const { switchTo } = useMenu()
               active: index === menuStore.actived,
             }" :title="item.meta?.title ?? '[ 无标题 ]'" @click="switchTo(index)"
           >
-            <el-icon v-if="item.meta?.icon">
-              <svg-icon :name="item.meta.icon" />
-            </el-icon>
+            <svg-icon v-if="item.meta?.icon" :name="item.meta.icon" />
             <span>{{ item.meta?.title ?? '[ 无标题 ]' }}</span>
           </div>
         </template>
@@ -89,7 +87,7 @@ const { switchTo } = useMenu()
         background-color: var(--g-main-sidebar-menu-active-bg);
       }
 
-      .el-icon {
+      .icon {
         margin: 0 auto;
         font-size: 24px;
       }

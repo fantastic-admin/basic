@@ -42,38 +42,26 @@ function userCommand(command: 'home' | 'setting' | 'hotkeys' | 'logout') {
   <div class="tools">
     <div class="buttons">
       <span v-if="settingsStore.settings.navSearch.enable" class="item" @click="eventBus.emit('global-search-toggle')">
-        <el-icon>
-          <svg-icon name="ep:search" />
-        </el-icon>
+        <svg-icon name="ep:search" />
       </span>
       <span v-if="settingsStore.mode === 'pc' && settingsStore.settings.toolbar.enableFullscreen" class="item" @click="toggle">
-        <el-icon>
-          <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
-        </el-icon>
+        <svg-icon :name="isFullscreen ? 'fullscreen-exit' : 'fullscreen'" />
       </span>
       <span v-if="settingsStore.settings.toolbar.enablePageReload" class="item" @click="mainPage.reload()">
-        <el-icon>
-          <svg-icon name="ep:refresh-right" />
-        </el-icon>
+        <svg-icon name="ep:refresh-right" />
       </span>
       <span v-if="settingsStore.settings.toolbar.enableColorScheme" class="item" @click="settingsStore.setColorScheme(settingsStore.settings.app.colorScheme === 'dark' ? 'light' : 'dark')">
-        <el-icon>
-          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'light'" name="ep:sunny" />
-          <svg-icon v-show="settingsStore.settings.app.colorScheme === 'dark'" name="ep:moon" />
-        </el-icon>
+        <svg-icon v-show="settingsStore.settings.app.colorScheme === 'light'" name="ep:sunny" />
+        <svg-icon v-show="settingsStore.settings.app.colorScheme === 'dark'" name="ep:moon" />
       </span>
     </div>
     <el-dropdown class="user-container" size="default" @command="userCommand">
       <div class="user-wrapper">
         <el-avatar size="small">
-          <el-icon>
-            <svg-icon name="ep:user-filled" />
-          </el-icon>
+          <svg-icon name="ep:user-filled" />
         </el-avatar>
         {{ userStore.account }}
-        <el-icon>
-          <svg-icon name="ep:caret-bottom" />
-        </el-icon>
+        <svg-icon name="ep:caret-bottom" />
       </div>
       <template #dropdown>
         <el-dropdown-menu class="user-dropdown">
@@ -114,7 +102,7 @@ function userCommand(command: 'home' | 'setting' | 'hotkeys' | 'logout') {
       cursor: pointer;
       vertical-align: middle;
 
-      .el-icon {
+      .icon {
         color: var(--el-text-color-primary);
         transition: var(--el-transition-color);
       }

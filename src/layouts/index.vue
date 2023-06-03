@@ -95,9 +95,7 @@ onUnmounted(() => {
     <Search />
     <HotkeysIntro />
     <div v-if="settingsStore.settings.app.enableAppSetting">
-      <el-icon class="app-setting" @click="eventBus.emit('global-app-setting-toggle')">
-        <svg-icon name="ep:setting" />
-      </el-icon>
+      <svg-icon name="ep:setting" class="app-setting" @click="eventBus.emit('global-app-setting-toggle')" />
       <AppSetting />
     </div>
   </div>
@@ -247,7 +245,7 @@ header:not(.header-leave-active) + .wrapper {
   background-color: var(--el-color-primary);
   cursor: pointer;
 
-  svg {
+  :deep(svg) {
     animation: rotate 5s linear infinite;
   }
 

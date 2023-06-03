@@ -104,9 +104,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
       <el-image v-if="url === ''" :src="url === '' ? placeholder : url" :style="`width:${width}px;height:${height}px;`" fit="fill">
         <template #error>
           <div class="image-slot" :style="`width:${width}px;height:${height}px;`">
-            <el-icon>
-              <svg-icon name="ep:plus" />
-            </el-icon>
+            <svg-icon name="ep:plus" />
           </div>
         </template>
       </el-image>
@@ -115,14 +113,10 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
         <div class="mask">
           <div class="actions">
             <span title="预览" @click.stop="preview">
-              <el-icon>
-                <svg-icon name="ep:zoom-in" />
-              </el-icon>
+              <svg-icon name="ep:zoom-in" />
             </span>
             <span title="移除" @click.stop="remove">
-              <el-icon>
-                <svg-icon name="ep:delete" />
-              </el-icon>
+              <svg-icon name="ep:delete" />
             </span>
           </div>
         </div>
@@ -185,7 +179,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
           transform: scale(1.5);
         }
 
-        .el-icon {
+        .icon {
           font-size: 24px;
         }
       }

@@ -51,9 +51,7 @@ function handleCopy() {
       <el-divider>颜色主题</el-divider>
       <div class="color-scheme">
         <div class="switch" :class="settingsStore.settings.app.colorScheme" @click="settingsStore.settings.app.colorScheme = settingsStore.settings.app.colorScheme === 'dark' ? 'light' : 'dark'">
-          <el-icon class="icon">
-            <svg-icon :name="settingsStore.settings.app.colorScheme === 'light' ? 'ep:sunny' : 'ep:moon'" />
-          </el-icon>
+          <svg-icon :name="settingsStore.settings.app.colorScheme === 'light' ? 'ep:sunny' : 'ep:moon'" />
         </div>
       </div>
       <el-divider v-if="settingsStore.mode === 'pc'">
@@ -63,25 +61,19 @@ function handleCopy() {
         <el-tooltip content="侧边栏模式（含主导航）" placement="top" :show-after="500">
           <div class="mode mode-side" :class="{ active: settingsStore.settings.menu.menuMode === 'side' }" @click="settingsStore.settings.menu.menuMode = 'side'">
             <div class="mode-container" />
-            <el-icon>
-              <svg-icon name="ep:check" />
-            </el-icon>
+            <svg-icon name="ep:check" />
           </div>
         </el-tooltip>
         <el-tooltip content="顶部模式" placement="top" :show-after="500">
           <div class="mode mode-head" :class="{ active: settingsStore.settings.menu.menuMode === 'head' }" @click="settingsStore.settings.menu.menuMode = 'head'">
             <div class="mode-container" />
-            <el-icon>
-              <svg-icon name="ep:check" />
-            </el-icon>
+            <svg-icon name="ep:check" />
           </div>
         </el-tooltip>
         <el-tooltip content="侧边栏模式（不含主导航）" placement="top" :show-after="500">
           <div class="mode mode-single" :class="{ active: settingsStore.settings.menu.menuMode === 'single' }" @click="settingsStore.settings.menu.menuMode = 'single'">
             <div class="mode-container" />
-            <el-icon>
-              <svg-icon name="ep:check" />
-            </el-icon>
+            <svg-icon name="ep:check" />
           </div>
         </el-tooltip>
       </div>
@@ -90,9 +82,7 @@ function handleCopy() {
         <div class="label">
           主导航切换跳转
           <el-tooltip content="开启该功能后，切换主导航时，页面自动跳转至该主导航下，次导航里第一个导航" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.menu.switchMainMenuAndPageJump" :disabled="['single'].includes(settingsStore.settings.menu.menuMode)" />
@@ -101,9 +91,7 @@ function handleCopy() {
         <div class="label">
           次导航保持展开一个
           <el-tooltip content="开启该功能后，次导航只保持单个菜单的展开" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.menu.subMenuUniqueOpened" />
@@ -148,9 +136,7 @@ function handleCopy() {
         <div class="label">
           全屏
           <el-tooltip content="该功能使用场景极少，用户习惯于通过窗口“最大化”功能来扩大显示区域，以显示更多内容，并且使用 F11 键也可以进入全屏效果" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.toolbar.enableFullscreen" />
@@ -159,9 +145,7 @@ function handleCopy() {
         <div class="label">
           页面刷新
           <el-tooltip content="开启时会阻止原生 F5 键刷新功能，并采用框架提供的刷新模式进行页面刷新" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.toolbar.enablePageReload" />
@@ -170,9 +154,7 @@ function handleCopy() {
         <div class="label">
           颜色主题
           <el-tooltip content="开启后可在明亮/暗黑模式中切换" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.toolbar.enableColorScheme" />
@@ -191,9 +173,7 @@ function handleCopy() {
         <div class="label">
           是否启用
           <el-tooltip content="对导航进行快捷搜索" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.navSearch.enable" />
@@ -240,9 +220,7 @@ function handleCopy() {
         <div class="label">
           是否开启
           <el-tooltip content="该功能开启时，登录成功默认进入主页，反之则默认进入导航栏里第一个导航页面" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.home.enable" />
@@ -258,9 +236,7 @@ function handleCopy() {
         <div class="label">
           组件尺寸
           <el-tooltip content="全局设置 Element Plus 组件的默认尺寸大小" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-radio-group v-model="settingsStore.settings.app.elementSize" size="small">
@@ -285,9 +261,7 @@ function handleCopy() {
         <div class="label">
           载入进度条
           <el-tooltip content="该功能开启时，跳转路由会看到页面顶部有进度条" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.app.enableProgress" />
@@ -296,9 +270,7 @@ function handleCopy() {
         <div class="label">
           动态标题
           <el-tooltip content="该功能开启时，页面标题会显示当前路由标题，格式为“页面标题 - 网站名称”；关闭时则显示网站名称，网站名称在项目根目录下 .env.* 文件里配置" placement="top">
-            <el-icon>
-              <svg-icon name="ep:question-filled" />
-            </el-icon>
+            <svg-icon name="ep:question-filled" />
           </el-tooltip>
         </div>
         <el-switch v-model="settingsStore.settings.app.enableDynamicTitle" />
@@ -306,9 +278,7 @@ function handleCopy() {
       <template v-if="isSupported" #footer>
         <el-button type="primary" @click="handleCopy">
           <template #icon>
-            <el-icon>
-              <svg-icon name="ep:document-copy" />
-            </el-icon>
+            <svg-icon name="ep:document-copy" />
           </template>
           复制配置
         </el-button>
