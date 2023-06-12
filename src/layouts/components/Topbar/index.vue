@@ -44,7 +44,7 @@ function onScroll() {
   scrollTop.value = (document.documentElement || document.body).scrollTop
 }
 watch(scrollTop, (val, oldVal) => {
-  const topbarHeight = parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-topbar-height'))
+  const topbarHeight = Number.parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-topbar-height'))
   scrollOnHide.value = settingsStore.settings.topbar.mode === 'sticky' && val > oldVal && val > topbarHeight
 })
 
