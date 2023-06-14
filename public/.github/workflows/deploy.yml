@@ -1,9 +1,9 @@
 name: deploy-example-site-to-gitee
 
 on:
-  # 每当 push 到 master 分支时触发部署
+  # 每当 push 到 main 分支时触发部署
   push:
-    branches: [master]
+    branches: [main]
 
 jobs:
   docs:
@@ -23,9 +23,9 @@ jobs:
           git checkout --orphan new_branch
           git add -A
           git commit -m "deploy"
-          git branch -D master
-          git branch -m master
-          git push -f origin master
+          git branch -D main
+          git branch -m main
+          git push -f origin main
 
       - name: Sync to Gitee
         uses: wearerequired/git-mirror-action@master
@@ -48,4 +48,4 @@ jobs:
           # 注意替换为你的 Gitee 仓库，仓库名严格区分大小写，请准确填写，否则会出错
           gitee-repo: fantastic-admin/basic-example
           # 要部署的分支，默认是 master，若是其他分支，则需要指定（指定的分支必须存在）
-          branch: master
+          branch: main

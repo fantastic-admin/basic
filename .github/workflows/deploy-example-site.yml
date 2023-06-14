@@ -57,4 +57,4 @@ jobs:
           destination-github-username: 'fantastic-admin'
           destination-repository-name: 'basic-example'
           user-email: 304327508@qq.com
-          target-branch: master
+          target-branch: main
