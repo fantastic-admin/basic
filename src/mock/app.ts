@@ -1,6 +1,6 @@
 export default [
   {
-    url: '/mock/route/list',
+    url: '/mock/app/route/list',
     method: 'get',
     response: () => {
       return {
@@ -85,7 +85,7 @@ export default [
                 meta: {
                   title: '权限验证',
                   i18n: 'route.permission',
-                  icon: 'ri:shield-keyhole-line',
+                  icon: 'ep:key',
                 },
                 children: [
                   {
@@ -111,6 +111,72 @@ export default [
                       breadcrumb: false,
                       activeMenu: '/permission_example',
                     },
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      }
+    },
+  },
+  {
+    url: '/mock/app/menu/list',
+    method: 'get',
+    response: () => {
+      return {
+        error: '',
+        status: 1,
+        data: [
+          {
+            meta: {
+              title: '演示',
+              icon: 'sidebar-default',
+            },
+            children: [
+              {
+                meta: {
+                  title: '多级导航',
+                  icon: 'sidebar-menu',
+                },
+                children: [
+                  {
+                    path: '/multilevel_menu_example/page',
+                    meta: {
+                      title: '导航1',
+                    },
+                  },
+                  {
+                    meta: {
+                      title: '导航2',
+                    },
+                    children: [
+                      {
+                        path: '/multilevel_menu_example/level2/page',
+                        meta: {
+                          title: '导航2-1',
+                        },
+                      },
+                      {
+                        meta: {
+                          title: '导航2-2',
+                        },
+                        children: [
+                          {
+                            path: '/multilevel_menu_example/level2/level3/page1',
+                            meta: {
+                              title: '导航2-2-1',
+                            },
+                          },
+                          {
+                            path: '/multilevel_menu_example/level2/level3/page2',
+                            meta: {
+                              title: '导航2-2-2',
+                            },
+                          },
+                        ],
+                      },
+                    ],
                   },
                 ],
               },
