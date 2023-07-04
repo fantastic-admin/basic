@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineOptions({
+  name: 'Trend',
+})
+
 const props = withDefaults(
   defineProps<{
     value: string
@@ -14,10 +18,6 @@ const props = withDefaults(
     reverse: false,
   },
 )
-
-defineOptions({
-  name: 'Trend',
-})
 
 const isUp = computed(() => {
   let isUp = props.type === 'up'

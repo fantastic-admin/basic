@@ -4,7 +4,6 @@ meta:
 </route>
 
 <script setup lang="ts">
-import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
 defineOptions({
@@ -24,7 +23,7 @@ const files = ref([
   },
 ])
 
-const handleSuccess1: UploadProps['onSuccess'] = (res) => {
+function handleSuccess1(res: any) {
   if (res.error === '') {
     image.value = res.data.path
   }
@@ -32,7 +31,7 @@ const handleSuccess1: UploadProps['onSuccess'] = (res) => {
     ElMessage.warning(res.error)
   }
 }
-const handleSuccess2: UploadProps['onSuccess'] = (res) => {
+function handleSuccess2(res: any) {
   if (res.error === '') {
     images.value.push(res.data.path)
   }
@@ -40,7 +39,7 @@ const handleSuccess2: UploadProps['onSuccess'] = (res) => {
     ElMessage.warning(res.error)
   }
 }
-const handleSuccess3: UploadProps['onSuccess'] = (res, file, fileList) => {
+function handleSuccess3(res: any, file: any, fileList: any) {
   if (res.error === '') {
     files.value.push({
       name: file.name,

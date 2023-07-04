@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineOptions({
+  name: 'SearchBar',
+})
+
 const props = withDefaults(
   defineProps<{
     fold?: boolean
@@ -20,10 +24,6 @@ const emits = defineEmits<{
     value: boolean,
   ]
 }>()
-
-defineOptions({
-  name: 'SearchBar',
-})
 
 const isFold = ref(props.fold)
 

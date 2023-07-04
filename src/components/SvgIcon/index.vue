@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
 
+defineOptions({
+  name: 'SvgIcon',
+})
+
 const props = defineProps<{
   name: string
   flip?: 'horizontal' | 'vertical' | 'both'
@@ -8,10 +12,6 @@ const props = defineProps<{
   color?: string
   size?: string | number
 }>()
-
-defineOptions({
-  name: 'SvgIcon',
-})
 
 const style = computed(() => {
   const transform = []

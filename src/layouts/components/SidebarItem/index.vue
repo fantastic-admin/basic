@@ -3,6 +3,10 @@ import { resolveRoutePath } from '@/utils'
 import useSettingsStore from '@/store/modules/settings'
 import type { Menu } from '#/global'
 
+defineOptions({
+  name: 'SidebarItem',
+})
+
 const props = withDefaults(
   defineProps<{
     item: Menu.recordRaw
@@ -12,10 +16,6 @@ const props = withDefaults(
     basePath: '',
   },
 )
-
-defineOptions({
-  name: 'SidebarItem',
-})
 
 const settingsStore = useSettingsStore()
 
