@@ -2,6 +2,10 @@
 // 行政区划数据来源于 https://github.com/modood/Administrative-divisions-of-China
 import pcasRaw from './pcas-code.json'
 
+defineOptions({
+  name: 'PcasCascader',
+})
+
 const props = withDefaults(
   defineProps<{
     modelValue: string[] | {
@@ -27,10 +31,6 @@ const emits = defineEmits<{
     }[],
   ]
 }>()
-
-defineOptions({
-  name: 'PcasCascader',
-})
 
 interface pcasItem {
   code: string

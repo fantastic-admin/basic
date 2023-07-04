@@ -1,4 +1,8 @@
 <script setup lang="ts">
+defineOptions({
+  name: 'ImagePreview',
+})
+
 const props = withDefaults(
   defineProps<{
     src: string
@@ -10,10 +14,6 @@ const props = withDefaults(
     height: 200,
   },
 )
-
-defineOptions({
-  name: 'ImagePreview',
-})
 
 const realWidth = computed(() => {
   return typeof props.width === 'string' ? props.width : `${props.width}px`

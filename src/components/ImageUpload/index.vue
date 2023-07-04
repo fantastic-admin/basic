@@ -2,6 +2,10 @@
 import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
+defineOptions({
+  name: 'ImageUpload',
+})
+
 const props = withDefaults(
   defineProps<{
     action: UploadProps['action']
@@ -36,10 +40,6 @@ const emits = defineEmits<{
     res: any,
   ]
 }>()
-
-defineOptions({
-  name: 'ImageUpload',
-})
 
 const uploadData = ref({
   imageViewerVisible: false,

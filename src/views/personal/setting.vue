@@ -6,7 +6,6 @@ meta:
 </route>
 
 <script setup lang="ts">
-import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
 defineOptions({
@@ -23,7 +22,7 @@ const form = ref({
   wechat: '',
 })
 
-const handleSuccess: UploadProps['onSuccess'] = (res) => {
+function handleSuccess(res: any) {
   if (res.error === '') {
     form.value.headimg = res.data.path
   }

@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const isBottom = ref(false)
-
 defineOptions({
   name: 'FixedActionBar',
 })
+
+const isBottom = ref(false)
 
 onMounted(() => {
   onScroll()

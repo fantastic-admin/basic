@@ -2,6 +2,10 @@
 import type { UploadProps } from 'element-plus'
 import { ElMessage } from 'element-plus'
 
+defineOptions({
+  name: 'ImagesUpload',
+})
+
 const props = withDefaults(
   defineProps<{
     action: UploadProps['action']
@@ -38,10 +42,6 @@ const emits = defineEmits<{
     res: any,
   ]
 }>()
-
-defineOptions({
-  name: 'ImagesUpload',
-})
 
 const uploadData = ref({
   dialogImageIndex: 0,

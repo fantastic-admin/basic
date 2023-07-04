@@ -2,6 +2,10 @@
 import imgLogo from '@/assets/images/logo.png'
 import useSettingsStore from '@/store/modules/settings'
 
+defineOptions({
+  name: 'Logo',
+})
+
 withDefaults(
   defineProps<{
     showLogo?: boolean
@@ -12,10 +16,6 @@ withDefaults(
     showTitle: true,
   },
 )
-
-defineOptions({
-  name: 'Logo',
-})
 
 const settingsStore = useSettingsStore()
 
