@@ -21,9 +21,9 @@ const menuStore = useMenuStore()
 interface listTypes {
   path: string
   icon?: string
-  title?: string | Function
+  title?: string | (() => string)
   link?: string
-  breadcrumb: (string | Function | undefined)[]
+  breadcrumb: any[]
 }
 
 const isShow = ref(false)
@@ -147,16 +147,16 @@ function hasChildren(item: RouteRecordRaw) {
   }
   return flag
 }
-function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, breadcrumb?: (string | Function | undefined)[]) {
+function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, breadcrumb?: (string | (() => string))[]) {
   arr.forEach((item) => {
     if (item.meta?.sidebar !== false) {
       const breadcrumbTemp = cloneDeep(breadcrumb) || []
       if (item.children && hasChildren(item)) {
-        breadcrumbTemp.push(item.meta?.title)
+        item.meta?.title && breadcrumbTemp.push(item.meta?.title)
         getSourceList(item.children, basePath ? [basePath, item.path].join('/') : item.path, item.meta?.icon ?? icon, breadcrumbTemp)
       }
       else {
-        breadcrumbTemp.push(item.meta?.title)
+        item.meta?.title && breadcrumbTemp.push(item.meta?.title)
         sourceList.value.push({
           path: basePath ? [basePath, item.path].join('/') : item.path,
           icon: item.meta?.icon ?? icon,
@@ -168,15 +168,15 @@ function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, 
     }
   })
 }
-function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?: (string | Function | undefined)[]) {
+function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?: (string | (() => string))[]) {
   arr.forEach((item) => {
     const breadcrumbTemp = cloneDeep(breadcrumb) || []
     if (item.children && item.children.length > 0) {
-      breadcrumbTemp.push(item.meta?.title)
+      item.meta?.title && breadcrumbTemp.push(item.meta?.title)
       getSourceListByMenus(item.children, item.meta?.icon ?? icon, breadcrumbTemp)
     }
     else {
-      breadcrumbTemp.push(item.meta?.title)
+      item.meta?.title && breadcrumbTemp.push(item.meta?.title)
       sourceList.value.push({
         icon: item.meta?.icon ?? icon,
         title: item.meta?.title,

@@ -17,7 +17,7 @@ const useRouteStore = defineStore(
     const isGenerate = ref(false)
     const routesRaw = ref<Route.recordMainRaw[]>([])
     const filesystemRoutesRaw = ref<RouteRecordRaw[]>([])
-    const currentRemoveRoutes = ref<Function[]>([])
+    const currentRemoveRoutes = ref<(() => void)[]>([])
 
     // 将多层嵌套路由处理成两层，保留顶层和最子层路由，中间层级将被拍平
     function flatAsyncRoutes<T extends RouteRecordRaw>(route: T): T {
@@ -216,7 +216,7 @@ const useRouteStore = defineStore(
       isGenerate.value = true
     }
     // 记录 accessRoutes 路由，用于登出时删除路由
-    function setCurrentRemoveRoutes(routes: Function[]) {
+    function setCurrentRemoveRoutes(routes: (() => void)[]) {
       currentRemoveRoutes.value = routes
     }
     // 清空动态路由
