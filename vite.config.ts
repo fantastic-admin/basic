@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 import { defineConfig, loadEnv } from 'vite'
 import dayjs from 'dayjs'
 import pkg from './package.json'
@@ -11,7 +12,9 @@ export default ({ mode, command }) => {
   // 全局 scss 资源
   const scssResources = []
   fs.readdirSync('src/assets/styles/resources').forEach((dirname) => {
-    if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) { scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`) }
+    if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) {
+      scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`)
+    }
   })
   // css 精灵图相关
   fs.readdirSync('src/assets/sprites').forEach((dirname) => {
