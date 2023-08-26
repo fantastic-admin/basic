@@ -1,4 +1,5 @@
 import path from 'node:path'
+import process from 'node:process'
 import fs from 'fs-extra'
 import { icons } from '@iconify-json/ep'
 
