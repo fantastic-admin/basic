@@ -187,6 +187,9 @@ const useRouteStore = defineStore(
             if (route.component) {
               route.component = views[`../../views/${route.component}`]
             }
+            else {
+              delete route.component
+            }
         }
         if (route.children) {
           route.children = formatBackRoutes(route.children, views)
