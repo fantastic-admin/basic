@@ -54,8 +54,7 @@ function goBack() {
   @include position-center(xy);
 
   .icon {
-    width: 400px;
-    height: 400px;
+    font-size: 400px;
   }
 
   .content {
