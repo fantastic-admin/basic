@@ -422,7 +422,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
           }
         }
 
-        .icon {
+        > .icon {
           flex: 0 0 66px;
           text-align: center;
           color: var(--el-color-info);
@@ -460,8 +460,16 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
           }
 
           .breadcrumb {
+            display: flex;
+            align-items: center;
+
             span {
-              margin-right: 5px;
+              display: flex;
+              align-items: center;
+
+              .icon {
+                margin: 0 5px;
+              }
 
               &:last-child i {
                 display: none;
