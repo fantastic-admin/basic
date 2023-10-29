@@ -40,7 +40,7 @@ jobs:
       - name: Create Archive
         uses: thedoctor0/zip-release@main
         with:
-          type: 'zip'
+          type: zip
           filename: fantastic-admin.${{ steps.last_release.outputs.tag_name }}.zip
           exclusions: '/.git/* /.github/*'
 
@@ -73,7 +73,7 @@ jobs:
       - name: Create Archive
         uses: thedoctor0/zip-release@main
         with:
-          type: 'zip'
+          type: zip
           filename: fantastic-admin.example.${{ steps.last_release.outputs.tag_name }}.zip
           exclusions: '/.git/* /.github/*'
 

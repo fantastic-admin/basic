@@ -17,18 +17,6 @@ declare namespace Settings {
      */
     colorScheme?: '' | 'light' | 'dark'
     /**
-     * Element Plus 组件默认尺寸
-     * @默认值 `'default'` 默认
-     * @可选值 `'large'` 大号
-     * @可选值 `'small'` 小号
-     */
-    elementSize?: 'default' | 'large' | 'small'
-    /**
-     * 是否将 iconify 图标集中的 Element Plus 图标下载到本地，以便在离线环境下使用
-     * @默认值 `false`
-     */
-    iconifyOfflineUse?: boolean
-    /**
      * 是否开启权限功能
      * @默认值 `false`
      */
@@ -58,7 +46,7 @@ declare namespace Settings {
   }
   interface home {
     /**
-     * 是否开启主页页面
+     * 是否开启主页
      * @默认值 `true`
      */
     enable?: boolean
@@ -148,6 +136,13 @@ declare namespace Settings {
      */
     enable?: boolean
   }
+  interface mainPage {
+    /**
+     * 是否开启页面快捷键
+     * @默认值 `true`
+     */
+    enableHotkeys?: boolean
+  }
   interface navSearch {
     /**
      * 是否开启导航搜索
@@ -202,6 +197,8 @@ declare namespace Settings {
     toolbar?: toolbar
     /** 面包屑导航设置 */
     breadcrumb?: breadcrumb
+    /** 页面设置 */
+    mainPage?: mainPage
     /** 导航搜索设置 */
     navSearch?: navSearch
     /** 底部版权设置 */
@@ -212,9 +209,7 @@ declare namespace Settings {
 declare module 'vue-router' {
   interface RouteMeta {
     title?: string | (() => string)
-    i18n?: string
     icon?: string
-    activeIcon?: string
     defaultOpened?: boolean
     auth?: string | string[]
     sidebar?: boolean
@@ -238,6 +233,7 @@ declare namespace Route {
   interface breadcrumb {
     path: string
     title?: string | (() => string)
+    icon?: string
     hide: boolean
   }
 }

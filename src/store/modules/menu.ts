@@ -21,6 +21,16 @@ const useMenuStore = defineStore(
     }])
     const actived = ref(0)
 
+    // 将多级导航的每一级 path 都转换为完整路径
+    function convertToFullPath(menu: any[], path: string = '') {
+      return menu.map((item) => {
+        item.path = resolveRoutePath(path, item.path)
+        if (item.children) {
+          item.children = convertToFullPath(item.children, item.path)
+        }
+        return item
+      })
+    }
     // 完整导航数据
     const allMenus = computed(() => {
       let returnMenus: Menu.recordMainRaw[] = [{
@@ -37,6 +47,7 @@ const useMenuStore = defineStore(
         else {
           returnMenus = routeStore.routes as Menu.recordMainRaw[]
         }
+        returnMenus.map(item => convertToFullPath(item.children))
       }
       else {
         returnMenus = menus.value
@@ -51,7 +62,7 @@ const useMenuStore = defineStore(
     })
     // 次导航第一层最深路径
     const sidebarMenusFirstDeepestPath = computed(() => {
-      return allMenus.value.length > 0
+      return sidebarMenus.value.length > 0
         ? getDeepestPath(sidebarMenus.value[0])
         : '/'
     })
@@ -98,7 +109,7 @@ const useMenuStore = defineStore(
     // 判断是否有权限
     function hasPermission(permissions: string[], menu: Menu.recordMainRaw | Menu.recordRaw) {
       let isAuth = false
-      if (menu.meta && menu.meta.auth) {
+      if (menu.meta?.auth) {
         isAuth = permissions.some((auth) => {
           if (typeof menu.meta?.auth === 'string') {
             return menu.meta.auth !== '' ? menu.meta.auth === auth : true
@@ -149,6 +160,8 @@ const useMenuStore = defineStore(
     // 生成导航（后端生成）
     async function generateMenusAtBack() {
       await apiApp.menuList().then(async (res) => {
+        const settingsStore = useSettingsStore()
+        const userStore = useUserStore()
         let accessedMenus: Menu.recordMainRaw[]
         // 如果权限功能开启，则需要对导航数据进行筛选过滤
         if (settingsStore.settings.app.enablePermission) {
@@ -161,7 +174,7 @@ const useMenuStore = defineStore(
         menus.value = accessedMenus.filter(item => item.children.length !== 0)
       }).catch(() => {})
     }
-    // 切换主导航
+    // 设置主导航
     function setActived(data: number | string) {
       if (typeof data === 'number') {
         // 如果是 number 类型，则认为是主导航的索引

@@ -8,5 +8,5 @@ export default function createBanner() {
  * Gitee  https://fantastic-admin.gitee.io
  * Github https://fantastic-admin.github.io
  */
-  `)
+`)
 }

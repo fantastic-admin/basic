@@ -145,5 +145,5 @@ function codeToAny(codes: string[], dictionarie: any[] = pcasData.value): any {
 </script>
 
 <template>
-  <el-cascader v-model="myValue" :options="pcasData as any[]" :props="{ value: 'code', label: 'name' }" :disabled="disabled" clearable filterable />
+  <ElCascader v-model="myValue" :options="pcasData as any[]" :props="{ value: 'code', label: 'name' }" :disabled="disabled" clearable filterable />
 </template>

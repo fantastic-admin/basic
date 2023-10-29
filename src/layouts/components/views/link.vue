@@ -1,9 +1,17 @@
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core'
+import Message from 'vue-m-message'
+
 defineOptions({
   name: 'LinkView',
 })
 
 const route = useRoute()
+
+const { copy, copied } = useClipboard()
+watch(copied, (val) => {
+  val && Message.success('复制成功')
+})
 
 function open() {
   window.open(route.meta.link, '_blank')
@@ -11,89 +19,47 @@ function open() {
 </script>
 
 <template>
-  <div class="link-view">
-    <transition name="link" mode="out-in" appear>
-      <page-main :key="route.meta.link" title="⚠️访问提醒">
-        <div class="container">
-          <div class="title">
+  <div class="flex flex-col absolute w-full h-full">
+    <Transition name="slide-right" mode="out-in" appear>
+      <PageMain :key="route.meta.link" class="flex flex-col flex-1 justify-center">
+        <div class="flex flex-col items-center">
+          <SvgIcon name="icon-park-twotone:planet" :size="120" class="text-ui-primary/80" />
+          <div class="my-2 text-xl text-dark dark:text-white">
             是否访问此链接
           </div>
-          <div class="link">
-            {{ route.meta.link }}
+          <div class="my-2 max-w-[300px] text-[14px] text-center text-stone-5 cursor-pointer" @click="route.meta.link && copy(route.meta.link)">
+            <HTooltip text="复制链接">
+              <div class="line-clamp-3">
+                {{ route.meta.link }}
+              </div>
+            </HTooltip>
           </div>
-          <el-button type="primary" plain round @click="open">
-            <template #icon>
-              <svg-icon name="ep:link" />
-            </template>
+          <HButton class="my-4" @click="open">
+            <SvgIcon name="ri:external-link-fill" />
             立即访问
-          </el-button>
+          </HButton>
         </div>
-      </page-main>
-    </transition>
+      </PageMain>
+    </Transition>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.link-view {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-
-  .page-main {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex: 1;
-
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      margin: 0 50px;
-
-      .title {
-        margin: 10px 0;
-        font-size: 22px;
-        color: var(--el-text-color-primary);
-      }
-
-      .link {
-        margin: 10px 0;
-        max-width: 300px;
-        font-size: 14px;
-        color: var(--el-text-color-disabled);
-
-        @include text-overflow(3);
-      }
-
-      .el-button {
-        margin: 20px 0;
-      }
-    }
-  }
-}
-// link 区动画
-.link-enter-active {
+.slide-right-enter-active {
   transition: 0.2s;
 }
 
-.link-leave-active {
+.slide-right-leave-active {
   transition: 0.15s;
 }
 
-.link-enter-from {
+.slide-right-enter-from {
   opacity: 0;
-  transform: translateX(-20px);
+  margin-left: -20px;
 }
 
-.link-leave-to {
+.slide-right-leave-to {
   opacity: 0;
-  transform: translateX(20px);
+  margin-left: 20px;
 }
 </style>

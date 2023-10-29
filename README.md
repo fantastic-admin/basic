@@ -4,19 +4,19 @@
 
 <h1 align="center">Fantastic-admin</h1>
 
-<p align="center">一款<b>开箱即用</b>的 Vue 中后台管理系统框架</p>
+<p align="center">一款<b>开箱即用</b>的 Vue3 中后台管理系统框架</p>
 
 <p align="center">
   <a href="https://fantastic-admin.gitee.io" target="_blank">官网</a>
-  ( <a href="https://fantastic-admin.github.io" target="_blank">备用</a> )
-  <span>&nbsp;|&nbsp;</span>
-  演示
-  ( <a href="https://fantastic-admin.gitee.io/basic-example" target="_blank">基础版</a>
-  <a href="https://fantastic-admin.gitee.io/pro-example" target="_blank">专业版</a> )
+  <sup><a href="https://fantastic-admin.github.io" target="_blank">备用地址</a></sup>
   <span>&nbsp;|&nbsp;</span>
   <a href="https://fantastic-admin.gitee.io/support.html" target="_blank">技术支持</a>
   <span>&nbsp;|&nbsp;</span>
-  <a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">购买</a>
+  演示
+  <sup><a href="https://fantastic-admin.gitee.io/basic-example" target="_blank">基础版</a> <a href="https://fantastic-admin.gitee.io/pro-example" target="_blank">专业版</a></sup>
+  <span>&nbsp;|&nbsp;</span>
+  购买
+  <sup><a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">专业版</a></sup>
 <p>
 
 <p align="center">
@@ -26,9 +26,9 @@
 
 ## 特点
 
+- 可自由替换 UI 组件库，默认使用 Element Plus
 - 丰富的布局与主题，覆盖市面上各种中后台应用场景，兼容PC、平板和移动端
 - 提供系统配置文件，轻松实现个性化定制
-- 精心设计的动效，让每一处的动画都干净利落
 - 根据路由配置自动生成导航栏
 - 基于文件系统的路由
 - 支持全方位权限验证
@@ -36,14 +36,17 @@
 - 轻松实现国际化多语言适配
 - 提供接近于浏览器原生标签栏操作体验的标签页功能
 
-## 分支说明
+## 下载
+
+> 本仓库为基础版
+
+**直接拉取源码可能会包含未发布的内容，推荐去 [Github Releases](https://github.com/fantastic-admin/basic/releases) 页面下载稳定版本的压缩包**。如果确定需要拉取源码，请参考下列分支说明：
 
 - `main` Vue3 版本框架源码分支，不含示例代码，可直接用于实际开发
 - `example` Vue3 版本演示源码分支，同线上演示站，包含大量示例，可用于参考学习
 - `vue2` Vue2 版本框架源码分支，不含示例代码，可直接用于实际开发（停止维护）
 - `vue2-example` Vue2 版本演示源码分支，包含大量示例，可用于参考学习（停止维护）
 
-如果你更注重使用时的稳定性，推荐去 [Github Releases](https://github.com/fantastic-admin/basic/releases) 页面下载最新稳定版本的压缩包。
 
 ## 预览
 
@@ -80,7 +83,7 @@
   </tr>
   <tr>
     <th colspan="3" align="center">
-      一款开箱即用的 Vue 项目启动套件
+      一款开箱即用的 Vue3 项目启动套件
     </th>
   </tr>
 </table>

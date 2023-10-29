@@ -9,8 +9,8 @@ import pinia from '@/store'
 import useSettingsStore from '@/store/modules/settings'
 import useKeepAliveStore from '@/store/modules/keepAlive'
 import useUserStore from '@/store/modules/user'
-import useMenuStore from '@/store/modules/menu'
 import useRouteStore from '@/store/modules/route'
+import useMenuStore from '@/store/modules/menu'
 
 const { isLoading } = useNProgress()
 
@@ -22,8 +22,8 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   const settingsStore = useSettingsStore()
   const userStore = useUserStore()
-  const menuStore = useMenuStore()
   const routeStore = useRouteStore()
+  const menuStore = useMenuStore()
   settingsStore.settings.app.enableProgress && (isLoading.value = true)
   // 是否已登录
   if (userStore.isLogin) {
@@ -46,7 +46,7 @@ router.beforeEach(async (to, from, next) => {
             replace: true,
           })
         }
-        // 如果侧边栏导航第一个模块无法命中，则还是进入主页
+        // 如果侧边栏导航第一个模块均无法命中，则还是进入主页
         else {
           next()
         }
@@ -126,6 +126,9 @@ router.afterEach((to, from) => {
   else {
     settingsStore.setTitle(to.meta.title)
   }
+  /**
+   * 处理普通页面的缓存
+   */
   // 判断当前页面是否开启缓存，如果开启，则将当前页面的 name 信息存入 keep-alive 全局状态
   if (to.meta.cache) {
     const componentName = to.matched.at(-1)?.components?.default.name
@@ -140,7 +143,7 @@ router.afterEach((to, from) => {
   if (from.meta.cache) {
     const componentName = from.matched.at(-1)?.components?.default.name
     if (componentName) {
-    // 通过 meta.cache 判断针对哪些页面进行缓存
+      // 通过 meta.cache 判断针对哪些页面进行缓存
       switch (typeof from.meta.cache) {
         case 'string':
           if (from.meta.cache !== to.name) {

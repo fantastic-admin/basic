@@ -30,45 +30,20 @@ function goBack() {
 </script>
 
 <template>
-  <div class="notallowed">
-    <svg-icon name="403" class="icon" />
-    <div class="content">
-      <h1>403</h1>
-      <div class="desc">
+  <div class="flex items-center justify-between flex-col lg:flex-row lg:gap-12 absolute left-[50%] top-[50%] -translate-x-50% -translate-y-50%">
+    <SvgIcon name="403" class="text-[300px] lg:text-[400px]" />
+    <div class="flex flex-col gap-4">
+      <h1 class="m-0 text-6xl font-sans">
+        403
+      </h1>
+      <div class="desc mx-0 text-stone-5 text-xl">
         抱歉，你无权访问该页面
       </div>
-      <el-button type="primary" @click="goBack">
-        {{ data.countdown }} 秒后，返回首页
-      </el-button>
+      <div>
+        <HButton @click="goBack">
+          {{ data.countdown }} 秒后，返回首页
+        </HButton>
+      </div>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.notallowed {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 700px;
-
-  @include position-center(xy);
-
-  .icon {
-    font-size: 400px;
-  }
-
-  .content {
-    h1 {
-      margin: 0;
-      font-size: 72px;
-      color: var(--el-text-color-primary);
-    }
-
-    .desc {
-      margin: 20px 0 30px;
-      font-size: 20px;
-      color: var(--el-text-color-secondary);
-    }
-  }
-}
-</style>

@@ -5,14 +5,13 @@ defineOptions({
   name: 'Copyright',
 })
 
-const route = useRoute()
 const settingsStore = useSettingsStore()
 </script>
 
 <template>
-  <footer v-if="route.meta.copyright ?? settingsStore.settings.copyright.enable" class="copyright">
+  <footer v-if="settingsStore.settings.copyright.enable" class="copyright">
     <span>Copyright</span>
-    <span class="icon">©</span>
+    <SvgIcon name="ri:copyright-line" :size="18" />
     <span v-if="settingsStore.settings.copyright.dates">{{ settingsStore.settings.copyright.dates }}</span>
     <template v-if="settingsStore.settings.copyright.company">
       <a v-if="settingsStore.settings.copyright.website" :href="settingsStore.settings.copyright.website" target="_blank" rel="noopener">{{ settingsStore.settings.copyright.company }}</a>
@@ -23,32 +22,20 @@ const settingsStore = useSettingsStore()
 </template>
 
 <style lang="scss" scoped>
-footer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 40px 0 20px;
-  color: var(--el-text-color-secondary);
-  font-size: 14px;
+.copyright {
+  --at-apply: flex items-center justify-center flex-wrap my-4 px-4 text-sm text-stone-5;
 
   span,
   a {
-    padding: 0 5px;
-  }
-
-  a {
-    text-decoration: none;
-    color: var(--el-text-color-secondary);
-    transition: var(--el-transition-color);
-
-    &:hover {
-      color: var(--el-text-color-primary);
-    }
+    --at-apply: px-1;
   }
 
   .icon {
-    padding: 0;
-    font-size: 18px;
+    --at-apply: mx-1;
+  }
+
+  a {
+    --at-apply: text-center no-underline text-stone-5 hover:text-dark dark:hover:text-light transition;
   }
 }
 </style>

@@ -18,72 +18,30 @@ const props = withDefaults(
 
 const titleSlot = !!useSlots().title
 
-const collaspeData = ref(props.collaspe)
+const isCollaspe = ref(props.collaspe)
 function unCollaspe() {
-  collaspeData.value = false
+  isCollaspe.value = false
 }
 </script>
 
 <template>
   <div
-    class="page-main" :class="{
-      'is-collaspe': collaspeData,
+    class="page-main flex flex-col relative m-4 bg-[var(--g-container-bg)] transition-background-color-300" :class="{
+      'of-hidden': isCollaspe,
     }" :style="{
-      height: collaspeData ? height : '',
+      height: isCollaspe ? height : '',
     }"
   >
-    <div v-if="titleSlot || title" class="title-container">
-      <slot v-if="titleSlot" name="title" />
-      <template v-else>
+    <div v-if="titleSlot || title" class="title-container px-5 py-4 border-b-1 border-b-solid border-b-[var(--g-bg)] transition-border-color-300">
+      <slot name="title">
         {{ title }}
-      </template>
+      </slot>
     </div>
-    <slot />
-    <div v-if="collaspeData" class="collaspe" title="展开" @click="unCollaspe">
-      <svg-icon name="ep:arrow-down" />
+    <div class="main-container p-5">
+      <slot />
+    </div>
+    <div v-if="isCollaspe" class="collaspe absolute bottom-0 w-full pt-10 pb-2 text-center cursor-pointer bg-gradient-to-b from-transparent to-[var(--g-container-bg)]" @click="unCollaspe">
+      <SvgIcon name="ep:arrow-down" class="text-xl op-30 hover:op-100 transition-opacity" />
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.page-main {
-  position: relative;
-  margin: 20px;
-  padding: 20px;
-  background-color: var(--g-app-bg);
-  transition: background-color 0.3s;
-
-  &.is-collaspe {
-    overflow: hidden;
-
-    .collaspe {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      padding: 40px 0 10px;
-      text-align: center;
-      font-size: 24px;
-      color: var(--el-text-color-primary);
-      text-shadow: 0 0 1px var(--el-text-color-primary);
-      background: linear-gradient(to bottom, transparent, var(--g-app-bg));
-      transition: background 0.3s, var(--el-transition-color);
-      cursor: pointer;
-
-      &:hover {
-        color: var(--el-text-color-secondary);
-      }
-    }
-  }
-
-  .title-container {
-    width: calc(100% + 40px);
-    padding: 14px 20px;
-    margin-left: -20px;
-    margin-top: -20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--el-border-color-lighter);
-    transition: var(--el-transition-border);
-  }
-}
-</style>

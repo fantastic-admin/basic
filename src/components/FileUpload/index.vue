@@ -60,7 +60,7 @@ const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
 </script>
 
 <template>
-  <el-upload
+  <ElUpload
     :headers="headers"
     :action="action"
     :data="data"
@@ -68,12 +68,12 @@ const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
     :before-upload="beforeUpload"
     :on-exceed="onExceed"
     :on-success="onSuccess"
-    :file-list="files as UploadUserFile[]"
+    :file-list="files"
     :limit="max"
     drag
   >
     <div class="slot">
-      <svg-icon name="ep:upload-filled" class="el-icon--upload" />
+      <SvgIcon name="ep:upload-filled" class="el-icon--upload" />
       <div class="el-upload__text">
         将文件拖到此处，或<em>点击上传</em>
       </div>
@@ -81,11 +81,11 @@ const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
     <template #tip>
       <div v-if="!notip" class="el-upload__tip">
         <div style="display: inline-block;">
-          <el-alert :title="`上传文件支持 ${ext.join(' / ')} 格式，单个文件大小不超过 ${size}MB，且文件数量不超过 ${max} 个`" type="info" show-icon :closable="false" />
+          <ElAlert :title="`上传文件支持 ${ext.join(' / ')} 格式，单个文件大小不超过 ${size}MB，且文件数量不超过 ${max} 个`" type="info" show-icon :closable="false" />
         </div>
       </div>
     </template>
-  </el-upload>
+  </ElUpload>
 </template>
 
 <style lang="scss" scoped>

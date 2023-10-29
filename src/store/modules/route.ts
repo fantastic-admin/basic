@@ -25,6 +25,7 @@ const useRouteStore = defineStore(
         route.children = flatAsyncRoutesRecursive(route.children, [{
           path: route.path,
           title: route.meta?.title,
+          icon: route.meta?.icon,
           hide: !route.meta?.breadcrumb && route.meta?.breadcrumb === false,
         }], route.path, route.meta?.auth)
       }
@@ -40,6 +41,7 @@ const useRouteStore = defineStore(
           tmpBreadcrumb.push({
             path: childrenBaseUrl,
             title: route.meta?.title,
+            icon: route.meta?.icon,
             hide: !route.meta?.breadcrumb && route.meta?.breadcrumb === false,
           })
           const tmpRoute = cloneDeep(route)
@@ -74,6 +76,7 @@ const useRouteStore = defineStore(
           tmpBreadcrumb.push({
             path: tmpRoute.path,
             title: tmpRoute.meta?.title,
+            icon: tmpRoute.meta?.icon,
             hide: !tmpRoute.meta?.breadcrumb && tmpRoute.meta?.breadcrumb === false,
           })
           if (!tmpRoute.meta) {
@@ -88,10 +91,9 @@ const useRouteStore = defineStore(
     }
     // 扁平化路由（将三级及以上路由数据拍平成二级）
     const flatRoutes = computed(() => {
-      const settingsStore = useSettingsStore()
       const returnRoutes: RouteRecordRaw[] = []
-      if (routesRaw.value) {
-        if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
+      if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
+        if (routesRaw.value) {
           routesRaw.value.forEach((item) => {
             const tmpRoutes = cloneDeep(item.children) as RouteRecordRaw[]
             tmpRoutes.map((v) => {
@@ -105,9 +107,9 @@ const useRouteStore = defineStore(
           })
           returnRoutes.forEach(item => flatAsyncRoutes(item))
         }
-        else {
-          returnRoutes.push(...cloneDeep(filesystemRoutesRaw.value))
-        }
+      }
+      else {
+        returnRoutes.push(...cloneDeep(filesystemRoutesRaw.value) as RouteRecordRaw[])
       }
       return returnRoutes
     })
@@ -201,9 +203,9 @@ const useRouteStore = defineStore(
     async function generateRoutesAtBack() {
       await apiApp.routeList().then(async (res) => {
         // 设置 routes 数据
-        routesRaw.value = formatBackRoutes(res.data)
+        routesRaw.value = formatBackRoutes(res.data) as any
         if (settingsStore.settings.app.enablePermission) {
-          userStore.getPermissions()
+          await userStore.getPermissions()
         }
         isGenerate.value = true
       }).catch(() => {})
@@ -212,7 +214,6 @@ const useRouteStore = defineStore(
     async function generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {
       // 设置 routes 数据
       filesystemRoutesRaw.value = cloneDeep(asyncRoutes) as any
-      // 如果权限功能开启，则需要对路由数据进行筛选过滤
       if (settingsStore.settings.app.enablePermission) {
         await userStore.getPermissions()
       }

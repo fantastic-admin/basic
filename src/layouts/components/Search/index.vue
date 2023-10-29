@@ -1,19 +1,44 @@
 <script setup lang="ts">
+import { Dialog, DialogDescription, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import type { OverlayScrollbarsComponentRef } from 'overlayscrollbars-vue'
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import { cloneDeep } from 'lodash-es'
 import hotkeys from 'hotkeys-js'
 import type { RouteRecordRaw } from 'vue-router'
+import Breadcrumb from '../Breadcrumb/index.vue'
+import BreadcrumbItem from '../Breadcrumb/item.vue'
+import { resolveRoutePath } from '@/utils'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useRouteStore from '@/store/modules/route'
 import useMenuStore from '@/store/modules/menu'
-import type { Menu } from '#/global'
+import type { Menu } from '@/types/global'
 
 defineOptions({
   name: 'Search',
 })
 
-const router = useRouter()
+const overlayTransitionClass = ref({
+  enter: 'ease-in-out duration-500',
+  enterFrom: 'opacity-0',
+  enterTo: 'opacity-100',
+  leave: 'ease-in-out duration-500',
+  leaveFrom: 'opacity-100',
+  leaveTo: 'opacity-0',
+})
 
+const transitionClass = computed(() => {
+  return {
+    enter: 'ease-out duration-300',
+    enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+    enterTo: 'opacity-100 translate-y-0 sm:scale-100',
+    leave: 'ease-in duration-200',
+    leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
+    leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+  }
+})
+
+const router = useRouter()
 const settingsStore = useSettingsStore()
 const routeStore = useRouteStore()
 const menuStore = useMenuStore()
@@ -30,13 +55,11 @@ const isShow = ref(false)
 const searchInput = ref('')
 const sourceList = ref<listTypes[]>([])
 const actived = ref(-1)
+const isScrollbarsInit = ref(false)
 
 const searchInputRef = ref()
-const searchResultRef = ref()
-const searchResultItemRef = ref<any>([])
-function setSearchResultItemRef(el: any) {
-  return searchResultItemRef.value.push(el)
-}
+const searchResultRef = ref<OverlayScrollbarsComponentRef>()
+const searchResultItemRef = ref<HTMLElement[]>([])
 onBeforeUpdate(() => {
   searchResultItemRef.value = []
 })
@@ -60,22 +83,7 @@ const resultList = computed(() => {
     if (item.path.includes(searchInput.value)) {
       flag = true
     }
-    if (item.breadcrumb.some((b) => {
-      let flag = false
-      if (b) {
-        if (typeof b === 'function') {
-          if (b().includes(searchInput.value)) {
-            flag = true
-          }
-        }
-        else {
-          if (b.includes(searchInput.value)) {
-            flag = true
-          }
-        }
-      }
-      return flag
-    })) {
+    if (item.breadcrumb.some((b: { title: any }) => b.title.includes(searchInput.value))) {
       flag = true
     }
     return flag
@@ -85,40 +93,35 @@ const resultList = computed(() => {
 
 watch(() => isShow.value, (val) => {
   if (val) {
-    document.body.classList.add('overflow-hidden')
-    searchResultRef.value.scrollTop = 0
+    searchInput.value = ''
+    actived.value = -1
     // 当搜索显示的时候绑定上、下、回车快捷键，隐藏的时候再解绑。另外当 input 处于 focus 状态时，采用 vue 来绑定键盘事件
     hotkeys('up', keyUp)
     hotkeys('down', keyDown)
     hotkeys('enter', keyEnter)
-    setTimeout(() => {
-      searchInputRef.value.focus()
-    }, 500)
   }
   else {
-    document.body.classList.remove('overflow-hidden')
     hotkeys.unbind('up', keyUp)
     hotkeys.unbind('down', keyDown)
     hotkeys.unbind('enter', keyEnter)
-    setTimeout(() => {
-      searchInput.value = ''
-      actived.value = -1
-    }, 500)
   }
 })
 watch(() => resultList.value, () => {
   actived.value = -1
-  searchResultItemRef.value = []
   handleScroll()
 })
 
 onMounted(() => {
   eventBus.on('global-search-toggle', () => {
+    if (!isShow.value) {
+      initSourceList()
+    }
     isShow.value = !isShow.value
   })
   hotkeys('alt+s', (e) => {
     if (settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys) {
       e.preventDefault()
+      initSourceList()
       isShow.value = true
     }
   })
@@ -128,9 +131,14 @@ onMounted(() => {
       isShow.value = false
     }
   })
+  initSourceList()
+})
+
+function initSourceList() {
+  sourceList.value = []
   if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
     routeStore.routes.forEach((item) => {
-      item.children && getSourceList(item.children)
+      item.children && getSourceList(item.children as RouteRecordRaw[])
     })
   }
   else {
@@ -138,7 +146,7 @@ onMounted(() => {
       getSourceListByMenus(item.children)
     })
   }
-})
+}
 
 function hasChildren(item: RouteRecordRaw) {
   let flag = true
@@ -147,18 +155,22 @@ function hasChildren(item: RouteRecordRaw) {
   }
   return flag
 }
-function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, breadcrumb?: (string | (() => string))[]) {
+function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, breadcrumb?: { title?: string | (() => string) }[]) {
   arr.forEach((item) => {
     if (item.meta?.sidebar !== false) {
       const breadcrumbTemp = cloneDeep(breadcrumb) || []
       if (item.children && hasChildren(item)) {
-        item.meta?.title && breadcrumbTemp.push(item.meta?.title)
-        getSourceList(item.children, basePath ? [basePath, item.path].join('/') : item.path, item.meta?.icon ?? icon, breadcrumbTemp)
+        breadcrumbTemp.push({
+          title: item.meta?.title,
+        })
+        getSourceList(item.children, resolveRoutePath(basePath, item.path), item.meta?.icon ?? icon, breadcrumbTemp)
       }
       else {
-        item.meta?.title && breadcrumbTemp.push(item.meta?.title)
+        breadcrumbTemp.push({
+          title: item.meta?.title,
+        })
         sourceList.value.push({
-          path: basePath ? [basePath, item.path].join('/') : item.path,
+          path: resolveRoutePath(basePath, item.path),
           icon: item.meta?.icon ?? icon,
           title: item.meta?.title,
           link: item.meta?.link,
@@ -168,15 +180,19 @@ function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, 
     }
   })
 }
-function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?: (string | (() => string))[]) {
+function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?: { title?: string | (() => string) }[]) {
   arr.forEach((item) => {
     const breadcrumbTemp = cloneDeep(breadcrumb) || []
     if (item.children && item.children.length > 0) {
-      item.meta?.title && breadcrumbTemp.push(item.meta?.title)
+      breadcrumbTemp.push({
+        title: item.meta?.title,
+      })
       getSourceListByMenus(item.children, item.meta?.icon ?? icon, breadcrumbTemp)
     }
     else {
-      item.meta?.title && breadcrumbTemp.push(item.meta?.title)
+      breadcrumbTemp.push({
+        title: item.meta?.title,
+      })
       sourceList.value.push({
         icon: item.meta?.icon ?? icon,
         title: item.meta?.title,
@@ -207,27 +223,31 @@ function keyDown() {
 }
 function keyEnter() {
   if (actived.value !== -1) {
-    searchResultItemRef.value[actived.value].click()
+    searchResultItemRef.value.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.click()
   }
 }
+// FIXME 列表数据变更后，快捷键滚动失效
 function handleScroll() {
-  let scrollTo = 0
-  if (actived.value !== -1) {
-    scrollTo = searchResultRef.value.scrollTop
-    const activedOffsetTop = searchResultItemRef.value[actived.value].offsetTop
-    const activedClientHeight = searchResultItemRef.value[actived.value].clientHeight
-    const searchScrollTop = searchResultRef.value.scrollTop
-    const searchClientHeight = searchResultRef.value.clientHeight
-    if (activedOffsetTop + activedClientHeight > searchScrollTop + searchClientHeight) {
-      scrollTo = activedOffsetTop + activedClientHeight - searchClientHeight
+  if (searchResultRef.value) {
+    const contentDom = searchResultRef.value.osInstance()!.elements().content
+    let scrollTo = 0
+    if (actived.value !== -1) {
+      scrollTo = contentDom.scrollTop
+      const activedOffsetTop = searchResultItemRef.value.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.offsetTop ?? 0
+      const activedClientHeight = searchResultItemRef.value.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.clientHeight ?? 0
+      const searchScrollTop = contentDom.scrollTop
+      const searchClientHeight = contentDom.clientHeight
+      if (activedOffsetTop + activedClientHeight > searchScrollTop + searchClientHeight) {
+        scrollTo = activedOffsetTop + activedClientHeight - searchClientHeight
+      }
+      else if (activedOffsetTop <= searchScrollTop) {
+        scrollTo = activedOffsetTop
+      }
     }
-    else if (activedOffsetTop <= searchScrollTop) {
-      scrollTo = activedOffsetTop
-    }
+    contentDom.scrollTo({
+      top: scrollTo,
+    })
   }
-  searchResultRef.value.scrollTo({
-    top: scrollTo,
-  })
 }
 
 function pageJump(path: listTypes['path'], link: listTypes['link']) {
@@ -237,248 +257,82 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
   else {
     router.push(path)
   }
+  isShow.value = false
 }
 </script>
 
 <template>
-  <div id="search" :class="{ searching: isShow }" @click="isShow && eventBus.emit('global-search-toggle')">
-    <div class="container">
-      <div class="search-box" @click.stop>
-        <el-input ref="searchInputRef" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" clearable @keydown.esc="eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
-          <template #prefix>
-            <svg-icon name="ep:search" />
-          </template>
-        </el-input>
-        <div v-if="settingsStore.mode === 'pc'" class="tips">
-          <div class="tip">
-            <el-tag type="info" size="large">
-              {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + S
-            </el-tag>
-            <el-tag type="info" size="large">
-              唤醒搜索面板
-            </el-tag>
-          </div>
-          <div class="tip">
-            <el-tag type="info" size="large">
-              <svg-icon name="search-up" />
-            </el-tag>
-            <el-tag type="info" size="large">
-              <svg-icon name="search-down" />
-            </el-tag>
-            <el-tag type="info" size="large">
-              切换搜索结果
-            </el-tag>
-          </div>
-          <div class="tip">
-            <el-tag type="info" size="large">
-              <svg-icon name="search-enter" />
-            </el-tag>
-            <el-tag type="info" size="large">
-              访问页面
-            </el-tag>
-          </div>
-          <div class="tip">
-            <el-tag type="info" size="large">
-              ESC
-            </el-tag>
-            <el-tag type="info" size="large">
-              退出
-            </el-tag>
-          </div>
+  <TransitionRoot as="template" :show="isShow" @after-leave="isScrollbarsInit = false">
+    <Dialog :initial-focus="searchInputRef" class="fixed inset-0 flex z-2000" @close="isShow && eventBus.emit('global-search-toggle')">
+      <TransitionChild as="template" v-bind="overlayTransitionClass">
+        <div class="fixed inset-0 transition-opacity bg-stone-200/75 dark:bg-stone-8/75 backdrop-blur-sm" />
+      </TransitionChild>
+      <div class="fixed inset-0">
+        <div class="flex h-full items-end sm:items-center justify-center text-center p-4 sm:p-0">
+          <TransitionChild as="template" v-bind="transitionClass">
+            <DialogPanel class="relative text-left w-full sm:max-w-2xl h-full max-h-4/5 flex flex-col">
+              <div class="flex flex-col bg-white dark:bg-stone-8 rounded-xl shadow-xl overflow-y-auto">
+                <div class="flex items-center px-4 py-3" border-b="~ solid stone-2 dark:stone-7">
+                  <SvgIcon name="ep:search" :size="18" class="text-stone-5" />
+                  <input ref="searchInputRef" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" class="w-full focus:outline-none border-0 rounded-md placeholder-stone-4 dark:placeholder-stone-5 text-base px-3 bg-transparent text-dark dark:text-white" @keydown.esc="eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
+                </div>
+                <DialogDescription class="relative m-0 of-y-hidden">
+                  <OverlayScrollbarsComponent ref="searchResultRef" :options="{ scrollbars: { autoHide: 'leave', autoHideDelay: 300 } }" class="h-full" @os-initialized="isScrollbarsInit = true">
+                    <template v-if="isScrollbarsInit">
+                      <template v-if="resultList.length > 0">
+                        <a v-for="(item, index) in resultList" ref="searchResultItemRef" :key="item.path" class="flex items-center cursor-pointer" :class="{ 'bg-stone-2/40 dark:bg-stone-7/40': index === actived }" :data-index="index" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
+                          <SvgIcon v-if="item.icon" :name="item.icon" :size="20" class="basis-16 transition" :class="{ 'scale-120 text-ui-primary': index === actived }" />
+                          <div class="flex-1 flex flex-col gap-1 px-4 py-3 truncate" border-l="~ solid stone-2 dark:stone-7">
+                            <div class="text-base font-bold truncate">{{ item.title ?? '[ 无标题 ]' }}</div>
+                            <Breadcrumb v-if="item.breadcrumb.length" class="truncate">
+                              <BreadcrumbItem v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex" class="text-xs">
+                                {{ bc.title ?? '[ 无标题 ]' }}
+                              </BreadcrumbItem>
+                            </Breadcrumb>
+                          </div>
+                        </a>
+                      </template>
+                      <template v-else>
+                        <div flex="center col" py-6 text-stone-5>
+                          <SvgIcon name="tabler:mood-empty" :size="40" />
+                          <p text-base m-2>
+                            没有找到你想要的
+                          </p>
+                        </div>
+                      </template>
+                    </template>
+                  </OverlayScrollbarsComponent>
+                </DialogDescription>
+                <div v-if="settingsStore.mode === 'pc'" class="px-4 py-3 flex justify-between" border-t="~ solid stone-2 dark:stone-7">
+                  <div class="flex gap-8">
+                    <div class="inline-flex items-center gap-1 text-xs">
+                      <HKbd>
+                        <SvgIcon name="ion:md-return-left" :size="14" />
+                      </HKbd>
+                      <span>访问</span>
+                    </div>
+                    <div class="inline-flex items-center gap-1 text-xs">
+                      <HKbd>
+                        <SvgIcon name="ant-design:caret-up-filled" :size="14" />
+                      </HKbd>
+                      <HKbd>
+                        <SvgIcon name="ant-design:caret-down-filled" :size="14" />
+                      </HKbd>
+                      <span>切换</span>
+                    </div>
+                  </div>
+                  <div v-if="settingsStore.settings.navSearch.enableHotkeys" class="inline-flex items-center gap-1 text-xs">
+                    <HKbd>
+                      ESC
+                    </HKbd>
+                    <span>退出</span>
+                  </div>
+                </div>
+              </div>
+            </DialogPanel>
+          </TransitionChild>
         </div>
       </div>
-      <div ref="searchResultRef" class="result">
-        <a v-for="(item, index) in resultList" :key="item.path" :ref="setSearchResultItemRef" class="item" :class="{ actived: index === actived }" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
-          <svg-icon v-if="item.icon" :name="item.icon" />
-          <div class="info">
-            <div class="title">
-              {{ item.title ?? '[ 无标题 ]' }}
-            </div>
-            <div class="breadcrumb">
-              <span v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex">
-                {{ bc ?? '[ 无标题 ]' }}
-                <svg-icon name="ep:arrow-right" />
-              </span>
-            </div>
-            <div class="path">{{ item.path }}</div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </div>
+    </Dialog>
+  </TransitionRoot>
 </template>
-
-<style lang="scss" scoped>
-#search {
-  position: fixed;
-  z-index: 2000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: radial-gradient(transparent 1px, rgb(0 0 0 / 30%) 1px);
-  background-size: 4px 4px;
-  backdrop-filter: saturate(50%) blur(4px);
-  transition: all 0.2s;
-  opacity: 0;
-  visibility: hidden;
-
-  &.searching {
-    opacity: 1;
-    visibility: visible;
-
-    .container {
-      transform: initial;
-      filter: initial;
-    }
-  }
-
-  .container {
-    display: flex;
-    flex-direction: column;
-    max-width: 800px;
-    height: 100%;
-    margin: 0 auto;
-    transition: all 0.2s;
-    transform: scale(1.1);
-    filter: blur(10px);
-
-    .search-box {
-      margin: 50px 20px 20px;
-
-      :deep(.el-input__inner) {
-        height: 52px;
-        line-height: 52px;
-      }
-
-      :deep(.el-input__icon) {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-
-      .tips {
-        display: flex;
-        justify-content: center;
-        padding-top: 20px;
-        font-weight: bold;
-
-        .tip {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          margin: 0 20px;
-
-          .el-tag {
-            margin: 0 5px;
-
-            &:first-child {
-              margin-left: 0;
-            }
-
-            &:last-child {
-              margin-right: 0;
-            }
-          }
-        }
-      }
-    }
-
-    .result {
-      position: relative;
-      margin: 0 20px 50px;
-      border-radius: 5px;
-      overflow: auto;
-      background-color: var(--el-bg-color);
-      box-shadow: 0 0 0 1px var(--el-border-color-darker);
-
-      .item {
-        display: flex;
-        align-items: center;
-        text-decoration: none;
-        cursor: pointer;
-        transition: all 0.3s;
-
-        &.actived {
-          background-color: var(--el-bg-color-page);
-
-          .icon {
-            color: var(--el-color-primary);
-            transform: scale(1.2);
-          }
-
-          .info {
-            border-left-color: var(--el-border-color);
-
-            .title {
-              color: var(--el-text-color-primary);
-            }
-
-            .breadcrumb,
-            .path {
-              color: var(--el-text-color-regular);
-            }
-          }
-        }
-
-        > .icon {
-          flex: 0 0 66px;
-          text-align: center;
-          color: var(--el-color-info);
-          font-size: 20px;
-          transition: all 0.3s;
-        }
-
-        .info {
-          flex: 1;
-          height: 70px;
-          display: flex;
-          flex-direction: column;
-          justify-content: space-around;
-          border-left: 1px solid var(--el-border-color-lighter);
-          padding: 5px 10px 7px;
-          transition: all 0.3s;
-
-          @include text-overflow(1, true);
-
-          .title {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--el-text-color-regular);
-
-            @include text-overflow(1, true);
-          }
-
-          .breadcrumb,
-          .path {
-            font-size: 12px;
-            color: var(--el-text-color-secondary);
-            transition: all 0.3s;
-
-            @include text-overflow(1, true);
-          }
-
-          .breadcrumb {
-            display: flex;
-            align-items: center;
-
-            span {
-              display: flex;
-              align-items: center;
-
-              .icon {
-                margin: 0 5px;
-              }
-
-              &:last-child i {
-                display: none;
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-}
-</style>

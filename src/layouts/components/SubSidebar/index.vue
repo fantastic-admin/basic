@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Logo from '../Logo/index.vue'
-import SidebarItem from '../SidebarItem/index.vue'
+import Menu from '../Menu/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
 
@@ -18,59 +18,60 @@ const sidebarScrollTop = ref(0)
 function onSidebarScroll(e: Event) {
   sidebarScrollTop.value = (e.target as HTMLElement).scrollTop
 }
+
+const enableSidebar = computed(() => {
+  return settingsStore.mode === 'mobile' || (
+    ['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode)
+      && menuStore.sidebarMenus.length !== 0
+      && !(
+        !menuStore.sidebarMenus[0].children
+          || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
+      )
+  )
+})
 </script>
 
 <template>
-  <div v-if="['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode) || settingsStore.mode === 'mobile'" class="sub-sidebar-container" :class="{ 'is-collapse': settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse }" @scroll="onSidebarScroll">
+  <div
+    v-if="enableSidebar" class="sub-sidebar-container" :class="{
+      'is-collapse': settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse,
+    }"
+  >
     <Logo
       :show-logo="settingsStore.settings.menu.menuMode === 'single'" class="sidebar-logo" :class="{
         'sidebar-logo-bg': settingsStore.settings.menu.menuMode === 'single',
-        'shadow': sidebarScrollTop,
       }"
     />
-    <transition-group name="sub-sidebar">
-      <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
-        <div v-show="mainIndex === menuStore.actived">
-          <el-menu
-            :unique-opened="settingsStore.settings.menu.subMenuUniqueOpened" :default-openeds="menuStore.defaultOpenedPaths" :default-active="route.meta.activeMenu || route.path" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" :collapse-transition="false" :class="{
-              'is-collapse-without-logo': settingsStore.settings.menu.menuMode !== 'single' && settingsStore.settings.menu.subMenuCollapse,
-            }"
-          >
-            <template v-for="(item, index) in mainItem.children">
-              <SidebarItem v-if="item.meta?.sidebar !== false" :key="item.path || index" :item="item" :base-path="item.path" />
-            </template>
-          </el-menu>
-        </div>
-      </template>
-    </transition-group>
+    <div
+      class="sub-sidebar flex-1 transition-shadow-300" :class="{
+        shadow: sidebarScrollTop,
+      }" @scroll="onSidebarScroll"
+    >
+      <TransitionGroup name="sub-sidebar">
+        <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
+          <div v-show="mainIndex === menuStore.actived">
+            <Menu :menu="mainItem.children" :value="route.meta.activeMenu || route.path" :default-openeds="menuStore.defaultOpenedPaths" :accordion="settingsStore.settings.menu.subMenuUniqueOpened" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" class="menu" />
+          </div>
+        </template>
+      </TransitionGroup>
+    </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .sub-sidebar-container {
-  overflow-x: hidden;
-  overflow-y: auto;
-  overscroll-behavior: contain;
-
-  // firefox隐藏滚动条
-  scrollbar-width: none;
-
-  // chrome隐藏滚动条
-  &::-webkit-scrollbar {
-    display: none;
-  }
-
-  width: var(--g-sub-sidebar-width);
+  display: flex;
+  flex-direction: column;
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
+  width: var(--g-sub-sidebar-width);
   background-color: var(--g-sub-sidebar-bg);
-  box-shadow: 10px 0 10px -10px var(--g-box-shadow-color);
-  transition: background-color 0.3s, var(--el-transition-box-shadow), left 0.3s, width 0.3s;
+  transition: background-color 0.3s, left 0.3s, width 0.3s;
 
   &.is-collapse {
-    width: 64px;
+    width: var(--g-sub-sidebar-collapse-width);
 
     .sidebar-logo {
       &:not(.sidebar-logo-bg) {
@@ -84,77 +85,43 @@ function onSidebarScroll(e: Event) {
   }
 
   .sidebar-logo {
-    transition: box-shadow 0.2s, background-color 0.3s, color 0.3s;
     background-color: var(--g-sub-sidebar-bg);
-
-    &:not(.sidebar-logo-bg) {
-      :deep(span) {
-        color: var(--g-sub-sidebar-menu-color);
-      }
-    }
+    transition: background-color 0.3s;
 
     &.sidebar-logo-bg {
-      background-color: var(--g-main-sidebar-bg);
-    }
+      background-color: var(--g-sub-sidebar-logo-bg);
 
-    &.shadow {
-      box-shadow: 0 10px 10px -10px var(--g-box-shadow-color);
+      :deep(span) {
+        color: var(--g-sub-sidebar-logo-color);
+      }
     }
   }
 
-  .el-menu {
-    border-right: 0;
-    padding-top: var(--g-sidebar-logo-height);
-    transition: border-color 0.3s, background-color 0.3s, color 0.3s, padding-top 0.3s;
-    background-color: var(--g-sub-sidebar-bg);
+  .sub-sidebar {
+    overflow: hidden auto;
+    overscroll-behavior: contain;
 
-    &:not(.el-menu--collapse) {
-      width: inherit;
+    // firefox隐藏滚动条
+    scrollbar-width: none;
+
+    // chrome隐藏滚动条
+    &::-webkit-scrollbar {
+      display: none;
     }
 
-    &.is-collapse-without-logo {
-      padding-top: 0;
+    &.shadow {
+      box-shadow: inset 0 10px 10px -10px var(--g-box-shadow-color);
     }
+  }
 
-    &.el-menu--collapse {
-      :deep(.title-icon) {
-        margin-right: 0;
-      }
-
-      :deep(.el-menu-item),
-      :deep(.el-sub-menu__title) {
-        span,
-        .el-sub-menu__icon-arrow {
-          display: none;
-        }
-      }
-    }
-
-    &.menu-radius:not(.el-menu--collapse) {
-      .sidebar-item {
-        padding: 0 10px;
-
-        &:first-child {
-          padding-top: 10px;
-        }
-
-        &:last-child {
-          padding-bottom: 10px;
-        }
-      }
-
-      :deep(.el-menu--inline),
-      :deep(.el-menu-item),
-      :deep(.el-sub-menu__title) {
-        border-radius: 10px;
-      }
-    }
+  .menu {
+    width: 100%;
   }
 }
 
 // 次侧边栏动画
 .sub-sidebar-enter-active {
-  transition: opacity 0.3s, transform 0.3s;
+  transition: 0.2s;
 }
 
 .sub-sidebar-enter-from,

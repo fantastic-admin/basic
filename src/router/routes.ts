@@ -2,7 +2,6 @@ import { setupLayouts } from 'virtual:meta-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import type { RouteRecordRaw } from 'vue-router'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
-import BreadcrumbExample from './modules/breadcrumb.example'
 import type { Route } from '#/global'
 import useSettingsStore from '@/store/modules/settings'
 
@@ -42,6 +41,7 @@ const systemRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/index.vue'),
         meta: {
           title: () => useSettingsStore().settings.home.title,
+          icon: 'ant-design:home-twotone',
           breadcrumb: false,
         },
       },
@@ -54,23 +54,6 @@ const systemRoutes: RouteRecordRaw[] = [
           breadcrumb: false,
         },
       },
-      {
-        path: 'setting',
-        name: 'personalSetting',
-        component: () => import('@/views/personal/setting.vue'),
-        meta: {
-          title: '个人设置',
-          cache: 'personalEditPassword',
-        },
-      },
-      {
-        path: 'edit/password',
-        name: 'personalEditPassword',
-        component: () => import('@/views/personal/edit.password.vue'),
-        meta: {
-          title: '修改密码',
-        },
-      },
     ],
   },
 ]
@@ -80,11 +63,10 @@ const asyncRoutes: Route.recordMainRaw[] = [
   {
     meta: {
       title: '演示',
-      icon: 'sidebar-default',
+      icon: 'uim:box',
     },
     children: [
       MultilevelMenuExample,
-      BreadcrumbExample,
     ],
   },
 ]

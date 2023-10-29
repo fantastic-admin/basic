@@ -5,8 +5,6 @@ import type { RecursiveRequired, Settings } from '#/global'
 const globalSettingsDefault: RecursiveRequired<Settings.all> = {
   app: {
     colorScheme: 'light',
-    elementSize: 'default',
-    iconifyOfflineUse: false,
     enablePermission: false,
     enableProgress: true,
     enableDynamicTitle: false,
@@ -39,6 +37,9 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
   },
   breadcrumb: {
     enable: true,
+  },
+  mainPage: {
+    enableHotkeys: true,
   },
   navSearch: {
     enable: true,

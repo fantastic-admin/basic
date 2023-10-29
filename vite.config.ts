@@ -7,20 +7,13 @@ import pkg from './package.json'
 import createVitePlugins from './vite/plugins'
 
 // https://vitejs.dev/config/
-export default ({ mode, command }) => {
+export default async ({ mode, command }) => {
   const env = loadEnv(mode, process.cwd())
   // 全局 scss 资源
   const scssResources = []
   fs.readdirSync('src/assets/styles/resources').forEach((dirname) => {
     if (fs.statSync(`src/assets/styles/resources/${dirname}`).isFile()) {
       scssResources.push(`@use "src/assets/styles/resources/${dirname}" as *;`)
-    }
-  })
-  // css 精灵图相关
-  fs.readdirSync('src/assets/sprites').forEach((dirname) => {
-    if (fs.statSync(`src/assets/sprites/${dirname}`).isDirectory()) {
-      // css 精灵图生成的 scss 文件也需要放入全局 scss 资源
-      scssResources.push(`@use "src/assets/sprites/_${dirname}.scss" as *;`)
     }
   })
   return defineConfig({
@@ -45,7 +38,6 @@ export default ({ mode, command }) => {
     define: {
       __SYSTEM_INFO__: JSON.stringify({
         pkg: {
-          version: pkg.version,
           dependencies: pkg.dependencies,
           devDependencies: pkg.devDependencies,
         },

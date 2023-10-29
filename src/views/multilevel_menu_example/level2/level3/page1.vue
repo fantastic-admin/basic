@@ -5,8 +5,8 @@ meta:
 
 <template>
   <div>
-    <page-main>
+    <PageMain>
       多级导航2-2-1
-    </page-main>
+    </PageMain>
   </div>
 </template>

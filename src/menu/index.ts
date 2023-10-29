@@ -6,7 +6,7 @@ const menu: Menu.recordMainRaw[] = [
   {
     meta: {
       title: '演示',
-      icon: 'sidebar-default',
+      icon: 'uim:box',
     },
     children: [
       MultilevelMenuExample,
