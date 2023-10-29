@@ -9,9 +9,12 @@ import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 
 const router = useRouter()
-const { auth, authAll } = useAuth()
+
 const settingsStore = useSettingsStore()
 const userStore = useUserStore()
+
+const { auth, authAll } = useAuth()
+const mainPage = useMainPage()
 
 // 模拟账号切换
 async function accountChange(val: any) {
@@ -20,7 +23,7 @@ async function accountChange(val: any) {
     password: '',
   })
   await userStore.getPermissions()
-  useMainPage().reload()
+  mainPage.reload()
 }
 function goTest() {
   router.push({
@@ -47,60 +50,60 @@ function permissionCheck2(permissions: string[]) {
 
 <template>
   <div>
-    <page-header title="权限验证" />
-    <page-main>
+    <PageHeader title="权限验证" />
+    <PageMain>
       <div v-if="!settingsStore.settings.app.enablePermission">
         请到 seeting.js 里打开权限功能，再进入该页面查看演示
       </div>
       <div v-else>
         <h3>切换帐号</h3>
-        <el-radio-group v-model="userStore.account" @change="accountChange">
-          <el-radio-button label="admin" />
-          <el-radio-button label="test" />
-          <el-radio-button label="hooray">
+        <ElRadioGroup v-model="userStore.account" @change="accountChange">
+          <ElRadioButton label="admin" />
+          <ElRadioButton label="test" />
+          <ElRadioButton label="hooray">
             hooray(无权限)
-          </el-radio-button>
-        </el-radio-group>
+          </ElRadioButton>
+        </ElRadioGroup>
         <h3>帐号权限</h3>
         <div>{{ userStore.permissions }}</div>
         <h3>访问鉴权页面</h3>
         <div>
-          <el-button @click="goTest">
+          <ElButton @click="goTest">
             点击访问
-          </el-button>
+          </ElButton>
         </div>
         <h3>鉴权组件（请对照代码查看）</h3>
         <div>
           <Auth value="permission.browse" style="margin-bottom: 10px;">
-            <el-tag>你有 permission.browse 权限</el-tag>
+            <ElTag>你有 permission.browse 权限</ElTag>
             <template #no-auth>
-              <el-tag type="danger">
+              <ElTag type="danger">
                 你没有 permission.browse 权限
-              </el-tag>
+              </ElTag>
             </template>
           </Auth>
           <Auth value="permission.create" style="margin-bottom: 10px;">
-            <el-tag>你有 permission.create 权限</el-tag>
+            <ElTag>你有 permission.create 权限</ElTag>
             <template #no-auth>
-              <el-tag type="danger">
+              <ElTag type="danger">
                 你没有 permission.create 权限
-              </el-tag>
+              </ElTag>
             </template>
           </Auth>
           <Auth :value="['permission.browse', 'permission.create']" style="margin-bottom: 10px;">
-            <el-tag>你有 permission.browse 或 permission.create 权限</el-tag>
+            <ElTag>你有 permission.browse 或 permission.create 权限</ElTag>
             <template #no-auth>
-              <el-tag type="danger">
+              <ElTag type="danger">
                 你没有 permission.browse 或 permission.create 权限
-              </el-tag>
+              </ElTag>
             </template>
           </Auth>
           <AuthAll :value="['permission.browse', 'permission.create']">
-            <el-tag>你有 permission.browse 和 permission.create 权限</el-tag>
+            <ElTag>你有 permission.browse 和 permission.create 权限</ElTag>
             <template #no-auth>
-              <el-tag type="danger">
+              <ElTag type="danger">
                 你没有 permission.browse 和 permission.create 权限
-              </el-tag>
+              </ElTag>
             </template>
           </AuthAll>
         </div>
@@ -121,24 +124,24 @@ function permissionCheck2(permissions: string[]) {
         </div>
         <h3>鉴权函数（请对照代码查看）</h3>
         <div>
-          <el-button-group style="display: block; margin-bottom: 10px;">
-            <el-button @click="permissionCheck('permission.browse')">
+          <ElButtonGroup style="display: block; margin-bottom: 10px;">
+            <ElButton @click="permissionCheck('permission.browse')">
               校验 permission.browse 权限
-            </el-button>
-            <el-button @click="permissionCheck('permission.create')">
+            </ElButton>
+            <ElButton @click="permissionCheck('permission.create')">
               校验 permission.create 权限
-            </el-button>
-          </el-button-group>
-          <el-button-group>
-            <el-button @click="permissionCheck(['permission.browse', 'permission.create'])">
+            </ElButton>
+          </ElButtonGroup>
+          <ElButtonGroup>
+            <ElButton @click="permissionCheck(['permission.browse', 'permission.create'])">
               校验 permission.browse 或 permission.create 权限
-            </el-button>
-            <el-button @click="permissionCheck2(['permission.browse', 'permission.create'])">
+            </ElButton>
+            <ElButton @click="permissionCheck2(['permission.browse', 'permission.create'])">
               校验 permission.browse 和 permission.create 权限
-            </el-button>
-          </el-button-group>
+            </ElButton>
+          </ElButtonGroup>
         </div>
       </div>
-    </page-main>
+    </PageMain>
   </div>
 </template>

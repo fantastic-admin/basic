@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 // import qs from 'qs'
-import { ElMessage } from 'element-plus'
+import Message from 'vue-m-message'
 import useUserStore from '@/store/modules/user'
 
 const api = axios.create({
@@ -12,13 +12,13 @@ const api = axios.create({
 
 api.interceptors.request.use(
   (request) => {
+    // 全局拦截请求发送前提交的参数
     const userStore = useUserStore()
-    /**
-     * 全局拦截请求发送前提交的参数
-     * 以下代码为示例，在请求头里带上 token 信息
-     */
-    if (userStore.isLogin && request.headers) {
-      request.headers.Token = userStore.token
+    // 设置请求头
+    if (request.headers) {
+      if (userStore.isLogin) {
+        request.headers.Token = userStore.token
+      }
     }
     // 是否将 POST 请求参数进行字符串化处理
     if (request.method === 'post') {
@@ -40,8 +40,10 @@ api.interceptors.response.use(
      */
     if (response.data.status === 1) {
       if (response.data.error !== '') {
-        // 这里做错误提示，如果使用了 element plus 则可以使用 Message 进行提示
-        // ElMessage.error(options)
+        // 错误提示
+        Message.error(response.data.error, {
+          zIndex: 2000,
+        })
         return Promise.reject(response.data)
       }
     }
@@ -61,9 +63,8 @@ api.interceptors.response.use(
     else if (message.includes('Request failed with status code')) {
       message = `接口${message.substr(message.length - 3)}异常`
     }
-    ElMessage({
-      message,
-      type: 'error',
+    Message.error(message, {
+      zIndex: 2000,
     })
     return Promise.reject(error)
   },

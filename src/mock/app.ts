@@ -10,7 +10,7 @@ export default [
           {
             meta: {
               title: '演示',
-              icon: 'sidebar-default',
+              icon: 'uim:box',
             },
             children: [
               {
@@ -20,7 +20,7 @@ export default [
                 name: 'multilevelMenuExample',
                 meta: {
                   title: '多级导航',
-                  icon: 'sidebar-menu',
+                  icon: 'heroicons-solid:menu-alt-3',
                 },
                 children: [
                   {
@@ -84,8 +84,7 @@ export default [
                 name: 'permissionExample',
                 meta: {
                   title: '权限验证',
-                  i18n: 'route.permission',
-                  icon: 'ep:key',
+                  icon: 'ri:shield-keyhole-line',
                 },
                 children: [
                   {
@@ -94,7 +93,6 @@ export default [
                     component: 'permission_example/index.vue',
                     meta: {
                       title: '权限验证',
-                      i18n: 'route.permission',
                       sidebar: false,
                       breadcrumb: false,
                       activeMenu: '/permission_example',
@@ -131,13 +129,13 @@ export default [
           {
             meta: {
               title: '演示',
-              icon: 'sidebar-default',
+              icon: 'uim:box',
             },
             children: [
               {
                 meta: {
                   title: '多级导航',
-                  icon: 'sidebar-menu',
+                  icon: 'heroicons-solid:menu-alt-3',
                 },
                 children: [
                   {

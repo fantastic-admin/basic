@@ -1,22 +1,20 @@
 <script setup lang="ts">
 import eruda from 'eruda'
 import VConsole from 'vconsole'
-import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import hotkeys from 'hotkeys-js'
+import elementPlusLocaleZhCN from 'element-plus/es/locale/lang/zh-cn.mjs'
 import eventBus from './utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
+import useMenuStore from '@/store/modules/menu'
 
 const settingsStore = useSettingsStore()
+const menuStore = useMenuStore()
 const { auth } = useAuth()
-
-const buttonConfig = ref({
-  autoInsertSpace: true,
-})
 
 // 侧边栏主导航当前实际宽度
 const mainSidebarActualWidth = computed(() => {
   let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width'))
-  if (['head', 'single'].includes(settingsStore.settings.menu.menuMode)) {
+  if (settingsStore.settings.menu.menuMode === 'single' || (settingsStore.settings.menu.menuMode === 'head' && settingsStore.mode !== 'mobile')) {
     actualWidth = 0
   }
   return `${actualWidth}px`
@@ -25,12 +23,22 @@ const mainSidebarActualWidth = computed(() => {
 // 侧边栏次导航当前实际宽度
 const subSidebarActualWidth = computed(() => {
   let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width'))
-  if (settingsStore.settings.menu.subMenuCollapse) {
-    actualWidth = 64
+  if (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile') {
+    actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-collapse-width'))
+  }
+  if (
+    menuStore.sidebarMenus.length === 1
+      && (
+        !menuStore.sidebarMenus[0].children
+          || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
+      )
+  ) {
+    actualWidth = 0
   }
   return `${actualWidth}px`
 })
 
+// 设置网页 title
 watch([
   () => settingsStore.settings.app.enableDynamicTitle,
   () => settingsStore.title,
@@ -44,6 +52,7 @@ watch([
   }
 }, {
   immediate: true,
+  deep: true,
 })
 
 onMounted(() => {
@@ -61,7 +70,7 @@ import.meta.env.VITE_APP_DEBUG_TOOL === 'vconsole' && new VConsole()
 </script>
 
 <template>
-  <el-config-provider :locale="zhCn" :size="settingsStore.settings.app.elementSize" :button="buttonConfig">
+  <ElConfigProvider :locale="elementPlusLocaleZhCN" :button="{ autoInsertSpace: true }">
     <RouterView
       v-slot="{ Component, route }"
       :style="{
@@ -70,8 +79,8 @@ import.meta.env.VITE_APP_DEBUG_TOOL === 'vconsole' && new VConsole()
       }"
     >
       <component :is="Component" v-if="auth(route.meta.auth ?? '')" />
-      <not-allowed v-else />
+      <NotAllowed v-else />
     </RouterView>
-    <system-info />
-  </el-config-provider>
+    <SystemInfo />
+  </ElConfigProvider>
 </template>

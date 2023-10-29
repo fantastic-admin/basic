@@ -1,34 +1,36 @@
 <script setup lang="ts">
-import { icons } from '@iconify-json/ep'
+import { icons } from '@/iconify'
+
+const icon = icons.filter(item => item.prefix === 'ep')[0]
 </script>
 
 <template>
   <div>
     <div class="demo">
-      <svg-icon name="ep:edit" />
-      <svg-icon name="ep:share" />
-      <svg-icon name="ep:delete" />
-      <el-button type="primary">
+      <SvgIcon name="ep:edit" />
+      <SvgIcon name="ep:share" />
+      <SvgIcon name="ep:delete" />
+      <ElButton type="primary">
         <template #icon>
-          <svg-icon name="ep:search" />
+          <SvgIcon name="ep:search" />
         </template>
         搜索
-      </el-button>
+      </ElButton>
     </div>
-    <el-divider content-position="left">
+    <ElDivider content-position="left">
       图标集合
-    </el-divider>
-    <div v-for="(item, index) in icons.icons" :key="index" class="list-icon">
-      <el-tooltip class="item" effect="dark" :content="`ep:${index}`" placement="top">
-        <svg-icon :name="`ep:${index}`" />
-      </el-tooltip>
+    </ElDivider>
+    <div v-for="(item, index) in icon.icons" :key="index" class="list-icon">
+      <ElTooltip class="item" effect="dark" :content="`ep:${item}`" placement="top">
+        <SvgIcon :name="`ep:${item}`" />
+      </ElTooltip>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
 .demo {
-  > .icon {
+  > i {
     color: #606266;
     margin: 0 20px;
     font-size: 1.5em;
@@ -44,7 +46,7 @@ import { icons } from '@iconify-json/ep'
   display: inline-block;
   margin: 10px;
 
-  .icon {
+  i {
     font-size: 32px;
     color: #606266;
   }

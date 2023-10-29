@@ -46,6 +46,8 @@ jobs:
 
       # 运行构建脚本
       - name: Build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
         run: nr build:example
 
       - name: Pushes to another repository
@@ -53,8 +55,8 @@ jobs:
         env:
           SSH_DEPLOY_KEY: ${{ secrets.PUSH_TO_ANOTHER_REPO_SSH_DEPLOY_KEY }}
         with:
-          source-directory: 'dist-example'
-          destination-github-username: 'fantastic-admin'
-          destination-repository-name: 'basic-example'
+          source-directory: dist-example
+          destination-github-username: fantastic-admin
+          destination-repository-name: basic-example
           user-email: 304327508@qq.com
           target-branch: main

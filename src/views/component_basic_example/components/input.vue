@@ -7,38 +7,38 @@ const textarea = ref('')
 
 <template>
   <div>
-    <el-divider content-position="left">
+    <ElDivider content-position="left">
       基础用法
-    </el-divider>
-    <el-input v-model="input" placeholder="请输入内容" />
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElInput v-model="input" placeholder="请输入内容" />
+    <ElDivider content-position="left">
       禁用状态
-    </el-divider>
-    <el-input v-model="input" placeholder="请输入内容" :disabled="true" />
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElInput v-model="input" placeholder="请输入内容" :disabled="true" />
+    <ElDivider content-position="left">
       可清空
-    </el-divider>
-    <el-input v-model="input" placeholder="请输入内容" clearable />
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElInput v-model="input" placeholder="请输入内容" clearable />
+    <ElDivider content-position="left">
       密码框
-    </el-divider>
-    <el-input v-model="input" placeholder="请输入内容" show-password />
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElInput v-model="input" placeholder="请输入内容" show-password />
+    <ElDivider content-position="left">
       带 icon 的输入框
-    </el-divider>
-    <el-input v-model="input1" placeholder="请选择日期">
+    </ElDivider>
+    <ElInput v-model="input1" placeholder="请选择日期">
       <template #suffix>
-        <svg-icon name="ep:calendar" />
+        <SvgIcon name="ep:calendar" />
       </template>
-    </el-input>
-    <el-input v-model="input2" placeholder="请输入内容">
+    </ElInput>
+    <ElInput v-model="input2" placeholder="请输入内容">
       <template #prefix>
-        <svg-icon name="ep:search" />
+        <SvgIcon name="ep:search" />
       </template>
-    </el-input>
-    <el-divider content-position="left">
+    </ElInput>
+    <ElDivider content-position="left">
       文本域
-    </el-divider>
-    <el-input v-model="textarea" type="textarea" :rows="2" placeholder="请输入内容" />
+    </ElDivider>
+    <ElInput v-model="textarea" type="textarea" :rows="2" placeholder="请输入内容" />
   </div>
 </template>

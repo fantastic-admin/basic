@@ -39,38 +39,38 @@ function editPassword() {
 
 <template>
   <div>
-    <page-main>
-      <el-tabs tab-position="left" style="height: 600px;">
-        <el-tab-pane label="基本设置" class="basic">
+    <PageMain>
+      <ElTabs tab-position="left" style="height: 600px;">
+        <ElTabPane label="基本设置" class="basic">
           <h2>基本设置</h2>
-          <el-row :gutter="20">
-            <el-col :span="16">
-              <el-form :model="form" label-width="120px" label-suffix="：">
-                <el-form-item label="名 称">
-                  <el-input v-model="form.name" placeholder="请输入你的名称" />
-                </el-form-item>
-                <el-form-item label="手机号">
-                  <el-input v-model="form.mobile" placeholder="请输入你的手机号" />
-                </el-form-item>
-                <el-form-item label="QQ 号">
-                  <el-input v-model="form.qq" placeholder="请输入你的 QQ 号" />
-                </el-form-item>
-                <el-form-item label="微信号">
-                  <el-input v-model="form.wechat" placeholder="请输入你的微信号" />
-                </el-form-item>
-                <el-form-item>
-                  <el-button type="primary">
+          <ElRow :gutter="20">
+            <ElCol :span="16">
+              <ElForm :model="form" label-width="120px" label-suffix="：">
+                <ElFormItem label="名 称">
+                  <ElInput v-model="form.name" placeholder="请输入你的名称" />
+                </ElFormItem>
+                <ElFormItem label="手机号">
+                  <ElInput v-model="form.mobile" placeholder="请输入你的手机号" />
+                </ElFormItem>
+                <ElFormItem label="QQ 号">
+                  <ElInput v-model="form.qq" placeholder="请输入你的 QQ 号" />
+                </ElFormItem>
+                <ElFormItem label="微信号">
+                  <ElInput v-model="form.wechat" placeholder="请输入你的微信号" />
+                </ElFormItem>
+                <ElFormItem>
+                  <ElButton type="primary">
                     保存
-                  </el-button>
-                </el-form-item>
-              </el-form>
-            </el-col>
-            <el-col :span="8">
-              <image-upload v-model:url="form.headimg" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{ token: 'TKD628431923530324' }" notip class="headimg-upload" @on-success="handleSuccess" />
-            </el-col>
-          </el-row>
-        </el-tab-pane>
-        <el-tab-pane label="安全设置" class="security">
+                  </ElButton>
+                </ElFormItem>
+              </ElForm>
+            </ElCol>
+            <ElCol :span="8">
+              <ImageUpload v-model:url="form.headimg" action="http://scrm.1daas.com/api/upload/upload" name="image" :data="{ token: 'TKD628431923530324' }" notip class="headimg-upload" @on-success="handleSuccess" />
+            </ElCol>
+          </ElRow>
+        </ElTabPane>
+        <ElTabPane label="安全设置" class="security">
           <h2>安全设置</h2>
           <div class="setting-list">
             <div class="item">
@@ -83,9 +83,9 @@ function editPassword() {
                 </div>
               </div>
               <div class="action">
-                <el-button type="primary" text @click="editPassword">
+                <ElButton type="primary" text @click="editPassword">
                   修改
-                </el-button>
+                </ElButton>
               </div>
             </div>
             <div class="item">
@@ -98,9 +98,9 @@ function editPassword() {
                 </div>
               </div>
               <div class="action">
-                <el-button type="primary" text>
+                <ElButton type="primary" text>
                   修改
-                </el-button>
+                </ElButton>
               </div>
             </div>
             <div class="item">
@@ -113,15 +113,15 @@ function editPassword() {
                 </div>
               </div>
               <div class="action">
-                <el-button type="primary" text>
+                <ElButton type="primary" text>
                   绑定
-                </el-button>
+                </ElButton>
               </div>
             </div>
           </div>
-        </el-tab-pane>
-      </el-tabs>
-    </page-main>
+        </ElTabPane>
+      </ElTabs>
+    </PageMain>
   </div>
 </template>
 

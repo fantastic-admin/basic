@@ -20,41 +20,41 @@ const value3 = ref([])
 
 <template>
   <div>
-    <el-divider content-position="left">
+    <ElDivider content-position="left">
       基础用法
-    </el-divider>
-    <el-select v-model="value1" placeholder="请选择">
-      <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
-    </el-select>
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElSelect v-model="value1" placeholder="请选择">
+      <ElOption v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
+    </ElSelect>
+    <ElDivider content-position="left">
       有禁用选项
-    </el-divider>
-    <el-select v-model="value2" placeholder="请选择">
-      <el-option v-for="item in options2" :key="item.value" :label="item.label" :value="item.value" />
-    </el-select>
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElSelect v-model="value2" placeholder="请选择">
+      <ElOption v-for="item in options2" :key="item.value" :label="item.label" :value="item.value" />
+    </ElSelect>
+    <ElDivider content-position="left">
       禁用状态
-    </el-divider>
-    <el-select v-model="value1" disabled placeholder="请选择">
-      <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
-    </el-select>
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElSelect v-model="value1" disabled placeholder="请选择">
+      <ElOption v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
+    </ElSelect>
+    <ElDivider content-position="left">
       可清空单选
-    </el-divider>
-    <el-select v-model="value1" clearable placeholder="请选择">
-      <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
-    </el-select>
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElSelect v-model="value1" clearable placeholder="请选择">
+      <ElOption v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
+    </ElSelect>
+    <ElDivider content-position="left">
       基础多选
-    </el-divider>
-    <el-select v-model="value3" multiple placeholder="请选择">
-      <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
-    </el-select>
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElSelect v-model="value3" multiple placeholder="请选择">
+      <ElOption v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
+    </ElSelect>
+    <ElDivider content-position="left">
       可搜索
-    </el-divider>
-    <el-select v-model="value1" filterable placeholder="请选择">
-      <el-option v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
-    </el-select>
+    </ElDivider>
+    <ElSelect v-model="value1" filterable placeholder="请选择">
+      <ElOption v-for="item in options1" :key="item.value" :label="item.label" :value="item.value" />
+    </ElSelect>
   </div>
 </template>

@@ -7,18 +7,18 @@ const value3 = ref(false)
 
 <template>
   <div>
-    <el-divider content-position="left">
+    <ElDivider content-position="left">
       基础用法
-    </el-divider>
-    <el-switch v-model="value" active-color="#13ce66" inactive-color="#ff4949" />
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElSwitch v-model="value" active-color="#13ce66" inactive-color="#ff4949" />
+    <ElDivider content-position="left">
       文字描述
-    </el-divider>
-    <el-switch v-model="value1" active-text="按月付费" inactive-text="按年付费" />
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElSwitch v-model="value1" active-text="按月付费" inactive-text="按年付费" />
+    <ElDivider content-position="left">
       禁用状态
-    </el-divider>
-    <el-switch v-model="value2" disabled style="margin-right: 10px;" />
-    <el-switch v-model="value3" disabled />
+    </ElDivider>
+    <ElSwitch v-model="value2" disabled style="margin-right: 10px;" />
+    <ElSwitch v-model="value3" disabled />
   </div>
 </template>

@@ -1,21 +1,49 @@
-@use "./themes.scss";
-@use "./element-plus/index.scss";
-
-// 全局变量
+// 页面布局 CSS 变量
 :root {
-  // 头部宽度（默认自适应宽度，可固定宽度，固定宽度后为居中显示）
-  --g-header-width: 100%;
   // 头部高度
-  --g-header-height: 70px;
+  --g-header-height: 80px;
   // 侧边栏宽度
-  --g-main-sidebar-width: 70px;
+  --g-main-sidebar-width: 80px;
   --g-sub-sidebar-width: 220px;
-  // 侧边栏Logo高度
+  --g-sub-sidebar-collapse-width: 64px;
+  // 侧边栏 Logo 区域高度
   --g-sidebar-logo-height: 50px;
-  // 顶栏高度
-  --g-topbar-height: 50px;
+  // 工具栏高度
+  --g-toolbar-height: 50px;
 }
-// 全局样式
+
+// 明暗模式 CSS 变量
+/* stylelint-disable-next-line no-duplicate-selectors */
+:root {
+  &::view-transition-old(root),
+  &::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+  }
+
+  &::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  &::view-transition-new(root) {
+    z-index: 9999;
+  }
+
+  --g-box-shadow-color: rgb(0 0 0 / 12%);
+
+  &.dark {
+    &::view-transition-old(root) {
+      z-index: 9999;
+    }
+
+    &::view-transition-new(root) {
+      z-index: 1;
+    }
+
+    --g-box-shadow-color: rgb(0 0 0 / 72%);
+  }
+}
+
 ::-webkit-scrollbar {
   width: 12px;
   height: 12px;
@@ -43,6 +71,7 @@ body {
 
 body {
   margin: 0;
+  background-color: var(--g-container-bg);
   box-sizing: border-box;
   font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
   -webkit-tap-highlight-color: transparent;
@@ -55,6 +84,7 @@ body {
 * {
   box-sizing: inherit;
 }
+
 // 右侧内容区针对fixed元素，有横向铺满的需求，可在fixed元素上设置 [data-fixed-calc-width]
 [data-fixed-calc-width] {
   position: fixed;
@@ -74,15 +104,37 @@ body {
 textarea {
   font-family: inherit;
 }
-// 列表页全局样式
-.el-table.list-table {
-  margin: 20px 0;
 
-  .el-button + .el-dropdown {
-    margin-left: 10px;
-  }
+/* Overrides Floating Vue */
+.v-popper--theme-dropdown,
+.v-popper--theme-tooltip {
+  --at-apply: inline-flex;
 }
 
-.el-loading-mask {
-  z-index: 900 !important;
+.v-popper--theme-dropdown .v-popper__inner,
+.v-popper--theme-tooltip .v-popper__inner {
+  --at-apply: bg-white dark:bg-stone-8 text-dark dark:text-white rounded shadow ring-1 ring-gray-200 dark:ring-gray-800 border border-solid border-stone/20 text-xs font-normal;
+
+  box-shadow: 0 6px 30px rgb(0 0 0 / 10%);
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-inner,
+.v-popper--theme-dropdown .v-popper__arrow-inner {
+  visibility: visible;
+
+  --at-apply: border-white dark:border-stone-8;
+}
+
+.v-popper--theme-tooltip .v-popper__arrow-outer,
+.v-popper--theme-dropdown .v-popper__arrow-outer {
+  --at-apply: border-stone/20;
+}
+
+.v-popper--theme-tooltip.v-popper--shown,
+.v-popper--theme-tooltip.v-popper--shown * {
+  transition: none !important;
+}
+
+[data-overlayscrollbars-contents] {
+  overscroll-behavior: contain;
 }

@@ -15,6 +15,7 @@ import Select from './components/select.vue'
 import Switch from './components/switch.vue'
 import Slider from './components/slider.vue'
 import Rate from './components/rate.vue'
+import eventBus from '@/utils/eventBus'
 
 const components = {
   图标: Icon,
@@ -37,20 +38,28 @@ function open(url: string) {
 
 <template>
   <div>
-    <page-header title="基础组件" content="由 Element Plus 提供，本页仅展示部分组件，更多组件及使用说明请查看 Element Plus 官网">
-      <el-button @click="open('https://element-plus.org/#/zh-CN')">
+    <PageHeader title="基础组件">
+      <template #content>
+        <p>框架内置 Element Plus 组件库，本页仅展示部分组件，更多组件及使用说明请查看 Element Plus 官网</p>
+        <p class="mb-0">
+          <ElLink type="primary" @click="eventBus.emit('global-ui-component-switch')">
+            不想使用 Element Plus ？
+          </ElLink>
+        </p>
+      </template>
+      <ElButton @click="open('https://element-plus.org/#/zh-CN')">
         <template #icon>
-          <svg-icon name="ep:link" />
+          <SvgIcon name="ep:link" />
         </template>
         Element Plus 官网
-      </el-button>
-    </page-header>
-    <page-main>
-      <el-tabs type="border-card">
-        <el-tab-pane v-for="(item, key) in components" :key="key" :label="key">
+      </ElButton>
+    </PageHeader>
+    <PageMain>
+      <ElTabs type="border-card">
+        <ElTabPane v-for="(item, key) in components" :key="key" :label="key">
           <component :is="item" />
-        </el-tab-pane>
-      </el-tabs>
-    </page-main>
+        </ElTabPane>
+      </ElTabs>
+    </PageMain>
   </div>
 </template>

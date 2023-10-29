@@ -32,395 +32,395 @@ function toggle(fold: boolean) {
 
 <template>
   <div>
-    <page-header title="搜索面板" content="SearchBar" />
-    <page-main>
-      <search-bar>
+    <PageHeader title="搜索面板" content="SearchBar" />
+    <PageMain>
+      <SearchBar>
         <template #default="{ fold }">
-          <el-form :model="search" size="default" label-width="120px">
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="姓名 / 手机号">
-                  <el-input v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="6">
-                <el-form-item label="部门">
-                  <el-select v-model="search.department_id" clearable placeholder="请选择部门">
-                    <el-option label="技术部" :value="1" />
-                    <el-option label="设计部" :value="2" />
-                    <el-option label="行政部" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="职位">
-                  <el-select v-model="search.department_job_id" clearable placeholder="请选择职位">
-                    <el-option label="程序员" :value="1" />
-                    <el-option label="设计师" :value="2" />
-                    <el-option label="人事" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="角色">
-                  <el-select v-model="search.role_id" clearable placeholder="请选择角色">
-                    <el-option label="主管" :value="1" />
-                    <el-option label="普通职员" :value="2" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="24">
-                <el-form-item label="角色">
-                  <el-checkbox :value="true">
+          <ElForm :model="search" size="default" label-width="120px">
+            <ElRow>
+              <ElCol :span="12">
+                <ElFormItem label="姓名 / 手机号">
+                  <ElInput v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="6">
+                <ElFormItem label="部门">
+                  <ElSelect v-model="search.department_id" clearable placeholder="请选择部门">
+                    <ElOption label="技术部" :value="1" />
+                    <ElOption label="设计部" :value="2" />
+                    <ElOption label="行政部" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="职位">
+                  <ElSelect v-model="search.department_job_id" clearable placeholder="请选择职位">
+                    <ElOption label="程序员" :value="1" />
+                    <ElOption label="设计师" :value="2" />
+                    <ElOption label="人事" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="角色">
+                  <ElSelect v-model="search.role_id" clearable placeholder="请选择角色">
+                    <ElOption label="主管" :value="1" />
+                    <ElOption label="普通职员" :value="2" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="24">
+                <ElFormItem label="角色">
+                  <ElCheckbox :value="true">
                     备选项
-                  </el-checkbox>
-                  <el-checkbox :value="false">
+                  </ElCheckbox>
+                  <ElCheckbox :value="false">
                     备选项
-                  </el-checkbox>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-form-item>
-              <el-button type="primary">
+                  </ElCheckbox>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElFormItem>
+              <ElButton type="primary">
                 <template #icon>
-                  <svg-icon name="ep:search" />
+                  <SvgIcon name="ep:search" />
                 </template>
                 筛选
-              </el-button>
-              <el-button>导出</el-button>
-              <el-button type="primary" link>
+              </ElButton>
+              <ElButton>导出</ElButton>
+              <ElButton type="primary" link>
                 查看已导出记录
-              </el-button>
-            </el-form-item>
-          </el-form>
+              </ElButton>
+            </ElFormItem>
+          </ElForm>
         </template>
-      </search-bar>
-    </page-main>
-    <page-main title="默认展开">
-      <search-bar :fold="isFold">
+      </SearchBar>
+    </PageMain>
+    <PageMain title="默认展开">
+      <SearchBar :fold="isFold">
         <template #default="{ fold }">
-          <el-form :model="search" size="default" label-width="120px">
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="姓名 / 手机号">
-                  <el-input v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="6">
-                <el-form-item label="部门">
-                  <el-select v-model="search.department_id" clearable placeholder="请选择部门">
-                    <el-option label="技术部" :value="1" />
-                    <el-option label="设计部" :value="2" />
-                    <el-option label="行政部" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="职位">
-                  <el-select v-model="search.department_job_id" clearable placeholder="请选择职位">
-                    <el-option label="程序员" :value="1" />
-                    <el-option label="设计师" :value="2" />
-                    <el-option label="人事" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="角色">
-                  <el-select v-model="search.role_id" clearable placeholder="请选择角色">
-                    <el-option label="主管" :value="1" />
-                    <el-option label="普通职员" :value="2" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="24">
-                <el-form-item label="复选框">
-                  <el-checkbox v-model="search.check1">
+          <ElForm :model="search" size="default" label-width="120px">
+            <ElRow>
+              <ElCol :span="12">
+                <ElFormItem label="姓名 / 手机号">
+                  <ElInput v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="6">
+                <ElFormItem label="部门">
+                  <ElSelect v-model="search.department_id" clearable placeholder="请选择部门">
+                    <ElOption label="技术部" :value="1" />
+                    <ElOption label="设计部" :value="2" />
+                    <ElOption label="行政部" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="职位">
+                  <ElSelect v-model="search.department_job_id" clearable placeholder="请选择职位">
+                    <ElOption label="程序员" :value="1" />
+                    <ElOption label="设计师" :value="2" />
+                    <ElOption label="人事" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="角色">
+                  <ElSelect v-model="search.role_id" clearable placeholder="请选择角色">
+                    <ElOption label="主管" :value="1" />
+                    <ElOption label="普通职员" :value="2" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="24">
+                <ElFormItem label="复选框">
+                  <ElCheckbox v-model="search.check1">
                     备选项
-                  </el-checkbox>
-                  <el-checkbox v-model="search.check2">
+                  </ElCheckbox>
+                  <ElCheckbox v-model="search.check2">
                     备选项
-                  </el-checkbox>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-form-item>
-              <el-button type="primary">
+                  </ElCheckbox>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElFormItem>
+              <ElButton type="primary">
                 <template #icon>
-                  <svg-icon name="ep:search" />
+                  <SvgIcon name="ep:search" />
                 </template>
                 筛选
-              </el-button>
-              <el-button>导出</el-button>
-              <el-button type="primary" link>
+              </ElButton>
+              <ElButton>导出</ElButton>
+              <ElButton type="primary" link>
                 查看已导出记录
-              </el-button>
-            </el-form-item>
-          </el-form>
+              </ElButton>
+            </ElFormItem>
+          </ElForm>
         </template>
-      </search-bar>
-    </page-main>
-    <page-main title="显示背景">
-      <search-bar background>
+      </SearchBar>
+    </PageMain>
+    <PageMain title="显示背景">
+      <SearchBar background>
         <template #default="{ fold }">
-          <el-form :model="search" size="default" label-width="120px">
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="姓名 / 手机号">
-                  <el-input v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="6">
-                <el-form-item label="部门">
-                  <el-select v-model="search.department_id" clearable placeholder="请选择部门">
-                    <el-option label="技术部" :value="1" />
-                    <el-option label="设计部" :value="2" />
-                    <el-option label="行政部" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="职位">
-                  <el-select v-model="search.department_job_id" clearable placeholder="请选择职位">
-                    <el-option label="程序员" :value="1" />
-                    <el-option label="设计师" :value="2" />
-                    <el-option label="人事" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="角色">
-                  <el-select v-model="search.role_id" clearable placeholder="请选择角色">
-                    <el-option label="主管" :value="1" />
-                    <el-option label="普通职员" :value="2" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="24">
-                <el-form-item label="复选框">
-                  <el-checkbox :value="true">
+          <ElForm :model="search" size="default" label-width="120px">
+            <ElRow>
+              <ElCol :span="12">
+                <ElFormItem label="姓名 / 手机号">
+                  <ElInput v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="6">
+                <ElFormItem label="部门">
+                  <ElSelect v-model="search.department_id" clearable placeholder="请选择部门">
+                    <ElOption label="技术部" :value="1" />
+                    <ElOption label="设计部" :value="2" />
+                    <ElOption label="行政部" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="职位">
+                  <ElSelect v-model="search.department_job_id" clearable placeholder="请选择职位">
+                    <ElOption label="程序员" :value="1" />
+                    <ElOption label="设计师" :value="2" />
+                    <ElOption label="人事" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="角色">
+                  <ElSelect v-model="search.role_id" clearable placeholder="请选择角色">
+                    <ElOption label="主管" :value="1" />
+                    <ElOption label="普通职员" :value="2" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="24">
+                <ElFormItem label="复选框">
+                  <ElCheckbox :value="true">
                     备选项
-                  </el-checkbox>
-                  <el-checkbox :value="false">
+                  </ElCheckbox>
+                  <ElCheckbox :value="false">
                     备选项
-                  </el-checkbox>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-form-item>
-              <el-button type="primary">
+                  </ElCheckbox>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElFormItem>
+              <ElButton type="primary">
                 <template #icon>
-                  <svg-icon name="ep:search" />
+                  <SvgIcon name="ep:search" />
                 </template>
                 筛选
-              </el-button>
-              <el-button>导出</el-button>
-              <el-button type="primary" link>
+              </ElButton>
+              <ElButton>导出</ElButton>
+              <ElButton type="primary" link>
                 查看已导出记录
-              </el-button>
-            </el-form-item>
-          </el-form>
+              </ElButton>
+            </ElFormItem>
+          </ElForm>
         </template>
-      </search-bar>
-    </page-main>
-    <page-main title="切换事件">
-      <search-bar @toggle="toggle">
+      </SearchBar>
+    </PageMain>
+    <PageMain title="切换事件">
+      <SearchBar @toggle="toggle">
         <template #default="{ fold }">
-          <el-form :model="search" size="default" label-width="120px">
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="姓名 / 手机号">
-                  <el-input v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="6">
-                <el-form-item label="部门">
-                  <el-select v-model="search.department_id" clearable placeholder="请选择部门">
-                    <el-option label="技术部" :value="1" />
-                    <el-option label="设计部" :value="2" />
-                    <el-option label="行政部" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="职位">
-                  <el-select v-model="search.department_job_id" clearable placeholder="请选择职位">
-                    <el-option label="程序员" :value="1" />
-                    <el-option label="设计师" :value="2" />
-                    <el-option label="人事" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6">
-                <el-form-item label="角色">
-                  <el-select v-model="search.role_id" clearable placeholder="请选择角色">
-                    <el-option label="主管" :value="1" />
-                    <el-option label="普通职员" :value="2" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-row v-show="!fold">
-              <el-col :span="24">
-                <el-form-item label="复选框">
-                  <el-checkbox :value="true">
+          <ElForm :model="search" size="default" label-width="120px">
+            <ElRow>
+              <ElCol :span="12">
+                <ElFormItem label="姓名 / 手机号">
+                  <ElInput v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="6">
+                <ElFormItem label="部门">
+                  <ElSelect v-model="search.department_id" clearable placeholder="请选择部门">
+                    <ElOption label="技术部" :value="1" />
+                    <ElOption label="设计部" :value="2" />
+                    <ElOption label="行政部" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="职位">
+                  <ElSelect v-model="search.department_job_id" clearable placeholder="请选择职位">
+                    <ElOption label="程序员" :value="1" />
+                    <ElOption label="设计师" :value="2" />
+                    <ElOption label="人事" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6">
+                <ElFormItem label="角色">
+                  <ElSelect v-model="search.role_id" clearable placeholder="请选择角色">
+                    <ElOption label="主管" :value="1" />
+                    <ElOption label="普通职员" :value="2" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElRow v-show="!fold">
+              <ElCol :span="24">
+                <ElFormItem label="复选框">
+                  <ElCheckbox :value="true">
                     备选项
-                  </el-checkbox>
-                  <el-checkbox :value="false">
+                  </ElCheckbox>
+                  <ElCheckbox :value="false">
                     备选项
-                  </el-checkbox>
-                </el-form-item>
-              </el-col>
-            </el-row>
-            <el-form-item>
-              <el-button type="primary">
+                  </ElCheckbox>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+            <ElFormItem>
+              <ElButton type="primary">
                 <template #icon>
-                  <svg-icon name="ep:search" />
+                  <SvgIcon name="ep:search" />
                 </template>
                 筛选
-              </el-button>
-              <el-button>导出</el-button>
-              <el-button type="primary" link>
+              </ElButton>
+              <ElButton>导出</ElButton>
+              <ElButton type="primary" link>
                 查看已导出记录
-              </el-button>
-            </el-form-item>
-          </el-form>
+              </ElButton>
+            </ElFormItem>
+          </ElForm>
         </template>
-      </search-bar>
-    </page-main>
-    <page-main title="自定义切换按钮（搭配自定义 flex 布局）">
-      <search-bar :fold="isFold2" :show-toggle="false">
+      </SearchBar>
+    </PageMain>
+    <PageMain title="自定义切换按钮（搭配自定义 flex 布局）">
+      <SearchBar :fold="isFold2" :show-toggle="false">
         <template #default="{ fold }">
-          <el-form :model="search" size="default" label-width="120px" inline class="search-form">
-            <el-form-item label="姓名 / 手机号" class="search-form-item-name">
-              <el-input v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
-            </el-form-item>
-            <el-form-item v-show="!fold" label="部门">
-              <el-select v-model="search.department_id" clearable placeholder="请选择部门">
-                <el-option label="技术部" :value="1" />
-                <el-option label="设计部" :value="2" />
-                <el-option label="行政部" :value="3" />
-              </el-select>
-            </el-form-item>
-            <el-form-item v-show="!fold" label="职位">
-              <el-select v-model="search.department_job_id" clearable placeholder="请选择职位">
-                <el-option label="程序员" :value="1" />
-                <el-option label="设计师" :value="2" />
-                <el-option label="人事" :value="3" />
-              </el-select>
-            </el-form-item>
-            <el-form-item v-show="!fold" label="角色">
-              <el-select v-model="search.role_id" clearable placeholder="请选择角色">
-                <el-option label="主管" :value="1" />
-                <el-option label="普通职员" :value="2" />
-              </el-select>
-            </el-form-item>
-            <el-form-item v-show="!fold" label="复选框">
-              <el-checkbox v-model="search.check1">
+          <ElForm :model="search" size="default" label-width="120px" inline class="search-form">
+            <ElFormItem label="姓名 / 手机号" class="search-form-item-name">
+              <ElInput v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
+            </ElFormItem>
+            <ElFormItem v-show="!fold" label="部门">
+              <ElSelect v-model="search.department_id" clearable placeholder="请选择部门">
+                <ElOption label="技术部" :value="1" />
+                <ElOption label="设计部" :value="2" />
+                <ElOption label="行政部" :value="3" />
+              </ElSelect>
+            </ElFormItem>
+            <ElFormItem v-show="!fold" label="职位">
+              <ElSelect v-model="search.department_job_id" clearable placeholder="请选择职位">
+                <ElOption label="程序员" :value="1" />
+                <ElOption label="设计师" :value="2" />
+                <ElOption label="人事" :value="3" />
+              </ElSelect>
+            </ElFormItem>
+            <ElFormItem v-show="!fold" label="角色">
+              <ElSelect v-model="search.role_id" clearable placeholder="请选择角色">
+                <ElOption label="主管" :value="1" />
+                <ElOption label="普通职员" :value="2" />
+              </ElSelect>
+            </ElFormItem>
+            <ElFormItem v-show="!fold" label="复选框">
+              <ElCheckbox v-model="search.check1">
                 备选项
-              </el-checkbox>
-              <el-checkbox v-model="search.check2">
+              </ElCheckbox>
+              <ElCheckbox v-model="search.check2">
                 备选项
-              </el-checkbox>
-            </el-form-item>
-            <el-form-item>
-              <el-button type="primary">
+              </ElCheckbox>
+            </ElFormItem>
+            <ElFormItem>
+              <ElButton type="primary">
                 <template #icon>
-                  <svg-icon name="ep:search" />
+                  <SvgIcon name="ep:search" />
                 </template>
                 筛选
-              </el-button>
-              <el-button link @click="isFold2 = !fold">
+              </ElButton>
+              <ElButton link @click="isFold2 = !fold">
                 <template #icon>
-                  <svg-icon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
+                  <SvgIcon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
                 </template>
                 {{ fold ? '展开' : '收起' }}
-              </el-button>
-            </el-form-item>
-          </el-form>
+              </ElButton>
+            </ElFormItem>
+          </ElForm>
         </template>
-      </search-bar>
-    </page-main>
-    <page-main title="自定义切换按钮（搭配 el-row 组件）">
-      <search-bar :fold="isFold3" :show-toggle="false">
+      </SearchBar>
+    </PageMain>
+    <PageMain title="自定义切换按钮（搭配 el-row 组件）">
+      <SearchBar :fold="isFold3" :show-toggle="false">
         <template #default="{ fold }">
-          <el-form :model="search" size="default" label-width="120px">
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="姓名 / 手机号">
-                  <el-input v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
-                </el-form-item>
-              </el-col>
-              <el-col v-show="!fold" :span="6">
-                <el-form-item label="部门">
-                  <el-select v-model="search.department_id" clearable placeholder="请选择部门">
-                    <el-option label="技术部" :value="1" />
-                    <el-option label="设计部" :value="2" />
-                    <el-option label="行政部" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col v-show="!fold" :span="6">
-                <el-form-item label="职位">
-                  <el-select v-model="search.department_job_id" clearable placeholder="请选择职位">
-                    <el-option label="程序员" :value="1" />
-                    <el-option label="设计师" :value="2" />
-                    <el-option label="人事" :value="3" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col v-show="!fold" :span="6">
-                <el-form-item label="角色">
-                  <el-select v-model="search.role_id" clearable placeholder="请选择角色">
-                    <el-option label="主管" :value="1" />
-                    <el-option label="普通职员" :value="2" />
-                  </el-select>
-                </el-form-item>
-              </el-col>
-              <el-col v-show="!fold" :span="6">
-                <el-form-item label="复选框">
-                  <el-checkbox v-model="search.check1">
+          <ElForm :model="search" size="default" label-width="120px">
+            <ElRow>
+              <ElCol :span="12">
+                <ElFormItem label="姓名 / 手机号">
+                  <ElInput v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
+                </ElFormItem>
+              </ElCol>
+              <ElCol v-show="!fold" :span="6">
+                <ElFormItem label="部门">
+                  <ElSelect v-model="search.department_id" clearable placeholder="请选择部门">
+                    <ElOption label="技术部" :value="1" />
+                    <ElOption label="设计部" :value="2" />
+                    <ElOption label="行政部" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol v-show="!fold" :span="6">
+                <ElFormItem label="职位">
+                  <ElSelect v-model="search.department_job_id" clearable placeholder="请选择职位">
+                    <ElOption label="程序员" :value="1" />
+                    <ElOption label="设计师" :value="2" />
+                    <ElOption label="人事" :value="3" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol v-show="!fold" :span="6">
+                <ElFormItem label="角色">
+                  <ElSelect v-model="search.role_id" clearable placeholder="请选择角色">
+                    <ElOption label="主管" :value="1" />
+                    <ElOption label="普通职员" :value="2" />
+                  </ElSelect>
+                </ElFormItem>
+              </ElCol>
+              <ElCol v-show="!fold" :span="6">
+                <ElFormItem label="复选框">
+                  <ElCheckbox v-model="search.check1">
                     备选项
-                  </el-checkbox>
-                  <el-checkbox v-model="search.check2">
+                  </ElCheckbox>
+                  <ElCheckbox v-model="search.check2">
                     备选项
-                  </el-checkbox>
-                </el-form-item>
-              </el-col>
-              <el-col :span="6" :offset="6">
-                <el-form-item label-width="0" class="action-box">
-                  <el-button type="primary">
+                  </ElCheckbox>
+                </ElFormItem>
+              </ElCol>
+              <ElCol :span="6" :offset="6">
+                <ElFormItem label-width="0" class="action-box">
+                  <ElButton type="primary">
                     <template #icon>
-                      <svg-icon name="ep:search" />
+                      <SvgIcon name="ep:search" />
                     </template>
                     筛选
-                  </el-button>
-                  <el-button link @click="isFold3 = !fold">
+                  </ElButton>
+                  <ElButton link @click="isFold3 = !fold">
                     <template #icon>
-                      <svg-icon :name="fold ? 'epcaret-bottom' : 'ep:caret-top' " />
+                      <SvgIcon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
                     </template>
                     {{ fold ? '展开' : '收起' }}
-                  </el-button>
-                </el-form-item>
-              </el-col>
-            </el-row>
-          </el-form>
+                  </ElButton>
+                </ElFormItem>
+              </ElCol>
+            </ElRow>
+          </ElForm>
         </template>
-      </search-bar>
-    </page-main>
+      </SearchBar>
+    </PageMain>
   </div>
 </template>
 

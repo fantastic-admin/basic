@@ -10,6 +10,7 @@ export default [
           account: body.account,
           token: `${body.account}_@string`,
           failure_time: Math.ceil(new Date().getTime() / 1000) + 24 * 60 * 60,
+          avatar: '',
         },
       }
     },

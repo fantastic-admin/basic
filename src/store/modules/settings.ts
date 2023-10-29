@@ -1,25 +1,23 @@
 import { defaultsDeep } from 'lodash-es'
 import type { RouteMeta } from 'vue-router'
-import type { RecursiveRequired, Settings } from '#/global'
-import settingsCustom from '@/settings'
-import settingsDefault from '@/settings.default'
+import type { Settings } from '#/global'
+import settingsDefault from '@/settings'
 
 const useSettingsStore = defineStore(
   // 唯一ID
   'settings',
   () => {
-    const mergeSettings: RecursiveRequired<Settings.all> = defaultsDeep(settingsCustom, settingsDefault)
-    const settings = ref(mergeSettings)
-    watch(() => settings.value.app.colorScheme, (val) => {
-      if (val === '') {
-        val = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    const settings = ref(settingsDefault)
+    watch(() => settings.value.app.colorScheme, (colorScheme) => {
+      if (colorScheme === '') {
+        colorScheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
       }
-      switch (val) {
-        case 'dark':
-          document.documentElement.classList.add('dark')
-          break
+      switch (colorScheme) {
         case 'light':
           document.documentElement.classList.remove('dark')
+          break
+        case 'dark':
+          document.documentElement.classList.add('dark')
           break
       }
     }, {
@@ -48,14 +46,14 @@ const useSettingsStore = defineStore(
 
     // 页面标题
     const title = ref<RouteMeta['title']>()
-    // 设置网页标题
+    // 记录页面标题
     function setTitle(_title: RouteMeta['title']) {
       title.value = _title
     }
 
     // 显示模式
     const mode = ref<'pc' | 'mobile'>('pc')
-    // 设置访问模式
+    // 设置显示模式
     function setMode(width: number) {
       if (settings.value.layout.enableMobileAdaptation) {
         // 先判断 UA 是否为移动端设备（手机&平板）
@@ -63,7 +61,7 @@ const useSettingsStore = defineStore(
           mode.value = 'mobile'
         }
         else {
-          // 如果为桌面设备，再根据页面宽度判断是否需要切换为移动端展示
+          // 如果是桌面设备，则根据页面宽度判断是否需要切换为移动端展示
           mode.value = width < 992 ? 'mobile' : 'pc'
         }
       }
@@ -72,8 +70,8 @@ const useSettingsStore = defineStore(
       }
     }
 
-    // 侧边栏是否收起（用于记录 pc 模式下最后的状态）
-    const subMenuCollapseLastStatus = ref(mergeSettings.menu.subMenuCollapse)
+    // 次导航是否收起（用于记录 pc 模式下最后的状态）
+    const subMenuCollapseLastStatus = ref(settingsDefault.menu.subMenuCollapse)
     // 切换侧边栏导航展开/收起
     function toggleSidebarCollapse() {
       settings.value.menu.subMenuCollapse = !settings.value.menu.subMenuCollapse
@@ -100,9 +98,10 @@ const useSettingsStore = defineStore(
     function setColorScheme(color: Required<Settings.app>['colorScheme']) {
       settings.value.app.colorScheme = color
     }
+
     // 更新应用配置
-    function updateSettings(data: Settings.all) {
-      settings.value = defaultsDeep(data, settings.value)
+    function updateSettings(data: Settings.all, fromBase = false) {
+      settings.value = defaultsDeep(data, fromBase ? settingsDefault : settings.value)
     }
 
     return {

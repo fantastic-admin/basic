@@ -29,35 +29,10 @@ const isUp = computed(() => {
 </script>
 
 <template>
-  <div :class="`trend ${isUp ? 'up' : 'down'}`">
+  <div class="flex items-center transition" :class="`${isUp ? 'c-green' : 'c-red'}`">
     <span v-if="prefix" class="prefix">{{ prefix }}</span>
     <span class="text">{{ value }}</span>
     <span v-if="suffix" class="suffix">{{ suffix }}</span>
-    <svg-icon name="ep:caret-top" />
+    <SvgIcon name="ep:caret-top" :rotate="isUp ? 0 : 180" class="ml-1 transition" />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.trend {
-  display: flex;
-  align-items: center;
-  transition: var(--el-transition-color);
-
-  &.up {
-    color: var(--el-color-success);
-  }
-
-  &.down {
-    color: var(--el-color-danger);
-
-    .icon {
-      transform: rotate(180deg);
-    }
-  }
-
-  .icon {
-    margin-left: 5px;
-    transition: transform 0.3s;
-  }
-}
-</style>

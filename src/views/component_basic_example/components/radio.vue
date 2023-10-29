@@ -8,55 +8,55 @@ const radio5 = ref('1')
 
 <template>
   <div>
-    <el-divider content-position="left">
+    <ElDivider content-position="left">
       基础用法
-    </el-divider>
-    <el-radio v-model="radio" label="1">
+    </ElDivider>
+    <ElRadio v-model="radio" label="1">
       备选项
-    </el-radio>
-    <el-radio v-model="radio" label="2">
+    </ElRadio>
+    <ElRadio v-model="radio" label="2">
       备选项
-    </el-radio>
-    <el-divider content-position="left">
+    </ElRadio>
+    <ElDivider content-position="left">
       禁用状态
-    </el-divider>
-    <el-radio v-model="radio2" disabled label="禁用">
+    </ElDivider>
+    <ElRadio v-model="radio2" disabled label="禁用">
       备选项
-    </el-radio>
-    <el-radio v-model="radio2" disabled label="选中且禁用">
+    </ElRadio>
+    <ElRadio v-model="radio2" disabled label="选中且禁用">
       备选项
-    </el-radio>
-    <el-divider content-position="left">
+    </ElRadio>
+    <ElDivider content-position="left">
       单选框组
-    </el-divider>
-    <el-radio-group v-model="radio3">
-      <el-radio :label="3">
+    </ElDivider>
+    <ElRadioGroup v-model="radio3">
+      <ElRadio :label="3">
         备选项
-      </el-radio>
-      <el-radio :label="6">
+      </ElRadio>
+      <ElRadio :label="6">
         备选项
-      </el-radio>
-      <el-radio :label="9">
+      </ElRadio>
+      <ElRadio :label="9">
         备选项
-      </el-radio>
-    </el-radio-group>
-    <el-divider content-position="left">
+      </ElRadio>
+    </ElRadioGroup>
+    <ElDivider content-position="left">
       按钮样式
-    </el-divider>
-    <el-radio-group v-model="radio4">
-      <el-radio-button label="上海" />
-      <el-radio-button label="北京" />
-      <el-radio-button label="广州" />
-      <el-radio-button label="深圳" />
-    </el-radio-group>
-    <el-divider content-position="left">
+    </ElDivider>
+    <ElRadioGroup v-model="radio4">
+      <ElRadioButton label="上海" />
+      <ElRadioButton label="北京" />
+      <ElRadioButton label="广州" />
+      <ElRadioButton label="深圳" />
+    </ElRadioGroup>
+    <ElDivider content-position="left">
       带有边框
-    </el-divider>
-    <el-radio v-model="radio5" label="1" border>
+    </ElDivider>
+    <ElRadio v-model="radio5" label="1" border>
       备选项1
-    </el-radio>
-    <el-radio v-model="radio5" label="2" border>
+    </ElRadio>
+    <ElRadio v-model="radio5" label="2" border>
       备选项2
-    </el-radio>
+    </ElRadio>
   </div>
 </template>

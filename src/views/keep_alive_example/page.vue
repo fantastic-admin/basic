@@ -52,23 +52,23 @@ onBeforeRouteLeave((to, from) => {
 
 <template>
   <div>
-    <page-header title="页面缓存" content="除了可以在路由里配置页面是否需要缓存外，你也可以不使用框架提供的方法，而是在页面里自行实现。" />
-    <page-main>
+    <PageHeader title="页面缓存" content="除了可以在路由里配置页面是否需要缓存外，你也可以不使用框架提供的方法，而是在页面里自行实现。" />
+    <PageMain>
       <div class="block">
-        <el-switch v-model="openKeepAlive" active-text="开启缓存" inactive-text="关闭缓存" />
+        <ElSwitch v-model="openKeepAlive" active-text="开启缓存" inactive-text="关闭缓存" />
       </div>
       <div class="block">
-        <el-input-number v-model="num" />
+        <ElInputNumber v-model="num" />
       </div>
       <div class="block">
-        <el-button @click="go(1)">
+        <ElButton @click="go(1)">
           进入同级路由页面
-        </el-button>
-        <el-button @click="go(2)">
+        </ElButton>
+        <ElButton @click="go(2)">
           进入下级路由页面
-        </el-button>
+        </ElButton>
       </div>
-    </page-main>
+    </PageMain>
   </div>
 </template>
 

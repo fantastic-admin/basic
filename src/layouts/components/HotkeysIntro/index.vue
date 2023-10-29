@@ -18,38 +18,39 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
-    <el-drawer v-model="isShow" title="快捷键介绍" direction="rtl" :size="360">
-      <el-descriptions title="全局" :column="1" border>
-        <el-descriptions-item label="查看系统信息">
-          {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + I
-        </el-descriptions-item>
-        <el-descriptions-item v-if="settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys" label="唤起导航搜索">
-          {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + S
-        </el-descriptions-item>
-      </el-descriptions>
-      <el-descriptions v-if="settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.menuMode)" title="主导航" :column="1" border>
-        <el-descriptions-item label="激活下一个主导航">
-          {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} + `
-        </el-descriptions-item>
-      </el-descriptions>
-    </el-drawer>
-  </div>
+  <HDialog v-model="isShow" title="快捷键介绍">
+    <div class="px-4">
+      <div class="grid md:grid-cols-2 gap-2">
+        <div>
+          <h2 class="text-lg font-bold m-0">
+            全局
+          </h2>
+          <ul class="list-none pl-4 text-sm">
+            <li class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>I</HKbd>
+              查看系统信息
+            </li>
+            <li v-if="settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys" class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>S</HKbd>
+              唤起导航搜索
+            </li>
+          </ul>
+        </div>
+        <div v-if="settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.menuMode)">
+          <h2 class="text-lg font-bold m-0">
+            主导航
+          </h2>
+          <ul class="list-none pl-4 text-sm">
+            <li class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>`</HKbd>
+              激活下一个主导航
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </HDialog>
 </template>
-
-<style lang="scss" scoped>
-:deep(.el-drawer__header) {
-  margin-bottom: initial;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--el-border-color);
-  transition: var(--el-transition-border);
-}
-
-:deep(.el-descriptions) {
-  margin-bottom: 20px;
-
-  .el-descriptions__label {
-    width: 200px;
-  }
-}
-</style>

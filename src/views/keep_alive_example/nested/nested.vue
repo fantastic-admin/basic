@@ -15,13 +15,13 @@ const keepAliveStore = useKeepAliveStore()
 
 <template>
   <div>
-    <page-main>
+    <PageMain>
       <div>层级：1</div>
-      <router-view v-slot="{ Component }">
-        <keep-alive :include="keepAliveStore.list">
+      <RouterView v-slot="{ Component }">
+        <KeepAlive :include="keepAliveStore.list">
           <component :is="Component" />
-        </keep-alive>
-      </router-view>
-    </page-main>
+        </KeepAlive>
+      </RouterView>
+    </PageMain>
   </div>
 </template>

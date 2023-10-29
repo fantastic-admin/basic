@@ -5,8 +5,8 @@ meta:
 
 <template>
   <div>
-    <page-main>
+    <PageMain>
       你能看到这个页面，说明你有访问权限。
-    </page-main>
+    </PageMain>
   </div>
 </template>

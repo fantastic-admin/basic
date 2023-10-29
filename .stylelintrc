@@ -20,6 +20,25 @@
     "property-no-unknown": null,
     "font-family-no-missing-generic-family-keyword": null,
     "selector-class-pattern": null,
+    "function-no-unknown": [
+      true,
+      {
+        "ignoreFunctions": [
+          "v-bind",
+          "map-get",
+          "lighten",
+          "darken"
+        ]
+      }
+    ],
+    "selector-pseudo-element-no-unknown": [
+      true,
+      {
+        "ignorePseudoElements": [
+          "/^view-transition/"
+        ]
+      }
+    ],
     "scss/double-slash-comment-empty-line-before": null,
     "scss/no-global-function-names": null
   }

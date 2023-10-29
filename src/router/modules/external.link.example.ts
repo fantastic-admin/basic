@@ -11,13 +11,13 @@ const routes: RouteRecordRaw = {
   name: 'externalLinkExample',
   meta: {
     title: '外链',
-    icon: 'sidebar-external-link',
+    icon: 'ri:external-link-fill',
   },
   children: [
     {
       path: 'gitee',
       redirect: '',
-      name: 'externalLinkGitee',
+      name: 'linkExampleWindowGitee',
       meta: {
         title: 'Gitee 仓库',
         link: 'https://gitee.com/fantastic-admin/basic',
@@ -26,7 +26,7 @@ const routes: RouteRecordRaw = {
     {
       path: 'github',
       redirect: '',
-      name: 'externalLinkGithub',
+      name: 'linkExampleWindowGithub',
       meta: {
         title: 'Github 仓库',
         link: 'https://github.com/fantastic-admin/basic',

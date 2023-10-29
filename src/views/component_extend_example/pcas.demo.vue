@@ -42,34 +42,34 @@ function submitForm() {
 
 <template>
   <div>
-    <page-header title="省市区街道联动" content="PcasCascader" />
-    <page-main title="多级联动">
+    <PageHeader title="省市区街道联动" content="PcasCascader" />
+    <PageMain title="多级联动">
       <p>省份/城市联动</p>
-      <pcas-cascader v-model="pcas1" type="pc" />
+      <PcasCascader v-model="pcas1" type="pc" />
       <p>省份/城市/区县联动</p>
-      <pcas-cascader v-model="pcas2" />
+      <PcasCascader v-model="pcas2" />
       <p>省份/城市/区县/街道联动</p>
-      <pcas-cascader v-model="pcas3" type="pcas" />
-    </page-main>
-    <page-main title="数据格式化">
+      <PcasCascader v-model="pcas3" type="pcas" />
+    </PageMain>
+    <PageMain title="数据格式化">
       <p>{{ pcasCode }}</p>
-      <pcas-cascader v-model="pcasCode" />
+      <PcasCascader v-model="pcasCode" />
       <p>{{ pcasName }}</p>
-      <pcas-cascader v-model="pcasName" format="name" />
+      <PcasCascader v-model="pcasName" format="name" />
       <p>{{ pcasBoth }}</p>
-      <pcas-cascader v-model="pcasBoth" format="both" />
-    </page-main>
-    <page-main title="表单验证">
-      <el-form ref="formRef" :model="ruleForm" :rules="rules">
-        <el-form-item label="地区" prop="pca">
-          <pcas-cascader v-model="ruleForm.pca" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary" @click="submitForm">
+      <PcasCascader v-model="pcasBoth" format="both" />
+    </PageMain>
+    <PageMain title="表单验证">
+      <ElForm ref="formRef" :model="ruleForm" :rules="rules">
+        <ElFormItem label="地区" prop="pca">
+          <PcasCascader v-model="ruleForm.pca" />
+        </ElFormItem>
+        <ElFormItem>
+          <ElButton type="primary" @click="submitForm">
             提交
-          </el-button>
-        </el-form-item>
-      </el-form>
-    </page-main>
+          </ElButton>
+        </ElFormItem>
+      </ElForm>
+    </PageMain>
   </div>
 </template>

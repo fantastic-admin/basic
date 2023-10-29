@@ -8,9 +8,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/official',
     redirect: '/official/fantastic-startkit',
+    component: Layout,
     meta: {
       title: '官方周边',
-      icon: 'ep:grid',
+      icon: 'ion:apps',
     },
     children: [
       {
@@ -36,9 +37,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/cooperation',
     redirect: '/cooperation/vform',
+    component: Layout,
     meta: {
       title: '战略合作',
-      icon: 'sidebar-cooperation',
+      icon: 'ic:outline-handshake',
     },
     children: [
       {
@@ -57,26 +59,6 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: 'QuickAdmin 快速开发管理框架',
           link: 'https://gitee.com/sciqtw/quickadmin',
-        },
-      },
-    ],
-  },
-  {
-    path: '/video/coming/soon',
-    component: Layout,
-    meta: {
-      title: '视频教程',
-      icon: 'sidebar-videos',
-    },
-    children: [
-      {
-        path: '',
-        name: 'videosComingSoon',
-        component: () => import('@/views/videos_example/coming.soon.vue'),
-        meta: {
-          title: '视频教程',
-          sidebar: false,
-          breadcrumb: false,
         },
       },
     ],

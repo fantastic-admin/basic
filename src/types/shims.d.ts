@@ -5,9 +5,11 @@ declare interface Window {
 
 declare const __SYSTEM_INFO__: {
   pkg: {
-    version: string
     dependencies: Recordable<string>
     devDependencies: Recordable<string>
   }
   lastBuildTime: string
 }
+
+declare module 'vue-esign'
+declare module '@bytemd/plugin-gfm/lib/locales/zh_Hans.json'

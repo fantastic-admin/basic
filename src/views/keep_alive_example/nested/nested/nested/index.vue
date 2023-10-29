@@ -13,9 +13,9 @@ const val = ref('')
 
 <template>
   <div>
-    <page-main>
+    <PageMain>
       <div>层级 1-1-1</div>
-      <el-input v-model="val" />
-    </page-main>
+      <ElInput v-model="val" />
+    </PageMain>
   </div>
 </template>

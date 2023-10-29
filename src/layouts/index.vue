@@ -9,6 +9,7 @@ import HotkeysIntro from './components/HotkeysIntro/index.vue'
 import AppSetting from './components/AppSetting/index.vue'
 import LinkView from './components/views/link.vue'
 import Copyright from './components/Copyright/index.vue'
+import BackTop from './components/BackTop/index.vue'
 import BuyIt from './components/BuyIt/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 import useKeepAliveStore from '@/store/modules/keepAlive'
@@ -24,6 +25,9 @@ const routeInfo = useRoute()
 const settingsStore = useSettingsStore()
 const keepAliveStore = useKeepAliveStore()
 const menuStore = useMenuStore()
+
+const mainPage = useMainPage()
+const menu = useMenu()
 
 const isLink = computed(() => !!routeInfo.meta.link)
 
@@ -50,13 +54,13 @@ onMounted(() => {
   hotkeys('f5', (e) => {
     if (settingsStore.settings.toolbar.enablePageReload) {
       e.preventDefault()
-      useMainPage().reload()
+      mainPage.reload()
     }
   })
   hotkeys('alt+`', (e) => {
     if (settingsStore.settings.menu.enableHotkeys) {
       e.preventDefault()
-      useMenu().switchTo(menuStore.actived + 1 < menuStore.allMenus.length ? menuStore.actived + 1 : 0)
+      menu.switchTo(menuStore.actived + 1 < menuStore.allMenus.length ? menuStore.actived + 1 : 0)
     }
   })
 })
@@ -76,29 +80,31 @@ onUnmounted(() => {
           <SubSidebar />
         </div>
         <div class="sidebar-mask" :class="{ show: settingsStore.mode === 'mobile' && !settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()" />
-        <div class="main-container" :style="{ 'padding-bottom': routeInfo.meta.paddingBottom } as any">
-          <Topbar v-if="!(settingsStore.settings.menu.menuMode === 'head' && !settingsStore.settings.menu.enableSubMenuCollapseButton && !settingsStore.settings.breadcrumb.enable)" />
+        <div class="main-container">
+          <Topbar />
           <div class="main">
-            <router-view v-slot="{ Component, route }">
-              <transition name="main" mode="out-in" appear>
-                <keep-alive :include="keepAliveStore.list">
+            <RouterView v-slot="{ Component, route }">
+              <Transition name="slide-right" mode="out-in" appear>
+                <KeepAlive :include="keepAliveStore.list">
                   <component :is="Component" v-show="!isLink" :key="route.fullPath" />
-                </keep-alive>
-              </transition>
-            </router-view>
+                </KeepAlive>
+              </Transition>
+            </RouterView>
             <LinkView v-if="isLink" />
           </div>
           <Copyright />
         </div>
       </div>
-      <el-backtop :right="20" :bottom="20" title="回到顶部" />
     </div>
     <Search />
     <HotkeysIntro />
-    <div v-if="settingsStore.settings.app.enableAppSetting">
-      <svg-icon name="ep:setting" class="app-setting" @click="eventBus.emit('global-app-setting-toggle')" />
+    <template v-if="settingsStore.settings.app.enableAppSetting">
+      <div class="app-setting" @click="eventBus.emit('global-app-setting-toggle')">
+        <SvgIcon name="uiw:setting-o" class="icon" />
+      </div>
       <AppSetting />
-    </div>
+    </template>
+    <BackTop />
     <BuyIt />
   </div>
 </template>
@@ -136,14 +142,12 @@ onUnmounted(() => {
   width: 100%;
   height: 100%;
   margin: 0 auto;
-  transition: all 0.2s;
 }
 
 .wrapper {
   position: relative;
   width: 100%;
   height: 100%;
-  box-shadow: -1px 0 0 0 var(--g-box-shadow-color);
   transition: padding-top 0.3s;
 
   .sidebar-container {
@@ -152,8 +156,9 @@ onUnmounted(() => {
     top: 0;
     bottom: 0;
     display: flex;
-    transition: transform 0.3s, top 0.3s;
     width: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
+    box-shadow: -1px 0 0 0 var(--g-border-color), 1px 0 0 0 var(--g-border-color);
+    transition: width 0.3s, transform 0.3s, box-shadow 0.3s, top 0.3s;
   }
 
   .sidebar-mask {
@@ -185,13 +190,9 @@ onUnmounted(() => {
     flex-direction: column;
     min-height: 100%;
     margin-left: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
-    background-color: var(--g-main-bg);
-    transition: margin-left 0.3s, background-color 0.3s;
-
-    .topbar-container {
-      top: 0;
-      z-index: 998;
-    }
+    background-color: var(--g-bg);
+    box-shadow: -1px 0 0 0 var(--g-border-color), 1px 0 0 0 var(--g-border-color);
+    transition: margin-left 0.3s, background-color 0.3s, box-shadow 0.3s;
 
     .main {
       height: 100%;
@@ -201,8 +202,8 @@ onUnmounted(() => {
       transition: 0.3s;
     }
 
-    .topbar-container + .main {
-      margin: var(--g-topbar-height) 0 0;
+    .topbar-container.has-toolbar + .main {
+      margin: var(--g-toolbar-height) 0 0;
     }
   }
 }
@@ -215,10 +216,6 @@ header:not(.header-leave-active) + .wrapper {
 
     :deep(.sidebar-logo) {
       display: none;
-    }
-
-    :deep(.el-menu) {
-      padding-top: 0;
     }
   }
 
@@ -234,20 +231,23 @@ header:not(.header-leave-active) + .wrapper {
 }
 
 .app-setting {
+  --at-apply: text-white dark:text-dark bg-ui-primary;
+
   position: fixed;
   z-index: 10;
   right: 0;
   top: calc(50% + 250px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 50px;
   height: 50px;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
   font-size: 24px;
-  color: #fff;
-  background-color: var(--el-color-primary);
   cursor: pointer;
 
-  :deep(svg) {
+  .icon {
     animation: rotate 5s linear infinite;
   }
 
@@ -263,20 +263,20 @@ header:not(.header-leave-active) + .wrapper {
 }
 
 // 主内容区动画
-.main-enter-active {
+.slide-right-enter-active {
   transition: 0.2s;
 }
 
-.main-leave-active {
+.slide-right-leave-active {
   transition: 0.15s;
 }
 
-.main-enter-from {
+.slide-right-enter-from {
   opacity: 0;
   margin-left: -20px;
 }
 
-.main-leave-to {
+.slide-right-leave-to {
   opacity: 0;
   margin-left: 20px;
 }

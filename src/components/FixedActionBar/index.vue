@@ -27,27 +27,11 @@ function onScroll() {
 </script>
 
 <template>
-  <div class="actionbar" :class="{ shadow: !isBottom }" data-fixed-calc-width>
+  <div
+    class="z-4 bottom-0 p-5 text-center bg-[var(--g-container-bg)] transition" :class="[
+      isBottom ? 'shadow-[0_0_1px_0_var(--g-box-shadow-color)]' : 'shadow-[0_-10px_10px_-10px_var(--g-box-shadow-color)]',
+    ]" data-fixed-calc-width
+  >
     <slot />
   </div>
 </template>
-
-<style lang="scss" scoped>
-.actionbar {
-  z-index: 4;
-  bottom: 0;
-  padding: 20px;
-  text-align: center;
-  background-color: var(--g-app-bg);
-  box-shadow: 0 0 1px 0 var(--g-box-shadow-color);
-  transition: all 0.3s, var(--el-transition-box-shadow);
-
-  &.shadow {
-    box-shadow: 0 -10px 10px -10px var(--g-box-shadow-color);
-  }
-}
-
-:deep(.el-form-item) {
-  margin-bottom: 0;
-}
-</style>

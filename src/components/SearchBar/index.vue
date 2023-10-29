@@ -39,45 +39,17 @@ function toggle() {
 </script>
 
 <template>
-  <div class="search-container" :class="{ 'has-bg': background }">
+  <div
+    class="relative" :class="{
+      'py-4': showToggle,
+      'px-4 bg-[var(--g-bg)] transition': background,
+    }"
+  >
     <slot :fold="isFold" />
-    <div v-if="showToggle" class="toggle">
-      <el-button text size="small" @click="toggle">
-        <template #icon>
-          <svg-icon :name="isFold ? 'ep:caret-bottom' : 'ep:caret-top' " />
-        </template>
-        {{ isFold ? '展开' : '收起' }}
-      </el-button>
+    <div v-if="showToggle" class="absolute left-0 bottom-0 w-full text-center translate-y-1/2">
+      <button class="outline-none cursor-pointer inline-flex items-center px-2 h-5 border-size-0 font-medium text-xs rounded select-none bg-[var(--g-bg)]" @click="toggle">
+        <SvgIcon :name="isFold ? 'ep:caret-bottom' : 'ep:caret-top' " />
+      </button>
     </div>
   </div>
 </template>
-
-<style lang="scss" scoped>
-.search-container {
-  position: relative;
-
-  &.has-bg {
-    padding: 20px;
-    background-color: var(--el-fill-color-lighter);
-    transition: background-color 0.3s;
-  }
-
-  :deep(.el-form) {
-    margin-bottom: -10px;
-
-    .el-select {
-      width: 100%;
-    }
-
-    .el-date-editor {
-      width: 100%;
-    }
-  }
-
-  .toggle {
-    position: relative;
-    text-align: center;
-    margin-bottom: -10px;
-  }
-}
-</style>

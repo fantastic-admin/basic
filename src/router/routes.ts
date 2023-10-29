@@ -4,8 +4,10 @@ import type { RouteRecordRaw } from 'vue-router'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
 import BreadcrumbExample from './modules/breadcrumb.example'
 import KeepAliveExample from './modules/keep.alive.example'
-import ComponentBasicExample from './modules/component.basic.example'
-import ComponentExtendExample from './modules/component.extend.example'
+import ComponentExample from './modules/component.example'
+import IconExample from './modules/icon.example'
+import FeatureExample from './modules/feature.example'
+import PluginExample from './modules/plugin.example'
 import PermissionExample from './modules/permission.example'
 import MockExample from './modules/mock.example'
 import JsxExample from './modules/jsx.example'
@@ -50,6 +52,7 @@ const systemRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/index.vue'),
         meta: {
           title: () => useSettingsStore().settings.home.title,
+          icon: 'ant-design:home-twotone',
           breadcrumb: false,
         },
       },
@@ -63,7 +66,7 @@ const systemRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'setting',
+        path: 'personal/setting',
         name: 'personalSetting',
         component: () => import('@/views/personal/setting.vue'),
         meta: {
@@ -72,7 +75,7 @@ const systemRoutes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'edit/password',
+        path: 'personal/edit/password',
         name: 'personalEditPassword',
         component: () => import('@/views/personal/edit.password.vue'),
         meta: {
@@ -88,14 +91,16 @@ const asyncRoutes: Route.recordMainRaw[] = [
   {
     meta: {
       title: '演示',
-      icon: 'sidebar-default',
+      icon: 'uim:box',
     },
     children: [
       MultilevelMenuExample,
       BreadcrumbExample,
       KeepAliveExample,
-      ComponentBasicExample,
-      ComponentExtendExample,
+      ComponentExample,
+      IconExample,
+      FeatureExample,
+      PluginExample,
       PermissionExample,
       MockExample,
       JsxExample,
@@ -105,7 +110,7 @@ const asyncRoutes: Route.recordMainRaw[] = [
   {
     meta: {
       title: '生态',
-      icon: 'sidebar-ecology',
+      icon: 'icon-park-outline:circular-connection',
     },
     children: [
       ...EcologyExample,
