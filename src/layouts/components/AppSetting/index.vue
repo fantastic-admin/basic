@@ -300,7 +300,7 @@ function handleCopy() {
 
 <style lang="scss" scoped>
 .divider {
-  --at-apply: flex items-center justify-between gap-4 my-4 text-nowrap text-sm font-500;
+  --at-apply: flex items-center justify-between gap-4 my-4 whitespace-nowrap text-sm font-500;
 
   &::before,
   &::after {

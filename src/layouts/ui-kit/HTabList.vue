@@ -37,7 +37,7 @@ function handleChange(index: number) {
     <TabList class="inline-flex items-center justify-center p-1 rounded-md bg-stone-1 dark:bg-stone-9 ring-1 ring-stone-2 dark:ring-stone-8 select-none">
       <Tab v-for="(option, index) in options" :key="index" v-slot="{ selected }" as="template">
         <button
-          class="w-full px-2 py-1.5 border-size-0 text-sm rounded-md truncate text-dark dark:text-white bg-inherit focus:outline-none ring-inset ring-stone-2 dark:ring-stone-8 focus:ring-2" :class="{
+          class="inline-flex w-full px-2 py-1.5 border-size-0 text-sm rounded-md truncate text-dark dark:text-white bg-inherit focus:outline-none ring-inset ring-stone-2 dark:ring-stone-8 focus:ring-2" :class="{
             'cursor-default bg-white dark:bg-dark-9': selected,
             'cursor-pointer opacity-50 transition hover:(opacity-100)': !selected,
           }"
