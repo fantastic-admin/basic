@@ -1,4 +1,4 @@
-const fs = require('node:fs')
+import fs from 'node:fs'
 
 function getFolder(path) {
   const components = []
@@ -13,7 +13,7 @@ function getFolder(path) {
   return components
 }
 
-module.exports = {
+export default {
   description: '创建组件',
   prompts: [
     {

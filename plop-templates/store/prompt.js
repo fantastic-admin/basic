@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   description: '创建全局状态',
   prompts: [
     {
