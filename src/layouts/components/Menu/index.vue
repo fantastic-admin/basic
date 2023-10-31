@@ -91,7 +91,6 @@ const handleMenuItemClick: MenuInjection['handleMenuItemClick'] = (index, meta) 
   if (props.mode === 'horizontal' || props.collapse) {
     openedMenus.value = []
   }
-  activeIndex.value = index
   setSubMenusActive(index)
   if (meta?.link) {
     window.open(meta.link)
