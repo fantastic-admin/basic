@@ -1,5 +1,5 @@
-const path = require('node:path')
-const fs = require('node:fs')
+import path from 'node:path'
+import fs from 'node:fs'
 
 function getFolder(path) {
   const components = []
@@ -14,7 +14,7 @@ function getFolder(path) {
   return components
 }
 
-module.exports = {
+export default {
   description: '创建标准模块 Mock',
   prompts: [
     {
