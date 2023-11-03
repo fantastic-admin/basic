@@ -16,7 +16,7 @@ const props = withDefaults(
     appear: false,
     side: 'right',
     preventClose: false,
-    overlay: true,
+    overlay: false,
   },
 )
 

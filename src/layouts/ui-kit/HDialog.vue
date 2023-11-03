@@ -13,7 +13,7 @@ const props = withDefaults(
     modelValue: false,
     appear: false,
     preventClose: false,
-    overlay: true,
+    overlay: false,
   },
 )
 
