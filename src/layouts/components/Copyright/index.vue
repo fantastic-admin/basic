@@ -30,10 +30,6 @@ const settingsStore = useSettingsStore()
     --at-apply: px-1;
   }
 
-  .icon {
-    --at-apply: mx-1;
-  }
-
   a {
     --at-apply: text-center no-underline text-stone-5 hover:text-dark dark:hover:text-light transition;
   }
