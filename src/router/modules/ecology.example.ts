@@ -61,6 +61,15 @@ const routes: RouteRecordRaw[] = [
           link: 'https://gitee.com/sciqtw/quickadmin',
         },
       },
+      {
+        path: 'vexip',
+        redirect: '',
+        name: 'cooperationVexip',
+        meta: {
+          title: 'Vexip UI 组件库',
+          link: 'https://www.vexipui.com/zh-CN',
+        },
+      },
     ],
   },
 ]
