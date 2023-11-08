@@ -70,6 +70,15 @@ const routes: RouteRecordRaw[] = [
           link: 'https://www.vexipui.com/zh-CN',
         },
       },
+      {
+        path: 'form-create',
+        redirect: '',
+        name: 'cooperationFormcreate',
+        meta: {
+          title: 'Form-create 动态表单生成器',
+          link: 'https://form-create.com',
+        },
+      },
     ],
   },
 ]
