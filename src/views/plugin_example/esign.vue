@@ -5,6 +5,7 @@ meta:
 
 <script setup lang="ts">
 import { ElMessage } from 'element-plus'
+import VueEsign from 'vue-esign'
 import Alert from './components/alert.vue'
 
 defineOptions({
