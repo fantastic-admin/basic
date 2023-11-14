@@ -16,6 +16,14 @@ onMounted(() => {
   <HSlideover v-model="isShow" title="系统信息">
     <div class="px-4">
       <h2 class="text-lg font-bold m-0">
+        版本号
+      </h2>
+      <div class="my-4 text-lg text-center font-sans">
+        {{ pkg.version }}
+      </div>
+    </div>
+    <div class="px-4">
+      <h2 class="text-lg font-bold m-0">
         最后编译时间
       </h2>
       <div class="my-4 text-lg text-center font-sans">
