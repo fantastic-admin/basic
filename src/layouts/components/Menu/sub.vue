@@ -188,8 +188,8 @@ function handleMouseleave() {
           'mx-2': rootMenu.isMenuPopup && (rootMenu.props.mode === 'vertical' || level !== 0),
         }"
       >
-        <template v-for="item in menu.children" :key="item.path">
-          <SubMenu v-if="item.meta?.sidebar !== false" :unique-key="[...uniqueKey, item.path]" :menu="item" :level="level + 1" />
+        <template v-for="item in menu.children" :key="item.path ?? JSON.stringify(item)">
+          <SubMenu v-if="item.meta?.sidebar !== false" :unique-key="[...uniqueKey, item.path ?? JSON.stringify(item)]" :menu="item" :level="level + 1" />
         </template>
       </OverlayScrollbarsComponent>
     </Transition>
