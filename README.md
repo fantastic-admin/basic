@@ -73,6 +73,12 @@
 
 [![star](https://gitee.com/fantastic-admin/basic/badge/star.svg?theme=dark)](https://gitee.com/fantastic-admin/basic)
 
+<details>
+<summary>Github Stars 曲线</summary>
+
+[![Stargazers over time](https://starchart.cc/fantastic-admin/basic.svg)](https://starchart.cc/fantastic-admin/basic)
+</details>
+
 ## 生态
 
 <table>
