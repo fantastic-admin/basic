@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
