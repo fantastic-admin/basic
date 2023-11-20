@@ -77,20 +77,17 @@ const { switchTo } = useMenu()
 
     :deep(.menu-item) {
       .menu-item-container {
-        height: 60px;
-        padding: 0 5px;
+        padding-block: 8px;
         color: var(--g-main-sidebar-menu-color);
-        background-color: var(--g-main-sidebar-menu-bg);
+
+        &:hover {
+          color: var(--g-main-sidebar-menu-hover-color);
+          background-color: var(--g-main-sidebar-menu-hover-bg);
+        }
 
         .menu-item-container-icon {
-          transform: scale(1);
           font-size: 24px !important;
         }
-      }
-
-      &:hover .menu-item-container {
-        color: var(--g-main-sidebar-menu-hover-color);
-        background-color: var(--g-main-sidebar-menu-hover-bg);
       }
 
       &.active .menu-item-container {
