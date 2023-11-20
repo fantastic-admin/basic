@@ -46,15 +46,14 @@ defineExpose({
     <div
       class="menu-item-container w-full h-full flex justify-between items-center gap-1 px-5 py-4 transition-all cursor-pointer group text-[var(--g-sub-sidebar-menu-color)] hover:(text-[var(--g-sub-sidebar-menu-hover-color)] bg-[var(--g-sub-sidebar-menu-hover-bg)])" :class="{
         'text-[var(--g-sub-sidebar-menu-active-color)]! bg-[var(--g-sub-sidebar-menu-active-bg)]!': isItemActive,
-        'px-2!': rootMenu.isMenuPopup && level === 0,
+        'px-3!': rootMenu.isMenuPopup && level === 0,
       }" :title="item.meta?.title"
     >
       <div
         class="inline-flex justify-center items-center gap-[12px] flex-1" :class="{
-          'flex-col gap-none': rootMenu.isMenuPopup && level === 0,
-          'flex-col gap-[2px]!': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName,
+          'flex-col': rootMenu.isMenuPopup && level === 0 && rootMenu.props.mode === 'vertical',
+          'gap-1!': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName,
           'w-full': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName && rootMenu.props.mode === 'vertical',
-          'w-[50px]': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName && rootMenu.props.mode === 'horizontal',
         }" :style="indentStyle"
       >
         <SvgIcon v-if="props.item.meta?.icon" :name="props.item.meta.icon" :size="20" class="menu-item-container-icon transition-transform group-hover:scale-120" async />

@@ -22,11 +22,11 @@ function onSidebarScroll(e: Event) {
 const enableSidebar = computed(() => {
   return settingsStore.mode === 'mobile' || (
     ['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode)
-      && menuStore.sidebarMenus.length !== 0
-      && !(
-        !menuStore.sidebarMenus[0].children
-          || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
-      )
+    && menuStore.sidebarMenus.length !== 0
+    && !(
+      !menuStore.sidebarMenus[0].children
+      || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
+    )
   )
 })
 </script>

@@ -18,11 +18,11 @@ const menuStore = useMenuStore()
 const enableSubMenuCollapseButton = computed(() => {
   return settingsStore.mode === 'mobile' || (
     ['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode)
-      && settingsStore.settings.menu.enableSubMenuCollapseButton
-      && !(
-        !menuStore.sidebarMenus[0].children
-          || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
-      )
+    && settingsStore.settings.menu.enableSubMenuCollapseButton
+    && !(
+      !menuStore.sidebarMenus[0].children
+      || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
+    )
   )
 })
 
