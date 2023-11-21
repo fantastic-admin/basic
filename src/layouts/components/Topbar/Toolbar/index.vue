@@ -20,8 +20,11 @@ const enableSubMenuCollapseButton = computed(() => {
     ['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode)
     && settingsStore.settings.menu.enableSubMenuCollapseButton
     && !(
-      !menuStore.sidebarMenus[0].children
-      || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
+      menuStore.sidebarMenus.length === 1
+      && (
+        !menuStore.sidebarMenus[0].children
+        || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
+      )
     )
   )
 })
