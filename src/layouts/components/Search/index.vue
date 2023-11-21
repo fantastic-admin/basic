@@ -225,7 +225,6 @@ function keyEnter() {
     searchResultItemRef.value.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.click()
   }
 }
-// FIXME 列表数据变更后，快捷键滚动失效
 function handleScroll() {
   if (searchResultRef.value) {
     const contentDom = searchResultRef.value.osInstance()!.elements().content
