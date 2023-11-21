@@ -243,7 +243,7 @@ declare namespace Menu {
   interface recordRaw {
     path?: string
     meta?: {
-      title?: string
+      title?: string | (() => string)
       icon?: string
       defaultOpened?: boolean
       auth?: string | string[]
@@ -255,7 +255,7 @@ declare namespace Menu {
   /** 主导航 */
   interface recordMainRaw {
     meta?: {
-      title?: string
+      title?: string | (() => string)
       icon?: string
       auth?: string | string[]
     }

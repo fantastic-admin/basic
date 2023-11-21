@@ -47,7 +47,7 @@ defineExpose({
       class="menu-item-container w-full h-full flex justify-between items-center gap-1 px-5 py-4 transition-all cursor-pointer group text-[var(--g-sub-sidebar-menu-color)] hover:(text-[var(--g-sub-sidebar-menu-hover-color)] bg-[var(--g-sub-sidebar-menu-hover-bg)])" :class="{
         'text-[var(--g-sub-sidebar-menu-active-color)]! bg-[var(--g-sub-sidebar-menu-active-bg)]!': isItemActive,
         'px-3!': rootMenu.isMenuPopup && level === 0,
-      }" :title="item.meta?.title"
+      }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title"
     >
       <div
         class="inline-flex justify-center items-center gap-[12px] flex-1" :class="{
@@ -64,7 +64,7 @@ defineExpose({
             'w-full text-center': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName,
           }"
         >
-          {{ item.meta?.title }}
+          {{ typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title }}
         </span>
       </div>
       <i
