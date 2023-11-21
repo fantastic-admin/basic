@@ -21,6 +21,7 @@ const router = useRouter()
 const userStore = useUserStore()
 
 const banner = new URL('../assets/images/login-banner.png', import.meta.url).href
+const logo = new URL('../assets/images/logo.png', import.meta.url).href
 const title = import.meta.env.VITE_APP_TITLE
 
 // 表单类型，login 登录，register 注册，reset 重置密码
@@ -152,7 +153,7 @@ function testAccount(account: string) {
     <div class="bg-banner" />
     <div id="login-box">
       <div class="login-banner">
-        <div class="logo" />
+        <img :src="logo" class="logo">
         <img :src="banner" class="banner">
       </div>
       <ElForm v-show="formType === 'login'" ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form">
@@ -381,11 +382,8 @@ function testAccount(account: string) {
       position: absolute;
       top: 20px;
       left: 20px;
-      width: 30px;
       height: 30px;
       border-radius: 4px;
-      background: url("../assets/images/logo.png") no-repeat;
-      background-size: contain;
       box-shadow: var(--el-box-shadow-light);
     }
   }
