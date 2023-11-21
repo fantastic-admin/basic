@@ -28,12 +28,12 @@ const { switchTo } = useMenu()
             <div
               v-if="item.children && item.children.length !== 0" class="menu-item-container w-full h-full flex justify-between items-center gap-1 px-2! py-4 transition-all cursor-pointer group text-[var(--g-main-sidebar-menu-color)] hover:(text-[var(--g-main-sidebar-menu-hover-color)] bg-[var(--g-main-sidebar-menu-hover-bg)])" :class="{
                 'text-[var(--g-main-sidebar-menu-active-color)]! bg-[var(--g-main-sidebar-menu-active-bg)]!': index === menuStore.actived,
-              }" :title="item.meta?.title" @click="switchTo(index)"
+              }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" @click="switchTo(index)"
             >
               <div class="inline-flex flex-col justify-center items-center flex-1 gap-[2px] w-full">
                 <SvgIcon v-if="item.meta?.icon" :name="item.meta?.icon" :size="20" class="menu-item-container-icon transition-transform group-hover:scale-120" async />
                 <span class="flex-1 text-sm w-full text-center truncate transition-width transition-height transition-opacity">
-                  {{ item.meta?.title }}
+                  {{ typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title }}
                 </span>
               </div>
             </div>

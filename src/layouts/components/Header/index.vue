@@ -41,12 +41,12 @@ function handlerMouserScroll(event: WheelEvent) {
                   <div
                     v-if="item.children && item.children.length !== 0" class="menu-item-container w-full h-full flex justify-between items-center gap-1 px-3 transition-all cursor-pointer group text-[var(--g-header-menu-color)] hover:(text-[var(--g-header-menu-hover-color)] bg-[var(--g-header-menu-hover-bg)])" :class="{
                       'text-[var(--g-header-menu-active-color)]! bg-[var(--g-header-menu-active-bg)]!': index === menuStore.actived,
-                    }" :title="item.meta?.title" @click="switchTo(index)"
+                    }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" @click="switchTo(index)"
                   >
                     <div class="inline-flex justify-center items-center gap-1 flex-1">
                       <SvgIcon v-if="item.meta?.icon" :name="item.meta?.icon" :size="20" class="menu-item-container-icon transition-transform group-hover:scale-120" async />
                       <span class="flex-1 text-sm w-full truncate transition-width transition-height transition-opacity">
-                        {{ item.meta?.title }}
+                        {{ typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title }}
                       </span>
                     </div>
                   </div>
