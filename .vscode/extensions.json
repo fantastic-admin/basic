@@ -5,6 +5,7 @@
     "dbaeumer.vscode-eslint",
     "stylelint.vscode-stylelint",
     "Vue.volar",
+    "Vue.vscode-typescript-vue-plugin",
     "antfu.unocss"
   ]
 }
