@@ -59,8 +59,8 @@ function pathCompile(path: string) {
 <template>
   <div class="toolbar-container">
     <div class="left-box">
-      <div v-if="enableSubMenuCollapseButton" class="flex-center px-2 py-1 cursor-pointer transition-transform" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
-        <SvgIcon name="toolbar-collapse" class="icon" />
+      <div v-if="enableSubMenuCollapseButton" class="flex-center cursor-pointer px-2 py-1 transition-transform" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
+        <SvgIcon name="toolbar-collapse" />
       </div>
       <Breadcrumb v-if="settingsStore.mode === 'pc' && settingsStore.settings.breadcrumb.enable && settingsStore.settings.app.routeBaseOn !== 'filesystem'" class="breadcrumb">
         <TransitionGroup name="breadcrumb">

@@ -44,13 +44,13 @@ defineExpose({
     }"
   >
     <div
-      class="menu-item-container w-full h-full flex justify-between items-center gap-1 px-5 py-4 transition-all cursor-pointer group text-[var(--g-sub-sidebar-menu-color)] hover:(text-[var(--g-sub-sidebar-menu-hover-color)] bg-[var(--g-sub-sidebar-menu-hover-bg)])" :class="{
+      class="menu-item-container group h-full w-full flex cursor-pointer items-center justify-between gap-1 px-5 py-4 text-[var(--g-sub-sidebar-menu-color)] transition-all hover:(bg-[var(--g-sub-sidebar-menu-hover-bg)] text-[var(--g-sub-sidebar-menu-hover-color)])" :class="{
         'text-[var(--g-sub-sidebar-menu-active-color)]! bg-[var(--g-sub-sidebar-menu-active-bg)]!': isItemActive,
         'px-3!': rootMenu.isMenuPopup && level === 0,
       }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title"
     >
       <div
-        class="inline-flex justify-center items-center gap-[12px] flex-1" :class="{
+        class="inline-flex flex-1 items-center justify-center gap-[12px]" :class="{
           'flex-col': rootMenu.isMenuPopup && level === 0 && rootMenu.props.mode === 'vertical',
           'gap-1!': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName,
           'w-full': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName && rootMenu.props.mode === 'vertical',
@@ -58,7 +58,7 @@ defineExpose({
       >
         <SvgIcon v-if="props.item.meta?.icon" :name="props.item.meta.icon" :size="20" class="menu-item-container-icon transition-transform group-hover:scale-120" async />
         <span
-          v-if="!(rootMenu.isMenuPopup && level === 0 && !rootMenu.props.showCollapseName)" class="flex-1 text-sm w-0 truncate transition-width transition-height transition-opacity"
+          v-if="!(rootMenu.isMenuPopup && level === 0 && !rootMenu.props.showCollapseName)" class="w-0 flex-1 truncate text-sm transition-height transition-opacity transition-width"
           :class="{
             'opacity-0 w-0 h-0': rootMenu.isMenuPopup && level === 0 && !rootMenu.props.showCollapseName,
             'w-full text-center': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName,
@@ -68,7 +68,7 @@ defineExpose({
         </span>
       </div>
       <i
-        v-if="subMenu && !(rootMenu.isMenuPopup && level === 0)" class="relative w-[10px] ml-1 before:(content-empty absolute w-[6px] h-[1.5px] bg-current -translate-y-[1px] transition-transform-200) after:(content-empty absolute w-[6px] h-[1.5px] bg-current -translate-y-[1px] transition-transform-200)" :class="[
+        v-if="subMenu && !(rootMenu.isMenuPopup && level === 0)" class="relative ml-1 w-[10px] after:(absolute h-[1.5px] w-[6px] bg-current transition-transform-200 content-empty -translate-y-[1px]) before:(absolute h-[1.5px] w-[6px] bg-current transition-transform-200 content-empty -translate-y-[1px])" :class="[
           expand ? 'before:(-rotate-45 -translate-x-[2px]) after:(rotate-45 translate-x-[2px])' : 'before:(rotate-45 -translate-x-[2px]) after:(-rotate-45 translate-x-[2px])',
           rootMenu.isMenuPopup && level === 0 && 'opacity-0',
           rootMenu.isMenuPopup && level !== 0 && '-rotate-90 -top-[1.5px]',

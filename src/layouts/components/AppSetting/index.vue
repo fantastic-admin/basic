@@ -57,7 +57,7 @@ function handleCopy() {
 
 <template>
   <HSlideover v-model="isShow" title="应用配置">
-    <div class="px-4 py-2 rounded-2 text-sm/6 c-rose bg-rose/20 ">
+    <div class="rounded-2 bg-rose/20 px-4 py-2 text-sm/6 c-rose">
       <p class="my-1">
         应用配置可实时预览效果，但只是临时生效，要想真正应用于项目，可以点击下方的「复制配置」按钮，并将配置粘贴到 src/settings.ts 文件中。
       </p>
@@ -68,7 +68,7 @@ function handleCopy() {
     <div class="divider">
       颜色主题风格
     </div>
-    <div class="flex justify-center items-center pb-4">
+    <div class="flex items-center justify-center pb-4">
       <HToggle v-model="isDark" on-icon="ri:sun-line" off-icon="ri:moon-line" />
     </div>
     <div v-if="settingsStore.mode === 'pc'" class="divider">

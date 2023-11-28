@@ -61,21 +61,21 @@ function close() {
 
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <Dialog class="fixed inset-0 flex z-2000" @close="!preventClose && close()">
+    <Dialog class="fixed inset-0 z-2000 flex" @close="!preventClose && close()">
       <TransitionChild as="template" :appear="appear" v-bind="overlayTransitionClass">
-        <div class="fixed inset-0 transition-opacity bg-stone-2/75 dark:bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
+        <div class="fixed inset-0 bg-stone-2/75 transition-opacity dark:bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
       </TransitionChild>
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="flex min-h-full items-end sm:items-center justify-center text-center p-4 sm:p-0">
+        <div class="min-h-full flex items-end justify-center p-4 text-center sm:items-center sm:p-0">
           <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-            <DialogPanel class="relative text-left overflow-hidden sm:my-8 w-full flex flex-col sm:max-w-lg bg-white dark:bg-stone-8 rounded-xl shadow-xl">
+            <DialogPanel class="relative w-full flex flex-col overflow-hidden rounded-xl bg-white text-left shadow-xl sm:my-8 sm:max-w-lg dark:bg-stone-8">
               <div flex="~ items-center justify-between" px-4 py-3 border-b="~ solid stone/15" text-6>
                 <DialogTitle m-0 text-lg text-dark dark:text-white>
                   {{ title }}
                 </DialogTitle>
                 <SvgIcon name="carbon:close" cursor-pointer @click="close" />
               </div>
-              <DialogDescription m-0 p-4 overflow-y-auto>
+              <DialogDescription m-0 overflow-y-auto p-4>
                 <slot />
               </DialogDescription>
               <div v-if="!!slots.footer" flex="~ items-center justify-end" px-4 py-3 border-t="~ solid stone/15">

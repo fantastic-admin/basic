@@ -26,13 +26,13 @@ const { switchTo } = useMenu()
             }"
           >
             <div
-              v-if="item.children && item.children.length !== 0" class="menu-item-container w-full h-full flex justify-between items-center gap-1 px-2! py-4 transition-all cursor-pointer group text-[var(--g-main-sidebar-menu-color)] hover:(text-[var(--g-main-sidebar-menu-hover-color)] bg-[var(--g-main-sidebar-menu-hover-bg)])" :class="{
+              v-if="item.children && item.children.length !== 0" class="menu-item-container group h-full w-full flex cursor-pointer items-center justify-between gap-1 py-4 text-[var(--g-main-sidebar-menu-color)] transition-all hover:(bg-[var(--g-main-sidebar-menu-hover-bg)] text-[var(--g-main-sidebar-menu-hover-color)]) px-2!" :class="{
                 'text-[var(--g-main-sidebar-menu-active-color)]! bg-[var(--g-main-sidebar-menu-active-bg)]!': index === menuStore.actived,
               }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" @click="switchTo(index)"
             >
-              <div class="inline-flex flex-col justify-center items-center flex-1 gap-[2px] w-full">
+              <div class="w-full inline-flex flex-1 flex-col items-center justify-center gap-[2px]">
                 <SvgIcon v-if="item.meta?.icon" :name="item.meta?.icon" :size="20" class="menu-item-container-icon transition-transform group-hover:scale-120" async />
-                <span class="flex-1 text-sm w-full text-center truncate transition-width transition-height transition-opacity">
+                <span class="w-full flex-1 truncate text-center text-sm transition-height transition-opacity transition-width">
                   {{ typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title }}
                 </span>
               </div>

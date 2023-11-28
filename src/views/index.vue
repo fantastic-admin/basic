@@ -89,7 +89,7 @@ function open(url: string) {
         </HButton>
       </HDropdownMenu>
     </PageHeader>
-    <div class="w-full flex flex-col xl:flex-row gap-[20px] px-[20px]">
+    <div class="w-full flex flex-col gap-[20px] px-[20px] xl:flex-row">
       <PageMain class="ecology">
         <template #title>
           <div class="title-info">

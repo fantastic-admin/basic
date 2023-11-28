@@ -30,8 +30,8 @@ const to = computed(() => {
 </script>
 
 <template>
-  <RouterLink :to="to" class="flex-center gap-2 w-inherit h-[var(--g-sidebar-logo-height)] px-3 text-inherit no-underline" :class="{ 'cursor-pointer': settingsStore.settings.home.enable }" :title="title">
-    <img v-if="showLogo" :src="logo" class="logo w-[30px] h-[30px] object-contain">
-    <span v-if="showTitle" class="block font-bold truncate">{{ title }}</span>
+  <RouterLink :to="to" class="h-[var(--g-sidebar-logo-height)] w-inherit flex-center gap-2 px-3 text-inherit no-underline" :class="{ 'cursor-pointer': settingsStore.settings.home.enable }" :title="title">
+    <img v-if="showLogo" :src="logo" class="logo h-[30px] w-[30px] object-contain">
+    <span v-if="showTitle" class="block truncate font-bold">{{ title }}</span>
   </RouterLink>
 </template>

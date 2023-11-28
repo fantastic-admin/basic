@@ -34,10 +34,10 @@ function handleChange(index: number) {
 
 <template>
   <TabGroup :selected-index="selectedIndex" @change="handleChange">
-    <TabList class="inline-flex items-center justify-center p-1 rounded-md bg-stone-1 dark:bg-stone-9 ring-1 ring-stone-2 dark:ring-stone-8 select-none">
+    <TabList class="inline-flex select-none items-center justify-center rounded-md bg-stone-1 p-1 ring-1 ring-stone-2 dark:bg-stone-9 dark:ring-stone-8">
       <Tab v-for="(option, index) in options" :key="index" v-slot="{ selected }" as="template">
         <button
-          class="inline-flex items-center justify-center w-full px-2 py-1.5 border-size-0 text-sm rounded-md truncate text-dark dark:text-white bg-inherit focus:outline-none ring-inset ring-stone-2 dark:ring-stone-8 focus:ring-2" :class="{
+          class="w-full inline-flex items-center justify-center truncate border-size-0 rounded-md bg-inherit px-2 py-1.5 text-sm text-dark ring-stone-2 ring-inset dark:text-white focus:outline-none focus:ring-2 dark:ring-stone-8" :class="{
             'cursor-default bg-white dark:bg-dark-9': selected,
             'cursor-pointer opacity-50 transition hover:(opacity-100)': !selected,
           }"
