@@ -301,7 +301,7 @@ function toggle(fold: boolean) {
         </template>
       </SearchBar>
     </PageMain>
-    <PageMain title="自定义切换按钮（搭配自定义 flex 布局）">
+    <PageMain title="自定义切换按钮（搭配自定义 grid 布局）">
       <SearchBar :fold="isFold2" :show-toggle="false">
         <template #default="{ fold }">
           <ElForm :model="search" size="default" label-width="120px" inline class="search-form">
@@ -426,22 +426,22 @@ function toggle(fold: boolean) {
 
 <style lang="scss" scoped>
 .search-form {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
 
   :deep(.el-form-item) {
-    flex: 1 1 300px;
-
-    &.search-form-item-name {
-      flex-basis: 450px;
-    }
+    grid-column: auto / span 1;
 
     &:last-child {
-      margin-left: auto;
+      grid-column-end: -1;
 
       .el-form-item__content {
         justify-content: flex-end;
       }
+    }
+
+    &.search-form-item-name {
+      grid-column: auto / span 2;
     }
   }
 }
