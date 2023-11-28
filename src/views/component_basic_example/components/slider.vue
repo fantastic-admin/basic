@@ -43,7 +43,7 @@ function formatTooltip(val: number) {
     <ElDivider content-position="left">
       范围选择
     </ElDivider>
-    <ElSlider v-model="value8" range show-stops :max="10" />
+    <ElSlider v-model="value8" show-stops range :max="10" />
     <ElDivider content-position="left">
       竖向模式
     </ElDivider>

@@ -46,8 +46,8 @@ function toggle() {
     }"
   >
     <slot :fold="isFold" />
-    <div v-if="showToggle" class="absolute left-0 bottom-0 w-full text-center translate-y-1/2">
-      <button class="outline-none cursor-pointer inline-flex items-center px-2 h-5 border-size-0 font-medium text-xs rounded select-none bg-[var(--g-bg)]" @click="toggle">
+    <div v-if="showToggle" class="absolute bottom-0 left-0 w-full translate-y-1/2 text-center">
+      <button class="h-5 inline-flex cursor-pointer select-none items-center border-size-0 rounded bg-[var(--g-bg)] px-2 text-xs font-medium outline-none" @click="toggle">
         <SvgIcon :name="isFold ? 'ep:caret-bottom' : 'ep:caret-top' " />
       </button>
     </div>

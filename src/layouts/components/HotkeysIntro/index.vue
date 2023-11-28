@@ -20,9 +20,9 @@ onMounted(() => {
 <template>
   <HDialog v-model="isShow" title="快捷键介绍">
     <div class="px-4">
-      <div class="grid md:grid-cols-2 gap-2">
+      <div class="grid gap-2 md:grid-cols-2">
         <div>
-          <h2 class="text-lg font-bold m-0">
+          <h2 class="m-0 text-lg font-bold">
             全局
           </h2>
           <ul class="list-none pl-4 text-sm">
@@ -39,7 +39,7 @@ onMounted(() => {
           </ul>
         </div>
         <div v-if="settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.menuMode)">
-          <h2 class="text-lg font-bold m-0">
+          <h2 class="m-0 text-lg font-bold">
             主导航
           </h2>
           <ul class="list-none pl-4 text-sm">

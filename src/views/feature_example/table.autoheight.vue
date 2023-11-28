@@ -116,7 +116,7 @@ const dataList = ref([
   <div class="absolute-container">
     <PageHeader title="表格高度自适应" />
     <PageMain>
-      <ElTable :data="dataList" border stripe highlight-current-row height="100%">
+      <ElTable :data="dataList" stripe highlight-current-row border height="100%">
         <ElTableColumn type="index" width="50" />
         <ElTableColumn prop="date" label="日期" width="180" />
         <ElTableColumn prop="name" label="姓名" width="180" />

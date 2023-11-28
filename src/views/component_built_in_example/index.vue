@@ -11,7 +11,7 @@ const toggle = ref(false)
 <template>
   <div>
     <PageHeader title="内建组件" content="内建组件仅服务于框架自身，不建议在业务页面内使用，业务页面内请使用专业的 UI 组件库。" />
-    <div class="flex flex-wrap flex-col lg:flex-row gap-4 px-4">
+    <div class="flex flex-col flex-wrap gap-4 px-4 lg:flex-row">
       <PageMain title="Button">
         <HButton>
           按钮
@@ -22,7 +22,7 @@ const toggle = ref(false)
         <HButton disabled>
           按钮
         </HButton>
-        <HButton outline disabled>
+        <HButton disabled outline>
           按钮
         </HButton>
       </PageMain>
@@ -50,7 +50,7 @@ const toggle = ref(false)
             <SvgIcon name="ep:caret-bottom" />
           </div>
           <template #dropdown>
-            <div class="w-60 h-30 flex justify-center items-center">
+            <div class="h-30 w-60 flex items-center justify-center">
               下拉内容
             </div>
           </template>

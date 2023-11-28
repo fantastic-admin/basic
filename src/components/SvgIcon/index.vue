@@ -68,7 +68,7 @@ const style = computed(() => {
 </script>
 
 <template>
-  <i class="h-[1em] w-[1em] leading-[1em] flex-inline justify-center items-center relative fill-current" :style="style">
+  <i class="relative h-[1em] w-[1em] flex-inline items-center justify-center fill-current leading-[1em]" :style="style">
     <i v-if="outputType === 'css'" :class="outputName" />
     <Icon v-else-if="outputType === 'svg'" :icon="outputName" />
     <svg v-else h-1em w-1em aria-hidden="true">

@@ -53,10 +53,10 @@ watch(() => userStore.avatar, () => {
 </script>
 
 <template>
-  <div class="tools flex items-center gap-4 px-4 whitespace-nowrap">
-    <span v-if="settingsStore.settings.navSearch.enable && settingsStore.mode === 'pc'" class="group inline-flex items-center gap-1 px-2 py-1.5 rounded-2 text-dark dark:text-white bg-stone-1 dark:bg-stone-9 ring-inset ring-stone-3 dark:ring-stone-7 hover:ring-1 cursor-pointer transition" @click="eventBus.emit('global-search-toggle')">
+  <div class="tools flex items-center gap-4 whitespace-nowrap px-4">
+    <span v-if="settingsStore.settings.navSearch.enable && settingsStore.mode === 'pc'" class="group inline-flex cursor-pointer items-center gap-1 rounded-2 bg-stone-1 px-2 py-1.5 text-dark ring-stone-3 ring-inset transition dark:bg-stone-9 dark:text-white hover:ring-1 dark:ring-stone-7" @click="eventBus.emit('global-search-toggle')">
       <SvgIcon name="ri:search-line" />
-      <span class="text-sm text-stone-5 group-hover:text-dark dark:group-hover:text-white transition">搜索</span>
+      <span class="text-sm text-stone-5 transition group-hover:text-dark dark:group-hover:text-white">搜索</span>
       <HKbd v-if="settingsStore.settings.navSearch.enableHotkeys" class="ml-2">{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} S</HKbd>
     </span>
     <div class="flex items-center empty:hidden">
@@ -87,8 +87,8 @@ watch(() => userStore.avatar, () => {
         ],
       ]"
     >
-      <div flex-center gap-1 cursor-pointer>
-        <img v-if="userStore.avatar && !avatarError" :src="userStore.avatar" :onerror="() => (avatarError = true)" class="w-[24px] h-[24px] rounded-full">
+      <div flex-center cursor-pointer gap-1>
+        <img v-if="userStore.avatar && !avatarError" :src="userStore.avatar" :onerror="() => (avatarError = true)" class="h-[24px] w-[24px] rounded-full">
         <SvgIcon v-else name="carbon:user-avatar-filled-alt" :size="24" class="text-gray-400" />
         {{ userStore.account }}
         <SvgIcon name="ep:caret-bottom" />

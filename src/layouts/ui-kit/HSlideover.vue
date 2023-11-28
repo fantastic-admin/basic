@@ -64,19 +64,19 @@ function close() {
 
 <template>
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
-    <Dialog class="fixed inset-0 flex z-2000" :class="{ 'justify-end': side === 'right' }" @close="!preventClose && close()">
+    <Dialog class="fixed inset-0 z-2000 flex" :class="{ 'justify-end': side === 'right' }" @close="!preventClose && close()">
       <TransitionChild as="template" :appear="appear" v-bind="overlayTransitionClass">
-        <div class="fixed inset-0 transition-opacity bg-stone-2/75 dark:bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
+        <div class="fixed inset-0 bg-stone-2/75 transition-opacity dark:bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
       </TransitionChild>
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <DialogPanel relative flex-1 flex flex-col w-full focus:outline-none w-screen max-w-md bg-white dark:bg-stone-8>
+        <DialogPanel relative max-w-md w-full w-screen flex flex-1 flex-col bg-white dark:bg-stone-8 focus:outline-none>
           <div flex="~ items-center justify-between" p-4 border-b="~ solid stone/15" text-6>
             <DialogTitle m-0 text-lg text-dark dark:text-white>
               {{ title }}
             </DialogTitle>
             <SvgIcon name="carbon:close" cursor-pointer @click="close" />
           </div>
-          <DialogDescription flex-1 m-0 of-y-hidden>
+          <DialogDescription m-0 flex-1 of-y-hidden>
             <OverlayScrollbarsComponent :options="{ scrollbars: { autoHide: 'leave', autoHideDelay: 300 } }" defer class="h-full p-4">
               <slot />
             </OverlayScrollbarsComponent>

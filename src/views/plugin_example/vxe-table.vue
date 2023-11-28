@@ -98,8 +98,8 @@ function open(url: string) {
     </PageHeader>
     <PageMain>
       <VxeTable
-        border
-        stripe
+
+        stripe border
         height="400"
         :loading="demo1.loading"
         :column-config="{ resizable: true }"

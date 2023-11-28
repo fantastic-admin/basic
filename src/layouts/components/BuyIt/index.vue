@@ -45,7 +45,7 @@ onUnmounted(() => {
       <SvgIcon name="icon-park-twotone:components" />
       <span class="title">切换<br>组件库</span>
       <HDialog v-model="UIdialog" title="切换组件库" overlay>
-        <div class="px-4 py-2 rounded-2 text-sm/6 c-green-6 bg-green/20">
+        <div class="rounded-2 bg-green/20 px-4 py-2 text-sm/6 c-green-6">
           <p class="my-1">
             为了视觉风格统一，同时也能服务于更多开发者，本框架从 v4.0.0 版本开始，与 Element Plus 组件库进行了解耦，意味着可以轻松将 Element Plus 组件库替换成其他 UI 组件库，并且不会影响框架原本的功能。
           </p>
@@ -53,7 +53,7 @@ onUnmounted(() => {
             演示站挑选了以下 5 款组件库作为示例，你可以点击访问并预览。
           </p>
         </div>
-        <div class="mt-4 flex justify-center flex-wrap gap-4">
+        <div class="mt-4 flex flex-wrap justify-center gap-4">
           <HButton @click="open('https://fantastic-admin.github.io/antd-example/')">
             访问 Ant Design Vue 演示站
           </HButton>
