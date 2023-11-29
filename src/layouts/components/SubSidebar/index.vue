@@ -18,25 +18,11 @@ const sidebarScrollTop = ref(0)
 function onSidebarScroll(e: Event) {
   sidebarScrollTop.value = (e.target as HTMLElement).scrollTop
 }
-
-const enableSidebar = computed(() => {
-  return settingsStore.mode === 'mobile' || (
-    ['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode)
-    && menuStore.sidebarMenus.length !== 0
-    && !(
-      menuStore.sidebarMenus.length === 1
-      && (
-        !menuStore.sidebarMenus[0].children
-        || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
-      )
-    )
-  )
-})
 </script>
 
 <template>
   <div
-    v-if="enableSidebar" class="sub-sidebar-container" :class="{
+    class="sub-sidebar-container" :class="{
       'is-collapse': settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse,
     }"
   >

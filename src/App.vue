@@ -5,10 +5,8 @@ import hotkeys from 'hotkeys-js'
 import elementPlusLocaleZhCN from 'element-plus/es/locale/lang/zh-cn.mjs'
 import eventBus from './utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
-import useMenuStore from '@/store/modules/menu'
 
 const settingsStore = useSettingsStore()
-const menuStore = useMenuStore()
 const { auth } = useAuth()
 
 // 侧边栏主导航当前实际宽度
@@ -25,15 +23,6 @@ const subSidebarActualWidth = computed(() => {
   let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width'))
   if (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile') {
     actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-collapse-width'))
-  }
-  if (
-    menuStore.sidebarMenus.length === 1
-    && (
-      !menuStore.sidebarMenus[0].children
-      || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
-    )
-  ) {
-    actualWidth = 0
   }
   return `${actualWidth}px`
 })
