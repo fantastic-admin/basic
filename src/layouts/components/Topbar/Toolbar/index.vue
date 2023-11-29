@@ -4,7 +4,6 @@ import Breadcrumb from '../../Breadcrumb/index.vue'
 import BreadcrumbItem from '../../Breadcrumb/item.vue'
 import Tools from '../../Tools/index.vue'
 import useSettingsStore from '@/store/modules/settings'
-import useMenuStore from '@/store/modules/menu'
 
 defineOptions({
   name: 'Toolbar',
@@ -13,20 +12,9 @@ defineOptions({
 const route = useRoute()
 
 const settingsStore = useSettingsStore()
-const menuStore = useMenuStore()
 
 const enableSubMenuCollapseButton = computed(() => {
-  return settingsStore.mode === 'mobile' || (
-    ['side', 'head', 'single'].includes(settingsStore.settings.menu.menuMode)
-    && settingsStore.settings.menu.enableSubMenuCollapseButton
-    && !(
-      menuStore.sidebarMenus.length === 1
-      && (
-        !menuStore.sidebarMenus[0].children
-        || menuStore.sidebarMenus[0]?.children.every(item => item.meta?.sidebar === false)
-      )
-    )
-  )
+  return settingsStore.mode === 'mobile' || settingsStore.settings.menu.enableSubMenuCollapseButton
 })
 
 const breadcrumbList = computed(() => {
