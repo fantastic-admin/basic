@@ -19,8 +19,6 @@ const props = withDefaults(
   },
 )
 
-const router = useRouter()
-
 const activeIndex = ref<MenuInjection['activeIndex']>(props.value)
 const items = ref<MenuInjection['items']>({})
 const subMenus = ref<MenuInjection['subMenus']>({})
@@ -87,16 +85,11 @@ function setSubMenusActive(index: string) {
   })
 }
 
-const handleMenuItemClick: MenuInjection['handleMenuItemClick'] = (index, meta) => {
+const handleMenuItemClick: MenuInjection['handleMenuItemClick'] = (index) => {
   if (props.mode === 'horizontal' || props.collapse) {
     openedMenus.value = []
   }
   setSubMenusActive(index)
-  if (meta?.link) {
-    window.open(meta.link)
-    return
-  }
-  router.push(index)
 }
 const handleSubMenuClick: MenuInjection['handleSubMenuClick'] = (index, indexPath) => {
   if (openedMenus.value.includes(index)) {
@@ -175,7 +168,7 @@ provide(rootMenuInjectionKey, reactive({
   >
     <template v-for="(item, index) in menu" :key="index">
       <SubMenu v-if="item.children?.length" :menu="item" :unique-key="[item.path ?? JSON.stringify(item)]" />
-      <Item v-else :item="item" :unique-key="[item.path ?? JSON.stringify(item)]" @click="handleMenuItemClick(item.path ?? JSON.stringify(item), item.meta)" />
+      <Item v-else :item="item" :unique-key="[item.path ?? JSON.stringify(item)]" @click="handleMenuItemClick(item.path ?? JSON.stringify(item))" />
     </template>
   </div>
 </template>

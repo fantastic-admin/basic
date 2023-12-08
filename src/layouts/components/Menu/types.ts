@@ -27,7 +27,7 @@ export interface MenuInjection {
   isMenuPopup: boolean
   openMenu: (index: string, indexPath: string[]) => void
   closeMenu: (index: string | string[]) => void
-  handleMenuItemClick: (index: string, meta?: Menu.recordRaw['meta']) => void
+  handleMenuItemClick: (index: string) => void
   handleSubMenuClick: (index: string, indexPath: string[]) => void
 }
 
