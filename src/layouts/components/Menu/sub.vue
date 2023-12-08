@@ -114,7 +114,7 @@ function handleClick() {
     rootMenu.handleSubMenuClick(index, props.uniqueKey)
   }
   else {
-    rootMenu.handleMenuItemClick(index, props.menu.meta)
+    rootMenu.handleMenuItemClick(index)
   }
 }
 
