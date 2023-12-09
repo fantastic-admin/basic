@@ -23,7 +23,7 @@ const subMenuRef = shallowRef<OverlayScrollbarsComponentRef>()
 const rootMenu = inject(rootMenuInjectionKey)!
 
 const opened = computed(() => {
-  return rootMenu.openedMenus.includes(props.uniqueKey[props.uniqueKey.length - 1])
+  return rootMenu.openedMenus.includes(props.uniqueKey.at(-1)!)
 })
 
 const transitionEvent = computed(() => {

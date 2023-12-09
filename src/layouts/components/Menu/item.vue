@@ -17,8 +17,8 @@ const itemRef = ref<HTMLElement>()
 
 const isActived = computed(() => {
   return props.subMenu
-    ? rootMenu.subMenus[props.uniqueKey[props.uniqueKey.length - 1]]?.active
-    : rootMenu.activeIndex === props.uniqueKey[props.uniqueKey.length - 1]
+    ? rootMenu.subMenus[props.uniqueKey.at(-1)!].active
+    : rootMenu.activeIndex === props.uniqueKey.at(-1)!
 })
 
 const isItemActive = computed(() => {
