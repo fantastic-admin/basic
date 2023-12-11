@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
 import Message from 'vue-m-message'
+import settingsDefault from '@/settings.default'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
@@ -50,8 +51,35 @@ watch(copied, (val) => {
   }
 })
 
+interface AnyObject {
+  [key: string]: any
+}
+// 比较两个对象，并提取出不同的部分
+function getObjectDiff(originalObj: AnyObject, diffObj: AnyObject): AnyObject {
+  if (typeof originalObj !== 'object' || typeof diffObj !== 'object') {
+    return diffObj
+  }
+  const diff: AnyObject = {}
+  for (const key in diffObj) {
+    const originalValue = originalObj[key]
+    const diffValue = diffObj[key]
+    if (originalValue !== diffValue) {
+      if (typeof originalValue === 'object' && typeof diffValue === 'object') {
+        const nestedDiff = getObjectDiff(originalValue, diffValue)
+        if (Object.keys(nestedDiff).length > 0) {
+          diff[key] = nestedDiff
+        }
+      }
+      else {
+        diff[key] = diffValue
+      }
+    }
+  }
+  return diff
+}
+
 function handleCopy() {
-  copy(JSON.stringify(settingsStore.settings, null, 2))
+  copy(JSON.stringify(getObjectDiff(settingsDefault, settingsStore.settings), null, 2))
 }
 </script>
 
