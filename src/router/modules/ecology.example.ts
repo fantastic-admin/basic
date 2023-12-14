@@ -53,6 +53,15 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        path: 'form-create',
+        redirect: '',
+        name: 'cooperationFormcreate',
+        meta: {
+          title: 'Form-create 动态表单生成器',
+          link: 'https://form-create.com',
+        },
+      },
+      {
         path: 'quickadmin',
         redirect: '',
         name: 'cooperationQuickadmin',
@@ -71,12 +80,12 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'form-create',
+        path: 'idux',
         redirect: '',
-        name: 'cooperationFormcreate',
+        name: 'cooperationIDux',
         meta: {
-          title: 'Form-create 动态表单生成器',
-          link: 'https://form-create.com',
+          title: 'iDux 组件库',
+          link: 'https://idux.site',
         },
       },
     ],
