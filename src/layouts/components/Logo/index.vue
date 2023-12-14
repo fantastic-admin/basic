@@ -22,11 +22,7 @@ const settingsStore = useSettingsStore()
 const title = ref(import.meta.env.VITE_APP_TITLE)
 const logo = ref(imgLogo)
 
-const to = computed(() => {
-  return {
-    ...(settingsStore.settings.home.enable && { name: 'home' }),
-  }
-})
+const to = computed(() => settingsStore.settings.home.enable ? settingsStore.settings.home.fullPath : '')
 </script>
 
 <template>

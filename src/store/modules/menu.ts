@@ -64,7 +64,7 @@ const useMenuStore = defineStore(
     const sidebarMenusFirstDeepestPath = computed(() => {
       return sidebarMenus.value.length > 0
         ? getDeepestPath(sidebarMenus.value[0])
-        : '/'
+        : settingsStore.settings.home.fullPath
     })
     function getDeepestPath(menu: Menu.recordRaw, rootPath = '') {
       let retnPath = ''

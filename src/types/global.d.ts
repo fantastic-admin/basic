@@ -55,6 +55,11 @@ declare namespace Settings {
      * @默认值 `'主页'`
      */
     title?: string
+    /**
+     * 主页完整路径
+     * @默认值 `'/'`
+     */
+    fullPath?: string
   }
   interface layout {
     /**
