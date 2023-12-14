@@ -48,7 +48,6 @@ const systemRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'home',
         component: () => import('@/views/index.vue'),
         meta: {
           title: () => useSettingsStore().settings.home.title,

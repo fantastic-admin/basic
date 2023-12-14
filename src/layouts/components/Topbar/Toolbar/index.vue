@@ -21,7 +21,7 @@ const breadcrumbList = computed(() => {
   const breadcrumbList = []
   if (settingsStore.settings.home.enable) {
     breadcrumbList.push({
-      path: '/',
+      path: settingsStore.settings.home.fullPath,
       title: settingsStore.settings.home.title,
     })
   }

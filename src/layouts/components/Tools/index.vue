@@ -76,7 +76,7 @@ watch(() => userStore.avatar, () => {
     <HDropdownMenu
       :items="[
         [
-          { label: settingsStore.settings.home.title, handle: () => router.push({ name: 'home' }), hide: !settingsStore.settings.home.enable },
+          { label: settingsStore.settings.home.title, handle: () => router.push({ path: settingsStore.settings.home.fullPath }), hide: !settingsStore.settings.home.enable },
           { label: '个人设置', handle: () => router.push({ name: 'personalSetting' }) },
         ],
         [

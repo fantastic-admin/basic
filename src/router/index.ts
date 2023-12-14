@@ -34,12 +34,12 @@ router.beforeEach(async (to, from, next) => {
       // 如果已登录状态下，进入登录页会强制跳转到主页
       if (to.name === 'login') {
         next({
-          name: 'home',
+          path: settingsStore.settings.home.fullPath,
           replace: true,
         })
       }
       // 如果未开启主页，但进入的是主页，则会进入侧边栏导航第一个模块
-      else if (!settingsStore.settings.home.enable && to.name === 'home') {
+      else if (!settingsStore.settings.home.enable && to.fullPath === settingsStore.settings.home.fullPath) {
         if (menuStore.sidebarMenus.length > 0) {
           next({
             path: menuStore.sidebarMenusFirstDeepestPath,
@@ -105,7 +105,7 @@ router.beforeEach(async (to, from, next) => {
       next({
         name: 'login',
         query: {
-          redirect: to.fullPath !== '/' ? to.fullPath : undefined,
+          redirect: to.fullPath !== settingsStore.settings.home.fullPath ? to.fullPath : undefined,
         },
       })
     }

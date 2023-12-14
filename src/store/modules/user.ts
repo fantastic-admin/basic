@@ -1,3 +1,4 @@
+import useSettingsStore from './settings'
 import useRouteStore from './route'
 import useMenuStore from './menu'
 import router from '@/router'
@@ -7,6 +8,7 @@ const useUserStore = defineStore(
   // 唯一ID
   'user',
   () => {
+    const settingsStore = useSettingsStore()
     const routeStore = useRouteStore()
     const menuStore = useMenuStore()
 
@@ -56,7 +58,7 @@ const useUserStore = defineStore(
       router.push({
         name: 'login',
         query: {
-          ...(router.currentRoute.value.path !== '/' && router.currentRoute.value.name !== 'login' && { redirect }),
+          ...(router.currentRoute.value.path !== settingsStore.settings.home.fullPath && router.currentRoute.value.name !== 'login' && { redirect }),
         },
       })
     }

@@ -9,6 +9,7 @@ meta:
 import type { FormInstance, FormRules } from 'element-plus'
 import { ElMessage } from 'element-plus'
 import Copyright from '@/layouts/components/Copyright/index.vue'
+import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 
 defineOptions({
@@ -18,6 +19,7 @@ defineOptions({
 const route = useRoute()
 const router = useRouter()
 
+const settingsStore = useSettingsStore()
 const userStore = useUserStore()
 
 const banner = new URL('../assets/images/login-banner.png', import.meta.url).href
@@ -27,7 +29,7 @@ const title = import.meta.env.VITE_APP_TITLE
 // 表单类型，login 登录，register 注册，reset 重置密码
 const formType = ref('login')
 const loading = ref(false)
-const redirect = ref(route.query.redirect?.toString() ?? '/')
+const redirect = ref(route.query.redirect?.toString() ?? settingsStore.settings.home.fullPath)
 
 // 登录
 const loginFormRef = ref<FormInstance>()
