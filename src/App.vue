@@ -2,8 +2,8 @@
 import eruda from 'eruda'
 import VConsole from 'vconsole'
 import hotkeys from 'hotkeys-js'
-import elementPlusLocaleZhCN from 'element-plus/es/locale/lang/zh-cn.mjs'
 import eventBus from './utils/eventBus'
+import Provider from './ui-provider/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 
 const settingsStore = useSettingsStore()
@@ -59,7 +59,7 @@ import.meta.env.VITE_APP_DEBUG_TOOL === 'vconsole' && new VConsole()
 </script>
 
 <template>
-  <ElConfigProvider :locale="elementPlusLocaleZhCN" :button="{ autoInsertSpace: true }">
+  <Provider>
     <RouterView
       v-slot="{ Component, route }"
       :style="{
@@ -71,5 +71,5 @@ import.meta.env.VITE_APP_DEBUG_TOOL === 'vconsole' && new VConsole()
       <NotAllowed v-else />
     </RouterView>
     <SystemInfo />
-  </ElConfigProvider>
+  </Provider>
 </template>
