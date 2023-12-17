@@ -67,6 +67,8 @@ onUnmounted(() => {
   hotkeys.unbind('f5')
   hotkeys.unbind('alt+`')
 })
+
+const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
 </script>
 
 <template>
@@ -97,7 +99,7 @@ onUnmounted(() => {
     </div>
     <Search />
     <HotkeysIntro />
-    <template v-if="settingsStore.settings.app.enableAppSetting">
+    <template v-if="enableAppSetting">
       <div class="app-setting" @click="eventBus.emit('global-app-setting-toggle')">
         <SvgIcon name="uiw:setting-o" class="icon" />
       </div>
