@@ -28,8 +28,8 @@
   }
 
   @if $type == xy {
-    left: 50%;
     top: 50%;
+    left: 50%;
     transform: translateX(-50%) translateY(-50%);
   }
 }
@@ -46,8 +46,8 @@
 
   &::before,
   &::after {
-    content: "";
     display: block;
     clear: both;
+    content: "";
   }
 }

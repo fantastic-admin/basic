@@ -129,10 +129,10 @@ const dataList = ref([
 <style lang="scss" scoped>
 .absolute-container {
   position: absolute;
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
 
   .page-header {
     margin-bottom: 0;
@@ -144,10 +144,10 @@ const dataList = ref([
     overflow: auto;
 
     :deep(.main-container) {
-      flex: 1;
-      overflow: auto;
       display: flex;
+      flex: 1;
       flex-direction: column;
+      overflow: auto;
     }
   }
 }

@@ -17,8 +17,8 @@
 :root {
   &::view-transition-old(root),
   &::view-transition-new(root) {
-    animation: none;
     mix-blend-mode: normal;
+    animation: none;
   }
 
   &::view-transition-old(root) {
@@ -70,10 +70,10 @@ body {
 }
 
 body {
-  margin: 0;
-  background-color: var(--g-container-bg);
   box-sizing: border-box;
+  margin: 0;
   font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background-color: var(--g-container-bg);
   -webkit-tap-highlight-color: transparent;
 
   &.overflow-hidden {
@@ -88,8 +88,8 @@ body {
 // 右侧内容区针对fixed元素，有横向铺满的需求，可在fixed元素上设置 [data-fixed-calc-width]
 [data-fixed-calc-width] {
   position: fixed;
-  left: 50%;
   right: 0;
+  left: 50%;
   width: calc(100% - var(--g-main-sidebar-actual-width) - var(--g-sub-sidebar-actual-width));
   transform: translateX(-50%) translateX(calc(var(--g-main-sidebar-actual-width) / 2)) translateX(calc(var(--g-sub-sidebar-actual-width) / 2));
 }

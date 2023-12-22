@@ -52,11 +52,11 @@ function open(url: string) {
 <style lang="scss" scoped>
 .splitpanes__pane {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   font-family: Helvetica, Arial, sans-serif;
-  color: #999;
   font-size: 36px;
   font-weight: bold;
+  color: #999;
 }
 </style>

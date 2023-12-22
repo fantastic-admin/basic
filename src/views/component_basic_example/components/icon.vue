@@ -31,9 +31,9 @@ const icon = icons.filter(item => item.prefix === 'ep')[0]
 <style lang="scss" scoped>
 .demo {
   > i {
-    color: #606266;
     margin: 0 20px;
     font-size: 1.5em;
+    color: #606266;
     vertical-align: middle;
   }
 

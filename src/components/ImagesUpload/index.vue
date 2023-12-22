@@ -169,34 +169,34 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
   position: relative;
   display: inline-block;
   margin-right: 10px;
+  overflow: hidden;
   border: 1px dashed var(--el-border-color);
   border-radius: 6px;
-  overflow: hidden;
 
   .mask {
-    opacity: 0;
     position: absolute;
     top: 0;
     width: 100%;
     height: 100%;
     background-color: var(--el-overlay-color-lighter);
+    opacity: 0;
     transition: opacity 0.3s;
 
     .actions {
-      width: 100px;
-      height: 100px;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
+      width: 100px;
+      height: 100px;
 
       @include position-center(xy);
 
       span {
         width: 50%;
+        color: var(--el-color-white);
         text-align: center;
         cursor: pointer;
-        color: var(--el-color-white);
         transition: color 0.1s, transform 0.1s;
 
         &.disabled {
@@ -236,8 +236,8 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
 
     .image-slot {
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
       width: 100%;
       height: 100%;
       color: var(--el-text-color-placeholder);
@@ -253,12 +253,12 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
       top: 0;
 
       &::after {
-        content: "";
         position: absolute;
+        top: 0;
+        left: 0;
         width: 100%;
         height: 100%;
-        left: 0;
-        top: 0;
+        content: "";
         background-color: var(--el-overlay-color-lighter);
       }
 

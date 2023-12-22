@@ -104,8 +104,8 @@ function showInfo(iconName: string) {
 
   .icon-box {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
     width: 80px;
     height: 80px;
     border: 1px solid #e0e8ef;

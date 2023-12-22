@@ -64,32 +64,32 @@ function handlerMouserScroll(event: WheelEvent) {
 <style lang="scss" scoped>
 header {
   position: fixed;
-  z-index: 2000;
   top: 0;
-  left: 0;
   right: 0;
+  left: 0;
+  z-index: 2000;
   display: flex;
   align-items: center;
-  margin: 0 auto;
-  padding: 0 20px;
   width: 100%;
   height: var(--g-header-height);
+  padding: 0 20px;
+  margin: 0 auto;
   color: var(--g-header-color);
   background-color: var(--g-header-bg);
   box-shadow: -1px 0 0 0 var(--g-border-color), 1px 0 0 0 var(--g-border-color), 0 1px 0 0 var(--g-border-color);
   transition: background-color 0.3s;
 
   .header-container {
-    width: 100%;
-    height: 100%;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
 
     .main {
-      flex: 1;
       display: flex;
+      flex: 1;
       flex-wrap: wrap;
       align-items: center;
       height: 100%;
@@ -110,16 +110,16 @@ header {
 
     span {
       font-size: 20px;
-      letter-spacing: 1px;
       color: var(--g-header-color);
+      letter-spacing: 1px;
     }
   }
 
   .menu-container {
     flex: 1;
-    margin: 0 30px;
-    padding: 0 20px;
     height: 100%;
+    padding: 0 20px;
+    margin: 0 30px;
     overflow-x: auto;
     mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
 

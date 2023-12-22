@@ -146,16 +146,16 @@ function open(url: string) {
 
 <style lang="scss" scoped>
 .swiper {
-  height: 300px;
   width: 100%;
+  height: 300px;
 
   .swiper-slide {
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-    font-weight: 700;
+    justify-content: center;
     font-size: 36.4px;
+    font-weight: 700;
+    text-align: center;
     background-color: #fff;
   }
 }

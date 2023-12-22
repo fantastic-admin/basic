@@ -95,8 +95,8 @@ function open(url: string) {
   margin-top: 10px;
 
   &::before {
-    content: "预览：";
     display: block;
+    content: "预览：";
   }
 }
 </style>
