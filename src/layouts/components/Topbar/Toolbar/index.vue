@@ -74,8 +74,8 @@ function pathCompile(path: string) {
   .left-box {
     display: flex;
     align-items: center;
-    padding-left: 10px;
     padding-right: 50px;
+    padding-left: 10px;
     overflow: hidden;
     mask-image: linear-gradient(90deg, #000 0%, #000 calc(100% - 50px), transparent);
 

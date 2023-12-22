@@ -141,7 +141,7 @@ function open(url: string) {
         </template>
         <ElCarousel trigger="click" indicator-position="none" :interval="5000" height="250px">
           <ElCarouselItem v-for="(item, index) in fantasticAdminInfo.data" :key="item">
-            <ElImage :src="item" fit="cover" style="cursor: pointer; width: 100%; height: 250px; margin: auto;" @click="fantasticAdminInfo.imageVisible = true; fantasticAdminInfo.index = index" />
+            <ElImage :src="item" fit="cover" style="width: 100%; height: 250px; margin: auto; cursor: pointer;" @click="fantasticAdminInfo.imageVisible = true; fantasticAdminInfo.index = index" />
           </ElCarouselItem>
         </ElCarousel>
         <ElImageViewer v-if="fantasticAdminInfo.imageVisible" :url-list="fantasticAdminInfo.data" :initial-index="fantasticAdminInfo.index" @close="fantasticAdminInfo.imageVisible = false" />
@@ -168,7 +168,7 @@ function open(url: string) {
         </template>
         <ElCarousel trigger="click" indicator-position="none" :interval="5000" height="250px">
           <ElCarouselItem v-for="(item, index) in oneStepAdminInfo.data" :key="item">
-            <ElImage :src="item" fit="cover" style="cursor: pointer; width: 100%; height: 250px; margin: auto;" @click="oneStepAdminInfo.imageVisible = true; oneStepAdminInfo.index = index" />
+            <ElImage :src="item" fit="cover" style="width: 100%; height: 250px; margin: auto; cursor: pointer;" @click="oneStepAdminInfo.imageVisible = true; oneStepAdminInfo.index = index" />
           </ElCarouselItem>
         </ElCarousel>
         <ElImageViewer v-if="oneStepAdminInfo.imageVisible" :url-list="oneStepAdminInfo.data" :initial-index="oneStepAdminInfo.index" @close="oneStepAdminInfo.imageVisible = false" />

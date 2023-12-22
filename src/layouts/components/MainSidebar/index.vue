@@ -46,10 +46,10 @@ const { switchTo } = useMenu()
 
 <style lang="scss" scoped>
 .main-sidebar-container {
-  display: flex;
-  flex-direction: column;
   position: relative;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
   width: var(--g-main-sidebar-width);
   color: var(--g-main-sidebar-menu-color);
   background-color: var(--g-main-sidebar-bg);

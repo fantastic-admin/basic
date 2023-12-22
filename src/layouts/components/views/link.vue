@@ -54,12 +54,12 @@ function open() {
 }
 
 .slide-right-enter-from {
-  opacity: 0;
   margin-left: -20px;
+  opacity: 0;
 }
 
 .slide-right-leave-to {
-  opacity: 0;
   margin-left: 20px;
+  opacity: 0;
 }
 </style>

@@ -1,4 +1,4 @@
 {
-  "*.{ts,tsx,vue}": "eslint . --cache --fix",
-  "*.{css,scss,vue}": "stylelint src/**/*.{css,scss,vue} --cache --fix --allow-empty-input"
+  "*.{ts,tsx,vue}": "eslint --cache --fix",
+  "*.{css,scss,vue}": "stylelint --cache --fix"
 }

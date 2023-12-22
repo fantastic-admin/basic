@@ -49,12 +49,12 @@ function onSidebarScroll(e: Event) {
 
 <style lang="scss" scoped>
 .sub-sidebar-container {
-  display: flex;
-  flex-direction: column;
   position: absolute;
-  left: 0;
   top: 0;
   bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
   width: var(--g-sub-sidebar-width);
   background-color: var(--g-sub-sidebar-bg);
   transition: background-color 0.3s, left 0.3s, width 0.3s;
