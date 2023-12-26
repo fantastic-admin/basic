@@ -43,7 +43,7 @@ defineExpose({
       active: isItemActive,
     }"
   >
-    <router-link v-slot="{ href }" custom :to="uniqueKey.at(-1) ?? ''">
+    <router-link v-slot="{ href, navigate }" custom :to="uniqueKey.at(-1) ?? ''">
       <component
         :is="subMenu ? 'div' : 'a'" v-bind="{
           ...(!subMenu && {
@@ -54,7 +54,11 @@ defineExpose({
         }" class="group menu-item-container h-full w-full flex cursor-pointer items-center justify-between gap-1 px-5 py-4 text-[var(--g-sub-sidebar-menu-color)] transition-all hover:(bg-[var(--g-sub-sidebar-menu-hover-bg)] text-[var(--g-sub-sidebar-menu-hover-color)])" :class="{
           'text-[var(--g-sub-sidebar-menu-active-color)]! bg-[var(--g-sub-sidebar-menu-active-bg)]!': isItemActive,
           'px-3!': rootMenu.isMenuPopup && level === 0,
-        }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title"
+        }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" v-on="{
+          ...(!subMenu && {
+            click: navigate,
+          }),
+        }"
       >
         <div
           class="inline-flex flex-1 items-center justify-center gap-[12px]" :class="{
