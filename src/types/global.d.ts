@@ -114,27 +114,30 @@ declare namespace Settings {
   }
   interface toolbar {
     /**
+     * 是否开启面包屑导航
+     * @默认值 `true`
+     */
+    breadcrumb?: boolean
+    /**
+     * 是否开启导航搜索
+     * @默认值 `true`
+     */
+    navSearch?: boolean
+    /**
      * 是否开启全屏
      * @默认值 `false`
      */
-    enableFullscreen?: boolean
+    fullscreen?: boolean
     /**
      * 是否开启页面刷新
      * @默认值 `false`
      */
-    enablePageReload?: boolean
+    pageReload?: boolean
     /**
      * 是否开启颜色主题
      * @默认值 `false`
      */
-    enableColorScheme?: boolean
-  }
-  interface breadcrumb {
-    /**
-     * 是否开启面包屑导航
-     * @默认值 `true`
-     */
-    enable?: boolean
+    colorScheme?: boolean
   }
   interface mainPage {
     /**
@@ -144,11 +147,6 @@ declare namespace Settings {
     enableHotkeys?: boolean
   }
   interface navSearch {
-    /**
-     * 是否开启导航搜索
-     * @默认值 `true`
-     */
-    enable?: boolean
     /**
      * 是否开启导航搜索快捷键
      * @默认值 `true`
@@ -195,8 +193,6 @@ declare namespace Settings {
     topbar?: topbar
     /** 工具栏设置 */
     toolbar?: toolbar
-    /** 面包屑导航设置 */
-    breadcrumb?: breadcrumb
     /** 页面设置 */
     mainPage?: mainPage
     /** 导航搜索设置 */

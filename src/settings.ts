@@ -18,9 +18,9 @@ const globalSettings: Settings.all = {
     mode: 'fixed',
   },
   toolbar: {
-    enableFullscreen: true,
-    enablePageReload: true,
-    enableColorScheme: true,
+    fullscreen: true,
+    pageReload: true,
+    colorScheme: true,
   },
   mainPage: {
     enableHotkeys: true,

@@ -52,7 +52,7 @@ watch(() => routeInfo.path, () => {
 
 onMounted(() => {
   hotkeys('f5', (e) => {
-    if (settingsStore.settings.toolbar.enablePageReload) {
+    if (settingsStore.settings.toolbar.pageReload) {
       e.preventDefault()
       mainPage.reload()
     }

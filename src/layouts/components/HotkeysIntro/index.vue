@@ -31,7 +31,7 @@ onMounted(() => {
               <HKbd>I</HKbd>
               查看系统信息
             </li>
-            <li v-if="settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys" class="py-1">
+            <li v-if="settingsStore.settings.toolbar.navSearch && settingsStore.settings.navSearch.enableHotkeys" class="py-1">
               <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
               <HKbd>S</HKbd>
               唤起导航搜索
