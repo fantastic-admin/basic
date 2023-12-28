@@ -132,14 +132,14 @@ onMounted(() => {
     isShow.value = !isShow.value
   })
   hotkeys('alt+s', (e) => {
-    if (settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys) {
+    if (settingsStore.settings.toolbar.navSearch && settingsStore.settings.navSearch.enableHotkeys) {
       e.preventDefault()
       initSourceList()
       isShow.value = true
     }
   })
   hotkeys('esc', (e) => {
-    if (settingsStore.settings.navSearch.enable && settingsStore.settings.navSearch.enableHotkeys) {
+    if (settingsStore.settings.toolbar.navSearch && settingsStore.settings.navSearch.enableHotkeys) {
       e.preventDefault()
       isShow.value = false
     }

@@ -31,18 +31,16 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
     mode: 'static',
   },
   toolbar: {
-    enableFullscreen: false,
-    enablePageReload: false,
-    enableColorScheme: false,
-  },
-  breadcrumb: {
-    enable: true,
+    breadcrumb: true,
+    navSearch: true,
+    fullscreen: false,
+    pageReload: false,
+    colorScheme: false,
   },
   mainPage: {
     enableHotkeys: true,
   },
   navSearch: {
-    enable: true,
     enableHotkeys: true,
   },
   copyright: {

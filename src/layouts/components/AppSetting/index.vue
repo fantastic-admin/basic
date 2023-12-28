@@ -180,7 +180,7 @@ function handleCopy() {
       <div class="label">
         全屏
       </div>
-      <HToggle v-model="settingsStore.settings.toolbar.enableFullscreen" />
+      <HToggle v-model="settingsStore.settings.toolbar.fullscreen" />
     </div>
     <div class="setting-item">
       <div class="label">
@@ -189,7 +189,7 @@ function handleCopy() {
           <SvgIcon name="ri:question-line" />
         </HTooltip>
       </div>
-      <HToggle v-model="settingsStore.settings.toolbar.enablePageReload" />
+      <HToggle v-model="settingsStore.settings.toolbar.pageReload" />
     </div>
     <div class="setting-item">
       <div class="label">
@@ -198,7 +198,7 @@ function handleCopy() {
           <SvgIcon name="ri:question-line" />
         </HTooltip>
       </div>
-      <HToggle v-model="settingsStore.settings.toolbar.enableColorScheme" />
+      <HToggle v-model="settingsStore.settings.toolbar.colorScheme" />
     </div>
     <div v-if="settingsStore.mode === 'pc'" class="divider">
       面包屑导航
@@ -207,7 +207,7 @@ function handleCopy() {
       <div class="label">
         是否启用
       </div>
-      <HToggle v-model="settingsStore.settings.breadcrumb.enable" />
+      <HToggle v-model="settingsStore.settings.toolbar.breadcrumb" />
     </div>
     <div class="divider">
       页面
@@ -228,13 +228,13 @@ function handleCopy() {
           <SvgIcon name="ri:question-line" />
         </HTooltip>
       </div>
-      <HToggle v-model="settingsStore.settings.navSearch.enable" />
+      <HToggle v-model="settingsStore.settings.toolbar.navSearch" />
     </div>
     <div class="setting-item">
       <div class="label">
         是否启用快捷键
       </div>
-      <HToggle v-model="settingsStore.settings.navSearch.enableHotkeys" :disabled="!settingsStore.settings.navSearch.enable" />
+      <HToggle v-model="settingsStore.settings.navSearch.enableHotkeys" :disabled="!settingsStore.settings.toolbar.navSearch" />
     </div>
     <div class="divider">
       底部版权
