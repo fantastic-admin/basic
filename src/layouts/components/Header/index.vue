@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Logo from '../Logo/index.vue'
-import Tools from '../Tools/index.vue'
+import ToolbarRightSide from '../Topbar/Toolbar/rightSide.vue'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 
@@ -55,7 +55,7 @@ function handlerMouserScroll(event: WheelEvent) {
             </div>
           </div>
         </div>
-        <Tools />
+        <ToolbarRightSide />
       </div>
     </header>
   </Transition>

@@ -178,6 +178,21 @@ function handleCopy() {
     </div>
     <div v-if="settingsStore.mode === 'pc'" class="setting-item">
       <div class="label">
+        面包屑导航
+      </div>
+      <HToggle v-model="settingsStore.settings.toolbar.breadcrumb" />
+    </div>
+    <div class="setting-item">
+      <div class="label">
+        导航搜索
+        <HTooltip text="对导航进行快捷搜索">
+          <SvgIcon name="ri:question-line" />
+        </HTooltip>
+      </div>
+      <HToggle v-model="settingsStore.settings.toolbar.navSearch" />
+    </div>
+    <div v-if="settingsStore.mode === 'pc'" class="setting-item">
+      <div class="label">
         全屏
       </div>
       <HToggle v-model="settingsStore.settings.toolbar.fullscreen" />
@@ -200,15 +215,6 @@ function handleCopy() {
       </div>
       <HToggle v-model="settingsStore.settings.toolbar.colorScheme" />
     </div>
-    <div v-if="settingsStore.mode === 'pc'" class="divider">
-      面包屑导航
-    </div>
-    <div v-if="settingsStore.mode === 'pc'" class="setting-item">
-      <div class="label">
-        是否启用
-      </div>
-      <HToggle v-model="settingsStore.settings.toolbar.breadcrumb" />
-    </div>
     <div class="divider">
       页面
     </div>
@@ -220,15 +226,6 @@ function handleCopy() {
     </div>
     <div class="divider">
       导航搜索
-    </div>
-    <div class="setting-item">
-      <div class="label">
-        是否启用
-        <HTooltip text="对导航进行快捷搜索">
-          <SvgIcon name="ri:question-line" />
-        </HTooltip>
-      </div>
-      <HToggle v-model="settingsStore.settings.toolbar.navSearch" />
     </div>
     <div class="setting-item">
       <div class="label">
