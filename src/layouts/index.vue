@@ -222,10 +222,6 @@ header:not(.header-leave-active) + .wrapper {
   .main-container {
     .topbar-container {
       top: var(--g-header-height);
-
-      :deep(.tools) {
-        display: none;
-      }
     }
   }
 }
