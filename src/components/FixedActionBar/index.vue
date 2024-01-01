@@ -28,10 +28,18 @@ function onScroll() {
 
 <template>
   <div
-    class="bottom-0 z-4 bg-[var(--g-container-bg)] p-5 text-center transition" :class="[
-      isBottom ? 'shadow-[0_0_1px_0_var(--g-box-shadow-color)]' : 'shadow-[0_-10px_10px_-10px_var(--g-box-shadow-color)]',
-    ]" data-fixed-calc-width
+    class="fixed-action-bar bottom-0 z-4 bg-[var(--g-container-bg)] p-5 text-center transition" :class="{ shadow: !isBottom }" data-fixed-calc-width
   >
     <slot />
   </div>
 </template>
+
+<style lang="scss" scoped>
+.fixed-action-bar {
+  box-shadow: 0 0 1px 0 var(--g-box-shadow-color);
+
+  &.shadow {
+    box-shadow: 0 -10px 10px -10px var(--g-box-shadow-color);
+  }
+}
+</style>
