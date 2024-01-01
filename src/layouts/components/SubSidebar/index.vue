@@ -13,11 +13,20 @@ const route = useRoute()
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
-const sidebarScrollTop = ref(0)
-
-function onSidebarScroll(e: Event) {
-  sidebarScrollTop.value = (e.target as HTMLElement).scrollTop
+const subSidebarRef = ref()
+const showShadowTop = ref(false)
+const showShadowBottom = ref(false)
+function onSidebarScroll() {
+  const scrollTop = subSidebarRef.value.scrollTop
+  showShadowTop.value = scrollTop > 0
+  const clientHeight = subSidebarRef.value.clientHeight
+  const scrollHeight = subSidebarRef.value.scrollHeight
+  showShadowBottom.value = Math.ceil(scrollTop + clientHeight) < scrollHeight
 }
+
+onMounted(() => {
+  onSidebarScroll()
+})
 </script>
 
 <template>
@@ -32,8 +41,9 @@ function onSidebarScroll(e: Event) {
       }"
     />
     <div
-      class="sub-sidebar flex-1 transition-shadow-300" :class="{
-        shadow: sidebarScrollTop,
+      ref="subSidebarRef" class="sub-sidebar flex-1 transition-shadow-300" :class="{
+        'shadow-top': showShadowTop,
+        'shadow-bottom': showShadowBottom,
       }" @scroll="onSidebarScroll"
     >
       <TransitionGroup name="sub-sidebar">
@@ -43,6 +53,11 @@ function onSidebarScroll(e: Event) {
           </div>
         </template>
       </TransitionGroup>
+    </div>
+    <div v-if="settingsStore.mode === 'pc'" class="relative flex items-center p-4" :class="[settingsStore.settings.menu.subMenuCollapse ? 'justify-center' : 'justify-end']">
+      <span v-show="settingsStore.settings.menu.enableSubMenuCollapseButton" class="flex-center cursor-pointer rounded bg-stone-1 p-2 transition dark:bg-stone-9 hover:bg-stone-2 dark:hover:bg-stone-8" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
+        <SvgIcon name="toolbar-collapse" />
+      </span>
     </div>
   </div>
 </template>
@@ -98,8 +113,16 @@ function onSidebarScroll(e: Event) {
       display: none;
     }
 
-    &.shadow {
-      box-shadow: inset 0 10px 10px -10px var(--g-box-shadow-color);
+    &.shadow-top {
+      box-shadow: inset 0 10px 10px -10px var(--g-box-shadow-color), inset 0 0 0 transparent;
+    }
+
+    &.shadow-bottom {
+      box-shadow: inset 0 0 0 transparent, inset 0 -10px 10px -10px var(--g-box-shadow-color);
+    }
+
+    &.shadow-top.shadow-bottom {
+      box-shadow: inset 0 10px 10px -10px var(--g-box-shadow-color), inset 0 -10px 10px -10px var(--g-box-shadow-color);
     }
   }
 
