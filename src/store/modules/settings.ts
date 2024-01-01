@@ -70,16 +70,17 @@ const useSettingsStore = defineStore(
       }
     }
 
-    // 次导航是否收起（用于记录 pc 模式下最后的状态）
-    const subMenuCollapseLastStatus = ref(settingsDefault.menu.subMenuCollapse)
     // 切换侧边栏导航展开/收起
     function toggleSidebarCollapse() {
       settings.value.menu.subMenuCollapse = !settings.value.menu.subMenuCollapse
-      if (mode.value === 'pc') {
-        subMenuCollapseLastStatus.value = !subMenuCollapseLastStatus.value
-      }
     }
-
+    // 次导航是否收起（用于记录 pc 模式下最后的状态）
+    const subMenuCollapseLastStatus = ref(settingsDefault.menu.subMenuCollapse)
+    watch(() => settings.value.menu.subMenuCollapse, (val) => {
+      if (mode.value === 'pc') {
+        subMenuCollapseLastStatus.value = val
+      }
+    })
     watch(mode, (val) => {
       switch (val) {
         case 'pc':
