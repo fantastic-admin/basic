@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useElementSize } from '@vueuse/core'
 import Logo from '../Logo/index.vue'
 import Menu from '../Menu/index.vue'
 import useSettingsStore from '@/store/modules/settings'
@@ -24,8 +25,18 @@ function onSidebarScroll() {
   showShadowBottom.value = Math.ceil(scrollTop + clientHeight) < scrollHeight
 }
 
+const menuRef = ref()
+
 onMounted(() => {
   onSidebarScroll()
+  const { height } = useElementSize(menuRef)
+  watch(() => height.value, () => {
+    if (height.value > 0) {
+      onSidebarScroll()
+    }
+  }, {
+    immediate: true,
+  })
 })
 </script>
 
@@ -46,13 +57,15 @@ onMounted(() => {
         'shadow-bottom': showShadowBottom,
       }" @scroll="onSidebarScroll"
     >
-      <TransitionGroup name="sub-sidebar">
-        <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
-          <div v-show="mainIndex === menuStore.actived">
-            <Menu :menu="mainItem.children" :value="route.meta.activeMenu || route.path" :default-openeds="menuStore.defaultOpenedPaths" :accordion="settingsStore.settings.menu.subMenuUniqueOpened" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" class="menu" />
-          </div>
-        </template>
-      </TransitionGroup>
+      <div ref="menuRef">
+        <TransitionGroup name="sub-sidebar">
+          <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
+            <div v-show="mainIndex === menuStore.actived">
+              <Menu :menu="mainItem.children" :value="route.meta.activeMenu || route.path" :default-openeds="menuStore.defaultOpenedPaths" :accordion="settingsStore.settings.menu.subMenuUniqueOpened" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" class="menu" />
+            </div>
+          </template>
+        </TransitionGroup>
+      </div>
     </div>
     <div v-if="settingsStore.mode === 'pc'" class="relative flex items-center p-4" :class="[settingsStore.settings.menu.subMenuCollapse ? 'justify-center' : 'justify-end']">
       <span v-show="settingsStore.settings.menu.enableSubMenuCollapseButton" class="flex-center cursor-pointer rounded bg-stone-1 p-2 transition dark:bg-stone-9 hover:bg-stone-2 dark:hover:bg-stone-8" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
