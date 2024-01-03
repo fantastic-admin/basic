@@ -1,26 +1,29 @@
-export default [
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
+import Mock from 'mockjs'
+
+export default defineFakeRoute([
   {
     url: '/mock/user/login',
     method: 'post',
-    response: ({ body }: any) => {
+    response: ({ body }) => {
       return {
         error: '',
         status: 1,
-        data: {
+        data: Mock.mock({
           account: body.account,
           token: `${body.account}_@string`,
           failure_time: Math.ceil(new Date().getTime() / 1000) + 24 * 60 * 60,
           avatar: '',
-        },
+        }),
       }
     },
   },
   {
     url: '/mock/user/permission',
     method: 'get',
-    response: ({ headers }: any) => {
+    response: ({ headers }) => {
       let permissions: string[] = []
-      if (headers.token.indexOf('admin') === 0) {
+      if (headers.token?.indexOf('admin') === 0) {
         permissions = [
           'permission.browse',
           'permission.create',
@@ -28,7 +31,7 @@ export default [
           'permission.remove',
         ]
       }
-      else if (headers.token.indexOf('test') === 0) {
+      else if (headers.token?.indexOf('test') === 0) {
         permissions = [
           'permission.browse',
         ]
@@ -45,12 +48,14 @@ export default [
   {
     url: '/mock/user/password/edit',
     method: 'post',
-    response: {
-      error: '',
-      status: 1,
-      data: {
-        isSuccess: true,
-      },
+    response: () => {
+      return {
+        error: '',
+        status: 1,
+        data: {
+          isSuccess: true,
+        },
+      }
     },
   },
-]
+])
