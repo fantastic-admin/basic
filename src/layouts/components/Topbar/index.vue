@@ -10,7 +10,7 @@ const settingsStore = useSettingsStore()
 
 const enableToolbar = computed(() => {
   return !(
-    settingsStore.settings.menu.menuMode === 'head' && !settingsStore.settings.menu.enableSubMenuCollapseButton && (
+    settingsStore.settings.menu.menuMode === 'head' && (
       !settingsStore.settings.toolbar.breadcrumb || settingsStore.settings.app.routeBaseOn === 'filesystem'
     )
   )
