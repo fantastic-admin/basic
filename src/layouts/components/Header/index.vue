@@ -152,10 +152,6 @@ header {
       }
     }
   }
-
-  :deep(.tools) {
-    padding: 0;
-  }
 }
 
 // 头部动画
