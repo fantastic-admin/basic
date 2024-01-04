@@ -23,7 +23,7 @@ export default defineFakeRoute([
     method: 'get',
     response: ({ headers }) => {
       let permissions: string[] = []
-      if (headers.token?.indexOf('admin') === 0) {
+      if (headers.Token?.indexOf('admin') === 0) {
         permissions = [
           'permission.browse',
           'permission.create',
@@ -31,7 +31,7 @@ export default defineFakeRoute([
           'permission.remove',
         ]
       }
-      else if (headers.token?.indexOf('test') === 0) {
+      else if (headers.Token?.indexOf('test') === 0) {
         permissions = [
           'permission.browse',
         ]
