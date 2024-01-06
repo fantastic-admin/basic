@@ -1,16 +1,14 @@
 <script setup lang="ts">
 import { Dialog, DialogDescription, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
-    modelValue: boolean
     appear?: boolean
     title?: string
     preventClose?: boolean
     overlay?: boolean
   }>(),
   {
-    modelValue: false,
     appear: false,
     preventClose: false,
     overlay: false,
@@ -18,9 +16,12 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<{
-  'update:modelValue': [boolean]
   'close': []
 }>()
+
+const isOpen = defineModel<boolean>({
+  default: false,
+})
 
 const slots = useSlots()
 
@@ -42,15 +43,6 @@ const transitionClass = computed(() => {
     leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
     leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
   }
-})
-
-const isOpen = computed({
-  get() {
-    return props.modelValue
-  },
-  set(value) {
-    emits('update:modelValue', value)
-  },
 })
 
 function close() {

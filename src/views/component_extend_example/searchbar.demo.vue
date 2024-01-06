@@ -19,11 +19,7 @@ const search = ref({
   check2: false,
 })
 
-const isFold = ref(false)
-const isFold2 = ref(true)
-const isFold3 = ref(true)
-
-function toggle(fold: boolean) {
+function onToggle(fold: boolean) {
   ElMessage({
     message: fold ? '收起' : '展开',
   })
@@ -101,7 +97,7 @@ function toggle(fold: boolean) {
       </SearchBar>
     </PageMain>
     <PageMain title="默认展开">
-      <SearchBar :fold="isFold">
+      <SearchBar :fold="false">
         <template #default="{ fold }">
           <ElForm :model="search" size="default" label-width="120px">
             <ElRow>
@@ -235,7 +231,7 @@ function toggle(fold: boolean) {
       </SearchBar>
     </PageMain>
     <PageMain title="切换事件">
-      <SearchBar @toggle="toggle">
+      <SearchBar @toggle="onToggle">
         <template #default="{ fold }">
           <ElForm :model="search" size="default" label-width="120px">
             <ElRow>
@@ -302,8 +298,8 @@ function toggle(fold: boolean) {
       </SearchBar>
     </PageMain>
     <PageMain title="自定义切换按钮（搭配自定义 grid 布局）">
-      <SearchBar :fold="isFold2" :show-toggle="false">
-        <template #default="{ fold }">
+      <SearchBar :show-toggle="false">
+        <template #default="{ fold, toggle }">
           <ElForm :model="search" size="default" label-width="120px" inline class="search-form">
             <ElFormItem label="姓名 / 手机号" class="search-form-item-name">
               <ElInput v-model="search.name" placeholder="请输入姓名或者手机号，支持模糊查询" clearable />
@@ -343,7 +339,7 @@ function toggle(fold: boolean) {
                 </template>
                 筛选
               </ElButton>
-              <ElButton link @click="isFold2 = !fold">
+              <ElButton link @click="toggle">
                 <template #icon>
                   <SvgIcon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
                 </template>
@@ -355,8 +351,8 @@ function toggle(fold: boolean) {
       </SearchBar>
     </PageMain>
     <PageMain title="自定义切换按钮（搭配 el-row 组件）">
-      <SearchBar :fold="isFold3" :show-toggle="false">
-        <template #default="{ fold }">
+      <SearchBar :show-toggle="false">
+        <template #default="{ fold, toggle }">
           <ElForm :model="search" size="default" label-width="120px">
             <ElRow>
               <ElCol :span="12">
@@ -408,7 +404,7 @@ function toggle(fold: boolean) {
                     </template>
                     筛选
                   </ElButton>
-                  <ElButton link @click="isFold3 = !fold">
+                  <ElButton link @click="toggle">
                     <template #icon>
                       <SvgIcon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
                     </template>

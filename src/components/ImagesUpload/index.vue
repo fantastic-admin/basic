@@ -12,7 +12,6 @@ const props = withDefaults(
     headers?: UploadProps['headers']
     data?: UploadProps['data']
     name?: UploadProps['name']
-    url?: string[]
     size?: number
     max?: number
     width?: number
@@ -23,7 +22,6 @@ const props = withDefaults(
   }>(),
   {
     name: 'file',
-    url: () => [],
     size: 2,
     max: 3,
     width: 150,
@@ -35,13 +33,14 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<{
-  'update:url': [
-    url: string[],
-  ]
   'onSuccess': [
     res: any,
   ]
 }>()
+
+const url = defineModel<string[]>({
+  default: [],
+})
 
 const uploadData = ref({
   dialogImageIndex: 0,
@@ -63,20 +62,16 @@ function previewClose() {
 }
 // 移除
 function remove(index: number) {
-  const url = props.url
-  url.splice(index, 1)
-  emits('update:url', url)
+  url.value.splice(index, 1)
 }
 // 移动
 function move(index: number, type: 'left' | 'right') {
-  const url = props.url
   if (type === 'left' && index !== 0) {
-    url[index] = url.splice(index - 1, 1, url[index])[0]
+    url.value[index] = url.value.splice(index - 1, 1, url.value[index])[0]
   }
-  if (type === 'right' && index !== url.length - 1) {
-    url[index] = url.splice(index + 1, 1, url[index])[0]
+  if (type === 'right' && index !== url.value.length - 1) {
+    url.value[index] = url.value.splice(index + 1, 1, url.value[index])[0]
   }
-  emits('update:url', url)
 }
 
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {

@@ -8,10 +8,6 @@ defineOptions({
 
 const props = withDefaults(
   defineProps<{
-    modelValue: string[] | {
-      code: string
-      name: string
-    }[]
     disabled?: boolean
     type?: 'pc' | 'pca' | 'pcas'
     format?: 'code' | 'name' | 'both'
@@ -23,14 +19,12 @@ const props = withDefaults(
   },
 )
 
-const emits = defineEmits<{
-  'update:modelValue': [
-    value: string[] | {
-      code: string
-      name: string
-    }[],
-  ]
-}>()
+const value = defineModel<string[] | {
+  code: string
+  name: string
+}[]>({
+  default: [],
+})
 
 interface pcasItem {
   code: string
@@ -88,11 +82,11 @@ const pcasData = computed(() => {
 const myValue = computed({
   // 将入参数据转成 code 码
   get: () => {
-    return anyToCode(props.modelValue)
+    return anyToCode(value.value)
   },
   // 将 code 码转成出参数据
-  set: (value) => {
-    emits('update:modelValue', value ? codeToAny(value) : [])
+  set: (val) => {
+    value.value = val ? codeToAny(val) : []
   },
 })
 

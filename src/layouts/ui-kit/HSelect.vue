@@ -1,7 +1,6 @@
 <script setup lang="ts">
 const props = withDefaults(
   defineProps<{
-    modelValue: string | number | undefined
     options: {
       label: string | number
       value: string | number
@@ -14,16 +13,14 @@ const props = withDefaults(
   },
 )
 
-const emits = defineEmits<{
-  'update:modelValue': [string | number]
-}>()
+const value = defineModel<string | number>()
 
 const selected = computed({
   get() {
-    return props.options.find(option => option.value === props.modelValue) ?? props.options[0]
+    return props.options.find(option => option.value === value.value) ?? props.options[0]
   },
   set(val) {
-    emits('update:modelValue', val.value)
+    value.value = val.value
   },
 })
 </script>

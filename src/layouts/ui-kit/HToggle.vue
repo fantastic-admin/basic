@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { Switch } from '@headlessui/vue'
 
-const props = withDefaults(
+withDefaults(
   defineProps<{
-    modelValue?: boolean
     disabled?: boolean
     onIcon?: string
     offIcon?: string
@@ -13,18 +12,7 @@ const props = withDefaults(
   },
 )
 
-const emits = defineEmits<{
-  'update:modelValue': [boolean]
-}>()
-
-const enabled = computed({
-  get() {
-    return props.modelValue
-  },
-  set(value) {
-    emits('update:modelValue', value)
-  },
-})
+const enabled = defineModel<boolean>()
 </script>
 
 <template>
