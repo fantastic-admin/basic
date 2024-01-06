@@ -12,7 +12,6 @@ const props = withDefaults(
     headers?: UploadProps['headers']
     data?: UploadProps['data']
     name?: UploadProps['name']
-    url?: string
     size?: number
     width?: number
     height?: number
@@ -22,7 +21,6 @@ const props = withDefaults(
   }>(),
   {
     name: 'file',
-    url: '',
     size: 2,
     width: 150,
     height: 150,
@@ -33,13 +31,14 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<{
-  'update:url': [
-    url: string,
-  ]
   'onSuccess': [
     res: any,
   ]
 }>()
+
+const url = defineModel<string>({
+  default: '',
+})
 
 const uploadData = ref({
   imageViewerVisible: false,
@@ -59,7 +58,7 @@ function previewClose() {
 }
 // 移除
 function remove() {
-  emits('update:url', '')
+  url.value = ''
 }
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const fileName = file.name.split('.')

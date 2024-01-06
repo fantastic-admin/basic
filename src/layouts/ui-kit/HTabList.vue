@@ -2,7 +2,6 @@
 import { Tab, TabGroup, TabList } from '@headlessui/vue'
 
 const props = defineProps<{
-  modelValue: T
   options: {
     label: any
     value: T
@@ -10,25 +9,26 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  'update:modelValue': [T]
   'change': [T]
 }>()
 
+const value = defineModel<T>()
+
 const selectedIndex = computed({
   get() {
-    return props.options.findIndex(option => option.value === props.modelValue)
+    return props.options.findIndex(option => option.value === value.value)
   },
   set(val) {
-    emits('update:modelValue', props.options[val].value)
+    value.value = props.options[val].value
   },
 })
 
-watch(() => props.modelValue, (val) => {
-  emits('change', val)
+watch(value, (val) => {
+  val && emits('change', val)
 })
 
 function handleChange(index: number) {
-  emits('update:modelValue', props.options[index].value)
+  value.value = props.options[index].value
 }
 </script>
 

@@ -4,7 +4,6 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 
 const props = withDefaults(
   defineProps<{
-    modelValue: boolean
     appear?: boolean
     side?: 'left' | 'right'
     title?: string
@@ -12,7 +11,6 @@ const props = withDefaults(
     overlay?: boolean
   }>(),
   {
-    modelValue: false,
     appear: false,
     side: 'right',
     preventClose: false,
@@ -21,9 +19,12 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<{
-  'update:modelValue': [boolean]
   'close': []
 }>()
+
+const isOpen = defineModel<boolean>({
+  default: false,
+})
 
 const slots = useSlots()
 
@@ -45,15 +46,6 @@ const transitionClass = computed(() => {
     leaveFrom: 'translate-x-0',
     leaveTo: props.side === 'left' ? '-translate-x-full' : 'translate-x-full',
   }
-})
-
-const isOpen = computed({
-  get() {
-    return props.modelValue
-  },
-  set(value) {
-    emits('update:modelValue', value)
-  },
 })
 
 function close() {
