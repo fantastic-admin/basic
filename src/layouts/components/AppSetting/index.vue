@@ -51,20 +51,20 @@ watch(copied, (val) => {
   }
 })
 
-interface AnyObject {
-  [key: string]: any
+function isObject(value: any) {
+  return typeof value === 'object' && !Array.isArray(value)
 }
 // 比较两个对象，并提取出不同的部分
-function getObjectDiff(originalObj: AnyObject, diffObj: AnyObject): AnyObject {
-  if (typeof originalObj !== 'object' || typeof diffObj !== 'object') {
+function getObjectDiff(originalObj: Record<string, any>, diffObj: Record<string, any>) {
+  if (!isObject(originalObj) || !isObject(diffObj)) {
     return diffObj
   }
-  const diff: AnyObject = {}
+  const diff: Record<string, any> = {}
   for (const key in diffObj) {
     const originalValue = originalObj[key]
     const diffValue = diffObj[key]
-    if (originalValue !== diffValue) {
-      if (typeof originalValue === 'object' && typeof diffValue === 'object') {
+    if (JSON.stringify(originalValue) !== JSON.stringify(diffValue)) {
+      if (isObject(originalValue) && isObject(diffValue)) {
         const nestedDiff = getObjectDiff(originalValue, diffValue)
         if (Object.keys(nestedDiff).length > 0) {
           diff[key] = nestedDiff
