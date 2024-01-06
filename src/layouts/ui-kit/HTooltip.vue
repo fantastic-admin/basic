@@ -10,7 +10,7 @@ withDefaults(
 </script>
 
 <template>
-  <VTooltip v-bind="$attrs">
+  <VTooltip :popper-triggers="['hover']" v-bind="$attrs">
     <slot />
     <template #popper>
       <slot name="text">
