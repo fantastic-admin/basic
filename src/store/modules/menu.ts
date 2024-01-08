@@ -57,7 +57,9 @@ const useMenuStore = defineStore(
     // 次导航数据
     const sidebarMenus = computed<Menu.recordMainRaw['children']>(() => {
       return allMenus.value.length > 0
-        ? allMenus.value[actived.value].children
+        ? allMenus.value.length > 1
+          ? allMenus.value[actived.value].children
+          : allMenus.value[0].children
         : []
     })
     // 次导航第一层最深路径
