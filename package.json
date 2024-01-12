@@ -83,6 +83,7 @@
     "typescript": "^5.3.3",
     "unocss": "^0.58.3",
     "unplugin-auto-import": "^0.17.3",
+    "unplugin-turbo-console": "^1.0.9",
     "unplugin-vue-components": "^0.26.0",
     "vite": "^5.0.11",
     "vite-plugin-banner": "^0.7.1",
