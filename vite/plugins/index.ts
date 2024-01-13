@@ -2,6 +2,7 @@ import type { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueLegacy from '@vitejs/plugin-legacy'
+import appInfo from './app-info'
 
 import createInspector from './inspector'
 import createAutoImport from './auto-import'
@@ -17,6 +18,7 @@ import createBanner from './banner'
 
 export default function createVitePlugins(viteEnv, isBuild = false) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
+    appInfo(),
     vue(),
     vueJsx(),
     vueLegacy({
