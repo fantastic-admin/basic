@@ -37,7 +37,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
   vitePlugins.push(createMock(viteEnv, isBuild))
   vitePlugins.push(createLayouts())
   vitePlugins.push(createPages())
-  isBuild && vitePlugins.push(...createCompression(viteEnv))
+  vitePlugins.push(...createCompression(viteEnv, isBuild))
   vitePlugins.push(createConsole())
   vitePlugins.push(createBanner())
   return vitePlugins
