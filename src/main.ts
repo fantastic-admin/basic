@@ -1,5 +1,3 @@
-import '@/utils/baidu'
-
 import '@/utils/system.copyright'
 
 import FloatingVue from 'floating-vue'
