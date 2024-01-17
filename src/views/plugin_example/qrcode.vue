@@ -67,7 +67,7 @@ function open(url: string) {
       </template>
       <ElButton @click="open('https://github.com/soldair/node-qrcode')">
         <template #icon>
-          <SvgIcon name="ep:link" />
+          <SvgIcon name="i-ep:link" />
         </template>
         访问 node-qrcode
       </ElButton>

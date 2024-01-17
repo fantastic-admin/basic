@@ -13,6 +13,14 @@ import { entriesToCss, toArray } from '@unocss/core'
 import { darkTheme, lightTheme } from './themes'
 
 export default defineConfig<Theme>({
+  content: {
+    pipeline: {
+      include: [
+        /\.(vue|svelte|[jt]sx|mdx?|astro|elm|php|phtml|html)($|\?)/,
+        'src/**/*.{js,ts}',
+      ],
+    },
+  },
   shortcuts: [
     {
       'flex-center': 'flex justify-center items-center',

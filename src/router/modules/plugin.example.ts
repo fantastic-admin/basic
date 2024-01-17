@@ -11,7 +11,7 @@ const routes: RouteRecordRaw = {
   name: 'pluginExample',
   meta: {
     title: '插件',
-    icon: 'clarity:plugin-outline-alerted',
+    icon: 'i-clarity:plugin-outline-alerted',
   },
   children: [
     {
@@ -20,7 +20,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/qrcode.vue'),
       meta: {
         title: '二维码',
-        icon: 'material-symbols:qr-code',
+        icon: 'i-material-symbols:qr-code',
       },
     },
     {
@@ -29,7 +29,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/print.vue'),
       meta: {
         title: '打印',
-        icon: 'ri:printer-line',
+        icon: 'i-ri:printer-line',
       },
     },
     {
@@ -38,7 +38,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/esign.vue'),
       meta: {
         title: '电子签名',
-        icon: 'mdi:draw',
+        icon: 'i-mdi:draw',
       },
     },
     {
@@ -47,7 +47,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/animation.vue'),
       meta: {
         title: '过渡动画',
-        icon: 'clarity:animation-line',
+        icon: 'i-clarity:animation-line',
       },
     },
     {
@@ -56,7 +56,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/swiper.vue'),
       meta: {
         title: '轮播动画',
-        icon: 'carbon:carousel-horizontal',
+        icon: 'i-carbon:carousel-horizontal',
       },
     },
     {
@@ -65,7 +65,7 @@ const routes: RouteRecordRaw = {
       name: 'pluginExampleChart',
       meta: {
         title: '图表',
-        icon: 'ri:bar-chart-2-line',
+        icon: 'i-ri:bar-chart-2-line',
       },
       children: [
         {
@@ -92,7 +92,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/tinymce.vue'),
       meta: {
         title: 'TinyMCE 编辑器',
-        icon: 'file-icons:tinymce',
+        icon: 'i-file-icons:tinymce',
       },
     },
     {
@@ -101,7 +101,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/markdown.vue'),
       meta: {
         title: 'Markdown 编辑器',
-        icon: 'teenyicons:markdown-outline',
+        icon: 'i-teenyicons:markdown-outline',
       },
     },
     {
@@ -110,7 +110,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/count.to.vue'),
       meta: {
         title: '计数器',
-        icon: 'carbon:character-whole-number',
+        icon: 'i-carbon:character-whole-number',
       },
     },
     {
@@ -119,7 +119,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/splitpanes.vue'),
       meta: {
         title: '拆分面板',
-        icon: 'icon-park-outline:split-cells',
+        icon: 'i-icon-park-outline:split-cells',
       },
     },
     {
@@ -128,7 +128,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/plugin_example/vxe-table.vue'),
       meta: {
         title: 'vxe-table',
-        icon: 'mdi:table-large',
+        icon: 'i-mdi:table-large',
       },
     },
   ],

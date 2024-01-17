@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { Icon } from '@iconify/vue'
-import { isOfflineUse } from '@/iconify/index.json'
 
 defineOptions({
   name: 'SvgIcon',
@@ -8,7 +7,6 @@ defineOptions({
 
 const props = defineProps<{
   name: string
-  async?: boolean
   flip?: 'horizontal' | 'vertical' | 'both'
   rotate?: number
   color?: string
@@ -16,27 +14,17 @@ const props = defineProps<{
 }>()
 
 const outputType = computed(() => {
-  if (props.name.indexOf('i-') === 0) {
-    return (props.async || isOfflineUse) ? 'svg' : 'css'
+  if (/^https?:\/\//.test(props.name)) {
+    return 'img'
+  }
+  else if (/i-[^:]+:[^:]+/.test(props.name)) {
+    return 'unocss'
   }
   else if (props.name.includes(':')) {
+    return 'iconify'
+  }
+  else {
     return 'svg'
-  }
-  else {
-    return 'custom'
-  }
-})
-
-const outputName = computed(() => {
-  if (props.name.indexOf('i-') === 0) {
-    let conversionName = props.name
-    if (props.async || isOfflineUse) {
-      conversionName = conversionName.replace('i-', '')
-    }
-    return conversionName
-  }
-  else {
-    return props.name
   }
 })
 
@@ -68,11 +56,11 @@ const style = computed(() => {
 </script>
 
 <template>
-  <i class="relative h-[1em] w-[1em] flex-inline items-center justify-center fill-current leading-[1em]" :style="style">
-    <i v-if="outputType === 'css'" :class="outputName" />
-    <Icon v-else-if="outputType === 'svg'" :icon="outputName" />
-    <svg v-else h-1em w-1em aria-hidden="true">
-      <use :xlink:href="`#icon-${outputName}`" />
+  <i class="relative h-[1em] w-[1em] flex-inline items-center justify-center fill-current leading-[1em]" :class="{ [name]: outputType === 'unocss' }" :style="style">
+    <Icon v-if="outputType === 'iconify'" :icon="name" />
+    <svg v-else-if="outputType === 'svg'" class="h-[1em] w-[1em]" aria-hidden="true">
+      <use :xlink:href="`#icon-${name}`" />
     </svg>
+    <img v-else-if="outputType === 'img'" :src="name" class="h-[1em] w-[1em]">
   </i>
 </template>

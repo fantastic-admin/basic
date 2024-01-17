@@ -53,12 +53,12 @@
       图标
     </ElDivider>
     <ElLink>
-      <SvgIcon name="ep:edit" class="el-icon--left" />
+      <SvgIcon name="i-ep:edit" class="el-icon--left" />
       编辑
     </ElLink>
     <ElLink>
       查看
-      <SvgIcon name="ep:view" class="el-icon--right" />
+      <SvgIcon name="i-ep:view" class="el-icon--right" />
     </ElLink>
   </div>
 </template>

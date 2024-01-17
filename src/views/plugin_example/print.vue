@@ -68,7 +68,7 @@ function open(url: string) {
       </template>
       <ElButton @click="open('https://github.com/crabbly/print.js')">
         <template #icon>
-          <SvgIcon name="ep:link" />
+          <SvgIcon name="i-ep:link" />
         </template>
         访问 print.js
       </ElButton>

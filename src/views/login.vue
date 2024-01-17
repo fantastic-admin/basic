@@ -168,14 +168,14 @@ function testAccount(account: string) {
           <ElFormItem prop="account">
             <ElInput v-model="loginForm.account" placeholder="用户名" type="text" tabindex="1">
               <template #prefix>
-                <SvgIcon name="ri:user-3-fill" />
+                <SvgIcon name="i-ri:user-3-fill" />
               </template>
             </ElInput>
           </ElFormItem>
           <ElFormItem prop="password">
             <ElInput v-model="loginForm.password" type="password" placeholder="密码" tabindex="2" autocomplete="new-password" show-password @keyup.enter="handleLogin">
               <template #prefix>
-                <SvgIcon name="ri:lock-2-fill" />
+                <SvgIcon name="i-ri:lock-2-fill" />
               </template>
             </ElInput>
           </ElFormItem>
@@ -217,14 +217,14 @@ function testAccount(account: string) {
           <ElFormItem prop="account">
             <ElInput v-model="registerForm.account" placeholder="用户名" tabindex="1">
               <template #prefix>
-                <SvgIcon name="ri:user-3-fill" />
+                <SvgIcon name="i-ri:user-3-fill" />
               </template>
             </ElInput>
           </ElFormItem>
           <ElFormItem prop="captcha">
             <ElInput v-model="registerForm.captcha" placeholder="验证码" tabindex="2">
               <template #prefix>
-                <SvgIcon name="ic:baseline-verified-user" />
+                <SvgIcon name="i-ic:baseline-verified-user" />
               </template>
               <template #append>
                 <ElButton>发送验证码</ElButton>
@@ -234,14 +234,14 @@ function testAccount(account: string) {
           <ElFormItem prop="password">
             <ElInput v-model="registerForm.password" type="password" placeholder="密码" tabindex="3" show-password>
               <template #prefix>
-                <SvgIcon name="ri:lock-2-fill" />
+                <SvgIcon name="i-ri:lock-2-fill" />
               </template>
             </ElInput>
           </ElFormItem>
           <ElFormItem prop="checkPassword">
             <ElInput v-model="registerForm.checkPassword" type="password" placeholder="确认密码" tabindex="4" show-password>
               <template #prefix>
-                <SvgIcon name="ri:lock-2-fill" />
+                <SvgIcon name="i-ri:lock-2-fill" />
               </template>
             </ElInput>
           </ElFormItem>
@@ -266,14 +266,14 @@ function testAccount(account: string) {
           <ElFormItem prop="account">
             <ElInput v-model="resetForm.account" placeholder="用户名" type="text" tabindex="1">
               <template #prefix>
-                <SvgIcon name="ri:user-3-fill" />
+                <SvgIcon name="i-ri:user-3-fill" />
               </template>
             </ElInput>
           </ElFormItem>
           <ElFormItem prop="captcha">
             <ElInput v-model="resetForm.captcha" placeholder="验证码" type="text" tabindex="2">
               <template #prefix>
-                <SvgIcon name="ic:baseline-verified-user" />
+                <SvgIcon name="i-ic:baseline-verified-user" />
               </template>
               <template #append>
                 <ElButton>发送验证码</ElButton>
@@ -283,7 +283,7 @@ function testAccount(account: string) {
           <ElFormItem prop="newPassword">
             <ElInput v-model="resetForm.newPassword" type="password" placeholder="新密码" tabindex="3" show-password>
               <template #prefix>
-                <SvgIcon name="ri:lock-2-fill" />
+                <SvgIcon name="i-ri:lock-2-fill" />
               </template>
             </ElInput>
           </ElFormItem>

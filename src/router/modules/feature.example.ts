@@ -11,7 +11,7 @@ const routes: RouteRecordRaw = {
   name: 'featureExample',
   meta: {
     title: '功能',
-    icon: 'ic:twotone-auto-awesome',
+    icon: 'i-ic:twotone-auto-awesome',
   },
   children: [
     {
@@ -20,7 +20,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/feature_example/vueuse.vue'),
       meta: {
         title: 'VueUse',
-        icon: 'logos:vueuse',
+        icon: 'i-logos:vueuse',
       },
     },
     {
@@ -29,7 +29,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/feature_example/rules.vue'),
       meta: {
         title: '常用正则',
-        icon: 'mdi:regex',
+        icon: 'i-mdi:regex',
       },
     },
     {
@@ -39,7 +39,7 @@ const routes: RouteRecordRaw = {
       meta: {
         title: '表格高度自适应',
         i18n: 'route.feature.tableautoheight',
-        icon: 'tabler:arrow-autofit-height',
+        icon: 'i-tabler:arrow-autofit-height',
       },
     },
     {
@@ -48,7 +48,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/feature_example/reload.vue'),
       meta: {
         title: '主页面刷新',
-        icon: 'iconoir:refresh-double',
+        icon: 'i-iconoir:refresh-double',
         cache: true,
       },
     },
@@ -58,7 +58,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/feature_example/menuswitch.vue'),
       meta: {
         title: '主导航切换',
-        icon: 'charm:menu-hamburger',
+        icon: 'i-charm:menu-hamburger',
       },
     },
     {
@@ -67,7 +67,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/feature_example/leavetips.vue'),
       meta: {
         title: '页面离开提醒',
-        icon: 'pepicons:leave',
+        icon: 'i-pepicons:leave',
       },
     },
     {
@@ -76,7 +76,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/feature_example/scroll.vue'),
       meta: {
         title: '记录滚动位置',
-        icon: 'carbon:auto-scroll',
+        icon: 'i-carbon:auto-scroll',
         cache: true,
       },
     },

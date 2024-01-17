@@ -16,7 +16,7 @@ const dialog = ref({
 })
 
 const code = computed(() => {
-  return `<svg-icon name="${dialog.value.iconName}"></svg-icon>`
+  return `<SvgIcon name="i-${dialog.value.iconName}" />`
 })
 
 watch(copied, (val) => {

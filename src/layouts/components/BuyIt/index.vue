@@ -42,7 +42,7 @@ onUnmounted(() => {
 <template>
   <div class="buy-it" :class="{ actived: isActived }">
     <div class="item" @click="switchUI">
-      <SvgIcon name="icon-park-twotone:components" />
+      <SvgIcon name="i-icon-park-twotone:components" />
       <span class="title">切换<br>组件库</span>
       <HDialog v-model="UIdialog" title="切换组件库" overlay>
         <div class="rounded-2 bg-green/20 px-4 py-2 text-sm/6 c-green-6">
@@ -76,19 +76,19 @@ onUnmounted(() => {
       </HDialog>
     </div>
     <div class="item" @click="open(`https://fantastic-admin.gitee.io/buy.html`)">
-      <SvgIcon name="ri:money-cny-box-line" />
+      <SvgIcon name="i-ri:money-cny-box-line" />
       <span class="title">购买<br>专业版</span>
     </div>
     <div class="item" @click="open('https://gitee.com/fantastic-admin/basic')">
-      <SvgIcon name="ri:code-s-slash-line" />
+      <SvgIcon name="i-ri:code-s-slash-line" />
       <span class="title">下载<br>基础版</span>
     </div>
     <div class="item" @click="open(`https://fantastic-admin.gitee.io`)">
-      <SvgIcon name="ri:book-read-line" />
+      <SvgIcon name="i-ri:book-read-line" />
       <span class="title">开发<br>文档</span>
     </div>
     <div class="item" @click="open(`https://fantastic-admin.gitee.io/support.html`)">
-      <SvgIcon name="ri:message-2-line" />
+      <SvgIcon name="i-ri:message-2-line" />
       <span class="title">技术<br>支持</span>
     </div>
   </div>

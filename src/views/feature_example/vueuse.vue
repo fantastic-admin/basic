@@ -37,7 +37,7 @@ function open(url: string) {
     <PageHeader title="VueUse" content="VueUse 是一个 Vue Composition API 实用程序的集合，更多 API 和例子请查看 VueUse 官网。">
       <ElButton @click="open('https://vueuse.org/')">
         <template #icon>
-          <SvgIcon name="ep:link" />
+          <SvgIcon name="i-ep:link" />
         </template>
         VueUse 官网
       </ElButton>

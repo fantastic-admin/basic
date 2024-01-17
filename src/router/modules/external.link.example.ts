@@ -11,7 +11,7 @@ const routes: RouteRecordRaw = {
   name: 'externalLinkExample',
   meta: {
     title: '外链',
-    icon: 'ri:external-link-fill',
+    icon: 'i-ri:external-link-fill',
   },
   children: [
     {

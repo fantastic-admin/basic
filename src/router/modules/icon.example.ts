@@ -11,7 +11,7 @@ const routes: RouteRecordRaw = {
   name: 'iconExample',
   meta: {
     title: '扩展图标',
-    icon: 'ri:remixicon-line',
+    icon: 'i-ri:remixicon-line',
   },
   children: [
     {

@@ -38,7 +38,7 @@ function handleClick() {
   <Teleport to="body">
     <Transition v-bind="transitionClass">
       <div v-if="scrollTop && scrollTop >= 200" class="fixed bottom-4 right-4 z-1000 h-12 w-12 flex cursor-pointer items-center justify-center rounded-full bg-white shadow-lg ring-1 ring-stone-3 ring-inset dark:bg-dark hover:bg-stone-1 dark:ring-stone-7 dark:hover:bg-dark/50" @click="handleClick">
-        <SvgIcon name="icon-park-outline:to-top-one" :size="24" />
+        <SvgIcon name="i-icon-park-outline:to-top-one" :size="24" />
       </div>
     </Transition>
   </Teleport>

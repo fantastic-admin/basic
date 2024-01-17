@@ -73,7 +73,7 @@ const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
     drag
   >
     <div class="slot">
-      <SvgIcon name="ep:upload-filled" class="el-icon--upload" />
+      <SvgIcon name="i-ep:upload-filled" class="el-icon--upload" />
       <div class="el-upload__text">
         将文件拖到此处，或<em>点击上传</em>
       </div>

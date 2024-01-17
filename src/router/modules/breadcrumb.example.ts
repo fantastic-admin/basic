@@ -11,7 +11,7 @@ const routes: RouteRecordRaw = {
   name: 'breadcrumbExample',
   meta: {
     title: '面包屑导航',
-    icon: 'ic:twotone-double-arrow',
+    icon: 'i-ic:twotone-double-arrow',
   },
   children: [
     {

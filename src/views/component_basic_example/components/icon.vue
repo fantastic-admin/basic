@@ -7,12 +7,12 @@ const icon = icons.filter(item => item.prefix === 'ep')[0]
 <template>
   <div>
     <div class="demo">
-      <SvgIcon name="ep:edit" />
-      <SvgIcon name="ep:share" />
-      <SvgIcon name="ep:delete" />
+      <SvgIcon name="i-ep:edit" />
+      <SvgIcon name="i-ep:share" />
+      <SvgIcon name="i-ep:delete" />
       <ElButton type="primary">
         <template #icon>
-          <SvgIcon name="ep:search" />
+          <SvgIcon name="i-ep:search" />
         </template>
         搜索
       </ElButton>

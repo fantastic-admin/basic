@@ -33,6 +33,6 @@ const isUp = computed(() => {
     <span v-if="prefix" class="prefix">{{ prefix }}</span>
     <span class="text">{{ value }}</span>
     <span v-if="suffix" class="suffix">{{ suffix }}</span>
-    <SvgIcon name="ep:caret-top" :rotate="isUp ? 0 : 180" class="ml-1 transition" />
+    <SvgIcon name="i-ep:caret-top" :rotate="isUp ? 0 : 180" class="ml-1 transition" />
   </div>
 </template>

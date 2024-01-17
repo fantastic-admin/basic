@@ -40,7 +40,7 @@ function toggle() {
     <slot :fold="fold" :toggle="toggle" />
     <div v-if="showToggle" class="absolute bottom-0 left-0 w-full translate-y-1/2 text-center">
       <button class="h-5 inline-flex cursor-pointer select-none items-center border-size-0 rounded bg-[var(--g-bg)] px-2 text-xs font-medium outline-none" @click="toggle">
-        <SvgIcon :name="fold ? 'ep:caret-bottom' : 'ep:caret-top' " />
+        <SvgIcon :name="fold ? 'i-ep:caret-bottom' : 'i-ep:caret-top' " />
       </button>
     </div>
   </div>

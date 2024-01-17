@@ -10,7 +10,7 @@ const routes: RouteRecordRaw = {
   name: 'componentExample',
   meta: {
     title: '组件',
-    icon: 'bx:bxs-component',
+    icon: 'i-bx:bxs-component',
   },
   children: [
     {
@@ -19,7 +19,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/component_basic_example/index.vue'),
       meta: {
         title: '基础组件',
-        icon: 'ep:element-plus',
+        icon: 'i-ep:element-plus',
       },
     },
     {

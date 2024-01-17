@@ -49,7 +49,7 @@ function open(url: string) {
       </template>
       <ElButton @click="open('https://element-plus.org/#/zh-CN')">
         <template #icon>
-          <SvgIcon name="ep:link" />
+          <SvgIcon name="i-ep:link" />
         </template>
         Element Plus 官网
       </ElButton>

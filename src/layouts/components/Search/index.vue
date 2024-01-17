@@ -285,7 +285,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
             <DialogPanel class="relative h-full max-h-4/5 w-full flex flex-col text-left sm:max-w-2xl">
               <div class="flex flex-col overflow-y-auto rounded-xl bg-white shadow-xl dark:bg-stone-8">
                 <div class="flex items-center px-4 py-3" border-b="~ solid stone-2 dark:stone-7">
-                  <SvgIcon name="ep:search" :size="18" class="text-stone-5" />
+                  <SvgIcon name="i-ep:search" :size="18" class="text-stone-5" />
                   <input ref="searchInputRef" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" class="w-full border-0 rounded-md bg-transparent px-3 text-base text-dark dark:text-white focus:outline-none placeholder-stone-4 dark:placeholder-stone-5" @keydown.esc="eventBus.emit('global-search-toggle')" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
                 </div>
                 <DialogDescription class="relative m-0 of-y-hidden">
@@ -305,7 +305,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
                     </template>
                     <template v-else>
                       <div flex="center col" py-6 text-stone-5>
-                        <SvgIcon name="tabler:mood-empty" :size="40" />
+                        <SvgIcon name="i-tabler:mood-empty" :size="40" />
                         <p m-2 text-base>
                           没有找到你想要的
                         </p>
@@ -317,16 +317,16 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
                   <div class="flex gap-8">
                     <div class="inline-flex items-center gap-1 text-xs">
                       <HKbd>
-                        <SvgIcon name="ion:md-return-left" :size="14" />
+                        <SvgIcon name="i-ion:md-return-left" :size="14" />
                       </HKbd>
                       <span>访问</span>
                     </div>
                     <div class="inline-flex items-center gap-1 text-xs">
                       <HKbd>
-                        <SvgIcon name="ant-design:caret-up-filled" :size="14" />
+                        <SvgIcon name="i-ant-design:caret-up-filled" :size="14" />
                       </HKbd>
                       <HKbd>
-                        <SvgIcon name="ant-design:caret-down-filled" :size="14" />
+                        <SvgIcon name="i-ant-design:caret-down-filled" :size="14" />
                       </HKbd>
                       <span>切换</span>
                     </div>

@@ -47,7 +47,7 @@ const toggle = ref(false)
         <HDropdown>
           <div>
             下拉面板
-            <SvgIcon name="ep:caret-bottom" />
+            <SvgIcon name="i-ep:caret-bottom" />
           </div>
           <template #dropdown>
             <div class="h-30 w-60 flex items-center justify-center">
@@ -71,7 +71,7 @@ const toggle = ref(false)
         >
           <div>
             下拉菜单
-            <SvgIcon name="ep:caret-bottom" />
+            <SvgIcon name="i-ep:caret-bottom" />
           </div>
         </HDropdownMenu>
       </PageMain>
@@ -115,7 +115,7 @@ const toggle = ref(false)
       </PageMain>
       <PageMain title="Tooltip">
         <HTooltip text="注意噢！">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </PageMain>
     </div>

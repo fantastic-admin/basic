@@ -11,7 +11,7 @@ const routes: RouteRecordRaw = {
   name: 'keepAliveExample',
   meta: {
     title: '页面缓存',
-    icon: 'cil:window-restore',
+    icon: 'i-cil:window-restore',
   },
   children: [
     {

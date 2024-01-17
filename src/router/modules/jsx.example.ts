@@ -11,7 +11,7 @@ const routes: RouteRecordRaw = {
   name: 'jsxExample',
   meta: {
     title: 'JSX',
-    icon: 'file-icons:jsx',
+    icon: 'i-file-icons:jsx',
   },
   children: [
     {

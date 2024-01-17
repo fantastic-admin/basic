@@ -13,7 +13,7 @@ meta:
       </template>
       <ElButton round>
         <template #icon>
-          <SvgIcon name="ep:arrow-left" />
+          <SvgIcon name="i-ep:arrow-left" />
         </template>
         返回
       </ElButton>
