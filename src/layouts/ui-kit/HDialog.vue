@@ -65,7 +65,7 @@ function close() {
                 <DialogTitle m-0 text-lg text-dark dark:text-white>
                   {{ title }}
                 </DialogTitle>
-                <SvgIcon name="carbon:close" cursor-pointer @click="close" />
+                <SvgIcon name="i-carbon:close" cursor-pointer @click="close" />
               </div>
               <DialogDescription m-0 overflow-y-auto p-4>
                 <slot />

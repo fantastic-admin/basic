@@ -40,7 +40,7 @@ const systemRoutes: RouteRecordRaw[] = [
         component: () => import('@/views/index.vue'),
         meta: {
           title: () => useSettingsStore().settings.home.title,
-          icon: 'ant-design:home-twotone',
+          icon: 'i-ant-design:home-twotone',
           breadcrumb: false,
         },
       },
@@ -62,7 +62,7 @@ const asyncRoutes: Route.recordMainRaw[] = [
   {
     meta: {
       title: '演示',
-      icon: 'uim:box',
+      icon: 'i-uim:box',
     },
     children: [
       MultilevelMenuExample,

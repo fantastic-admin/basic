@@ -126,7 +126,7 @@ function handleCopy() {
       <div class="label">
         主导航切换跳转
         <HTooltip text="开启该功能后，切换主导航时，页面自动跳转至该主导航下，次导航里第一个导航">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.menu.switchMainMenuAndPageJump" :disabled="['single'].includes(settingsStore.settings.menu.menuMode)" />
@@ -135,7 +135,7 @@ function handleCopy() {
       <div class="label">
         次导航保持展开一个
         <HTooltip text="开启该功能后，次导航只保持单个菜单的展开">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.menu.subMenuUniqueOpened" />
@@ -186,7 +186,7 @@ function handleCopy() {
       <div class="label">
         导航搜索
         <HTooltip text="对导航进行快捷搜索">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.toolbar.navSearch" />
@@ -201,7 +201,7 @@ function handleCopy() {
       <div class="label">
         页面刷新
         <HTooltip text="使用框架内提供的刷新功能进行页面刷新">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.toolbar.pageReload" />
@@ -210,7 +210,7 @@ function handleCopy() {
       <div class="label">
         颜色主题
         <HTooltip text="开启后可在明亮/暗黑模式中切换">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.toolbar.colorScheme" />
@@ -273,7 +273,7 @@ function handleCopy() {
       <div class="label">
         是否启用
         <HTooltip text="该功能开启时，登录成功默认进入主页，反之则默认进入导航栏里第一个导航页面">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.home.enable" />
@@ -282,7 +282,7 @@ function handleCopy() {
       <div class="label">
         主页名称
         <HTooltip text="开启国际化时，该设置无效">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HInput v-model="settingsStore.settings.home.title" />
@@ -300,7 +300,7 @@ function handleCopy() {
       <div class="label">
         载入进度条
         <HTooltip text="该功能开启时，跳转路由会看到页面顶部有进度条">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.app.enableProgress" />
@@ -309,14 +309,14 @@ function handleCopy() {
       <div class="label">
         动态标题
         <HTooltip text="该功能开启时，页面标题会显示当前路由标题，格式为“页面标题 - 网站名称”；关闭时则显示网站名称，网站名称在项目根目录下 .env.* 文件里配置">
-          <SvgIcon name="ri:question-line" />
+          <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
       <HToggle v-model="settingsStore.settings.app.enableDynamicTitle" />
     </div>
     <template v-if="isSupported" #footer>
       <HButton block @click="handleCopy">
-        <SvgIcon name="ep:document-copy" />
+        <SvgIcon name="i-ep:document-copy" />
         复制配置
       </HButton>
     </template>

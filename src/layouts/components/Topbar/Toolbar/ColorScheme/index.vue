@@ -38,6 +38,6 @@ function toggleColorScheme(event: MouseEvent) {
 
 <template>
   <span class="flex-center cursor-pointer px-2 py-1" @click="toggleColorScheme">
-    <SvgIcon :name="settingsStore.settings.app.colorScheme === 'light' ? 'ri:sun-line' : 'ri:moon-line'" />
+    <SvgIcon :name="settingsStore.settings.app.colorScheme === 'light' ? 'i-ri:sun-line' : 'i-ri:moon-line'" />
   </span>
 </template>

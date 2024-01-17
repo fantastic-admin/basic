@@ -66,7 +66,7 @@ function close() {
             <DialogTitle m-0 text-lg text-dark dark:text-white>
               {{ title }}
             </DialogTitle>
-            <SvgIcon name="carbon:close" cursor-pointer @click="close" />
+            <SvgIcon name="i-carbon:close" cursor-pointer @click="close" />
           </div>
           <DialogDescription m-0 flex-1 of-y-hidden>
             <OverlayScrollbarsComponent :options="{ scrollbars: { autoHide: 'leave', autoHideDelay: 300 } }" defer class="h-full p-4">

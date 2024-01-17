@@ -71,7 +71,7 @@ function open(url: string) {
         </div>
       </template>
       <HButton outline @click="open('https://fantastic-admin.gitee.io')">
-        <SvgIcon name="ri:file-text-line" />
+        <SvgIcon name="i-ri:file-text-line" />
         开发文档
       </HButton>
       <HDropdownMenu
@@ -83,9 +83,9 @@ function open(url: string) {
         ]"
       >
         <HButton class="ml-2">
-          <SvgIcon name="ri:code-s-slash-line" />
+          <SvgIcon name="i-ri:code-s-slash-line" />
           代码仓库
-          <SvgIcon name="ep:arrow-down" />
+          <SvgIcon name="i-ep:arrow-down" />
         </HButton>
       </HDropdownMenu>
     </PageHeader>

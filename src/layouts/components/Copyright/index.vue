@@ -11,7 +11,7 @@ const settingsStore = useSettingsStore()
 <template>
   <footer v-if="settingsStore.settings.copyright.enable" class="copyright">
     <span>Copyright</span>
-    <SvgIcon name="ri:copyright-line" :size="18" />
+    <SvgIcon name="i-ri:copyright-line" :size="18" />
     <span v-if="settingsStore.settings.copyright.dates">{{ settingsStore.settings.copyright.dates }}</span>
     <template v-if="settingsStore.settings.copyright.company">
       <a v-if="settingsStore.settings.copyright.website" :href="settingsStore.settings.copyright.website" target="_blank" rel="noopener">{{ settingsStore.settings.copyright.company }}</a>
