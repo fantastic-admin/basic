@@ -112,6 +112,23 @@ declare namespace Settings {
      */
     mode?: 'static' | 'fixed' | 'sticky'
   }
+  interface tabbar {
+    /**
+     * 是否开启标签栏
+     * @默认值 `false`
+     */
+    enable?: boolean
+    /**
+     * 是否开启标签栏图标显示
+     * @默认值 `false`
+     */
+    enableIcon?: boolean
+    /**
+     * 是否开启标签栏快捷键
+     * @默认值 `false`
+     */
+    enableHotkeys?: boolean
+  }
   interface toolbar {
     /**
      * 是否开启面包屑导航
@@ -191,6 +208,8 @@ declare namespace Settings {
     menu?: menu
     /** 顶栏设置 */
     topbar?: topbar
+    /** 标签栏设置 */
+    tabbar?: tabbar
     /** 工具栏设置 */
     toolbar?: toolbar
     /** 页面设置 */
@@ -212,6 +231,7 @@ declare module 'vue-router' {
     breadcrumb?: boolean
     activeMenu?: string
     cache?: boolean | string | string[]
+    noCache?: string | string[]
     link?: string
     breadcrumbNeste?: Route.breadcrumb[]
   }
@@ -256,5 +276,16 @@ declare namespace Menu {
       auth?: string | string[]
     }
     children: recordRaw[]
+  }
+}
+
+declare namespace Tabbar {
+  interface recordRaw {
+    tabId: string
+    fullPath: string
+    routeName?: RouteRecordRaw.name
+    title?: string | (() => string)
+    icon?: string
+    name: string[]
   }
 }

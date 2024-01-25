@@ -17,6 +17,11 @@ const globalSettings: Settings.all = {
   topbar: {
     mode: 'fixed',
   },
+  tabbar: {
+    enable: true,
+    enableIcon: true,
+    enableHotkeys: true,
+  },
   toolbar: {
     fullscreen: true,
     pageReload: true,

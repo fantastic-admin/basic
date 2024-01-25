@@ -204,8 +204,16 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
       transition: 0.3s;
     }
 
+    .topbar-container.has-tabbar + .main {
+      margin: var(--g-tabbar-height) 0 0;
+    }
+
     .topbar-container.has-toolbar + .main {
       margin: var(--g-toolbar-height) 0 0;
+    }
+
+    .topbar-container.has-tabbar.has-toolbar + .main {
+      margin: calc(var(--g-tabbar-height) + var(--g-toolbar-height)) 0 0;
     }
   }
 }

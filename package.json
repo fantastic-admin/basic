@@ -19,6 +19,7 @@
     "@bytemd/plugin-gfm": "^1.21.0",
     "@bytemd/vue-next": "^1.21.0",
     "@headlessui/vue": "^1.7.17",
+    "@imengyu/vue3-context-menu": "^1.3.6",
     "@tinymce/tinymce-vue": "^5.1.1",
     "@vueuse/core": "^10.7.1",
     "@vueuse/integrations": "^10.7.1",

@@ -173,6 +173,29 @@ function handleCopy() {
         ]"
       />
     </div>
+    <div>
+      <div class="divider">
+        标签栏
+      </div>
+      <div class="setting-item">
+        <div class="label">
+          是否启用
+        </div>
+        <HToggle v-model="settingsStore.settings.tabbar.enable" />
+      </div>
+      <div class="setting-item">
+        <div class="label">
+          是否显示图标
+        </div>
+        <HToggle v-model="settingsStore.settings.tabbar.enableIcon" :disabled="!settingsStore.settings.tabbar.enable" />
+      </div>
+      <div class="setting-item">
+        <div class="label">
+          是否启用快捷键
+        </div>
+        <HToggle v-model="settingsStore.settings.tabbar.enableHotkeys" :disabled="!settingsStore.settings.tabbar.enable" />
+      </div>
+    </div>
     <div class="divider">
       工具栏
     </div>

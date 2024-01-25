@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Tabbar from './Tabbar/index.vue'
 import Toolbar from './Toolbar/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 
@@ -19,7 +20,9 @@ const enableToolbar = computed(() => {
 const scrollTop = ref(0)
 const scrollOnHide = ref(false)
 const topbarHeight = computed(() => {
-  return enableToolbar.value ? Number.parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-toolbar-height')) : 0
+  const tabbarHeight = settingsStore.settings.tabbar.enable ? Number.parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-tabbar-height')) : 0
+  const toolbarHeight = enableToolbar.value ? Number.parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-toolbar-height')) : 0
+  return tabbarHeight + toolbarHeight
 })
 onMounted(() => {
   window.addEventListener('scroll', onScroll)
@@ -38,12 +41,14 @@ watch(scrollTop, (val, oldVal) => {
 <template>
   <div
     class="topbar-container" :class="{
+      'has-tabbar': settingsStore.settings.tabbar.enable,
       'has-toolbar': enableToolbar,
       [`topbar-${settingsStore.settings.topbar.mode}`]: true,
       'shadow': scrollTop,
       'hide': scrollOnHide,
     }" data-fixed-calc-width
   >
+    <Tabbar v-if="settingsStore.settings.tabbar.enable" />
     <Toolbar v-if="enableToolbar" />
   </div>
 </template>
@@ -68,7 +73,7 @@ watch(scrollTop, (val, oldVal) => {
   }
 
   &.topbar-sticky.hide {
-    top: calc(var(--g-toolbar-height) * -1) !important;
+    top: calc((var(--g-tabbar-height) + var(--g-toolbar-height)) * -1) !important;
   }
 }
 </style>

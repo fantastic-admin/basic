@@ -30,6 +30,11 @@ const globalSettingsDefault: RecursiveRequired<Settings.all> = {
   topbar: {
     mode: 'static',
   },
+  tabbar: {
+    enable: false,
+    enableIcon: false,
+    enableHotkeys: false,
+  },
   toolbar: {
     breadcrumb: true,
     navSearch: true,

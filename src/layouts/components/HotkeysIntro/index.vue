@@ -50,6 +50,38 @@ onMounted(() => {
             </li>
           </ul>
         </div>
+        <div v-if="settingsStore.settings.tabbar.enable && settingsStore.settings.tabbar.enableHotkeys">
+          <h2 class="m-0 text-lg font-bold">
+            标签栏
+          </h2>
+          <ul class="list-none pl-4 text-sm">
+            <li class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>←</HKbd>
+              切换到上一个标签页
+            </li>
+            <li class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>→</HKbd>
+              切换到下一个标签页
+            </li>
+            <li class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>W</HKbd>
+              关闭当前标签页
+            </li>
+            <li class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>1~9</HKbd>
+              切换到第 n 个标签页
+            </li>
+            <li class="py-1">
+              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
+              <HKbd>0</HKbd>
+              切换到最后一个标签页
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </HDialog>

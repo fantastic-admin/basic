@@ -156,6 +156,21 @@ router.afterEach((to, from) => {
           }
           break
       }
+      // 通过 meta.noCache 判断针对哪些页面不需要进行缓存
+      if (from.meta.noCache) {
+        switch (typeof from.meta.noCache) {
+          case 'string':
+            if (from.meta.noCache === to.name) {
+              keepAliveStore.remove(componentName)
+            }
+            break
+          case 'object':
+            if (from.meta.noCache.includes(to.name as string)) {
+              keepAliveStore.remove(componentName)
+            }
+            break
+        }
+      }
       // 如果进入的是 reload 页面，则也将离开页面的缓存清空
       if (to.name === 'reload') {
         keepAliveStore.remove(componentName)
