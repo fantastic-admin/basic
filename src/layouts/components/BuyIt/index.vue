@@ -24,11 +24,12 @@ onMounted(() => {
   eventBus.on('global-ui-component-switch', () => switchUI())
   ElNotification({
     type: 'info',
-    title: '「 专业版限时优惠 」',
+    title: '「 专业版限时优惠倒计时 」',
     dangerouslyUseHTMLString: true,
     message: `
-  <p>原价 1099.00 元，现价 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元，更有超值优惠合集，立减 <b style="color: #ff4400;">799.00</b> 元，点击<a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">查看详情</a>！</p>
-      `,
+<p>限时优惠活动将于 <b>2024/04/01</b> 到期，现在购买只需 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元。</p>
+<p style="text-align: right;"><a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">查看详情</a></p>
+    `,
     position: 'bottom-right',
     duration: 0,
   })
