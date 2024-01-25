@@ -2,15 +2,17 @@
 withDefaults(
   defineProps<{
     text: string
+    enable: boolean
   }>(),
   {
     text: '',
+    enable: true,
   },
 )
 </script>
 
 <template>
-  <VTooltip :popper-triggers="['hover']" v-bind="$attrs">
+  <VTooltip v-if="enable" :popper-triggers="['hover']" v-bind="$attrs">
     <slot />
     <template #popper>
       <slot name="text">
@@ -18,4 +20,5 @@ withDefaults(
       </slot>
     </template>
   </VTooltip>
+  <slot v-else />
 </template>
