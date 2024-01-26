@@ -5,7 +5,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 1031;
+    z-index: 10031;
     width: 100%;
     height: 2px;
     background: rgb(var(--ui-primary));
@@ -26,7 +26,7 @@
     position: fixed;
     top: 11px;
     right: 14px;
-    z-index: 1031;
+    z-index: 10031;
     display: block;
 
     .spinner-icon {
