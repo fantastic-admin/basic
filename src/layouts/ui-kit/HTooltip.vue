@@ -2,7 +2,7 @@
 withDefaults(
   defineProps<{
     text: string
-    enable: boolean
+    enable?: boolean
   }>(),
   {
     text: '',
@@ -20,5 +20,7 @@ withDefaults(
       </slot>
     </template>
   </VTooltip>
-  <slot v-else />
+  <div v-else>
+    <slot />
+  </div>
 </template>

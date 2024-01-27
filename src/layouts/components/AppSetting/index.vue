@@ -17,15 +17,6 @@ const menuStore = useMenuStore()
 
 const isShow = ref(false)
 
-const isDark = computed({
-  get() {
-    return settingsStore.settings.app.colorScheme === 'dark'
-  },
-  set(value) {
-    settingsStore.settings.app.colorScheme = value ? 'dark' : 'light'
-  },
-})
-
 watch(() => settingsStore.settings.menu.menuMode, (value) => {
   if (value === 'single') {
     menuStore.setActived(0)
@@ -97,7 +88,15 @@ function handleCopy() {
       颜色主题风格
     </div>
     <div class="flex items-center justify-center pb-4">
-      <HToggle v-model="isDark" on-icon="ri:sun-line" off-icon="ri:moon-line" />
+      <HTabList
+        v-model="settingsStore.settings.app.colorScheme"
+        :options="[
+          { icon: 'i-ri:sun-line', label: '明亮', value: 'light' },
+          { icon: 'i-ri:moon-line', label: '暗黑', value: 'dark' },
+          { icon: 'i-ri:computer-line', label: '系统', value: '' },
+        ]"
+        class="w-60"
+      />
     </div>
     <div v-if="settingsStore.mode === 'pc'" class="divider">
       导航栏模式

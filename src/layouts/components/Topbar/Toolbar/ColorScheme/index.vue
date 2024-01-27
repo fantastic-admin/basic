@@ -9,7 +9,7 @@ const settingsStore = useSettingsStore()
 
 function toggleColorScheme(event: MouseEvent) {
   const { startViewTransition } = useViewTransition(() => {
-    settingsStore.setColorScheme(settingsStore.settings.app.colorScheme === 'dark' ? 'light' : 'dark')
+    settingsStore.currentColorScheme && settingsStore.setColorScheme(settingsStore.currentColorScheme === 'dark' ? 'light' : 'dark')
   })
   startViewTransition()?.ready.then(() => {
     const x = event.clientX
@@ -37,7 +37,24 @@ function toggleColorScheme(event: MouseEvent) {
 </script>
 
 <template>
-  <span class="flex-center cursor-pointer px-2 py-1" @click="toggleColorScheme">
-    <SvgIcon :name="settingsStore.settings.app.colorScheme === 'light' ? 'i-ri:sun-line' : 'i-ri:moon-line'" />
-  </span>
+  <HDropdown class="flex-center cursor-pointer px-2 py-1">
+    <SvgIcon
+      :name="{
+        '': 'i-ri:computer-line',
+        'light': 'i-ri:sun-line',
+        'dark': 'i-ri:moon-line',
+      }[settingsStore.settings.app.colorScheme]" @click="toggleColorScheme"
+    />
+    <template #dropdown>
+      <HTabList
+        v-model="settingsStore.settings.app.colorScheme"
+        :options="[
+          { icon: 'i-ri:sun-line', label: '', value: 'light' },
+          { icon: 'i-ri:moon-line', label: '', value: 'dark' },
+          { icon: 'i-ri:computer-line', label: '', value: '' },
+        ]"
+        class="m-3"
+      />
+    </template>
+  </HDropdown>
 </template>
