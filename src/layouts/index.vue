@@ -159,6 +159,11 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
     width: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
     box-shadow: -1px 0 0 0 var(--g-border-color), 1px 0 0 0 var(--g-border-color);
     transition: width 0.3s, transform 0.3s, box-shadow 0.3s, top 0.3s;
+
+    &:has(> .main-sidebar-container.main-sidebar-enter-active),
+    &:has(> .main-sidebar-container.main-sidebar-leave-active) {
+      overflow: hidden;
+    }
   }
 
   .sidebar-mask {

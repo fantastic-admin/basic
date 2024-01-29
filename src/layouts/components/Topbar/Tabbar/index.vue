@@ -53,6 +53,7 @@ function tabbarScrollTip() {
       title: '温馨提示',
       duration: 5000,
       closable: true,
+      zIndex: 2000,
     })
   }
 }

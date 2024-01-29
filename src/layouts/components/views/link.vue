@@ -10,7 +10,9 @@ const route = useRoute()
 
 const { copy, copied } = useClipboard()
 watch(copied, (val) => {
-  val && Message.success('复制成功')
+  val && Message.success('复制成功', {
+    zIndex: 2000,
+  })
 })
 
 function open() {
