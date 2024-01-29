@@ -52,11 +52,15 @@ export default function useTabbar() {
         }
       }
       else {
-        Message.error('当前只有一个标签页，已阻止关闭')
+        Message.error('当前只有一个标签页，已阻止关闭', {
+          zIndex: 2000,
+        })
       }
     }
     else {
-      Message.error('关闭的页面不存在')
+      Message.error('关闭的页面不存在', {
+        zIndex: 2000,
+      })
     }
   }
 
