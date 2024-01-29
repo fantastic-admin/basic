@@ -4,6 +4,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
 import BreadcrumbExample from './modules/breadcrumb.example'
 import KeepAliveExample from './modules/keep.alive.example'
+import TabExample from './modules/tab.example'
 import ComponentExample from './modules/component.example'
 import IconExample from './modules/icon.example'
 import FeatureExample from './modules/feature.example'
@@ -96,6 +97,7 @@ const asyncRoutes: Route.recordMainRaw[] = [
       MultilevelMenuExample,
       BreadcrumbExample,
       KeepAliveExample,
+      TabExample,
       ComponentExample,
       IconExample,
       FeatureExample,
