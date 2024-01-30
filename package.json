@@ -95,7 +95,7 @@
     "vite-plugin-fake-server": "^2.1.1",
     "vite-plugin-pages": "^0.32.0",
     "vite-plugin-svg-icons": "^2.0.1",
-    "vite-plugin-vue-inspector": "^4.0.2",
+    "vite-plugin-vue-devtools": "^7.0.13",
     "vite-plugin-vue-meta-layouts": "^0.4.1",
     "vue-tsc": "^1.8.27"
   },

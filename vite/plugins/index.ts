@@ -4,7 +4,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueLegacy from '@vitejs/plugin-legacy'
 import appInfo from './app-info'
 
-import createInspector from './inspector'
+import createDevtools from './devtools'
 import createAutoImport from './auto-import'
 import createComponents from './components'
 import createUnocss from './unocss'
@@ -30,7 +30,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
       ],
     }),
   ]
-  vitePlugins.push(createInspector())
+  vitePlugins.push(createDevtools(viteEnv))
   vitePlugins.push(createAutoImport())
   vitePlugins.push(createComponents())
   vitePlugins.push(createUnocss())
