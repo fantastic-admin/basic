@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://fantastic-admin.gitee.io/logo.png" width="200" height="200" />
+  <img src="https://fantastic-admin.github.io/logo.png" width="200" height="200" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>
@@ -7,16 +7,16 @@
 <p align="center">一款<b>开箱即用</b>的 Vue3 中后台管理系统框架</p>
 
 <p align="center">
-  <a href="https://fantastic-admin.gitee.io" target="_blank">官网</a>
-  <sup><a href="https://fantastic-admin.github.io" target="_blank">备用地址</a></sup>
+  <a href="https://fantastic-admin.github.io" target="_blank">官网</a>
+  <sup><a href="https://fantastic-admin.gitee.io" target="_blank">备用地址</a></sup>
   <span>&nbsp;|&nbsp;</span>
-  <a href="https://fantastic-admin.gitee.io/support.html" target="_blank">技术支持</a>
+  <a href="https://fantastic-admin.github.io/support.html" target="_blank">技术支持</a>
   <span>&nbsp;|&nbsp;</span>
   演示
-  <sup><a href="https://fantastic-admin.gitee.io/basic-example" target="_blank">基础版</a> <a href="https://fantastic-admin.gitee.io/pro-example" target="_blank">专业版</a></sup>
+  <sup><a href="https://fantastic-admin.github.io/basic-example" target="_blank">基础版</a> <a href="https://fantastic-admin.github.io/pro-example" target="_blank">专业版</a></sup>
   <span>&nbsp;|&nbsp;</span>
   购买
-  <sup><a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">专业版</a></sup>
+  <sup><a href="https://fantastic-admin.github.io/buy.html" target="_blank">专业版</a></sup>
 <p>
 
 <p align="center">
@@ -53,14 +53,14 @@
 
 <table>
   <tr>
-    <td><img src="https://fantastic-admin.gitee.io/preview1.png" /></td>
-    <td><img src="https://fantastic-admin.gitee.io/preview2.png" /></td>
-    <td><img src="https://fantastic-admin.gitee.io/preview3.png" /></td>
+    <td><img src="https://fantastic-admin.github.io/preview1.png" /></td>
+    <td><img src="https://fantastic-admin.github.io/preview2.png" /></td>
+    <td><img src="https://fantastic-admin.github.io/preview3.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://fantastic-admin.gitee.io/preview4.png" /></td>
-    <td><img src="https://fantastic-admin.gitee.io/preview5.png" /></td>
-    <td><img src="https://fantastic-admin.gitee.io/preview6.png" /></td>
+    <td><img src="https://fantastic-admin.github.io/preview4.png" /></td>
+    <td><img src="https://fantastic-admin.github.io/preview5.png" /></td>
+    <td><img src="https://fantastic-admin.github.io/preview6.png" /></td>
   </tr>
 </table>
 
@@ -83,12 +83,12 @@
 <table>
   <tr>
     <th colspan="3" align="center">
-      <a href="https://hooray.gitee.io/fantastic-startkit/" target="_blank">Fantastic-startkit</a>
+      <a href="https://hooray.github.io/fantastic-startkit/" target="_blank">Fantastic-startkit</a>
     </th>
   </tr>
   <tr>
     <th colspan="3" align="center">
-      一款开箱即用的 Vue3 项目启动套件
+      一款简单好用的 Vue3 项目启动套件
     </th>
   </tr>
 </table>
@@ -96,7 +96,7 @@
 <table>
   <tr>
     <th colspan="3" align="center">
-      <a href="https://one-step-admin.gitee.io" target="_blank">One-step-admin</a>
+      <a href="https://one-step-admin.github.io" target="_blank">One-step-admin</a>
     </th>
   </tr>
   <tr>
@@ -105,13 +105,13 @@
     </th>
   </tr>
   <tr>
-    <td><img src="https://one-step-admin.gitee.io/preview1.png" /></td>
-    <td><img src="https://one-step-admin.gitee.io/preview2.png" /></td>
-    <td><img src="https://one-step-admin.gitee.io/preview3.png" /></td>
+    <td><img src="https://one-step-admin.github.io/preview1.png" /></td>
+    <td><img src="https://one-step-admin.github.io/preview2.png" /></td>
+    <td><img src="https://one-step-admin.github.io/preview3.png" /></td>
   </tr>
   <tr>
-    <td><img src="https://one-step-admin.gitee.io/preview4.png" /></td>
-    <td><img src="https://one-step-admin.gitee.io/preview5.png" /></td>
-    <td><img src="https://one-step-admin.gitee.io/preview6.png" /></td>
+    <td><img src="https://one-step-admin.github.io/preview4.png" /></td>
+    <td><img src="https://one-step-admin.github.io/preview5.png" /></td>
+    <td><img src="https://one-step-admin.github.io/preview6.png" /></td>
   </tr>
 </table>
