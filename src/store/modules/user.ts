@@ -12,19 +12,15 @@ const useUserStore = defineStore(
     const routeStore = useRouteStore()
     const menuStore = useMenuStore()
 
-    const account = ref(localStorage.account ?? '')
-    const token = ref(localStorage.token ?? '')
-    const failure_time = ref(localStorage.failure_time ?? '')
-    const avatar = ref(localStorage.avatar ?? '')
+    const account = ref(sessionStorage.account ?? '')
+    const token = ref(sessionStorage.token ?? '')
+    const avatar = ref(sessionStorage.avatar ?? '')
     const permissions = ref<string[]>([])
     const isLogin = computed(() => {
-      let retn = false
       if (token.value) {
-        if (new Date().getTime() < Number.parseInt(failure_time.value) * 1000) {
-          retn = true
-        }
+        return true
       }
-      return retn
+      return false
     })
 
     // 登录
@@ -33,24 +29,20 @@ const useUserStore = defineStore(
       password: string
     }) {
       const res = await apiUser.login(data)
-      localStorage.setItem('account', res.data.account)
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('failure_time', res.data.failure_time)
-      localStorage.setItem('avatar', res.data.avatar)
+      sessionStorage.setItem('account', res.data.account)
+      sessionStorage.setItem('token', res.data.token)
+      sessionStorage.setItem('avatar', res.data.avatar)
       account.value = res.data.account
       token.value = res.data.token
-      failure_time.value = res.data.failure_time
       avatar.value = res.data.avatar
     }
     // 登出
     async function logout(redirect = router.currentRoute.value.fullPath) {
-      localStorage.removeItem('account')
-      localStorage.removeItem('token')
-      localStorage.removeItem('failure_time')
-      localStorage.removeItem('avatar')
+      sessionStorage.removeItem('account')
+      sessionStorage.removeItem('token')
+      sessionStorage.removeItem('avatar')
       account.value = ''
       token.value = ''
-      failure_time.value = ''
       avatar.value = ''
       permissions.value = []
       routeStore.removeRoutes()

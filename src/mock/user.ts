@@ -12,8 +12,7 @@ export default defineFakeRoute([
         data: Mock.mock({
           account: body.account,
           token: `${body.account}_@string`,
-          failure_time: Math.ceil(new Date().getTime() / 1000) + 24 * 60 * 60,
-          avatar: '',
+          avatar: 'https://fantastic-admin.github.io/logo.png',
         }),
       }
     },
