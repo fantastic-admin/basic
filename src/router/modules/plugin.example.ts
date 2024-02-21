@@ -114,6 +114,15 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'currencyinput',
+      name: 'pluginExampleCurrencyInput',
+      component: () => import('@/views/plugin_example/currency.input.vue'),
+      meta: {
+        title: '货币格式输入',
+        icon: 'i-ph:currency-cny-bold',
+      },
+    },
+    {
       path: 'splitpanes',
       name: 'pluginExampleSplitpanes',
       component: () => import('@/views/plugin_example/splitpanes.vue'),
