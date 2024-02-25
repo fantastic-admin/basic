@@ -85,16 +85,6 @@ const routes: RouteRecordRaw[] = [
           link: 'https://www.vexipui.com/zh-CN',
         },
       },
-      {
-        path: 'idux',
-        redirect: '',
-        name: 'recommandIDux',
-        meta: {
-          title: 'iDux 组件库',
-          icon: 'https://idux.site/icons/logo.svg',
-          link: 'https://idux.site',
-        },
-      },
     ],
   },
 ]

@@ -99,7 +99,7 @@ function showInfo(iconName: string) {
 
 :deep(.el-dialog) {
   .el-dialog__body {
-    padding: 0 30px 30px;
+    padding: 0 16px 16px;
   }
 
   .icon-box {
