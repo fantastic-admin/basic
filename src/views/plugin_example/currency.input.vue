@@ -11,6 +11,10 @@ import { createReusableTemplate, useClipboard } from '@vueuse/core'
 import Alert from './components/alert.vue'
 
 const Option = createReusableTemplate<{
+  $slots: {
+    default: any
+    switch: any
+  }
   label: string
   description?: string
 }>()
