@@ -12,9 +12,9 @@ const useUserStore = defineStore(
     const routeStore = useRouteStore()
     const menuStore = useMenuStore()
 
-    const account = ref(sessionStorage.account ?? '')
-    const token = ref(sessionStorage.token ?? '')
-    const avatar = ref(sessionStorage.avatar ?? '')
+    const account = ref(localStorage.account ?? '')
+    const token = ref(localStorage.token ?? '')
+    const avatar = ref(localStorage.avatar ?? '')
     const permissions = ref<string[]>([])
     const isLogin = computed(() => {
       if (token.value) {
@@ -29,18 +29,18 @@ const useUserStore = defineStore(
       password: string
     }) {
       const res = await apiUser.login(data)
-      sessionStorage.setItem('account', res.data.account)
-      sessionStorage.setItem('token', res.data.token)
-      sessionStorage.setItem('avatar', res.data.avatar)
+      localStorage.setItem('account', res.data.account)
+      localStorage.setItem('token', res.data.token)
+      localStorage.setItem('avatar', res.data.avatar)
       account.value = res.data.account
       token.value = res.data.token
       avatar.value = res.data.avatar
     }
     // 登出
     async function logout(redirect = router.currentRoute.value.fullPath) {
-      sessionStorage.removeItem('account')
-      sessionStorage.removeItem('token')
-      sessionStorage.removeItem('avatar')
+      localStorage.removeItem('account')
+      localStorage.removeItem('token')
+      localStorage.removeItem('avatar')
       account.value = ''
       token.value = ''
       avatar.value = ''
