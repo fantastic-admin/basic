@@ -13,9 +13,9 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16.x
+          node-version: 20
 
       - run: npx changelogithub # or changelogithub@0.12 if ensure the stable result
         env:
