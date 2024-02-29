@@ -1,6 +1,9 @@
 {
   "type": "module",
   "version": "4.6.1",
+  "engines": {
+    "node": "^18.0.0 || ^20.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
