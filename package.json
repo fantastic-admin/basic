@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "4.6.1",
+  "version": "4.6.2",
   "engines": {
     "node": "^18.0.0 || ^20.0.0"
   },
