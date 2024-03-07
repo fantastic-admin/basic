@@ -45,34 +45,40 @@ export default [
   {
     url: '/mock/{{#if relativePath}}{{ relativePath }}/{{/if}}{{ moduleName }}/create',
     method: 'post',
-    response: {
-      error: '',
-      status: 1,
-      data: {
-        isSuccess: true,
-      },
+    response: () => {
+      return {
+        error: '',
+        status: 1,
+        data: {
+          isSuccess: true,
+        },
+      }
     },
   },
   {
     url: '/mock/{{#if relativePath}}{{ relativePath }}/{{/if}}{{ moduleName }}/edit',
     method: 'post',
-    response: {
-      error: '',
-      status: 1,
-      data: {
-        isSuccess: true,
-      },
+    response: () => {
+      return {
+        error: '',
+        status: 1,
+        data: {
+          isSuccess: true,
+        },
+      }
     },
   },
   {
     url: '/mock/{{#if relativePath}}{{ relativePath }}/{{/if}}{{ moduleName }}/delete',
     method: 'post',
-    response: {
-      error: '',
-      status: 1,
-      data: {
-        isSuccess: true,
-      },
+    response: () => {
+      return {
+        error: '',
+        status: 1,
+        data: {
+          isSuccess: true,
+        },
+      }
     },
   },
 ]
