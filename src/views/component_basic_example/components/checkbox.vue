@@ -31,17 +31,27 @@ const checked4 = ref(false)
       多选框组
     </ElDivider>
     <ElCheckboxGroup v-model="checkList">
-      <ElCheckbox label="复选框 A" />
-      <ElCheckbox label="复选框 B" />
-      <ElCheckbox label="复选框 C" />
-      <ElCheckbox label="禁用" disabled />
-      <ElCheckbox label="选中且禁用" disabled />
+      <ElCheckbox value="复选框 A">
+        复选框 A
+      </ElCheckbox>
+      <ElCheckbox value="复选框 B">
+        复选框 B
+      </ElCheckbox>
+      <ElCheckbox value="复选框 C">
+        复选框 C
+      </ElCheckbox>
+      <ElCheckbox value="禁用" disabled>
+        禁用
+      </ElCheckbox>
+      <ElCheckbox value="选中且禁用" disabled>
+        选中且禁用
+      </ElCheckbox>
     </ElCheckboxGroup>
     <ElDivider content-position="left">
       可选项目数量的限制
     </ElDivider>
     <ElCheckboxGroup v-model="checkedCities" :min="1" :max="2">
-      <ElCheckbox v-for="city in cities" :key="city" :label="city">
+      <ElCheckbox v-for="city in cities" :key="city" :value="city">
         {{ city }}
       </ElCheckbox>
     </ElCheckboxGroup>
@@ -49,14 +59,18 @@ const checked4 = ref(false)
       按钮样式
     </ElDivider>
     <ElCheckboxGroup v-model="checkboxGroup1">
-      <ElCheckboxButton v-for="city in cities" :key="city" :label="city">
+      <ElCheckboxButton v-for="city in cities" :key="city" :value="city">
         {{ city }}
       </ElCheckboxButton>
     </ElCheckboxGroup>
     <ElDivider content-position="left">
       带有边框
     </ElDivider>
-    <ElCheckbox v-model="checked3" label="备选项1" border />
-    <ElCheckbox v-model="checked4" label="备选项2" border />
+    <ElCheckbox v-model="checked3" value="备选项1" border>
+      备选项1
+    </ElCheckbox>
+    <ElCheckbox v-model="checked4" value="备选项2" border>
+      备选项2
+    </ElCheckbox>
   </div>
 </template>

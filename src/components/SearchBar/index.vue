@@ -15,7 +15,7 @@ withDefaults(
 )
 
 const emits = defineEmits<{
-  'toggle': [
+  toggle: [
     value: boolean,
   ]
 }>()

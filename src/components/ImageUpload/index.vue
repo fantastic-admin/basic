@@ -31,7 +31,7 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<{
-  'onSuccess': [
+  onSuccess: [
     res: any,
   ]
 }>()

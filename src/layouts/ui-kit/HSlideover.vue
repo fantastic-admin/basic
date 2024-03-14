@@ -19,7 +19,7 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<{
-  'close': []
+  close: []
 }>()
 
 const isOpen = defineModel<boolean>({
