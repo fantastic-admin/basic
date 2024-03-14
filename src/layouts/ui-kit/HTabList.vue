@@ -10,7 +10,7 @@ const props = defineProps<{
 }>()
 
 const emits = defineEmits<{
-  'change': [T]
+  change: [T]
 }>()
 
 const value = defineModel<T>()

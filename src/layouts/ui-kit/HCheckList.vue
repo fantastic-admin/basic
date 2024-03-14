@@ -15,7 +15,7 @@ withDefaults(
 )
 
 const emits = defineEmits<{
-  'change': [string | number | undefined]
+  change: [string | number | undefined]
 }>()
 
 const value = defineModel<string | number>()
