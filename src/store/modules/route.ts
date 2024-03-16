@@ -169,10 +169,37 @@ const useRouteStore = defineStore(
       return returnRoutes
     })
 
+    // TODO 将设置 meta.sidebar 的属性转换成 meta.menu ，过渡处理，未来将被弃用
+    let isUsedDeprecatedAttribute = false
+    function converDeprecatedAttribute<T extends Route.recordMainRaw[]>(routes: T): T {
+      routes.forEach((route) => {
+        route.children = converDeprecatedAttributeRecursive(route.children)
+      })
+      if (isUsedDeprecatedAttribute) {
+        console.warn('[Fantastic-admin] 路由配置中的 "sidebar" 属性即将被弃用, 请尽快替换为 "menu" 属性')
+      }
+      return routes
+    }
+    function converDeprecatedAttributeRecursive(routes: RouteRecordRaw[]) {
+      if (routes) {
+        routes.forEach((route) => {
+          if (typeof route.meta?.sidebar === 'boolean') {
+            isUsedDeprecatedAttribute = true
+            route.meta.menu = route.meta.sidebar
+            delete route.meta.sidebar
+          }
+          if (route.children) {
+            converDeprecatedAttributeRecursive(route.children)
+          }
+        })
+      }
+      return routes
+    }
+
     // 根据权限动态生成路由（前端生成）
     async function generateRoutesAtFront(asyncRoutes: Route.recordMainRaw[]) {
       // 设置 routes 数据
-      routesRaw.value = cloneDeep(asyncRoutes) as any
+      routesRaw.value = converDeprecatedAttribute(cloneDeep(asyncRoutes) as any)
       if (settingsStore.settings.app.enablePermission) {
         await userStore.getPermissions()
       }
@@ -203,7 +230,7 @@ const useRouteStore = defineStore(
     async function generateRoutesAtBack() {
       await apiApp.routeList().then(async (res) => {
         // 设置 routes 数据
-        routesRaw.value = formatBackRoutes(res.data) as any
+        routesRaw.value = converDeprecatedAttribute(formatBackRoutes(res.data) as any)
         if (settingsStore.settings.app.enablePermission) {
           await userStore.getPermissions()
         }

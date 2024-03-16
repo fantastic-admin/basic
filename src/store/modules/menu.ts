@@ -71,7 +71,7 @@ const useMenuStore = defineStore(
     function getDeepestPath(menu: Menu.recordRaw, rootPath = '') {
       let retnPath = ''
       if (menu.children) {
-        const item = menu.children.find(item => item.meta?.sidebar !== false)
+        const item = menu.children.find(item => item.meta?.menu !== false)
         if (item) {
           retnPath = getDeepestPath(item, resolveRoutePath(rootPath, menu.path))
         }

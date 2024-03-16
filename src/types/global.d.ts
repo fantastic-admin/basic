@@ -228,6 +228,7 @@ declare module 'vue-router' {
     defaultOpened?: boolean
     auth?: string | string[]
     sidebar?: boolean
+    menu?: boolean
     breadcrumb?: boolean
     activeMenu?: string
     cache?: boolean | string | string[]
@@ -263,7 +264,7 @@ declare namespace Menu {
       icon?: string
       defaultOpened?: boolean
       auth?: string | string[]
-      sidebar?: boolean
+      menu?: boolean
       link?: string
     }
     children?: recordRaw[]
