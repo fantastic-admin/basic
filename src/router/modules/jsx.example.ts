@@ -20,7 +20,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/jsx_example/index.tsx'),
       meta: {
         title: 'JSX',
-        sidebar: false,
+        menu: false,
         breadcrumb: false,
         activeMenu: '/jsx_example',
       },

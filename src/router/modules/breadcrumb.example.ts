@@ -28,7 +28,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/breadcrumb_example/detail1.vue'),
       meta: {
         title: '详情1',
-        sidebar: false,
+        menu: false,
         activeMenu: '/breadcrumb_example/list1',
       },
     },
@@ -45,7 +45,7 @@ const routes: RouteRecordRaw = {
           component: () => import('@/views/breadcrumb_example/list2.vue'),
           meta: {
             title: '列表2（层级模式）',
-            sidebar: false,
+            menu: false,
             breadcrumb: false,
           },
         },
@@ -55,7 +55,7 @@ const routes: RouteRecordRaw = {
           component: () => import('@/views/breadcrumb_example/detail2.vue'),
           meta: {
             title: '详情2',
-            sidebar: false,
+            menu: false,
             activeMenu: '/breadcrumb_example/list2',
           },
         },

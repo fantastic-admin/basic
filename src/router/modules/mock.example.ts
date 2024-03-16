@@ -20,7 +20,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/mock_example/index.vue'),
       meta: {
         title: 'Mock',
-        sidebar: false,
+        menu: false,
         breadcrumb: false,
         activeMenu: '/mock_example',
       },

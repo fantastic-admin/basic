@@ -29,7 +29,7 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/keep_alive_example/detail.vue'),
       meta: {
         title: '平级路由',
-        sidebar: false,
+        menu: false,
         activeMenu: '/keep_alive_example/page',
       },
     },
@@ -38,7 +38,7 @@ const routes: RouteRecordRaw = {
       redirect: '/keep_alive_example/nested/detail',
       meta: {
         title: '嵌套路由',
-        sidebar: false,
+        menu: false,
       },
       children: [
         {

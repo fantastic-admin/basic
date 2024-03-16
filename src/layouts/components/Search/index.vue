@@ -163,14 +163,14 @@ function initSourceList() {
 
 function hasChildren(item: RouteRecordRaw) {
   let flag = true
-  if (item.children?.every(i => i.meta?.sidebar === false)) {
+  if (item.children?.every(i => i.meta?.menu === false)) {
     flag = false
   }
   return flag
 }
 function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, breadcrumb?: { title?: string | (() => string) }[]) {
   arr.forEach((item) => {
-    if (item.meta?.sidebar !== false) {
+    if (item.meta?.menu !== false) {
       const breadcrumbTemp = cloneDeep(breadcrumb) || []
       if (item.children && hasChildren(item)) {
         breadcrumbTemp.push({

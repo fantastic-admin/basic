@@ -96,7 +96,7 @@ const transitionClass = computed(() => {
 const hasChildren = computed(() => {
   let flag = true
   if (props.menu.children) {
-    if (props.menu.children.every((item: any) => item.meta?.sidebar === false)) {
+    if (props.menu.children.every((item: any) => item.meta?.menu === false)) {
       flag = false
     }
   }
@@ -189,7 +189,7 @@ function handleMouseleave() {
         }"
       >
         <template v-for="item in menu.children" :key="item.path ?? JSON.stringify(item)">
-          <SubMenu v-if="item.meta?.sidebar !== false" :unique-key="[...uniqueKey, item.path ?? JSON.stringify(item)]" :menu="item" :level="level + 1" />
+          <SubMenu v-if="item.meta?.menu !== false" :unique-key="[...uniqueKey, item.path ?? JSON.stringify(item)]" :menu="item" :level="level + 1" />
         </template>
       </OverlayScrollbarsComponent>
     </Transition>

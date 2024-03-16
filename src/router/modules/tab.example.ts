@@ -22,7 +22,7 @@ const routes: RouteRecordRaw = {
       meta: {
         title: '标签栏演示',
         i18n: 'route.tabbar',
-        sidebar: false,
+        menu: false,
         breadcrumb: false,
         activeMenu: '/tab_example',
       },
