@@ -17,9 +17,11 @@ const menuRef = ref()
 
 // 顶部模式鼠标滚动
 function handlerMouserScroll(event: WheelEvent) {
-  menuRef.value.scrollBy({
-    left: (event.deltaY || event.detail) > 0 ? 50 : -50,
-  })
+  if (event.deltaY || event.detail !== 0) {
+    menuRef.value.scrollBy({
+      left: (event.deltaY || event.detail) > 0 ? 50 : -50,
+    })
+  }
 }
 </script>
 
