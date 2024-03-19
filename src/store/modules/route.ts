@@ -36,7 +36,7 @@ const useRouteStore = defineStore(
       routes.forEach((route) => {
         if (route.children) {
           const childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
-          const childrenBaseAuth = baseAuth ?? route.meta?.auth
+          const childrenBaseAuth = !baseAuth || baseAuth === '' || baseAuth?.length === 0 ? route.meta?.auth : baseAuth
           const tmpBreadcrumb = cloneDeep(breadcrumb)
           tmpBreadcrumb.push({
             path: childrenBaseUrl,
@@ -82,7 +82,7 @@ const useRouteStore = defineStore(
           if (!tmpRoute.meta) {
             tmpRoute.meta = {}
           }
-          tmpRoute.meta.auth = baseAuth ?? tmpRoute.meta?.auth
+          tmpRoute.meta.auth = !baseAuth || baseAuth === '' || baseAuth?.length === 0 ? tmpRoute.meta?.auth : baseAuth
           tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
           res.push(tmpRoute)
         }
