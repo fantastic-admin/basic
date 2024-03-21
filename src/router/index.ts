@@ -136,7 +136,8 @@ router.afterEach((to, from) => {
       keepAliveStore.add(componentName)
     }
     else {
-      console.warn('该页面组件未设置组件名，会导致缓存失效，请检查')
+      // turbo-console-disable-next-line
+      console.warn('[Fantastic-admin] 该页面组件未设置组件名，会导致缓存失效，请检查')
     }
   }
   // 判断离开页面是否开启缓存，如果开启，则根据缓存规则判断是否需要清空 keep-alive 全局状态里离开页面的 name 信息
