@@ -75,7 +75,7 @@ function onTabbarContextmenu(event: MouseEvent, routeItem: Tabbar.recordRaw) {
   ContextMenu.showContextMenu({
     x: event.x,
     y: event.y,
-    zIndex: 1000,
+    zIndex: 1050,
     iconFontClass: '',
     customClass: 'contextmenu-custom',
     items: [
@@ -221,8 +221,6 @@ onUnmounted(() => {
       }
 
       .icon {
-        width: 1em;
-        margin-right: 10px;
         color: initial;
       }
 
