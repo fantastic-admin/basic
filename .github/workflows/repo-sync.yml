@@ -1,9 +1,9 @@
 name: repo-sync
 
 on:
-  # 每天自动同步
+  # 每天 00:05 自动同步
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '5 0 * * *'
   # 手动触发部署
   workflow_dispatch:
 
