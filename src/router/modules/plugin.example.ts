@@ -15,6 +15,15 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
+      path: 'hooksplus',
+      name: 'pluginExampleHooksPlus',
+      component: () => import('@/views/plugin_example/hooks.plus.vue'),
+      meta: {
+        title: 'VueHooks Plus',
+        icon: 'https://inhiblabcore.github.io/docs/hooks/logo.svg',
+      },
+    },
+    {
       path: 'qrcode',
       name: 'pluginExampleQrcode',
       component: () => import('@/views/plugin_example/qrcode.vue'),
