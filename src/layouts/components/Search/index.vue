@@ -30,11 +30,11 @@ const overlayTransitionClass = ref({
 const transitionClass = computed(() => {
   return {
     enter: 'ease-out duration-300',
-    enterFrom: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-    enterTo: 'opacity-100 translate-y-0 sm:scale-100',
+    enterFrom: 'opacity-0 translate-y-4 lg:translate-y-0 lg:scale-95',
+    enterTo: 'opacity-100 translate-y-0 lg:scale-100',
     leave: 'ease-in duration-200',
-    leaveFrom: 'opacity-100 translate-y-0 sm:scale-100',
-    leaveTo: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+    leaveFrom: 'opacity-100 translate-y-0 lg:scale-100',
+    leaveTo: 'opacity-0 translate-y-4 lg:translate-y-0 lg:scale-95',
   }
 })
 
@@ -280,9 +280,9 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
         <div class="fixed inset-0 bg-stone-200/75 backdrop-blur-sm transition-opacity dark:bg-stone-8/75" />
       </TransitionChild>
       <div class="fixed inset-0">
-        <div class="h-full flex items-end justify-center p-4 text-center sm:items-center sm:p-0">
+        <div class="h-full flex items-end justify-center p-4 text-center lg:items-center">
           <TransitionChild as="template" v-bind="transitionClass">
-            <DialogPanel class="relative h-full max-h-4/5 w-full flex flex-col text-left sm:max-w-2xl">
+            <DialogPanel class="relative h-full max-h-4/5 w-full flex flex-col text-left lg:max-w-2xl">
               <div class="flex flex-col overflow-y-auto rounded-xl bg-white shadow-xl dark:bg-stone-8">
                 <div class="flex items-center px-4 py-3" border-b="~ solid stone-2 dark:stone-7">
                   <SvgIcon name="i-ep:search" :size="18" class="text-stone-5" />
