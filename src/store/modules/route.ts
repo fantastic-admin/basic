@@ -1,7 +1,6 @@
 import { cloneDeep } from 'lodash-es'
 import type { RouteMeta, RouteRecordRaw } from 'vue-router'
 import useSettingsStore from './settings'
-import useUserStore from './user'
 import { resolveRoutePath } from '@/utils'
 import { systemRoutes } from '@/router/routes'
 import apiApp from '@/api/modules/app'
@@ -12,7 +11,6 @@ const useRouteStore = defineStore(
   'route',
   () => {
     const settingsStore = useSettingsStore()
-    const userStore = useUserStore()
 
     const isGenerate = ref(false)
     const routesRaw = ref<Route.recordMainRaw[]>([])
@@ -147,13 +145,10 @@ const useRouteStore = defineStore(
       return routes
     }
 
-    // 根据权限动态生成路由（前端生成）
-    async function generateRoutesAtFront(asyncRoutes: Route.recordMainRaw[]) {
+    // 生成路由（前端生成）
+    function generateRoutesAtFront(asyncRoutes: Route.recordMainRaw[]) {
       // 设置 routes 数据
       routesRaw.value = converDeprecatedAttribute(cloneDeep(asyncRoutes) as any)
-      if (settingsStore.settings.app.enablePermission) {
-        await userStore.getPermissions()
-      }
       isGenerate.value = true
     }
     // 格式化后端路由数据
@@ -177,24 +172,18 @@ const useRouteStore = defineStore(
         return route
       })
     }
-    // 根据权限动态生成路由（后端获取）
+    // 生成路由（后端获取）
     async function generateRoutesAtBack() {
-      await apiApp.routeList().then(async (res) => {
+      await apiApp.routeList().then((res) => {
         // 设置 routes 数据
         routesRaw.value = converDeprecatedAttribute(formatBackRoutes(res.data) as any)
-        if (settingsStore.settings.app.enablePermission) {
-          await userStore.getPermissions()
-        }
         isGenerate.value = true
       }).catch(() => {})
     }
-    // 根据权限动态生成路由（文件系统生成）
-    async function generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {
+    // 生成路由（文件系统生成）
+    function generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {
       // 设置 routes 数据
       filesystemRoutesRaw.value = cloneDeep(asyncRoutes) as any
-      if (settingsStore.settings.app.enablePermission) {
-        await userStore.getPermissions()
-      }
       isGenerate.value = true
     }
     // 记录 accessRoutes 路由，用于登出时删除路由

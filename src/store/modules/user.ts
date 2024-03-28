@@ -58,7 +58,6 @@ const useUserStore = defineStore(
     async function getPermissions() {
       const res = await apiUser.permission()
       permissions.value = res.data.permissions
-      return permissions.value
     }
     // 修改密码
     async function editPassword(data: {
