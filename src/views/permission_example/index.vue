@@ -1,6 +1,6 @@
 <route lang="yaml">
 meta:
-  enabled: false
+  title: 权限验证
 </route>
 
 <script setup lang="ts">
@@ -58,9 +58,13 @@ function permissionCheck2(permissions: string[]) {
       <div v-else>
         <h3>切换帐号</h3>
         <ElRadioGroup v-model="userStore.account" @change="accountChange">
-          <ElRadioButton label="admin" />
-          <ElRadioButton label="test" />
-          <ElRadioButton label="hooray">
+          <ElRadioButton value="admin">
+            admin
+          </ElRadioButton>
+          <ElRadioButton value="test">
+            test
+          </ElRadioButton>
+          <ElRadioButton value="hooray">
             hooray(无权限)
           </ElRadioButton>
         </ElRadioGroup>

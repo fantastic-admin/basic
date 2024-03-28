@@ -57,20 +57,22 @@ router.beforeEach(async (to, from, next) => {
       }
     }
     else {
+      // 获取用户权限
+      settingsStore.settings.app.enablePermission && await userStore.getPermissions()
       // 生成动态路由
       switch (settingsStore.settings.app.routeBaseOn) {
         case 'frontend':
-          await routeStore.generateRoutesAtFront(asyncRoutes)
+          routeStore.generateRoutesAtFront(asyncRoutes)
           break
         case 'backend':
           await routeStore.generateRoutesAtBack()
           break
         case 'filesystem':
-          await routeStore.generateRoutesAtFilesystem(asyncRoutesByFilesystem)
+          routeStore.generateRoutesAtFilesystem(asyncRoutesByFilesystem)
           // 文件系统生成的路由，需要手动生成导航数据
           switch (settingsStore.settings.menu.baseOn) {
             case 'frontend':
-              await menuStore.generateMenusAtFront()
+              menuStore.generateMenusAtFront()
               break
             case 'backend':
               await menuStore.generateMenusAtBack()

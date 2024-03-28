@@ -72,13 +72,13 @@ const useMenuStore = defineStore(
       let returnMenus: Menu.recordMainRaw[] = []
       if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
         returnMenus = convertRouteToMenu(routeStore.routesRaw)
-        // 如果权限功能开启，则需要对导航数据进行筛选过滤
-        if (settingsStore.settings.app.enablePermission) {
-          returnMenus = filterAsyncMenus(returnMenus, userStore.permissions)
-        }
       }
       else {
         returnMenus = filesystemMenusRaw.value
+      }
+      // 如果权限功能开启，则需要对导航数据进行筛选过滤
+      if (settingsStore.settings.app.enablePermission) {
+        returnMenus = filterAsyncMenus(returnMenus, userStore.permissions)
       }
       return returnMenus
     })
@@ -176,32 +176,12 @@ const useMenuStore = defineStore(
     }
     // 生成导航（前端生成）
     async function generateMenusAtFront() {
-      let accessedMenus
-      // 如果权限功能开启，则需要对导航数据进行筛选过滤
-      if (settingsStore.settings.app.enablePermission) {
-        const permissions = await userStore.getPermissions()
-        accessedMenus = filterAsyncMenus(menu, permissions)
-      }
-      else {
-        accessedMenus = cloneDeep(menu)
-      }
-      filesystemMenusRaw.value = accessedMenus.filter(item => item.children.length !== 0)
+      filesystemMenusRaw.value = menu.filter(item => item.children.length !== 0)
     }
     // 生成导航（后端生成）
     async function generateMenusAtBack() {
       await apiApp.menuList().then(async (res) => {
-        const settingsStore = useSettingsStore()
-        const userStore = useUserStore()
-        let accessedMenus: Menu.recordMainRaw[]
-        // 如果权限功能开启，则需要对导航数据进行筛选过滤
-        if (settingsStore.settings.app.enablePermission) {
-          const permissions = await userStore.getPermissions()
-          accessedMenus = filterAsyncMenus(res.data, permissions)
-        }
-        else {
-          accessedMenus = cloneDeep(res.data)
-        }
-        filesystemMenusRaw.value = accessedMenus.filter(item => item.children.length !== 0)
+        filesystemMenusRaw.value = (res.data as Menu.recordMainRaw[]).filter(item => item.children.length !== 0)
       }).catch(() => {})
     }
     // 设置主导航

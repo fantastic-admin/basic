@@ -1,6 +1,6 @@
 <route lang="yaml">
 meta:
-  enabled: false
+  title: 测试页面
 </route>
 
 <template>

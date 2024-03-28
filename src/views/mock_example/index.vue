@@ -10,11 +10,11 @@ import useUserStore from '@/store/modules/user'
 const userStore = useUserStore()
 
 function getPermission() {
-  userStore.getPermissions().then((res) => {
+  userStore.getPermissions().then(() => {
     ElNotification({
       title: '当前用户权限',
       dangerouslyUseHTMLString: true,
-      message: res.map(p => `<p>${p}</p>`).join(''),
+      message: userStore.permissions.map(p => `<p>${p}</p>`).join(''),
     })
   })
 }

@@ -180,6 +180,13 @@ export default defineFakeRoute([
                   },
                 ],
               },
+              {
+                path: '/permission_example',
+                meta: {
+                  title: '权限验证',
+                  icon: 'ri:shield-keyhole-line',
+                },
+              },
             ],
           },
         ],
