@@ -192,7 +192,6 @@ const useMenuStore = defineStore(
     }
 
     return {
-      menus,
       actived,
       allMenus,
       sidebarMenus,

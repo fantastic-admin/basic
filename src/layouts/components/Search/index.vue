@@ -4,13 +4,11 @@ import type { OverlayScrollbarsComponentRef } from 'overlayscrollbars-vue'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import { cloneDeep } from 'lodash-es'
 import hotkeys from 'hotkeys-js'
-import type { RouteRecordRaw } from 'vue-router'
 import Breadcrumb from '../Breadcrumb/index.vue'
 import BreadcrumbItem from '../Breadcrumb/item.vue'
 import { resolveRoutePath } from '@/utils'
 import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
-import useRouteStore from '@/store/modules/route'
 import useMenuStore from '@/store/modules/menu'
 import type { Menu } from '@/types/global'
 
@@ -40,7 +38,6 @@ const transitionClass = computed(() => {
 
 const router = useRouter()
 const settingsStore = useSettingsStore()
-const routeStore = useRouteStore()
 const menuStore = useMenuStore()
 
 interface listTypes {
@@ -149,26 +146,19 @@ onMounted(() => {
 
 function initSourceList() {
   sourceList.value = []
-  if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
-    routeStore.routes.forEach((item) => {
-      item.children && getSourceList(item.children as RouteRecordRaw[])
-    })
-  }
-  else {
-    menuStore.menus.forEach((item) => {
-      getSourceListByMenus(item.children)
-    })
-  }
+  menuStore.allMenus.forEach((item) => {
+    getSourceListByMenus(item.children)
+  })
 }
 
-function hasChildren(item: RouteRecordRaw) {
+function hasChildren(item: Menu.recordRaw) {
   let flag = true
   if (item.children?.every(i => i.meta?.menu === false)) {
     flag = false
   }
   return flag
 }
-function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, breadcrumb?: { title?: string | (() => string) }[]) {
+function getSourceListByMenus(arr: Menu.recordRaw[], basePath?: string, icon?: string, breadcrumb?: { title?: string | (() => string) }[]) {
   arr.forEach((item) => {
     if (item.meta?.menu !== false) {
       const breadcrumbTemp = cloneDeep(breadcrumb) || []
@@ -176,7 +166,7 @@ function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, 
         breadcrumbTemp.push({
           title: item.meta?.title,
         })
-        getSourceList(item.children, resolveRoutePath(basePath, item.path), item.meta?.icon ?? icon, breadcrumbTemp)
+        getSourceListByMenus(item.children, resolveRoutePath(basePath, item.path), item.meta?.icon ?? icon, breadcrumbTemp)
       }
       else {
         breadcrumbTemp.push({
@@ -190,28 +180,6 @@ function getSourceList(arr: RouteRecordRaw[], basePath?: string, icon?: string, 
           breadcrumb: breadcrumbTemp,
         })
       }
-    }
-  })
-}
-function getSourceListByMenus(arr: Menu.recordRaw[], icon?: string, breadcrumb?: { title?: string | (() => string) }[]) {
-  arr.forEach((item) => {
-    const breadcrumbTemp = cloneDeep(breadcrumb) || []
-    if (item.children && item.children.length > 0) {
-      breadcrumbTemp.push({
-        title: item.meta?.title,
-      })
-      getSourceListByMenus(item.children, item.meta?.icon ?? icon, breadcrumbTemp)
-    }
-    else {
-      breadcrumbTemp.push({
-        title: item.meta?.title,
-      })
-      sourceList.value.push({
-        icon: item.meta?.icon ?? icon,
-        title: item.meta?.title,
-        path: item.path as string,
-        breadcrumb: breadcrumbTemp,
-      })
     }
   })
 }
