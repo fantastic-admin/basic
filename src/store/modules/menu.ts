@@ -1,11 +1,12 @@
 import { cloneDeep } from 'lodash-es'
+import type { RouteRecordRaw } from 'vue-router'
 import useSettingsStore from './settings'
 import useUserStore from './user'
 import useRouteStore from './route'
 import { resolveRoutePath } from '@/utils'
 import apiApp from '@/api/modules/app'
 import menu from '@/menu'
-import type { Menu } from '#/global'
+import type { Menu, Route } from '#/global'
 
 const useMenuStore = defineStore(
   // 唯一ID
@@ -15,42 +16,69 @@ const useMenuStore = defineStore(
     const userStore = useUserStore()
     const routeStore = useRouteStore()
 
-    const menus = ref<Menu.recordMainRaw[]>([{
-      meta: {},
-      children: [],
-    }])
+    const filesystemMenusRaw = ref<Menu.recordMainRaw[]>([])
     const actived = ref(0)
 
-    // 将多级导航的每一级 path 都转换为完整路径
-    function convertToFullPath(menu: any[], path: string = '') {
-      return menu.map((item) => {
-        item.path = resolveRoutePath(path, item.path)
-        if (item.children) {
-          item.children = convertToFullPath(item.children, item.path)
-        }
-        return item
-      })
-    }
-    // 完整导航数据
-    const allMenus = computed(() => {
-      let returnMenus: Menu.recordMainRaw[] = [{
-        meta: {},
-        children: [],
-      }]
-      if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
+    // 将原始路由转换成导航菜单
+    function convertRouteToMenu(routes: Route.recordMainRaw[]): Menu.recordMainRaw[] {
+      const returnMenus: Menu.recordMainRaw[] = []
+      routes.forEach((item) => {
         if (settingsStore.settings.menu.menuMode === 'single') {
-          returnMenus[0].children = []
-          routeStore.routes.forEach((item) => {
-            returnMenus[0].children?.push(...item.children as Menu.recordRaw[])
+          returnMenus.length === 0 && returnMenus.push({
+            meta: {},
+            children: [],
           })
+          returnMenus[0].children.push(...convertRouteToMenuRecursive(item.children))
         }
         else {
-          returnMenus = routeStore.routes as Menu.recordMainRaw[]
+          const menuItem: Menu.recordMainRaw = {
+            meta: {
+              title: item?.meta?.title,
+              icon: item?.meta?.icon,
+              auth: item?.meta?.auth,
+            },
+            children: [],
+          }
+          menuItem.children = convertRouteToMenuRecursive(item.children)
+          returnMenus.push(menuItem)
         }
-        returnMenus.map(item => convertToFullPath(item.children))
+      })
+      return returnMenus
+    }
+    function convertRouteToMenuRecursive(routes: RouteRecordRaw[], basePath = ''): Menu.recordRaw[] {
+      const returnMenus: Menu.recordRaw[] = []
+      routes.forEach((item) => {
+        const menuItem: Menu.recordRaw = {
+          path: resolveRoutePath(basePath, item.path),
+          meta: {
+            title: item?.meta?.title,
+            icon: item?.meta?.icon,
+            defaultOpened: item?.meta?.defaultOpened,
+            auth: item?.meta?.auth,
+            menu: item?.meta?.menu,
+            link: item?.meta?.link,
+          },
+        }
+        if (item.children) {
+          menuItem.children = convertRouteToMenuRecursive(item.children, menuItem.path)
+        }
+        returnMenus.push(menuItem)
+      })
+      return returnMenus
+    }
+
+    // 完整导航数据
+    const allMenus = computed(() => {
+      let returnMenus: Menu.recordMainRaw[] = []
+      if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
+        returnMenus = convertRouteToMenu(routeStore.routesRaw)
+        // 如果权限功能开启，则需要对导航数据进行筛选过滤
+        if (settingsStore.settings.app.enablePermission) {
+          returnMenus = filterAsyncMenus(returnMenus, userStore.permissions)
+        }
       }
       else {
-        returnMenus = menus.value
+        returnMenus = filesystemMenusRaw.value
       }
       return returnMenus
     })
@@ -157,7 +185,7 @@ const useMenuStore = defineStore(
       else {
         accessedMenus = cloneDeep(menu)
       }
-      menus.value = accessedMenus.filter(item => item.children.length !== 0)
+      filesystemMenusRaw.value = accessedMenus.filter(item => item.children.length !== 0)
     }
     // 生成导航（后端生成）
     async function generateMenusAtBack() {
@@ -173,7 +201,7 @@ const useMenuStore = defineStore(
         else {
           accessedMenus = cloneDeep(res.data)
         }
-        menus.value = accessedMenus.filter(item => item.children.length !== 0)
+        filesystemMenusRaw.value = accessedMenus.filter(item => item.children.length !== 0)
       }).catch(() => {})
     }
     // 设置主导航
