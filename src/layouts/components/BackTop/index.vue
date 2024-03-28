@@ -5,11 +5,11 @@ defineOptions({
 
 const transitionClass = {
   enterActiveClass: 'ease-out duration-300',
-  enterFromClass: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
-  enterToClass: 'opacity-100 translate-y-0 sm:scale-100',
+  enterFromClass: 'opacity-0 translate-y-4 lg:translate-y-0 lg:scale-95',
+  enterToClass: 'opacity-100 translate-y-0 lg:scale-100',
   leaveActiveClass: 'ease-in duration-200',
-  leaveFromClass: 'opacity-100 translate-y-0 sm:scale-100',
-  leaveToClass: 'opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95',
+  leaveFromClass: 'opacity-100 translate-y-0 lg:scale-100',
+  leaveToClass: 'opacity-0 translate-y-4 lg:translate-y-0 lg:scale-95',
 }
 
 onMounted(() => {
