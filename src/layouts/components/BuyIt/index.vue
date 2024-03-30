@@ -22,29 +22,29 @@ function open(url: string) {
 
 onMounted(() => {
   eventBus.on('global-ui-component-switch', () => switchUI())
-  ElNotification({
-    type: 'info',
-    title: '「 专业版限时优惠倒计时 」',
-    dangerouslyUseHTMLString: true,
-    message: `
-<p>限时优惠活动将于 <b>2024/04/01</b> 到期，现在购买只需 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元。</p>
-<p style="text-align: right;"><a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">查看详情</a></p>
-    `,
-    position: 'bottom-right',
-    duration: 0,
-  })
-  setTimeout(() => {
-    ElNotification({
-      type: 'info',
-      title: '「 免费领取 Vue2 版本专业版 」',
-      dangerouslyUseHTMLString: true,
-      message: `
-<p style="text-align: right;"><a href="https://fantastic-admin.gitee.io/get-vue2-pro.html" target="_blank">查看详情</a></p>
-    `,
-      position: 'bottom-right',
-      duration: 0,
-    })
-  }, 0)
+//   ElNotification({
+//     type: 'info',
+//     title: '「 专业版限时优惠倒计时 」',
+//     dangerouslyUseHTMLString: true,
+//     message: `
+// <p>限时优惠活动将于 <b>2024/04/01</b> 到期，现在购买只需 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元。</p>
+// <p style="text-align: right;"><a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">查看详情</a></p>
+//     `,
+//     position: 'bottom-right',
+//     duration: 0,
+//   })
+//   setTimeout(() => {
+//     ElNotification({
+//       type: 'info',
+//       title: '「 免费领取 Vue2 版本专业版 」',
+//       dangerouslyUseHTMLString: true,
+//       message: `
+// <p style="text-align: right;"><a href="https://fantastic-admin.gitee.io/get-vue2-pro.html" target="_blank">查看详情</a></p>
+//     `,
+//       position: 'bottom-right',
+//       duration: 0,
+//     })
+//   }, 0)
 })
 
 onUnmounted(() => {

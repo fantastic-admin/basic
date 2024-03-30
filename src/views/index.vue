@@ -103,9 +103,6 @@ function open(url: string) {
         </HButton>
       </HDropdownMenu>
     </PageHeader>
-    <PageMain class="rounded-lg text-white" style="background: linear-gradient(50deg, rgb(14 76 253), rgb(106 142 255));">
-      全新版本 V4.0 正式发布，支持替换 UI 组件库，点击查看<span class="cursor-pointer px-1 text-yellow font-bold hover:op-70" @click="open('https://fantastic-admin.gitee.io/guide/v4.html')">V4.0 更新介绍</span>。
-    </PageMain>
     <div class="w-full flex flex-col gap-4 px-4 xl:flex-row">
       <PageMain class="ecology">
         <template #title>
