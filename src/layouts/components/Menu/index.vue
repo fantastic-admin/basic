@@ -170,8 +170,10 @@ provide(rootMenuInjectionKey, reactive({
     }"
   >
     <template v-for="item in menu" :key="item.path ?? JSON.stringify(item)">
-      <SubMenu v-if="item.children?.length" :menu="item" :unique-key="[item.path ?? JSON.stringify(item)]" />
-      <Item v-else :item="item" :unique-key="[item.path ?? JSON.stringify(item)]" @click="handleMenuItemClick(item.path ?? JSON.stringify(item))" />
+      <template v-if="item.meta?.menu !== false">
+        <SubMenu v-if="item.children?.length" :menu="item" :unique-key="[item.path ?? JSON.stringify(item)]" />
+        <Item v-else :item="item" :unique-key="[item.path ?? JSON.stringify(item)]" @click="handleMenuItemClick(item.path ?? JSON.stringify(item))" />
+      </template>
     </template>
   </div>
 </template>
