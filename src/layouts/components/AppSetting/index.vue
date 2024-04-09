@@ -93,7 +93,7 @@ function handleCopy() {
         :options="[
           { icon: 'i-ri:sun-line', label: '明亮', value: 'light' },
           { icon: 'i-ri:moon-line', label: '暗黑', value: 'dark' },
-          { icon: 'i-ri:computer-line', label: '系统', value: '' },
+          { icon: 'i-codicon:color-mode', label: '系统', value: '' },
         ]"
         class="w-60"
       />
