@@ -77,7 +77,7 @@ function onTabbarContextmenu(event: MouseEvent, routeItem: Tabbar.recordRaw) {
     y: event.y,
     zIndex: 1050,
     iconFontClass: '',
-    customClass: 'contextmenu-custom',
+    customClass: 'tabbar-contextmenu',
     items: [
       {
         label: '重新加载',
@@ -201,7 +201,7 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss">
-.mx-menu-ghost-host {
+.tabbar-contextmenu {
   z-index: 1000;
 
   .mx-context-menu {
