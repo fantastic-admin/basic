@@ -6,8 +6,16 @@ import eventBus from './utils/eventBus'
 import Provider from './ui-provider/index.vue'
 import useSettingsStore from '@/store/modules/settings'
 
+const route = useRoute()
+
 const settingsStore = useSettingsStore()
 const { auth } = useAuth()
+
+const isAuth = computed(() => {
+  return route.matched.every((item) => {
+    return auth(item.meta.auth ?? '')
+  })
+})
 
 // 侧边栏主导航当前实际宽度
 const mainSidebarActualWidth = computed(() => {
@@ -61,13 +69,13 @@ import.meta.env.VITE_APP_DEBUG_TOOL === 'vconsole' && new VConsole()
 <template>
   <Provider>
     <RouterView
-      v-slot="{ Component, route }"
+      v-slot="{ Component }"
       :style="{
         '--g-main-sidebar-actual-width': mainSidebarActualWidth,
         '--g-sub-sidebar-actual-width': subSidebarActualWidth,
       }"
     >
-      <component :is="Component" v-if="auth(route.meta.auth ?? '')" />
+      <component :is="Component" v-if="isAuth" />
       <NotAllowed v-else />
     </RouterView>
     <SystemInfo />
