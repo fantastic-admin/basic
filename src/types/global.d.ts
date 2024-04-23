@@ -1,4 +1,4 @@
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordName, RouteRecordRaw } from 'vue-router'
 
 type RecursiveRequired<T> = {
   [P in keyof T]-?: RecursiveRequired<T[P]>
@@ -284,7 +284,7 @@ declare namespace Tabbar {
   interface recordRaw {
     tabId: string
     fullPath: string
-    routeName?: RouteRecordRaw.name
+    routeName?: RouteRecordName | null
     title?: string | (() => string)
     icon?: string
     name: string[]
