@@ -44,7 +44,7 @@ function goBack() {
       <h1 class="m-0 text-6xl font-sans">
         404
       </h1>
-      <div class="desc mx-0 text-xl text-stone-5">
+      <div class="mx-0 text-xl text-stone-5">
         抱歉，你访问的页面不存在
       </div>
       <div>
