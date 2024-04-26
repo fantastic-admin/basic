@@ -26,6 +26,9 @@ const banner = new URL('../assets/images/login-banner.png', import.meta.url).hre
 const logo = new URL('../assets/images/logo.png', import.meta.url).href
 const title = import.meta.env.VITE_APP_TITLE
 
+// 登录方式，default 账号密码登录，qrcode 扫码登录
+const loginType = ref('default')
+
 // 表单类型，login 登录，register 注册，reset 重置密码
 const formType = ref('login')
 const loading = ref(false)
@@ -159,44 +162,62 @@ function testAccount(account: string) {
         <img :src="banner" class="banner">
       </div>
       <ElForm v-show="formType === 'login'" ref="loginFormRef" :model="loginForm" :rules="loginRules" class="login-form">
-        <div class="title-container">
-          <h3 class="title">
-            欢迎来到 {{ title }} ! 👋🏻
-          </h3>
+        <div class="mb-6">
+          <HTabList
+            v-model="loginType" :options="[
+              { label: '账号密码登录', value: 'default' },
+              { label: '扫码登录', value: 'qrcode' },
+            ]"
+          />
         </div>
-        <div>
-          <ElFormItem prop="account">
-            <ElInput v-model="loginForm.account" placeholder="用户名" type="text" tabindex="1">
-              <template #prefix>
-                <SvgIcon name="i-ri:user-3-fill" />
-              </template>
-            </ElInput>
-          </ElFormItem>
-          <ElFormItem prop="password">
-            <ElInput v-model="loginForm.password" type="password" placeholder="密码" tabindex="2" autocomplete="new-password" show-password @keyup.enter="handleLogin">
-              <template #prefix>
-                <SvgIcon name="i-ri:lock-2-fill" />
-              </template>
-            </ElInput>
-          </ElFormItem>
-        </div>
-        <div class="flex-bar">
-          <ElCheckbox v-model="loginForm.remember">
-            记住我
-          </ElCheckbox>
-          <ElLink type="primary" :underline="false" @click="formType = 'reset'">
-            忘记密码了?
-          </ElLink>
-        </div>
-        <ElButton :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleLogin">
-          登录
-        </ElButton>
-        <div class="sub-link">
-          <span class="text">还没有帐号?</span>
-          <ElLink type="primary" :underline="false" @click="formType = 'register'">
-            创建新帐号
-          </ElLink>
-        </div>
+        <template v-if="loginType === 'default'">
+          <div class="title-container">
+            <h3 class="title">
+              欢迎来到 {{ title }} ! 👋🏻
+            </h3>
+          </div>
+          <div>
+            <ElFormItem prop="account">
+              <ElInput v-model="loginForm.account" placeholder="用户名" type="text" tabindex="1">
+                <template #prefix>
+                  <SvgIcon name="i-ri:user-3-fill" />
+                </template>
+              </ElInput>
+            </ElFormItem>
+            <ElFormItem prop="password">
+              <ElInput v-model="loginForm.password" type="password" placeholder="密码" tabindex="2" autocomplete="new-password" show-password @keyup.enter="handleLogin">
+                <template #prefix>
+                  <SvgIcon name="i-ri:lock-2-fill" />
+                </template>
+              </ElInput>
+            </ElFormItem>
+          </div>
+          <div class="flex-bar">
+            <ElCheckbox v-model="loginForm.remember">
+              记住我
+            </ElCheckbox>
+            <ElLink type="primary" :underline="false" @click="formType = 'reset'">
+              忘记密码了?
+            </ElLink>
+          </div>
+          <ElButton :loading="loading" type="primary" size="large" style="width: 100%;" @click.prevent="handleLogin">
+            登录
+          </ElButton>
+          <div class="sub-link">
+            <span class="text">还没有帐号?</span>
+            <ElLink type="primary" :underline="false" @click="formType = 'register'">
+              创建新帐号
+            </ElLink>
+          </div>
+        </template>
+        <template v-else-if="loginType === 'qrcode'">
+          <div class="flex flex-col items-center">
+            <el-image src="https://s2.loli.net/2024/04/26/GsahtuIZ9XOg5jr.png" class="h-[250px] w-[250px]" />
+            <div class="mt-2 op-50">
+              请使用微信扫码登录
+            </div>
+          </div>
+        </template>
         <div style="margin-top: 20px; margin-bottom: -20px; text-align: center;">
           <ElDivider>演示账号一键登录</ElDivider>
           <ElButton type="primary" size="small" plain @click="testAccount('admin')">
