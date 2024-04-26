@@ -86,6 +86,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'vchart',
+          name: 'pluginExampleChartVchart',
+          component: () => import('@/views/plugin_example/vchart.vue'),
+          meta: {
+            title: 'VChart',
+          },
+        },
+        {
           path: 'g2plot',
           name: 'pluginExampleChartG2plot',
           component: () => import('@/views/plugin_example/g2plot.vue'),

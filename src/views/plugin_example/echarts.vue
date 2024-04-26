@@ -292,6 +292,7 @@ function initChart4() {
   // 传入数据
   chart4.setOption(option)
 }
+
 function open(url: string) {
   window.open(url, '_blank')
 }
@@ -311,7 +312,7 @@ function open(url: string) {
         <template #icon>
           <SvgIcon name="i-ep:link" />
         </template>
-        访问 echart
+        访问 echarts
       </ElButton>
     </PageHeader>
     <ElRow :gutter="20" style="margin: -10px 10px;">
