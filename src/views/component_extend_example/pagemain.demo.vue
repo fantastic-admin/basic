@@ -14,7 +14,7 @@ meta:
     </PageMain>
     <PageMain>
       <template #title>
-        <div style="display: flex; align-item: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
           通过 slot 设置标题
           <ElButton size="small">
             还可以放置自定义按钮
