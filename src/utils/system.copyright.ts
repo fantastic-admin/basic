@@ -5,7 +5,7 @@ if (import.meta.env.PROD) {
   const copyright_main_style = `${copyright_common_style} background: #e24329;`
   const copyright_sub_style = `${copyright_common_style} background: #707070;`
   if ((navigator.language).toLowerCase() === 'zh-cn') {
-    console.info('%c由%cFantastic-admin%c驱动', copyright_sub_style, copyright_main_style, copyright_sub_style, '\nhttps://fantastic-admin.gitee.io')
+    console.info('%c由%cFantastic-admin%c驱动', copyright_sub_style, copyright_main_style, copyright_sub_style, '\nhttps://fantastic-admin.github.io')
   }
   else {
     console.info('%cPowered by%cFantastic-admin', copyright_sub_style, copyright_main_style, '\nhttps://fantastic-admin.github.io')

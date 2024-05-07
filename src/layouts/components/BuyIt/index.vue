@@ -28,7 +28,7 @@ onMounted(() => {
 //     dangerouslyUseHTMLString: true,
 //     message: `
 // <p>限时优惠活动将于 <b>2024/04/01</b> 到期，现在购买只需 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元。</p>
-// <p style="text-align: right;"><a href="https://fantastic-admin.gitee.io/buy.html" target="_blank">查看详情</a></p>
+// <p style="text-align: right;"><a href="https://fantastic-admin.github.io/buy.html" target="_blank">查看详情</a></p>
 //     `,
 //     position: 'bottom-right',
 //     duration: 0,
@@ -39,7 +39,7 @@ onMounted(() => {
 //       title: '「 免费领取 Vue2 版本专业版 」',
 //       dangerouslyUseHTMLString: true,
 //       message: `
-// <p style="text-align: right;"><a href="https://fantastic-admin.gitee.io/get-vue2-pro.html" target="_blank">查看详情</a></p>
+// <p style="text-align: right;"><a href="https://fantastic-admin.github.io/get-vue2-pro.html" target="_blank">查看详情</a></p>
 //     `,
 //       position: 'bottom-right',
 //       duration: 0,
@@ -88,19 +88,19 @@ onUnmounted(() => {
         </div>
       </HDialog>
     </div>
-    <div class="item" @click="open(`https://fantastic-admin.gitee.io/buy.html`)">
+    <div class="item" @click="open(`https://fantastic-admin.github.io/buy.html`)">
       <SvgIcon name="i-ri:money-cny-box-line" />
       <span class="title">购买<br>专业版</span>
     </div>
-    <div class="item" @click="open('https://gitee.com/fantastic-admin/basic')">
+    <div class="item" @click="open('https://github.com/fantastic-admin/basic')">
       <SvgIcon name="i-ri:code-s-slash-line" />
       <span class="title">下载<br>基础版</span>
     </div>
-    <div class="item" @click="open(`https://fantastic-admin.gitee.io`)">
+    <div class="item" @click="open(`https://fantastic-admin.github.io`)">
       <SvgIcon name="i-ri:book-read-line" />
       <span class="title">开发<br>文档</span>
     </div>
-    <div class="item" @click="open(`https://fantastic-admin.gitee.io/support.html`)">
+    <div class="item" @click="open(`https://fantastic-admin.github.io/support.html`)">
       <SvgIcon name="i-ri:message-2-line" />
       <span class="title">技术<br>支持</span>
     </div>

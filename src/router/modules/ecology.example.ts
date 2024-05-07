@@ -21,7 +21,7 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: 'Fantastic-startkit 项目启动套件',
           icon: 'https://cn.vuejs.org/logo.svg',
-          link: 'https://hooray.gitee.io/fantastic-startkit/',
+          link: 'https://hooray.github.io/fantastic-startkit/',
         },
       },
       {
@@ -30,8 +30,8 @@ const routes: RouteRecordRaw[] = [
         name: 'officialOneStepAdmin',
         meta: {
           title: 'One-step-admin 干啥都快人一步的中后台框架',
-          icon: 'https://one-step-admin.gitee.io/logo.png',
-          link: 'https://one-step-admin.gitee.io',
+          icon: 'https://one-step-admin.github.io/logo.png',
+          link: 'https://one-step-admin.github.io',
         },
       },
     ],

@@ -32,12 +32,12 @@ const fantasticAdminInfo = ref({
   imageVisible: false,
   index: 0,
   data: [
-    'https://fantastic-admin.gitee.io/preview1.png',
-    'https://fantastic-admin.gitee.io/preview2.png',
-    'https://fantastic-admin.gitee.io/preview3.png',
-    'https://fantastic-admin.gitee.io/preview4.png',
-    'https://fantastic-admin.gitee.io/preview5.png',
-    'https://fantastic-admin.gitee.io/preview6.png',
+    'https://fantastic-admin.github.io/preview1.png',
+    'https://fantastic-admin.github.io/preview2.png',
+    'https://fantastic-admin.github.io/preview3.png',
+    'https://fantastic-admin.github.io/preview4.png',
+    'https://fantastic-admin.github.io/preview5.png',
+    'https://fantastic-admin.github.io/preview6.png',
   ],
 })
 
@@ -45,12 +45,12 @@ const oneStepAdminInfo = ref({
   imageVisible: false,
   index: 0,
   data: [
-    'https://one-step-admin.gitee.io/preview1.png',
-    'https://one-step-admin.gitee.io/preview2.png',
-    'https://one-step-admin.gitee.io/preview3.png',
-    'https://one-step-admin.gitee.io/preview4.png',
-    'https://one-step-admin.gitee.io/preview5.png',
-    'https://one-step-admin.gitee.io/preview6.png',
+    'https://one-step-admin.github.io/preview1.png',
+    'https://one-step-admin.github.io/preview2.png',
+    'https://one-step-admin.github.io/preview3.png',
+    'https://one-step-admin.github.io/preview4.png',
+    'https://one-step-admin.github.io/preview5.png',
+    'https://one-step-admin.github.io/preview6.png',
   ],
 })
 
@@ -84,7 +84,7 @@ function open(url: string) {
           </div>
         </div>
       </template>
-      <HButton outline @click="open('https://fantastic-admin.gitee.io')">
+      <HButton outline @click="open('https://fantastic-admin.github.io')">
         <SvgIcon name="i-ri:file-text-line" />
         开发文档
       </HButton>
@@ -116,11 +116,8 @@ function open(url: string) {
             </div>
           </div>
           <div class="ml-auto">
-            <HButton @click="open('https://hooray.gitee.io/fantastic-startkit')">
+            <HButton @click="open('https://hooray.github.io/fantastic-startkit')">
               访问官网
-            </HButton>
-            <HButton outline class="ml-2" @click="open('https://hooray.github.io/fantastic-startkit')">
-              备用地址
             </HButton>
           </div>
         </template>
@@ -133,7 +130,7 @@ function open(url: string) {
       <PageMain class="ecology">
         <template #title>
           <div class="title-info">
-            <img src="https://fantastic-admin.gitee.io/logo.png">
+            <img src="https://fantastic-admin.github.io/logo.png">
             <div>
               <h1 class="c-[#e60000]">
                 Fantastic-admin
@@ -142,11 +139,8 @@ function open(url: string) {
             </div>
           </div>
           <div class="ml-auto">
-            <HButton @click="open('https://fantastic-admin.gitee.io')">
+            <HButton @click="open('https://fantastic-admin.github.io')">
               访问官网
-            </HButton>
-            <HButton outline class="ml-2" @click="open('https://fantastic-admin.github.io')">
-              备用地址
             </HButton>
           </div>
         </template>
@@ -160,7 +154,7 @@ function open(url: string) {
       <PageMain class="ecology">
         <template #title>
           <div class="title-info">
-            <img src="https://one-step-admin.gitee.io/logo.png">
+            <img src="https://one-step-admin.github.io/logo.png">
             <div>
               <h1 class="c-[#67c23a]">
                 One-step-admin
@@ -169,11 +163,8 @@ function open(url: string) {
             </div>
           </div>
           <div class="ml-auto">
-            <HButton @click="open('https://one-step-admin.gitee.io')">
+            <HButton @click="open('https://one-step-admin.github.io')">
               访问官网
-            </HButton>
-            <HButton outline class="ml-2" @click="open('https://one-step-admin.github.io')">
-              备用地址
             </HButton>
           </div>
         </template>

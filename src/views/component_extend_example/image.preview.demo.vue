@@ -9,25 +9,25 @@ const tableData = [
     date: '2016-05-03',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://fantastic-admin.gitee.io/logo.png',
+    src: 'https://fantastic-admin.github.io/logo.png',
   },
   {
     date: '2016-05-02',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://fantastic-admin.gitee.io/logo.png',
+    src: 'https://fantastic-admin.github.io/logo.png',
   },
   {
     date: '2016-05-04',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://fantastic-admin.gitee.io/logo.png',
+    src: 'https://fantastic-admin.github.io/logo.png',
   },
   {
     date: '2016-05-01',
     name: 'Tom',
     address: 'No. 189, Grove St, Los Angeles',
-    src: 'https://fantastic-admin.gitee.io/logo.png',
+    src: 'https://fantastic-admin.github.io/logo.png',
   },
 ]
 </script>
@@ -36,7 +36,7 @@ const tableData = [
   <div>
     <PageHeader title="图片预览" content="ImagePreview" />
     <PageMain>
-      <ImagePreview src="https://fantastic-admin.gitee.io/logo.png" :width="200" />
+      <ImagePreview src="https://fantastic-admin.github.io/logo.png" :width="200" />
     </PageMain>
     <PageMain title="图片加载失败时">
       <ImagePreview src="http://www.baidu.com" width="100px" height="100px" />

@@ -11,7 +11,7 @@ export default function appInfo(): Plugin {
       // eslint-disable-next-line no-console
       console.log(
         boxen(
-          `${bold(green(`由 ${bgGreen('Fantastic-admin')} 驱动`))}\n\n${underline('https://fantastic-admin.gitee.io')}\n\n当前使用：${cyan('基础版')}`,
+          `${bold(green(`由 ${bgGreen('Fantastic-admin')} 驱动`))}\n\n${underline('https://fantastic-admin.github.io')}\n\n当前使用：${cyan('基础版')}`,
           {
             padding: 1,
             margin: 1,
