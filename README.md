@@ -8,7 +8,6 @@
 
 <p align="center">
   <a href="https://fantastic-admin.github.io" target="_blank">官网</a>
-  <sup><a href="https://fantastic-admin.gitee.io" target="_blank">备用地址</a></sup>
   <span>&nbsp;|&nbsp;</span>
   <a href="https://fantastic-admin.github.io/support.html" target="_blank">技术支持</a>
   <span>&nbsp;|&nbsp;</span>
