@@ -45,7 +45,7 @@ const toggle = ref(false)
       </PageMain>
       <PageMain title="Dropdown">
         <HDropdown>
-          <div>
+          <div class="flex-center">
             下拉面板
             <SvgIcon name="i-ep:caret-bottom" />
           </div>
@@ -69,7 +69,7 @@ const toggle = ref(false)
             ],
           ]"
         >
-          <div>
+          <div class="flex-center">
             下拉菜单
             <SvgIcon name="i-ep:caret-bottom" />
           </div>
