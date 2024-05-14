@@ -163,11 +163,12 @@ const useMenuStore = defineStore(
       menus.forEach((menu) => {
         if (hasPermission(permissions, menu)) {
           const tmpMenu = cloneDeep(menu)
-          if (tmpMenu.children) {
+          if (tmpMenu.children && tmpMenu.children.length > 0) {
             tmpMenu.children = filterAsyncMenus(tmpMenu.children, permissions) as Menu.recordRaw[]
-            tmpMenu.children.length && res.push(tmpMenu)
+            tmpMenu.children.length > 0 && res.push(tmpMenu)
           }
           else {
+            delete tmpMenu.children
             res.push(tmpMenu)
           }
         }
