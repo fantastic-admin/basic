@@ -351,7 +351,7 @@ function handleCopy() {
 
   &::before,
   &::after {
-    --at-apply: content-empty w-full h-1px bg-stone-2 dark:bg-stone-6;
+    --at-apply: content-empty w-full h-1px bg-stone-2 dark-bg-stone-6;
   }
 }
 
@@ -359,7 +359,7 @@ function handleCopy() {
   --at-apply: flex items-center justify-center gap-4 pb-4;
 
   .mode {
-    --at-apply: relative w-16 h-12 rounded-2 ring-1 ring-stone-2 dark:ring-stone-7 cursor-pointer transition;
+    --at-apply: relative w-16 h-12 rounded-2 ring-1 ring-stone-2 dark-ring-stone-7 cursor-pointer transition;
 
     &.active {
       --at-apply: ring-ui-primary ring-2;
@@ -428,7 +428,7 @@ function handleCopy() {
 }
 
 .setting-item {
-  --at-apply: flex items-center justify-between gap-4 px-4 py-2 rounded-2 transition hover:bg-stone-1 dark:hover:bg-stone-9;
+  --at-apply: flex items-center justify-between gap-4 px-4 py-2 rounded-2 transition hover-bg-stone-1 dark-hover-bg-stone-9;
 
   .label {
     --at-apply: flex items-center flex-shrink-0 gap-2 text-sm;

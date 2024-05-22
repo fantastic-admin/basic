@@ -58,12 +58,12 @@ function close() {
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
     <Dialog class="fixed inset-0 z-2000 flex" :class="{ 'justify-end': side === 'right' }" @close="!preventClose && close()">
       <TransitionChild as="template" :appear="appear" v-bind="overlayTransitionClass">
-        <div class="fixed inset-0 bg-stone-2/75 transition-opacity dark:bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
+        <div class="fixed inset-0 bg-stone-2/75 transition-opacity dark-bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
       </TransitionChild>
       <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-        <DialogPanel relative max-w-md w-full w-screen flex flex-1 flex-col bg-white dark:bg-stone-8 focus:outline-none>
+        <DialogPanel relative max-w-md w-full w-screen flex flex-1 flex-col bg-white dark-bg-stone-8 focus-outline-none>
           <div flex="~ items-center justify-between" p-4 border-b="~ solid stone/15" text-6>
-            <DialogTitle m-0 text-lg text-dark dark:text-white>
+            <DialogTitle m-0 text-lg text-dark dark-text-white>
               {{ title }}
             </DialogTitle>
             <SvgIcon name="i-carbon:close" cursor-pointer @click="close" />

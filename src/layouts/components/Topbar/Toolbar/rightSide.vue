@@ -34,6 +34,7 @@ watch(() => userStore.avatar, () => {
       :items="[
         [
           { label: settingsStore.settings.home.title, handle: () => router.push({ path: settingsStore.settings.home.fullPath }), hide: !settingsStore.settings.home.enable },
+          { label: '个人设置', handle: () => router.push({ name: 'personalSetting' }) },
         ],
         [
           { label: '快捷键介绍', handle: () => eventBus.emit('global-hotkeys-intro-toggle'), hide: settingsStore.mode !== 'pc' },

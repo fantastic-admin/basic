@@ -52,7 +52,7 @@ defineExpose({
               target: item.meta?.link ? '_blank' : '_self',
               class: 'no-underline',
             }),
-          }" class="group menu-item-container h-full w-full flex cursor-pointer items-center justify-between gap-1 px-5 py-4 text-[var(--g-sub-sidebar-menu-color)] transition-all hover:(bg-[var(--g-sub-sidebar-menu-hover-bg)] text-[var(--g-sub-sidebar-menu-hover-color)])" :class="{
+          }" class="group menu-item-container h-full w-full flex cursor-pointer items-center justify-between gap-1 px-5 py-4 text-[var(--g-sub-sidebar-menu-color)] transition-all hover-(bg-[var(--g-sub-sidebar-menu-hover-bg)] text-[var(--g-sub-sidebar-menu-hover-color)])" :class="{
             'text-[var(--g-sub-sidebar-menu-active-color)]! bg-[var(--g-sub-sidebar-menu-active-bg)]!': isItemActive,
             'px-3!': rootMenu.isMenuPopup && level === 0,
           }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" v-on="{
@@ -68,7 +68,7 @@ defineExpose({
               'w-full': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName && rootMenu.props.mode === 'vertical',
             }" :style="indentStyle"
           >
-            <SvgIcon v-if="props.item.meta?.icon" :name="props.item.meta.icon" :size="20" class="menu-item-container-icon transition-transform group-hover:scale-120" async />
+            <SvgIcon v-if="props.item.meta?.icon" :name="props.item.meta.icon" :size="20" class="menu-item-container-icon transition-transform group-hover-scale-120" async />
             <span
               v-if="!(rootMenu.isMenuPopup && level === 0 && !rootMenu.props.showCollapseName)" class="w-0 flex-1 truncate text-sm transition-height transition-opacity transition-width"
               :class="{

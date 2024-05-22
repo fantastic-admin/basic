@@ -84,7 +84,7 @@ router.beforeEach(async (to, from, next) => {
       // 记录的数据会在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
       const removeRoutes: (() => void)[] = []
       routeStore.flatRoutes.forEach((route) => {
-        if (!/^(https?:|mailto:|tel:)/.test(route.path)) {
+        if (!/^(?:https?:|mailto:|tel:)/.test(route.path)) {
           removeRoutes.push(router.addRoute(route as RouteRecordRaw))
         }
       })

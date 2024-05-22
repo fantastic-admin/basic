@@ -20,7 +20,7 @@ onMounted(() => {
 <template>
   <HDialog v-model="isShow" title="快捷键介绍">
     <div class="px-4">
-      <div class="grid gap-2 sm:grid-cols-2">
+      <div class="grid gap-2 sm-grid-cols-2">
         <div>
           <h2 class="m-0 text-lg font-bold">
             全局

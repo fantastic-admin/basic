@@ -37,11 +37,11 @@ const overlayTransitionClass = ref({
 const transitionClass = computed(() => {
   return {
     enter: 'ease-out duration-300',
-    enterFrom: 'opacity-0 translate-y-4 lg:translate-y-0 lg:scale-95',
-    enterTo: 'opacity-100 translate-y-0 lg:scale-100',
+    enterFrom: 'opacity-0 translate-y-4 lg-translate-y-0 lg-scale-95',
+    enterTo: 'opacity-100 translate-y-0 lg-scale-100',
     leave: 'ease-in duration-200',
-    leaveFrom: 'opacity-100 translate-y-0 lg:scale-100',
-    leaveTo: 'opacity-0 translate-y-4 lg:translate-y-0 lg:scale-95',
+    leaveFrom: 'opacity-100 translate-y-0 lg-scale-100',
+    leaveTo: 'opacity-0 translate-y-4 lg-translate-y-0 lg-scale-95',
   }
 })
 
@@ -55,14 +55,14 @@ function close() {
   <TransitionRoot as="template" :appear="appear" :show="isOpen">
     <Dialog class="fixed inset-0 z-2000 flex" @close="!preventClose && close()">
       <TransitionChild as="template" :appear="appear" v-bind="overlayTransitionClass">
-        <div class="fixed inset-0 bg-stone-2/75 transition-opacity dark:bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
+        <div class="fixed inset-0 bg-stone-2/75 transition-opacity dark-bg-stone-8/75" :class="{ 'backdrop-blur-sm': overlay }" />
       </TransitionChild>
       <div class="fixed inset-0 overflow-y-auto">
-        <div class="min-h-full flex items-end justify-center p-4 text-center lg:items-center">
+        <div class="min-h-full flex items-end justify-center p-4 text-center lg-items-center">
           <TransitionChild as="template" :appear="appear" v-bind="transitionClass">
-            <DialogPanel class="relative w-full flex flex-col overflow-hidden rounded-xl bg-white text-left shadow-xl lg:my-8 lg:max-w-lg dark:bg-stone-8">
+            <DialogPanel class="relative w-full flex flex-col overflow-hidden rounded-xl bg-white text-left shadow-xl lg-my-8 lg-max-w-lg dark-bg-stone-8">
               <div flex="~ items-center justify-between" px-4 py-3 border-b="~ solid stone/15" text-6>
-                <DialogTitle m-0 text-lg text-dark dark:text-white>
+                <DialogTitle m-0 text-lg text-dark dark-text-white>
                   {{ title }}
                 </DialogTitle>
                 <SvgIcon name="i-carbon:close" cursor-pointer @click="close" />
