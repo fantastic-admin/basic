@@ -27,7 +27,7 @@ onMounted(() => {
         生产环境依赖
       </h2>
       <ul class="list-none pl-0 text-sm">
-        <li v-for="(val, key) in (pkg.dependencies as object)" :key="key" class="flex items-center justify-between rounded px-2 py-1.5 hover:bg-stone-1 dark:hover:bg-stone-9">
+        <li v-for="(val, key) in (pkg.dependencies as object)" :key="key" class="flex items-center justify-between rounded px-2 py-1.5 hover-bg-stone-1 dark-hover-bg-stone-9">
           <div class="font-bold">
             {{ key }}
           </div>
@@ -42,7 +42,7 @@ onMounted(() => {
         开发环境依赖
       </h2>
       <ul class="list-none pl-0 text-sm">
-        <li v-for="(val, key) in (pkg.devDependencies as object)" :key="key" class="flex items-center justify-between rounded px-2 py-1.5 hover:bg-stone-1 dark:hover:bg-stone-9">
+        <li v-for="(val, key) in (pkg.devDependencies as object)" :key="key" class="flex items-center justify-between rounded px-2 py-1.5 hover-bg-stone-1 dark-hover-bg-stone-9">
           <div class="font-bold">
             {{ key }}
           </div>

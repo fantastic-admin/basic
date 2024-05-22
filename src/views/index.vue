@@ -239,7 +239,7 @@ function open(url: string) {
     }
 
     span {
-      --at-apply: text-stone-7 dark:text-stone-3 font-bold;
+      --at-apply: text-stone-7 dark-text-stone-3 font-bold;
     }
   }
 }

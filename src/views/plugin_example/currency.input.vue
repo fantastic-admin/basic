@@ -162,7 +162,7 @@ function open(url: string) {
       </ElButton>
     </PageHeader>
     <PageMain>
-      <div class="grid items-center gap-y-4 md:grid-cols-2 md:gap-x-8">
+      <div class="grid items-center gap-y-4 md-grid-cols-2 md-gap-x-8">
         <el-input ref="inputRef" v-model="formattedValue" />
         <div>
           数值：<code class="ml-2">{{ numberValue != null ? numberValue : 'null' }}</code>
@@ -178,7 +178,7 @@ function open(url: string) {
           </el-button>
         </div>
       </template>
-      <div class="grid grid-cols-1 gap-x-8 md:grid-cols-2">
+      <div class="grid grid-cols-1 gap-x-8 md-grid-cols-2">
         <div>
           <Option.reuse label="地理位置">
             <template #switch>

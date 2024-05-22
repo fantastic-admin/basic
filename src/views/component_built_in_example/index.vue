@@ -11,7 +11,7 @@ const toggle = ref(false)
 <template>
   <div>
     <PageHeader title="内建组件" content="内建组件仅服务于框架自身，不建议在业务页面内使用，业务页面内请使用专业的 UI 组件库。" />
-    <div class="flex flex-col flex-wrap gap-4 px-4 lg:flex-row">
+    <div class="flex flex-col flex-wrap gap-4 px-4 lg-flex-row">
       <PageMain title="Button">
         <HButton>
           按钮

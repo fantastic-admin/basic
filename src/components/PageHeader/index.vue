@@ -19,7 +19,7 @@ const slots = useSlots()
           {{ title }}
         </slot>
       </div>
-      <div class="mt-2 text-sm text-stone-5 empty:hidden">
+      <div class="mt-2 text-sm text-stone-5 empty-hidden">
         <slot name="content">
           {{ content }}
         </slot>

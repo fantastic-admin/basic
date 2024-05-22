@@ -31,7 +31,7 @@ const settingsStore = useSettingsStore()
   }
 
   a {
-    --at-apply: text-center no-underline text-stone-5 hover:text-dark dark:hover:text-light transition;
+    --at-apply: text-center no-underline text-stone-5 hover-text-dark dark-hover-text-light transition;
   }
 }
 </style>

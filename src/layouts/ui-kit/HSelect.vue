@@ -28,7 +28,7 @@ const selected = computed({
 <template>
   <VMenu :triggers="['click']" :popper-triggers="['click']" :delay="0" :disabled="disabled" v-bind="$attrs">
     <div class="w-full inline-flex">
-      <button class="relative block w-full flex cursor-default items-center gap-x-2 border-0 rounded-md bg-white px-2.5 py-1.5 pe-9 text-left text-sm shadow-sm ring-1 ring-stone-2 ring-inset lg:w-48 disabled:cursor-not-allowed dark:bg-dark focus:outline-none focus:ring-2 dark:ring-stone-8 focus:ring-ui-primary" :disabled="disabled">
+      <button class="relative block w-full flex cursor-default items-center gap-x-2 border-0 rounded-md bg-white px-2.5 py-1.5 pe-9 text-left text-sm shadow-sm ring-1 ring-stone-2 ring-inset lg-w-48 disabled-cursor-not-allowed dark-bg-dark focus-outline-none focus-ring-2 dark-ring-stone-8 focus-ring-ui-primary" :disabled="disabled">
         <span class="block truncate">
           {{ selected.label }}
         </span>
@@ -38,8 +38,8 @@ const selected = computed({
       </button>
     </div>
     <template #popper>
-      <div class="max-h-60 w-full scroll-py-1 overflow-y-auto p-1 lg:w-48 focus:outline-none">
-        <button v-for="option in options" :key="option.value" :disabled="option.disabled" class="w-full cursor-pointer truncate border-size-0 rounded-md bg-inherit px-2 py-1.5 text-left text-sm disabled:cursor-not-allowed hover:not-disabled:bg-stone-1 dark:hover:not-disabled:bg-stone-9" :class="{ 'font-bold': modelValue === option.value }" @click="selected = option">
+      <div class="max-h-60 w-full scroll-py-1 overflow-y-auto p-1 lg-w-48 focus-outline-none">
+        <button v-for="option in options" :key="option.value" :disabled="option.disabled" class="w-full cursor-pointer truncate border-size-0 rounded-md bg-inherit px-2 py-1.5 text-left text-sm disabled-cursor-not-allowed hover-not-disabled-bg-stone-1 dark-hover-not-disabled-bg-stone-9" :class="{ 'font-bold': modelValue === option.value }" @click="selected = option">
           {{ option.label }}
         </button>
       </div>

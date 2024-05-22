@@ -205,7 +205,7 @@ onUnmounted(() => {
   z-index: 1000;
 
   .mx-context-menu {
-    --at-apply: fixed ring-1 ring-stone-2 dark:ring-stone-7 shadow-2xl;
+    --at-apply: fixed ring-1 ring-stone-2 dark-ring-stone-7 shadow-2xl;
 
     background-color: var(--g-container-bg);
 
@@ -213,7 +213,7 @@ onUnmounted(() => {
       --at-apply: transition-background-color;
 
       &:not(.disabled):hover {
-        --at-apply: cursor-pointer bg-stone-1 dark:bg-stone-9;
+        --at-apply: cursor-pointer bg-stone-1 dark-bg-stone-9;
       }
 
       span {
@@ -234,7 +234,7 @@ onUnmounted(() => {
       background-color: var(--g-container-bg);
 
       &::after {
-        --at-apply: bg-stone-2 dark:bg-stone-7;
+        --at-apply: bg-stone-2 dark-bg-stone-7;
       }
     }
   }
@@ -412,14 +412,14 @@ onUnmounted(() => {
             transform: translateY(-50%);
 
             &:hover {
-              --at-apply: ring-1 ring-stone-3 dark:ring-stone-7;
+              --at-apply: ring-1 ring-stone-3 dark-ring-stone-7;
 
               background-color: var(--g-bg);
             }
           }
 
           .hotkey-number {
-            --at-apply: ring-1 ring-stone-3 dark:ring-stone-7;
+            --at-apply: ring-1 ring-stone-3 dark-ring-stone-7;
 
             position: absolute;
             top: 50%;
