@@ -58,11 +58,9 @@ function tabbarScrollTip() {
   }
 }
 function handlerMouserScroll(event: WheelEvent) {
-  if (event.deltaY || event.detail !== 0) {
-    tabsRef.value.scrollBy({
-      left: (event.deltaY || event.detail) > 0 ? 50 : -50,
-    })
-  }
+  tabsRef.value.scrollBy({
+    left: event.deltaY || event.detail,
+  })
 }
 function scrollTo(offsetLeft: number) {
   tabsRef.value.scrollTo({
