@@ -7,15 +7,9 @@
 <p align="center">一款<b>开箱即用</b>的 Vue3 中后台管理系统框架</p>
 
 <p align="center">
-  <a href="https://fantastic-admin.github.io" target="_blank">官网</a>
+  <a href="https://fantastic-admin.github.io" target="_blank">官网(Github)</a>
   <span>&nbsp;|&nbsp;</span>
-  <a href="https://fantastic-admin.github.io/support.html" target="_blank">技术支持</a>
-  <span>&nbsp;|&nbsp;</span>
-  演示
-  <sup><a href="https://fantastic-admin.github.io/basic-example" target="_blank">基础版</a> <a href="https://fantastic-admin.github.io/pro-example" target="_blank">专业版</a></sup>
-  <span>&nbsp;|&nbsp;</span>
-  购买
-  <sup><a href="https://fantastic-admin.github.io/buy.html" target="_blank">专业版</a></sup>
+  <a href="https://fantastic-admin.pages.dev" target="_blank">官网(Cloudflare)</a>
 <p>
 
 <p align="center">
