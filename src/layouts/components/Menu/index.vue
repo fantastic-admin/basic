@@ -162,11 +162,8 @@ provide(rootMenuInjectionKey, reactive({
 
 <template>
   <div
-    class="flex flex-col of-hidden transition-all" :class="{
-      'w-[200px]': !isMenuPopup && props.mode === 'vertical',
-      'w-[64px]': isMenuPopup && props.mode === 'vertical',
-      'h-[80px]': props.mode === 'horizontal',
-      'flex-row! w-auto': isMenuPopup && props.mode === 'horizontal',
+    class="h-full w-full flex flex-col of-hidden transition-all" :class="{
+      'flex-row! w-auto!': isMenuPopup && props.mode === 'horizontal',
     }"
   >
     <template v-for="item in menu" :key="item.path ?? JSON.stringify(item)">

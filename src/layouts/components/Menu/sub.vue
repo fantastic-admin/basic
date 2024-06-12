@@ -147,6 +147,9 @@ function handleMouseenter() {
             subMenuRef.value!.getElement()!.style.height = `${window.innerHeight - top}px`
           }
         }
+        if (left + subMenuRef.value!.getElement()!.offsetWidth > document.documentElement.clientWidth) {
+          left = el.getBoundingClientRect().left - el.getBoundingClientRect().width
+        }
         subMenuRef.value!.getElement()!.style.top = `${top}px`
         subMenuRef.value!.getElement()!.style.left = `${left}px`
       })
