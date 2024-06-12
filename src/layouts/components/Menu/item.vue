@@ -2,6 +2,10 @@
 import type { SubMenuItemProps } from './types'
 import { rootMenuInjectionKey } from './types'
 
+defineOptions({
+  name: 'SubMenuItem',
+})
+
 const props = withDefaults(
   defineProps<SubMenuItemProps>(),
   {

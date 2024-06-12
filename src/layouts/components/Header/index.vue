@@ -32,7 +32,7 @@ function handlerMouserScroll(event: WheelEvent) {
         <Logo class="title" />
         <div ref="menuRef" class="menu-container" @wheel.prevent="handlerMouserScroll">
           <!-- 顶部模式 -->
-          <div class="menu flex of-hidden transition-all">
+          <div class="menu h-full flex of-hidden transition-all">
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
               <div
                 class="menu-item relative transition-all" :class="{
@@ -134,6 +134,10 @@ header {
             &:hover {
               color: var(--g-header-menu-hover-color);
               background-color: var(--g-header-menu-hover-bg);
+            }
+
+            .menu-item-container-icon {
+              font-size: 24px !important;
             }
           }
 
