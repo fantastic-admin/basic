@@ -8,8 +8,10 @@ import 'floating-vue/dist/style.css'
 import Message from 'vue-m-message'
 import 'vue-m-message/dist/style.css'
 
-import VXETable from 'vxe-table'
+import VxeUITable from 'vxe-table'
 import 'vxe-table/lib/style.css'
+import VxeUI from 'vxe-pc-ui'
+import 'vxe-pc-ui/lib/style.css'
 
 import 'overlayscrollbars/overlayscrollbars.css'
 
@@ -38,7 +40,7 @@ app.use(FloatingVue, {
   distance: 12,
 })
 app.use(Message)
-app.use(VXETable)
+app.use(VxeUI).use(VxeUITable)
 app.use(pinia)
 app.use(router)
 app.use(ui)
