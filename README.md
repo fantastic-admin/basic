@@ -108,3 +108,22 @@
     <td><img src="https://one-step-admin.github.io/preview6.png" /></td>
   </tr>
 </table>
+
+<table>
+  <tr>
+    <th colspan="4" align="center">
+      <a href="https://fantastic-mobile.github.io" target="_blank">Fantastic-mobile</a>
+    </th>
+  </tr>
+  <tr>
+    <th colspan="4" align="center">
+      一款自成一派的移动端 H5 框架
+    </th>
+  </tr>
+  <tr>
+    <td><img src="https://fantastic-mobile.github.io/preview1.png" /></td>
+    <td><img src="https://fantastic-mobile.github.io/preview2.png" /></td>
+    <td><img src="https://fantastic-mobile.github.io/preview3.png" /></td>
+    <td><img src="https://fantastic-mobile.github.io/preview4.png" /></td>
+  </tr>
+</table>
