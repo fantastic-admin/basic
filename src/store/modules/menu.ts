@@ -23,24 +23,26 @@ const useMenuStore = defineStore(
     function convertRouteToMenu(routes: Route.recordMainRaw[]): Menu.recordMainRaw[] {
       const returnMenus: Menu.recordMainRaw[] = []
       routes.forEach((item) => {
-        if (settingsStore.settings.menu.mode === 'single') {
-          returnMenus.length === 0 && returnMenus.push({
-            meta: {},
-            children: [],
-          })
-          returnMenus[0].children.push(...convertRouteToMenuRecursive(item.children))
-        }
-        else {
-          const menuItem: Menu.recordMainRaw = {
-            meta: {
-              title: item?.meta?.title,
-              icon: item?.meta?.icon,
-              auth: item?.meta?.auth,
-            },
-            children: [],
+        if (item.children.length > 0) {
+          if (settingsStore.settings.menu.mode === 'single') {
+            returnMenus.length === 0 && returnMenus.push({
+              meta: {},
+              children: [],
+            })
+            returnMenus[0].children.push(...convertRouteToMenuRecursive(item.children))
           }
-          menuItem.children = convertRouteToMenuRecursive(item.children)
-          returnMenus.push(menuItem)
+          else {
+            const menuItem: Menu.recordMainRaw = {
+              meta: {
+                title: item?.meta?.title,
+                icon: item?.meta?.icon,
+                auth: item?.meta?.auth,
+              },
+              children: [],
+            }
+            menuItem.children = convertRouteToMenuRecursive(item.children)
+            returnMenus.push(menuItem)
+          }
         }
       })
       return returnMenus
