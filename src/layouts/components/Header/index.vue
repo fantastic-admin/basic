@@ -27,7 +27,7 @@ function handlerMouserScroll(event: WheelEvent) {
 
 <template>
   <Transition name="header">
-    <header v-if="settingsStore.mode === 'pc' && settingsStore.settings.menu.menuMode === 'head'">
+    <header v-if="settingsStore.mode === 'pc' && settingsStore.settings.menu.mode === 'head'">
       <div class="header-container">
         <Logo class="title" />
         <div ref="menuRef" class="menu-container" @wheel.prevent="handlerMouserScroll">
