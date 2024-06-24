@@ -20,7 +20,7 @@ const isAuth = computed(() => {
 // 侧边栏主导航当前实际宽度
 const mainSidebarActualWidth = computed(() => {
   let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width'))
-  if (settingsStore.settings.menu.menuMode === 'single' || (settingsStore.settings.menu.menuMode === 'head' && settingsStore.mode !== 'mobile')) {
+  if (settingsStore.settings.menu.mode === 'single' || (settingsStore.settings.menu.mode === 'head' && settingsStore.mode !== 'mobile')) {
     actualWidth = 0
   }
   return `${actualWidth}px`

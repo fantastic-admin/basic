@@ -17,7 +17,7 @@ const menuStore = useMenuStore()
 
 const isShow = ref(false)
 
-watch(() => settingsStore.settings.menu.menuMode, (value) => {
+watch(() => settingsStore.settings.menu.mode, (value) => {
   if (value === 'single') {
     menuStore.setActived(0)
   }
@@ -103,17 +103,17 @@ function handleCopy() {
     </div>
     <div v-if="settingsStore.mode === 'pc'" class="menu-mode">
       <HTooltip text="侧边栏模式 (含主导航)" placement="bottom" :delay="500">
-        <div class="mode mode-side" :class="{ active: settingsStore.settings.menu.menuMode === 'side' }" @click="settingsStore.settings.menu.menuMode = 'side'">
+        <div class="mode mode-side" :class="{ active: settingsStore.settings.menu.mode === 'side' }" @click="settingsStore.settings.menu.mode = 'side'">
           <div class="mode-container" />
         </div>
       </HTooltip>
       <HTooltip text="顶部模式" placement="bottom" :delay="500">
-        <div class="mode mode-head" :class="{ active: settingsStore.settings.menu.menuMode === 'head' }" @click="settingsStore.settings.menu.menuMode = 'head'">
+        <div class="mode mode-head" :class="{ active: settingsStore.settings.menu.mode === 'head' }" @click="settingsStore.settings.menu.mode = 'head'">
           <div class="mode-container" />
         </div>
       </HTooltip>
       <HTooltip text="侧边栏模式 (不含主导航)" placement="bottom" :delay="500">
-        <div class="mode mode-single" :class="{ active: settingsStore.settings.menu.menuMode === 'single' }" @click="settingsStore.settings.menu.menuMode = 'single'">
+        <div class="mode mode-single" :class="{ active: settingsStore.settings.menu.mode === 'single' }" @click="settingsStore.settings.menu.mode = 'single'">
           <div class="mode-container" />
         </div>
       </HTooltip>
@@ -128,7 +128,7 @@ function handleCopy() {
           <SvgIcon name="i-ri:question-line" />
         </HTooltip>
       </div>
-      <HToggle v-model="settingsStore.settings.menu.switchMainMenuAndPageJump" :disabled="['single'].includes(settingsStore.settings.menu.menuMode)" />
+      <HToggle v-model="settingsStore.settings.menu.switchMainMenuAndPageJump" :disabled="['single'].includes(settingsStore.settings.menu.mode)" />
     </div>
     <div class="setting-item">
       <div class="label">
@@ -155,7 +155,7 @@ function handleCopy() {
       <div class="label">
         是否启用快捷键
       </div>
-      <HToggle v-model="settingsStore.settings.menu.enableHotkeys" :disabled="['single'].includes(settingsStore.settings.menu.menuMode)" />
+      <HToggle v-model="settingsStore.settings.menu.enableHotkeys" :disabled="['single'].includes(settingsStore.settings.menu.mode)" />
     </div>
     <div class="divider">
       顶栏
@@ -380,7 +380,7 @@ function handleCopy() {
     }
 
     .mode-container {
-      --at-apply: bg-ui-primary/20 border-dashed border-ui-primary;
+      --at-apply: bg-ui-primary/20 border-width-1.5 border-dashed border-ui-primary;
 
       &::before {
         --at-apply: content-empty absolute w-full h-full;

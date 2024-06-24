@@ -47,8 +47,8 @@ onMounted(() => {
     }"
   >
     <Logo
-      :show-logo="settingsStore.settings.menu.menuMode === 'single'" class="sidebar-logo" :class="{
-        'sidebar-logo-bg': settingsStore.settings.menu.menuMode === 'single',
+      :show-logo="settingsStore.settings.menu.mode === 'single'" class="sidebar-logo" :class="{
+        'sidebar-logo-bg': settingsStore.settings.menu.mode === 'single',
       }"
     />
     <div

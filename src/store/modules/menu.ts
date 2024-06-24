@@ -23,7 +23,7 @@ const useMenuStore = defineStore(
     function convertRouteToMenu(routes: Route.recordMainRaw[]): Menu.recordMainRaw[] {
       const returnMenus: Menu.recordMainRaw[] = []
       routes.forEach((item) => {
-        if (settingsStore.settings.menu.menuMode === 'single') {
+        if (settingsStore.settings.menu.mode === 'single') {
           returnMenus.length === 0 && returnMenus.push({
             meta: {},
             children: [],

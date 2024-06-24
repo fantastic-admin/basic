@@ -38,7 +38,7 @@ onMounted(() => {
             </li>
           </ul>
         </div>
-        <div v-if="settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.menuMode)">
+        <div v-if="settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.mode)">
           <h2 class="m-0 text-lg font-bold">
             主导航
           </h2>
