@@ -30,6 +30,7 @@
     "axios": "^1.7.2",
     "dayjs": "^1.11.11",
     "defu": "^6.1.4",
+    "disable-devtool": "^0.3.7",
     "element-plus": "^2.7.5",
     "eruda": "^3.0.1",
     "floating-vue": "5.2.2",

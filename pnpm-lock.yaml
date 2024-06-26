@@ -19,7 +19,7 @@ importers:
         version: 10.11.0(vue@3.4.29(typescript@5.4.5))
       '@vueuse/integrations':
         specifier: ^10.11.0
-        version: 10.11.0(async-validator@4.2.5)(axios@1.7.2)(change-case@5.4.4)(nprogress@0.2.0)(vue@3.4.29(typescript@5.4.5))
+        version: 10.11.0(async-validator@4.2.5)(axios@1.7.2)(change-case@4.1.2)(nprogress@0.2.0)(vue@3.4.29(typescript@5.4.5))
       axios:
         specifier: ^1.7.2
         version: 1.7.2
@@ -29,6 +29,9 @@ importers:
       defu:
         specifier: ^6.1.4
         version: 6.1.4
+      disable-devtool:
+        specifier: ^0.3.7
+        version: 0.3.7
       element-plus:
         specifier: ^2.7.5
         version: 2.7.5(vue@3.4.29(typescript@5.4.5))
@@ -2495,9 +2498,6 @@ packages:
   change-case@4.1.2:
     resolution: {integrity: sha512-bSxY2ws9OtviILG1EiY5K7NNxkqg/JnRnFxLtKQ96JaviiIxi7djMrSd0ECT9AC+lttClmYwKw53BWpOMblo7A==}
 
-  change-case@5.4.4:
-    resolution: {integrity: sha512-HRQyTk2/YPEkt9TnUPbOpr64Uw3KOicFWPVBb+xiHvd6eBx/qPr9xqfBFDT8P2vWsvvz4jbEkfDe71W3VyNu2w==}
-
   character-entities-legacy@1.1.4:
     resolution: {integrity: sha512-3Xnr+7ZFS1uxeiUDvV02wQ+QDbc55o97tIV5zHScSPJpcLm/r0DFPcoY3tYRp+VZukxuMeKgXYmsXQHO05zQeA==}
 
@@ -2863,6 +2863,9 @@ packages:
   dir-glob@3.0.1:
     resolution: {integrity: sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==}
     engines: {node: '>=8'}
+
+  disable-devtool@0.3.7:
+    resolution: {integrity: sha512-xF5uyEpBhDuy7b4Bb88GQG4IB+2CwuQfkJK9vB/ym+85NQp/f7Wc6hnT40Jy2SkKvEf1xAKpvJUJU3LykTXxKg==}
 
   doctrine@3.0.0:
     resolution: {integrity: sha512-yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==}
@@ -8234,7 +8237,7 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@vueuse/integrations@10.11.0(async-validator@4.2.5)(axios@1.7.2)(change-case@5.4.4)(nprogress@0.2.0)(vue@3.4.29(typescript@5.4.5))':
+  '@vueuse/integrations@10.11.0(async-validator@4.2.5)(axios@1.7.2)(change-case@4.1.2)(nprogress@0.2.0)(vue@3.4.29(typescript@5.4.5))':
     dependencies:
       '@vueuse/core': 10.11.0(vue@3.4.29(typescript@5.4.5))
       '@vueuse/shared': 10.11.0(vue@3.4.29(typescript@5.4.5))
@@ -8242,7 +8245,7 @@ snapshots:
     optionalDependencies:
       async-validator: 4.2.5
       axios: 1.7.2
-      change-case: 5.4.4
+      change-case: 4.1.2
       nprogress: 0.2.0
     transitivePeerDependencies:
       - '@vue/composition-api'
@@ -8672,9 +8675,6 @@ snapshots:
       snake-case: 3.0.4
       tslib: 2.6.2
 
-  change-case@5.4.4:
-    optional: true
-
   character-entities-legacy@1.1.4: {}
 
   character-entities@1.2.4: {}
@@ -9021,6 +9021,8 @@ snapshots:
   dir-glob@3.0.1:
     dependencies:
       path-type: 4.0.0
+
+  disable-devtool@0.3.7: {}
 
   doctrine@3.0.0:
     dependencies:
