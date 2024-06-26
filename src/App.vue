@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import eruda from 'eruda'
 import VConsole from 'vconsole'
+import DisableDevtool from 'disable-devtool'
 import hotkeys from 'hotkeys-js'
 import eventBus from './utils/eventBus'
 import Provider from './ui-provider/index.vue'
@@ -64,6 +65,7 @@ onMounted(() => {
 
 import.meta.env.VITE_APP_DEBUG_TOOL === 'eruda' && eruda.init()
 import.meta.env.VITE_APP_DEBUG_TOOL === 'vconsole' && new VConsole()
+import.meta.env.VITE_APP_DISABLE_DEVTOOL === 'true' && DisableDevtool()
 </script>
 
 <template>
