@@ -329,6 +329,21 @@ function handleCopy() {
     </div>
     <div class="setting-item">
       <div class="label">
+        哀悼模式
+        <HTooltip text="该功能开启时，整站会变为灰色">
+          <SvgIcon name="i-ri:question-line" />
+        </HTooltip>
+      </div>
+      <HToggle v-model="settingsStore.settings.app.enableMournMode" />
+    </div>
+    <div class="setting-item">
+      <div class="label">
+        色弱模式
+      </div>
+      <HToggle v-model="settingsStore.settings.app.enableColorAmblyopiaMode" />
+    </div>
+    <div class="setting-item">
+      <div class="label">
         动态标题
         <HTooltip text="该功能开启时，页面标题会显示当前路由标题，格式为“页面标题 - 网站名称”；关闭时则显示网站名称，网站名称在项目根目录下 .env.* 文件里配置">
           <SvgIcon name="i-ri:question-line" />
