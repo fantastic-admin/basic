@@ -17,6 +17,16 @@ declare namespace Settings {
      */
     colorScheme?: '' | 'light' | 'dark'
     /**
+     * 是否开启哀悼模式
+     * @默认值 `false`
+     */
+    enableMournMode?: boolean
+    /**
+     * 是否开启色弱模式
+     * @默认值 `false`
+     */
+    enableColorAmblyopiaMode?: boolean
+    /**
      * 是否开启权限功能
      * @默认值 `false`
      */
