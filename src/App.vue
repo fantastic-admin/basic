@@ -6,10 +6,12 @@ import hotkeys from 'hotkeys-js'
 import eventBus from './utils/eventBus'
 import Provider from './ui-provider/index.vue'
 import useSettingsStore from '@/store/modules/settings'
+import useMenuStore from '@/store/modules/menu'
 
 const route = useRoute()
 
 const settingsStore = useSettingsStore()
+const menuStore = useMenuStore()
 const { auth } = useAuth()
 
 const isAuth = computed(() => {
@@ -32,6 +34,9 @@ const subSidebarActualWidth = computed(() => {
   let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width'))
   if (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile') {
     actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-collapse-width'))
+  }
+  if (menuStore.sidebarMenus.every(item => item.meta?.menu === false)) {
+    actualWidth = 0
   }
   return `${actualWidth}px`
 })

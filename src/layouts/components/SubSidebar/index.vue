@@ -25,24 +25,42 @@ function onSidebarScroll() {
   showShadowBottom.value = Math.ceil(scrollTop + clientHeight) < scrollHeight
 }
 
+const enableSidebar = computed(() => {
+  return settingsStore.mode === 'mobile' || (
+    menuStore.sidebarMenus.length !== 0
+    && !menuStore.sidebarMenus.every(item => item.meta?.menu === false)
+  )
+})
+
+watch(enableSidebar, (val) => {
+  if (val) {
+    nextTick(() => {
+      onSidebarScroll()
+    })
+  }
+}, {
+  immediate: true,
+})
+
 const menuRef = ref()
 
 onMounted(() => {
-  onSidebarScroll()
-  const { height } = useElementSize(menuRef)
-  watch(() => height.value, () => {
-    if (height.value > 0) {
-      onSidebarScroll()
-    }
-  }, {
-    immediate: true,
-  })
+  if (enableSidebar.value) {
+    const { height } = useElementSize(menuRef)
+    watch(() => height.value, () => {
+      if (height.value > 0) {
+        onSidebarScroll()
+      }
+    }, {
+      immediate: true,
+    })
+  }
 })
 </script>
 
 <template>
   <div
-    class="sub-sidebar-container" :class="{
+    v-if="enableSidebar" class="sub-sidebar-container" :class="{
       'is-collapse': settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse,
     }"
   >
