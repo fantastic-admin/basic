@@ -16,6 +16,7 @@ import createCompression from './compression'
 import createArchiver from './archiver'
 import createConsole from './console'
 import createBanner from './banner'
+import createDebugTool from './debug-tool'
 
 export default function createVitePlugins(viteEnv, isBuild = false) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
@@ -42,5 +43,6 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
   vitePlugins.push(createArchiver(viteEnv))
   vitePlugins.push(createConsole())
   vitePlugins.push(createBanner())
+  vitePlugins.push(createDebugTool(viteEnv))
   return vitePlugins
 }
