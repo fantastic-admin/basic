@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import DisableDevtool from 'disable-devtool'
 import hotkeys from 'hotkeys-js'
 import eventBus from './utils/eventBus'
 import Provider from './ui-provider/index.vue'
@@ -65,8 +64,6 @@ onMounted(() => {
     eventBus.emit('global-system-info-toggle')
   })
 })
-
-import.meta.env.VITE_APP_DISABLE_DEVTOOL === 'true' && DisableDevtool()
 </script>
 
 <template>

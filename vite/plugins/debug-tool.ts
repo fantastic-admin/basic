@@ -3,7 +3,7 @@ import type { Plugin } from 'vite'
 export default function createDebugTool(env): Plugin {
   const { VITE_APP_DEBUG_TOOL } = env
   return {
-    name: 'debug-plugin',
+    name: 'debug-tool',
     transform: (code, id) => {
       if (/src\/main.ts$/.test(id)) {
         if (VITE_APP_DEBUG_TOOL === 'eruda') {
