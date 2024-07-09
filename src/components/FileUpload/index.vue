@@ -17,6 +17,7 @@ const props = withDefaults(
     files?: UploadUserFile[]
     notip?: boolean
     ext?: string[]
+    httpRequest?: UploadProps['httpRequest']
   }>(),
   {
     name: 'file',
@@ -68,6 +69,7 @@ const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
     :before-upload="beforeUpload"
     :on-exceed="onExceed"
     :on-success="onSuccess"
+    :http-request="httpRequest"
     :file-list="files"
     :limit="max"
     drag

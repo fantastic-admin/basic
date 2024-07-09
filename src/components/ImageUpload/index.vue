@@ -18,6 +18,7 @@ const props = withDefaults(
     placeholder?: string
     notip?: boolean
     ext?: string[]
+    httpRequest?: UploadProps['httpRequest']
   }>(),
   {
     name: 'file',
@@ -97,6 +98,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
       :before-upload="beforeUpload"
       :on-progress="onProgress"
       :on-success="onSuccess"
+      :http-request="httpRequest"
       drag
       class="image-upload"
     >
