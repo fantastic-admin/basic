@@ -442,12 +442,7 @@ const rules = ref([
   {
     title: '域名(非网址, 不包含协议)',
     rule: /^([0-9a-z-]+\.)+([a-z]{2,})$/i,
-    examples: ['www.baidu.com',
-      'baidu.com',
-      'baidu.com.cn',
-      'api.baidu.com',
-      'nodejs.org',
-      'nodejs.cn'],
+    examples: ['www.baidu.com', 'baidu.com', 'baidu.com.cn', 'api.baidu.com', 'nodejs.org', 'nodejs.cn'],
     counterExamples: ['http://baidu.com', 'https://baidu.com', 'www.百度.com'],
   },
 
