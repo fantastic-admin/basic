@@ -35,7 +35,7 @@ function handlerMouserScroll(event: WheelEvent) {
           <div class="menu h-full flex of-hidden transition-all">
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
               <div
-                class="menu-item relative transition-all" :class="{
+                class="menu-item relative mx-1 py-2 transition-all" :class="{
                   active: index === menuStore.actived,
                 }"
               >
@@ -45,7 +45,7 @@ function handlerMouserScroll(event: WheelEvent) {
                   }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" @click="switchTo(index)"
                 >
                   <div class="inline-flex flex-1 items-center justify-center gap-1">
-                    <SvgIcon v-if="item.meta?.icon" :name="item.meta?.icon" :size="20" class="menu-item-container-icon transition-transform group-hover-scale-120" async />
+                    <SvgIcon v-if="item.meta?.icon" :name="item.meta?.icon" class="menu-item-container-icon transition-transform group-hover-scale-120" />
                     <span class="w-full flex-1 truncate text-sm transition-height transition-opacity transition-width">
                       {{ typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title }}
                     </span>
@@ -137,7 +137,7 @@ header {
             }
 
             .menu-item-container-icon {
-              font-size: 24px !important;
+              font-size: 20px !important;
             }
           }
 
