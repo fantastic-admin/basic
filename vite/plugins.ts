@@ -167,7 +167,9 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
           if (viteEnv.VITE_APP_DISABLE_DEVTOOL === 'true') {
             code = code.concat(`
               import DisableDevtool from 'disable-devtool'
-              DisableDevtool()
+              DisableDevtool({
+                md5: '1a79a4d60de6718e8e5b326e338ae533',
+              })
             `)
           }
           return {
