@@ -40,7 +40,7 @@ watch(() => userStore.avatar, () => {
           { label: '快捷键介绍', handle: () => eventBus.emit('global-hotkeys-intro-toggle'), hide: settingsStore.mode !== 'pc' },
         ],
         [
-          { label: '退出登录', handle: () => userStore.logout() },
+          { label: '退出登录', handle: () => userStore.logout(settingsStore.settings.home.fullPath) },
         ],
       ]" class="flex-center cursor-pointer px-2"
     >

@@ -50,7 +50,7 @@ const useUserStore = defineStore(
       router.push({
         name: 'login',
         query: {
-          ...(router.currentRoute.value.path !== settingsStore.settings.home.fullPath && router.currentRoute.value.name !== 'login' && { redirect }),
+          ...(redirect !== settingsStore.settings.home.fullPath && router.currentRoute.value.name !== 'login' && { redirect }),
         },
       })
     }
