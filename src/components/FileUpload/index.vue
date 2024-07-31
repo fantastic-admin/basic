@@ -58,6 +58,29 @@ const onExceed: UploadProps['onExceed'] = () => {
 const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
   emits('onSuccess', res, file, fileList)
 }
+
+const onPreview: UploadProps['onPreview'] = (e) => {
+  const getBlob = (url: string) => new Promise((resolve) => {
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', url, true)
+    xhr.responseType = 'blob'
+    xhr.onload = () => {
+      if (xhr.status === 200) {
+        resolve(xhr.response)
+      }
+    }
+    xhr.send()
+  })
+  getBlob(e.url!).then((blob: any) => {
+    const a = document.createElement('a')
+    const url = window.URL.createObjectURL(blob)
+    const event = new MouseEvent('click')
+    a.target = '_blank'
+    a.download = e.name
+    a.href = url
+    a.dispatchEvent(event)
+  })
+}
 </script>
 
 <template>
@@ -69,6 +92,7 @@ const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
     :before-upload="beforeUpload"
     :on-exceed="onExceed"
     :on-success="onSuccess"
+    :on-preview="onPreview"
     :http-request="httpRequest"
     :file-list="files"
     :limit="max"
