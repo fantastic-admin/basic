@@ -18,8 +18,8 @@ const images = ref([
 ])
 const files = ref([
   {
-    name: '测试文件.zip',
-    url: 'http://images.lookbi.com/uploads/apply/96/d8521fc691e472eec91a170201866e7d.zip',
+    name: 'Fantastic-admin.png',
+    url: 'https://fantastic-admin.github.io/logo.png',
   },
 ])
 
