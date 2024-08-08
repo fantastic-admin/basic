@@ -24,19 +24,13 @@ const useTabbarStore = defineStore(
       if (route.name !== 'reload') {
         // 记录查找到的标签页
         const findTab = list.value.find((item) => {
-          if (item.routeName) {
-            return item.routeName === route.name
-          }
-          else {
-            return item.tabId === tabId
-          }
+          return item.tabId === tabId
         })
         // 新增标签页
         if (!findTab) {
           const listItem = {
             tabId,
             fullPath: route.fullPath,
-            routeName: route.name,
             title: typeof meta?.title === 'function' ? meta.title() : meta?.title,
             icon: meta?.icon ?? meta?.breadcrumbNeste?.findLast(item => item.icon)?.icon,
             name: names,
