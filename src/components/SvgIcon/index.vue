@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { UseImage } from '@vueuse/components'
 import { Icon } from '@iconify/vue'
 
 defineOptions({
@@ -14,7 +15,10 @@ const props = defineProps<{
 }>()
 
 const outputType = computed(() => {
-  if (/^https?:\/\//.test(props.name)) {
+  const hasPathFeatures = (str: string) => {
+    return /^\.{1,2}\//.test(str) || str.startsWith('/') || str.includes('/')
+  }
+  if (/^https?:\/\//.test(props.name) || hasPathFeatures(props.name) || !props.name) {
     return 'img'
   }
   else if (/i-[^:]+:[^:]+/.test(props.name)) {
@@ -56,11 +60,19 @@ const style = computed(() => {
 </script>
 
 <template>
-  <i class="relative h-[1em] w-[1em] flex-inline items-center justify-center fill-current leading-[1em]" :class="{ [name]: outputType === 'unocss' }" :style="style">
-    <Icon v-if="outputType === 'iconify'" :icon="name" />
+  <i class="relative h-[1em] w-[1em] flex-inline items-center justify-center fill-current leading-[1em]" :style="style">
+    <i v-if="outputType === 'unocss'" class="h-[1em] w-[1em]" :class="name" />
+    <Icon v-else-if="outputType === 'iconify'" :icon="name" />
     <svg v-else-if="outputType === 'svg'" class="h-[1em] w-[1em]" aria-hidden="true">
       <use :xlink:href="`#icon-${name}`" />
     </svg>
-    <img v-else-if="outputType === 'img'" :src="name" class="h-[1em] w-[1em]">
+    <UseImage v-else-if="outputType === 'img'" :src="name" class="h-[1em] w-[1em]">
+      <template #loading>
+        <i class="i-line-md:loading-loop h-[1em] w-[1em]" />
+      </template>
+      <template #error>
+        <i class="i-tdesign:image-error h-[1em] w-[1em]" />
+      </template>
+    </UseImage>
   </i>
 </template>
