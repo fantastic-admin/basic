@@ -15,6 +15,14 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
+      path: 'iconify',
+      name: 'iconExampleIconify',
+      component: () => import('@/views/icon_example/iconify.vue'),
+      meta: {
+        title: 'Iconify',
+      },
+    },
+    {
       path: 'svg',
       name: 'iconExampleSvg',
       component: () => import('@/views/icon_example/svg.vue'),
@@ -23,11 +31,11 @@ const routes: RouteRecordRaw = {
       },
     },
     {
-      path: 'iconify',
-      name: 'iconExampleIconify',
-      component: () => import('@/views/icon_example/iconify.vue'),
+      path: 'image',
+      name: 'iconExampleImage',
+      component: () => import('@/views/icon_example/image.vue'),
       meta: {
-        title: 'Iconify',
+        title: 'Image Icon',
       },
     },
   ],

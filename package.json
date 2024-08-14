@@ -25,6 +25,7 @@
     "@imengyu/vue3-context-menu": "^1.4.2",
     "@tinymce/tinymce-vue": "^6.0.1",
     "@visactor/vchart": "^1.11.10",
+    "@vueuse/components": "^10.11.1",
     "@vueuse/core": "^10.11.0",
     "@vueuse/integrations": "^10.11.0",
     "animate.css": "^4.1.1",
