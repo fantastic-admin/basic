@@ -30,8 +30,8 @@ const routes: RouteRecordRaw[] = [
         name: 'officialOneStepAdmin',
         meta: {
           title: 'One-step-admin 干啥都快人一步的中后台框架',
-          icon: 'https://one-step-admin.github.io/logo.png',
-          link: 'https://one-step-admin.github.io',
+          icon: 'https://one-step-admin.hurui.me/logo.png',
+          link: 'https://one-step-admin.hurui.me',
         },
       },
     ],

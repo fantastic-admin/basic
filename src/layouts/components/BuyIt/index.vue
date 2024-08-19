@@ -28,7 +28,7 @@ onMounted(() => {
 //     dangerouslyUseHTMLString: true,
 //     message: `
 // <p>限时优惠活动将于 <b>2024/04/01</b> 到期，现在购买只需 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元。</p>
-// <p style="text-align: right;"><a href="https://fantastic-admin.github.io/buy.html" target="_blank">查看详情</a></p>
+// <p style="text-align: right;"><a href="https://fantastic-admin.hurui.me/buy.html" target="_blank">查看详情</a></p>
 //     `,
 //     position: 'bottom-right',
 //     duration: 0,
@@ -39,7 +39,7 @@ onMounted(() => {
 //       title: '「 免费领取 Vue2 版本专业版 」',
 //       dangerouslyUseHTMLString: true,
 //       message: `
-// <p style="text-align: right;"><a href="https://fantastic-admin.github.io/get-vue2-pro.html" target="_blank">查看详情</a></p>
+// <p style="text-align: right;"><a href="https://fantastic-admin.hurui.me/get-vue2-pro.html" target="_blank">查看详情</a></p>
 //     `,
 //       position: 'bottom-right',
 //       duration: 0,
@@ -67,28 +67,28 @@ onUnmounted(() => {
           </p>
         </div>
         <div class="mt-4 flex flex-wrap justify-center gap-4">
-          <HButton @click="open('https://fantastic-admin.github.io/antd-example/')">
+          <HButton @click="open('https://fantastic-admin.hurui.me/antd-example/')">
             访问 Ant Design Vue 演示站
           </HButton>
-          <HButton @click="open('https://fantastic-admin.github.io/arco-example/')">
+          <HButton @click="open('https://fantastic-admin.hurui.me/arco-example/')">
             访问 Arco Design Vue 演示站
           </HButton>
-          <HButton @click="open('https://fantastic-admin.github.io/naive-example/')">
+          <HButton @click="open('https://fantastic-admin.hurui.me/naive-example/')">
             访问 Naive UI 演示站
           </HButton>
-          <HButton @click="open('https://fantastic-admin.github.io/tdesign-example/')">
+          <HButton @click="open('https://fantastic-admin.hurui.me/tdesign-example/')">
             访问 TDesign 演示站
           </HButton>
-          <HButton @click="open('https://fantastic-admin.github.io/vexip-example/')">
+          <HButton @click="open('https://fantastic-admin.hurui.me/vexip-example/')">
             访问 Vexip UI 演示站
           </HButton>
-          <HButton @click="open('https://fantastic-admin.github.io/idux-example/')">
+          <HButton @click="open('https://fantastic-admin.hurui.me/idux-example/')">
             访问 iDux 演示站
           </HButton>
         </div>
       </HDialog>
     </div>
-    <div class="item" @click="open(`https://fantastic-admin.github.io/buy.html`)">
+    <div class="item" @click="open(`https://fantastic-admin.hurui.me/buy.html`)">
       <SvgIcon name="i-ri:money-cny-box-line" />
       <span class="title">购买<br>专业版</span>
     </div>
@@ -96,11 +96,11 @@ onUnmounted(() => {
       <SvgIcon name="i-ri:code-s-slash-line" />
       <span class="title">下载<br>基础版</span>
     </div>
-    <div class="item" @click="open(`https://fantastic-admin.github.io`)">
+    <div class="item" @click="open(`https://fantastic-admin.hurui.me`)">
       <SvgIcon name="i-ri:book-read-line" />
       <span class="title">开发<br>文档</span>
     </div>
-    <div class="item" @click="open(`https://fantastic-admin.github.io/support.html`)">
+    <div class="item" @click="open(`https://fantastic-admin.hurui.me/support.html`)">
       <SvgIcon name="i-ri:message-2-line" />
       <span class="title">技术<br>支持</span>
     </div>

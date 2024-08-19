@@ -34,7 +34,7 @@ const globalSettings: Settings.all = {
     enable: true,
     dates: '2020-present',
     company: 'Fantastic-admin',
-    website: 'https://fantastic-admin.github.io',
+    website: 'https://fantastic-admin.hurui.me',
   },
 }
 

@@ -19,7 +19,7 @@ const images = ref([
 const files = ref([
   {
     name: 'Fantastic-admin.png',
-    url: 'https://fantastic-admin.github.io/logo.png',
+    url: 'https://fantastic-admin.hurui.me/logo.png',
   },
 ])
 
