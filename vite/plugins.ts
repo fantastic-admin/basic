@@ -132,7 +132,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
 /**
  * 由 Fantastic-admin 提供技术支持
  * Powered by Fantastic-admin
- * https://fantastic-admin.github.io
+ * https://fantastic-admin.hurui.me
  */
     `),
 
@@ -186,7 +186,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
         // eslint-disable-next-line no-console
         console.log(
           boxen(
-            `${bold(green(`由 ${bgGreen('Fantastic-admin')} 驱动`))}\n\n${underline('https://fantastic-admin.github.io')}\n\n当前使用：${cyan('基础版')}`,
+            `${bold(green(`由 ${bgGreen('Fantastic-admin')} 驱动`))}\n\n${underline('https://fantastic-admin.hurui.me')}\n\n当前使用：${cyan('基础版')}`,
             {
               padding: 1,
               margin: 1,
