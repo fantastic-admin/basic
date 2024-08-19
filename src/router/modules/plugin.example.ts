@@ -157,6 +157,15 @@ const routes: RouteRecordRaw = {
         icon: 'i-mdi:table-large',
       },
     },
+    {
+      path: 'file-preview',
+      name: 'pluginExampleFilePreview',
+      component: () => import('@/views/plugin_example/file-preview.vue'),
+      meta: {
+        title: '文件预览',
+        icon: 'i-mdi:file-eye-outline',
+      },
+    },
   ],
 }
 
