@@ -11,9 +11,9 @@ import '@vue-office/excel/lib/index.css'
 import VueOfficePdf from '@vue-office/pdf'
 import Alert from './components/alert.vue'
 
-const docx = ref('http://static.shanhuxueyuan.com/test6.docx')
-const excel = ref('http://static.shanhuxueyuan.com/demo/excel.xlsx')
-const pdf = ref('http://static.shanhuxueyuan.com/test.pdf')
+const docx = new URL('./files/test.docx', import.meta.url).href
+const excel = new URL('./files/test.xlsx', import.meta.url).href
+const pdf = new URL('./files/test.pdf', import.meta.url).href
 
 function open(url: string) {
   window.open(url, '_blank')
