@@ -7,7 +7,7 @@ if (!import.meta.env.DEV) {
   }]);
   (function () {
     const hm = document.createElement('script')
-    hm.src = 'https://hm.baidu.com/hm.js?7bb58fdfd1fe8ab146d4b4f23686b768'
+    hm.src = 'https://hm.baidu.com/hm.js?c458e5e4952cbc8ff4d06838d3df3e78'
     const s = document.getElementsByTagName('script')[0]
     s.parentNode?.insertBefore(hm, s)
   })()
