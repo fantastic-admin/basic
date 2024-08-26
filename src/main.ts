@@ -26,7 +26,7 @@ import icons from '@/iconify/index.json'
 import 'virtual:uno.css'
 
 // 全局样式
-import '@/assets/styles/globals.scss'
+import '@/assets/styles/globals.css'
 
 const app = createApp(App)
 app.use(FloatingVue, {

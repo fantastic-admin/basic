@@ -81,6 +81,7 @@
     "picocolors": "^1.0.1",
     "plop": "^4.0.1",
     "postcss": "^8.4.40",
+    "postcss-nested": "^6.2.0",
     "sass": "^1.77.8",
     "simple-git-hooks": "^2.11.1",
     "stylelint": "^16.8.1",

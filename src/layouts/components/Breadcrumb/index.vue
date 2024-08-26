@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 :deep(.breadcrumb-item) {
   &:first-child {
     .separator {

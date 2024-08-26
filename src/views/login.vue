@@ -61,7 +61,7 @@ const formRef = ref()
   <Copyright />
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .bg-banner {
   position: fixed;
   z-index: 0;
@@ -124,9 +124,10 @@ const formRef = ref()
     background-color: var(--g-bg);
 
     .banner {
+      position: absolute;
+      top: 50%;
       width: 100%;
-
-      @include position-center(y);
+      transform: translateY(-50%);
     }
   }
 

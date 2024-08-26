@@ -34,7 +34,7 @@ function onScroll() {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .fixed-action-bar {
   box-shadow: 0 0 1px 0 var(--g-box-shadow-color);
 

@@ -45,8 +45,8 @@ function pathCompile(path: string) {
   </Breadcrumb>
 </template>
 
-<style lang="scss" scoped>
-// 面包屑动画
+<style scoped>
+/* 面包屑动画 */
 .breadcrumb-enter-active {
   transition: transform 0.3s, opacity 0.3s;
 }
