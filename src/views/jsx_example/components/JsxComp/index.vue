@@ -13,7 +13,7 @@ export default defineComponent({
 })
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .test {
   font-size: 24px;
 

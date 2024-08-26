@@ -46,7 +46,7 @@ const { switchTo } = useMenu()
   </Transition>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .main-sidebar-container {
   position: relative;
   z-index: 1;
@@ -69,10 +69,10 @@ const { switchTo } = useMenu()
     overflow: hidden auto;
     overscroll-behavior: contain;
 
-    // firefox隐藏滚动条
+    /* firefox隐藏滚动条 */
     scrollbar-width: none;
 
-    // chrome隐藏滚动条
+    /* chrome隐藏滚动条 */
     &::-webkit-scrollbar {
       display: none;
     }
@@ -100,7 +100,7 @@ const { switchTo } = useMenu()
   }
 }
 
-// 主侧边栏动画
+/* 主侧边栏动画 */
 .main-sidebar-enter-active,
 .main-sidebar-leave-active {
   transition: 0.3s;

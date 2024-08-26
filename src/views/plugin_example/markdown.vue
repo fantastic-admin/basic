@@ -51,7 +51,7 @@ function open(url: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 :deep(.bytemd-fullscreen) {
   z-index: 2000;
 }

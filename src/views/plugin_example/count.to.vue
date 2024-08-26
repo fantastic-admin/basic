@@ -83,7 +83,7 @@ function open(url: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .count-to {
   display: inline-block;
   margin-bottom: 20px;

@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .alert {
   padding: 20px 20px 0;
   background-color: var(--g-container-bg);

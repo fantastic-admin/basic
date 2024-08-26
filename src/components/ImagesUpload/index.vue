@@ -153,7 +153,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .upload-container {
   line-height: initial;
 }
@@ -180,14 +180,16 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
     transition: opacity 0.3s;
 
     .actions {
+      position: absolute;
+      top: 50%;
+      left: 50%;
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: center;
       width: 100px;
       height: 100px;
-
-      @include position-center(xy);
+      transform: translateX(-50%) translateY(-50%);
 
       span {
         width: 50%;
@@ -260,9 +262,11 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
       }
 
       .el-progress {
+        position: absolute;
+        top: 50%;
+        left: 50%;
         z-index: 1;
-
-        @include position-center(xy);
+        transform: translateX(-50%) translateY(-50%);
 
         .el-progress__text {
           color: var(--el-text-color-placeholder);

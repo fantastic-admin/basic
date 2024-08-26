@@ -122,12 +122,12 @@ const toggle = ref(false)
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .page-main {
-  --at-apply: flex-grow-1 flex-shrink-1 flex-basis-400px m-0 min-h-50;
+  --uno: flex-grow-1 flex-shrink-1 flex-basis-400px m-0 min-h-50;
 
   :deep(.main-container) {
-    --at-apply: flex items-center justify-center flex-1 gap-4;
+    --uno: flex items-center justify-center flex-1 gap-4;
   }
 }
 </style>

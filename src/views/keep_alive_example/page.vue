@@ -75,7 +75,7 @@ onBeforeRouteLeave((to, from) => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .block {
   margin-bottom: 10px;
 }

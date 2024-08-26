@@ -125,7 +125,7 @@ function editPassword() {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 :deep(.el-tabs) {
   .el-tabs__header .el-tabs__nav {
     .el-tabs__active-bar {

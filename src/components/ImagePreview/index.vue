@@ -34,7 +34,7 @@ const realHeight = computed(() => {
   </ElImage>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .el-image {
   background-color: var(--el-fill-color);
   border-radius: 5px;

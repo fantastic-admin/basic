@@ -61,7 +61,7 @@ function handlerMouserScroll(event: WheelEvent) {
   </Transition>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 header {
   position: fixed;
   top: 0;
@@ -115,10 +115,10 @@ header {
       overflow-x: auto;
       mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
 
-      // firefox隐藏滚动条
+      /* firefox隐藏滚动条 */
       scrollbar-width: none;
 
-      // chrome隐藏滚动条
+      /* chrome隐藏滚动条 */
       &::-webkit-scrollbar {
         display: none;
       }
@@ -151,7 +151,7 @@ header {
   }
 }
 
-// 头部动画
+/* 头部动画 */
 .header-enter-active,
 .header-leave-active {
   transition: transform 0.3s;

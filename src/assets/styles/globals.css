@@ -1,20 +1,24 @@
-// 页面布局 CSS 变量
+/* 页面布局 CSS 变量 */
 :root {
-  // 头部高度
+  /* 头部高度 */
   --g-header-height: 60px;
-  // 侧边栏宽度
+
+  /* 侧边栏宽度 */
   --g-main-sidebar-width: 80px;
   --g-sub-sidebar-width: 220px;
   --g-sub-sidebar-collapse-width: 64px;
-  // 侧边栏 Logo 区域高度
+
+  /* 侧边栏 Logo 区域高度 */
   --g-sidebar-logo-height: 50px;
-  // 标签栏高度
+
+  /* 标签栏高度 */
   --g-tabbar-height: 50px;
-  // 工具栏高度
+
+  /* 工具栏高度 */
   --g-toolbar-height: 50px;
 }
 
-// 明暗模式 CSS 变量
+/* 明暗模式 CSS 变量 */
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
   --g-box-shadow-color: rgb(0 0 0 / 12%);
@@ -87,22 +91,21 @@ body {
   box-sizing: inherit;
 }
 
-// 右侧内容区针对fixed元素，有横向铺满的需求，可在fixed元素上设置 [data-fixed-calc-width]
+/* 右侧内容区针对fixed元素，有横向铺满的需求，可在fixed元素上设置 [data-fixed-calc-width] */
 [data-fixed-calc-width] {
   position: fixed;
   right: 0;
   left: 50%;
   width: calc(100% - var(--g-main-sidebar-actual-width) - var(--g-sub-sidebar-actual-width));
   transform: translateX(-50%) translateX(calc(var(--g-main-sidebar-actual-width) / 2)) translateX(calc(var(--g-sub-sidebar-actual-width) / 2));
-}
 
-[data-mode="mobile"] {
-  [data-fixed-calc-width] {
+  [data-mode="mobile"] & {
     width: 100% !important;
     transform: translateX(-50%) !important;
   }
 }
-// textarea 字体跟随系统
+
+/* textarea 字体跟随系统 */
 textarea {
   font-family: inherit;
 }
@@ -110,12 +113,12 @@ textarea {
 /* Overrides Floating Vue */
 .v-popper--theme-dropdown,
 .v-popper--theme-tooltip {
-  --at-apply: inline-flex;
+  --uno: inline-flex;
 }
 
 .v-popper--theme-dropdown .v-popper__inner,
 .v-popper--theme-tooltip .v-popper__inner {
-  --at-apply: bg-white dark-bg-stone-8 text-dark dark-text-white rounded shadow ring-1 ring-gray-200 dark-ring-gray-800 border border-solid border-stone/20 text-xs font-normal;
+  --uno: bg-white dark-bg-stone-8 text-dark dark-text-white rounded shadow ring-1 ring-gray-200 dark-ring-gray-800 border border-solid border-stone/20 text-xs font-normal;
 
   box-shadow: 0 6px 30px rgb(0 0 0 / 10%);
 }
@@ -124,12 +127,12 @@ textarea {
 .v-popper--theme-dropdown .v-popper__arrow-inner {
   visibility: visible;
 
-  --at-apply: border-white dark-border-stone-8;
+  --uno: border-white dark-border-stone-8;
 }
 
 .v-popper--theme-tooltip .v-popper__arrow-outer,
 .v-popper--theme-dropdown .v-popper__arrow-outer {
-  --at-apply: border-stone/20;
+  --uno: border-stone/20;
 }
 
 .v-popper--theme-tooltip.v-popper--shown,

@@ -249,7 +249,7 @@
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .el-row {
   margin-bottom: 20px;
 }

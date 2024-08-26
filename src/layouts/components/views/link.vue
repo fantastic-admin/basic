@@ -46,7 +46,7 @@ function open() {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .slide-right-enter-active {
   transition: 0.2s;
 }

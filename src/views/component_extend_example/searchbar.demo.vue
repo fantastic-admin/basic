@@ -420,7 +420,7 @@ function onToggle(fold: boolean) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .search-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));

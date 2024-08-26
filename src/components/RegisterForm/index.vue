@@ -113,7 +113,7 @@ function handleRegister() {
   </ElForm>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 :deep(input[type="password"]::-ms-reveal) {
   display: none;
 }

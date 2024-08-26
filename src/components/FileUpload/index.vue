@@ -114,7 +114,7 @@ const onPreview: UploadProps['onPreview'] = (e) => {
   </ElUpload>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 :deep(.el-upload.is-drag) {
   display: inline-block;
 

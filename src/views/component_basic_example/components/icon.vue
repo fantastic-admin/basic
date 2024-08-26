@@ -28,7 +28,7 @@ const icon = icons.filter(item => item.prefix === 'ep')[0]
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .demo {
   > i {
     margin: 0 20px;

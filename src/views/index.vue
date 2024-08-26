@@ -201,30 +201,30 @@ function open(url: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .text-emphasis {
   text-emphasis-style: "❤";
 }
 
 .ecology {
-  --at-apply: flex-1 m-0;
+  --uno: flex-1 m-0;
 
   :deep(.title-container) {
-    --at-apply: flex items-center justify-between flex-wrap gap-4;
+    --uno: flex items-center justify-between flex-wrap gap-4;
 
     .title-info {
-      --at-apply: flex items-center gap-4;
+      --uno: flex items-center gap-4;
 
       img {
-        --at-apply: block w-12 h-12;
+        --uno: block w-12 h-12;
       }
 
       h1 {
-        --at-apply: m-0 text-2xl;
+        --uno: m-0 text-2xl;
       }
 
       h2 {
-        --at-apply: m-0 text-base text-stone-5 font-normal;
+        --uno: m-0 text-base text-stone-5 font-normal;
       }
     }
   }
@@ -232,14 +232,14 @@ function open(url: string) {
 
 .question {
   .answer {
-    --at-apply: m-0 pl-6 text-stone-5;
+    --uno: m-0 pl-6 text-stone-5;
 
     li {
-      --at-apply: mb-2 lh-6 last:mb-0;
+      --uno: mb-2 lh-6 last:mb-0;
     }
 
     span {
-      --at-apply: text-stone-7 dark-text-stone-3 font-bold;
+      --uno: text-stone-7 dark-text-stone-3 font-bold;
     }
   }
 }

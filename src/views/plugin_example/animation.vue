@@ -242,7 +242,7 @@ function open(url: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .box {
   width: 100px;
   height: 100px;

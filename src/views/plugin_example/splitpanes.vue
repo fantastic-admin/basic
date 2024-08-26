@@ -49,7 +49,7 @@ function open(url: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .splitpanes__pane {
   display: flex;
   align-items: center;

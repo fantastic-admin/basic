@@ -82,7 +82,7 @@ function showInfo(iconName: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .el-card {
   margin-bottom: 15px;
 

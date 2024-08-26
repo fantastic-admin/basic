@@ -94,7 +94,7 @@ function open(url: string) {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .preview {
   margin-top: 10px;
 
