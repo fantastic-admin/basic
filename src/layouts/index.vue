@@ -28,6 +28,27 @@ const menuStore = useMenuStore()
 const mainPage = useMainPage()
 const menu = useMenu()
 
+// 侧边栏主导航当前实际宽度
+const mainSidebarActualWidth = computed(() => {
+  let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width'))
+  if (settingsStore.settings.menu.mode === 'single' || (settingsStore.settings.menu.mode === 'head' && settingsStore.mode !== 'mobile')) {
+    actualWidth = 0
+  }
+  return `${actualWidth}px`
+})
+
+// 侧边栏次导航当前实际宽度
+const subSidebarActualWidth = computed(() => {
+  let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width'))
+  if (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile') {
+    actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-collapse-width'))
+  }
+  if (menuStore.sidebarMenus.every(item => item.meta?.menu === false)) {
+    actualWidth = 0
+  }
+  return `${actualWidth}px`
+})
+
 const isLink = computed(() => !!routeInfo.meta.link)
 
 watch(() => settingsStore.settings.menu.subMenuCollapse, (val) => {
@@ -72,7 +93,12 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
 </script>
 
 <template>
-  <div class="layout">
+  <div
+    class="layout" :style="{
+      '--g-main-sidebar-actual-width': mainSidebarActualWidth,
+      '--g-sub-sidebar-actual-width': subSidebarActualWidth,
+    }"
+  >
     <div id="app-main">
       <Header />
       <div class="wrapper">
