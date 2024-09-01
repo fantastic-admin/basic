@@ -30,7 +30,7 @@ function handlerMouserScroll(event: WheelEvent) {
     <header v-if="settingsStore.mode === 'pc' && settingsStore.settings.menu.mode === 'head'">
       <div class="header-container">
         <Logo class="title" />
-        <div ref="menuRef" class="menu-container" @wheel.prevent="handlerMouserScroll">
+        <div ref="menuRef" class="menu-container scrollbar-none" @wheel.prevent="handlerMouserScroll">
           <!-- 顶部模式 -->
           <div class="menu h-full flex of-hidden transition-all">
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
@@ -114,14 +114,6 @@ header {
       padding: 0 20px;
       overflow-x: auto;
       mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
-
-      /* firefox隐藏滚动条 */
-      scrollbar-width: none;
-
-      /* chrome隐藏滚动条 */
-      &::-webkit-scrollbar {
-        display: none;
-      }
 
       .menu {
         display: inline-flex;
