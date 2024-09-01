@@ -10,6 +10,7 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 import { entriesToCss, toArray } from '@unocss/core'
+import { presetScrollbar } from 'unocss-preset-scrollbar'
 import { darkTheme, lightTheme } from './themes'
 
 export default defineConfig<Theme>({
@@ -73,6 +74,7 @@ export default defineConfig<Theme>({
       },
     }),
     presetTypography(),
+    presetScrollbar(),
   ],
   transformers: [
     transformerDirectives(),

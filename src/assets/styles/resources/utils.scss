@@ -7,9 +7,9 @@
   } @else {
     /* stylelint-disable-next-line value-no-vendor-prefix */
     display: -webkit-box;
+    overflow: hidden;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: $line;
-    overflow: hidden;
   }
 }
 
