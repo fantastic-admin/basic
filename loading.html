@@ -1,0 +1,197 @@
+<style>
+@keyframes rainbow {
+  0% { --rainbow-color: #00a98e; }
+  1.25% { --rainbow-color: #00a996; }
+  2.5% { --rainbow-color: #00a99f; }
+  3.75% { --rainbow-color: #00a9a7; }
+  5% { --rainbow-color: #00a9b0; }
+  6.25% { --rainbow-color: #00a9b8; }
+  7.5% { --rainbow-color: #00a9c0; }
+  8.75% { --rainbow-color: #00a8c7; }
+  10% { --rainbow-color: #00a8cf; }
+  11.25% { --rainbow-color: #00a7d5; }
+  12.5% { --rainbow-color: #00a6dc; }
+  13.75% { --rainbow-color: #00a6e2; }
+  15% { --rainbow-color: #00a4e7; }
+  16.25% { --rainbow-color: #00a3ec; }
+  17.5% { --rainbow-color: #00a2f1; }
+  18.75% { --rainbow-color: #00a0f4; }
+  20% { --rainbow-color: #009ff7; }
+  21.25% { --rainbow-color: #009dfa; }
+  22.5% { --rainbow-color: #009bfc; }
+  23.75% { --rainbow-color: #0098fd; }
+  25% { --rainbow-color: #0096fd; }
+  26.25% { --rainbow-color: #0093fd; }
+  27.5% { --rainbow-color: #2e90fc; }
+  28.75% { --rainbow-color: #4d8dfa; }
+  30% { --rainbow-color: #638af8; }
+  31.25% { --rainbow-color: #7587f5; }
+  32.5% { --rainbow-color: #8583f1; }
+  33.75% { --rainbow-color: #9280ed; }
+  35% { --rainbow-color: #9f7ce9; }
+  36.25% { --rainbow-color: #aa78e3; }
+  37.5% { --rainbow-color: #b574dd; }
+  38.75% { --rainbow-color: #be71d7; }
+  40% { --rainbow-color: #c76dd1; }
+  41.25% { --rainbow-color: #cf69c9; }
+  42.5% { --rainbow-color: #d566c2; }
+  43.75% { --rainbow-color: #dc63ba; }
+  45% { --rainbow-color: #e160b3; }
+  46.25% { --rainbow-color: #e65eab; }
+  47.5% { --rainbow-color: #e95ca2; }
+  48.75% { --rainbow-color: #ed5a9a; }
+  50% { --rainbow-color: #ef5992; }
+  51.25% { --rainbow-color: #f15989; }
+  52.5% { --rainbow-color: #f25981; }
+  53.75% { --rainbow-color: #f25a79; }
+  55% { --rainbow-color: #f25c71; }
+  56.25% { --rainbow-color: #f15e69; }
+  57.5% { --rainbow-color: #ef6061; }
+  58.75% { --rainbow-color: #ed635a; }
+  60% { --rainbow-color: #eb6552; }
+  61.25% { --rainbow-color: #e8694b; }
+  62.5% { --rainbow-color: #e46c44; }
+  63.75% { --rainbow-color: #e06f3d; }
+  65% { --rainbow-color: #db7336; }
+  66.25% { --rainbow-color: #d77630; }
+  67.5% { --rainbow-color: #d17a2a; }
+  68.75% { --rainbow-color: #cc7d24; }
+  70% { --rainbow-color: #c6811e; }
+  71.25% { --rainbow-color: #bf8418; }
+  72.5% { --rainbow-color: #b98713; }
+  73.75% { --rainbow-color: #b28a0f; }
+  75% { --rainbow-color: #ab8d0c; }
+  76.25% { --rainbow-color: #a3900b; }
+  77.5% { --rainbow-color: #9c920d; }
+  78.75% { --rainbow-color: #949510; }
+  80% { --rainbow-color: #8b9715; }
+  81.25% { --rainbow-color: #83991b; }
+  82.5% { --rainbow-color: #7a9b21; }
+  83.75% { --rainbow-color: #719d27; }
+  85% { --rainbow-color: #679e2e; }
+  86.25% { --rainbow-color: #5da035; }
+  87.5% { --rainbow-color: #51a13c; }
+  88.75% { --rainbow-color: #44a244; }
+  90% { --rainbow-color: #34a44b; }
+  91.25% { --rainbow-color: #1ba553; }
+  92.5% { --rainbow-color: #00a65b; }
+  93.75% { --rainbow-color: #00a663; }
+  95% { --rainbow-color: #00a76c; }
+  96.25% { --rainbow-color: #00a874; }
+  97.5% { --rainbow-color: #00a87d; }
+  98.75% { --rainbow-color: #00a985; }
+  100% { --rainbow-color: #00a98e; }
+}
+
+:root {
+  --rainbow-color: #00a98e;
+  animation: rainbow 20s linear infinite;
+}
+
+.loading-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: var(--rainbow-color);
+  user-select: none;
+  background-color: snow;
+}
+
+.loading-container .loading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.loading-container .loading .square {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.loading-container .loading .square::before {
+  width: 10px;
+  height: 10px;
+  content: "";
+  border: 3px solid var(--rainbow-color);
+  border-radius: 15%;
+  animation: square-to-dot-animation 2s linear infinite;
+}
+
+.loading-container .loading .square:nth-child(1)::before {
+  animation-delay: calc(150ms * 1);
+}
+
+.loading-container .loading .square:nth-child(2)::before {
+  animation-delay: calc(150ms * 2);
+}
+
+.loading-container .loading .square:nth-child(3)::before {
+  animation-delay: calc(150ms * 3);
+}
+
+.loading-container .loading .square:nth-child(4)::before {
+  animation-delay: calc(150ms * 4);
+}
+
+@keyframes square-to-dot-animation {
+  15%,
+  25% {
+    width: 0;
+    height: 0;
+    margin: 5px;
+    border-width: 5px;
+    border-radius: 100%;
+  }
+
+  40% {
+    width: 10px;
+    height: 10px;
+    margin: initial;
+    border-width: 3px;
+    border-radius: 15%;
+  }
+}
+
+.loading-container .name {
+  position: relative;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+.loading-container .tips {
+  position: relative;
+  margin-top: 10px;
+  font-size: 16px;
+  opacity: 0.5;
+}
+
+.loading-container .tips::after {
+  position: absolute;
+  padding-left: 5px;
+  content: "…";
+}
+</style>
+
+<div class="loading-container">
+  <div class="loading">
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+    <div class="square"></div>
+  </div>
+  <div class="name">%VITE_APP_TITLE%</div>
+  <div class="tips">载入中</div>
+</div>
