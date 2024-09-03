@@ -124,6 +124,35 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
       }
     })(),
 
+    {
+      name: 'vite-plugin-loading',
+      enforce: 'pre',
+      transformIndexHtml: {
+        handler: async html => html.replace(/<\/body>/, `${
+          `<div data-app-loading>${await fs.readFileSync(path.resolve(process.cwd(), 'loading.html'), 'utf8')}</div>`
+        }</body>`),
+        order: 'pre',
+      },
+      transform: (code, id) => {
+        if (/src\/main.ts$/.test(id)) {
+          code = code.concat(`
+            const loadingEl = document.querySelector('[data-app-loading]')
+            if (loadingEl) {
+              loadingEl.style['pointer-events'] = 'none'
+              loadingEl.style.visibility = 'hidden'
+              loadingEl.style.opacity = 0
+              loadingEl.style.transition = 'all 0.5s ease-out'
+              loadingEl.addEventListener('transitionend', () => loadingEl.remove(), { once: true })
+            }
+          `)
+          return {
+            code,
+            map: null,
+          }
+        }
+      },
+    },
+
     // https://github.com/unplugin/unplugin-turbo-console
     TurboConsole(),
 
@@ -138,6 +167,7 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
 
     {
       name: 'vite-plugin-debug-plugin',
+      enforce: 'pre',
       transform: (code, id) => {
         if (/src\/main.ts$/.test(id)) {
           if (viteEnv.VITE_APP_DEBUG_TOOL === 'eruda') {
@@ -162,9 +192,11 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
 
     {
       name: 'vite-plugin-disable-devtool',
+      enforce: 'pre',
       transform: (code, id) => {
         if (/src\/main.ts$/.test(id)) {
           if (viteEnv.VITE_APP_DISABLE_DEVTOOL === 'true') {
+            // ?ddtk=example
             code = code.concat(`
               import DisableDevtool from 'disable-devtool'
               DisableDevtool({

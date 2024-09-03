@@ -91,6 +91,10 @@ body {
   box-sizing: inherit;
 }
 
+#app {
+  height: 100%;
+}
+
 /* 右侧内容区针对fixed元素，有横向铺满的需求，可在fixed元素上设置 [data-fixed-calc-width] */
 [data-fixed-calc-width] {
   position: fixed;
