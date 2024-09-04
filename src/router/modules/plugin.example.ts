@@ -166,6 +166,15 @@ const routes: RouteRecordRaw = {
         icon: 'i-mdi:file-eye-outline',
       },
     },
+    {
+      path: 'cropper',
+      name: 'pluginExampleCropper',
+      component: () => import('@/views/plugin_example/cropper.vue'),
+      meta: {
+        title: '图片裁剪',
+        icon: 'i-mdi:crop',
+      },
+    },
   ],
 }
 

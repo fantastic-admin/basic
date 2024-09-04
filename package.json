@@ -34,6 +34,7 @@
     "animate.css": "^4.1.1",
     "axios": "^1.7.7",
     "bytemd": "^1.21.0",
+    "cropperjs": "^1.6.2",
     "dayjs": "^1.11.13",
     "defu": "^6.1.4",
     "disable-devtool": "^0.3.7",
