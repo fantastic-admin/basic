@@ -56,14 +56,14 @@ function handleReset() {
     </h3>
     <div>
       <ElFormItem prop="account">
-        <ElInput v-model="form.account" placeholder="用户名" type="text" tabindex="1">
+        <ElInput v-model="form.account" size="large" placeholder="用户名" type="text" tabindex="1">
           <template #prefix>
             <SvgIcon name="i-ri:user-3-fill" />
           </template>
         </ElInput>
       </ElFormItem>
       <ElFormItem prop="captcha">
-        <ElInput v-model="form.captcha" placeholder="验证码" type="text" tabindex="2">
+        <ElInput v-model="form.captcha" size="large" placeholder="验证码" type="text" tabindex="2">
           <template #prefix>
             <SvgIcon name="i-ic:baseline-verified-user" />
           </template>
@@ -73,7 +73,7 @@ function handleReset() {
         </ElInput>
       </ElFormItem>
       <ElFormItem prop="newPassword">
-        <ElInput v-model="form.newPassword" type="password" placeholder="新密码" tabindex="3" show-password>
+        <ElInput v-model="form.newPassword" type="password" size="large" placeholder="新密码" tabindex="3" show-password>
           <template #prefix>
             <SvgIcon name="i-ri:lock-2-fill" />
           </template>
@@ -90,37 +90,3 @@ function handleReset() {
     </div>
   </ElForm>
 </template>
-
-<style scoped>
-:deep(input[type="password"]::-ms-reveal) {
-  display: none;
-}
-
-.el-form-item {
-  margin-bottom: 24px;
-
-  :deep(.el-input) {
-    width: 100%;
-    height: 48px;
-    line-height: inherit;
-
-    input {
-      height: 48px;
-    }
-
-    .el-input__prefix,
-    .el-input__suffix {
-      display: flex;
-      align-items: center;
-    }
-
-    .el-input__prefix {
-      left: 10px;
-    }
-
-    .el-input__suffix {
-      right: 10px;
-    }
-  }
-}
-</style>
