@@ -112,7 +112,7 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
           <Topbar />
           <div class="main">
             <RouterView v-slot="{ Component, route }">
-              <Transition name="slide-right" mode="out-in" appear>
+              <Transition name="slide-right" mode="out-in">
                 <KeepAlive :include="keepAliveStore.list">
                   <component :is="Component" v-show="!isLink" :key="route.fullPath" />
                 </KeepAlive>
