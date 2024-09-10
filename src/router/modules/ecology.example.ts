@@ -60,7 +60,7 @@ const routes: RouteRecordRaw[] = [
         redirect: '',
         name: 'recommandFormcreate',
         meta: {
-          title: 'Form-create 动态表单生成器',
+          title: 'FormCreate 可视化表单设计器',
           icon: 'https://form-create.com/logo.png',
           link: 'https://form-create.com',
         },
