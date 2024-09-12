@@ -3,13 +3,6 @@ declare interface Window {
   mozDevicePixelRatio: any
 }
 
-declare module 'virtual:app-loading' {
-  const loadingFadeOut: () => void
-  export {
-    loadingFadeOut,
-  }
-}
-
 declare const __SYSTEM_INFO__: {
   pkg: {
     version: Recordable<string>
