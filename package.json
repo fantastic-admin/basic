@@ -97,12 +97,12 @@
     "unplugin-turbo-console": "^1.10.1",
     "unplugin-vue-components": "^0.27.4",
     "vite": "^5.4.2",
+    "vite-plugin-app-loading": "^0.3.0",
     "vite-plugin-banner": "^0.7.1",
     "vite-plugin-compression2": "^1.2.0",
     "vite-plugin-fake-server": "^2.1.1",
     "vite-plugin-pages": "^0.32.3",
     "vite-plugin-svg-icons": "^2.0.1",
-    "vite-plugin-vue-app-loading": "^0.2.1",
     "vite-plugin-vue-devtools": "^7.3.9",
     "vite-plugin-vue-meta-layouts": "^0.4.3",
     "vue-tsc": "^2.1.4"

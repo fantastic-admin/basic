@@ -225,6 +225,9 @@ importers:
       vite:
         specifier: ^5.4.2
         version: 5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6)
+      vite-plugin-app-loading:
+        specifier: ^0.3.0
+        version: 0.3.0
       vite-plugin-banner:
         specifier: ^0.7.1
         version: 0.7.1
@@ -240,9 +243,6 @@ importers:
       vite-plugin-svg-icons:
         specifier: ^2.0.1
         version: 2.0.1(vite@5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6))
-      vite-plugin-vue-app-loading:
-        specifier: ^0.2.1
-        version: 0.2.1
       vite-plugin-vue-devtools:
         specifier: ^7.3.9
         version: 7.3.9(rollup@4.21.2)(vite@5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4))
@@ -5795,6 +5795,9 @@ packages:
     peerDependencies:
       vite: ^2.6.0 || ^3.0.0 || ^4.0.0 || ^5.0.0-0
 
+  vite-plugin-app-loading@0.3.0:
+    resolution: {integrity: sha512-FJR40HCZ2CePVf9lJa+gDLi7YBB2V4eBeDeQp2fd3TBJr24oCHn4twhvNNYkGuQoROUhTdfZKX49JKVDYmpFYA==}
+
   vite-plugin-banner@0.7.1:
     resolution: {integrity: sha512-Bww2Xd5tOGsZ1yZ9rQiGneryvsL1u86znPrqeQjCsXPsG72pnSdV5lcQA+cy8UNDguMqyTJiCevlNUbLnT85UA==}
 
@@ -5836,9 +5839,6 @@ packages:
     resolution: {integrity: sha512-6ktD+DhV6Rz3VtedYvBKKVA2eXF+sAQVaKkKLDSqGUfnhqXl3bj5PPkVTl3VexfTuZy66PmINi8Q6eFnVfRUmA==}
     peerDependencies:
       vite: '>=2.0.0'
-
-  vite-plugin-vue-app-loading@0.2.1:
-    resolution: {integrity: sha512-/DE4bYFvs8akpm1CDFzGv43YVAunX1fEe718DAambRrUqBCMw+KJjfjfDzX13/lHA+zZEKrJ4053VgK57R9aVw==}
 
   vite-plugin-vue-devtools@7.3.9:
     resolution: {integrity: sha512-ybDV2kepW0NpusvtfbRKHs0pvyrReNcFtL572gyZ6Alox6u5uebYefd2eAG/7mJSU3NPI5UxUH1e/Mof5exdlw==}
@@ -12118,6 +12118,8 @@ snapshots:
     dependencies:
       vite: 5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6)
 
+  vite-plugin-app-loading@0.3.0: {}
+
   vite-plugin-banner@0.7.1: {}
 
   vite-plugin-compression2@1.2.0(rollup@4.21.2):
@@ -12182,8 +12184,6 @@ snapshots:
       vite: 5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6)
     transitivePeerDependencies:
       - supports-color
-
-  vite-plugin-vue-app-loading@0.2.1: {}
 
   vite-plugin-vue-devtools@7.3.9(rollup@4.21.2)(vite@5.4.2(@types/node@22.5.1)(sass@1.77.8)(terser@5.31.6))(vue@3.4.38(typescript@5.5.4)):
     dependencies:
