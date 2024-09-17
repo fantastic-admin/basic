@@ -207,9 +207,6 @@ importers:
       '@vitejs/plugin-vue-jsx':
         specifier: ^4.0.1
         version: 4.0.1(vite@5.4.2(@types/node@22.5.4)(sass@1.77.8)(terser@5.32.0))(vue@3.4.38(typescript@5.5.4))
-      archiver:
-        specifier: ^7.0.1
-        version: 7.0.1
       autoprefixer:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.42)
@@ -297,6 +294,9 @@ importers:
       vite-plugin-app-loading:
         specifier: ^0.3.0
         version: 0.3.0
+      vite-plugin-archiver:
+        specifier: ^0.1.1
+        version: 0.1.1
       vite-plugin-banner:
         specifier: ^0.7.1
         version: 0.7.1
@@ -4108,6 +4108,10 @@ packages:
   file-source@0.6.1:
     resolution: {integrity: sha512-1R1KneL7eTXmXfKxC10V/9NeGOdbsAXJ+lQ//fvvcHUgtaZcZDWNJNblxAoVOyV1cj45pOtUrR3vZTBwqcW8XA==}
 
+  filesize@10.1.6:
+    resolution: {integrity: sha512-sJslQKU2uM33qH5nqewAwVB2QgR6w1aMNsYUp3aN5rMRyXEwJGmZvaWzeJFNTOXWlHQyBFCWrdj3fV/fsTOX8w==}
+    engines: {node: '>= 10.4.0'}
+
   fill-range@4.0.0:
     resolution: {integrity: sha512-VcpLTWqWDiTerugjj8e3+esbg+skS3M9e54UuR3iCeIDMXCLTsAH8hTSzDQU/X6/6t3eYkOKoZSef2PlU6U1XQ==}
     engines: {node: '>=0.10.0'}
@@ -7078,6 +7082,9 @@ packages:
 
   vite-plugin-app-loading@0.3.0:
     resolution: {integrity: sha512-FJR40HCZ2CePVf9lJa+gDLi7YBB2V4eBeDeQp2fd3TBJr24oCHn4twhvNNYkGuQoROUhTdfZKX49JKVDYmpFYA==}
+
+  vite-plugin-archiver@0.1.1:
+    resolution: {integrity: sha512-d+W6c02OTU+GjlMJ3NXlMaDQazR653l7Ni7HLF6NfI795A4uVlaiDoh6XDaqFnWG+omnD2cK/DMhj/Nh9HYtdA==}
 
   vite-plugin-banner@0.7.1:
     resolution: {integrity: sha512-Bww2Xd5tOGsZ1yZ9rQiGneryvsL1u86znPrqeQjCsXPsG72pnSdV5lcQA+cy8UNDguMqyTJiCevlNUbLnT85UA==}
@@ -11781,6 +11788,8 @@ snapshots:
     dependencies:
       stream-source: 0.3.5
 
+  filesize@10.1.6: {}
+
   fill-range@4.0.0:
     dependencies:
       extend-shallow: 2.0.1
@@ -15215,6 +15224,13 @@ snapshots:
       vite: 5.4.2(@types/node@22.5.4)(sass@1.77.8)(terser@5.32.0)
 
   vite-plugin-app-loading@0.3.0: {}
+
+  vite-plugin-archiver@0.1.1:
+    dependencies:
+      archiver: 7.0.1
+      dayjs: 1.11.13
+      filesize: 10.1.6
+      open: 10.1.0
 
   vite-plugin-banner@0.7.1: {}
 

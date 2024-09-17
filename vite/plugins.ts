@@ -1,7 +1,5 @@
 import path from 'node:path'
 import process from 'node:process'
-import fs from 'node:fs'
-import dayjs from 'dayjs'
 import type { PluginOption } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
@@ -15,16 +13,12 @@ import { vitePluginFakeServer } from 'vite-plugin-fake-server'
 import Layouts from 'vite-plugin-vue-meta-layouts'
 import Pages from 'vite-plugin-pages'
 import { compression } from 'vite-plugin-compression2'
-import archiver from 'archiver'
+import Archiver from 'vite-plugin-archiver'
 import AppLoading from 'vite-plugin-app-loading'
 import TurboConsole from 'unplugin-turbo-console/vite'
 import banner from 'vite-plugin-banner'
 import boxen from 'boxen'
 import picocolors from 'picocolors'
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
 
 export default function createVitePlugins(viteEnv, isBuild = false) {
   const vitePlugins: (PluginOption | PluginOption[])[] = [
@@ -95,35 +89,15 @@ export default function createVitePlugins(viteEnv, isBuild = false) {
     }),
 
     // https://github.com/nonzzz/vite-plugin-compression
-    isBuild && viteEnv.VITE_BUILD_COMPRESS.split(',').includes('gzip') && compression(),
-    isBuild && viteEnv.VITE_BUILD_COMPRESS.split(',').includes('brotli') && compression({
+    viteEnv.VITE_BUILD_COMPRESS?.split(',').includes('gzip') && compression(),
+    viteEnv.VITE_BUILD_COMPRESS?.split(',').includes('brotli') && compression({
       exclude: [/\.(br)$/, /\.(gz)$/],
       algorithm: 'brotliCompress',
     }),
 
-    (function () {
-      let outDir: string
-      return {
-        name: 'vite-plugin-archiver',
-        apply: 'build',
-        configResolved(resolvedConfig) {
-          outDir = resolvedConfig.build.outDir
-        },
-        async closeBundle() {
-          if (['zip', 'tar'].includes(viteEnv.VITE_BUILD_ARCHIVE)) {
-            await sleep(1000)
-            const archive = archiver(viteEnv.VITE_BUILD_ARCHIVE, {
-              ...(viteEnv.VITE_BUILD_ARCHIVE === 'zip' && { zlib: { level: 9 } }),
-              ...(viteEnv.VITE_BUILD_ARCHIVE === 'tar' && { gzip: true, gzipOptions: { level: 9 } }),
-            })
-            const output = fs.createWriteStream(`${outDir}.${dayjs().format('YYYY-MM-DD-HH-mm-ss')}.${viteEnv.VITE_BUILD_ARCHIVE === 'zip' ? 'zip' : 'tar.gz'}`)
-            archive.pipe(output)
-            archive.directory(outDir, false)
-            archive.finalize()
-          }
-        },
-      }
-    })(),
+    viteEnv.VITE_BUILD_ARCHIVE && Archiver({
+      archiveType: viteEnv.VITE_BUILD_ARCHIVE,
+    }),
 
     AppLoading('loading.html'),
 
