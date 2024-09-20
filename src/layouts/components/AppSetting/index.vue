@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import settingsDefault from '@/settings.default'
+import useMenuStore from '@/store/modules/menu'
+import useSettingsStore from '@/store/modules/settings'
+import eventBus from '@/utils/eventBus'
 import { useClipboard } from '@vueuse/core'
 import Message from 'vue-m-message'
-import settingsDefault from '@/settings.default'
-import eventBus from '@/utils/eventBus'
-import useSettingsStore from '@/store/modules/settings'
-import useMenuStore from '@/store/modules/menu'
 
 defineOptions({
   name: 'AppSetting',

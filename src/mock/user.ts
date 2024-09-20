@@ -1,5 +1,5 @@
-import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 import Mock from 'mockjs'
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 
 export default defineFakeRoute([
   {

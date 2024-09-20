@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useTimeoutFn } from '@vueuse/core'
 import type { OverlayScrollbarsComponentRef } from 'overlayscrollbars-vue'
+import type { SubMenuProps } from './types'
+import { useTimeoutFn } from '@vueuse/core'
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import Item from './item.vue'
-import type { SubMenuProps } from './types'
 import { rootMenuInjectionKey } from './types'
 
 defineOptions({

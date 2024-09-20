@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import hotkeys from 'hotkeys-js'
-import eventBus from './utils/eventBus'
-import Provider from './ui-provider/index.vue'
 import useSettingsStore from '@/store/modules/settings'
+import hotkeys from 'hotkeys-js'
+import Provider from './ui-provider/index.vue'
+import eventBus from './utils/eventBus'
 
 const route = useRoute()
 

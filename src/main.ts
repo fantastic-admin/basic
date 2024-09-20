@@ -1,17 +1,17 @@
-import '@/utils/system.copyright'
-
 import FloatingVue from 'floating-vue'
-import 'floating-vue/dist/style.css'
 
 import Message from 'vue-m-message'
-import 'vue-m-message/dist/style.css'
-
-import 'overlayscrollbars/overlayscrollbars.css'
-
 import App from './App.vue'
-import pinia from './store'
+
 import router from './router'
+import pinia from './store'
+
 import ui from './ui-provider'
+
+import '@/utils/system.copyright'
+import 'floating-vue/dist/style.css'
+import 'vue-m-message/dist/style.css'
+import 'overlayscrollbars/overlayscrollbars.css'
 
 // 自定义指令
 import directive from '@/utils/directive'

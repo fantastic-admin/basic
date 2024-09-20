@@ -1,9 +1,9 @@
+import { exec } from 'node:child_process'
 import path from 'node:path'
 import process from 'node:process'
-import { exec } from 'node:child_process'
+import { lookupCollection, lookupCollections } from '@iconify/json'
 import fs from 'fs-extra'
 import inquirer from 'inquirer'
-import { lookupCollection, lookupCollections } from '@iconify/json'
 
 async function generateIcons() {
   // 拿到全部图标集的原始数据

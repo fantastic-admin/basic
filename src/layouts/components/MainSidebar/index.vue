@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import Logo from '../Logo/index.vue'
-import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
+import useSettingsStore from '@/store/modules/settings'
+import Logo from '../Logo/index.vue'
 
 defineOptions({
   name: 'MainSidebar',

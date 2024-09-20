@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import eventBus from '@/utils/eventBus'
 import useSettingsStore from '@/store/modules/settings'
+import eventBus from '@/utils/eventBus'
 
 defineOptions({
   name: 'ToolbarRightSide',

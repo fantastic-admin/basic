@@ -1,6 +1,6 @@
+import type { Tabbar } from '#/global'
 import type { RouteLocationNormalized } from 'vue-router'
 import useKeepAliveStore from './keepAlive'
-import type { Tabbar } from '#/global'
 
 const useTabbarStore = defineStore(
   // 唯一ID

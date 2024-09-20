@@ -1,4 +1,5 @@
 import type { Theme } from 'unocss/preset-uno'
+import { entriesToCss, toArray } from '@unocss/core'
 import {
   defineConfig,
   presetAttributify,
@@ -9,7 +10,6 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import { entriesToCss, toArray } from '@unocss/core'
 import { presetScrollbar } from 'unocss-preset-scrollbar'
 import { darkTheme, lightTheme } from './themes'
 
