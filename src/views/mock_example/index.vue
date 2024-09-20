@@ -4,8 +4,8 @@ meta:
 </route>
 
 <script setup lang="ts">
-import { ElNotification } from 'element-plus'
 import useUserStore from '@/store/modules/user'
+import { ElNotification } from 'element-plus'
 
 const userStore = useUserStore()
 

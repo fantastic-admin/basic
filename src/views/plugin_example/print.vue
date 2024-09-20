@@ -4,9 +4,9 @@ meta:
 </route>
 
 <script setup lang="ts">
+import img from '@/assets/images/login-banner.png'
 import printJS from 'print-js'
 import Alert from './components/alert.vue'
-import img from '@/assets/images/login-banner.png'
 
 const tableData = ref([
   {

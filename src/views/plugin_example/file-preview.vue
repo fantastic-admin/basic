@@ -5,11 +5,11 @@ meta:
 
 <script lang="ts" setup>
 import VueOfficeDocx from '@vue-office/docx'
-import '@vue-office/docx/lib/index.css'
 import VueOfficeExcel from '@vue-office/excel'
-import '@vue-office/excel/lib/index.css'
 import VueOfficePdf from '@vue-office/pdf'
 import Alert from './components/alert.vue'
+import '@vue-office/docx/lib/index.css'
+import '@vue-office/excel/lib/index.css'
 
 const docx = new URL('./files/test.docx', import.meta.url).href
 const excel = new URL('./files/test.xlsx', import.meta.url).href

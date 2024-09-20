@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Breadcrumb from './Breadcrumb/index.vue'
 import useSettingsStore from '@/store/modules/settings'
+import Breadcrumb from './Breadcrumb/index.vue'
 
 defineOptions({
   name: 'ToolbarLeftSide',

@@ -4,9 +4,9 @@ meta:
 </route>
 
 <script setup lang="ts">
+import { icons } from '@/iconify'
 import { useClipboard } from '@vueuse/core'
 import { ElMessage } from 'element-plus'
-import { icons } from '@/iconify'
 
 const { text, copy, copied } = useClipboard()
 

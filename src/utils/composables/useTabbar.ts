@@ -1,6 +1,6 @@
 import type { RouteLocationRaw } from 'vue-router'
-import Message from 'vue-m-message'
 import useTabbarStore from '@/store/modules/tabbar'
+import Message from 'vue-m-message'
 
 export default function useTabbar() {
   const route = useRoute()

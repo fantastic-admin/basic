@@ -1,12 +1,12 @@
-import type { RouteRecordRaw, Router } from 'vue-router'
-import { useNProgress } from '@vueuse/integrations/useNProgress'
-import '@/assets/styles/nprogress.css'
-import { asyncRoutes, asyncRoutesByFilesystem } from './routes'
+import type { Router, RouteRecordRaw } from 'vue-router'
+import useKeepAliveStore from '@/store/modules/keepAlive'
+import useMenuStore from '@/store/modules/menu'
+import useRouteStore from '@/store/modules/route'
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
-import useRouteStore from '@/store/modules/route'
-import useMenuStore from '@/store/modules/menu'
-import useKeepAliveStore from '@/store/modules/keepAlive'
+import { useNProgress } from '@vueuse/integrations/useNProgress'
+import { asyncRoutes, asyncRoutesByFilesystem } from './routes'
+import '@/assets/styles/nprogress.css'
 
 function setupRoutes(router: Router) {
   router.beforeEach(async (to, from, next) => {

@@ -5,8 +5,8 @@ meta:
 
 <script lang="ts" setup>
 import Cropper from 'cropperjs'
-import 'cropperjs/dist/cropper.css'
 import Alert from './components/alert.vue'
+import 'cropperjs/dist/cropper.css'
 
 let cropper: any = null
 const imageRef = ref()

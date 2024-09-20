@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { UseImage } from '@vueuse/components'
 import { Icon } from '@iconify/vue'
+import { UseImage } from '@vueuse/components'
 
 defineOptions({
   name: 'SvgIcon',

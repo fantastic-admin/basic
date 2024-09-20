@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import useSettingsStore from '@/store/modules/settings'
 import Tabbar from './Tabbar/index.vue'
 import Toolbar from './Toolbar/index.vue'
-import useSettingsStore from '@/store/modules/settings'
 
 defineOptions({
   name: 'Topbar',

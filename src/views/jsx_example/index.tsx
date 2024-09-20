@@ -1,5 +1,5 @@
-import styles from './index.module.scss'
 import JsxComp from './components/JsxComp/index.vue'
+import styles from './index.module.scss'
 
 export default defineComponent({
   name: 'JsxExample',

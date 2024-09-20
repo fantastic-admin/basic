@@ -5,8 +5,8 @@ meta:
 
 <script setup lang="ts">
 import { Pane, Splitpanes } from 'splitpanes'
-import 'splitpanes/dist/splitpanes.css'
 import Alert from './components/alert.vue'
+import 'splitpanes/dist/splitpanes.css'
 
 function open(url: string) {
   window.open(url, '_blank')

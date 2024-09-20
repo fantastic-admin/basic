@@ -4,18 +4,18 @@ meta:
 </route>
 
 <script setup lang="ts">
-import Icon from './components/icon.vue'
+import eventBus from '@/utils/eventBus'
 import Button from './components/button.vue'
-import Link from './components/link.vue'
-import Radio from './components/radio.vue'
 import Checkbox from './components/checkbox.vue'
+import Icon from './components/icon.vue'
 import Input from './components/input.vue'
 import InputNumber from './components/inputnumber.vue'
-import Select from './components/select.vue'
-import Switch from './components/switch.vue'
-import Slider from './components/slider.vue'
+import Link from './components/link.vue'
+import Radio from './components/radio.vue'
 import Rate from './components/rate.vue'
-import eventBus from '@/utils/eventBus'
+import Select from './components/select.vue'
+import Slider from './components/slider.vue'
+import Switch from './components/switch.vue'
 
 const components = {
   图标: Icon,

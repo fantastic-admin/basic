@@ -4,8 +4,10 @@ meta:
 </route>
 
 <script setup lang="ts">
-import tinymce from 'tinymce/tinymce'
+import useSettingsStore from '@/store/modules/settings'
 import TinymceEditor from '@tinymce/tinymce-vue'
+import tinymce from 'tinymce/tinymce'
+import Alert from './components/alert.vue'
 import 'tinymce/themes/silver/theme'
 import 'tinymce/icons/default/icons'
 import 'tinymce/models/dom'
@@ -22,8 +24,6 @@ import 'tinymce/plugins/table'
 import 'tinymce/plugins/wordcount'
 import 'tinymce/plugins/code'
 import 'tinymce/plugins/searchreplace'
-import Alert from './components/alert.vue'
-import useSettingsStore from '@/store/modules/settings'
 
 const settingsStore = useSettingsStore()
 

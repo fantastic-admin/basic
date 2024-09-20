@@ -1,24 +1,24 @@
-import '@/utils/baidu'
-
-import '@/utils/system.copyright'
-
 import FloatingVue from 'floating-vue'
-import 'floating-vue/dist/style.css'
 
 import Message from 'vue-m-message'
-import 'vue-m-message/dist/style.css'
 
-import VxeUITable from 'vxe-table'
-import 'vxe-table/lib/style.css'
 import VxeUI from 'vxe-pc-ui'
-import 'vxe-pc-ui/lib/style.css'
-
-import 'overlayscrollbars/overlayscrollbars.css'
+import VxeUITable from 'vxe-table'
 
 import App from './App.vue'
-import pinia from './store'
 import router from './router'
+
+import pinia from './store'
 import ui from './ui-provider'
+import '@/utils/baidu'
+import '@/utils/system.copyright'
+
+import 'floating-vue/dist/style.css'
+
+import 'vue-m-message/dist/style.css'
+import 'vxe-table/lib/style.css'
+import 'vxe-pc-ui/lib/style.css'
+import 'overlayscrollbars/overlayscrollbars.css'
 
 // 自定义指令
 import directive from '@/utils/directive'

@@ -4,9 +4,9 @@ meta:
 </route>
 
 <script setup lang="ts">
+import useSettingsStore from '@/store/modules/settings'
 import VxeUITable from 'vxe-table'
 import Alert from './components/alert.vue'
-import useSettingsStore from '@/store/modules/settings'
 
 const settingsStore = useSettingsStore()
 watch(() => settingsStore.currentColorScheme, () => {

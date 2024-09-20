@@ -4,10 +4,10 @@ meta:
 </route>
 
 <script setup lang="ts">
-import Message from 'vue-m-message'
 import type { CurrencyInputOptions } from 'vue-currency-input'
-import { useCurrencyInput } from 'vue-currency-input'
 import { createReusableTemplate, useClipboard } from '@vueuse/core'
+import { useCurrencyInput } from 'vue-currency-input'
+import Message from 'vue-m-message'
 import Alert from './components/alert.vue'
 
 const Option = createReusableTemplate<{
@@ -52,7 +52,7 @@ const precisionEnabled = ref(false)
 const precisionRangeEnabled = ref(false)
 const precisionRangeValue = ref([2, 5])
 function range(from: number, to: number) {
-  return Array(to - from).fill(from).map((x, y) => x + y)
+  return Array.from({ length: to - from }, (_, i) => from + i)
 }
 const precision = ref(2)
 const precisionOptions = computed(() => range(1, 16))

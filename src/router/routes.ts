@@ -1,21 +1,21 @@
-import { setupLayouts } from 'virtual:meta-layouts'
-import generatedRoutes from 'virtual:generated-pages'
-import type { RouteRecordRaw } from 'vue-router'
-import MultilevelMenuExample from './modules/multilevel.menu.example'
-import BreadcrumbExample from './modules/breadcrumb.example'
-import KeepAliveExample from './modules/keep.alive.example'
-import TabExample from './modules/tab.example'
-import ComponentExample from './modules/component.example'
-import IconExample from './modules/icon.example'
-import FeatureExample from './modules/feature.example'
-import PluginExample from './modules/plugin.example'
-import PermissionExample from './modules/permission.example'
-import MockExample from './modules/mock.example'
-import JsxExample from './modules/jsx.example'
-import ExternalLinkExample from './modules/external.link.example'
-import EcologyExample from './modules/ecology.example'
 import type { Route } from '#/global'
+import type { RouteRecordRaw } from 'vue-router'
 import useSettingsStore from '@/store/modules/settings'
+import generatedRoutes from 'virtual:generated-pages'
+import { setupLayouts } from 'virtual:meta-layouts'
+import BreadcrumbExample from './modules/breadcrumb.example'
+import ComponentExample from './modules/component.example'
+import EcologyExample from './modules/ecology.example'
+import ExternalLinkExample from './modules/external.link.example'
+import FeatureExample from './modules/feature.example'
+import IconExample from './modules/icon.example'
+import JsxExample from './modules/jsx.example'
+import KeepAliveExample from './modules/keep.alive.example'
+import MockExample from './modules/mock.example'
+import MultilevelMenuExample from './modules/multilevel.menu.example'
+import PermissionExample from './modules/permission.example'
+import PluginExample from './modules/plugin.example'
+import TabExample from './modules/tab.example'
 
 // 固定路由（默认路由）
 const constantRoutes: RouteRecordRaw[] = [
@@ -128,9 +128,9 @@ const asyncRoutesByFilesystem = setupLayouts(generatedRoutes.filter((item) => {
 }))
 
 export {
-  constantRoutes,
-  systemRoutes,
   asyncRoutes,
-  constantRoutesByFilesystem,
   asyncRoutesByFilesystem,
+  constantRoutes,
+  constantRoutesByFilesystem,
+  systemRoutes,
 }

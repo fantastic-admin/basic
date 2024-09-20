@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useFullscreen } from '@vueuse/core'
 import useSettingsStore from '@/store/modules/settings'
+import { useFullscreen } from '@vueuse/core'
 
 defineOptions({
   name: 'Fullscreen',

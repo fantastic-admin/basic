@@ -4,8 +4,8 @@ meta:
   </route>
 
 <script setup lang="ts">
-import useSettingsStore from '@/store/modules/settings'
 import useMenuStore from '@/store/modules/menu'
+import useSettingsStore from '@/store/modules/settings'
 
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()

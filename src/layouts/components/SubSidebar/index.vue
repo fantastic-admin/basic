@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import useMenuStore from '@/store/modules/menu'
+import useSettingsStore from '@/store/modules/settings'
 import { useElementSize } from '@vueuse/core'
 import Logo from '../Logo/index.vue'
 import Menu from '../Menu/index.vue'
-import useSettingsStore from '@/store/modules/settings'
-import useMenuStore from '@/store/modules/menu'
 
 defineOptions({
   name: 'SubSidebar',

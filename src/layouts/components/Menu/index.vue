@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import SubMenu from './sub.vue'
-import Item from './item.vue'
 import type { MenuInjection, MenuProps } from './types'
+import Item from './item.vue'
+import SubMenu from './sub.vue'
 import { rootMenuInjectionKey } from './types'
 
 defineOptions({

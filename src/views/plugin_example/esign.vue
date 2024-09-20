@@ -71,7 +71,7 @@ function open(url: string) {
       </ElButton>
     </PageHeader>
     <PageMain>
-      <VueEsign ref="esignRef" v-model:bgColor="options.bgColor" :width="500" :height="300" :is-crop="options.isCrop" :line-width="options.lineWidth" :line-color="options.lineColor" />
+      <VueEsign ref="esignRef" v-model:bg-color="options.bgColor" :width="500" :height="300" :is-crop="options.isCrop" :line-width="options.lineWidth" :line-color="options.lineColor" />
       <div>
         <ElButton @click="handleReset">
           清空画板

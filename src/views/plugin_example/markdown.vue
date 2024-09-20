@@ -4,12 +4,12 @@ meta:
 </route>
 
 <script setup lang="ts">
-import { Editor, Viewer } from '@bytemd/vue-next'
 import gfm from '@bytemd/plugin-gfm'
-import zhHans from 'bytemd/locales/zh_Hans.json'
 import gfmLocale from '@bytemd/plugin-gfm/lib/locales/zh_Hans.json'
-import 'bytemd/dist/index.css'
+import { Editor, Viewer } from '@bytemd/vue-next'
+import zhHans from 'bytemd/locales/zh_Hans.json'
 import Alert from './components/alert.vue'
+import 'bytemd/dist/index.css'
 
 const content = ref('# Fantastic-admin')
 
