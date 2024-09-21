@@ -6,6 +6,7 @@ meta:
 <script setup lang="ts">
 import gfm from '@bytemd/plugin-gfm'
 import gfmLocale from '@bytemd/plugin-gfm/lib/locales/zh_Hans.json'
+// @ts-expect-error 忽略警告
 import { Editor, Viewer } from '@bytemd/vue-next'
 import zhHans from 'bytemd/locales/zh_Hans.json'
 import Alert from './components/alert.vue'

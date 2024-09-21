@@ -467,7 +467,7 @@ const dialog = ref({
   formRules: {
     test: [
       {
-        validator: (rule: any, value: any, callback: any) => {
+        validator: (_rule: any, value: any, callback: any) => {
           if (rules.value[dialog.value.index].rule.test(value)) {
             callback()
           }

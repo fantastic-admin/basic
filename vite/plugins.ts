@@ -1,4 +1,3 @@
-import type { PluginOption } from 'vite'
 import path from 'node:path'
 import process from 'node:process'
 import vueLegacy from '@vitejs/plugin-legacy'
@@ -10,6 +9,7 @@ import Unocss from 'unocss/vite'
 import autoImport from 'unplugin-auto-import/vite'
 import TurboConsole from 'unplugin-turbo-console/vite'
 import components from 'unplugin-vue-components/vite'
+import { loadEnv, type PluginOption } from 'vite'
 import AppLoading from 'vite-plugin-app-loading'
 import Archiver from 'vite-plugin-archiver'
 import banner from 'vite-plugin-banner'
@@ -20,7 +20,8 @@ import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 import VueDevTools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-meta-layouts'
 
-export default function createVitePlugins(viteEnv, isBuild = false) {
+export default function createVitePlugins(mode: string, isBuild = false) {
+  const viteEnv = loadEnv(mode, process.cwd())
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     vue(),
     vueJsx(),

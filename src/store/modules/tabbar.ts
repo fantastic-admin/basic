@@ -113,7 +113,7 @@ const useTabbarStore = defineStore(
         }
       })
       keepAliveStore.remove(name)
-      list.value = list.value.filter((item, i) => {
+      list.value = list.value.filter((_item, i) => {
         return i >= index
       })
     }
@@ -138,7 +138,7 @@ const useTabbarStore = defineStore(
         }
       })
       keepAliveStore.remove(name)
-      list.value = list.value.filter((item, i) => {
+      list.value = list.value.filter((_item, i) => {
         return i <= index
       })
     }

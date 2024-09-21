@@ -8,7 +8,7 @@ import { ElMessageBox } from 'element-plus'
 
 const tipsSwitch = ref(true)
 
-onBeforeRouteLeave((from, to, next) => {
+onBeforeRouteLeave((_from, _to, next) => {
   if (tipsSwitch.value) {
     ElMessageBox.confirm('当前页面还没有保存，是否确定要离开？', '温馨提醒', {
       confirmButtonText: '确定离开',
