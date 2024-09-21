@@ -9,7 +9,7 @@ import { asyncRoutes, asyncRoutesByFilesystem } from './routes'
 import '@/assets/styles/nprogress.css'
 
 function setupRoutes(router: Router) {
-  router.beforeEach(async (to, from, next) => {
+  router.beforeEach(async (to, _from, next) => {
     const settingsStore = useSettingsStore()
     const userStore = useUserStore()
     const routeStore = useRouteStore()
@@ -110,7 +110,7 @@ function setupRoutes(router: Router) {
 // 进度条
 function setupProgress(router: Router) {
   const { isLoading } = useNProgress()
-  router.beforeEach((to, from, next) => {
+  router.beforeEach((_to, _from, next) => {
     const settingsStore = useSettingsStore()
     if (settingsStore.settings.app.enableProgress) {
       isLoading.value = true

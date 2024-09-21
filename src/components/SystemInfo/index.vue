@@ -14,6 +14,14 @@ onMounted(() => {
 
 <template>
   <HSlideover v-model="isShow" title="系统信息">
+    <div v-if="pkg.version" class="px-4">
+      <h2 class="m-0 text-lg font-bold">
+        版本号
+      </h2>
+      <div class="my-4 text-center text-lg font-sans">
+        {{ pkg.version }}
+      </div>
+    </div>
     <div class="px-4">
       <h2 class="m-0 text-lg font-bold">
         最后编译时间
