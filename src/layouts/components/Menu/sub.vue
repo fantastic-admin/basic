@@ -185,9 +185,9 @@ function handleMouseleave() {
   <Teleport v-if="hasChildren" to="body" :disabled="!rootMenu.isMenuPopup">
     <Transition v-bind="transitionClass" v-on="transitionEvent">
       <OverlayScrollbarsComponent
-        v-if="opened" ref="subMenuRef" :options="{ scrollbars: { visibility: 'hidden' } }" defer class="sub-menu" :class="{
+        v-show="opened" ref="subMenuRef" :options="{ scrollbars: { visibility: 'hidden' } }" defer class="sub-menu static" :class="{
           'bg-[var(--g-sub-sidebar-bg)]': rootMenu.isMenuPopup,
-          'ring-1 ring-stone-2 dark-ring-stone-8 shadow-xl fixed z-3000 w-[200px]': rootMenu.isMenuPopup,
+          'ring-1 ring-stone-2 dark-ring-stone-8 shadow-xl fixed! z-3000 w-[200px]': rootMenu.isMenuPopup,
           'mx-1': rootMenu.isMenuPopup && (rootMenu.props.mode === 'vertical' || level !== 0),
           'py-1': rootMenu.isMenuPopup,
         }"

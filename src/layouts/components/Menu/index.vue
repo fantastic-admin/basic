@@ -106,7 +106,7 @@ const handleSubMenuClick: MenuInjection['handleSubMenuClick'] = (index, indexPat
 function initMenu() {
   const activeItem = activeIndex.value && items.value[activeIndex.value]
   setSubMenusActive(activeIndex.value)
-  if (!activeItem || props.collapse) {
+  if (!activeItem || isMenuPopup.value || props.collapse) {
     return
   }
   // 展开该菜单项的路径上所有子菜单
