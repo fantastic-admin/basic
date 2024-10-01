@@ -85,11 +85,11 @@ const transitionClass = computed(() => {
       }
     : {
         enterActiveClass: 'ease-in-out duration-300',
-        enterFromClass: 'opacity-0',
-        enterToClass: 'opacity-100',
+        enterFromClass: 'opacity-0 translate-y-4 scale-95 blur-4',
+        enterToClass: 'opacity-100 translate-y-0 scale-100 blur-0',
         leaveActiveClass: 'ease-in-out duration-300',
-        leaveFromClass: 'opacity-100',
-        leaveToClass: 'opacity-0',
+        leaveFromClass: 'opacity-100 translate-y-0 scale-100 blur-0',
+        leaveToClass: 'opacity-0 translate-y-4 scale-95 blur-4',
       }
 })
 
