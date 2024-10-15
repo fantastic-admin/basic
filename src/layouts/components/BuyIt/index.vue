@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import dayjs from '@/utils/dayjs'
 import eventBus from '@/utils/eventBus'
+import isBetween from 'dayjs/plugin/isBetween'
 import { ElNotification } from 'element-plus'
 
 defineOptions({
@@ -22,29 +24,20 @@ function open(url: string) {
 
 onMounted(() => {
   eventBus.on('global-ui-component-switch', () => switchUI())
-//   ElNotification({
-//     type: 'info',
-//     title: '「 专业版限时优惠倒计时 」',
-//     dangerouslyUseHTMLString: true,
-//     message: `
-// <p>限时优惠活动将于 <b>2024/04/01</b> 到期，现在购买只需 <b style="font-size: 18px; color: #ff4400;">899.00</b> 元。</p>
-// <p style="text-align: right;"><a href="https://fantastic-admin.hurui.me/buy.html" target="_blank">查看详情</a></p>
-//     `,
-//     position: 'bottom-right',
-//     duration: 0,
-//   })
-//   setTimeout(() => {
-//     ElNotification({
-//       type: 'info',
-//       title: '「 免费领取 Vue2 版本专业版 」',
-//       dangerouslyUseHTMLString: true,
-//       message: `
-// <p style="text-align: right;"><a href="https://fantastic-admin.hurui.me/get-vue2-pro.html" target="_blank">查看详情</a></p>
-//     `,
-//       position: 'bottom-right',
-//       duration: 0,
-//     })
-//   }, 0)
+  dayjs.extend(isBetween)
+  if (dayjs().isBetween('2024-10-17', '2024-11-17')) {
+    ElNotification({
+      type: 'info',
+      title: '「 四周年庆，全年最低价 」',
+      dangerouslyUseHTMLString: true,
+      message: `
+  <p>为庆祝 Fantastic-admin 正式发布四周年，我们在 <b>2024/10/17 - 2024/11/17</b> 期间推出一系列优惠。</p>
+  <p style="text-align: right;"><a href="https://fantastic-admin.hurui.me/buy-4yr.html" target="_blank">查看详情</a></p>
+      `,
+      position: 'bottom-right',
+      duration: 0,
+    })
+  }
 })
 
 onUnmounted(() => {
