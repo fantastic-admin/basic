@@ -85,6 +85,16 @@ const routes: RouteRecordRaw[] = [
           link: 'https://www.vexipui.com/zh-CN',
         },
       },
+      {
+        path: 'unibest',
+        redirect: '',
+        name: 'recommandUnibest',
+        meta: {
+          title: 'unibest 最好的 uniapp 开发框架',
+          icon: 'https://codercup2.github.io/unibest-docs/logo.svg',
+          link: 'https://codercup2.github.io/unibest-docs',
+        },
+      },
     ],
   },
 ]
