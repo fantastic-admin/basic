@@ -55,12 +55,9 @@ const searchInput = ref('')
 const sourceList = ref<listTypes[]>([])
 const actived = ref(-1)
 
-const searchInputRef = ref()
-const searchResultRef = ref<OverlayScrollbarsComponentRef>()
-const searchResultItemRef = ref<HTMLElement[]>([])
-onBeforeUpdate(() => {
-  searchResultItemRef.value = []
-})
+const searchInputRef = useTemplateRef('searchInputRef')
+const searchResultRef = useTemplateRef<OverlayScrollbarsComponentRef>('searchResultRef')
+const searchResultItemRef = useTemplateRef<HTMLElement[]>('searchResultItemRef')
 
 const resultList = computed(() => {
   let result = []
@@ -204,7 +201,7 @@ function keyDown() {
 }
 function keyEnter() {
   if (actived.value !== -1) {
-    searchResultItemRef.value.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.click()
+    searchResultItemRef.value?.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.click()
   }
 }
 function handleScroll() {
@@ -213,8 +210,8 @@ function handleScroll() {
     let scrollTo = 0
     if (actived.value !== -1) {
       scrollTo = contentDom.scrollTop
-      const activedOffsetTop = searchResultItemRef.value.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.offsetTop ?? 0
-      const activedClientHeight = searchResultItemRef.value.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.clientHeight ?? 0
+      const activedOffsetTop = searchResultItemRef.value?.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.offsetTop ?? 0
+      const activedClientHeight = searchResultItemRef.value?.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.clientHeight ?? 0
       const searchScrollTop = contentDom.scrollTop
       const searchClientHeight = contentDom.clientHeight
       if (activedOffsetTop + activedClientHeight > searchScrollTop + searchClientHeight) {

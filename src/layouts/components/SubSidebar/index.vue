@@ -14,14 +14,14 @@ const route = useRoute()
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
-const subSidebarRef = ref()
+const subSidebarRef = useTemplateRef('subSidebarRef')
 const showShadowTop = ref(false)
 const showShadowBottom = ref(false)
 function onSidebarScroll() {
-  const scrollTop = subSidebarRef.value.scrollTop
+  const scrollTop = subSidebarRef.value?.scrollTop ?? 0
   showShadowTop.value = scrollTop > 0
-  const clientHeight = subSidebarRef.value.clientHeight
-  const scrollHeight = subSidebarRef.value.scrollHeight
+  const clientHeight = subSidebarRef.value?.clientHeight ?? 0
+  const scrollHeight = subSidebarRef.value?.scrollHeight ?? 0
   showShadowBottom.value = Math.ceil(scrollTop + clientHeight) < scrollHeight
 }
 
@@ -42,7 +42,7 @@ watch(enableSidebar, (val) => {
   immediate: true,
 })
 
-const menuRef = ref()
+const menuRef = useTemplateRef('menuRef')
 
 onMounted(() => {
   if (enableSidebar.value) {

@@ -18,8 +18,8 @@ const props = withDefaults(
 )
 
 const index = props.menu.path ?? JSON.stringify(props.menu)
-const itemRef = shallowRef()
-const subMenuRef = shallowRef<OverlayScrollbarsComponentRef>()
+const itemRef = useTemplateRef('itemRef')
+const subMenuRef = useTemplateRef<OverlayScrollbarsComponentRef>('subMenuRef')
 const rootMenu = inject(rootMenuInjectionKey)!
 
 const opened = computed(() => {
@@ -130,7 +130,10 @@ function handleMouseenter() {
     if (hasChildren.value) {
       rootMenu.openMenu(index, props.uniqueKey)
       nextTick(() => {
-        const el = itemRef.value.ref
+        const el = itemRef.value?.ref
+        if (!el) {
+          return
+        }
         let top = 0
         let left = 0
         if (rootMenu.props.mode === 'vertical' || props.level !== 0) {

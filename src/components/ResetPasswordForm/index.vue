@@ -17,7 +17,7 @@ const emits = defineEmits<{
 
 const loading = ref(false)
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef<FormInstance>('formRef')
 const form = ref({
   account: props.account ?? localStorage.login_account ?? '',
   captcha: '',
