@@ -12,7 +12,7 @@ defineOptions({
   name: 'ComponentExampleSignCanvas',
 })
 
-const esignRef = ref()
+const esignRef = useTemplateRef<any>('esignRef')
 const options = ref({
   lineWidth: 6,
   lineColor: '#000000',

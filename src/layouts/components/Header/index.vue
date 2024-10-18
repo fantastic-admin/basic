@@ -13,12 +13,12 @@ const menuStore = useMenuStore()
 
 const { switchTo } = useMenu()
 
-const menuRef = ref()
+const menuRef = useTemplateRef('menuRef')
 
 // 顶部模式鼠标滚动
 function handlerMouserScroll(event: WheelEvent) {
   if (event.deltaY || event.detail !== 0) {
-    menuRef.value.scrollBy({
+    menuRef.value?.scrollBy({
       left: (event.deltaY || event.detail) > 0 ? 50 : -50,
     })
   }

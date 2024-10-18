@@ -7,10 +7,10 @@ meta:
 import * as Echarts from 'echarts'
 import Alert from './components/alert.vue'
 
-const chart1Ref = ref()
-const chart2Ref = ref()
-const chart3Ref = ref()
-const chart4Ref = ref()
+const chart1Ref = useTemplateRef('chart1Ref')
+const chart2Ref = useTemplateRef('chart2Ref')
+const chart3Ref = useTemplateRef('chart3Ref')
+const chart4Ref = useTemplateRef('chart4Ref')
 let chart1: any
 let chart2: any
 let chart3: any

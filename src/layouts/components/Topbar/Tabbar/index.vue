@@ -25,19 +25,16 @@ const keys = useMagicKeys({ reactive: true })
 
 const activedTabId = computed(() => tabbar.getId())
 
-const tabsRef = ref()
-const tabContainerRef = ref()
-const tabRef = shallowRef<HTMLElement[]>([])
-onBeforeUpdate(() => {
-  tabRef.value = []
-})
+const tabsRef = useTemplateRef('tabsRef')
+const tabContainerRef = useTemplateRef('tabContainerRef')
+const tabRef = useTemplateRef<HTMLElement[]>('tabRef')
 
 watch(() => route, (val) => {
   if (settingsStore.settings.tabbar.enable) {
     tabbarStore.add(val).then(() => {
       const index = tabbarStore.list.findIndex(item => item.tabId === activedTabId.value)
       if (index !== -1) {
-        scrollTo(tabRef.value[index].offsetLeft)
+        tabRef.value && scrollTo(tabRef.value[index].offsetLeft)
         tabbarScrollTip()
       }
     })
@@ -47,7 +44,7 @@ watch(() => route, (val) => {
   deep: true,
 })
 function tabbarScrollTip() {
-  if (tabContainerRef.value.$el.clientWidth > tabsRef.value.clientWidth && localStorage.getItem('tabbarScrollTip') === undefined) {
+  if (tabContainerRef.value?.$el.clientWidth > (tabsRef.value?.clientWidth ?? 0) && localStorage.getItem('tabbarScrollTip') === undefined) {
     localStorage.setItem('tabbarScrollTip', '')
     Message.info('标签栏数量超过展示区域范围，可以将鼠标移到标签栏上，通过鼠标滚轮滑动浏览', {
       title: '温馨提示',
@@ -58,12 +55,12 @@ function tabbarScrollTip() {
   }
 }
 function handlerMouserScroll(event: WheelEvent) {
-  tabsRef.value.scrollBy({
+  tabsRef.value?.scrollBy({
     left: event.deltaY || event.detail,
   })
 }
 function scrollTo(offsetLeft: number) {
-  tabsRef.value.scrollTo({
+  tabsRef.value?.scrollTo({
     left: offsetLeft - 50,
     behavior: 'smooth',
   })

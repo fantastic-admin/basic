@@ -11,7 +11,7 @@ const url1 = ref('')
 const url2 = ref('')
 const url3 = ref('')
 
-const canvasRef = ref()
+const canvasRef = useTemplateRef('canvasRef')
 
 onMounted(() => {
   // 渲染成 img 标签

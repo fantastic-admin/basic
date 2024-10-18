@@ -9,10 +9,13 @@ import Alert from './components/alert.vue'
 import 'cropperjs/dist/cropper.css'
 
 let cropper: any = null
-const imageRef = ref()
+const imageRef = useTemplateRef('imageRef')
 const cropImage = ref('')
 
 onMounted(() => {
+  if (!imageRef.value) {
+    return
+  }
   cropper = new Cropper(imageRef.value, {
     aspectRatio: 1,
     viewMode: 1,

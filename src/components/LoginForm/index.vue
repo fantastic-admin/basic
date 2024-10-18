@@ -23,7 +23,7 @@ const loading = ref(false)
 
 // 登录方式，default 账号密码登录，qrcode 扫码登录
 const type = ref('default')
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef<FormInstance>('formRef')
 const form = ref({
   account: props.account ?? localStorage.login_account ?? '',
   password: '',

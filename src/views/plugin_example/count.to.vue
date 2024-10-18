@@ -7,7 +7,7 @@ meta:
 import { CountTo } from 'vue3-count-to'
 import Alert from './components/alert.vue'
 
-const countToRef = ref()
+const countToRef = useTemplateRef<any>('countToRef')
 const form = ref({
   startVal: 0,
   endVal: 2017,

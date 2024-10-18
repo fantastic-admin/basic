@@ -7,10 +7,10 @@ meta:
 import VChart from '@visactor/vchart'
 import Alert from './components/alert.vue'
 
-const chart1Ref = ref()
-const chart2Ref = ref()
-const chart3Ref = ref()
-const chart4Ref = ref()
+const chart1Ref = useTemplateRef('chart1Ref')
+const chart2Ref = useTemplateRef('chart2Ref')
+const chart3Ref = useTemplateRef('chart3Ref')
+const chart4Ref = useTemplateRef('chart4Ref')
 let chart1: any
 let chart2: any
 let chart3: any
@@ -24,6 +24,9 @@ onMounted(() => {
 })
 
 function initChart1() {
+  if (!chart1Ref.value) {
+    return
+  }
   const spec: any = {
     type: 'bar',
     data: {
@@ -73,6 +76,9 @@ function initChart1() {
   chart1.renderSync()
 }
 function initChart2() {
+  if (!chart2Ref.value) {
+    return
+  }
   const spec: any = {
     type: 'line',
     data: {
@@ -139,6 +145,9 @@ function initChart2() {
   chart2.renderSync()
 }
 function initChart3() {
+  if (!chart3Ref.value) {
+    return
+  }
   const spec: any = {
     type: 'common',
     padding: {
@@ -300,6 +309,9 @@ function initChart3() {
   chart3.renderSync()
 }
 function initChart4() {
+  if (!chart4Ref.value) {
+    return
+  }
   const spec: any = {
     type: 'radar',
     data: [
@@ -397,7 +409,6 @@ function initChart4() {
       },
     ],
   }
-
   chart4 = new VChart(spec, { dom: chart4Ref.value })
   chart4.renderSync()
 }

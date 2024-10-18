@@ -15,7 +15,7 @@ defineOptions({
 
 const userStore = useUserStore()
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef<FormInstance>('formRef')
 const form = ref({
   password: '',
   newpassword: '',

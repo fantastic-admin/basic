@@ -22,7 +22,7 @@ const pcasBoth = ref([
   { code: '330106', name: '西湖区' },
 ])
 
-const formRef = ref<FormInstance>()
+const formRef = useTemplateRef<FormInstance>('formRef')
 const ruleForm = ref({
   pca: [],
 })
