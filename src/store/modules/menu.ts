@@ -188,6 +188,16 @@ const useMenuStore = defineStore(
       }).catch(() => {})
     }
     // 设置主导航
+    function isPathInMenus(menus: Menu.recordRaw[], path: string) {
+      let flag = false
+      flag = menus.some((item) => {
+        if (item.children) {
+          return isPathInMenus(item.children, path)
+        }
+        return path.indexOf(`${item.path}/`) === 0 || path === item.path
+      })
+      return flag
+    }
     function setActived(data: number | string) {
       if (typeof data === 'number') {
         // 如果是 number 类型，则认为是主导航的索引
@@ -195,7 +205,7 @@ const useMenuStore = defineStore(
       }
       else {
         // 如果是 string 类型，则认为是路由，需要查找对应的主导航索引
-        const findIndex = allMenus.value.findIndex(item => item.children.some(r => data.indexOf(`${r.path}/`) === 0 || data === r.path))
+        const findIndex = allMenus.value.findIndex(item => isPathInMenus(item.children, data))
         if (findIndex >= 0) {
           actived.value = findIndex
         }
