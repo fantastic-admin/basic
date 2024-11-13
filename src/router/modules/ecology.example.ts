@@ -86,13 +86,13 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'unibest',
+        path: 'mineadmin',
         redirect: '',
-        name: 'recommandUnibest',
+        name: 'recommandMineadmin',
         meta: {
-          title: 'unibest 最好的 uniapp 开发框架',
-          icon: 'https://codercup2.github.io/unibest-docs/logo.svg',
-          link: 'https://codercup2.github.io/unibest-docs',
+          title: 'MineAdmin 开箱即用后台系统',
+          icon: 'https://doc.mineadmin.com/logo.svg',
+          link: 'https://github.com/mineadmin/mineadmin',
         },
       },
     ],
