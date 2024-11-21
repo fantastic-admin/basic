@@ -204,10 +204,18 @@ const useMenuStore = defineStore(
         actived.value = data
       }
       else {
-        // 如果是 string 类型，则认为是路由，需要查找对应的主导航索引
-        const findIndex = allMenus.value.findIndex(item => isPathInMenus(item.children, data))
-        if (findIndex >= 0) {
-          actived.value = findIndex
+        function _setActived() {
+          // 如果是 string 类型，则认为是路由，需要查找对应的主导航索引
+          const findIndex = allMenus.value.findIndex(item => isPathInMenus(item.children, data))
+          if (findIndex >= 0) {
+            actived.value = findIndex
+          }
+        }
+        if (settingsStore.settings.app.enablePermission) {
+          watch(allMenus, _setActived, { once: true })
+        }
+        else {
+          _setActived()
         }
       }
     }
