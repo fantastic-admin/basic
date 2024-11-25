@@ -3,7 +3,7 @@ import router from '@/router'
 import useMenuStore from './menu'
 import useRouteStore from './route'
 import useSettingsStore from './settings'
-import useTabbar from './tabbar.ts'
+import useTabbarStore from './tabbar'
 
 const useUserStore = defineStore(
   // 唯一ID
@@ -12,7 +12,7 @@ const useUserStore = defineStore(
     const settingsStore = useSettingsStore()
     const routeStore = useRouteStore()
     const menuStore = useMenuStore()
-    const tabbarStore = useTabbar()
+    const tabbarStore = useTabbarStore()
 
     const account = ref(localStorage.account ?? '')
     const token = ref(localStorage.token ?? '')
