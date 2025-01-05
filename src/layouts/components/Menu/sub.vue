@@ -36,39 +36,49 @@ const transitionEvent = computed(() => {
         },
         afterEnter: () => {},
         beforeLeave: (el: HTMLElement) => {
-          el.style.overflow = 'hidden'
           el.style.maxHeight = `${el.offsetHeight}px`
+          el.style.overflow = 'hidden'
         },
         leave: (el: HTMLElement) => {
           el.style.maxHeight = '0'
         },
         afterLeave(el: HTMLElement) {
-          el.style.overflow = ''
           el.style.maxHeight = ''
+          el.style.overflow = ''
         },
       }
     : {
         enter(el: HTMLElement) {
-          const memorizedHeight = el.offsetHeight
-          el.style.maxHeight = '0'
-          el.style.overflow = 'hidden'
-          void el.offsetHeight
-          el.style.maxHeight = `${memorizedHeight}px`
+          requestAnimationFrame(() => {
+            el.dataset.height = el.offsetHeight.toString()
+            el.style.maxHeight = '0'
+            void el.offsetHeight
+            el.style.maxHeight = `${el.dataset.height}px`
+            el.style.overflow = 'hidden'
+          })
         },
         afterEnter(el: HTMLElement) {
-          el.style.overflow = ''
           el.style.maxHeight = ''
+          el.style.overflow = ''
+        },
+        enterCancelled(el: HTMLElement) {
+          el.style.maxHeight = ''
+          el.style.overflow = ''
         },
         beforeLeave(el: HTMLElement) {
-          el.style.overflow = 'hidden'
           el.style.maxHeight = `${el.offsetHeight}px`
+          el.style.overflow = 'hidden'
         },
         leave(el: HTMLElement) {
           el.style.maxHeight = '0'
         },
         afterLeave(el: HTMLElement) {
-          el.style.overflow = ''
           el.style.maxHeight = ''
+          el.style.overflow = ''
+        },
+        leaveCancelled(el: HTMLElement) {
+          el.style.maxHeight = ''
+          el.style.overflow = ''
         },
       }
 })
@@ -188,9 +198,9 @@ function handleMouseleave() {
   <Teleport v-if="hasChildren" to="body" :disabled="!rootMenu.isMenuPopup">
     <Transition v-bind="transitionClass" v-on="transitionEvent">
       <OverlayScrollbarsComponent
-        v-show="opened" ref="subMenuRef" :options="{ scrollbars: { visibility: 'hidden' } }" defer class="sub-menu static" :class="{
+        v-if="opened" ref="subMenuRef" :options="{ scrollbars: { visibility: 'hidden' } }" defer class="sub-menu static rounded-lg" :class="{
           'bg-[var(--g-sub-sidebar-bg)]': rootMenu.isMenuPopup,
-          'ring-1 ring-stone-2 dark-ring-stone-8 shadow-xl fixed! z-3000 w-[200px]': rootMenu.isMenuPopup,
+          'border shadow-xl fixed! z-3000 w-[200px]': rootMenu.isMenuPopup,
           'mx-1': rootMenu.isMenuPopup && (rootMenu.props.mode === 'vertical' || level !== 0),
           'py-1': rootMenu.isMenuPopup,
         }"

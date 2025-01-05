@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import useSettingsStore from '@/store/modules/settings'
+import { ua } from '@/utils/ua'
 import hotkeys from 'hotkeys-js'
-import Provider from './ui-provider/index.vue'
+import Provider from './ui/provider/index.vue'
 import eventBus from './utils/eventBus'
 
 const route = useRoute()
 
 const settingsStore = useSettingsStore()
 const { auth } = useAuth()
+
+document.body.setAttribute('data-os', ua.getOS().name || '')
 
 const isAuth = computed(() => {
   return route.matched.every((item) => {
@@ -47,8 +50,10 @@ onMounted(() => {
   <Provider>
     <RouterView v-slot="{ Component }">
       <component :is="Component" v-if="isAuth" />
-      <NotAllowed v-else />
+      <FaNotAllowed v-else />
     </RouterView>
-    <SystemInfo />
+    <FaToast />
+    <FaNotification />
+    <FaSystemInfo />
   </Provider>
 </template>

@@ -18,22 +18,26 @@ onMounted(() => {
 </script>
 
 <template>
-  <HDialog v-model="isShow" title="快捷键介绍">
+  <FaModal v-model="isShow" title="快捷键介绍" :footer="false">
     <div class="px-4">
-      <div class="grid gap-2 sm-grid-cols-2">
+      <div class="grid gap-4 sm-grid-cols-2">
         <div>
           <h2 class="m-0 text-lg font-bold">
             全局
           </h2>
-          <ul class="list-none pl-4 text-sm">
-            <li class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>I</HKbd>
+          <ul class="list-none ps-2 pt-2 text-sm">
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>I</FaKbd>
+              </div>
               查看系统信息
             </li>
-            <li v-if="settingsStore.settings.toolbar.navSearch && settingsStore.settings.navSearch.enableHotkeys" class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>S</HKbd>
+            <li v-if="settingsStore.settings.toolbar.navSearch && settingsStore.settings.navSearch.enableHotkeys" class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>S</FaKbd>
+              </div>
               唤起导航搜索
             </li>
           </ul>
@@ -42,10 +46,12 @@ onMounted(() => {
           <h2 class="m-0 text-lg font-bold">
             主导航
           </h2>
-          <ul class="list-none pl-4 text-sm">
-            <li class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>`</HKbd>
+          <ul class="list-none ps-2 pt-2 text-sm">
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>`</FaKbd>
+              </div>
               激活下一个主导航
             </li>
           </ul>
@@ -54,35 +60,45 @@ onMounted(() => {
           <h2 class="m-0 text-lg font-bold">
             标签栏
           </h2>
-          <ul class="list-none pl-4 text-sm">
-            <li class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>←</HKbd>
+          <ul class="list-none ps-2 pt-2 text-sm">
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>←</FaKbd>
+              </div>
               切换到上一个标签页
             </li>
-            <li class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>→</HKbd>
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>→</FaKbd>
+              </div>
               切换到下一个标签页
             </li>
-            <li class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>W</HKbd>
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>W</FaKbd>
+              </div>
               关闭当前标签页
             </li>
-            <li class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>1~9</HKbd>
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>1~9</FaKbd>
+              </div>
               切换到第 n 个标签页
             </li>
-            <li class="py-1">
-              <HKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</HKbd>
-              <HKbd>0</HKbd>
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>0</FaKbd>
+              </div>
               切换到最后一个标签页
             </li>
           </ul>
         </div>
       </div>
     </div>
-  </HDialog>
+  </FaModal>
 </template>

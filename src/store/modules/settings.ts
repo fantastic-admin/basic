@@ -1,7 +1,7 @@
 import type { Settings } from '#/global'
 import type { RouteMeta } from 'vue-router'
 import settingsDefault from '@/settings'
-import { defaultsDeep } from 'lodash-es'
+import { merge } from '@/utils/object'
 
 const useSettingsStore = defineStore(
   // 唯一ID
@@ -10,7 +10,6 @@ const useSettingsStore = defineStore(
     const settings = ref(settingsDefault)
 
     const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
-    const currentColorScheme = ref<Exclude<Settings.app['colorScheme'], ''>>()
     watch(() => settings.value.app.colorScheme, (val) => {
       if (val === '') {
         prefersColorScheme.addEventListener('change', updateTheme)
@@ -21,6 +20,8 @@ const useSettingsStore = defineStore(
     }, {
       immediate: true,
     })
+
+    const currentColorScheme = ref<Exclude<Settings.app['colorScheme'], ''>>()
     watch(() => settings.value.app.colorScheme, updateTheme, {
       immediate: true,
     })
@@ -39,6 +40,13 @@ const useSettingsStore = defineStore(
           break
       }
     }
+
+    watch(() => settings.value.app.radius, (val) => {
+      document.documentElement.style.removeProperty('--radius')
+      document.documentElement.style.setProperty('--radius', `${val}rem`)
+    }, {
+      immediate: true,
+    })
     watch([
       () => settings.value.app.enableMournMode,
       () => settings.value.app.enableColorAmblyopiaMode,
@@ -136,7 +144,7 @@ const useSettingsStore = defineStore(
 
     // 更新应用配置
     function updateSettings(data: Settings.all, fromBase = false) {
-      settings.value = defaultsDeep(data, fromBase ? settingsDefault : settings.value)
+      settings.value = merge(data, fromBase ? settingsDefault : settings.value)
     }
 
     return {

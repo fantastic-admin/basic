@@ -39,41 +39,55 @@ watch(scrollTop, (val, oldVal) => {
 </script>
 
 <template>
-  <div
-    class="topbar-container" :class="{
-      'has-tabbar': settingsStore.settings.tabbar.enable,
-      'has-toolbar': enableToolbar,
-      [`topbar-${settingsStore.settings.topbar.mode}`]: true,
-      'shadow': scrollTop,
-      'hide': scrollOnHide,
-    }" data-fixed-calc-width
-  >
-    <Tabbar v-if="settingsStore.settings.tabbar.enable" />
-    <Toolbar v-if="enableToolbar" />
-  </div>
+  <FaSmartFixedBlock position="top" :class="{ 'absolute!': settingsStore.settings.topbar.mode === 'static' }">
+    <div
+      class="topbar-container transition-[transform,box-shadow]-300" :class="{
+        [`topbar-${settingsStore.settings.topbar.mode}`]: true,
+        mask: scrollTop,
+        hide: scrollOnHide,
+      }"
+    >
+      <Tabbar v-if="settingsStore.settings.tabbar.enable" />
+      <Toolbar v-if="enableToolbar" />
+    </div>
+  </FaSmartFixedBlock>
 </template>
 
 <style scoped>
 .topbar-container {
-  position: absolute;
-  top: 0;
-  z-index: 999;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 1px 0 0 var(--g-border-color);
-  transition: width 0.3s, top 0.3s, transform 0.3s, box-shadow 0.3s;
+  width: 100%;
+  box-shadow: 0 1px 0 0 hsl(var(--border));
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &::before {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 50px;
+    pointer-events: none;
+    content: "";
+    background-image: linear-gradient(0deg, transparent, var(--g-main-area-bg));
+    box-shadow: 0 -1px 0 0 hsl(var(--border));
+    opacity: 0;
+    transition: opacity 0.3s;
+    transform: translateY(100%);
+  }
 
   &.topbar-fixed,
   &.topbar-sticky {
     position: fixed;
 
-    &.shadow {
-      box-shadow: 0 10px 10px -10px var(--g-box-shadow-color);
+    &.mask::before {
+      opacity: 1;
     }
   }
 
   &.topbar-sticky.hide {
-    top: calc((var(--g-tabbar-height) + var(--g-toolbar-height)) * -1) !important;
+    transform: translateY(-100%);
   }
 }
 </style>

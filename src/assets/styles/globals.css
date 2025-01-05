@@ -50,24 +50,30 @@
   }
 }
 
-::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+body:not([data-os="macOS"]) {
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--primary) / 30%);
+    background-clip: padding-box;
+    border: 3px solid transparent;
+    border-radius: 6px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--primary) / 50%);
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
 }
 
-::-webkit-scrollbar-thumb {
-  background-color: rgb(0 0 0 / 40%);
-  background-clip: padding-box;
-  border: 3px solid transparent;
-  border-radius: 6px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(0 0 0 / 50%);
-}
-
-::-webkit-scrollbar-track {
-  background-color: transparent;
+* {
+  border-color: hsl(var(--border));
 }
 
 html,
@@ -78,8 +84,9 @@ body {
 body {
   box-sizing: border-box;
   margin: 0;
-  font-family: Lato, "PingFang SC", "Microsoft YaHei", sans-serif;
-  background-color: var(--g-container-bg);
+  font-family: var(--font-family);
+  color: hsl(var(--foreground));
+  background: hsl(var(--background));
   -webkit-tap-highlight-color: transparent;
 
   &.overflow-hidden {
@@ -87,26 +94,8 @@ body {
   }
 }
 
-* {
-  box-sizing: inherit;
-}
-
 #app {
   height: 100%;
-}
-
-/* 右侧内容区针对fixed元素，有横向铺满的需求，可在fixed元素上设置 [data-fixed-calc-width] */
-[data-fixed-calc-width] {
-  position: fixed;
-  right: 0;
-  left: 50%;
-  width: calc(100% - var(--g-main-sidebar-actual-width) - var(--g-sub-sidebar-actual-width));
-  transform: translateX(-50%) translateX(calc(var(--g-main-sidebar-actual-width) / 2)) translateX(calc(var(--g-sub-sidebar-actual-width) / 2));
-
-  [data-mode="mobile"] & {
-    width: 100% !important;
-    transform: translateX(-50%) !important;
-  }
 }
 
 /* textarea 字体跟随系统 */
@@ -114,36 +103,13 @@ textarea {
   font-family: inherit;
 }
 
-/* Overrides Floating Vue */
-.v-popper--theme-dropdown,
-.v-popper--theme-tooltip {
-  --uno: inline-flex;
-}
-
-.v-popper--theme-dropdown .v-popper__inner,
-.v-popper--theme-tooltip .v-popper__inner {
-  --uno: bg-white dark-bg-stone-8 text-dark dark-text-white rounded shadow ring-1 ring-gray-200 dark-ring-gray-800 border border-solid border-stone/20 text-xs font-normal;
-
-  box-shadow: 0 6px 30px rgb(0 0 0 / 10%);
-}
-
-.v-popper--theme-tooltip .v-popper__arrow-inner,
-.v-popper--theme-dropdown .v-popper__arrow-inner {
-  visibility: visible;
-
-  --uno: border-white dark-border-stone-8;
-}
-
-.v-popper--theme-tooltip .v-popper__arrow-outer,
-.v-popper--theme-dropdown .v-popper__arrow-outer {
-  --uno: border-stone/20;
-}
-
-.v-popper--theme-tooltip.v-popper--shown,
-.v-popper--theme-tooltip.v-popper--shown * {
-  transition: none !important;
-}
-
+/* Overrides OverlayScrollbars */
 [data-overlayscrollbars-contents] {
   overscroll-behavior: contain;
+}
+
+.os-scrollbar {
+  --os-handle-bg: hsl(var(--primary) / 30%);
+  --os-handle-bg-hover: hsl(var(--primary) / 40%);
+  --os-handle-bg-active: hsl(var(--primary) / 50%);
 }

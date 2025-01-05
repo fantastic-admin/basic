@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
-import { useElementSize } from '@vueuse/core'
 import Logo from '../Logo/index.vue'
 import Menu from '../Menu/index.vue'
 
@@ -14,17 +13,6 @@ const route = useRoute()
 const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
-const subSidebarRef = useTemplateRef('subSidebarRef')
-const showShadowTop = ref(false)
-const showShadowBottom = ref(false)
-function onSidebarScroll() {
-  const scrollTop = subSidebarRef.value?.scrollTop ?? 0
-  showShadowTop.value = scrollTop > 0
-  const clientHeight = subSidebarRef.value?.clientHeight ?? 0
-  const scrollHeight = subSidebarRef.value?.scrollHeight ?? 0
-  showShadowBottom.value = Math.ceil(scrollTop + clientHeight) < scrollHeight
-}
-
 const enableSidebar = computed(() => {
   return settingsStore.mode === 'mobile' || (
     menuStore.sidebarMenus.length !== 0
@@ -32,28 +20,23 @@ const enableSidebar = computed(() => {
   )
 })
 
-watch(enableSidebar, (val) => {
-  if (val) {
-    nextTick(() => {
-      onSidebarScroll()
-    })
+const transitionName = ref('')
+watch(() => menuStore.actived, (val, oldVal) => {
+  if (settingsStore.mode === 'mobile' || settingsStore.settings.menu.mode === 'side') {
+    if (val > oldVal) {
+      transitionName.value = 'sub-sidebar-y-start'
+    }
+    else {
+      transitionName.value = 'sub-sidebar-y-end'
+    }
   }
-}, {
-  immediate: true,
-})
-
-const menuRef = useTemplateRef('menuRef')
-
-onMounted(() => {
-  if (enableSidebar.value) {
-    const { height } = useElementSize(menuRef)
-    watch(() => height.value, () => {
-      if (height.value > 0) {
-        onSidebarScroll()
-      }
-    }, {
-      immediate: true,
-    })
+  else if (settingsStore.settings.menu.mode === 'head') {
+    if (val > oldVal) {
+      transitionName.value = 'sub-sidebar-x-start'
+    }
+    else {
+      transitionName.value = 'sub-sidebar-x-end'
+    }
   }
 })
 </script>
@@ -65,34 +48,27 @@ onMounted(() => {
     }"
   >
     <Logo
-      :show-logo="settingsStore.settings.menu.mode === 'single'" class="sidebar-logo" :class="{
+      v-if="['side', 'single'].includes(settingsStore.settings.menu.mode)" :show-logo="settingsStore.settings.menu.mode === 'single'" class="sidebar-logo" :class="{
         'sidebar-logo-bg': settingsStore.settings.menu.mode === 'single',
       }"
     />
-    <div
-      ref="subSidebarRef" class="sub-sidebar flex-1 transition-shadow-300 scrollbar-none" :class="{
-        'shadow-top': showShadowTop,
-        'shadow-bottom': showShadowBottom,
-      }" @scroll="onSidebarScroll"
-    >
-      <div ref="menuRef">
-        <TransitionGroup name="sub-sidebar">
-          <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
-            <div v-show="mainIndex === menuStore.actived">
-              <Menu
-                :menu="mainItem.children" :value="route.meta.activeMenu || route.path" :default-openeds="menuStore.defaultOpenedPaths" :accordion="settingsStore.settings.menu.subMenuUniqueOpened" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" class="menu" :class="{
-                  '-mt-2': !['head', 'single'].includes(settingsStore.settings.menu.mode),
-                }"
-              />
-            </div>
-          </template>
-        </TransitionGroup>
-      </div>
-    </div>
+    <FaMaskScrollContainer gradient-color="var(--g-sub-sidebar-bg)" class="flex-1">
+      <TransitionGroup :name="transitionName">
+        <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
+          <div v-show="mainIndex === menuStore.actived">
+            <Menu
+              :menu="mainItem.children" :value="route.meta.activeMenu || route.path" :default-openeds="menuStore.defaultOpenedPaths" :accordion="settingsStore.settings.menu.subMenuUniqueOpened" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" class="menu" :class="{
+                '-mt-2': !['head', 'single'].includes(settingsStore.settings.menu.mode),
+              }"
+            />
+          </div>
+        </template>
+      </TransitionGroup>
+    </FaMaskScrollContainer>
     <div v-if="settingsStore.mode === 'pc'" class="relative flex items-center px-4 py-3" :class="[settingsStore.settings.menu.subMenuCollapse ? 'justify-center' : 'justify-end']">
-      <span v-show="settingsStore.settings.menu.enableSubMenuCollapseButton" class="flex-center cursor-pointer rounded bg-stone-1 p-2 transition dark-bg-stone-9 hover-bg-stone-2 dark-hover-bg-stone-8" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
-        <SvgIcon name="toolbar-collapse" />
-      </span>
+      <FaButton v-show="settingsStore.settings.menu.enableSubMenuCollapseButton" variant="secondary" size="icon" class="h-8 w-8 transition" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
+        <FaIcon name="toolbar-collapse" :size="16" />
+      </FaButton>
     </div>
   </div>
 </template>
@@ -100,14 +76,15 @@ onMounted(() => {
 <style scoped>
 .sub-sidebar-container {
   position: absolute;
+  inset-inline-start: 0;
   top: 0;
   bottom: 0;
-  left: 0;
   display: flex;
   flex-direction: column;
   width: var(--g-sub-sidebar-width);
   background-color: var(--g-sub-sidebar-bg);
-  transition: background-color 0.3s, left 0.3s, width 0.3s;
+  box-shadow: -1px 0 0 0 hsl(var(--border)), 1px 0 0 0 hsl(var(--border));
+  transition: background-color 0.3s, inset-inline-start 0.3s, width 0.3s, box-shadow 0.3s;
 
   &.is-collapse {
     width: var(--g-sub-sidebar-collapse-width);
@@ -136,40 +113,47 @@ onMounted(() => {
     }
   }
 
-  .sub-sidebar {
-    overflow: hidden auto;
-    overscroll-behavior: contain;
-
-    &.shadow-top {
-      box-shadow: inset 0 10px 10px -10px var(--g-box-shadow-color), inset 0 0 0 transparent;
-    }
-
-    &.shadow-bottom {
-      box-shadow: inset 0 0 0 transparent, inset 0 -10px 10px -10px var(--g-box-shadow-color);
-    }
-
-    &.shadow-top.shadow-bottom {
-      box-shadow: inset 0 10px 10px -10px var(--g-box-shadow-color), inset 0 -10px 10px -10px var(--g-box-shadow-color);
-    }
-  }
-
   .menu {
     width: 100%;
   }
 }
 
 /* 次侧边栏动画 */
-.sub-sidebar-enter-active {
+.sub-sidebar-x-start-enter-active,
+.sub-sidebar-x-end-enter-active,
+.sub-sidebar-y-start-enter-active,
+.sub-sidebar-y-end-enter-active {
   transition: 0.2s;
 }
 
-.sub-sidebar-enter-from,
-.sub-sidebar-leave-active {
+.sub-sidebar-x-start-enter-from,
+.sub-sidebar-x-start-leave-active {
   opacity: 0;
-  transform: translateY(30px) skewY(10deg);
+  transform: translateX(30px);
 }
 
-.sub-sidebar-leave-active {
+.sub-sidebar-x-end-enter-from,
+.sub-sidebar-x-end-leave-active {
+  opacity: 0;
+  transform: translateX(-30px);
+}
+
+.sub-sidebar-y-start-enter-from,
+.sub-sidebar-y-start-leave-active {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.sub-sidebar-y-end-enter-from,
+.sub-sidebar-y-end-leave-active {
+  opacity: 0;
+  transform: translateY(-30px);
+}
+
+.sub-sidebar-x-start-leave-active,
+.sub-sidebar-x-end-leave-active,
+.sub-sidebar-y-start-leave-active,
+.sub-sidebar-y-end-leave-active {
   position: absolute;
 }
 </style>

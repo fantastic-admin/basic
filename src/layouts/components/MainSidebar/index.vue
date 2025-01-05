@@ -17,7 +17,7 @@ const { switchTo } = useMenu()
   <Transition name="main-sidebar">
     <div v-if="settingsStore.settings.menu.mode === 'side' || (settingsStore.mode === 'mobile' && settingsStore.settings.menu.mode !== 'single')" class="main-sidebar-container">
       <Logo :show-title="false" class="sidebar-logo" />
-      <div class="menu scrollbar-none">
+      <FaMaskScrollContainer gradient-color="var(--g-main-sidebar-bg)" class="menu">
         <!-- 侧边栏模式（含主导航） -->
         <div class="w-full flex flex-col of-hidden py-1 transition-all -mt-2">
           <template v-for="(item, index) in menuStore.allMenus" :key="index">
@@ -27,12 +27,12 @@ const { switchTo } = useMenu()
               }"
             >
               <div
-                v-if="item.children && item.children.length !== 0" class="group menu-item-container h-full w-full flex cursor-pointer items-center justify-between gap-1 py-4 text-[var(--g-main-sidebar-menu-color)] transition-all hover-(bg-[var(--g-main-sidebar-menu-hover-bg)] text-[var(--g-main-sidebar-menu-hover-color)]) px-2!" :class="{
+                v-if="item.children && item.children.length !== 0" class="group menu-item-container relative h-full w-full flex cursor-pointer items-center justify-between gap-1 rounded-lg py-4 text-[var(--g-main-sidebar-menu-color)] transition-all hover-(bg-[var(--g-main-sidebar-menu-hover-bg)] text-[var(--g-main-sidebar-menu-hover-color)]) px-2!" :class="{
                   'text-[var(--g-main-sidebar-menu-active-color)]! bg-[var(--g-main-sidebar-menu-active-bg)]!': index === menuStore.actived,
                 }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" @click="switchTo(index)"
               >
                 <div class="w-full inline-flex flex-1 flex-col items-center justify-center gap-[2px]">
-                  <SvgIcon v-if="item.meta?.icon" :name="item.meta?.icon" class="menu-item-container-icon transition-transform group-hover-scale-120" />
+                  <FaIcon v-if="item.meta?.icon" :name="item.meta?.icon" class="menu-item-container-icon transition-transform group-hover-scale-120" />
                   <span class="w-full flex-1 truncate text-center text-sm transition-height transition-opacity transition-width">
                     {{ typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title }}
                   </span>
@@ -41,7 +41,7 @@ const { switchTo } = useMenu()
             </div>
           </template>
         </div>
-      </div>
+      </FaMaskScrollContainer>
     </div>
   </Transition>
 </template>
@@ -49,13 +49,13 @@ const { switchTo } = useMenu()
 <style scoped>
 .main-sidebar-container {
   position: relative;
-  z-index: 1;
+  z-index: 10;
   display: flex;
   flex-direction: column;
   width: var(--g-main-sidebar-width);
   color: var(--g-main-sidebar-menu-color);
   background-color: var(--g-main-sidebar-bg);
-  box-shadow: 1px 0 0 0 var(--g-border-color);
+  box-shadow: 1px 0 0 0 hsl(var(--border)), -1px 0 0 0 hsl(var(--border));
   transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
 
   .sidebar-logo {
@@ -65,9 +65,6 @@ const { switchTo } = useMenu()
 
   .menu {
     flex: 1;
-    width: initial;
-    overflow: hidden auto;
-    overscroll-behavior: contain;
 
     :deep(.menu-item) {
       .menu-item-container {

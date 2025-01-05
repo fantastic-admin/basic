@@ -17,6 +17,12 @@ declare namespace Settings {
      */
     colorScheme?: '' | 'light' | 'dark'
     /**
+     * 圆角系数
+     * @默认值 `0.5`
+     * @可选值 `0` / `0.25` / `0.5` / `0.75` / `1`
+     */
+    radius?: 0 | 0.25 | 0.5 | 0.75 | 1
+    /**
      * 是否开启哀悼模式
      * @默认值 `false`
      */
@@ -88,10 +94,12 @@ declare namespace Settings {
      */
     mode?: 'side' | 'head' | 'single'
     /**
-     * 切换主导航是否跳转页面
-     * @默认值 `false`
+     * 主导航点击模式
+     * @默认值 `'switch'` 切换
+     * @可选值 `'jump'` 跳转
+     * @可选值 `'smart'` 智能选择
      */
-    switchMainMenuAndPageJump?: boolean
+    mainMenuClickMode?: 'switch' | 'jump' | 'smart'
     /**
      * 次导航是否只保持一个子项的展开
      * @默认值 `true`
@@ -237,7 +245,6 @@ declare module 'vue-router' {
     icon?: string
     defaultOpened?: boolean
     auth?: string | string[]
-    sidebar?: boolean
     menu?: boolean
     breadcrumb?: boolean
     activeMenu?: string

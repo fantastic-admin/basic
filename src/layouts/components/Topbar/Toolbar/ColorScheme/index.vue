@@ -37,24 +37,12 @@ function toggleColorScheme(event: MouseEvent) {
 </script>
 
 <template>
-  <HDropdown class="flex-center cursor-pointer px-2 py-1">
-    <SvgIcon
+  <FaButton variant="ghost" size="icon" @click="toggleColorScheme">
+    <FaIcon
       :name="{
-        '': 'i-codicon:color-mode',
-        'light': 'i-ri:sun-line',
-        'dark': 'i-ri:moon-line',
-      }[settingsStore.settings.app.colorScheme]" @click="toggleColorScheme"
+        light: 'i-ri:sun-line',
+        dark: 'i-ri:moon-line',
+      }[settingsStore.currentColorScheme!]" :size="16"
     />
-    <template #dropdown>
-      <HTabList
-        v-model="settingsStore.settings.app.colorScheme"
-        :options="[
-          { icon: 'i-ri:sun-line', label: '', value: 'light' },
-          { icon: 'i-ri:moon-line', label: '', value: 'dark' },
-          { icon: 'i-codicon:color-mode', label: '', value: '' },
-        ]"
-        class="m-3"
-      />
-    </template>
-  </HDropdown>
+  </FaButton>
 </template>

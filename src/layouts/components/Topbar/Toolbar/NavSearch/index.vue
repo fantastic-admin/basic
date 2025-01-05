@@ -1,21 +1,25 @@
 <script setup lang="ts">
 import useSettingsStore from '@/store/modules/settings'
-import eventBus from '@/utils/eventBus'
+import Search from './search.vue'
 
 defineOptions({
-  name: 'ToolbarRightSide',
+  name: 'NavSearch',
 })
 
 const settingsStore = useSettingsStore()
+
+const isShow = ref(false)
 </script>
 
 <template>
-  <span class="flex-center cursor-pointer px-2 py-1" @click="eventBus.emit('global-search-toggle')">
-    <SvgIcon v-if="settingsStore.mode === 'mobile'" name="i-ri:search-line" />
-    <span v-else class="group inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-2 bg-stone-1 px-2 py-1.5 text-dark ring-stone-3 ring-inset transition dark-bg-stone-9 dark-text-white hover-ring-1 dark-ring-stone-7">
-      <SvgIcon name="i-ri:search-line" />
-      <span class="text-sm text-stone-5 transition group-hover-text-dark dark-group-hover-text-white">搜索</span>
-      <HKbd v-if="settingsStore.settings.navSearch.enableHotkeys" class="ml-2">{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} S</HKbd>
-    </span>
-  </span>
+  <FaButton :variant="settingsStore.mode === 'pc' ? 'outline' : 'ghost'" :size="settingsStore.mode === 'pc' ? undefined : 'icon'" :class="{ 'mx-2 pe-1.5 ps-2': settingsStore.mode === 'pc' }" @click="isShow = true">
+    <FaIcon name="i-ri:search-line" :size="16" />
+    <template v-if="settingsStore.mode === 'pc'">
+      <span class="text-sm text-muted-foreground/60 transition group-hover-text-muted-foreground">搜索</span>
+      <FaKbd v-if="settingsStore.settings.navSearch.enableHotkeys">
+        {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} S
+      </FaKbd>
+    </template>
+  </FaButton>
+  <Search v-model="isShow" />
 </template>

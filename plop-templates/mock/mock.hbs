@@ -1,19 +1,20 @@
-import Mock from 'mockjs'
+import { faker } from '@faker-js/faker'
+import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 
 const AllList: any[] = []
 for (let i = 0; i < 50; i++) {
-  AllList.push(Mock.mock({
-    id: '@id',
-    title: '@ctitle(10, 20)',
-  }))
+  AllList.push({
+    id: i + 1,
+    title: faker.color.human(),
+  })
 }
 
-export default [
+export default defineFakeRoute([
   {
     url: '/mock/{{#if relativePath}}{{ relativePath }}/{{/if}}{{ moduleName }}/list',
     method: 'get',
-    response: (option: any) => {
-      const { title, from, limit } = option.query
+    response: ({ query }) => {
+      const { title, from, limit } = query
       const list = AllList.filter((item) => {
         return title ? item.title.includes(title) : true
       })
@@ -33,8 +34,8 @@ export default [
   {
     url: '/mock/{{#if relativePath}}{{ relativePath }}/{{/if}}{{ moduleName }}/detail',
     method: 'get',
-    response: (option: any) => {
-      const info = AllList.filter(item => item.id === option.query.id)
+    response: ({ query }) => {
+      const info = AllList.filter(item => item.id === query.id)
       return {
         error: '',
         status: 1,
@@ -81,4 +82,4 @@ export default [
       }
     },
   },
-]
+])

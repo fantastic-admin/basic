@@ -105,7 +105,7 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
       <ElImage v-if="url === ''" :src="url === '' ? placeholder : url" :style="`width:${width}px;height:${height}px;`" fit="fill">
         <template #error>
           <div class="image-slot" :style="`width:${width}px;height:${height}px;`">
-            <SvgIcon name="i-ep:plus" class="icon" />
+            <FaIcon name="i-ep:plus" class="icon" />
           </div>
         </template>
       </ElImage>
@@ -113,11 +113,11 @@ const onSuccess: UploadProps['onSuccess'] = (res) => {
         <ElImage :src="url" :style="`width:${width}px;height:${height}px;`" fit="fill" />
         <div class="mask">
           <div class="actions">
-            <span title="预览" @click.stop="preview">
-              <SvgIcon name="i-ep:zoom-in" class="icon" />
+            <span @click.stop="preview">
+              <FaIcon name="i-ep:zoom-in" class="icon" />
             </span>
-            <span title="移除" @click.stop="remove">
-              <SvgIcon name="i-ep:delete" class="icon" />
+            <span @click.stop="remove">
+              <FaIcon name="i-ep:delete" class="icon" />
             </span>
           </div>
         </div>

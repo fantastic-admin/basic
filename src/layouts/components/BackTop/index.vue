@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useTimeoutFn } from '@vueuse/core'
+
 defineOptions({
   name: 'BackTop',
 })
@@ -16,18 +18,40 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   handleScroll()
 })
-
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
 })
 
-const scrollTop = ref<number | null>(null)
+let timeout: (() => void) | undefined
+
+const show = ref(false)
+const scrollTop = ref(0)
 function handleScroll() {
   scrollTop.value = document.documentElement.scrollTop
 }
+watch(scrollTop, (val) => {
+  if (val >= 200) {
+    handleMouseenter()
+    handleMouseleave()
+  }
+})
 
-function handleClick() {
-  document.documentElement.scrollTo({
+function handleMouseenter() {
+  timeout?.()
+  // 此处setTimeout是为了避免移动端下和click事件同时触发
+  setTimeout(() => {
+    show.value = true
+  }, 0)
+}
+
+function handleMouseleave() {
+  ;({ stop: timeout } = useTimeoutFn(() => {
+    show.value = false
+  }, 2000))
+}
+
+function handleBackToTop() {
+  show.value && document.documentElement.scrollTo({
     top: 0,
     behavior: 'smooth',
   })
@@ -37,9 +61,9 @@ function handleClick() {
 <template>
   <Teleport to="body">
     <Transition v-bind="transitionClass">
-      <div v-if="scrollTop && scrollTop >= 200" class="fixed bottom-4 right-4 z-1000 h-12 w-12 flex cursor-pointer items-center justify-center rounded-full bg-white shadow-lg ring-1 ring-stone-3 ring-inset dark-bg-dark hover-bg-stone-1 dark-ring-stone-7 dark-hover-bg-dark/50" @click="handleClick">
-        <SvgIcon name="i-icon-park-outline:to-top-one" :size="24" />
-      </div>
+      <FaButton v-if="scrollTop >= 200" variant="outline" size="icon" class="fixed inset-b-4 z-1000 h-12 w-12 rounded-full transition-all -inset-e-9" :class="{ 'inset-e-3!': show }" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave" @click="handleBackToTop">
+        <FaIcon name="i-icon-park-outline:to-top-one" :size="24" />
+      </FaButton>
     </Transition>
   </Teleport>
 </template>
