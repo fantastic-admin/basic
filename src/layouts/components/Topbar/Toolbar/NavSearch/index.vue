@@ -17,7 +17,7 @@ const isShow = ref(false)
     <template v-if="settingsStore.mode === 'pc'">
       <span class="text-sm text-muted-foreground/60 transition group-hover-text-muted-foreground">搜索</span>
       <FaKbd v-if="settingsStore.settings.navSearch.enableHotkeys">
-        {{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }} S
+        {{ settingsStore.os === 'mac' ? '⌘' : 'Ctrl' }} K
       </FaKbd>
     </template>
   </FaButton>

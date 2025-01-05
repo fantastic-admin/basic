@@ -90,7 +90,7 @@ const useUserStore = defineStore(
     // 修改密码
     async function editPassword(data: {
       password: string
-      newpassword: string
+      newPassword: string
     }) {
       await apiUser.passwordEdit(data)
     }

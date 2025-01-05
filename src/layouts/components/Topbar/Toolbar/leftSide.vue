@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import ToolbarStart from '@/slots/ToolbarStart/index.vue'
+import { useSlots } from '@/slots'
 import useSettingsStore from '@/store/modules/settings'
 import Breadcrumb from './Breadcrumb/index.vue'
 
@@ -15,7 +15,7 @@ const settingsStore = useSettingsStore()
     <FaButton v-if="settingsStore.mode === 'mobile'" variant="ghost" size="icon" class="h-9 w-9 -rotate-z-180" @click="settingsStore.toggleSidebarCollapse()">
       <FaIcon name="toolbar-collapse" :size="16" />
     </FaButton>
-    <ToolbarStart />
+    <component :is="useSlots('toolbar-start')" />
     <Breadcrumb v-if="settingsStore.settings.toolbar.breadcrumb" />
   </div>
 </template>

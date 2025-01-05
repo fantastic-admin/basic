@@ -22,28 +22,22 @@ export default function useTabbar() {
 
   function go(delta: number) {
     const tabId = getId()
-    if (checkClose(tabId, false)) {
-      router.go(delta)
-      tabbarStore.remove(tabId)
-    }
+    router.go(delta)
+    tabbarStore.remove(tabId)
   }
 
   function replace(to: RouteLocationRaw) {
     const tabId = getId()
-    if (checkClose(tabId, false)) {
-      router.replace(to).then(() => {
-        tabbarStore.remove(tabId)
-      })
-    }
+    router.replace(to).then(() => {
+      tabbarStore.remove(tabId)
+    })
   }
 
   function close(to: RouteLocationRaw) {
     const tabId = getId()
-    if (checkClose(tabId, false)) {
-      router.push(to).then(() => {
-        tabbarStore.remove(tabId)
-      })
-    }
+    router.push(to).then(() => {
+      tabbarStore.remove(tabId)
+    })
   }
 
   function closeById(tabId = getId()) {

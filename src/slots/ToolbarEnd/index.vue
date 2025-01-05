@@ -2,19 +2,22 @@
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
 import eventBus from '@/utils/eventBus'
+import Profile from './profile.vue'
 
 const router = useRouter()
 
 const settingsStore = useSettingsStore()
 const userStore = useUserStore()
+
+const isProfileShow = ref(false)
 </script>
 
 <template>
   <FaDropdown
-    align="end"
-    :items="[
+    align="end" :items="[
       [
         { label: settingsStore.settings.home.title, icon: 'i-mdi:home', handle: () => router.push({ path: settingsStore.settings.home.fullPath }), hide: !settingsStore.settings.home.enable },
+        { label: '个人设置', icon: 'i-mdi:account', handle: () => isProfileShow = true },
       ],
       [
         { label: '快捷键介绍', icon: 'i-mdi:keyboard', handle: () => eventBus.emit('global-hotkeys-intro-toggle'), hide: settingsStore.mode !== 'pc' },
@@ -52,4 +55,7 @@ const userStore = useUserStore()
       </template>
     </FaButton>
   </FaDropdown>
+  <FaModal v-model="isProfileShow" align-center :header="false" :footer="false" :close-on-click-overlay="false" :close-on-press-escape="false" class="h-500px min-w-600px overflow-hidden" content-class="min-h-full p-0 flex">
+    <Profile />
+  </FaModal>
 </template>

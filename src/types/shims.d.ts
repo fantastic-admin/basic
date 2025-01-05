@@ -5,9 +5,9 @@ declare interface Window {
 
 declare const __SYSTEM_INFO__: {
   pkg: {
-    version: Recordable<string>
-    dependencies: Recordable<string>
-    devDependencies: Recordable<string>
+    version: string
+    dependencies: Record<string, string>
+    devDependencies: Record<string, string>
   }
   lastBuildTime: string
 }

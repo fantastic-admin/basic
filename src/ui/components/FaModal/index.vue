@@ -9,6 +9,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from './dialog'
+import { useDraggable } from './use-draggable'
 
 defineOptions({
   name: 'FaModal',
@@ -22,8 +23,10 @@ const props = withDefaults(
     closable: true,
     maximize: false,
     maximizable: false,
-    centered: false,
-    bordered: true,
+    draggable: false,
+    center: false,
+    border: true,
+    alignCenter: false,
     overlay: true,
     overlayBlur: false,
     showConfirmButton: true,
@@ -47,10 +50,45 @@ const slots = defineSlots<{
   footer?: () => VNode
 }>()
 
+const dialogContentRef = useTemplateRef('dialogContentRef')
+const dialogHeaderRef = ref()
+const dialogAreaRef = useTemplateRef('dialogAreaRef')
+const dialogRef = ref()
+
+defineExpose({
+  areaRef: dialogAreaRef,
+})
+
 const isOpen = ref(props.modelValue)
+const isMaximize = ref(props.maximize)
 
 watch(() => props.modelValue, (newValue) => {
   isOpen.value = newValue
+})
+
+const { isDragging, transform } = useDraggable(
+  dialogRef,
+  dialogHeaderRef,
+  computed(() => props.draggable && props.header && !isMaximize.value),
+)
+function setTransform() {
+  if (isMaximize.value) {
+    dialogRef.value.style.transform = 'none'
+  }
+  else {
+    dialogRef.value.style.transform = `translate(${transform.offsetX}px, ${transform.offsetY}px)`
+  }
+}
+
+watch(isOpen, (val) => {
+  if (val) {
+    nextTick(() => {
+      if (dialogContentRef.value) {
+        dialogRef.value = dialogContentRef.value.el?.$el
+        setTransform()
+      }
+    })
+  }
 })
 
 function updateOpen(value: boolean) {
@@ -63,8 +101,6 @@ function updateOpen(value: boolean) {
     emits('close')
   }
 }
-
-const isMaximize = ref(props.maximize)
 
 function onConfirm() {
   updateOpen(false)
@@ -95,6 +131,7 @@ function handleEscapeKeyDown(e: KeyboardEvent) {
 
 function handleMaximize(val: boolean) {
   isMaximize.value = val
+  setTransform()
 }
 
 function handleAnimationEnd() {
@@ -110,12 +147,15 @@ function handleAnimationEnd() {
 <template>
   <Dialog :modal="props.overlay" :open="isOpen" @update:open="updateOpen">
     <DialogContent
+      ref="dialogContentRef"
       :closable="props.closable"
       :overlay-blur="props.overlayBlur"
       :maximize="isMaximize"
       :maximizable="props.maximizable"
-      :class="cn('flex flex-col p-0 gap-0 max-h-full sm:max-h-[90vh] duration-0', props.class, {
-        'size-full max-w-full max-h-full sm:max-h-full': isMaximize,
+      :class="cn('left-0 right-0 top-0 md:top-[5vh] flex flex-col p-0 gap-0 mx-auto h-[calc-size(auto,size)] min-h-full md:min-h-auto max-h-full md:max-h-[90vh] translate-x-0 translate-y-0', props.class, {
+        'md:top-0 size-full max-w-full max-h-full md:max-h-full': isMaximize,
+        'md:top-1/2 md:-translate-y-1/2!': props.alignCenter,
+        'duration-0': isDragging,
       })"
       @close-auto-focus="handleFocusOutside"
       @focus-outside="handleFocusOutside"
@@ -126,12 +166,13 @@ function handleAnimationEnd() {
       @animation-end="handleAnimationEnd"
     >
       <DialogHeader
-        v-if="header" :class="cn('p-4', props.headerClass, {
-          'border-b': props.bordered,
+        v-if="header" ref="dialogHeaderRef" :class="cn('p-4', props.headerClass, {
+          'cursor-move select-none': props.draggable,
+          'border-b': props.border,
         })"
       >
         <slot name="header">
-          <DialogTitle class="flex-center-start gap-x-2" :class="{ 'justify-center': props.centered }">
+          <DialogTitle class="flex-center gap-x-2 md:justify-start" :class="{ 'md:justify-center': props.center }">
             <FaIcon
               v-if="props.icon" :name="{
                 info: 'i-ant-design:info-circle-filled',
@@ -147,25 +188,23 @@ function handleAnimationEnd() {
             />
             {{ title }}
           </DialogTitle>
-          <DialogDescription v-if="!!description" :class="{ 'text-center': props.centered }">
+          <DialogDescription v-if="!!description" :class="{ 'text-center': props.center }">
             {{ description }}
           </DialogDescription>
         </slot>
       </DialogHeader>
-      <div
-        v-if="!!slots.default" :class="cn('relative min-h-40 flex-1 p-4 of-y-auto', props.contentClass, {
-          'of-hidden': props.loading,
-        })"
-      >
-        <slot />
+      <FaScrollArea v-if="!!slots.default" ref="dialogAreaRef" class="flex-1">
+        <div :class="cn('min-h-40 p-4', props.contentClass)">
+          <slot />
+        </div>
         <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
           <FaIcon name="i-line-md:loading-twotone-loop" :size="36" />
         </div>
-      </div>
+      </FaScrollArea>
       <DialogFooter
         v-if="footer" :class="cn('p-2 gap-y-2', props.footerClass, {
-          'sm:justify-center': props.centered,
-          'border-t': props.bordered,
+          'md:justify-center': props.center,
+          'border-t': props.border,
         })"
       >
         <slot name="footer">

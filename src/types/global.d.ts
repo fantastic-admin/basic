@@ -97,7 +97,7 @@ declare namespace Settings {
      * 主导航点击模式
      * @默认值 `'switch'` 切换
      * @可选值 `'jump'` 跳转
-     * @可选值 `'smart'` 智能选择
+     * @可选值 `'smart'` 智能选择，判断次导航是否只有且只有一个可访问的菜单进行切换或跳转操作
      */
     mainMenuClickMode?: 'switch' | 'jump' | 'smart'
     /**

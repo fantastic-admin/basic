@@ -50,7 +50,7 @@ function handleItemClick(item: { handle?: () => void }) {
 </script>
 
 <template>
-  <DropdownMenu>
+  <DropdownMenu :modal="false">
     <DropdownMenuTrigger as-child>
       <slot />
     </DropdownMenuTrigger>

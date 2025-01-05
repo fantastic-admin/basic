@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@headlessui/vue':
-        specifier: ^1.7.23
-        version: 1.7.23(vue@3.5.13(typescript@5.7.2))
-      '@imengyu/vue3-context-menu':
-        specifier: ^1.4.4
-        version: 1.4.4
       '@vee-validate/zod':
         specifier: ^4.15.0
         version: 4.15.0(vue@3.5.13(typescript@5.7.2))(zod@3.24.1)
@@ -65,12 +59,6 @@ importers:
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
-      overlayscrollbars:
-        specifier: ^2.10.1
-        version: 2.10.1
-      overlayscrollbars-vue:
-        specifier: ^0.5.9
-        version: 0.5.9(overlayscrollbars@2.10.1)(vue@3.5.13(typescript@5.7.2))
       path-browserify:
         specifier: ^1.0.1
         version: 1.0.1
@@ -141,6 +129,9 @@ importers:
       '@unocss/eslint-plugin':
         specifier: ^0.65.3
         version: 0.65.3(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
+      '@unocss/preset-legacy-compat':
+        specifier: ^65.4.2
+        version: 65.4.2
       '@vitejs/plugin-legacy':
         specifier: ^6.0.0
         version: 6.0.0(terser@5.33.0)(vite@6.0.7(@types/node@22.5.5)(jiti@2.4.2)(sass-embedded@1.83.1)(sass@1.79.2)(terser@5.33.0)(tsx@4.19.2)(yaml@2.7.0))
@@ -1290,12 +1281,6 @@ packages:
   '@floating-ui/vue@1.1.5':
     resolution: {integrity: sha512-ynL1p5Z+woPVSwgMGqeDrx6HrJfGIDzFyESFkyqJKilGW1+h/8yVY29Khn0LaU6wHBRwZ13ntG6reiHWK6jyzw==}
 
-  '@headlessui/vue@1.7.23':
-    resolution: {integrity: sha512-JzdCNqurrtuu0YW6QaDtR2PIYCKPUWq28csDyMvN4zmGccmE7lz40Is6hc3LA4HFeCI7sekZ/PQMTNmn9I/4Wg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      vue: ^3.2.0
-
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -1329,9 +1314,6 @@ packages:
     resolution: {integrity: sha512-Xq0h6zMrHBbrW8jXJ9fISi+x8oDQllg5hTDkDuxnWiskJ63rpJu9CvJshj8VniHVTbsxCg9fVoPAaNp3RQI5OQ==}
     peerDependencies:
       vue: '>=3'
-
-  '@imengyu/vue3-context-menu@1.4.4':
-    resolution: {integrity: sha512-Zjh1BbrvcNbZvsWr9IJl9KQUomf50EeP2GT+mWk63sqatDZxG7ZFX1eltrwRyfSBr+SuFpMvdYv/yRxpBsyw6w==}
 
   '@inquirer/checkbox@4.0.4':
     resolution: {integrity: sha512-fYAKCAcGNMdfjL6hZTRUwkIByQ8EIZCXKrIQZH7XjADnN/xvRUhj8UdBbpC4zoUzvChhkSC/zRKaP/tDs3dZpg==}
@@ -1830,6 +1812,9 @@ packages:
   '@unocss/core@0.65.3':
     resolution: {integrity: sha512-xYkJ63lIadL6KqvGcaE2fFeLvo6rC1F+e+R9EFn0Aj0ArMRhiltZk8vvLFHP7iYjjdTdqDkAr/7IdrTosTo8Pg==}
 
+  '@unocss/core@65.4.2':
+    resolution: {integrity: sha512-VmXy5D25por+pt9LBlKZ3gk4rOE5ldm80MyVOEnLcpaFb9LqB0g/8qUU9/Dk3TSA+ZPeoGm53Juo0p8LMFIigA==}
+
   '@unocss/eslint-plugin@0.65.3':
     resolution: {integrity: sha512-l/mIp+IOF4TukjcHtxzpYW8gVlYwBpDlOrPYMVMcD8gAmxydBb111RkJPmJKjeDgYcoXDcjP8wyumQuM1L1vWA==}
     engines: {node: '>=14'}
@@ -1854,6 +1839,9 @@ packages:
 
   '@unocss/preset-icons@0.65.3':
     resolution: {integrity: sha512-3V4d5M+a2mTGnLjSsXyNL+/+nzjasdsJEJdXarLnj9Ez0KaBCvi32OjyoYrZUSMC5GCSreVNUOVBZKcxfdtitA==}
+
+  '@unocss/preset-legacy-compat@65.4.2':
+    resolution: {integrity: sha512-oo0XgPnToBe1zEm71blvNFKkhQ224diOlOU3wdRgEGYN//jrwD+8Dd/ZymHAefxEcBQsDaVCsmUlj9HWovhHcg==}
 
   '@unocss/preset-mini@0.56.5':
     resolution: {integrity: sha512-/KhlThhs1ilauM7MwRSpahLbIPZ5VGeGvaUsU8+ZlNT3sis4yoVYkPtR14tL2IT6jhOU05N/uu3aBj+1bP8GjQ==}
@@ -4590,15 +4578,6 @@ packages:
     resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
     engines: {node: '>=0.10.0'}
 
-  overlayscrollbars-vue@0.5.9:
-    resolution: {integrity: sha512-zZEcsb6llnKaRwXTP44E4RrmwuH+eAi70mgCdiiPwcPBE2H99Vs2V0q7sWnEanqU3462ch38e4SmIMnuH906DQ==}
-    peerDependencies:
-      overlayscrollbars: ^2.0.0
-      vue: ^3.2.25
-
-  overlayscrollbars@2.10.1:
-    resolution: {integrity: sha512-BQoUAaw533ZbqBIE8LzKtsIiOKzB3pkhA6oS2ol+8THB5b2VO91myEXPlKrQqXQRYHG53f/169fFBNrGZ9tzag==}
-
   oxc-parser@0.40.1:
     resolution: {integrity: sha512-uN+yvg3rJX6SDtWq4unomdlhafjj0X82yT3DS64XGSG8+bNEBe4ktA95K/WRFH/0l7/pB2xcvo40tFfEqDx+hQ==}
 
@@ -7272,11 +7251,6 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@headlessui/vue@1.7.23(vue@3.5.13(typescript@5.7.2))':
-    dependencies:
-      '@tanstack/vue-virtual': 3.10.8(vue@3.5.13(typescript@5.7.2))
-      vue: 3.5.13(typescript@5.7.2)
-
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.6':
@@ -7314,8 +7288,6 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
       vue: 3.5.13(typescript@5.7.2)
-
-  '@imengyu/vue3-context-menu@1.4.4': {}
 
   '@inquirer/checkbox@4.0.4(@types/node@22.5.5)':
     dependencies:
@@ -7822,6 +7794,8 @@ snapshots:
 
   '@unocss/core@0.65.3': {}
 
+  '@unocss/core@65.4.2': {}
+
   '@unocss/eslint-plugin@0.65.3(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)':
     dependencies:
       '@typescript-eslint/utils': 8.19.0(eslint@9.17.0(jiti@2.4.2))(typescript@5.7.2)
@@ -7874,6 +7848,10 @@ snapshots:
       ofetch: 1.4.1
     transitivePeerDependencies:
       - supports-color
+
+  '@unocss/preset-legacy-compat@65.4.2':
+    dependencies:
+      '@unocss/core': 65.4.2
 
   '@unocss/preset-mini@0.56.5':
     dependencies:
@@ -11086,13 +11064,6 @@ snapshots:
       strip-ansi: 7.1.0
 
   os-tmpdir@1.0.2: {}
-
-  overlayscrollbars-vue@0.5.9(overlayscrollbars@2.10.1)(vue@3.5.13(typescript@5.7.2)):
-    dependencies:
-      overlayscrollbars: 2.10.1
-      vue: 3.5.13(typescript@5.7.2)
-
-  overlayscrollbars@2.10.1: {}
 
   oxc-parser@0.40.1:
     dependencies:

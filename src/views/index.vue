@@ -9,7 +9,7 @@ meta:
 const versionType = ref('basic')
 watch(versionType, (val) => {
   if (val === 'pro') {
-    location.href = location.href.replace('basic-example', 'pro-example')
+    location.href = `${location.origin}${location.pathname}`.replace('basic-example', 'pro-example')
   }
 })
 
@@ -66,11 +66,10 @@ function open(url: string) {
         <div class="flex items-center gap-4">
           欢迎使用 Fantastic-admin
           <FaTabs
-            v-model="versionType"
-            :list="[
+            v-model="versionType" :list="[
               { label: '基础版', value: 'basic' },
               { label: '专业版', value: 'pro' },
-            ]"
+            ]" class="-mb-2"
           />
         </div>
       </template>

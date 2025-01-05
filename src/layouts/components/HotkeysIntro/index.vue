@@ -28,15 +28,15 @@ onMounted(() => {
           <ul class="list-none ps-2 pt-2 text-sm">
             <li class="flex-baseline gap-2 py-1">
               <div class="flex-shrink-0 space-x-1">
-                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌘' : 'Ctrl' }}</FaKbd>
                 <FaKbd>I</FaKbd>
               </div>
               查看系统信息
             </li>
             <li v-if="settingsStore.settings.toolbar.navSearch && settingsStore.settings.navSearch.enableHotkeys" class="flex-baseline gap-2 py-1">
               <div class="flex-shrink-0 space-x-1">
-                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
-                <FaKbd>S</FaKbd>
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌘' : 'Ctrl' }}</FaKbd>
+                <FaKbd>K</FaKbd>
               </div>
               唤起导航搜索
             </li>

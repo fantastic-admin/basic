@@ -57,7 +57,7 @@ watch(scrollTop, (val, oldVal) => {
 .topbar-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: calc(100% - var(--scrollbar-width, 0px));
   box-shadow: 0 1px 0 0 hsl(var(--border));
   transition: transform 0.3s, box-shadow 0.3s;
 

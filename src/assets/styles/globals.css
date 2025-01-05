@@ -21,7 +21,7 @@
 /* 明暗模式 CSS 变量 */
 /* stylelint-disable-next-line no-duplicate-selectors */
 :root {
-  --g-box-shadow-color: rgb(0 0 0 / 12%);
+  color-scheme: light;
 
   &::view-transition-old(root),
   &::view-transition-new(root) {
@@ -38,7 +38,7 @@
   }
 
   &.dark {
-    --g-box-shadow-color: rgb(0 0 0 / 72%);
+    color-scheme: dark;
 
     &::view-transition-old(root) {
       z-index: 9999;
@@ -50,29 +50,9 @@
   }
 }
 
-body:not([data-os="macOS"]) {
-  ::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: hsl(var(--primary) / 30%);
-    background-clip: padding-box;
-    border: 3px solid transparent;
-    border-radius: 6px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(var(--primary) / 50%);
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-}
-
 * {
+  scrollbar-color: hsl(var(--border)) transparent;
+  scrollbar-width: thin;
   border-color: hsl(var(--border));
 }
 
@@ -88,10 +68,6 @@ body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
   -webkit-tap-highlight-color: transparent;
-
-  &.overflow-hidden {
-    overflow: hidden;
-  }
 }
 
 #app {
@@ -101,15 +77,4 @@ body {
 /* textarea 字体跟随系统 */
 textarea {
   font-family: inherit;
-}
-
-/* Overrides OverlayScrollbars */
-[data-overlayscrollbars-contents] {
-  overscroll-behavior: contain;
-}
-
-.os-scrollbar {
-  --os-handle-bg: hsl(var(--primary) / 30%);
-  --os-handle-bg-hover: hsl(var(--primary) / 40%);
-  --os-handle-bg-active: hsl(var(--primary) / 50%);
 }

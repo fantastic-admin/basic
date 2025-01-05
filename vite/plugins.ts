@@ -31,6 +31,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       modernPolyfills: [
         'es.array.at',
         'es.array.find-last',
+        'es.object.has-own',
       ],
     }),
 

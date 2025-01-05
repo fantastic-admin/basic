@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSlots } from '@/slots'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import Logo from '../Logo/index.vue'
@@ -47,12 +48,14 @@ watch(() => menuStore.actived, (val, oldVal) => {
       'is-collapse': settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse,
     }"
   >
+    <component :is="useSlots('sub-sidebar-top')" />
     <Logo
       v-if="['side', 'single'].includes(settingsStore.settings.menu.mode)" :show-logo="settingsStore.settings.menu.mode === 'single'" class="sidebar-logo" :class="{
         'sidebar-logo-bg': settingsStore.settings.menu.mode === 'single',
       }"
     />
-    <FaMaskScrollContainer gradient-color="var(--g-sub-sidebar-bg)" class="flex-1">
+    <component :is="useSlots('sub-sidebar-after-logo')" />
+    <FaScrollArea :scrollbar="false" mask gradient-color="var(--g-sub-sidebar-bg)" class="flex-1">
       <TransitionGroup :name="transitionName">
         <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
           <div v-show="mainIndex === menuStore.actived">
@@ -64,12 +67,13 @@ watch(() => menuStore.actived, (val, oldVal) => {
           </div>
         </template>
       </TransitionGroup>
-    </FaMaskScrollContainer>
+    </FaScrollArea>
     <div v-if="settingsStore.mode === 'pc'" class="relative flex items-center px-4 py-3" :class="[settingsStore.settings.menu.subMenuCollapse ? 'justify-center' : 'justify-end']">
       <FaButton v-show="settingsStore.settings.menu.enableSubMenuCollapseButton" variant="secondary" size="icon" class="h-8 w-8 transition" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
         <FaIcon name="toolbar-collapse" :size="16" />
       </FaButton>
     </div>
+    <component :is="useSlots('sub-sidebar-bottom')" />
   </div>
 </template>
 

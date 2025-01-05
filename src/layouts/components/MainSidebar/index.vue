@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSlots } from '@/slots'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import Logo from '../Logo/index.vue'
@@ -16,8 +17,10 @@ const { switchTo } = useMenu()
 <template>
   <Transition name="main-sidebar">
     <div v-if="settingsStore.settings.menu.mode === 'side' || (settingsStore.mode === 'mobile' && settingsStore.settings.menu.mode !== 'single')" class="main-sidebar-container">
+      <component :is="useSlots('main-sidebar-top')" />
       <Logo :show-title="false" class="sidebar-logo" />
-      <FaMaskScrollContainer gradient-color="var(--g-main-sidebar-bg)" class="menu">
+      <component :is="useSlots('main-sidebar-after-logo')" />
+      <FaScrollArea :scrollbar="false" mask gradient-color="var(--g-main-sidebar-bg)" class="menu">
         <!-- 侧边栏模式（含主导航） -->
         <div class="w-full flex flex-col of-hidden py-1 transition-all -mt-2">
           <template v-for="(item, index) in menuStore.allMenus" :key="index">
@@ -41,7 +44,8 @@ const { switchTo } = useMenu()
             </div>
           </template>
         </div>
-      </FaMaskScrollContainer>
+      </FaScrollArea>
+      <component :is="useSlots('main-sidebar-bottom')" />
     </div>
   </Transition>
 </template>

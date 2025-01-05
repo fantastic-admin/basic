@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSlots } from '@/slots'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import Logo from '../Logo/index.vue'
@@ -17,9 +18,11 @@ const { switchTo } = useMenu()
 <template>
   <Transition name="header">
     <header v-if="settingsStore.mode === 'pc' && settingsStore.settings.menu.mode === 'head'">
+      <component :is="useSlots('header-start')" />
       <div class="header-container">
         <Logo class="title" />
-        <FaMaskScrollContainer scroll="x" gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
+        <component :is="useSlots('header-after-logo')" />
+        <FaScrollArea horizontal :scrollbar="false" mask gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
           <!-- 顶部模式 -->
           <div class="menu h-full flex of-hidden transition-all">
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
@@ -43,9 +46,10 @@ const { switchTo } = useMenu()
               </div>
             </template>
           </div>
-        </FaMaskScrollContainer>
+        </FaScrollArea>
         <ToolbarRightSide />
       </div>
+      <component :is="useSlots('header-end')" />
     </header>
   </Transition>
 </template>
@@ -54,14 +58,13 @@ const { switchTo } = useMenu()
 header {
   position: fixed;
   top: 0;
-  right: 0;
+  right: var(--scrollbar-width, 0);
   left: 0;
   z-index: 2000;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: calc(100% - var(--scrollbar-width, 0px));
   height: var(--g-header-height);
-  padding: 0 20px;
   margin: 0 auto;
   color: var(--g-header-color);
   background-color: var(--g-header-bg);
@@ -75,6 +78,7 @@ header {
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    padding: 0 12px 0 20px;
     margin: 0 auto;
 
     :deep(a.title) {
@@ -82,7 +86,7 @@ header {
       flex: 0;
       width: inherit;
       height: inherit;
-      padding: inherit;
+      padding: 0;
       background-color: inherit;
 
       .logo {

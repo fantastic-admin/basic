@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import type { OverlayScrollbarsComponentRef } from 'overlayscrollbars-vue'
 import type { SubMenuProps } from './types'
 import { useTimeoutFn } from '@vueuse/core'
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import Item from './item.vue'
 import { rootMenuInjectionKey } from './types'
 
@@ -19,7 +17,7 @@ const props = withDefaults(
 
 const index = props.menu.path ?? JSON.stringify(props.menu)
 const itemRef = useTemplateRef('itemRef')
-const subMenuRef = useTemplateRef<OverlayScrollbarsComponentRef>('subMenuRef')
+const subMenuRef = useTemplateRef('subMenuRef')
 const rootMenu = inject(rootMenuInjectionKey)!
 
 const opened = computed(() => {
@@ -141,7 +139,8 @@ function handleMouseenter() {
       rootMenu.openMenu(index, props.uniqueKey)
       nextTick(() => {
         const el = itemRef.value?.ref
-        if (!el) {
+        const subMenuEl = subMenuRef.value?.$el
+        if (!el || !subMenuEl) {
           return
         }
         let top = 0
@@ -149,22 +148,22 @@ function handleMouseenter() {
         if (rootMenu.props.mode === 'vertical' || props.level !== 0) {
           top = el.getBoundingClientRect().top + el.scrollTop
           left = el.getBoundingClientRect().left + el.getBoundingClientRect().width
-          if (top + subMenuRef.value!.getElement()!.offsetHeight > window.innerHeight) {
-            top = window.innerHeight - subMenuRef.value!.getElement()!.offsetHeight
+          if (top + subMenuEl.offsetHeight > window.innerHeight) {
+            top = window.innerHeight - subMenuEl.offsetHeight
           }
         }
         else {
           top = el.getBoundingClientRect().top + el.getBoundingClientRect().height
           left = el.getBoundingClientRect().left
-          if (top + subMenuRef.value!.getElement()!.offsetHeight > window.innerHeight) {
-            subMenuRef.value!.getElement()!.style.height = `${window.innerHeight - top}px`
+          if (top + subMenuEl.offsetHeight > window.innerHeight) {
+            subMenuEl.style.height = `${window.innerHeight - top}px`
           }
         }
-        if (left + subMenuRef.value!.getElement()!.offsetWidth > document.documentElement.clientWidth) {
+        if (left + subMenuEl.offsetWidth > document.documentElement.clientWidth) {
           left = el.getBoundingClientRect().left - el.getBoundingClientRect().width
         }
-        subMenuRef.value!.getElement()!.style.top = `${top}px`
-        subMenuRef.value!.getElement()!.style.left = `${left}px`
+        subMenuEl.style.top = `${top}px`
+        subMenuEl.style.insetInlineStart = `${left}px`
       })
     }
     else {
@@ -197,8 +196,8 @@ function handleMouseleave() {
   <Item ref="itemRef" :unique-key="uniqueKey" :item="menu" :level="level" :sub-menu="hasChildren" :expand="opened" @click="handleClick" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave" />
   <Teleport v-if="hasChildren" to="body" :disabled="!rootMenu.isMenuPopup">
     <Transition v-bind="transitionClass" v-on="transitionEvent">
-      <OverlayScrollbarsComponent
-        v-if="opened" ref="subMenuRef" :options="{ scrollbars: { visibility: 'hidden' } }" defer class="sub-menu static rounded-lg" :class="{
+      <FaScrollArea
+        v-if="opened" ref="subMenuRef" :scrollbar="false" :mask="rootMenu.isMenuPopup" class="sub-menu static rounded-lg" :class="{
           'bg-[var(--g-sub-sidebar-bg)]': rootMenu.isMenuPopup,
           'border shadow-xl fixed! z-3000 w-[200px]': rootMenu.isMenuPopup,
           'mx-1': rootMenu.isMenuPopup && (rootMenu.props.mode === 'vertical' || level !== 0),
@@ -208,7 +207,7 @@ function handleMouseleave() {
         <template v-for="item in menu.children" :key="item.path ?? JSON.stringify(item)">
           <SubMenu v-if="item.meta?.menu !== false" :unique-key="[...uniqueKey, item.path ?? JSON.stringify(item)]" :menu="item" :level="level + 1" />
         </template>
-      </OverlayScrollbarsComponent>
+      </FaScrollArea>
     </Transition>
   </Teleport>
 </template>
