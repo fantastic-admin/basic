@@ -8,12 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@headlessui/vue':
-        specifier: ^1.7.23
-        version: 1.7.23(vue@3.5.13(typescript@5.7.2))
-      '@imengyu/vue3-context-menu':
-        specifier: ^1.4.4
-        version: 1.4.4
       '@vee-validate/zod':
         specifier: ^4.15.0
         version: 4.15.0(vue@3.5.13(typescript@5.7.2))(zod@3.24.1)
@@ -65,12 +59,6 @@ importers:
       nprogress:
         specifier: ^0.2.0
         version: 0.2.0
-      overlayscrollbars:
-        specifier: ^2.10.1
-        version: 2.10.1
-      overlayscrollbars-vue:
-        specifier: ^0.5.9
-        version: 0.5.9(overlayscrollbars@2.10.1)(vue@3.5.13(typescript@5.7.2))
       path-browserify:
         specifier: ^1.0.1
         version: 1.0.1
@@ -1290,12 +1278,6 @@ packages:
   '@floating-ui/vue@1.1.5':
     resolution: {integrity: sha512-ynL1p5Z+woPVSwgMGqeDrx6HrJfGIDzFyESFkyqJKilGW1+h/8yVY29Khn0LaU6wHBRwZ13ntG6reiHWK6jyzw==}
 
-  '@headlessui/vue@1.7.23':
-    resolution: {integrity: sha512-JzdCNqurrtuu0YW6QaDtR2PIYCKPUWq28csDyMvN4zmGccmE7lz40Is6hc3LA4HFeCI7sekZ/PQMTNmn9I/4Wg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      vue: ^3.2.0
-
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
     engines: {node: '>=18.18.0'}
@@ -1329,9 +1311,6 @@ packages:
     resolution: {integrity: sha512-Xq0h6zMrHBbrW8jXJ9fISi+x8oDQllg5hTDkDuxnWiskJ63rpJu9CvJshj8VniHVTbsxCg9fVoPAaNp3RQI5OQ==}
     peerDependencies:
       vue: '>=3'
-
-  '@imengyu/vue3-context-menu@1.4.4':
-    resolution: {integrity: sha512-Zjh1BbrvcNbZvsWr9IJl9KQUomf50EeP2GT+mWk63sqatDZxG7ZFX1eltrwRyfSBr+SuFpMvdYv/yRxpBsyw6w==}
 
   '@inquirer/checkbox@4.0.4':
     resolution: {integrity: sha512-fYAKCAcGNMdfjL6hZTRUwkIByQ8EIZCXKrIQZH7XjADnN/xvRUhj8UdBbpC4zoUzvChhkSC/zRKaP/tDs3dZpg==}
@@ -4590,15 +4569,6 @@ packages:
     resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
     engines: {node: '>=0.10.0'}
 
-  overlayscrollbars-vue@0.5.9:
-    resolution: {integrity: sha512-zZEcsb6llnKaRwXTP44E4RrmwuH+eAi70mgCdiiPwcPBE2H99Vs2V0q7sWnEanqU3462ch38e4SmIMnuH906DQ==}
-    peerDependencies:
-      overlayscrollbars: ^2.0.0
-      vue: ^3.2.25
-
-  overlayscrollbars@2.10.1:
-    resolution: {integrity: sha512-BQoUAaw533ZbqBIE8LzKtsIiOKzB3pkhA6oS2ol+8THB5b2VO91myEXPlKrQqXQRYHG53f/169fFBNrGZ9tzag==}
-
   oxc-parser@0.40.1:
     resolution: {integrity: sha512-uN+yvg3rJX6SDtWq4unomdlhafjj0X82yT3DS64XGSG8+bNEBe4ktA95K/WRFH/0l7/pB2xcvo40tFfEqDx+hQ==}
 
@@ -7272,11 +7242,6 @@ snapshots:
       - '@vue/composition-api'
       - vue
 
-  '@headlessui/vue@1.7.23(vue@3.5.13(typescript@5.7.2))':
-    dependencies:
-      '@tanstack/vue-virtual': 3.10.8(vue@3.5.13(typescript@5.7.2))
-      vue: 3.5.13(typescript@5.7.2)
-
   '@humanfs/core@0.19.1': {}
 
   '@humanfs/node@0.16.6':
@@ -7314,8 +7279,6 @@ snapshots:
     dependencies:
       '@iconify/types': 2.0.0
       vue: 3.5.13(typescript@5.7.2)
-
-  '@imengyu/vue3-context-menu@1.4.4': {}
 
   '@inquirer/checkbox@4.0.4(@types/node@22.5.5)':
     dependencies:
@@ -11086,13 +11049,6 @@ snapshots:
       strip-ansi: 7.1.0
 
   os-tmpdir@1.0.2: {}
-
-  overlayscrollbars-vue@0.5.9(overlayscrollbars@2.10.1)(vue@3.5.13(typescript@5.7.2)):
-    dependencies:
-      overlayscrollbars: 2.10.1
-      vue: 3.5.13(typescript@5.7.2)
-
-  overlayscrollbars@2.10.1: {}
 
   oxc-parser@0.40.1:
     dependencies:

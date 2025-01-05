@@ -2,6 +2,7 @@ import type { Settings } from '#/global'
 import type { RouteMeta } from 'vue-router'
 import settingsDefault from '@/settings'
 import { merge } from '@/utils/object'
+import { cloneDeep } from 'es-toolkit'
 
 const useSettingsStore = defineStore(
   // 唯一ID
@@ -144,7 +145,7 @@ const useSettingsStore = defineStore(
 
     // 更新应用配置
     function updateSettings(data: Settings.all, fromBase = false) {
-      settings.value = merge(data, fromBase ? settingsDefault : settings.value)
+      settings.value = merge(data, fromBase ? cloneDeep(settingsDefault) : settings.value)
     }
 
     return {

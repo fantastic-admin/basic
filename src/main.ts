@@ -13,7 +13,6 @@ import uiProvider from './ui/provider'
 
 import '@/utils/systemCopyright'
 
-import 'overlayscrollbars/overlayscrollbars.css'
 // 加载 svg 图标
 import 'virtual:svg-icons-register'
 import 'virtual:uno.css'

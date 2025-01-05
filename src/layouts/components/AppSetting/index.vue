@@ -49,7 +49,7 @@ function handleCopy() {
 </script>
 
 <template>
-  <FaDrawer v-model="isShow" title="应用配置" description="在生产环境中应关闭该模块">
+  <FaDrawer v-model="isShow" title="应用配置" description="在生产环境中应关闭该模块" :footer="isSupported">
     <div class="rounded-2 bg-rose/20 px-4 py-2 text-sm/6 c-rose">
       应用配置可实时预览效果，但只是临时生效，要想真正应用于项目，可以点击下方的「复制配置」按钮，并将配置粘贴到 src/settings.ts 文件中。
     </div>
@@ -350,7 +350,7 @@ function handleCopy() {
         <FaSwitch v-model="settingsStore.settings.app.enableDynamicTitle" />
       </div>
     </div>
-    <template v-if="isSupported" #footer>
+    <template #footer>
       <FaButton class="w-full" @click="handleCopy">
         <FaIcon name="i-ep:document-copy" />
         复制配置

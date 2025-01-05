@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import eventBus from '@/utils/eventBus'
+import hotkeys from 'hotkeys-js'
 
 defineOptions({
   name: 'FaSystemInfo',
@@ -10,27 +10,35 @@ const isShow = ref(false)
 const { pkg, lastBuildTime } = __SYSTEM_INFO__
 
 onMounted(() => {
-  eventBus.on('global-system-info-toggle', () => {
-    isShow.value = !isShow.value
+  hotkeys('command+i, ctrl+i', () => {
+    isShow.value = true
   })
 })
 </script>
 
 <template>
-  <FaDrawer v-model="isShow" title="系统信息">
-    <div class="px-4">
-      <h2 class="m-0 text-lg font-bold">
+  <FaDrawer v-model="isShow" title="系统信息" :footer="false">
+    <div v-if="pkg.version">
+      <FaDivider>
+        系统信息
+      </FaDivider>
+      <div class="text-center text-lg font-bold font-sans">
+        {{ pkg.version }}
+      </div>
+    </div>
+    <div>
+      <FaDivider>
         最后编译时间
-      </h2>
-      <div class="my-4 text-center text-lg font-sans">
+      </FaDivider>
+      <div class="text-center text-lg font-bold font-sans">
         {{ lastBuildTime }}
       </div>
     </div>
-    <div class="px-4">
-      <h2 class="m-0 text-lg font-bold">
+    <div>
+      <FaDivider>
         生产环境依赖
-      </h2>
-      <ul class="my-4 list-none text-sm">
+      </FaDivider>
+      <ul class="list-none text-sm">
         <li v-for="(val, key) in (pkg.dependencies as object)" :key="key" class="flex items-center justify-between rounded-lg px-2 py-1.5 hover-bg-secondary">
           <div class="font-bold">
             {{ key }}
@@ -41,11 +49,11 @@ onMounted(() => {
         </li>
       </ul>
     </div>
-    <div class="px-4">
-      <h2 class="m-0 text-lg font-bold">
+    <div>
+      <FaDivider>
         开发环境依赖
-      </h2>
-      <ul class="my-4 list-none text-sm">
+      </FaDivider>
+      <ul class="list-none text-sm">
         <li v-for="(val, key) in (pkg.devDependencies as object)" :key="key" class="flex items-center justify-between rounded-lg px-2 py-1.5 hover-bg-secondary">
           <div class="font-bold">
             {{ key }}

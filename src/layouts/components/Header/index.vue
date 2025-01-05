@@ -19,7 +19,7 @@ const { switchTo } = useMenu()
     <header v-if="settingsStore.mode === 'pc' && settingsStore.settings.menu.mode === 'head'">
       <div class="header-container">
         <Logo class="title" />
-        <FaMaskScrollContainer scroll="x" gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
+        <FaScrollArea horizontal :scrollbar="false" mask gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
           <!-- 顶部模式 -->
           <div class="menu h-full flex of-hidden transition-all">
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
@@ -43,7 +43,7 @@ const { switchTo } = useMenu()
               </div>
             </template>
           </div>
-        </FaMaskScrollContainer>
+        </FaScrollArea>
         <ToolbarRightSide />
       </div>
     </header>

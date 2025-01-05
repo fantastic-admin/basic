@@ -2,11 +2,9 @@
 import type { Tabbar } from '#/global'
 import useSettingsStore from '@/store/modules/settings'
 import useTabbarStore from '@/store/modules/tabbar'
-import ContextMenu from '@imengyu/vue3-context-menu'
 import { useMagicKeys } from '@vueuse/core'
 import hotkeys from 'hotkeys-js'
 import { toast } from 'vue-sonner'
-import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
 
 defineOptions({
   name: 'Tabbar',
@@ -25,7 +23,7 @@ const keys = useMagicKeys({ reactive: true })
 
 const activedTabId = computed(() => tabbar.getId())
 
-const tabsRef = ref()
+const tabsRef = useTemplateRef('tabsRef')
 const tabContainerRef = useTemplateRef('tabContainerRef')
 const tabRef = useTemplateRef<HTMLElement[]>('tabRef')
 
@@ -34,7 +32,7 @@ watch(() => route, (val) => {
     tabbarStore.add(val).then(() => {
       const index = tabbarStore.list.findIndex(item => item.tabId === activedTabId.value)
       if (index !== -1) {
-        tabRef.value && tabsRef.value.scrollTo(tabRef.value[index].offsetLeft - tabsRef.value.ref.clientWidth * 0.4)
+        tabRef.value && tabsRef.value?.scrollTo(tabRef.value[index].offsetLeft - tabsRef.value.ref?.$el.clientWidth * 0.4)
         tabbarScrollTip()
       }
     })
@@ -44,7 +42,7 @@ watch(() => route, (val) => {
   deep: true,
 })
 function tabbarScrollTip() {
-  if (tabContainerRef.value?.$el.clientWidth > (tabsRef.value.ref.clientWidth ?? 0) && localStorage.getItem('tabbarScrollTip') === undefined) {
+  if (tabContainerRef.value?.$el.clientWidth > (tabsRef.value?.ref?.$el.clientWidth ?? 0) && localStorage.getItem('tabbarScrollTip') === undefined) {
     localStorage.setItem('tabbarScrollTip', '')
     const tips = toast.info('温馨提示', {
       description: '标签栏数量超过展示区域范围，可以将鼠标移到标签栏上，通过鼠标滚轮滑动浏览',
@@ -57,53 +55,40 @@ function tabbarScrollTip() {
     })
   }
 }
-function onTabbarContextmenu(event: MouseEvent, routeItem: Tabbar.recordRaw) {
-  event.preventDefault()
-  ContextMenu.showContextMenu({
-    x: event.x,
-    y: event.y,
-    zIndex: 1050,
-    iconFontClass: '',
-    customClass: 'tabbar-contextmenu',
-    items: [
+function contextMenuItems(routeItem: Tabbar.recordRaw) {
+  return [
+    [
       {
         label: '重新加载',
         icon: 'i-ri:refresh-line',
         disabled: routeItem.tabId !== activedTabId.value,
-        onClick: () => mainPage.reload(),
+        handle: () => mainPage.reload(),
       },
       {
         label: '关闭标签页',
         icon: 'i-ri:close-line',
         disabled: tabbarStore.list.length <= 1,
-        divided: true,
-        onClick: () => {
-          tabbar.closeById(routeItem.tabId)
-        },
+        handle: () => tabbar.closeById(routeItem.tabId),
       },
+    ],
+    [
       {
         label: '关闭其他标签页',
         disabled: !tabbar.checkCloseOtherSide(routeItem.tabId),
-        onClick: () => {
-          tabbar.closeOtherSide(routeItem.tabId)
-        },
+        handle: () => tabbar.closeOtherSide(routeItem.tabId),
       },
       {
         label: '关闭左侧标签页',
         disabled: !tabbar.checkCloseLeftSide(routeItem.tabId),
-        onClick: () => {
-          tabbar.closeLeftSide(routeItem.tabId)
-        },
+        handle: () => tabbar.closeLeftSide(routeItem.tabId),
       },
       {
         label: '关闭右侧标签页',
         disabled: !tabbar.checkCloseRightSide(routeItem.tabId),
-        onClick: () => {
-          tabbar.closeRightSide(routeItem.tabId)
-        },
+        handle: () => tabbar.closeRightSide(routeItem.tabId),
       },
     ],
-  })
+  ]
 }
 
 onMounted(() => {
@@ -159,80 +144,47 @@ onUnmounted(() => {
 
 <template>
   <div class="tabbar-container">
-    <FaMaskScrollContainer ref="tabsRef" scroll="x" gradient-color="var(--g-tabbar-bg)" class="tabs">
+    <FaScrollArea ref="tabsRef" horizontal :scrollbar="false" mask gradient-color="var(--g-tabbar-bg)" class="tabs">
       <TransitionGroup ref="tabContainerRef" name="tabbar" tag="div" class="tab-container">
         <div
           v-for="(element, index) in tabbarStore.list" :key="element.tabId"
           ref="tabRef" :data-index="index" class="tab" :class="{
             actived: element.tabId === activedTabId,
-          }" @click="router.push(element.fullPath)" @contextmenu="onTabbarContextmenu($event, element)"
+          }" @click="router.push(element.fullPath)"
         >
-          <div class="tab-dividers" />
-          <div class="tab-background" />
-          <FaTooltip :delay="1000" side="bottom">
-            <div class="tab-content">
-              <div :key="element.tabId" class="title">
-                <FaIcon v-if="settingsStore.settings.tabbar.enableIcon && element.icon" :name="element.icon" class="icon" />
-                {{ typeof element?.title === 'function' ? element.title() : element.title }}
-              </div>
-              <div v-if="tabbarStore.list.length > 1" class="action-icon" @click.stop="tabbar.closeById(element.tabId)">
-                <FaIcon name="i-ri:close-fill" />
-              </div>
-              <div v-show="keys.alt && index < 9" class="hotkey-number">
-                {{ index + 1 }}
-              </div>
+          <FaContextMenu :items="contextMenuItems(element)">
+            <div class="size-full">
+              <div class="tab-dividers" />
+              <div class="tab-background" />
+              <FaTooltip :delay="1000" side="bottom">
+                <div class="tab-content">
+                  <div :key="element.tabId" class="title">
+                    <FaIcon v-if="settingsStore.settings.tabbar.enableIcon && element.icon" :name="element.icon" class="icon" />
+                    {{ typeof element?.title === 'function' ? element.title() : element.title }}
+                  </div>
+                  <div v-if="tabbarStore.list.length > 1" class="action-icon" @click.stop="tabbar.closeById(element.tabId)">
+                    <FaIcon name="i-ri:close-fill" />
+                  </div>
+                  <div v-show="keys.alt && index < 9" class="hotkey-number">
+                    {{ index + 1 }}
+                  </div>
+                </div>
+                <template #content>
+                  <div class="text-sm">
+                    {{ typeof element?.title === 'function' ? element.title() : element.title }}
+                  </div>
+                  <div class="text-accent-foreground/50">
+                    {{ element.fullPath }}
+                  </div>
+                </template>
+              </FaTooltip>
             </div>
-            <template #content>
-              <div class="text-sm">
-                {{ typeof element?.title === 'function' ? element.title() : element.title }}
-              </div>
-              <div class="text-accent-foreground/50">
-                {{ element.fullPath }}
-              </div>
-            </template>
-          </FaTooltip>
+          </FaContextMenu>
         </div>
       </TransitionGroup>
-    </FaMaskScrollContainer>
+    </FaScrollArea>
   </div>
 </template>
-
-<style>
-.tabbar-contextmenu {
-  --uno: fixed ring-1 ring-border shadow-2xl;
-
-  background-color: hsl(var(--popover));
-
-  .mx-context-menu-items .mx-context-menu-item {
-    --uno: transition-background-color;
-
-    &:not(.disabled):hover {
-      --uno: cursor-pointer bg-accent;
-    }
-
-    span {
-      color: initial;
-    }
-
-    .icon {
-      color: initial;
-    }
-
-    &.disabled span,
-    &.disabled .icon {
-      opacity: 0.25;
-    }
-  }
-
-  .mx-context-menu-item-sperator {
-    background-color: hsl(var(--popover));
-
-    &::after {
-      --uno: bg-border;
-    }
-  }
-}
-</style>
 
 <style scoped>
 .tabbar-container {
@@ -248,7 +200,6 @@ onUnmounted(() => {
   .tabs {
     position: absolute;
     inset-inline: 0;
-    margin-inline-end: 50px;
     white-space: nowrap;
 
     .tab-container {

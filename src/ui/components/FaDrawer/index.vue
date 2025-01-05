@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/utils'
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 import {
   Sheet,
   SheetContent,
@@ -157,9 +156,11 @@ function handleAnimationEnd() {
         </slot>
       </SheetHeader>
       <div class="m-0 flex-1 of-y-hidden">
-        <OverlayScrollbarsComponent :options="{ scrollbars: { autoHide: 'leave', autoHideDelay: 300 } }" defer class="h-full p-4">
-          <slot />
-        </OverlayScrollbarsComponent>
+        <FaScrollArea class="h-full">
+          <div class="p-4">
+            <slot />
+          </div>
+        </FaScrollArea>
         <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
           <FaIcon name="i-line-md:loading-twotone-loop" :size="36" />
         </div>

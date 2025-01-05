@@ -17,7 +17,7 @@ const { switchTo } = useMenu()
   <Transition name="main-sidebar">
     <div v-if="settingsStore.settings.menu.mode === 'side' || (settingsStore.mode === 'mobile' && settingsStore.settings.menu.mode !== 'single')" class="main-sidebar-container">
       <Logo :show-title="false" class="sidebar-logo" />
-      <FaMaskScrollContainer gradient-color="var(--g-main-sidebar-bg)" class="menu">
+      <FaScrollArea :scrollbar="false" mask gradient-color="var(--g-main-sidebar-bg)" class="menu">
         <!-- 侧边栏模式（含主导航） -->
         <div class="w-full flex flex-col of-hidden py-1 transition-all -mt-2">
           <template v-for="(item, index) in menuStore.allMenus" :key="index">
@@ -41,7 +41,7 @@ const { switchTo } = useMenu()
             </div>
           </template>
         </div>
-      </FaMaskScrollContainer>
+      </FaScrollArea>
     </div>
   </Transition>
 </template>

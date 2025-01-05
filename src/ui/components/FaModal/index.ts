@@ -10,8 +10,10 @@ export interface ModalProps {
   closable?: boolean
   maximize?: boolean
   maximizable?: boolean
-  centered?: boolean
-  bordered?: boolean
+  draggable?: boolean
+  center?: boolean
+  border?: boolean
+  alignCenter?: boolean
   overlay?: boolean
   overlayBlur?: boolean
   showConfirmButton?: boolean
@@ -39,12 +41,12 @@ export interface ModalEmits {
   'cancel': []
 }
 
-type alertOptions = Pick<ModalProps, 'title' | 'description' | 'icon' | 'centered' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
+type alertOptions = Pick<ModalProps, 'title' | 'description' | 'icon' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
   content: string
   onConfirm?: () => any
 }
 
-type confirmOptions = Pick<ModalProps, 'title' | 'description' | 'centered' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'cancelButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
+type confirmOptions = Pick<ModalProps, 'title' | 'description' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'cancelButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
   content: string
   onConfirm?: () => any
   onCancel?: () => any
@@ -59,7 +61,8 @@ export function useFaModal() {
           modelValue: true,
           icon: 'info',
           closable: false,
-          bordered: false,
+          border: false,
+          alignCenter: true,
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
@@ -79,7 +82,8 @@ export function useFaModal() {
           modelValue: true,
           icon: 'success',
           closable: false,
-          bordered: false,
+          border: false,
+          alignCenter: true,
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
@@ -99,7 +103,8 @@ export function useFaModal() {
           modelValue: true,
           icon: 'warning',
           closable: false,
-          bordered: false,
+          border: false,
+          alignCenter: true,
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
@@ -119,7 +124,8 @@ export function useFaModal() {
           modelValue: true,
           icon: 'error',
           closable: false,
-          bordered: false,
+          border: false,
+          alignCenter: true,
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
@@ -138,7 +144,8 @@ export function useFaModal() {
         return h(Modal, Object.assign({
           modelValue: true,
           closable: false,
-          bordered: false,
+          border: false,
+          alignCenter: true,
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',

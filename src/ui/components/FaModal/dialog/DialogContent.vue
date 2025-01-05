@@ -35,6 +35,12 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
 function handleMaximize() {
   emits('toggleMaximize', !props.maximize)
 }
+
+const dialogContentRef = useTemplateRef('dialogContentRef')
+
+defineExpose({
+  el: dialogContentRef,
+})
 </script>
 
 <template>
@@ -45,6 +51,7 @@ function handleMaximize() {
       })"
     />
     <DialogContent
+      ref="dialogContentRef"
       v-bind="forwarded"
       :class="
         cn(

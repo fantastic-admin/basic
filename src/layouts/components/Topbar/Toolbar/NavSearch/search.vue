@@ -1,15 +1,12 @@
 <script setup lang="ts">
 import type { Menu } from '@/types/global'
-import type { OverlayScrollbarsComponentRef } from 'overlayscrollbars-vue'
 import Breadcrumb from '@/layouts/components/Breadcrumb/index.vue'
 import BreadcrumbItem from '@/layouts/components/Breadcrumb/item.vue'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import { resolveRoutePath } from '@/utils'
-import { Dialog, DialogDescription, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { cloneDeep } from 'es-toolkit'
 import hotkeys from 'hotkeys-js'
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-vue'
 
 defineOptions({
   name: 'Search',
@@ -17,26 +14,6 @@ defineOptions({
 
 const isShow = defineModel<boolean>({
   default: false,
-})
-
-const overlayTransitionClass = ref({
-  enter: 'ease-in-out duration-500',
-  enterFrom: 'opacity-0',
-  enterTo: 'opacity-100',
-  leave: 'ease-in-out duration-500',
-  leaveFrom: 'opacity-100',
-  leaveTo: 'opacity-0',
-})
-
-const transitionClass = computed(() => {
-  return {
-    enter: 'ease-out duration-300',
-    enterFrom: 'opacity-0 translate-y-4 lg-translate-y-0 lg-scale-95',
-    enterTo: 'opacity-100 translate-y-0 lg-scale-100',
-    leave: 'ease-in duration-200',
-    leaveFrom: 'opacity-100 translate-y-0 lg-scale-100',
-    leaveTo: 'opacity-0 translate-y-4 lg-translate-y-0 lg-scale-95',
-  }
 })
 
 const router = useRouter()
@@ -57,43 +34,44 @@ const searchInput = ref('')
 const sourceList = ref<listTypes[]>([])
 const actived = ref(-1)
 
-const searchInputRef = useTemplateRef('searchInputRef')
-const searchResultRef = useTemplateRef<OverlayScrollbarsComponentRef>('searchResultRef')
+const searchResultRef = useTemplateRef('searchResultRef')
 const searchResultItemRef = useTemplateRef<HTMLElement[]>('searchResultItemRef')
 
 const resultList = computed(() => {
   let result = []
   result = sourceList.value.filter((item) => {
     let flag = false
-    if (item.title) {
-      if (typeof item.title === 'function') {
-        if (item.title().includes(searchInput.value)) {
-          flag = true
+    if (searchInput.value !== '') {
+      if (item.title) {
+        if (typeof item.title === 'function') {
+          if (item.title().includes(searchInput.value)) {
+            flag = true
+          }
+        }
+        else {
+          if (item.title.includes(searchInput.value)) {
+            flag = true
+          }
         }
       }
-      else {
-        if (item.title.includes(searchInput.value)) {
-          flag = true
-        }
+      if (item.path.includes(searchInput.value)) {
+        flag = true
       }
-    }
-    if (item.path.includes(searchInput.value)) {
-      flag = true
-    }
-    if (item.breadcrumb.some((b) => {
-      if (typeof b.title === 'function') {
-        if (b.title().includes(searchInput.value)) {
-          return true
+      if (item.breadcrumb.some((b) => {
+        if (typeof b.title === 'function') {
+          if (b.title().includes(searchInput.value)) {
+            return true
+          }
         }
-      }
-      else {
-        if (b.title?.includes(searchInput.value)) {
-          return true
+        else {
+          if (b.title?.includes(searchInput.value)) {
+            return true
+          }
         }
+        return false
+      })) {
+        flag = true
       }
-      return false
-    })) {
-      flag = true
     }
     return flag
   })
@@ -129,7 +107,7 @@ watch(() => resultList.value, () => {
 
 onMounted(() => {
   initSourceList()
-  hotkeys('alt+s', (e) => {
+  hotkeys('command+k, ctrl+k', (e) => {
     if (settingsStore.settings.navSearch.enableHotkeys) {
       e.preventDefault()
       isShow.value = true
@@ -138,7 +116,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  hotkeys.unbind('alt+s')
+  hotkeys.unbind('command+k, ctrl+k')
 })
 
 function initSourceList() {
@@ -205,8 +183,8 @@ function keyEnter() {
   }
 }
 function handleScroll() {
-  if (searchResultRef.value) {
-    const contentDom = searchResultRef.value.osInstance()!.elements().content
+  if (searchResultRef.value?.areaRef?.ref?.el?.viewportElement) {
+    const contentDom = searchResultRef.value.areaRef.ref.el.viewportElement
     let scrollTo = 0
     if (actived.value !== -1) {
       scrollTo = contentDom.scrollTop
@@ -239,92 +217,77 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
 </script>
 
 <template>
-  <TransitionRoot as="template" :show="isShow">
-    <Dialog :initial-focus="searchInputRef" class="fixed inset-0 z-2000 flex" @close="isShow = false">
-      <TransitionChild v-if="settingsStore.mode === 'pc'" as="template" v-bind="overlayTransitionClass">
-        <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" />
-      </TransitionChild>
-      <div class="fixed inset-0">
-        <div class="h-full flex items-end justify-center text-center lg-items-center lg-p-4">
-          <TransitionChild as="template" v-bind="transitionClass">
-            <div class="h-full max-h-full w-full lg-max-h-4/5 lg-max-w-2xl">
-              <DialogPanel class="relative h-full flex flex-col text-left lg-max-h-full">
-                <div class="h-full flex flex-col overflow-y-auto border bg-background shadow-xl lg-h-auto lg-rounded-md">
-                  <div class="h-12 flex flex-shrink-0 items-center border-b">
-                    <div class="h-full w-14 flex-center">
-                      <FaIcon name="i-ri:search-line" :size="18" class="text-foreground/30" />
-                    </div>
-                    <input ref="searchInputRef" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" class="h-full w-full border-0 rounded-md bg-transparent text-base text-foreground focus-outline-none placeholder-foreground/30" @keydown.esc="isShow = false" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
-                    <div v-if="settingsStore.mode === 'mobile'" class="h-full w-14 flex-center border-s">
-                      <FaIcon name="i-carbon:close" :size="18" @click="isShow = false" />
-                    </div>
-                  </div>
-                  <DialogDescription class="relative m-0 h-full of-y-hidden">
-                    <OverlayScrollbarsComponent ref="searchResultRef" :options="{ scrollbars: { autoHide: 'leave', autoHideDelay: 300 } }" defer class="h-full">
-                      <template v-if="resultList.length > 0">
-                        <div v-for="(item, index) in resultList" ref="searchResultItemRef" :key="item.path" class="p-4" :data-index="index" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
-                          <a class="flex cursor-pointer items-center border rounded-lg" :class="{ '-mt-4': index !== 0, 'bg-accent': index === actived }">
-                            <FaIcon v-if="item.icon" :name="item.icon" :size="20" class="basis-16 transition" :class="{ 'scale-120 text-primary': index === actived }" />
-                            <div class="flex flex-1 flex-col gap-1 truncate border-s px-4 py-3">
-                              <div class="truncate text-start text-base font-bold">{{ (typeof item.title === 'function' ? item.title() : item.title) ?? '[ 无标题 ]' }}</div>
-                              <Breadcrumb v-if="item.breadcrumb.length" class="truncate">
-                                <BreadcrumbItem v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex" class="text-xs">
-                                  {{ (typeof bc.title === 'function' ? bc.title() : bc.title) ?? '[ 无标题 ]' }}
-                                </BreadcrumbItem>
-                              </Breadcrumb>
-                            </div>
-                          </a>
-                        </div>
-                      </template>
-                      <template v-else-if="searchInput === ''">
-                        <div class="h-full flex-col-center py-6 text-secondary-foreground/50">
-                          <FaIcon name="i-tabler:mood-smile" :size="40" />
-                          <p class="m-2 text-base">
-                            输入你要搜索的导航
-                          </p>
-                        </div>
-                      </template>
-                      <template v-else>
-                        <div class="h-full flex-col-center py-6 text-secondary-foreground/50">
-                          <FaIcon name="i-tabler:mood-empty" :size="40" />
-                          <p class="m-2 text-base">
-                            没有找到你想要的
-                          </p>
-                        </div>
-                      </template>
-                    </OverlayScrollbarsComponent>
-                  </DialogDescription>
-                  <div v-if="settingsStore.mode === 'pc'" class="flex justify-between border-t px-4 py-3">
-                    <div class="flex gap-8">
-                      <div class="inline-flex items-center gap-1 text-xs">
-                        <FaKbd>
-                          <FaIcon name="i-ion:md-return-left" :size="14" />
-                        </FaKbd>
-                        <span>访问</span>
-                      </div>
-                      <div class="inline-flex items-center gap-1 text-xs">
-                        <FaKbd>
-                          <FaIcon name="i-ant-design:caret-up-filled" :size="14" />
-                        </FaKbd>
-                        <FaKbd>
-                          <FaIcon name="i-ant-design:caret-down-filled" :size="14" />
-                        </FaKbd>
-                        <span>切换</span>
-                      </div>
-                    </div>
-                    <div v-if="settingsStore.settings.navSearch.enableHotkeys" class="inline-flex items-center gap-1 text-xs">
-                      <FaKbd>
-                        ESC
-                      </FaKbd>
-                      <span>退出</span>
-                    </div>
-                  </div>
-                </div>
-              </DialogPanel>
-            </div>
-          </TransitionChild>
+  <FaModal ref="searchResultRef" v-model="isShow" border :footer="settingsStore.mode === 'pc'" :closable="false" class="w-full lg-max-w-2xl" content-class="flex flex-col p-0 min-h-auto" header-class="p-0" footer-class="p-0">
+    <template #header>
+      <div class="h-12 flex flex-shrink-0 items-center">
+        <div class="h-full w-14 flex-center">
+          <FaIcon name="i-ri:search-line" :size="18" class="text-foreground/30" />
+        </div>
+        <input v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" class="h-full w-full border-0 rounded-md bg-transparent text-base text-foreground focus-outline-none placeholder-foreground/30" @keydown.esc="isShow = false" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
+        <div v-if="settingsStore.mode === 'mobile'" class="h-full w-14 flex-center border-s">
+          <FaIcon name="i-carbon:close" :size="18" @click="isShow = false" />
         </div>
       </div>
-    </Dialog>
-  </TransitionRoot>
+    </template>
+    <template #footer>
+      <div class="w-full flex justify-between px-4 py-3">
+        <div class="flex gap-8">
+          <div class="inline-flex items-center gap-1 text-xs">
+            <FaKbd>
+              <FaIcon name="i-ion:md-return-left" :size="14" />
+            </FaKbd>
+            <span>访问</span>
+          </div>
+          <div class="inline-flex items-center gap-1 text-xs">
+            <FaKbd>
+              <FaIcon name="i-ant-design:caret-up-filled" :size="14" />
+            </FaKbd>
+            <FaKbd>
+              <FaIcon name="i-ant-design:caret-down-filled" :size="14" />
+            </FaKbd>
+            <span>切换</span>
+          </div>
+        </div>
+        <div v-if="settingsStore.settings.navSearch.enableHotkeys" class="inline-flex items-center gap-1 text-xs">
+          <FaKbd>
+            ESC
+          </FaKbd>
+          <span>退出</span>
+        </div>
+      </div>
+    </template>
+    <div>
+      <template v-if="resultList.length > 0">
+        <div v-for="(item, index) in resultList" ref="searchResultItemRef" :key="item.path" class="p-4" :data-index="index" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
+          <a class="flex cursor-pointer items-center border rounded-lg" :class="{ '-mt-4': index !== 0, 'bg-accent': index === actived }">
+            <FaIcon v-if="item.icon" :name="item.icon" :size="20" class="basis-16 transition" :class="{ 'scale-120 text-primary': index === actived }" />
+            <div class="flex flex-1 flex-col gap-1 truncate border-s px-4 py-3">
+              <div class="truncate text-start text-base font-bold">{{ (typeof item.title === 'function' ? item.title() : item.title) ?? '[ 无标题 ]' }}</div>
+              <Breadcrumb v-if="item.breadcrumb.length" class="truncate">
+                <BreadcrumbItem v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex" class="text-xs">
+                  {{ (typeof bc.title === 'function' ? bc.title() : bc.title) ?? '[ 无标题 ]' }}
+                </BreadcrumbItem>
+              </Breadcrumb>
+            </div>
+          </a>
+        </div>
+      </template>
+      <template v-else-if="searchInput === ''">
+        <div class="h-full flex-col-center py-6 text-secondary-foreground/50">
+          <FaIcon name="i-tabler:mood-smile" :size="40" />
+          <p class="m-2 text-base">
+            输入你要搜索的导航
+          </p>
+        </div>
+      </template>
+      <template v-else>
+        <div class="h-full flex-col-center py-6 text-secondary-foreground/50">
+          <FaIcon name="i-tabler:mood-empty" :size="40" />
+          <p class="m-2 text-base">
+            没有找到你想要的
+          </p>
+        </div>
+      </template>
+    </div>
+  </FaModal>
 </template>

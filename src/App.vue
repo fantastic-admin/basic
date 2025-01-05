@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import useSettingsStore from '@/store/modules/settings'
 import { ua } from '@/utils/ua'
-import hotkeys from 'hotkeys-js'
 import Provider from './ui/provider/index.vue'
-import eventBus from './utils/eventBus'
 
 const route = useRoute()
 
@@ -39,9 +37,6 @@ onMounted(() => {
   settingsStore.setMode(document.documentElement.clientWidth)
   window.addEventListener('resize', () => {
     settingsStore.setMode(document.documentElement.clientWidth)
-  })
-  hotkeys('alt+i', () => {
-    eventBus.emit('global-system-info-toggle')
   })
 })
 </script>
