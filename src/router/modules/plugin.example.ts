@@ -122,15 +122,6 @@ const routes: RouteRecordRaw = {
       },
     },
     {
-      path: 'countto',
-      name: 'pluginExampleCountTo',
-      component: () => import('@/views/plugin_example/count.to.vue'),
-      meta: {
-        title: '计数器',
-        icon: 'i-carbon:character-whole-number',
-      },
-    },
-    {
       path: 'currencyinput',
       name: 'pluginExampleCurrencyInput',
       component: () => import('@/views/plugin_example/currency.input.vue'),

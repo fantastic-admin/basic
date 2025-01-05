@@ -4,9 +4,11 @@ meta:
 </route>
 
 <template>
-  <PageMain>
-    <RouterLink :to="{ name: 'breadcrumbExampleDetail2' }">
-      查看详情页
+  <FaPageMain>
+    <RouterLink v-slot="{ navigate }" :to="{ name: 'breadcrumbExampleDetail2' }" custom>
+      <FaButton @click="navigate">
+        查看详情页
+      </FaButton>
     </RouterLink>
-  </PageMain>
+  </FaPageMain>
 </template>

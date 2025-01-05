@@ -8,6 +8,7 @@ import useSettingsStore from '@/store/modules/settings'
 import TinymceEditor from '@tinymce/tinymce-vue'
 import tinymce from 'tinymce/tinymce'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 import 'tinymce/themes/silver/theme'
 import 'tinymce/icons/default/icons'
 import 'tinymce/models/dom'
@@ -67,40 +68,36 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="TinyMCE 编辑器">
-      <template #content>
-        <p>
-          安装命令：<ElTag>pnpm add tinymce @tinymce/tinymce-vue</ElTag>
-        </p>
-        <p style="margin-bottom: 0;">
-          安装成功后，在框架 /public 目录下创建 tinymce 文件夹，并将 /node_modules/tinymce 目录下的 skins 文件夹复制到 /public/tinymce 目录下；然后在到 TinyMCE 官网
-          <el-link type="primary" href="https://www.tiny.cloud/get-tiny/language-packages/" target="_blank">
-            下载中文语言包
-          </el-link>
-          ，解压并放到 /public/tinymce 目录下。
-        </p>
+    <FaPageHeader title="TinyMCE 编辑器">
+      <template #description>
+        <div class="space-y-2">
+          <p>
+            安装命令：
+            <Command text="pnpm add tinymce @tinymce/tinymce-vue" />
+          </p>
+          <p>
+            安装成功后，在框架 /public 目录下创建 tinymce 文件夹，并将 /node_modules/tinymce 目录下的 skins 文件夹复制到 /public/tinymce 目录下；然后在到 TinyMCE 官网
+            <FaButton variant="link" class="h-auto p-0" href="https://www.tiny.cloud/get-tiny/language-packages/" target="_blank">
+              下载中文语言包
+            </FaButton>
+            ，解压并放到 /public/tinymce 目录下。
+          </p>
+        </div>
       </template>
-      <ElButton @click="open('https://github.com/tinymce/tinymce')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/tinymce/tinymce')">
+        <FaIcon name="i-ep:link" />
         访问 TinyMCE
-      </ElButton>
-    </PageHeader>
-    <PageMain>
-      <TinymceEditor v-model="content" :init="defaultSetting" />
-      <div class="preview" v-html="content" />
-    </PageMain>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
+      <div class="min-w-full prose">
+        <TinymceEditor v-model="content" :init="defaultSetting" />
+      </div>
+    </FaPageMain>
+    <FaPageMain title="预览">
+      <div class="min-w-full prose">
+        <div v-html="content" />
+      </div>
+    </FaPageMain>
   </div>
 </template>
-
-<style scoped>
-.preview {
-  margin-top: 10px;
-
-  &::before {
-    display: block;
-    content: "预览：";
-  }
-}
-</style>

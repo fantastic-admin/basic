@@ -3,9 +3,10 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import Cropper from 'cropperjs'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 import 'cropperjs/dist/cropper.css'
 
 let cropper: any = null
@@ -36,29 +37,28 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="图片裁剪">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add cropperjs</ElTag>
+    <FaPageHeader title="图片裁剪">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add cropperjs" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/fengyuanchen/cropperjs')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/fengyuanchen/cropperjs')">
+        <FaIcon name="i-ep:link" />
         访问 cropperjs
-      </ElButton>
-    </PageHeader>
-    <PageMain>
-      <div>
-        <img ref="imageRef" src="@/assets/images/logo.png" class="block h-xl w-xl">
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
+      <div class="space-y-2">
+        <img ref="imageRef" src="@/assets/images/logo.svg" class="block h-xl w-xl">
+        <FaButton @click="onCrop">
+          裁剪
+        </FaButton>
       </div>
-      <HButton @click="onCrop">
-        裁剪
-      </HButton>
-    </PageMain>
-    <PageMain v-if="cropImage">
+    </FaPageMain>
+    <FaPageMain v-if="cropImage">
       <img :src="cropImage" class="block h-xs w-xs">
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

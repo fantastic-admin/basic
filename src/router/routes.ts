@@ -65,23 +65,6 @@ const systemRoutes: RouteRecordRaw[] = [
           breadcrumb: false,
         },
       },
-      {
-        path: 'personal/setting',
-        name: 'personalSetting',
-        component: () => import('@/views/personal/setting.vue'),
-        meta: {
-          title: '个人设置',
-          cache: 'personalEditPassword',
-        },
-      },
-      {
-        path: 'personal/edit/password',
-        name: 'personalEditPassword',
-        component: () => import('@/views/personal/edit.password.vue'),
-        meta: {
-          title: '修改密码',
-        },
-      },
     ],
   },
 ]

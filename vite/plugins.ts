@@ -14,6 +14,7 @@ import AppLoading from 'vite-plugin-app-loading'
 import Archiver from 'vite-plugin-archiver'
 import banner from 'vite-plugin-banner'
 import { compression } from 'vite-plugin-compression2'
+import { envParse, parseLoadedEnv } from 'vite-plugin-env-parse'
 import { vitePluginFakeServer } from 'vite-plugin-fake-server'
 import Pages from 'vite-plugin-pages'
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
@@ -21,7 +22,7 @@ import VueDevTools from 'vite-plugin-vue-devtools'
 import Layouts from 'vite-plugin-vue-meta-layouts'
 
 export default function createVitePlugins(mode: string, isBuild = false) {
-  const viteEnv = loadEnv(mode, process.cwd())
+  const viteEnv = parseLoadedEnv(loadEnv(mode, process.cwd()))
   const vitePlugins: (PluginOption | PluginOption[])[] = [
     vue(),
     vueJsx(),
@@ -30,11 +31,16 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       modernPolyfills: [
         'es.array.at',
         'es.array.find-last',
+        'es.object.has-own',
       ],
     }),
 
     // https://github.com/vuejs/devtools-next
-    viteEnv.VITE_OPEN_DEVTOOLS === 'true' && VueDevTools(),
+    viteEnv.VITE_OPEN_DEVTOOLS && VueDevTools(),
+
+    envParse({
+      dtsPath: 'src/types/env.d.ts',
+    }),
 
     // https://github.com/unplugin/unplugin-auto-import
     autoImport({
@@ -51,11 +57,10 @@ export default function createVitePlugins(mode: string, isBuild = false) {
 
     // https://github.com/unplugin/unplugin-vue-components
     components({
-      dirs: [
-        'src/components',
-        'src/layouts/ui-kit',
+      globs: [
+        'src/ui/components/*/index.vue',
+        'src/components/*/index.vue',
       ],
-      include: [/\.vue$/, /\.vue\?vue/, /\.tsx$/],
       dts: './src/types/components.d.ts',
     }),
 
@@ -73,7 +78,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       logger: !isBuild,
       include: 'src/mock',
       infixName: false,
-      enableProd: isBuild && viteEnv.VITE_BUILD_MOCK === 'true',
+      enableProd: isBuild && viteEnv.VITE_BUILD_MOCK,
     }),
 
     // https://github.com/dishait/vite-plugin-vue-meta-layouts
@@ -144,7 +149,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       enforce: 'pre',
       transform: (code, id) => {
         if (/src\/main.ts$/.test(id)) {
-          if (viteEnv.VITE_APP_DISABLE_DEVTOOL === 'true') {
+          if (viteEnv.VITE_APP_DISABLE_DEVTOOL) {
             // ?ddtk=example
             code = code.concat(`
               import DisableDevtool from 'disable-devtool'

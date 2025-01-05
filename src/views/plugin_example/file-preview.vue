@@ -3,11 +3,12 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import VueOfficeDocx from '@vue-office/docx'
 import VueOfficeExcel from '@vue-office/excel'
 import VueOfficePdf from '@vue-office/pdf'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 import '@vue-office/docx/lib/index.css'
 import '@vue-office/excel/lib/index.css'
 
@@ -23,28 +24,29 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="文件预览">
-      <template #content>
-        <p>支持docx、xlsx、pdf文件预览。</p>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add @vue-office/docx @vue-office/excel @vue-office/pdf</ElTag>
-        </p>
+    <FaPageHeader title="文件预览">
+      <template #description>
+        <div class="space-y-2">
+          <p>支持docx、xlsx、pdf文件预览。</p>
+          <p>
+            安装命令：
+            <Command text="pnpm add @vue-office/docx @vue-office/excel @vue-office/pdf" />
+          </p>
+        </div>
       </template>
-      <ElButton @click="open('https://github.com/501351981/vue-office')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/501351981/vue-office')">
+        <FaIcon name="i-ep:link" />
         访问 vue-office
-      </ElButton>
-    </PageHeader>
-    <PageMain title="docx文件预览">
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain title="docx文件预览">
       <VueOfficeDocx :src="docx" style="height: 500px;" />
-    </PageMain>
-    <PageMain title="excel文件预览">
+    </FaPageMain>
+    <FaPageMain title="excel文件预览">
       <VueOfficeExcel :src="excel" style="height: 500px;" />
-    </PageMain>
-    <PageMain title="pdf文件预览">
+    </FaPageMain>
+    <FaPageMain title="pdf文件预览">
       <VueOfficePdf :src="pdf" style="height: 500px;" />
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

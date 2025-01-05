@@ -5,8 +5,8 @@ meta:
 
 <template>
   <div>
-    <PageMain>
+    <FaPageMain>
       注意看面包屑导航的变化
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

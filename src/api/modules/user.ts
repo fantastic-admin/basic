@@ -17,7 +17,7 @@ export default {
   // 修改密码
   passwordEdit: (data: {
     password: string
-    newpassword: string
+    newPassword: string
   }) => api.post('user/password/edit', data, {
     baseURL: '/mock/',
   }),

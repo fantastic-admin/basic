@@ -11,7 +11,6 @@ const routes: RouteRecordRaw = {
   name: 'tabExample',
   meta: {
     title: '标签栏',
-    i18n: 'route.tabbar',
     icon: 'i-ic:round-tab',
   },
   children: [
@@ -21,7 +20,6 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/tab_example/index.vue'),
       meta: {
         title: '标签栏演示',
-        i18n: 'route.tabbar',
         menu: false,
         breadcrumb: false,
         activeMenu: '/tab_example',

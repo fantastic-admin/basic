@@ -46,8 +46,8 @@
 
   &::before,
   &::after {
-    display: block;
     clear: both;
+    display: block;
     content: "";
   }
 }

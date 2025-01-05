@@ -114,15 +114,15 @@ const dataList = ref([
 
 <template>
   <div class="absolute-container">
-    <PageHeader title="表格高度自适应" />
-    <PageMain>
+    <FaPageHeader title="表格高度自适应" class="mb-0" />
+    <FaPageMain class="flex-1 overflow-auto" main-class="flex-1 flex flex-col overflow-auto">
       <ElTable :data="dataList" stripe highlight-current-row border height="100%">
         <ElTableColumn type="index" width="50" />
         <ElTableColumn prop="date" label="日期" width="180" />
         <ElTableColumn prop="name" label="姓名" width="180" />
         <ElTableColumn prop="address" label="地址" />
       </ElTable>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>
 
@@ -133,22 +133,5 @@ const dataList = ref([
   flex-direction: column;
   width: 100%;
   height: 100%;
-
-  .page-header {
-    margin-bottom: 0;
-  }
-
-  /* 让 page-main 的高度自适应 */
-  .page-main {
-    flex: 1;
-    overflow: auto;
-
-    :deep(.main-container) {
-      display: flex;
-      flex: 1;
-      flex-direction: column;
-      overflow: auto;
-    }
-  }
 }
 </style>

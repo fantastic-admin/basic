@@ -3,9 +3,10 @@ meta:
   enabled: false
 </route>
 
-<script lang="ts" setup>
+<script setup lang="ts">
 import { useRequest } from 'vue-hooks-plus'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 function getUsername(): Promise<string> {
   return new Promise((resolve) => {
@@ -41,38 +42,41 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="VueHooks Plus">
-      <template #content>
-        <p>提供基础和高级的 hook ，高性能逻辑的抽象封装，满足大量场景，更多 API 和例子请查看 VueHooks Plus 官网。</p>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add vue-hooks-plus</ElTag>
-        </p>
+    <FaPageHeader title="VueHooks Plus">
+      <template #description>
+        <div class="space-y-2">
+          <p>提供基础和高级的 hook ，高性能逻辑的抽象封装，满足大量场景，更多 API 和例子请查看 VueHooks Plus 官网。</p>
+          <p>
+            安装命令：
+            <Command text="pnpm add vue-hooks-plus" />
+          </p>
+        </div>
       </template>
-      <ElButton @click="open('https://github.com/InhiblabCore/vue-hooks-plus')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/InhiblabCore/vue-hooks-plus')">
+        <FaIcon name="i-ep:link" />
         访问 VueHooks Plus
-      </ElButton>
-    </PageHeader>
-    <PageMain title="轮询">
-      <div class="mb-4">
-        Data：<span>{{ loading ? 'loading' : data }}</span>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain title="轮询">
+      <div class="space-y-2">
+        <div>
+          Data：<span>{{ loading ? 'loading' : data }}</span>
+        </div>
+        <div>
+          PollingInterval：{{ computedTime }}ms
+        </div>
+        <div class="space-x-2">
+          <FaButton @click="start()">
+            Start
+          </FaButton>
+          <FaButton @click="update()">
+            time + 100ms
+          </FaButton>
+          <FaButton @click="cancel()">
+            Stop
+          </FaButton>
+        </div>
       </div>
-      <div class="mb-4">
-        PollingInterval：{{ computedTime }}ms
-      </div>
-      <div>
-        <el-button @click="start()">
-          Start
-        </el-button>
-        <el-button @click="update()">
-          time + 100ms
-        </el-button>
-        <el-button @click="cancel()">
-          Stop
-        </el-button>
-      </div>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

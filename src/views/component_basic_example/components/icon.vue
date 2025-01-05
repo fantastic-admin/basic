@@ -7,12 +7,12 @@ const icon = icons.filter(item => item.prefix === 'ep')[0]
 <template>
   <div>
     <div class="demo">
-      <SvgIcon name="i-ep:edit" />
-      <SvgIcon name="i-ep:share" />
-      <SvgIcon name="i-ep:delete" />
+      <FaIcon name="i-ep:edit" />
+      <FaIcon name="i-ep:share" />
+      <FaIcon name="i-ep:delete" />
       <ElButton type="primary">
         <template #icon>
-          <SvgIcon name="i-ep:search" />
+          <FaIcon name="i-ep:search" />
         </template>
         搜索
       </ElButton>
@@ -22,7 +22,7 @@ const icon = icons.filter(item => item.prefix === 'ep')[0]
     </ElDivider>
     <div v-for="(item, index) in icon.icons" :key="index" class="list-icon">
       <ElTooltip class="item" effect="dark" :content="`ep:${item}`" placement="top">
-        <SvgIcon :name="`ep:${item}`" />
+        <FaIcon :name="`ep:${item}`" />
       </ElTooltip>
     </div>
   </div>
@@ -33,8 +33,8 @@ const icon = icons.filter(item => item.prefix === 'ep')[0]
   > i {
     margin: 0 20px;
     font-size: 1.5em;
-    color: #606266;
     vertical-align: middle;
+    color: #606266;
   }
 
   button {

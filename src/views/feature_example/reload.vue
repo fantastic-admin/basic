@@ -19,13 +19,13 @@ function reload() {
 
 <template>
   <div>
-    <PageHeader title="主页面刷新" content="重新渲染当前页面" />
-    <PageMain>
+    <FaPageHeader title="主页面刷新" description="重新渲染当前页面" />
+    <FaPageMain>
       <p>该特性无视页面缓存，意味着即便当前页面开启了页面缓存，手动刷新也会强制清除当前页面内的组件和数据的状态。</p>
       <ElInput v-model="text" />
       <ElButton @click="reload">
         刷新
       </ElButton>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

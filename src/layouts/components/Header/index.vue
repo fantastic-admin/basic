@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSlots } from '@/slots'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import Logo from '../Logo/index.vue'
@@ -12,25 +13,16 @@ const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
 const { switchTo } = useMenu()
-
-const menuRef = useTemplateRef('menuRef')
-
-// 顶部模式鼠标滚动
-function handlerMouserScroll(event: WheelEvent) {
-  if (event.deltaY || event.detail !== 0) {
-    menuRef.value?.scrollBy({
-      left: (event.deltaY || event.detail) > 0 ? 50 : -50,
-    })
-  }
-}
 </script>
 
 <template>
   <Transition name="header">
     <header v-if="settingsStore.mode === 'pc' && settingsStore.settings.menu.mode === 'head'">
+      <component :is="useSlots('header-start')" />
       <div class="header-container">
         <Logo class="title" />
-        <div ref="menuRef" class="menu-container scrollbar-none" @wheel.prevent="handlerMouserScroll">
+        <component :is="useSlots('header-after-logo')" />
+        <FaScrollArea horizontal :scrollbar="false" mask gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
           <!-- 顶部模式 -->
           <div class="menu h-full flex of-hidden transition-all">
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
@@ -40,12 +32,12 @@ function handlerMouserScroll(event: WheelEvent) {
                 }"
               >
                 <div
-                  v-if="item.children && item.children.length !== 0" class="group menu-item-container h-full w-full flex cursor-pointer items-center justify-between gap-1 px-3 text-[var(--g-header-menu-color)] transition-all hover-(bg-[var(--g-header-menu-hover-bg)] text-[var(--g-header-menu-hover-color)])" :class="{
+                  v-if="item.children && item.children.length !== 0" class="group menu-item-container relative h-full w-full flex cursor-pointer items-center justify-between gap-1 rounded-lg px-3 text-[var(--g-header-menu-color)] transition-all hover-(bg-[var(--g-header-menu-hover-bg)] text-[var(--g-header-menu-hover-color)])" :class="{
                     'text-[var(--g-header-menu-active-color)]! bg-[var(--g-header-menu-active-bg)]!': index === menuStore.actived,
                   }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" @click="switchTo(index)"
                 >
                   <div class="inline-flex flex-1 items-center justify-center gap-1">
-                    <SvgIcon v-if="item.meta?.icon" :name="item.meta?.icon" class="menu-item-container-icon transition-transform group-hover-scale-120" />
+                    <FaIcon v-if="item.meta?.icon" :name="item.meta?.icon" class="menu-item-container-icon transition-transform group-hover-scale-120" />
                     <span class="w-full flex-1 truncate text-sm transition-height transition-opacity transition-width">
                       {{ typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title }}
                     </span>
@@ -54,9 +46,10 @@ function handlerMouserScroll(event: WheelEvent) {
               </div>
             </template>
           </div>
-        </div>
+        </FaScrollArea>
         <ToolbarRightSide />
       </div>
+      <component :is="useSlots('header-end')" />
     </header>
   </Transition>
 </template>
@@ -65,18 +58,17 @@ function handlerMouserScroll(event: WheelEvent) {
 header {
   position: fixed;
   top: 0;
-  right: 0;
+  right: var(--scrollbar-width, 0);
   left: 0;
   z-index: 2000;
   display: flex;
   align-items: center;
-  width: 100%;
+  width: calc(100% - var(--scrollbar-width, 0px));
   height: var(--g-header-height);
-  padding: 0 20px;
   margin: 0 auto;
   color: var(--g-header-color);
   background-color: var(--g-header-bg);
-  box-shadow: -1px 0 0 0 var(--g-border-color), 1px 0 0 0 var(--g-border-color), 0 1px 0 0 var(--g-border-color);
+  box-shadow: -1px 0 0 0 hsl(var(--border)), 1px 0 0 0 hsl(var(--border)), 0 1px 0 0 hsl(var(--border));
   transition: background-color 0.3s;
 
   .header-container {
@@ -86,6 +78,7 @@ header {
     justify-content: space-between;
     width: 100%;
     height: 100%;
+    padding: 0 12px 0 20px;
     margin: 0 auto;
 
     :deep(a.title) {
@@ -93,12 +86,13 @@ header {
       flex: 0;
       width: inherit;
       height: inherit;
-      padding: inherit;
+      padding: 0;
       background-color: inherit;
 
       .logo {
         width: initial;
-        height: 40px;
+        max-width: initial;
+        height: min(70%, 50px);
       }
 
       span {
@@ -109,12 +103,6 @@ header {
     }
 
     .menu-container {
-      flex: 1;
-      height: 100%;
-      padding: 0 20px;
-      overflow-x: auto;
-      mask-image: linear-gradient(to right, transparent, #000 20px, #000 calc(100% - 20px), transparent);
-
       .menu {
         display: inline-flex;
         height: 100%;

@@ -55,28 +55,24 @@ onBeforeRouteLeave((to, from) => {
 
 <template>
   <div>
-    <PageHeader title="页面缓存" content="除了可以在路由里配置页面是否需要缓存外，你也可以不使用框架提供的方法，而是在页面里自行实现。" />
-    <PageMain>
-      <div class="block">
-        <ElSwitch v-model="openKeepAlive" active-text="开启缓存" inactive-text="关闭缓存" />
-      </div>
-      <div class="block">
+    <FaPageHeader title="页面缓存" description="除了可以在路由里配置页面是否需要缓存外，你也可以不使用框架提供的方法，而是在页面里自行实现。" />
+    <FaPageMain>
+      <div class="space-y-2">
+        <div class="flex-center-start gap-2 text-sm">
+          关闭缓存
+          <FaSwitch v-model="openKeepAlive" />
+          开启缓存
+        </div>
         <ElInputNumber v-model="num" />
+        <div class="space-x-2">
+          <FaButton @click="go(1)">
+            进入同级路由页面
+          </FaButton>
+          <FaButton @click="go(2)">
+            进入下级路由页面
+          </FaButton>
+        </div>
       </div>
-      <div class="block">
-        <ElButton @click="go(1)">
-          进入同级路由页面
-        </ElButton>
-        <ElButton @click="go(2)">
-          进入下级路由页面
-        </ElButton>
-      </div>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>
-
-<style scoped>
-.block {
-  margin-bottom: 10px;
-}
-</style>

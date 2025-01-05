@@ -38,7 +38,6 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/feature_example/table.autoheight.vue'),
       meta: {
         title: '表格高度自适应',
-        i18n: 'route.feature.tableautoheight',
         icon: 'i-tabler:arrow-autofit-height',
       },
     },

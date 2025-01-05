@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { useSlots } from '@/slots'
 import useKeepAliveStore from '@/store/modules/keepAlive'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
@@ -6,12 +7,10 @@ import eventBus from '@/utils/eventBus'
 import hotkeys from 'hotkeys-js'
 import AppSetting from './components/AppSetting/index.vue'
 import BackTop from './components/BackTop/index.vue'
-import BuyIt from './components/BuyIt/index.vue'
 import Copyright from './components/Copyright/index.vue'
 import Header from './components/Header/index.vue'
 import HotkeysIntro from './components/HotkeysIntro/index.vue'
 import MainSidebar from './components/MainSidebar/index.vue'
-import Search from './components/Search/index.vue'
 import SubSidebar from './components/SubSidebar/index.vue'
 import Topbar from './components/Topbar/index.vue'
 import LinkView from './components/views/link.vue'
@@ -29,13 +28,22 @@ const menuStore = useMenuStore()
 const mainPage = useMainPage()
 const menu = useMenu()
 
+// 头部当前实际高度
+const headerActualHeight = computed(() => {
+  let actualHeight = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-header-height'))
+  if (['single', 'side'].includes(settingsStore.settings.menu.mode) || settingsStore.mode === 'mobile') {
+    actualHeight = 0
+  }
+  return actualHeight
+})
+
 // 侧边栏主导航当前实际宽度
 const mainSidebarActualWidth = computed(() => {
   let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width'))
   if (settingsStore.settings.menu.mode === 'single' || (settingsStore.settings.menu.mode === 'head' && settingsStore.mode !== 'mobile')) {
     actualWidth = 0
   }
-  return `${actualWidth}px`
+  return actualWidth
 })
 
 // 侧边栏次导航当前实际宽度
@@ -47,7 +55,19 @@ const subSidebarActualWidth = computed(() => {
   if (menuStore.sidebarMenus.every(item => item.meta?.menu === false)) {
     actualWidth = 0
   }
-  return `${actualWidth}px`
+  return actualWidth
+})
+
+// 顶栏当前实际高度
+const topbarActualHeight = computed(() => {
+  let actualHeight = 0
+  if (settingsStore.settings.tabbar.enable) {
+    actualHeight += Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-tabbar-height'))
+  }
+  if (!['head'].includes(settingsStore.settings.menu.mode) || settingsStore.settings.toolbar.breadcrumb) {
+    actualHeight += Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-toolbar-height'))
+  }
+  return actualHeight
 })
 
 const isLink = computed(() => !!routeInfo.meta.link)
@@ -90,14 +110,16 @@ onUnmounted(() => {
   hotkeys.unbind('alt+`')
 })
 
-const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
+const enableAppSetting = import.meta.env.VITE_APP_SETTING
 </script>
 
 <template>
   <div
     class="layout" :style="{
-      '--g-main-sidebar-actual-width': mainSidebarActualWidth,
-      '--g-sub-sidebar-actual-width': subSidebarActualWidth,
+      '--g-header-actual-height': `${headerActualHeight}px`,
+      '--g-main-sidebar-actual-width': `${mainSidebarActualWidth}px`,
+      '--g-sub-sidebar-actual-width': `${subSidebarActualWidth}px`,
+      '--g-topbar-actual-height': `${topbarActualHeight}px`,
     }"
   >
     <div id="app-main">
@@ -107,8 +129,8 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
           <MainSidebar />
           <SubSidebar />
         </div>
-        <div class="sidebar-mask" :class="{ show: settingsStore.mode === 'mobile' && !settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()" />
-        <div class="main-container">
+        <div class="invisible fixed inset-0 z-1009 bg-black/50 op-0 backdrop-blur-sm transition-opacity" :class="{ 'op-100! visible!': settingsStore.mode === 'mobile' && !settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()" />
+        <div class="main-container pb-[var(--g-main-container-padding-bottom)]">
           <Topbar />
           <div class="main">
             <RouterView v-slot="{ Component, route }">
@@ -124,16 +146,15 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
         </div>
       </div>
     </div>
-    <Search />
     <HotkeysIntro />
     <template v-if="enableAppSetting">
       <div class="app-setting" @click="eventBus.emit('global-app-setting-toggle')">
-        <SvgIcon name="i-uiw:setting-o" class="icon" />
+        <FaIcon name="i-uiw:setting-o" class="icon" />
       </div>
       <AppSetting />
     </template>
     <BackTop />
-    <BuyIt />
+    <component :is="useSlots('free-position')" />
   </div>
 </template>
 
@@ -176,41 +197,22 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
   position: relative;
   width: 100%;
   height: 100%;
+  padding-top: var(--g-header-actual-height);
   transition: padding-top 0.3s;
 
   .sidebar-container {
     position: fixed;
-    top: 0;
+    top: var(--g-header-actual-height);
     bottom: 0;
     z-index: 1010;
     display: flex;
     width: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
-    box-shadow: -1px 0 0 0 var(--g-border-color), 1px 0 0 0 var(--g-border-color);
+    box-shadow: -1px 0 0 0 hsl(var(--border)), 1px 0 0 0 hsl(var(--border));
     transition: width 0.3s, transform 0.3s, box-shadow 0.3s, top 0.3s;
 
     &:has(> .main-sidebar-container.main-sidebar-enter-active),
     &:has(> .main-sidebar-container.main-sidebar-leave-active) {
       overflow: hidden;
-    }
-  }
-
-  .sidebar-mask {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-    width: 100%;
-    height: 100%;
-    visibility: hidden;
-    background-image: radial-gradient(transparent 1px, rgb(0 0 0 / 30%) 1px);
-    background-size: 4px 4px;
-    backdrop-filter: saturate(50%) blur(4px);
-    opacity: 0;
-    transition: all 0.2s;
-
-    &.show {
-      visibility: visible;
-      opacity: 1;
     }
   }
 
@@ -223,52 +225,22 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING === 'true'
     flex-direction: column;
     min-height: 100%;
     margin-left: calc(var(--g-main-sidebar-actual-width) + var(--g-sub-sidebar-actual-width));
-    background-color: var(--g-bg);
-    box-shadow: -1px 0 0 0 var(--g-border-color), 1px 0 0 0 var(--g-border-color);
+    background-color: var(--g-main-area-bg);
+    box-shadow: -1px 0 0 0 hsl(var(--border)), 1px 0 0 0 hsl(var(--border));
     transition: margin-left 0.3s, background-color 0.3s, box-shadow 0.3s;
 
     .main {
       position: relative;
       flex: auto;
       height: 100%;
+      margin: var(--g-topbar-actual-height) 0 0;
       overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .topbar-container.has-tabbar + .main {
-      margin: var(--g-tabbar-height) 0 0;
-    }
-
-    .topbar-container.has-toolbar + .main {
-      margin: var(--g-toolbar-height) 0 0;
-    }
-
-    .topbar-container.has-tabbar.has-toolbar + .main {
-      margin: calc(var(--g-tabbar-height) + var(--g-toolbar-height)) 0 0;
-    }
-  }
-}
-
-header:not(.header-leave-active) + .wrapper {
-  padding-top: var(--g-header-height);
-
-  .sidebar-container {
-    top: var(--g-header-height);
-
-    :deep(.sidebar-logo) {
-      display: none;
-    }
-  }
-
-  .main-container {
-    .topbar-container {
-      top: var(--g-header-height);
     }
   }
 }
 
 .app-setting {
-  --uno: text-white dark-text-dark bg-ui-primary;
+  --uno: bg-primary text-primary-foreground rounded-l-md;
 
   position: fixed;
   top: calc(50% + 250px);
@@ -281,8 +253,6 @@ header:not(.header-leave-active) + .wrapper {
   height: 50px;
   font-size: 24px;
   cursor: pointer;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
 
   .icon {
     animation: rotate 5s linear infinite;
