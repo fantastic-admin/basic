@@ -7,6 +7,7 @@ meta:
 import img from '@/assets/images/login-banner.png'
 import printJS from 'print-js'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 const tableData = ref([
   {
@@ -60,33 +61,34 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="打印">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add print-js</ElTag>
+    <FaPageHeader title="打印">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add print-js" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/crabbly/print.js')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/crabbly/print.js')">
+        <FaIcon name="i-ep:link" />
         访问 print.js
-      </ElButton>
-    </PageHeader>
-    <PageMain title="打印JSON">
-      <ElTable :data="tableData" stripe border :style="{ width: '100%' }">
-        <ElTableColumn prop="date" label="日期" width="180" />
-        <ElTableColumn prop="name" label="姓名" width="180" />
-        <ElTableColumn prop="address" label="地址" />
-      </ElTable>
-      <ElButton @click="print('json')">
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain title="打印JSON">
+      <div class="space-y-2">
+        <ElTable :data="tableData" stripe border :style="{ width: '100%' }">
+          <ElTableColumn prop="date" label="日期" width="180" />
+          <ElTableColumn prop="name" label="姓名" width="180" />
+          <ElTableColumn prop="address" label="地址" />
+        </ElTable>
+        <FaButton @click="print('json')">
+          打印
+        </FaButton>
+      </div>
+    </FaPageMain>
+    <FaPageMain title="打印图片">
+      <FaButton @click="print('image')">
         打印
-      </ElButton>
-    </PageMain>
-    <PageMain title="打印图片">
-      <ElButton @click="print('image')">
-        打印
-      </ElButton>
-    </PageMain>
+      </FaButton>
+    </FaPageMain>
   </div>
 </template>

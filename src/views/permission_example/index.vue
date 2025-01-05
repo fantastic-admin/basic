@@ -6,7 +6,11 @@ meta:
 <script setup lang="ts">
 import useSettingsStore from '@/store/modules/settings'
 import useUserStore from '@/store/modules/user'
-import { ElMessage } from 'element-plus'
+import { toast } from 'vue-sonner'
+
+defineOptions({
+  name: 'PermissionExample',
+})
 
 const router = useRouter()
 
@@ -21,7 +25,7 @@ async function accountChange(val: any) {
     account: val,
     password: '',
   })
-  await userStore.getPermissions()
+  location.reload()
 }
 function goTest() {
   router.push({
@@ -30,120 +34,136 @@ function goTest() {
 }
 function permissionCheck(permissions: string | string[]) {
   if (auth(permissions)) {
-    ElMessage.success('校验通过')
+    toast.success('校验通过', {
+      position: 'top-center',
+    })
   }
   else {
-    ElMessage.error('校验不通过')
+    toast.error('校验不通过', {
+      position: 'top-center',
+    })
   }
 }
 function permissionCheck2(permissions: string[]) {
   if (authAll(permissions)) {
-    ElMessage.success('校验通过')
+    toast.success('校验通过', {
+      position: 'top-center',
+    })
   }
   else {
-    ElMessage.error('校验不通过')
+    toast.error('校验不通过', {
+      position: 'top-center',
+    })
   }
 }
 </script>
 
 <template>
   <div>
-    <PageHeader title="权限验证" />
-    <PageMain>
-      <div v-if="!settingsStore.settings.app.enablePermission">
-        请到 seeting.js 里打开权限功能，再进入该页面查看演示
+    <FaPageHeader title="权限验证" />
+    <FaPageMain v-if="!settingsStore.settings.app.enablePermission">
+      请到 settings.ts 里设置并开启权限功能，再进入该页面查看演示
+    </FaPageMain>
+    <FaPageMain v-else title="切换账号">
+      <div class="space-y-2">
+        <div class="space-x-2">
+          <FaButton
+            v-for="(item, index) in [
+              { label: 'admin', value: 'admin' },
+              { label: 'test', value: 'test' },
+              { label: 'hooray(无权限)', value: 'hooray' },
+            ]" :key="index" :variant="userStore.account === item.value ? 'default' : 'outline'" @click="accountChange(item.value)"
+          >
+            {{ item.label }}
+          </FaButton>
+        </div>
+        <div>当前账号权限：{{ userStore.permissions }}</div>
       </div>
-      <div v-else>
-        <h3>切换帐号</h3>
-        <ElRadioGroup v-model="userStore.account" @change="accountChange">
-          <ElRadioButton value="admin">
-            admin
-          </ElRadioButton>
-          <ElRadioButton value="test">
-            test
-          </ElRadioButton>
-          <ElRadioButton value="hooray">
-            hooray(无权限)
-          </ElRadioButton>
-        </ElRadioGroup>
-        <h3>帐号权限</h3>
-        <div>{{ userStore.permissions }}</div>
-        <h3>访问鉴权页面</h3>
-        <div>
-          <ElButton @click="goTest">
-            点击访问
-          </ElButton>
+    </FaPageMain>
+    <FaPageMain v-if="settingsStore.settings.app.enablePermission" title="路由鉴权">
+      <FaButton @click="goTest">
+        跳转页面
+      </FaButton>
+    </FaPageMain>
+    <FaPageMain v-if="settingsStore.settings.app.enablePermission" title="鉴权指令">
+      <div class="flex-col-start space-y-2">
+        <div v-auth="'permission.browse'">
+          如果你有 permission.browse 权限则能看到这句话
         </div>
-        <h3>鉴权指令（请对照代码查看）</h3>
-        <div>
-          <div v-auth="'permission.browse'">
-            如果你有 permission.browse 权限则能看到这句话
-          </div>
-          <div v-auth="'permission.create'">
-            如果你有 permission.create 权限则能看到这句话
-          </div>
-          <div v-auth="['permission.browse', 'permission.create']">
-            如果你有 permission.browse 或 permission.create 权限则能看到这句话
-          </div>
-          <div v-auth.all="['permission.browse', 'permission.create']">
-            如果你有 permission.browse 和 permission.create 权限则能看到这句话
-          </div>
+        <div v-auth="'permission.create'">
+          如果你有 permission.create 权限则能看到这句话
         </div>
-        <h3>鉴权组件（请对照代码查看）</h3>
-        <div class="flex-col-start gap-2">
-          <Auth value="permission.browse">
-            <ElTag>你有 permission.browse 权限</ElTag>
-            <template #no-auth>
-              <ElTag type="danger">
-                你没有 permission.browse 权限
-              </ElTag>
-            </template>
-          </Auth>
-          <Auth value="permission.create">
-            <ElTag>你有 permission.create 权限</ElTag>
-            <template #no-auth>
-              <ElTag type="danger">
-                你没有 permission.create 权限
-              </ElTag>
-            </template>
-          </Auth>
-          <Auth :value="['permission.browse', 'permission.create']">
-            <ElTag>你有 permission.browse 或 permission.create 权限</ElTag>
-            <template #no-auth>
-              <ElTag type="danger">
-                你没有 permission.browse 或 permission.create 权限
-              </ElTag>
-            </template>
-          </Auth>
-          <Auth :value="['permission.browse', 'permission.create']" all>
-            <ElTag>你有 permission.browse 和 permission.create 权限</ElTag>
-            <template #no-auth>
-              <ElTag type="danger">
-                你没有 permission.browse 和 permission.create 权限
-              </ElTag>
-            </template>
-          </Auth>
+        <div v-auth="['permission.browse', 'permission.create']">
+          如果你有 permission.browse 或 permission.create 权限则能看到这句话
         </div>
-        <h3>鉴权函数（请对照代码查看）</h3>
-        <div>
-          <ElButtonGroup style="display: block; margin-bottom: 10px;">
-            <ElButton @click="permissionCheck('permission.browse')">
-              校验 permission.browse 权限
-            </ElButton>
-            <ElButton @click="permissionCheck('permission.create')">
-              校验 permission.create 权限
-            </ElButton>
-          </ElButtonGroup>
-          <ElButtonGroup>
-            <ElButton @click="permissionCheck(['permission.browse', 'permission.create'])">
-              校验 permission.browse 或 permission.create 权限
-            </ElButton>
-            <ElButton @click="permissionCheck2(['permission.browse', 'permission.create'])">
-              校验 permission.browse 和 permission.create 权限
-            </ElButton>
-          </ElButtonGroup>
+        <div v-auth.all="['permission.browse', 'permission.create']">
+          如果你有 permission.browse 和 permission.create 权限则能看到这句话
         </div>
       </div>
-    </PageMain>
+    </FaPageMain>
+    <FaPageMain v-if="settingsStore.settings.app.enablePermission" title="鉴权组件">
+      <div class="text-sm space-y-2">
+        <div>
+          你
+          <FaAuth value="permission.browse">
+            <FaKbd>有</FaKbd>
+            <template #no-auth>
+              <FaKbd>没有</FaKbd>
+            </template>
+          </FaAuth>
+          permission.browse 权限
+        </div>
+        <div>
+          你
+          <FaAuth value="permission.create">
+            <FaKbd>有</FaKbd>
+            <template #no-auth>
+              <FaKbd>没有</FaKbd>
+            </template>
+          </FaAuth>
+          permission.create 权限
+        </div>
+        <div>
+          你
+          <FaAuth :value="['permission.browse', 'permission.create']">
+            <FaKbd>有</FaKbd>
+            <template #no-auth>
+              <FaKbd>没有</FaKbd>
+            </template>
+          </FaAuth>
+          permission.browse 或 permission.create 权限
+        </div>
+        <div>
+          你
+          <FaAuth :value="['permission.browse', 'permission.create']" all>
+            <FaKbd>有</FaKbd>
+            <template #no-auth>
+              <FaKbd>没有</FaKbd>
+            </template>
+          </FaAuth>
+          permission.browse 和 permission.create 权限
+        </div>
+      </div>
+    </FaPageMain>
+    <FaPageMain v-if="settingsStore.settings.app.enablePermission" title="鉴权函数">
+      <div class="space-y-2">
+        <div class="space-x-2">
+          <FaButton variant="outline" @click="permissionCheck('permission.browse')">
+            校验 permission.browse 权限
+          </FaButton>
+          <FaButton variant="outline" @click="permissionCheck('permission.create')">
+            校验 permission.create 权限
+          </FaButton>
+        </div>
+        <div class="space-x-2">
+          <FaButton variant="outline" @click="permissionCheck(['permission.browse', 'permission.create'])">
+            校验 permission.browse 或 permission.create 权限
+          </FaButton>
+          <FaButton variant="outline" @click="permissionCheck2(['permission.browse', 'permission.create'])">
+            校验 permission.browse 和 permission.create 权限
+          </FaButton>
+        </div>
+      </div>
+    </FaPageMain>
   </div>
 </template>

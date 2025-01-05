@@ -7,8 +7,9 @@ meta:
 import type { CurrencyInputOptions } from 'vue-currency-input'
 import { createReusableTemplate, useClipboard } from '@vueuse/core'
 import { useCurrencyInput } from 'vue-currency-input'
-import Message from 'vue-m-message'
+import { toast } from 'vue-sonner'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 const Option = createReusableTemplate<{
   $slots: {
@@ -118,8 +119,8 @@ const { copy, copied, isSupported } = useClipboard()
 
 watch(copied, (val) => {
   if (val) {
-    Message.success('复制成功', {
-      zIndex: 2000,
+    toast.success('复制成功', {
+      position: 'top-center',
     })
   }
 })
@@ -148,116 +149,115 @@ function open(url: string) {
       </section>
     </Option.define>
     <Alert />
-    <PageHeader title="货币格式输入">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add vue-currency-input</ElTag>
+    <FaPageHeader title="货币格式输入">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add vue-currency-input" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/dm4t2/vue-currency-input')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/dm4t2/vue-currency-input')">
+        <FaIcon name="i-ep:link" />
         访问 vue-currency-input
-      </ElButton>
-    </PageHeader>
-    <PageMain>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
       <div class="grid items-center gap-y-4 md-grid-cols-2 md-gap-x-8">
-        <el-input ref="inputRef" v-model="formattedValue" />
+        <ElInput ref="inputRef" v-model="formattedValue" />
         <div>
           数值：<code class="ml-2">{{ numberValue != null ? numberValue : 'null' }}</code>
         </div>
       </div>
-    </PageMain>
-    <PageMain title="选项">
+    </FaPageMain>
+    <FaPageMain title="选项">
       <template #title>
         <div class="flex items-center justify-between">
           选项
-          <el-button v-if="isSupported" size="small" @click="handleCopy">
+          <ElButton v-if="isSupported" size="small" @click="handleCopy">
             复制选项
-          </el-button>
+          </ElButton>
         </div>
       </template>
       <div class="grid grid-cols-1 gap-x-8 md-grid-cols-2">
         <div>
           <Option.reuse label="地理位置">
             <template #switch>
-              <el-switch v-model="localeEnabled" />
+              <ElSwitch v-model="localeEnabled" />
             </template>
-            <el-select v-model="locale" :disabled="!localeEnabled">
-              <el-option v-for="item in locales" :key="item" :value="item" :label="item" />
-            </el-select>
+            <ElSelect v-model="locale" :disabled="!localeEnabled">
+              <ElOption v-for="item in locales" :key="item" :value="item" :label="item" />
+            </ElSelect>
           </Option.reuse>
           <Option.reuse label="货币">
-            <el-select v-model="currency">
-              <el-option v-for="item in currencies" :key="item" :value="item" :label="item" />
-            </el-select>
+            <ElSelect v-model="currency">
+              <ElOption v-for="item in currencies" :key="item" :value="item" :label="item" />
+            </ElSelect>
           </Option.reuse>
           <Option.reuse label="货币显示" description="如何在格式化中显示货币">
-            <el-select v-model="currencyDisplay">
-              <el-option v-for="item in currencyDisplays" :key="item.value" :value="item.value" :label="item.label" />
-            </el-select>
+            <ElSelect v-model="currencyDisplay">
+              <ElOption v-for="item in currencyDisplays" :key="item.value" :value="item.value" :label="item.label" />
+            </ElSelect>
           </Option.reuse>
           <Option.reuse label="会计标志" description="是否使用会计符号格式化">
             <template #switch>
-              <el-switch v-model="accountingSign" />
+              <ElSwitch v-model="accountingSign" />
             </template>
           </Option.reuse>
           <Option.reuse label="使用分组" description="是否使用分组分隔符，如千/万/千万分隔符">
             <template #switch>
-              <el-switch v-model="useGrouping" />
+              <ElSwitch v-model="useGrouping" />
             </template>
           </Option.reuse>
           <Option.reuse label="无干扰输入" description="对焦时隐藏格式的不同部分，以方便输入">
             <div>
-              <el-checkbox v-model="hideCurrencySymbolOnFocus" label="隐藏货币符号" />
+              <ElCheckbox v-model="hideCurrencySymbolOnFocus" label="隐藏货币符号" />
             </div>
             <div>
-              <el-checkbox v-model="hideGroupingSeparatorOnFocus" label="隐藏分组分隔符" />
+              <ElCheckbox v-model="hideGroupingSeparatorOnFocus" label="隐藏分组分隔符" />
             </div>
             <div>
-              <el-checkbox v-model="hideNegligibleDecimalDigitsOnFocus" :disabled="!hideNegligibleDecimalDigitsOnFocusEnabled" label="隐藏可忽略的小数位数" />
+              <ElCheckbox v-model="hideNegligibleDecimalDigitsOnFocus" :disabled="!hideNegligibleDecimalDigitsOnFocusEnabled" label="隐藏可忽略的小数位数" />
             </div>
           </Option.reuse>
         </div>
         <div>
           <Option.reuse label="数值范围" description="验证在模糊时触发，并在超出范围时自动设置相应的阈值">
             <template #switch>
-              <el-switch v-model="valueRangeEnabled" />
+              <ElSwitch v-model="valueRangeEnabled" />
             </template>
             <div class="flex items-center space-x-4">
-              <el-input-number v-model="minValue" :disabled="!valueRangeEnabled" placeholder="最小值" class="flex-1" />
+              <ElInputNumber v-model="minValue" :disabled="!valueRangeEnabled" placeholder="最小值" class="flex-1" />
               <span class="text-center">to</span>
-              <el-input-number v-model="maxValue" :disabled="!valueRangeEnabled" placeholder="最大值" class="flex-1" />
+              <ElInputNumber v-model="maxValue" :disabled="!valueRangeEnabled" placeholder="最大值" class="flex-1" />
             </div>
           </Option.reuse>
           <Option.reuse label="精确度" description="覆盖显示的小数位数，仅适用于支持小数位的货币">
             <template #switch>
-              <el-switch v-model="precisionEnabled" />
+              <ElSwitch v-model="precisionEnabled" />
             </template>
             <div>
-              <el-checkbox v-model="precisionRangeEnabled" :disabled="!precisionEnabled" label="使用范围" />
-              <el-slider v-if="precisionRangeEnabled" v-model="precisionRangeValue" range show-stops :min="1" :max="15" />
-              <el-select v-else v-model="precision" :disabled="!precisionEnabled">
-                <el-option v-for="item in precisionOptions" :key="item" :value="item" :label="item" />
-              </el-select>
+              <ElCheckbox v-model="precisionRangeEnabled" :disabled="!precisionEnabled" label="使用范围" />
+              <ElSlider v-if="precisionRangeEnabled" v-model="precisionRangeValue" range show-stops :min="1" :max="15" />
+              <ElSelect v-else v-model="precision" :disabled="!precisionEnabled">
+                <ElOption v-for="item in precisionOptions" :key="item" :value="item" :label="item" />
+              </ElSelect>
             </div>
           </Option.reuse>
           <Option.reuse label="数值缩放" description="对输出值进行缩放">
             <template #switch>
-              <el-switch v-model="valueScalingEnabled" />
+              <ElSwitch v-model="valueScalingEnabled" />
             </template>
-            <el-select v-model="valueScaling" :disabled="!valueScalingEnabled">
-              <el-option v-for="item in valueScalingOptions" :key="item.value" :value="item.value" :label="item.label" />
-            </el-select>
+            <ElSelect v-model="valueScaling" :disabled="!valueScalingEnabled">
+              <ElOption v-for="item in valueScalingOptions" :key="item.value" :value="item.value" :label="item.label" />
+            </ElSelect>
           </Option.reuse>
           <Option.reuse label="自动小数位" description="是否自动插入小数符号，将最后输入的数字作为小数位">
             <template #switch>
-              <el-switch v-model="autoDecimalDigits" />
+              <ElSwitch v-model="autoDecimalDigits" />
             </template>
           </Option.reuse>
         </div>
       </div>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

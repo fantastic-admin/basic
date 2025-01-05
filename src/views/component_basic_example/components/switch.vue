@@ -18,7 +18,7 @@ const value3 = ref(false)
     <ElDivider content-position="left">
       禁用状态
     </ElDivider>
-    <ElSwitch v-model="value2" disabled style="margin-right: 10px;" />
+    <ElSwitch v-model="value2" disabled style="margin-inline-end: 10px;" />
     <ElSwitch v-model="value3" disabled />
   </div>
 </template>

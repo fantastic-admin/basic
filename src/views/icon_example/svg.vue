@@ -10,29 +10,29 @@ const rotate = ref(0)
 
 <template>
   <div>
-    <PageHeader title="SVG Icon" content="可以使用自定义的 SVG 图标" />
-    <PageMain>
+    <FaPageHeader title="SVG Icon" description="可以使用自定义的 SVG 图标" />
+    <FaPageMain>
       <p>单色 SVG Icon</p>
-      <SvgIcon name="example-emotion-line" :size="48" :flip="flip" :rotate="rotate" />
-      <SvgIcon name="example-emotion-laugh-line" :size="48" :flip="flip" :rotate="rotate" />
-      <SvgIcon name="example-emotion-unhappy-line" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon name="example-emotion-line" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon name="example-emotion-laugh-line" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon name="example-emotion-unhappy-line" :size="48" :flip="flip" :rotate="rotate" />
       <p>彩色 SVG Icon</p>
-      <SvgIcon name="example-crown" :size="48" :flip="flip" :rotate="rotate" />
-      <SvgIcon name="example-star" :size="48" :flip="flip" :rotate="rotate" />
-      <SvgIcon name="example-vip" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon name="example-crown" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon name="example-star" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon name="example-vip" :size="48" :flip="flip" :rotate="rotate" />
       <div>
         <p>翻转：</p>
         <ElRadioGroup v-model="flip">
-          <ElRadioButton label="">
+          <ElRadioButton value="">
             无
           </ElRadioButton>
-          <ElRadioButton label="horizontal">
+          <ElRadioButton value="horizontal">
             水平翻转
           </ElRadioButton>
-          <ElRadioButton label="vertical">
+          <ElRadioButton value="vertical">
             垂直翻转
           </ElRadioButton>
-          <ElRadioButton label="both">
+          <ElRadioButton value="both">
             水平垂直翻转
           </ElRadioButton>
         </ElRadioGroup>
@@ -44,6 +44,6 @@ const rotate = ref(0)
         <li>上 <a href="https://www.iconfont.cn/" target="_blank">Iconfont</a> 下载需要的 svg 图标</li>
         <li>将 svg 文件放入 ./src/assets/icons 目录下，文件名即为 name</li>
       </ol>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

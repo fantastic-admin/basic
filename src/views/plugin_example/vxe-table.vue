@@ -7,6 +7,7 @@ meta:
 import useSettingsStore from '@/store/modules/settings'
 import VxeUITable from 'vxe-table'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 const settingsStore = useSettingsStore()
 watch(() => settingsStore.currentColorScheme, () => {
@@ -39,27 +40,28 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="vxe-table">
-      <template #content>
-        <p>Element Plus 自带的 el-table 组件大部分时候只能满足简单需求的使用，如果对表格有更加复杂场景需求下的使用，推荐使用 vxe-table 。</p>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add xe-utils vxe-table</ElTag>
-        </p>
+    <FaPageHeader title="vxe-table">
+      <template #description>
+        <div class="space-y-2">
+          <p>Element Plus 自带的 el-table 组件大部分时候只能满足简单需求的使用，如果对表格有更加复杂场景需求下的使用，推荐使用 vxe-table 。</p>
+          <p>
+            安装命令：
+            <Command text="pnpm add xe-utils vxe-table" />
+          </p>
+        </div>
       </template>
-      <ElButton @click="open('https://github.com/x-extends/vxe-table')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/x-extends/vxe-table')">
+        <FaIcon name="i-ep:link" />
         访问 vxe-table
-      </ElButton>
-    </PageHeader>
-    <PageMain>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
       <vxe-table :data="tableData">
         <vxe-column type="seq" width="60" />
         <vxe-column field="name" title="Name" />
         <vxe-column field="sex" title="Sex" />
         <vxe-column field="age" title="Age" />
       </vxe-table>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

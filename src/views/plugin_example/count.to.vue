@@ -6,6 +6,7 @@ meta:
 <script setup lang="ts">
 import { CountTo } from 'vue3-count-to'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 const countToRef = useTemplateRef<any>('countToRef')
 const form = ref({
@@ -33,20 +34,19 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="计数器">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add vue3-count-to</ElTag>
+    <FaPageHeader title="计数器">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add vue3-count-to" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/xiaofan9/vue-count-to')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/xiaofan9/vue-count-to')">
+        <FaIcon name="i-ep:link" />
         访问 vue-count-to
-      </ElButton>
-    </PageHeader>
-    <PageMain>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
       <CountTo ref="countToRef" class="count-to" :start-val="form.startVal" :end-val="form.endVal" :duration="form.duration" :decimals="form.decimals" :separator="form.separator" :prefix="form.prefix" :suffix="form.suffix" :autoplay="false" />
       <ElForm :model="form" size="default" label-width="80px" style="width: 300px;">
         <ElFormItem label="startVal">
@@ -79,7 +79,7 @@ function open(url: string) {
           </ElButton>
         </ElFormItem>
       </ElForm>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>
 

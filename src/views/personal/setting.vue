@@ -6,7 +6,7 @@ meta:
 </route>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
+import { toast } from 'vue-sonner'
 
 defineOptions({
   name: 'PersonalSetting',
@@ -27,7 +27,7 @@ function handleSuccess(res: any) {
     form.value.headimg = res.data.path
   }
   else {
-    ElMessage.warning(res.error)
+    toast.warning(res.error)
   }
 }
 function editPassword() {
@@ -39,7 +39,7 @@ function editPassword() {
 
 <template>
   <div>
-    <PageMain>
+    <FaPageMain>
       <ElTabs tab-position="left" style="height: 600px;">
         <ElTabPane label="基本设置" class="basic">
           <h2>基本设置</h2>
@@ -121,7 +121,7 @@ function editPassword() {
           </div>
         </ElTabPane>
       </ElTabs>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>
 

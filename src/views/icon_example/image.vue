@@ -18,20 +18,20 @@ const rotate = ref(0)
 
 <template>
   <div>
-    <PageHeader title="Image Icon" content="可以使用本地或网络图片" />
-    <PageMain>
+    <FaPageHeader title="Image Icon" description="可以使用本地或网络图片" />
+    <FaPageMain>
       <p>网络图片</p>
-      <SvgIcon :name="webImage" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon :name="webImage" :size="48" :flip="flip" :rotate="rotate" />
       <div class="space-x-2">
-        <HButton @click="change">
+        <FaButton @click="change">
           更改图片
-        </HButton>
-        <HButton @click="webImage = ''">
+        </FaButton>
+        <FaButton @click="webImage = ''">
           创建错误
-        </HButton>
+        </FaButton>
       </div>
       <p>本地图片</p>
-      <SvgIcon :name="fa" :size="48" :flip="flip" :rotate="rotate" />
+      <FaIcon :name="fa" :size="48" :flip="flip" :rotate="rotate" />
       <div>
         <p>翻转：</p>
         <ElRadioGroup v-model="flip">
@@ -51,6 +51,6 @@ const rotate = ref(0)
         <p>旋转：</p>
         <ElSlider v-model="rotate" :min="0" :max="360" style="width: 50%;" />
       </div>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

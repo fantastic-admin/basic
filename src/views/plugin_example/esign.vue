@@ -4,9 +4,10 @@ meta:
 </route>
 
 <script setup lang="ts">
-import { ElMessage } from 'element-plus'
 import VueEsign from 'vue-esign'
+import { toast } from 'vue-sonner'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 defineOptions({
   name: 'ComponentExampleSignCanvas',
@@ -31,7 +32,7 @@ function handleGenerate() {
   esignRef.value.generate().then((res: string) => {
     result.value = res
   }).catch(() => {
-    ElMessage('画板为空，无法生成图片')
+    toast.warning('画板为空，无法生成图片')
   })
 }
 function handleDownload() {
@@ -57,33 +58,34 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="电子签名">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add vue-esign</ElTag>
+    <FaPageHeader title="电子签名">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add vue-esign" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/JaimeCheng/vue-esign')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/JaimeCheng/vue-esign')">
+        <FaIcon name="i-ep:link" />
         访问 vue-esign
-      </ElButton>
-    </PageHeader>
-    <PageMain>
-      <VueEsign ref="esignRef" v-model:bg-color="options.bgColor" :width="500" :height="300" :is-crop="options.isCrop" :line-width="options.lineWidth" :line-color="options.lineColor" />
-      <div>
-        <ElButton @click="handleReset">
-          清空画板
-        </ElButton>
-        <ElButton @click="handleGenerate">
-          生成图片
-        </ElButton>
-        <ElButton @click="handleDownload">
-          下载图片
-        </ElButton>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
+      <div class="space-y-2">
+        <VueEsign ref="esignRef" v-model:bg-color="options.bgColor" :width="500" :height="300" :is-crop="options.isCrop" :line-width="options.lineWidth" :line-color="options.lineColor" />
+        <div class="space-x-2">
+          <FaButton @click="handleReset">
+            清空画板
+          </FaButton>
+          <FaButton @click="handleGenerate">
+            生成图片
+          </FaButton>
+          <FaButton @click="handleDownload">
+            下载图片
+          </FaButton>
+        </div>
+        <img v-if="result" :src="result" :width="500" :height="300">
       </div>
-      <img v-if="result" :src="result" :width="500" :height="300">
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

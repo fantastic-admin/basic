@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import useSettingsStore from '@/store/modules/settings'
-import hotkeys from 'hotkeys-js'
-import Provider from './ui-provider/index.vue'
-import eventBus from './utils/eventBus'
+import { ua } from '@/utils/ua'
+import Provider from './ui/provider/index.vue'
 
 const route = useRoute()
 
 const settingsStore = useSettingsStore()
 const { auth } = useAuth()
+
+document.body.setAttribute('data-os', ua.getOS().name || '')
 
 const isAuth = computed(() => {
   return route.matched.every((item) => {
@@ -37,9 +38,6 @@ onMounted(() => {
   window.addEventListener('resize', () => {
     settingsStore.setMode(document.documentElement.clientWidth)
   })
-  hotkeys('alt+i', () => {
-    eventBus.emit('global-system-info-toggle')
-  })
 })
 </script>
 
@@ -47,8 +45,10 @@ onMounted(() => {
   <Provider>
     <RouterView v-slot="{ Component }">
       <component :is="Component" v-if="isAuth" />
-      <NotAllowed v-else />
+      <FaNotAllowed v-else />
     </RouterView>
-    <SystemInfo />
+    <FaToast />
+    <FaNotification />
+    <FaSystemInfo />
   </Provider>
 </template>

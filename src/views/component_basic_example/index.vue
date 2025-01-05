@@ -38,28 +38,28 @@ function open(url: string) {
 
 <template>
   <div>
-    <PageHeader title="基础组件">
+    <FaPageHeader title="基础组件">
       <template #content>
-        <p>框架内置 Element Plus 组件库，本页仅展示部分组件，更多组件及使用说明请查看 Element Plus 官网</p>
-        <p class="mb-0">
-          <ElLink type="primary" @click="eventBus.emit('global-ui-component-switch')">
+        <div class="space-y-2">
+          <p>框架内置 Element Plus 组件库，本页仅展示部分组件，更多组件及使用说明请查看 Element Plus 官网</p>
+          <FaButton variant="link" class="h-auto p-0" @click="eventBus.emit('global-ui-component-switch')">
             不想使用 Element Plus ？
-          </ElLink>
-        </p>
+          </FaButton>
+        </div>
       </template>
       <ElButton @click="open('https://element-plus.org/#/zh-CN')">
         <template #icon>
-          <SvgIcon name="i-ep:link" />
+          <FaIcon name="i-ep:link" />
         </template>
         Element Plus 官网
       </ElButton>
-    </PageHeader>
-    <PageMain>
+    </FaPageHeader>
+    <FaPageMain>
       <ElTabs type="border-card">
         <ElTabPane v-for="(item, key) in components" :key="key" :label="key">
           <component :is="item" />
         </ElTabPane>
       </ElTabs>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

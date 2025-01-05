@@ -34,6 +34,16 @@ const routes: RouteRecordRaw[] = [
           link: 'https://one-step-admin.hurui.me',
         },
       },
+      {
+        path: 'fantastic-mobile',
+        redirect: '',
+        name: 'officialFantasticMobile',
+        meta: {
+          title: 'Fantastic-mobile 自成一派的 H5 框架',
+          icon: 'https://fantastic-mobile.hurui.me/logo.png',
+          link: 'https://fantastic-mobile.hurui.me',
+        },
+      },
     ],
   },
   {

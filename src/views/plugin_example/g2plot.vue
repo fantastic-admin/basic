@@ -6,6 +6,7 @@ meta:
 <script setup lang="ts">
 import { Column, Line, Pie, Radar } from '@antv/g2plot'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 let barPlot: any
 let linePlot: any
@@ -153,51 +154,40 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="G2plot">
-      <template #content>
-        <p>由于 G2 的高度可定置化，导致不同开发者开发出来的图表效果有的好看，有的不好看，G2Plot 解决了这一问题，由官方制定了一套标准设计规范，开发者可以专注于数据，而不用关心最终呈现，当然缺点也很明显，就是自定义上不如 G2 ，所以如果你有更复杂的需求，推荐还是使用 G2 去自行实现。</p>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add @antv/g2plot</ElTag>
-        </p>
+    <FaPageHeader title="G2plot">
+      <template #description>
+        <div class="space-y-2">
+          <p>由于 G2 的高度可定置化，导致不同开发者开发出来的图表效果有的好看，有的不好看，G2Plot 解决了这一问题，由官方制定了一套标准设计规范，开发者可以专注于数据，而不用关心最终呈现，当然缺点也很明显，就是自定义上不如 G2 ，所以如果你有更复杂的需求，推荐还是使用 G2 去自行实现。</p>
+          <p>
+            安装命令：
+            <Command text="pnpm add @antv/g2plot" />
+          </p>
+        </div>
       </template>
-      <ElButtonGroup>
-        <ElButton @click="open('https://github.com/antvis/g2')">
-          <template #icon>
-            <SvgIcon name="i-ep:link" />
-          </template>
+      <div class="space-x-2">
+        <FaButton variant="outline" @click="open('https://github.com/antvis/g2')">
+          <FaIcon name="i-ep:link" />
           访问 G2
-        </ElButton>
-        <ElButton @click="open('https://github.com/antvis/G2Plot')">
-          <template #icon>
-            <SvgIcon name="i-ep:link" />
-          </template>
+        </FaButton>
+        <FaButton variant="outline" @click="open('https://github.com/antvis/G2Plot')">
+          <FaIcon name="i-ep:link" />
           访问 G2plot
-        </ElButton>
-      </ElButtonGroup>
-    </PageHeader>
-    <ElRow :gutter="20" style="margin: -10px 10px;">
-      <ElCol :md="12">
-        <PageMain title="柱状图" style="margin: 10px 0;">
-          <div id="chart1" style="width: 100%; height: 400px;" />
-        </PageMain>
-      </ElCol>
-      <ElCol :md="12">
-        <PageMain title="折线图" style="margin: 10px 0;">
-          <div id="chart2" style="width: 100%; height: 400px;" />
-        </PageMain>
-      </ElCol>
-    </ElRow>
-    <ElRow :gutter="20" style="margin: 0 10px;">
-      <ElCol :md="12">
-        <PageMain title="饼图" style="margin: 10px 0;">
-          <div id="chart3" style="width: 100%; height: 400px;" />
-        </PageMain>
-      </ElCol>
-      <ElCol :md="12">
-        <PageMain title="雷达图" style="margin: 10px 0;">
-          <div id="chart4" style="width: 100%; height: 400px;" />
-        </PageMain>
-      </ElCol>
-    </ElRow>
+        </FaButton>
+      </div>
+    </FaPageHeader>
+    <div class="grid grid-cols-1 mx-4 gap-4 lg-grid-cols-2">
+      <FaPageMain title="柱状图" class="m-0!">
+        <div id="chart1" class="h-[400px] w-full" />
+      </FaPageMain>
+      <FaPageMain title="折线图" class="m-0!">
+        <div id="chart2" class="h-[400px] w-full" />
+      </FaPageMain>
+      <FaPageMain title="饼图" class="m-0!">
+        <div id="chart3" class="h-[400px] w-full" />
+      </FaPageMain>
+      <FaPageMain title="雷达图" class="m-0!">
+        <div id="chart4" class="h-[400px] w-full" />
+      </FaPageMain>
+    </div>
   </div>
 </template>

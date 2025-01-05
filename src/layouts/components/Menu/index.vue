@@ -69,11 +69,7 @@ const closeMenu: MenuInjection['closeMenu'] = (index) => {
     })
     return
   }
-  Object.keys(subMenus.value).forEach((item) => {
-    if (subMenus.value[item].indexPath.includes(index)) {
-      openedMenus.value = openedMenus.value.filter(item => item !== index)
-    }
-  })
+  openedMenus.value = openedMenus.value.filter(item => item !== index)
 }
 
 function setSubMenusActive(index: string) {
@@ -162,7 +158,7 @@ provide(rootMenuInjectionKey, reactive({
 
 <template>
   <div
-    class="h-full w-full flex flex-col of-hidden transition-all" :class="{
+    class="h-full w-full flex flex-col of-hidden transition-all-300" :class="{
       'flex-row! w-auto!': isMenuPopup && props.mode === 'horizontal',
       'py-1': props.mode === 'vertical',
     }"

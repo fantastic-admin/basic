@@ -1,14 +1,22 @@
 #nprogress {
   pointer-events: none;
 
+  [dir="rtl"] & {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 3000;
+    transform: scaleX(-1);
+  }
+
   .bar {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2000;
+    z-index: 3000;
     width: 100%;
     height: 2px;
-    background: rgb(var(--ui-primary));
+    background: hsl(var(--primary));
   }
 
   .peg {
@@ -17,7 +25,7 @@
     display: block;
     width: 100px;
     height: 100%;
-    box-shadow: 0 0 10px rgb(var(--ui-primary)), 0 0 5px rgb(var(--ui-primary));
+    box-shadow: 0 0 10px hsl(var(--primary)), 0 0 5px hsl(var(--primary));
     opacity: 1;
     transform: rotate(3deg) translate(0, -4px);
   }
@@ -34,8 +42,8 @@
       width: 18px;
       height: 18px;
       border: solid 2px transparent;
-      border-top-color: rgb(var(--ui-primary));
-      border-left-color: rgb(var(--ui-primary));
+      border-top-color: hsl(var(--primary));
+      border-left-color: hsl(var(--primary));
       border-radius: 50%;
       animation: nprogress-spinner 400ms linear infinite;
     }

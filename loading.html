@@ -104,6 +104,11 @@
   background-color: snow;
 }
 
+.loading-container *::before,
+.loading-container *::after {
+  box-sizing: content-box;
+}
+
 .loading-container .loading {
   display: flex;
   flex-wrap: wrap;
@@ -169,6 +174,7 @@
   position: relative;
   margin-top: 20px;
   font-size: 24px;
+  line-height: 1.5;
 }
 
 .loading-container .tips {
@@ -176,6 +182,7 @@
   margin-top: 10px;
   font-size: 16px;
   opacity: 0.5;
+  line-height: 1.5;
 }
 
 .loading-container .tips::after {

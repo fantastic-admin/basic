@@ -6,6 +6,7 @@ meta:
 <script setup lang="ts">
 import VChart from '@visactor/vchart'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 const chart1Ref = useTemplateRef('chart1Ref')
 const chart2Ref = useTemplateRef('chart2Ref')
@@ -421,42 +422,31 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="VChart">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add @visactor/vchart</ElTag>
+    <FaPageHeader title="VChart">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add @visactor/vchart" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/VisActor/VChart')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/VisActor/VChart')">
+        <FaIcon name="i-ep:link" />
         访问 VChart
-      </ElButton>
-    </PageHeader>
-    <ElRow :gutter="20" style="margin: -10px 10px;">
-      <ElCol :md="12">
-        <PageMain title="柱状图" style="margin: 10px 0;">
-          <div ref="chart1Ref" class="h-[400px] w-full" />
-        </PageMain>
-      </ElCol>
-      <ElCol :md="12">
-        <PageMain title="折线图" style="margin: 10px 0;">
-          <div ref="chart2Ref" style="width: 100%; height: 400px;" />
-        </PageMain>
-      </ElCol>
-    </ElRow>
-    <ElRow :gutter="20" style="margin: 0 10px;">
-      <ElCol :md="12">
-        <PageMain title="饼图" style="margin: 10px 0;">
-          <div ref="chart3Ref" style="width: 100%; height: 400px;" />
-        </PageMain>
-      </ElCol>
-      <ElCol :md="12">
-        <PageMain title="雷达图" style="margin: 10px 0;">
-          <div ref="chart4Ref" style="width: 100%; height: 400px;" />
-        </PageMain>
-      </ElCol>
-    </ElRow>
+      </FaButton>
+    </FaPageHeader>
+    <div class="grid grid-cols-1 mx-4 gap-4 lg-grid-cols-2">
+      <FaPageMain title="柱状图" class="m-0!">
+        <div ref="chart1Ref" class="h-[400px] w-full" />
+      </FaPageMain>
+      <FaPageMain title="折线图" class="m-0!">
+        <div ref="chart2Ref" class="h-[400px] w-full" />
+      </FaPageMain>
+      <FaPageMain title="饼图" class="m-0!">
+        <div ref="chart3Ref" class="h-[400px] w-full" />
+      </FaPageMain>
+      <FaPageMain title="雷达图" class="m-0!">
+        <div ref="chart4Ref" class="h-[400px] w-full" />
+      </FaPageMain>
+    </div>
   </div>
 </template>

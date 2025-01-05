@@ -6,6 +6,7 @@ meta:
 <script setup lang="ts">
 import QRCode from 'qrcode'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 
 const url1 = ref('')
 const url2 = ref('')
@@ -59,46 +60,32 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="二维码">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add qrcode</ElTag> <ElTag>pnpm add @types/qrcode -D</ElTag>
+    <FaPageHeader title="二维码">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add qrcode" />
+          <Command text="pnpm add @types/qrcode -D" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/soldair/node-qrcode')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/soldair/node-qrcode')">
+        <FaIcon name="i-ep:link" />
         访问 node-qrcode
-      </ElButton>
-    </PageHeader>
-    <ElRow :gutter="20" style="margin: 0 10px;">
-      <ElCol :sm="6">
-        <PageMain title="渲染成 img 标签" style="margin: 0;">
-          <img :src="url1">
-        </PageMain>
-      </ElCol>
-      <ElCol :sm="6">
-        <PageMain title="渲染成 canvas 标签" style="margin: 0;">
-          <canvas ref="canvasRef" />
-        </PageMain>
-      </ElCol>
-      <ElCol :sm="6">
-        <PageMain title="自定义颜色" style="margin: 0;">
-          <img :src="url2">
-        </PageMain>
-      </ElCol>
-      <ElCol :sm="6">
-        <PageMain title="指定宽度" style="margin: 0;">
-          <img :src="url3">
-        </PageMain>
-      </ElCol>
-    </ElRow>
+      </FaButton>
+    </FaPageHeader>
+    <div class="grid grid-cols-1 mx-4 gap-4 lg-grid-cols-2 xl-grid-cols-4">
+      <FaPageMain title="渲染成 img 标签" class="m-0!">
+        <img :src="url1">
+      </FaPageMain>
+      <FaPageMain title="渲染成 canvas 标签" class="m-0!">
+        <canvas ref="canvasRef" />
+      </FaPageMain>
+      <FaPageMain title="自定义颜色" class="m-0!">
+        <img :src="url2">
+      </FaPageMain>
+      <FaPageMain title="指定宽度" class="m-0!">
+        <img :src="url3">
+      </FaPageMain>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.page-main {
-  text-align: center;
-}
-</style>

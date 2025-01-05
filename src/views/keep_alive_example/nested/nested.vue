@@ -15,13 +15,13 @@ const keepAliveStore = useKeepAliveStore()
 
 <template>
   <div>
-    <PageMain>
+    <FaPageMain>
       <div>层级：1</div>
       <RouterView v-slot="{ Component }">
         <KeepAlive :include="keepAliveStore.list">
           <component :is="Component" />
         </KeepAlive>
       </RouterView>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>

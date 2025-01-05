@@ -5,7 +5,7 @@ meta:
 
 <script setup lang="ts">
 import { useClipboard } from '@vueuse/core'
-import { ElMessage } from 'element-plus'
+import { toast } from 'vue-sonner'
 
 const { text, copy, copied } = useClipboard()
 
@@ -482,7 +482,7 @@ const dialog = ref({
 })
 
 watch(copied, (val) => {
-  val && ElMessage.success(`复制成功：${text.value}`)
+  val && toast.success(`复制成功：${text.value}`)
 })
 
 function test(index: number) {
@@ -497,25 +497,27 @@ function open(url: string) {
 
 <template>
   <div>
-    <PageHeader title="常用正则" content="正则来源于 Github 上 any-rule 项目">
+    <FaPageHeader title="常用正则" description="正则来源于 Github 上 any-rule 项目">
       <ElButton @click="open('https://github.com/any86/any-rule')">
         <template #icon>
-          <SvgIcon name="i-ep:link" />
+          <FaIcon name="i-ep:link" />
         </template>
         访问 any-rule
       </ElButton>
-    </PageHeader>
-    <PageMain v-for="(item, index) in rules" :key="index" :title="item.title">
+    </FaPageHeader>
+    <FaPageMain v-for="(item, index) in rules" :key="index" :title="item.title">
       <div class="rule">
         {{ item.rule }}
       </div>
-      <ElButton type="primary" @click="copy(item.rule.toString())">
-        复制
-      </ElButton>
-      <ElButton @click="test(index)">
-        测试
-      </ElButton>
-    </PageMain>
+      <div class="space-x-2">
+        <FaButton @click="copy(item.rule.toString())">
+          复制
+        </FaButton>
+        <FaButton variant="outline" @click="test(index)">
+          测试
+        </FaButton>
+      </div>
+    </FaPageMain>
     <ElDialog v-model="dialog.visible" :title="rules[dialog.index].title" width="500px">
       <ElForm :model="dialog.form" :rules="dialog.formRules">
         <ElFormItem prop="test">

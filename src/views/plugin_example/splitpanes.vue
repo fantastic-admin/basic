@@ -6,6 +6,7 @@ meta:
 <script setup lang="ts">
 import { Pane, Splitpanes } from 'splitpanes'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 import 'splitpanes/dist/splitpanes.css'
 
 function open(url: string) {
@@ -16,20 +17,20 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="拆分面板">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add splitpanes</ElTag> <ElTag>pnpm add @types/splitpanes -D</ElTag>
+    <FaPageHeader title="拆分面板">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add splitpanes" />
+          <Command text="pnpm add @types/splitpanes -D" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/antoniandre/splitpanes')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/antoniandre/splitpanes')">
+        <FaIcon name="i-ep:link" />
         访问 splitpanes
-      </ElButton>
-    </PageHeader>
-    <PageMain>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
       <Splitpanes class="default-theme" style="height: 400px;">
         <Pane min-size="20">
           1
@@ -45,7 +46,7 @@ function open(url: string) {
           5
         </Pane>
       </Splitpanes>
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>
 

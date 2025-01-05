@@ -5,6 +5,7 @@ meta:
 
 <script setup lang="ts">
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 import 'animate.css'
 
 const animateList = ref([
@@ -200,45 +201,44 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="过渡动画" content="结合 <transition> 组件使用">
+    <FaPageHeader title="过渡动画" description="结合 <transition> 组件使用">
       <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add animate.css</ElTag>
+        <p>
+          安装命令：
+          <Command text="pnpm add animate.css" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/animate-css/animate.css')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/animate-css/animate.css')">
+        <FaIcon name="i-ep:link" />
         访问 animate.css
-      </ElButton>
-    </PageHeader>
-    <PageMain>
-      <ElForm>
-        <ElFormItem label="进入动画（显示）">
-          <ElSelect v-model="animateIn" filterable>
-            <ElOptionGroup v-for="group in animateList" :key="group.label" :label="group.label">
-              <ElOption v-for="item in group.options" :key="item.label" :label="item.label" :value="item.value" />
-            </ElOptionGroup>
-          </ElSelect>
-        </ElFormItem>
-        <ElFormItem label="离开动画（隐藏）">
-          <ElSelect v-model="animateOut" filterable>
-            <ElOptionGroup v-for="group in animateList" :key="group.label" :label="group.label">
-              <ElOption v-for="item in group.options" :key="item.label" :label="item.label" :value="item.value" />
-            </ElOptionGroup>
-          </ElSelect>
-        </ElFormItem>
-        <ElFormItem>
-          <ElButton @click="flag = !flag">
-            {{ flag ? '隐藏' : '显示' }}
-          </ElButton>
-        </ElFormItem>
-      </ElForm>
-      <Transition :enter-active-class="`animate__animated ${animateIn}`" :leave-active-class="`animate__animated ${animateOut}`">
-        <div v-if="flag" class="box" />
-      </Transition>
-    </PageMain>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
+      <div class="space-y-2">
+        <ElForm>
+          <ElFormItem label="进入动画（显示）">
+            <ElSelect v-model="animateIn" filterable>
+              <ElOptionGroup v-for="group in animateList" :key="group.label" :label="group.label">
+                <ElOption v-for="item in group.options" :key="item.label" :label="item.label" :value="item.value" />
+              </ElOptionGroup>
+            </ElSelect>
+          </ElFormItem>
+          <ElFormItem label="离开动画（隐藏）">
+            <ElSelect v-model="animateOut" filterable>
+              <ElOptionGroup v-for="group in animateList" :key="group.label" :label="group.label">
+                <ElOption v-for="item in group.options" :key="item.label" :label="item.label" :value="item.value" />
+              </ElOptionGroup>
+            </ElSelect>
+          </ElFormItem>
+        </ElForm>
+        <FaButton @click="flag = !flag">
+          {{ flag ? '隐藏' : '显示' }}
+        </FaButton>
+        <Transition :enter-active-class="`animate__animated ${animateIn}`" :leave-active-class="`animate__animated ${animateOut}`">
+          <div v-if="flag" class="box" />
+        </Transition>
+      </div>
+    </FaPageMain>
   </div>
 </template>
 

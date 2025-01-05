@@ -3,6 +3,5 @@ node_modules
 dist*
 dist-ssr
 *.local
-*.tsbuildinfo
 .eslintcache
 .stylelintcache

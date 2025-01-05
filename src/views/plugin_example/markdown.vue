@@ -10,6 +10,7 @@ import gfmLocale from '@bytemd/plugin-gfm/lib/locales/zh_Hans.json'
 import { Editor, Viewer } from '@bytemd/vue-next'
 import zhHans from 'bytemd/locales/zh_Hans.json'
 import Alert from './components/alert.vue'
+import Command from './components/command.vue'
 import 'bytemd/dist/index.css'
 
 const content = ref('# Fantastic-admin')
@@ -32,23 +33,24 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <PageHeader title="Markdown 编辑器">
-      <template #content>
-        <p style="margin-bottom: 0;">
-          安装命令：<ElTag>pnpm add bytemd @bytemd/vue-next @bytemd/plugin-gfm</ElTag>
+    <FaPageHeader title="Markdown 编辑器">
+      <template #description>
+        <p>
+          安装命令：
+          <Command text="pnpm add bytemd @bytemd/vue-next @bytemd/plugin-gfm" />
         </p>
       </template>
-      <ElButton @click="open('https://github.com/bytedance/bytemd')">
-        <template #icon>
-          <SvgIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/bytedance/bytemd')">
+        <FaIcon name="i-ep:link" />
         访问 bytemd
-      </ElButton>
-    </PageHeader>
-    <PageMain>
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain>
       <Editor :value="content" :plugins="plugins" :locale="zhHans" @change="handleChange" />
+    </FaPageMain>
+    <FaPageMain title="预览">
       <Viewer :value="content" />
-    </PageMain>
+    </FaPageMain>
   </div>
 </template>
 

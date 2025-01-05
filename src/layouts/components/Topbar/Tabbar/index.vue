@@ -2,11 +2,9 @@
 import type { Tabbar } from '#/global'
 import useSettingsStore from '@/store/modules/settings'
 import useTabbarStore from '@/store/modules/tabbar'
-import ContextMenu from '@imengyu/vue3-context-menu'
 import { useMagicKeys } from '@vueuse/core'
 import hotkeys from 'hotkeys-js'
-import Message from 'vue-m-message'
-import '@imengyu/vue3-context-menu/lib/vue3-context-menu.css'
+import { toast } from 'vue-sonner'
 
 defineOptions({
   name: 'Tabbar',
@@ -34,7 +32,7 @@ watch(() => route, (val) => {
     tabbarStore.add(val).then(() => {
       const index = tabbarStore.list.findIndex(item => item.tabId === activedTabId.value)
       if (index !== -1) {
-        tabRef.value && scrollTo(tabRef.value[index].offsetLeft)
+        tabRef.value && tabsRef.value?.scrollTo(tabRef.value[index].offsetLeft - tabsRef.value.ref?.$el.clientWidth * 0.4)
         tabbarScrollTip()
       }
     })
@@ -44,74 +42,53 @@ watch(() => route, (val) => {
   deep: true,
 })
 function tabbarScrollTip() {
-  if (tabContainerRef.value?.$el.clientWidth > (tabsRef.value?.clientWidth ?? 0) && localStorage.getItem('tabbarScrollTip') === undefined) {
+  if (tabContainerRef.value?.$el.clientWidth > (tabsRef.value?.ref?.$el.clientWidth ?? 0) && localStorage.getItem('tabbarScrollTip') === undefined) {
     localStorage.setItem('tabbarScrollTip', '')
-    Message.info('标签栏数量超过展示区域范围，可以将鼠标移到标签栏上，通过鼠标滚轮滑动浏览', {
-      title: '温馨提示',
-      duration: 5000,
-      closable: true,
-      zIndex: 2000,
+    const tips = toast.info('温馨提示', {
+      description: '标签栏数量超过展示区域范围，可以将鼠标移到标签栏上，通过鼠标滚轮滑动浏览',
+      position: 'top-center',
+      duration: Infinity,
+      action: {
+        label: '知道了',
+        onClick: () => toast.dismiss(tips),
+      },
     })
   }
 }
-function handlerMouserScroll(event: WheelEvent) {
-  tabsRef.value?.scrollBy({
-    left: event.deltaY || event.detail,
-  })
-}
-function scrollTo(offsetLeft: number) {
-  tabsRef.value?.scrollTo({
-    left: offsetLeft - 50,
-    behavior: 'smooth',
-  })
-}
-function onTabbarContextmenu(event: MouseEvent, routeItem: Tabbar.recordRaw) {
-  event.preventDefault()
-  ContextMenu.showContextMenu({
-    x: event.x,
-    y: event.y,
-    zIndex: 1050,
-    iconFontClass: '',
-    customClass: 'tabbar-contextmenu',
-    items: [
+function contextMenuItems(routeItem: Tabbar.recordRaw) {
+  return [
+    [
       {
         label: '重新加载',
         icon: 'i-ri:refresh-line',
         disabled: routeItem.tabId !== activedTabId.value,
-        onClick: () => mainPage.reload(),
+        handle: () => mainPage.reload(),
       },
       {
         label: '关闭标签页',
         icon: 'i-ri:close-line',
         disabled: tabbarStore.list.length <= 1,
-        divided: true,
-        onClick: () => {
-          tabbar.closeById(routeItem.tabId)
-        },
+        handle: () => tabbar.closeById(routeItem.tabId),
       },
+    ],
+    [
       {
         label: '关闭其他标签页',
         disabled: !tabbar.checkCloseOtherSide(routeItem.tabId),
-        onClick: () => {
-          tabbar.closeOtherSide(routeItem.tabId)
-        },
+        handle: () => tabbar.closeOtherSide(routeItem.tabId),
       },
       {
         label: '关闭左侧标签页',
         disabled: !tabbar.checkCloseLeftSide(routeItem.tabId),
-        onClick: () => {
-          tabbar.closeLeftSide(routeItem.tabId)
-        },
+        handle: () => tabbar.closeLeftSide(routeItem.tabId),
       },
       {
         label: '关闭右侧标签页',
         disabled: !tabbar.checkCloseRightSide(routeItem.tabId),
-        onClick: () => {
-          tabbar.closeRightSide(routeItem.tabId)
-        },
+        handle: () => tabbar.closeRightSide(routeItem.tabId),
       },
     ],
-  })
+  ]
 }
 
 onMounted(() => {
@@ -167,83 +144,62 @@ onUnmounted(() => {
 
 <template>
   <div class="tabbar-container">
-    <div ref="tabsRef" class="tabs scrollbar-none" @wheel.prevent="handlerMouserScroll">
+    <FaScrollArea ref="tabsRef" horizontal :scrollbar="false" mask gradient-color="var(--g-tabbar-bg)" class="tabs">
       <TransitionGroup ref="tabContainerRef" name="tabbar" tag="div" class="tab-container">
         <div
           v-for="(element, index) in tabbarStore.list" :key="element.tabId"
           ref="tabRef" :data-index="index" class="tab" :class="{
             actived: element.tabId === activedTabId,
-          }" :title="typeof element?.title === 'function' ? element.title() : element.title" @click="router.push(element.fullPath)" @contextmenu="onTabbarContextmenu($event, element)"
+          }" @click="router.push(element.fullPath)"
         >
-          <div class="tab-dividers" />
-          <div class="tab-background" />
-          <div class="tab-content">
-            <div :key="element.tabId" class="title">
-              <SvgIcon v-if="settingsStore.settings.tabbar.enableIcon && element.icon" :name="element.icon" class="icon" />
-              {{ typeof element?.title === 'function' ? element.title() : element.title }}
+          <FaContextMenu :items="contextMenuItems(element)">
+            <div class="size-full">
+              <div class="tab-dividers" />
+              <div class="tab-background" />
+              <FaTooltip :delay="1000" side="bottom">
+                <div class="tab-content">
+                  <div :key="element.tabId" class="title">
+                    <FaIcon v-if="settingsStore.settings.tabbar.enableIcon && element.icon" :name="element.icon" class="icon" />
+                    {{ typeof element?.title === 'function' ? element.title() : element.title }}
+                  </div>
+                  <div v-if="tabbarStore.list.length > 1" class="action-icon" @click.stop="tabbar.closeById(element.tabId)">
+                    <FaIcon name="i-ri:close-fill" />
+                  </div>
+                  <div v-show="keys.alt && index < 9" class="hotkey-number">
+                    {{ index + 1 }}
+                  </div>
+                </div>
+                <template #content>
+                  <div class="text-sm">
+                    {{ typeof element?.title === 'function' ? element.title() : element.title }}
+                  </div>
+                  <div class="text-accent-foreground/50">
+                    {{ element.fullPath }}
+                  </div>
+                </template>
+              </FaTooltip>
             </div>
-            <div v-if="tabbarStore.list.length > 1" class="action-icon" @click.stop="tabbar.closeById(element.tabId)">
-              <SvgIcon name="i-ri:close-fill" />
-            </div>
-            <div v-show="keys.alt && index < 9" class="hotkey-number">
-              {{ index + 1 }}
-            </div>
-          </div>
+          </FaContextMenu>
         </div>
       </TransitionGroup>
-    </div>
+    </FaScrollArea>
   </div>
 </template>
-
-<style>
-.tabbar-contextmenu {
-  --uno: fixed ring-1 ring-stone-2 dark-ring-stone-7 shadow-2xl;
-
-  background-color: var(--g-container-bg);
-
-  .mx-context-menu-items .mx-context-menu-item {
-    --uno: transition-background-color;
-
-    &:not(.disabled):hover {
-      --uno: cursor-pointer bg-stone-1 dark-bg-stone-9;
-    }
-
-    span {
-      color: initial;
-    }
-
-    .icon {
-      color: initial;
-    }
-
-    &.disabled span,
-    &.disabled .icon {
-      opacity: 0.25;
-    }
-  }
-
-  .mx-context-menu-item-sperator {
-    background-color: var(--g-container-bg);
-
-    &::after {
-      --uno: bg-stone-2 dark-bg-stone-7;
-    }
-  }
-}
-</style>
 
 <style scoped>
 .tabbar-container {
   position: relative;
   height: var(--g-tabbar-height);
-  background-color: var(--g-bg);
-  transition: background-color 0.3s;
+  background-color: var(--g-tabbar-bg);
+  transition: background-color 0.3s, box-shadow 0.3s;
+
+  .dark & {
+    box-shadow: 0 1px 0 0 hsl(var(--border)), 0 -1px 0 0 hsl(var(--border));
+  }
 
   .tabs {
     position: absolute;
-    right: 0;
-    left: 0;
-    overflow-y: hidden;
+    inset-inline: 0;
     white-space: nowrap;
 
     .tab-container {
@@ -288,6 +244,13 @@ onUnmounted(() => {
           user-select: none;
         }
 
+        & + .tab:hover,
+        & + .tab.actived {
+          .tab-dividers::before {
+            opacity: 0;
+          }
+        }
+
         &.actived {
           z-index: 5;
 
@@ -308,7 +271,7 @@ onUnmounted(() => {
           }
 
           .tab-background {
-            background-color: var(--g-container-bg);
+            background-color: var(--g-tabbar-tab-active-bg);
           }
         }
 
@@ -331,7 +294,7 @@ onUnmounted(() => {
             content: "";
             background-color: var(--g-tabbar-dividers-bg);
             opacity: 1;
-            transition: opacity 0.2s ease, background-color 0.3s;
+            transition: opacity 0.3s, background-color 0.3s;
           }
         }
 
@@ -380,44 +343,11 @@ onUnmounted(() => {
           }
 
           .action-icon {
-            position: absolute;
-            top: 50%;
-            right: 0.5em;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.5em;
-            height: 1.5em;
-            font-size: 12px;
-            color: var(--g-tabbar-tab-color);
-            border-radius: 50%;
-            transform: translateY(-50%);
-
-            &:hover {
-              --uno: ring-1 ring-stone-3 dark-ring-stone-7;
-
-              background-color: var(--g-bg);
-            }
+            --uno: transition absolute inset-e-2 top-1/2 -translate-y-1/2 rounded-full z-10 w-5 h-5 flex-center text-xs "text-[var(--g-tabbar-tab-color)]" hover:(border bg-secondary);
           }
 
           .hotkey-number {
-            --uno: ring-1 ring-stone-3 dark-ring-stone-7;
-
-            position: absolute;
-            top: 50%;
-            right: 0.5em;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 1.5em;
-            height: 1.5em;
-            font-size: 12px;
-            color: var(--g-tabbar-tab-color);
-            background-color: var(--g-bg);
-            border-radius: 50%;
-            transform: translateY(-50%);
+            --uno: border bg-secondary absolute inset-e-2 top-1/2 -translate-y-1/2 rounded-full z-10 w-5 h-5 flex-center text-xs "text-[var(--g-tabbar-tab-color)]";
           }
         }
       }

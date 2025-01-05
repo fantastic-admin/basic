@@ -38,25 +38,50 @@ const useUserStore = defineStore(
       token.value = res.data.token
       avatar.value = res.data.avatar
     }
-    // 登出
-    async function logout(redirect = router.currentRoute.value.fullPath) {
-      localStorage.removeItem('account')
+
+    // 手动登出
+    function logout(redirect = router.currentRoute.value.fullPath) {
+      // 此处仅清除计算属性 isLogin 中判断登录状态过期的变量，以保证在弹出登录窗口模式下页面展示依旧正常
       localStorage.removeItem('token')
-      localStorage.removeItem('avatar')
-      account.value = ''
       token.value = ''
-      avatar.value = ''
-      permissions.value = []
-      routeStore.removeRoutes()
-      menuStore.setActived(0)
-      settingsStore.settings.tabbar.enable && tabbarStore.clean()
       router.push({
         name: 'login',
         query: {
           ...(redirect !== settingsStore.settings.home.fullPath && router.currentRoute.value.name !== 'login' && { redirect }),
         },
-      })
+      }).then(logoutCleanStatus)
     }
+    // 请求登出
+    function requestLogout() {
+      // 此处仅清除计算属性 isLogin 中判断登录状态过期的变量，以保证在弹出登录窗口模式下页面展示依旧正常
+      localStorage.removeItem('token')
+      token.value = ''
+      router.push({
+        name: 'login',
+        query: {
+          ...(
+            router.currentRoute.value.fullPath !== settingsStore.settings.home.fullPath
+            && router.currentRoute.value.name !== 'login'
+            && {
+              redirect: router.currentRoute.value.fullPath,
+            }
+          ),
+        },
+      }).then(logoutCleanStatus)
+    }
+    // 登出后清除状态
+    function logoutCleanStatus() {
+      localStorage.removeItem('account')
+      localStorage.removeItem('avatar')
+      account.value = ''
+      avatar.value = ''
+      permissions.value = []
+      settingsStore.updateSettings({}, true)
+      tabbarStore.clean()
+      routeStore.removeRoutes()
+      menuStore.setActived(0)
+    }
+
     // 获取权限
     async function getPermissions() {
       const res = await apiUser.permission()
@@ -78,6 +103,7 @@ const useUserStore = defineStore(
       isLogin,
       login,
       logout,
+      requestLogout,
       getPermissions,
       editPassword,
     }

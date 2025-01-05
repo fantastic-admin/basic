@@ -8,9 +8,9 @@ const router = useRouter()
 </script>
 
 <template>
-  <PageMain>
-    <ElButton @click="router.go(-1)">
+  <FaPageMain>
+    <FaButton @click="router.go(-1)">
       返回
-    </ElButton>
-  </PageMain>
+    </FaButton>
+  </FaPageMain>
 </template>

@@ -7,7 +7,7 @@ meta:
 <script setup lang="ts">
 import type { FormInstance, FormRules } from 'element-plus'
 import useUserStore from '@/store/modules/user'
-import { ElMessage } from 'element-plus'
+import { toast } from 'vue-sonner'
 
 defineOptions({
   name: 'PersonalEditPassword',
@@ -49,10 +49,7 @@ function onSubmit() {
   formRef.value?.validate((valid) => {
     if (valid) {
       userStore.editPassword(form.value).then(() => {
-        ElMessage({
-          type: 'success',
-          message: '模拟修改成功，请重新登录',
-        })
+        toast.success('模拟修改成功，请重新登录')
         userStore.logout()
       })
     }
@@ -62,8 +59,8 @@ function onSubmit() {
 
 <template>
   <div>
-    <PageHeader title="修改密码" content="定期修改密码可以提高帐号安全性噢~" />
-    <PageMain>
+    <FaPageHeader title="修改密码" description="定期修改密码可以提高帐号安全性噢~" />
+    <FaPageMain>
       <ElRow>
         <ElCol :md="24" :lg="12">
           <ElForm ref="formRef" :model="form" :rules="rules" label-width="120px">
@@ -79,11 +76,11 @@ function onSubmit() {
           </ElForm>
         </ElCol>
       </ElRow>
-    </PageMain>
-    <FixedActionBar>
+    </FaPageMain>
+    <FaFixedActionBar>
       <ElButton type="primary" size="large" @click="onSubmit">
         提交
       </ElButton>
-    </FixedActionBar>
+    </FaFixedActionBar>
   </div>
 </template>

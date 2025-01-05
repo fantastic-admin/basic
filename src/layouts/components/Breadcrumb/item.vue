@@ -22,7 +22,7 @@ function onClick() {
 </script>
 
 <template>
-  <div class="breadcrumb-item flex items-center text-dark dark-text-white">
+  <div class="breadcrumb-item flex items-center text-foreground">
     <span class="separator mx-2">
       {{ separator }}
     </span>
