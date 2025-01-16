@@ -42,7 +42,7 @@ function toggleColorScheme(event: MouseEvent) {
       :name="{
         light: 'i-ri:sun-line',
         dark: 'i-ri:moon-line',
-      }[settingsStore.currentColorScheme!]" :size="16"
+      }[settingsStore.currentColorScheme!]" class="size-4"
     />
   </FaButton>
 </template>

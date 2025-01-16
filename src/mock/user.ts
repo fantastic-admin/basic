@@ -12,7 +12,7 @@ export default defineFakeRoute([
         data: {
           account: body.account,
           token: `${body.account}:${faker.internet.jwt()}`,
-          avatar: 'https://fantastic-admin.hurui.me/logo.png',
+          avatar: 'https://fantastic-admin.hurui.me/logo.svg',
         },
       }
     },

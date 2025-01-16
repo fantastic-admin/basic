@@ -16,6 +16,8 @@ const isCheck = computed(() => {
 </script>
 
 <template>
-  <slot v-if="isCheck" />
-  <slot v-else name="no-auth" />
+  <div class="contents">
+    <slot v-if="isCheck" />
+    <slot v-else name="no-auth" />
+  </div>
 </template>

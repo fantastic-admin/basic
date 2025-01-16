@@ -65,7 +65,7 @@ function handleItemClick(item: { handle?: () => void }) {
         <DropdownMenuGroup>
           <DropdownMenuItem v-for="(v, i) in item" :key="i" :disabled="v.disabled" @click="handleItemClick(v)">
             <div v-if="isItemsHasIcon" class="size-4 flex-center">
-              <FaIcon v-if="v.icon" :name="v.icon" :size="16" />
+              <FaIcon v-if="v.icon" :name="v.icon" class="size-4" />
             </div>
             {{ v.label }}
           </DropdownMenuItem>

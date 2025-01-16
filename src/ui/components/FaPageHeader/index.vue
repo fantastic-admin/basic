@@ -1,11 +1,17 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/utils'
+
 defineOptions({
   name: 'FaPageHeader',
 })
 
-defineProps<{
+const props = defineProps<{
   title?: string
   description?: string
+  class?: HTMLAttributes['class']
+  mainClass?: HTMLAttributes['class']
+  defaultClass?: HTMLAttributes['class']
 }>()
 
 const slots = defineSlots<{
@@ -16,8 +22,8 @@ const slots = defineSlots<{
 </script>
 
 <template>
-  <div class="page-header mb-4 flex flex-wrap items-center justify-between gap-5 border-b bg-background px-5 py-4 transition-[background-color,border-color]">
-    <div class="main flex-[1_1_70%]">
+  <div :class="cn('mb-4 flex flex-wrap items-center justify-between gap-5 border-b bg-background px-5 py-4 transition-[background-color,border-color]', props.class)">
+    <div :class="cn('flex-[1_1_70%]', props.mainClass)">
       <div class="text-2xl">
         <slot name="title">
           {{ title }}
@@ -29,7 +35,7 @@ const slots = defineSlots<{
         </slot>
       </div>
     </div>
-    <div v-if="!!slots.default" class="ml-a flex-none">
+    <div v-if="!!slots.default" :class="cn('ml-a flex-none', props.defaultClass)">
       <slot />
     </div>
   </div>

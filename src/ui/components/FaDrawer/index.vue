@@ -162,7 +162,7 @@ function handleAnimationEnd() {
           </div>
         </FaScrollArea>
         <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
-          <FaIcon name="i-line-md:loading-twotone-loop" :size="36" />
+          <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
         </div>
       </div>
       <SheetFooter

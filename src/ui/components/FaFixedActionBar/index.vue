@@ -42,35 +42,9 @@ function onScroll() {
 <template>
   <FaSmartFixedBlock position="bottom">
     <div ref="actionBarRef">
-      <div class="fixed-action-bar bottom-0 z-4 border-t bg-background p-5 text-center transition" :class="{ mask: !isBottom }">
+      <div class="relative bottom-0 z-4 border-t bg-background p-5 text-center transition before:(pointer-events-none absolute left-0 z-1 h-12 w-full from-transparent to-[var(--g-main-area-bg)] bg-gradient-to-b opacity-0 transition-opacity content-empty -top-1px -translate-y-full)" :class="{ 'before:(opacity-100)': !isBottom }">
         <slot />
       </div>
     </div>
   </FaSmartFixedBlock>
 </template>
-
-<style scoped>
-.fixed-action-bar {
-  position: relative;
-
-  &::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    width: 100%;
-    height: 50px;
-    pointer-events: none;
-    content: "";
-    background-image: linear-gradient(180deg, transparent, var(--g-main-area-bg));
-    box-shadow: 0 1px 0 0 hsl(var(--border));
-    opacity: 0;
-    transition: opacity 0.3s;
-    transform: translateY(-100%);
-  }
-
-  &.mask::before {
-    opacity: 1;
-  }
-}
-</style>

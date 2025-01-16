@@ -51,7 +51,7 @@ watch(() => menuStore.actived, (val, oldVal) => {
     <component :is="useSlots('sub-sidebar-top')" />
     <Logo
       v-if="['side', 'single'].includes(settingsStore.settings.menu.mode)" :show-logo="settingsStore.settings.menu.mode === 'single'" class="sidebar-logo" :class="{
-        'sidebar-logo-bg': settingsStore.settings.menu.mode === 'single',
+        single: settingsStore.settings.menu.mode === 'single',
       }"
     />
     <component :is="useSlots('sub-sidebar-after-logo')" />
@@ -70,7 +70,7 @@ watch(() => menuStore.actived, (val, oldVal) => {
     </FaScrollArea>
     <div v-if="settingsStore.mode === 'pc'" class="relative flex items-center px-4 py-3" :class="[settingsStore.settings.menu.subMenuCollapse ? 'justify-center' : 'justify-end']">
       <FaButton v-show="settingsStore.settings.menu.enableSubMenuCollapseButton" variant="secondary" size="icon" class="h-8 w-8 transition" :class="{ '-rotate-z-180': settingsStore.settings.menu.subMenuCollapse }" @click="settingsStore.toggleSidebarCollapse()">
-        <FaIcon name="toolbar-collapse" :size="16" />
+        <FaIcon name="toolbar-collapse" class="size-4" />
       </FaButton>
     </div>
     <component :is="useSlots('sub-sidebar-bottom')" />
@@ -94,25 +94,12 @@ watch(() => menuStore.actived, (val, oldVal) => {
     width: var(--g-sub-sidebar-collapse-width);
 
     .sidebar-logo {
-      &:not(.sidebar-logo-bg) {
+      &:not(.single) {
         display: none;
       }
 
       :deep(span) {
         display: none;
-      }
-    }
-  }
-
-  .sidebar-logo {
-    background-color: var(--g-sub-sidebar-bg);
-    transition: background-color 0.3s;
-
-    &.sidebar-logo-bg {
-      background-color: var(--g-sub-sidebar-logo-bg);
-
-      :deep(span) {
-        color: var(--g-sub-sidebar-logo-color);
       }
     }
   }

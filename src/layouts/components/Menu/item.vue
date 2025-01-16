@@ -74,7 +74,7 @@ defineExpose({
               'w-full': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName && rootMenu.props.mode === 'vertical',
             }" :style="indentStyle"
           >
-            <FaIcon v-if="props.item.meta?.icon" :name="props.item.meta.icon" :size="18" class="menu-item-container-icon transition-transform group-hover-scale-120" />
+            <FaIcon v-if="props.item.meta?.icon" :name="props.item.meta.icon" class="menu-item-container-icon size-5 transition-transform group-hover-scale-120" />
             <span
               v-if="!(rootMenu.isMenuPopup && level === 0 && !rootMenu.props.showCollapseName)" class="w-0 flex-1 truncate text-sm transition-height transition-opacity transition-width"
               :class="{

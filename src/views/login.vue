@@ -34,7 +34,7 @@ const formType = ref<'login' | 'register' | 'resetPassword'>('login')
   </div>
   <div class="login-box">
     <div class="login-banner">
-      <img src="@/assets/images/logo.png" class="absolute inset-s-4 inset-t-4 h-30px rounded ring ring-border">
+      <img src="@/assets/images/logo.svg" class="absolute inset-s-4 inset-t-4 h-8 rounded">
       <img src="@/assets/images/login-banner.png" class="banner">
     </div>
     <div class="login-form flex-col-center">
@@ -73,9 +73,9 @@ const formType = ref<'login' | 'register' | 'resetPassword'>('login')
   background:
     radial-gradient(closest-side, hsl(var(--border) / 10%) 30%, hsl(var(--primary) / 20%) 30%, hsl(var(--border) / 30%) 50%) no-repeat,
     radial-gradient(closest-side, hsl(var(--border) / 10%) 30%, hsl(var(--primary) / 20%) 30%, hsl(var(--border) / 30%) 50%) no-repeat;
-  filter: blur(100px);
   background-position: 100% 100%, 0% 0%;
   background-size: 200vw 200vh;
+  filter: blur(100px);
 }
 
 [data-mode="mobile"] {
@@ -140,9 +140,9 @@ const formType = ref<'login' | 'register' | 'resetPassword'>('login')
       background:
         radial-gradient(closest-side, hsl(var(--border) / 10%) 30%, hsl(var(--primary) / 20%) 30%, hsl(var(--border) / 30%) 50%) no-repeat,
         radial-gradient(closest-side, hsl(var(--border) / 10%) 30%, hsl(var(--primary) / 20%) 30%, hsl(var(--border) / 30%) 50%) no-repeat;
-      filter: blur(100px);
       background-position: 100% 100%, 0% 0%;
       background-size: 200vw 200vh;
+      filter: blur(100px);
     }
 
     .banner {

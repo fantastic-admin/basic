@@ -1,4 +1,7 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/utils'
+
 defineOptions({
   name: 'FaPageMain',
 })
@@ -8,6 +11,9 @@ const props = withDefaults(
     title?: string
     collaspe?: boolean
     height?: string
+    class?: HTMLAttributes['class']
+    titleClass?: HTMLAttributes['class']
+    mainClass?: HTMLAttributes['class']
   }>(),
   {
     title: '',
@@ -28,17 +34,21 @@ function handleCollaspe() {
 </script>
 
 <template>
-  <div class="page-main m-4 flex flex-col border rounded-lg bg-card transition-[background-color,border-color]" :class="{ 'overflow-hidden': collaspe }">
-    <div v-if="!!slots.title || title" class="title-container border-b px-5 py-4 transition-border-color">
+  <div
+    :class="cn('m-4 flex flex-col border rounded-lg bg-card transition-[background-color,border-color]', {
+      'overflow-hidden': collaspe,
+    }, props.class)"
+  >
+    <div v-if="!!slots.title || title" :class="cn('border-b px-5 py-4 transition-border-color', props.titleClass)">
       <slot name="title">
         {{ title }}
       </slot>
     </div>
     <div
-      class="main-container group relative h-[calc-size(auto,size)] p-5 transition-height after:(pointer-events-none absolute bottom-0 left-0 z-1 h-12 max-h-full w-full from-transparent to-[hsl(var(--card))] bg-gradient-to-b opacity-0 transition-opacity content-empty)" :class="{
+      :class="cn('main-container group relative h-[calc-size(auto,size)] p-5 transition-height after:(pointer-events-none absolute bottom-0 left-0 z-1 h-12 max-h-full w-full from-transparent to-[hsl(var(--card))] bg-gradient-to-b opacity-0 transition-opacity content-empty)', {
         'overflow-hidden': collaspe,
         'after:(opacity-100)': isCollaspe,
-      }" :style="{
+      }, props.mainClass)" :style="{
         height: isCollaspe ? height : '',
       }"
     >

@@ -39,8 +39,6 @@ export const lightTheme = {
   '--g-main-sidebar-menu-active-color': 'hsl(var(--primary-foreground))',
   // 次导航
   '--g-sub-sidebar-bg': 'hsl(var(--background))',
-  '--g-sub-sidebar-logo-bg': 'hsl(var(--primary))',
-  '--g-sub-sidebar-logo-color': 'hsl(var(--primary-foreground))',
   '--g-sub-sidebar-menu-color': 'hsl(var(--accent-foreground))',
   '--g-sub-sidebar-menu-hover-bg': 'hsl(var(--accent))',
   '--g-sub-sidebar-menu-hover-color': 'hsl(var(--accent-foreground))',
@@ -99,8 +97,6 @@ export const darkTheme = {
   '--g-main-sidebar-menu-active-color': 'hsl(var(--accent-foreground))',
   // 次导航
   '--g-sub-sidebar-bg': 'hsl(var(--background))',
-  '--g-sub-sidebar-logo-bg': 'hsl(var(--primary))',
-  '--g-sub-sidebar-logo-color': 'hsl(var(--primary-foreground))',
   '--g-sub-sidebar-menu-color': 'hsl(var(--muted-foreground))',
   '--g-sub-sidebar-menu-hover-bg': 'hsl(var(--muted))',
   '--g-sub-sidebar-menu-hover-color': 'hsl(var(--muted-foreground))',

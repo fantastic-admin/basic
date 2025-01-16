@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ModalEmits, ModalProps } from '.'
 import { cn } from '@/utils'
+import { VisuallyHidden } from 'radix-vue'
 import {
   Dialog,
   DialogContent,
@@ -171,6 +172,10 @@ function handleAnimationEnd() {
           'border-b': props.border,
         })"
       >
+        <VisuallyHidden v-if="!!slots.header">
+          <DialogTitle />
+          <DialogDescription />
+        </VisuallyHidden>
         <slot name="header">
           <DialogTitle class="flex-center gap-x-2 md:justify-start" :class="{ 'md:justify-center': props.center }">
             <FaIcon
@@ -179,7 +184,7 @@ function handleAnimationEnd() {
                 success: 'i-ant-design:check-circle-filled',
                 warning: 'i-ant-design:exclamation-circle-filled',
                 error: 'i-ant-design:close-circle-filled',
-              }[props.icon]" :size="24" :class="{
+              }[props.icon]" class="size-6" :class="{
                 'text-blue-600 dark:text-blue-400': props.icon === 'info',
                 'text-green-600 dark:text-green-400': props.icon === 'success',
                 'text-yellow-600 dark:text-yellow-400': props.icon === 'warning',
@@ -198,7 +203,7 @@ function handleAnimationEnd() {
           <slot />
         </div>
         <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
-          <FaIcon name="i-line-md:loading-twotone-loop" :size="36" />
+          <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
         </div>
       </FaScrollArea>
       <DialogFooter

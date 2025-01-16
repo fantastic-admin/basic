@@ -1,5 +1,4 @@
 <route lang="yaml">
-name: home
 meta:
   title: 主页
   icon: ant-design:home-twotone
@@ -105,7 +104,7 @@ function open(url: string) {
       </div>
     </FaPageHeader>
     <div class="w-full flex flex-col gap-4 px-4 xl-flex-row">
-      <FaPageMain class="ecology">
+      <FaPageMain class="m-0 flex-1" title-class="flex flex-wrap items-center justify-between gap-4">
         <template #title>
           <div class="title-info">
             <img src="https://cn.vuejs.org/logo.svg">
@@ -128,12 +127,12 @@ function open(url: string) {
           </li>
         </ul>
       </FaPageMain>
-      <FaPageMain class="ecology">
+      <FaPageMain class="m-0 flex-1" title-class="flex flex-wrap items-center justify-between gap-4">
         <template #title>
           <div class="title-info">
-            <img src="https://fantastic-admin.hurui.me/logo.png">
+            <img src="https://fantastic-admin.hurui.me/logo.svg">
             <div>
-              <h1 class="c-[#e60000]">
+              <h1 class="c-[#41b883]">
                 Fantastic-admin
               </h1>
               <h2>一款开箱即用的 Vue 中后台管理系统框架</h2>
@@ -152,7 +151,7 @@ function open(url: string) {
         </ElCarousel>
         <ElImageViewer v-if="fantasticAdminInfo.imageVisible" :url-list="fantasticAdminInfo.data" :initial-index="fantasticAdminInfo.index" @close="fantasticAdminInfo.imageVisible = false" />
       </FaPageMain>
-      <FaPageMain class="ecology">
+      <FaPageMain class="m-0 flex-1" title-class="flex flex-wrap items-center justify-between gap-4">
         <template #title>
           <div class="title-info">
             <img src="https://one-step-admin.hurui.me/logo.png">
@@ -185,27 +184,19 @@ function open(url: string) {
   text-emphasis-style: "❤";
 }
 
-.ecology {
-  --uno: flex-1 m-0;
+.title-info {
+  --uno: flex items-center gap-4;
 
-  :deep(.title-container) {
-    --uno: flex items-center justify-between flex-wrap gap-4;
+  img {
+    --uno: block w-12 h-12;
+  }
 
-    .title-info {
-      --uno: flex items-center gap-4;
+  h1 {
+    --uno: m-0 text-2xl;
+  }
 
-      img {
-        --uno: block w-12 h-12;
-      }
-
-      h1 {
-        --uno: m-0 text-2xl;
-      }
-
-      h2 {
-        --uno: m-0 text-base text-secondary-foreground/50 font-normal;
-      }
-    }
+  h2 {
+    --uno: m-0 text-base text-secondary-foreground/50 font-normal;
   }
 }
 </style>

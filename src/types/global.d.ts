@@ -74,7 +74,7 @@ declare namespace Settings {
   }
   interface layout {
     /**
-     * 是否开启移动端适配，开启后当页面宽度小于 992px 时自动切换为移动端展示
+     * 是否开启移动端适配，开启后当页面宽度小于 1024px 时自动切换为移动端展示
      * @默认值 `false`
      */
     enableMobileAdaptation?: boolean

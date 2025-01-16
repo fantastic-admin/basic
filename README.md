@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://fantastic-admin.hurui.me/logo.png" width="200" height="200" />
+  <img src="https://fantastic-admin.hurui.me/logo.svg" width="200" height="200" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>

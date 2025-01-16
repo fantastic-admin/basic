@@ -47,7 +47,7 @@ const isProfileShow = ref(false)
     </template>
     <FaButton variant="ghost" class="h-9 flex-center gap-1 px-2">
       <FaAvatar :src="userStore.avatar" class="size-6">
-        <FaIcon name="i-carbon:user-avatar-filled-alt" :size="24" class="text-secondary-foreground/50" />
+        <FaIcon name="i-carbon:user-avatar-filled-alt" class="size-6 text-secondary-foreground/50" />
       </FaAvatar>
       <template v-if="settingsStore.mode === 'pc'">
         {{ userStore.account }}

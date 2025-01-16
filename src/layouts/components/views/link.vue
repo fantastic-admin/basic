@@ -23,7 +23,7 @@ function open() {
     <Transition name="slide-right" mode="out-in" appear>
       <FaPageMain :key="route.meta.link" class="flex flex-1 flex-col justify-center">
         <div class="flex flex-col items-center">
-          <FaIcon name="i-icon-park-twotone:planet" :size="120" class="text-primary/80" />
+          <FaIcon name="i-icon-park-twotone:planet" class="size-30 text-primary/80" />
           <div class="my-2 text-xl text-dark dark-text-white">
             是否访问此链接
           </div>

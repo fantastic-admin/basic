@@ -221,11 +221,11 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
     <template #header>
       <div class="h-12 flex flex-shrink-0 items-center">
         <div class="h-full w-14 flex-center">
-          <FaIcon name="i-ri:search-line" :size="18" class="text-foreground/30" />
+          <FaIcon name="i-ri:search-line" class="size-4 text-foreground/30" />
         </div>
         <input v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" class="h-full w-full border-0 rounded-md bg-transparent text-base text-foreground focus-outline-none placeholder-foreground/30" @keydown.esc="isShow = false" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
         <div v-if="settingsStore.mode === 'mobile'" class="h-full w-14 flex-center border-s">
-          <FaIcon name="i-carbon:close" :size="18" @click="isShow = false" />
+          <FaIcon name="i-carbon:close" class="size-4" @click="isShow = false" />
         </div>
       </div>
     </template>
@@ -234,16 +234,16 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
         <div class="flex gap-8">
           <div class="inline-flex items-center gap-1 text-xs">
             <FaKbd>
-              <FaIcon name="i-ion:md-return-left" :size="14" />
+              <FaIcon name="i-ion:md-return-left" class="size-4" />
             </FaKbd>
             <span>访问</span>
           </div>
           <div class="inline-flex items-center gap-1 text-xs">
             <FaKbd>
-              <FaIcon name="i-ant-design:caret-up-filled" :size="14" />
+              <FaIcon name="i-ant-design:caret-up-filled" class="size-4" />
             </FaKbd>
             <FaKbd>
-              <FaIcon name="i-ant-design:caret-down-filled" :size="14" />
+              <FaIcon name="i-ant-design:caret-down-filled" class="size-4" />
             </FaKbd>
             <span>切换</span>
           </div>
@@ -260,7 +260,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
       <template v-if="resultList.length > 0">
         <div v-for="(item, index) in resultList" ref="searchResultItemRef" :key="item.path" class="p-4" :data-index="index" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
           <a class="flex cursor-pointer items-center border rounded-lg" :class="{ '-mt-4': index !== 0, 'bg-accent': index === actived }">
-            <FaIcon v-if="item.icon" :name="item.icon" :size="20" class="basis-16 transition" :class="{ 'scale-120 text-primary': index === actived }" />
+            <FaIcon v-if="item.icon" :name="item.icon" class="size-5 basis-16 transition" :class="{ 'scale-120 text-primary': index === actived }" />
             <div class="flex flex-1 flex-col gap-1 truncate border-s px-4 py-3">
               <div class="truncate text-start text-base font-bold">{{ (typeof item.title === 'function' ? item.title() : item.title) ?? '[ 无标题 ]' }}</div>
               <Breadcrumb v-if="item.breadcrumb.length" class="truncate">
@@ -274,7 +274,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
       </template>
       <template v-else-if="searchInput === ''">
         <div class="h-full flex-col-center py-6 text-secondary-foreground/50">
-          <FaIcon name="i-tabler:mood-smile" :size="40" />
+          <FaIcon name="i-tabler:mood-smile" class="size-10" />
           <p class="m-2 text-base">
             输入你要搜索的导航
           </p>
@@ -282,7 +282,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
       </template>
       <template v-else>
         <div class="h-full flex-col-center py-6 text-secondary-foreground/50">
-          <FaIcon name="i-tabler:mood-empty" :size="40" />
+          <FaIcon name="i-tabler:mood-empty" class="size-10" />
           <p class="m-2 text-base">
             没有找到你想要的
           </p>

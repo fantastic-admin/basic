@@ -15,7 +15,7 @@ function handleClick() {
 
 <template>
   <FaButton variant="ghost" size="icon" @click="handleClick" @animationend="isAnimating = false">
-    <FaIcon name="i-iconoir:refresh-double" :size="16" :class="{ animation: isAnimating }" />
+    <FaIcon name="i-iconoir:refresh-double" class="size-4" :class="{ animation: isAnimating }" />
   </FaButton>
 </template>
 
