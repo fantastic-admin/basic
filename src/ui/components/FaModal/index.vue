@@ -60,6 +60,9 @@ defineExpose({
   areaRef: dialogAreaRef,
 })
 
+const id = useId()
+provide('ModalId', id)
+
 const isOpen = ref(props.modelValue)
 const isMaximize = ref(props.maximize)
 
@@ -119,14 +122,16 @@ function handleFocusOutside(e: Event) {
 }
 
 function handleClickOutside(e: Event) {
-  if (!props.closeOnClickOverlay) {
+  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.modalId !== id) {
     e.preventDefault()
+    e.stopPropagation()
   }
 }
 
 function handleEscapeKeyDown(e: KeyboardEvent) {
   if (!props.closeOnPressEscape) {
     e.preventDefault()
+    e.stopPropagation()
   }
 }
 
@@ -146,10 +151,12 @@ function handleAnimationEnd() {
 </script>
 
 <template>
-  <Dialog :modal="props.overlay" :open="isOpen" @update:open="updateOpen">
+  <Dialog :modal="false" :open="isOpen" @update:open="updateOpen">
     <DialogContent
       ref="dialogContentRef"
+      :open="isOpen"
       :closable="props.closable"
+      :overlay="props.overlay"
       :overlay-blur="props.overlayBlur"
       :maximize="isMaximize"
       :maximizable="props.maximizable"
@@ -158,6 +165,7 @@ function handleAnimationEnd() {
         'md:top-1/2 md:-translate-y-1/2!': props.alignCenter,
         'duration-0': isDragging,
       })"
+      @open-auto-focus="handleFocusOutside"
       @close-auto-focus="handleFocusOutside"
       @focus-outside="handleFocusOutside"
       @pointer-down-outside="handleClickOutside"
@@ -193,7 +201,7 @@ function handleAnimationEnd() {
             />
             {{ title }}
           </DialogTitle>
-          <DialogDescription v-if="!!description" :class="{ 'text-center': props.center }">
+          <DialogDescription class="empty:hidden" :class="{ 'text-center': props.center }">
             {{ description }}
           </DialogDescription>
         </slot>

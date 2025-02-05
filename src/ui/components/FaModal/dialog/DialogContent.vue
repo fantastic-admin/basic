@@ -6,7 +6,6 @@ import {
   DialogContent,
   type DialogContentEmits,
   type DialogContentProps,
-  DialogOverlay,
   DialogPortal,
   useForwardPropsEmits,
 } from 'radix-vue'
@@ -14,9 +13,11 @@ import { computed, type HTMLAttributes } from 'vue'
 
 const props = defineProps<DialogContentProps & {
   class?: HTMLAttributes['class']
+  open?: boolean
   maximize?: boolean
   maximizable?: boolean
   closable?: boolean
+  overlay?: boolean
   overlayBlur?: boolean
 }>()
 const emits = defineEmits<DialogContentEmits & {
@@ -41,15 +42,31 @@ const dialogContentRef = useTemplateRef('dialogContentRef')
 defineExpose({
   el: dialogContentRef,
 })
+
+const id = inject('ModalId')
 </script>
 
 <template>
   <DialogPortal>
-    <DialogOverlay
-      :class="cn('fixed inset-0 z-2000 data-[state=closed]:animate-out data-[state=open]:animate-in bg-black/50 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0', {
-        'backdrop-blur-sm': props.overlayBlur,
-      })"
-    />
+    <Transition
+      v-bind="{
+        enterActiveClass: 'ease-in-out duration-300',
+        enterFromClass: 'opacity-0',
+        enterToClass: 'opacity-100',
+        leaveActiveClass: 'ease-in-out duration-300',
+        leaveFromClass: 'opacity-100',
+        leaveToClass: 'opacity-0',
+      }"
+      :appear="true"
+    >
+      <div
+        v-if="props.open && props.overlay"
+        :data-modal-id="id"
+        :class="cn('fixed inset-0 z-2000 data-[state=closed]:animate-out data-[state=open]:animate-in bg-black/50 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0', {
+          'backdrop-blur-sm': props.overlayBlur,
+        })"
+      />
+    </Transition>
     <DialogContent
       ref="dialogContentRef"
       v-bind="forwarded"
