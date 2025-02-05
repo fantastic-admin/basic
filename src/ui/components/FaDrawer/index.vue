@@ -73,6 +73,9 @@ const emits = defineEmits<{
   'cancel': []
 }>()
 
+const id = useId()
+provide('DrawerId', id)
+
 const isOpen = ref(props.modelValue)
 
 watch(() => props.modelValue, (newValue) => {
@@ -106,14 +109,16 @@ function handleFocusOutside(e: Event) {
 }
 
 function handleClickOutside(e: Event) {
-  if (!props.closeOnClickOverlay) {
+  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.drawerId !== id) {
     e.preventDefault()
+    e.stopPropagation()
   }
 }
 
 function handleEscapeKeyDown(e: KeyboardEvent) {
   if (!props.closeOnPressEscape) {
     e.preventDefault()
+    e.stopPropagation()
   }
 }
 
@@ -128,12 +133,15 @@ function handleAnimationEnd() {
 </script>
 
 <template>
-  <Sheet :modal="props.overlay" :open="isOpen" @update:open="updateOpen">
+  <Sheet :modal="false" :open="isOpen" @update:open="updateOpen">
     <SheetContent
       :closable="props.closable"
+      :open="isOpen"
+      :overlay="props.overlay"
       :overlay-blur="props.overlayBlur"
       class="w-full flex flex-col gap-0 p-0"
       :side="props.side"
+      @open-auto-focus="handleFocusOutside"
       @close-auto-focus="handleFocusOutside"
       @focus-outside="handleFocusOutside"
       @pointer-down-outside="handleClickOutside"
@@ -150,7 +158,7 @@ function handleAnimationEnd() {
           <SheetTitle :class="{ 'text-center': props.centered }">
             {{ title }}
           </SheetTitle>
-          <SheetDescription v-if="!!description" :class="{ 'text-center': props.centered }">
+          <SheetDescription class="empty:hidden" :class="{ 'text-center': props.centered }">
             {{ description }}
           </SheetDescription>
         </slot>
