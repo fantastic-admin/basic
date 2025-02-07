@@ -1,14 +1,15 @@
 <script setup lang="ts">
+import type { ContextMenuCheckboxItemEmits, ContextMenuCheckboxItemProps } from 'radix-vue'
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@/utils'
 import { Check } from 'lucide-vue-next'
 import {
   ContextMenuCheckboxItem,
-  type ContextMenuCheckboxItemEmits,
-  type ContextMenuCheckboxItemProps,
+
   ContextMenuItemIndicator,
   useForwardPropsEmits,
 } from 'radix-vue'
-import { computed, type HTMLAttributes } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps<ContextMenuCheckboxItemProps & { class?: HTMLAttributes['class'] }>()
 const emits = defineEmits<ContextMenuCheckboxItemEmits>()
@@ -30,7 +31,7 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits)
       props.class,
     )"
   >
-    <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+    <span class="absolute left-2 h-3.5 w-3.5 flex items-center justify-center">
       <ContextMenuItemIndicator>
         <Check class="h-4 w-4" />
       </ContextMenuItemIndicator>
