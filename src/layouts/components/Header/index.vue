@@ -22,7 +22,7 @@ const { switchTo } = useMenu()
       <div class="header-container">
         <Logo class="title" />
         <component :is="useSlots('header-after-logo')" />
-        <FaScrollArea horizontal :scrollbar="false" mask gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
+        <FaScrollArea :scrollbar="false" mask horizontal gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
           <!-- 顶部模式 -->
           <div class="menu h-full flex of-hidden transition-all">
             <template v-for="(item, index) in menuStore.allMenus" :key="index">
