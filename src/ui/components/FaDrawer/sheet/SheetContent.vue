@@ -3,11 +3,11 @@ import type { DialogContentEmits, DialogContentProps } from 'radix-vue'
 import type { HTMLAttributes } from 'vue'
 import type { SheetVariants } from '.'
 import { cn } from '@/utils'
+import { useScrollLock } from '@vueuse/core'
 import { X } from 'lucide-vue-next'
 import {
   DialogClose,
   DialogContent,
-
   DialogPortal,
   useForwardPropsEmits,
 } from 'radix-vue'
@@ -41,6 +41,17 @@ const delegatedProps = computed(() => {
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
+const showOverlay = computed(() => props.open && props.overlay)
+const isLocked = useScrollLock(document.body)
+watch(showOverlay, (val) => {
+  if (val) {
+    isLocked.value = true
+  }
+  else {
+    isLocked.value = false
+  }
+})
+
 const id = inject('DrawerId')
 </script>
 
@@ -58,7 +69,7 @@ const id = inject('DrawerId')
       :appear="true"
     >
       <div
-        v-if="props.open && props.overlay"
+        v-if="showOverlay"
         :data-drawer-id="id"
         :class="cn('fixed inset-0 z-2000 data-[state=closed]:animate-out data-[state=open]:animate-in bg-black/50 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0', {
           'backdrop-blur-sm': props.overlayBlur,
