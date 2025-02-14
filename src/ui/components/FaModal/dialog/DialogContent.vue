@@ -7,7 +7,6 @@ import { Maximize, Minimize, X } from 'lucide-vue-next'
 import {
   DialogClose,
   DialogContent,
-
   DialogPortal,
   useForwardPropsEmits,
 } from 'radix-vue'

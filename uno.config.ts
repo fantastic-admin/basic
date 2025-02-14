@@ -1,4 +1,3 @@
-import type { PresetOrFactory } from '@unocss/core'
 import type { Theme } from 'unocss/preset-uno'
 import { entriesToCss, toArray } from '@unocss/core'
 import presetLegacyCompat from '@unocss/preset-legacy-compat'
@@ -106,7 +105,7 @@ export default defineConfig<Theme>({
   },
   presets: [
     presetUno(),
-    presetAnimations() as PresetOrFactory<Theme>,
+    presetAnimations(),
     presetAttributify(),
     presetIcons({
       extraProperties: {
@@ -118,7 +117,7 @@ export default defineConfig<Theme>({
     presetScrollbar(),
     presetLegacyCompat({
       legacyColorSpace: true,
-    }) as PresetOrFactory<Theme>,
+    }),
   ],
   transformers: [
     transformerDirectives(),

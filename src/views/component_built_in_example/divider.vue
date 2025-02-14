@@ -5,7 +5,7 @@ meta:
 
 <template>
   <div>
-    <FaPageHeader title="复选框" description="FaCheckbox" />
+    <FaPageHeader title="分割线" description="FaDivider" />
     <FaPageMain>
       <FaDivider>center</FaDivider>
       <FaDivider position="start">
