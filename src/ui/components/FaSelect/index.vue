@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
+import { cn } from '@/utils'
 import {
   Select,
   SelectContent,
@@ -19,6 +21,7 @@ const props = defineProps<{
     value: string
     disabled?: boolean
   }[]
+  class?: HTMLAttributes['class']
 }>()
 
 const value = defineModel<string>()
@@ -35,7 +38,7 @@ const selectedOption = computed({
 
 <template>
   <Select v-model:model-value="value" :disabled>
-    <SelectTrigger class="w-[200px]">
+    <SelectTrigger :class="cn('w-[200px]', props.class)">
       <SelectValue :placeholder="selectedOption.label" />
     </SelectTrigger>
     <SelectContent>
