@@ -1,9 +1,9 @@
 import type { Route } from '#/global'
-import type { RouteRecordRaw } from 'vue-router'
+import type { RouteRecordRaw, RouterMatcher } from 'vue-router'
 import apiApp from '@/api/modules/app'
-import { systemRoutes } from '@/router/routes'
-import { resolveRoutePath } from '@/utils'
+import { systemRoutes as systemRoutesRaw } from '@/router/routes'
 import { cloneDeep } from 'es-toolkit'
+import { createRouterMatcher } from 'vue-router'
 import useSettingsStore from './settings'
 
 const useRouteStore = defineStore(
@@ -13,79 +13,15 @@ const useRouteStore = defineStore(
     const settingsStore = useSettingsStore()
 
     const isGenerate = ref(false)
+    // 原始路由
     const routesRaw = ref<Route.recordMainRaw[]>([])
+    // 文件系统原始路由
     const filesystemRoutesRaw = ref<RouteRecordRaw[]>([])
+    // 已注册的路由，用于登出时删除路由
     const currentRemoveRoutes = ref<(() => void)[]>([])
 
-    // 将多层嵌套路由处理成两层，保留顶层和最子层路由，中间层级将被拍平
-    function flatAsyncRoutes<T extends RouteRecordRaw>(route: T): T {
-      if (route.children) {
-        route.children = flatAsyncRoutesRecursive(route.children, [{
-          path: route.path,
-          title: route.meta?.title,
-          icon: route.meta?.icon,
-          hide: !route.meta?.breadcrumb && route.meta?.breadcrumb === false,
-        }], route.path)
-      }
-      return route
-    }
-    function flatAsyncRoutesRecursive(routes: RouteRecordRaw[], breadcrumb: Route.breadcrumb[] = [], baseUrl = ''): RouteRecordRaw[] {
-      const res: RouteRecordRaw[] = []
-      routes.forEach((route) => {
-        if (route.children) {
-          const childrenBaseUrl = resolveRoutePath(baseUrl, route.path)
-          const tmpBreadcrumb = cloneDeep(breadcrumb)
-          tmpBreadcrumb.push({
-            path: childrenBaseUrl,
-            title: route.meta?.title,
-            icon: route.meta?.icon,
-            hide: !route.meta?.breadcrumb && route.meta?.breadcrumb === false,
-          })
-          const tmpRoute = cloneDeep(route)
-          tmpRoute.path = childrenBaseUrl
-          if (!tmpRoute.meta) {
-            tmpRoute.meta = {}
-          }
-          tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
-          delete tmpRoute.children
-          res.push(tmpRoute)
-          const childrenRoutes = flatAsyncRoutesRecursive(route.children, tmpBreadcrumb, childrenBaseUrl)
-          childrenRoutes.forEach((item) => {
-            // 如果 path 一样则覆盖，因为子路由的 path 可能设置为空，导致和父路由一样，直接注册会提示路由重复
-            if (res.some(v => v.path === item.path)) {
-              res.forEach((v, i) => {
-                if (v.path === item.path) {
-                  res[i] = item
-                }
-              })
-            }
-            else {
-              res.push(item)
-            }
-          })
-        }
-        else {
-          const tmpRoute = cloneDeep(route)
-          tmpRoute.path = resolveRoutePath(baseUrl, tmpRoute.path)
-          // 处理面包屑导航
-          const tmpBreadcrumb = cloneDeep(breadcrumb)
-          tmpBreadcrumb.push({
-            path: tmpRoute.path,
-            title: tmpRoute.meta?.title,
-            icon: tmpRoute.meta?.icon,
-            hide: !tmpRoute.meta?.breadcrumb && tmpRoute.meta?.breadcrumb === false,
-          })
-          if (!tmpRoute.meta) {
-            tmpRoute.meta = {}
-          }
-          tmpRoute.meta.breadcrumbNeste = tmpBreadcrumb
-          res.push(tmpRoute)
-        }
-      })
-      return res
-    }
-    // 扁平化路由（将三级及以上路由数据拍平成二级）
-    const flatRoutes = computed(() => {
+    // 实际路由
+    const routes = computed(() => {
       const returnRoutes: RouteRecordRaw[] = []
       if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
         if (routesRaw.value) {
@@ -100,7 +36,12 @@ const useRouteStore = defineStore(
             })
             returnRoutes.push(...tmpRoutes)
           })
-          returnRoutes.forEach(item => flatAsyncRoutes(item))
+          returnRoutes.forEach((item) => {
+            if (item.children) {
+              item.children = deleteMiddleRouteComponent(item.children)
+            }
+            return item
+          })
         }
       }
       else {
@@ -108,16 +49,48 @@ const useRouteStore = defineStore(
       }
       return returnRoutes
     })
-    const flatSystemRoutes = computed(() => {
-      const routes = [...systemRoutes]
-      routes.forEach(item => flatAsyncRoutes(item))
+    // 系统路由
+    const systemRoutes = computed(() => {
+      const routes = [...systemRoutesRaw]
+      routes.forEach((item) => {
+        if (item.children) {
+          item.children = deleteMiddleRouteComponent(item.children)
+        }
+      })
       return routes
     })
+    // 删除路由中间层级对应的组件
+    function deleteMiddleRouteComponent(routes: RouteRecordRaw[]) {
+      const res: RouteRecordRaw[] = []
+      routes.forEach((route) => {
+        if (route.children) {
+          delete route.component
+          route.children = deleteMiddleRouteComponent(route.children)
+        }
+        res.push(route)
+      })
+      return res
+    }
+
+    // 路由匹配器
+    const routesMatcher = ref<RouterMatcher>()
+    // 根据路径获取匹配的路由
+    function getRouteMatchedByPath(path: string) {
+      return routesMatcher.value?.resolve({ path }, undefined!)?.matched ?? []
+    }
 
     // 生成路由（前端生成）
     function generateRoutesAtFront(asyncRoutes: Route.recordMainRaw[]) {
       // 设置 routes 数据
       routesRaw.value = cloneDeep(asyncRoutes) as any
+      // 创建路由匹配器
+      const routes: RouteRecordRaw[] = []
+      routesRaw.value.forEach((route) => {
+        if (route.children) {
+          routes.push(...route.children)
+        }
+      })
+      routesMatcher.value = createRouterMatcher(routes, {})
       isGenerate.value = true
     }
     // 格式化后端路由数据
@@ -146,6 +119,14 @@ const useRouteStore = defineStore(
       await apiApp.routeList().then((res) => {
         // 设置 routes 数据
         routesRaw.value = formatBackRoutes(res.data) as any
+        // 创建路由匹配器
+        const routes: RouteRecordRaw[] = []
+        routesRaw.value.forEach((route) => {
+          if (route.children) {
+            routes.push(...route.children)
+          }
+        })
+        routesMatcher.value = createRouterMatcher(routes, {})
         isGenerate.value = true
       }).catch(() => {})
     }
@@ -174,8 +155,9 @@ const useRouteStore = defineStore(
       isGenerate,
       routesRaw,
       currentRemoveRoutes,
-      flatRoutes,
-      flatSystemRoutes,
+      routes,
+      systemRoutes,
+      getRouteMatchedByPath,
       generateRoutesAtFront,
       generateRoutesAtBack,
       generateRoutesAtFilesystem,

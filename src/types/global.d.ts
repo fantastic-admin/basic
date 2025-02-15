@@ -251,7 +251,6 @@ declare module 'vue-router' {
     cache?: boolean | string | string[]
     noCache?: string | string[]
     link?: string
-    breadcrumbNeste?: Route.breadcrumb[]
   }
 }
 
@@ -263,12 +262,6 @@ declare namespace Route {
       auth?: string | string[]
     }
     children: RouteRecordRaw[]
-  }
-  interface breadcrumb {
-    path: string
-    title?: string | (() => string)
-    icon?: string
-    hide: boolean
   }
 }
 

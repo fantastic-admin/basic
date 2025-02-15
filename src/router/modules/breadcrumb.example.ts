@@ -34,7 +34,6 @@ const routes: RouteRecordRaw = {
     },
     {
       path: 'list2',
-      name: 'breadcrumbExampleList2',
       redirect: '/breadcrumb_example/list2',
       meta: {
         title: '列表2（层级模式）',
@@ -42,6 +41,7 @@ const routes: RouteRecordRaw = {
       children: [
         {
           path: '',
+          name: 'breadcrumbExampleList2',
           component: () => import('@/views/breadcrumb_example/list2.vue'),
           meta: {
             title: '列表2（层级模式）',

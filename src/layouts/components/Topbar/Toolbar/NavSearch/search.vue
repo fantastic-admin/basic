@@ -3,9 +3,9 @@ import type { Menu } from '@/types/global'
 import Breadcrumb from '@/layouts/components/Breadcrumb/index.vue'
 import BreadcrumbItem from '@/layouts/components/Breadcrumb/item.vue'
 import useMenuStore from '@/store/modules/menu'
+import useRouteStore from '@/store/modules/route'
 import useSettingsStore from '@/store/modules/settings'
 import { resolveRoutePath } from '@/utils'
-import { cloneDeep } from 'es-toolkit'
 import hotkeys from 'hotkeys-js'
 
 defineOptions({
@@ -18,6 +18,7 @@ const isShow = defineModel<boolean>({
 
 const router = useRouter()
 const settingsStore = useSettingsStore()
+const routeStore = useRouteStore()
 const menuStore = useMenuStore()
 
 interface listTypes {
@@ -25,9 +26,6 @@ interface listTypes {
   icon?: string
   title?: string | (() => string)
   link?: string
-  breadcrumb: {
-    title?: string | (() => string)
-  }[]
 }
 
 const searchInput = ref('')
@@ -57,18 +55,8 @@ const resultList = computed(() => {
       if (item.path.includes(searchInput.value)) {
         flag = true
       }
-      if (item.breadcrumb.some((b) => {
-        if (typeof b.title === 'function') {
-          if (b.title().includes(searchInput.value)) {
-            return true
-          }
-        }
-        else {
-          if (b.title?.includes(searchInput.value)) {
-            return true
-          }
-        }
-        return false
+      if (routeStore.getRouteMatchedByPath(item.path).some((b) => {
+        return typeof b.meta?.title === 'function' ? b.meta?.title().includes(searchInput.value) : b.meta?.title?.includes(searchInput.value)
       })) {
         flag = true
       }
@@ -122,7 +110,7 @@ onUnmounted(() => {
 function initSourceList() {
   sourceList.value = []
   menuStore.allMenus.forEach((item) => {
-    getSourceListByMenus(item.children)
+    getSourceList(item.children)
   })
 }
 
@@ -133,26 +121,18 @@ function hasChildren(item: Menu.recordRaw) {
   }
   return flag
 }
-function getSourceListByMenus(arr: Menu.recordRaw[], basePath?: string, icon?: string, breadcrumb?: { title?: string | (() => string) }[]) {
+function getSourceList(arr: Menu.recordRaw[], basePath?: string, icon?: string) {
   arr.forEach((item) => {
     if (item.meta?.menu !== false) {
-      const breadcrumbTemp = cloneDeep(breadcrumb) || []
       if (item.children && hasChildren(item)) {
-        breadcrumbTemp.push({
-          title: item.meta?.title,
-        })
-        getSourceListByMenus(item.children, resolveRoutePath(basePath, item.path), item.meta?.icon ?? icon, breadcrumbTemp)
+        getSourceList(item.children, resolveRoutePath(basePath, item.path), item.meta?.icon ?? icon)
       }
       else {
-        breadcrumbTemp.push({
-          title: item.meta?.title,
-        })
         sourceList.value.push({
           path: resolveRoutePath(basePath, item.path),
           icon: item.meta?.icon ?? icon,
           title: item.meta?.title,
           link: item.meta?.link,
-          breadcrumb: breadcrumbTemp,
         })
       }
     }
@@ -263,9 +243,9 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
             <FaIcon v-if="item.icon" :name="item.icon" class="size-5 basis-16 transition" :class="{ 'scale-120 text-primary': index === actived }" />
             <div class="flex flex-1 flex-col gap-1 truncate border-s px-4 py-3">
               <div class="truncate text-start text-base font-bold">{{ (typeof item.title === 'function' ? item.title() : item.title) ?? '[ 无标题 ]' }}</div>
-              <Breadcrumb v-if="item.breadcrumb.length" class="truncate">
-                <BreadcrumbItem v-for="(bc, bcIndex) in item.breadcrumb" :key="bcIndex" class="text-xs">
-                  {{ (typeof bc.title === 'function' ? bc.title() : bc.title) ?? '[ 无标题 ]' }}
+              <Breadcrumb v-if="routeStore.getRouteMatchedByPath(item.path).length" class="truncate">
+                <BreadcrumbItem v-for="(bc, bcIndex) in routeStore.getRouteMatchedByPath(item.path)" :key="bcIndex" class="text-xs">
+                  {{ (typeof bc.meta?.title === 'function' ? bc.meta?.title() : bc.meta?.title) ?? '[ 无标题 ]' }}
                 </BreadcrumbItem>
               </Breadcrumb>
             </div>
