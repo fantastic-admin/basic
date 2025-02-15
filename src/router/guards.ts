@@ -73,13 +73,13 @@ function setupRoutes(router: Router) {
           // 注册并记录路由数据
           // 记录的数据会在登出时会使用到，不使用 router.removeRoute 是考虑配置的路由可能不一定有设置 name ，则通过调用 router.addRoute() 返回的回调进行删除
           const removeRoutes: (() => void)[] = []
-          routeStore.flatRoutes.forEach((route) => {
+          routeStore.routes.forEach((route) => {
             if (!/^(?:https?:|mailto:|tel:)/.test(route.path)) {
               removeRoutes.push(router.addRoute(route as RouteRecordRaw))
             }
           })
           if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
-            routeStore.flatSystemRoutes.forEach((route) => {
+            routeStore.systemRoutes.forEach((route) => {
               removeRoutes.push(router.addRoute(route as RouteRecordRaw))
             })
           }
@@ -133,7 +133,7 @@ function setupTitle(router: Router) {
   router.afterEach((to) => {
     const settingsStore = useSettingsStore()
     if (settingsStore.settings.app.routeBaseOn !== 'filesystem') {
-      settingsStore.setTitle(to.meta.breadcrumbNeste?.at(-1)?.title ?? to.meta.title)
+      settingsStore.setTitle(to.matched?.at(-1)?.meta?.title ?? to.meta.title)
     }
     else {
       settingsStore.setTitle(to.meta.title)

@@ -32,7 +32,7 @@ const useTabbarStore = defineStore(
             tabId,
             fullPath: route.fullPath,
             title: typeof meta?.title === 'function' ? meta.title() : meta?.title,
-            icon: meta?.icon ?? meta?.breadcrumbNeste?.findLast(item => item.icon)?.icon,
+            icon: meta?.icon ?? route.matched?.findLast(item => item.meta?.icon)?.meta?.icon,
             name: names,
           }
           if (leaveIndex.value >= 0) {

@@ -16,16 +16,14 @@ const breadcrumbList = computed(() => {
       title: settingsStore.settings.home.title,
     })
   }
-  if (route.meta.breadcrumbNeste) {
-    route.meta.breadcrumbNeste.forEach((item) => {
-      if (item.hide === false) {
-        breadcrumbList.push({
-          path: item.path,
-          title: item.title,
-        })
-      }
-    })
-  }
+  route.matched.forEach((item) => {
+    if (item.meta?.breadcrumb !== false) {
+      breadcrumbList.push({
+        path: item.path,
+        title: item.meta?.title,
+      })
+    }
+  })
   return breadcrumbList
 })
 
