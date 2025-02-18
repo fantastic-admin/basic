@@ -1,51 +1,31 @@
 {
+  "extends": "@vue/tsconfig/tsconfig.dom.json",
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
-    "target": "ESNext",
-    "jsx": "preserve",
-    "lib": [
-      "ESNext",
-      "DOM",
-      "DOM.Iterable"
-    ],
-    "moduleDetection": "force",
-    "useDefineForClassFields": true,
+    "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "baseUrl": "./",
-    "module": "ESNext",
-    "moduleResolution": "Bundler",
     "paths": {
-      "@/*": [
-        "src/*"
-      ],
-      "#/*": [
-        "src/types/*"
-      ]
+      "@/*": ["src/*"],
+      "#/*": ["src/types/*"]
     },
     "resolveJsonModule": true,
     "types": [
-      "vite/client",
       "vite-plugin-pages/client",
       "vite-plugin-vue-meta-layouts/client",
       "vite-plugin-app-loading/client",
       "element-plus/global"
     ],
-    "allowImportingTsExtensions": true,
     "allowJs": false,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noEmit": true,
     "sourceMap": true,
-    "esModuleInterop": true,
-    "isolatedModules": true,
-    "skipLibCheck": true
+    "esModuleInterop": true
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.d.ts",
     "src/**/*.tsx",
-    "src/**/*.vue",
-    "env.d.ts"
+    "src/**/*.vue"
   ]
 }

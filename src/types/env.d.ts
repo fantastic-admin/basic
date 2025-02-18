@@ -1,4 +1,3 @@
-/// <reference types="vite/client" />
 interface ImportMetaEnv {
   // Auto generate by env-parse
   /**
