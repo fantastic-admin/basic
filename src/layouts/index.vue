@@ -6,7 +6,6 @@ import useSettingsStore from '@/store/modules/settings'
 import eventBus from '@/utils/eventBus'
 import hotkeys from 'hotkeys-js'
 import AppSetting from './components/AppSetting/index.vue'
-import BackTop from './components/BackTop/index.vue'
 import Copyright from './components/Copyright/index.vue'
 import Header from './components/Header/index.vue'
 import HotkeysIntro from './components/HotkeysIntro/index.vue'
@@ -153,7 +152,6 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING
       </div>
       <AppSetting />
     </template>
-    <BackTop />
     <component :is="useSlots('free-position')" />
   </div>
 </template>
