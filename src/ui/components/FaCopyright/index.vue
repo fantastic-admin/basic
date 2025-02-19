@@ -2,7 +2,7 @@
 import useSettingsStore from '@/store/modules/settings'
 
 defineOptions({
-  name: 'Copyright',
+  name: 'FaCopyright',
 })
 
 const settingsStore = useSettingsStore()

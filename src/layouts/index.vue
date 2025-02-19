@@ -6,7 +6,6 @@ import useSettingsStore from '@/store/modules/settings'
 import eventBus from '@/utils/eventBus'
 import hotkeys from 'hotkeys-js'
 import AppSetting from './components/AppSetting/index.vue'
-import Copyright from './components/Copyright/index.vue'
 import Header from './components/Header/index.vue'
 import HotkeysIntro from './components/HotkeysIntro/index.vue'
 import MainSidebar from './components/MainSidebar/index.vue'
@@ -141,7 +140,7 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING
             </RouterView>
             <LinkView v-if="isLink" />
           </div>
-          <Copyright />
+          <FaCopyright />
         </div>
       </div>
     </div>

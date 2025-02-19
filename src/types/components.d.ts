@@ -14,6 +14,7 @@ declare module 'vue' {
     FaCard: typeof import('./../ui/components/FaCard/index.vue')['default']
     FaCheckbox: typeof import('./../ui/components/FaCheckbox/index.vue')['default']
     FaContextMenu: typeof import('./../ui/components/FaContextMenu/index.vue')['default']
+    FaCopyright: typeof import('./../ui/components/FaCopyright/index.vue')['default']
     FaDivider: typeof import('./../ui/components/FaDivider/index.vue')['default']
     FaDrawer: typeof import('./../ui/components/FaDrawer/index.vue')['default']
     FaDropdown: typeof import('./../ui/components/FaDropdown/index.vue')['default']
