@@ -63,9 +63,12 @@ const useRouteStore = defineStore(
     function deleteMiddleRouteComponent(routes: RouteRecordRaw[]) {
       const res: RouteRecordRaw[] = []
       routes.forEach((route) => {
-        if (route.children) {
+        if (route.children?.length) {
           delete route.component
           route.children = deleteMiddleRouteComponent(route.children)
+        }
+        else {
+          delete route.children
         }
         res.push(route)
       })
