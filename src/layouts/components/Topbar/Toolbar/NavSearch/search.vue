@@ -6,6 +6,7 @@ import useMenuStore from '@/store/modules/menu'
 import useRouteStore from '@/store/modules/route'
 import useSettingsStore from '@/store/modules/settings'
 import { resolveRoutePath } from '@/utils'
+import { useFocus } from '@vueuse/core'
 import hotkeys from 'hotkeys-js'
 
 defineOptions({
@@ -29,6 +30,8 @@ interface listTypes {
 }
 
 const searchInput = ref('')
+const searchInputRef = useTemplateRef('searchInputRef')
+const { focused: searchInputFocused } = useFocus(searchInputRef)
 const sourceList = ref<listTypes[]>([])
 const actived = ref(-1)
 
@@ -197,13 +200,13 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
 </script>
 
 <template>
-  <FaModal ref="searchResultRef" v-model="isShow" border :footer="settingsStore.mode === 'pc'" :closable="false" class="w-full lg-max-w-2xl" content-class="flex flex-col p-0 min-h-auto" header-class="p-0" footer-class="p-0">
+  <FaModal ref="searchResultRef" v-model="isShow" border :footer="settingsStore.mode === 'pc'" :closable="false" class="w-full lg-max-w-2xl" content-class="flex flex-col p-0 min-h-auto" header-class="p-0" footer-class="p-0" @opened="searchInputFocused = true">
     <template #header>
       <div class="h-12 flex flex-shrink-0 items-center">
         <div class="h-full w-14 flex-center">
           <FaIcon name="i-ri:search-line" class="size-4 text-foreground/30" />
         </div>
-        <input v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" class="h-full w-full border-0 rounded-md bg-transparent text-base text-foreground focus-outline-none placeholder-foreground/30" @keydown.esc="isShow = false" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
+        <input ref="searchInputRef" v-model="searchInput" placeholder="搜索页面，支持标题、URL模糊查询" class="h-full w-full border-0 rounded-md bg-transparent text-base text-foreground focus-outline-none placeholder-foreground/30" @keydown.esc.prevent="isShow = false" @keydown.up.prevent="keyUp" @keydown.down.prevent="keyDown" @keydown.enter.prevent="keyEnter">
         <div v-if="settingsStore.mode === 'mobile'" class="h-full w-14 flex-center border-s">
           <FaIcon name="i-carbon:close" class="size-4" @click="isShow = false" />
         </div>
