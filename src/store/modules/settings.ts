@@ -87,6 +87,13 @@ const useSettingsStore = defineStore(
         break
     }
 
+    // 页面是否刷新
+    const isReloading = ref(false)
+    // 切换当前页面是否刷新
+    function setIsReloading(value?: boolean) {
+      isReloading.value = value ?? !isReloading.value
+    }
+
     // 页面标题
     const title = ref<RouteMeta['title']>()
     // 记录页面标题
@@ -152,6 +159,8 @@ const useSettingsStore = defineStore(
       settings,
       currentColorScheme,
       os,
+      isReloading,
+      setIsReloading,
       title,
       setTitle,
       mode,

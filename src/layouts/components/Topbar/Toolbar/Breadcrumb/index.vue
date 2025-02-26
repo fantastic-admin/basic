@@ -8,23 +8,29 @@ const route = useRoute()
 
 const settingsStore = useSettingsStore()
 
-const breadcrumbList = computed(() => {
-  const breadcrumbList = []
+const breadcrumbList = ref<{ path: string, title: string }[]>([])
+watch(() => route.matched, () => {
+  if (route.name === 'reload') {
+    return
+  }
+  const list = []
   if (settingsStore.settings.home.enable) {
-    breadcrumbList.push({
+    list.push({
       path: settingsStore.settings.home.fullPath,
       title: settingsStore.settings.home.title,
     })
   }
   route.matched.forEach((item) => {
     if (item.meta?.breadcrumb !== false) {
-      breadcrumbList.push({
+      list.push({
         path: item.path,
         title: item.meta?.title,
       })
     }
   })
-  return breadcrumbList
+  breadcrumbList.value = list
+}, {
+  immediate: true,
 })
 
 function pathCompile(path: string) {
