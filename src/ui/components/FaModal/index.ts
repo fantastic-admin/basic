@@ -69,7 +69,7 @@ export function useFaModal() {
           onClosed: () => {
             app.unmount()
           },
-        }, options), options.content)
+        }, options), () => options.content)
       },
     })
     app.mount(container)
@@ -90,7 +90,7 @@ export function useFaModal() {
           onClosed: () => {
             app.unmount()
           },
-        }, options), options.content)
+        }, options), () => options.content)
       },
     })
     app.mount(container)
@@ -111,7 +111,7 @@ export function useFaModal() {
           onClosed: () => {
             app.unmount()
           },
-        }, options), options.content)
+        }, options), () => options.content)
       },
     })
     app.mount(container)
@@ -132,7 +132,7 @@ export function useFaModal() {
           onClosed: () => {
             app.unmount()
           },
-        }, options), options.content)
+        }, options), () => options.content)
       },
     })
     app.mount(container)
@@ -153,7 +153,7 @@ export function useFaModal() {
           onClosed: () => {
             app.unmount()
           },
-        }, options), options.content)
+        }, options), () => options.content)
       },
     })
     app.mount(container)
