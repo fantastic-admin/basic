@@ -54,6 +54,14 @@ onMounted(() => {
               </div>
               激活下一个主导航
             </li>
+            <li class="flex-baseline gap-2 py-1">
+              <div class="flex-shrink-0 space-x-1">
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⌥' : 'Alt' }}</FaKbd>
+                <FaKbd>{{ settingsStore.os === 'mac' ? '⇧' : 'Shift' }}</FaKbd>
+                <FaKbd>`</FaKbd>
+              </div>
+              激活上一个主导航
+            </li>
           </ul>
         </div>
         <div v-if="settingsStore.settings.tabbar.enable && settingsStore.settings.tabbar.enableHotkeys">

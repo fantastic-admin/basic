@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useSettingsStore from '@/store/modules/settings'
+import hotkeys from 'hotkeys-js'
 
 defineOptions({
   name: 'PageReload',
@@ -9,6 +10,18 @@ const settingsStore = useSettingsStore()
 const mainPage = useMainPage()
 
 const isAnimating = ref(false)
+
+onMounted(() => {
+  hotkeys('f5', (e) => {
+    if (settingsStore.settings.toolbar.pageReload) {
+      e.preventDefault()
+      mainPage.reload()
+    }
+  })
+})
+onUnmounted(() => {
+  hotkeys.unbind('f5')
+})
 
 function handleClick() {
   isAnimating.value = true
