@@ -4,7 +4,6 @@ import useKeepAliveStore from '@/store/modules/keepAlive'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import eventBus from '@/utils/eventBus'
-import hotkeys from 'hotkeys-js'
 import AppSetting from './components/AppSetting/index.vue'
 import Header from './components/Header/index.vue'
 import HotkeysIntro from './components/HotkeysIntro/index.vue'
@@ -22,9 +21,6 @@ const routeInfo = useRoute()
 const settingsStore = useSettingsStore()
 const keepAliveStore = useKeepAliveStore()
 const menuStore = useMenuStore()
-
-const mainPage = useMainPage()
-const menu = useMenu()
 
 // 头部当前实际高度
 const headerActualHeight = computed(() => {
@@ -87,25 +83,6 @@ watch(() => routeInfo.path, () => {
       state.settings.menu.subMenuCollapse = true
     })
   }
-})
-
-onMounted(() => {
-  hotkeys('f5', (e) => {
-    if (settingsStore.settings.toolbar.pageReload) {
-      e.preventDefault()
-      mainPage.reload()
-    }
-  })
-  hotkeys('alt+`', (e) => {
-    if (settingsStore.settings.menu.enableHotkeys) {
-      e.preventDefault()
-      menu.switchTo(menuStore.actived + 1 < menuStore.allMenus.length ? menuStore.actived + 1 : 0)
-    }
-  })
-})
-onUnmounted(() => {
-  hotkeys.unbind('f5')
-  hotkeys.unbind('alt+`')
 })
 
 const enableAppSetting = import.meta.env.VITE_APP_SETTING

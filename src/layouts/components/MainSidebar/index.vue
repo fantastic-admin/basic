@@ -2,6 +2,7 @@
 import { useSlots } from '@/slots'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
+import hotkeys from 'hotkeys-js'
 import Logo from '../Logo/index.vue'
 
 defineOptions({
@@ -12,6 +13,25 @@ const settingsStore = useSettingsStore()
 const menuStore = useMenuStore()
 
 const { switchTo } = useMenu()
+
+onMounted(() => {
+  hotkeys('alt+`', (e) => {
+    if (settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.mode)) {
+      e.preventDefault()
+      switchTo(menuStore.actived + 1 < menuStore.allMenus.length ? menuStore.actived + 1 : 0)
+    }
+  })
+  hotkeys('alt+shift+`', (e) => {
+    if (settingsStore.settings.menu.enableHotkeys && ['side', 'head'].includes(settingsStore.settings.menu.mode)) {
+      e.preventDefault()
+      switchTo(menuStore.actived - 1 >= 0 ? menuStore.actived - 1 : menuStore.allMenus.length - 1)
+    }
+  })
+})
+onUnmounted(() => {
+  hotkeys.unbind('alt+`')
+  hotkeys.unbind('alt+shift+`')
+})
 </script>
 
 <template>
