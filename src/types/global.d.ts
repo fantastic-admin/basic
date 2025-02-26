@@ -11,11 +11,11 @@ declare namespace Settings {
   interface app {
     /**
      * 颜色方案
-     * @默认值 `''` 跟随系统
-     * @可选值 `'light'` 明亮模式
+     * @默认值 `'light'` 明亮模式
      * @可选值 `'dark'` 暗黑模式
+     * @可选值 `''` 跟随系统
      */
-    colorScheme?: '' | 'light' | 'dark'
+    colorScheme?: 'light' | 'dark' | ''
     /**
      * 圆角系数
      * @默认值 `0.5`
