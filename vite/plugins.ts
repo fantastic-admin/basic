@@ -36,8 +36,10 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       ],
     }),
 
-    // https://github.com/vuejs/devtools-next
-    viteEnv.VITE_OPEN_DEVTOOLS && VueDevTools(),
+    // https://github.com/vuejs/devtools
+    viteEnv.VITE_OPEN_DEVTOOLS && VueDevTools({
+      launchEditor: viteEnv.VITE_VUE_DEVTOOLS_LAUNCH_EDITOR ?? 'vscode',
+    }),
 
     envParse({
       dtsPath: 'src/types/env.d.ts',
