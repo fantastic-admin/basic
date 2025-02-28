@@ -23,10 +23,14 @@ const props = defineProps<{
 function handleOpenAutoFocus(e: Event) {
   e.preventDefault()
 }
+
+const open = defineModel<boolean>('open', {
+  default: false,
+})
 </script>
 
 <template>
-  <Popover>
+  <Popover v-model:open="open">
     <PopoverTrigger as-child>
       <slot />
     </PopoverTrigger>
