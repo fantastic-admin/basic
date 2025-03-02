@@ -185,7 +185,9 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING
     transition: width 0.3s, transform 0.3s, box-shadow 0.3s, top 0.3s;
 
     &:has(> .main-sidebar-container.main-sidebar-enter-active),
-    &:has(> .main-sidebar-container.main-sidebar-leave-active) {
+    &:has(> .main-sidebar-container.main-sidebar-leave-active),
+    &:has(> .sub-sidebar-container.sub-sidebar-enter-active),
+    &:has(> .sub-sidebar-container.sub-sidebar-leave-active) {
       overflow: hidden;
     }
   }

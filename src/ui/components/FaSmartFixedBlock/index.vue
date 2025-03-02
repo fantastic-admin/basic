@@ -22,7 +22,7 @@ defineProps<{
   width: calc(100% - var(--g-main-sidebar-actual-width) - var(--g-sub-sidebar-actual-width));
   padding-right: var(--scrollbar-width, 0);
   transform: translateX(-50%) translateX(calc(var(--g-main-sidebar-actual-width) / 2)) translateX(calc(var(--g-sub-sidebar-actual-width) / 2));
-  transition: width 0.3s, max-width 0.3s, transform 0.3s;
+  transition: width 0.3s, max-width 0.3s, transform 0.3s, top 0.3s;
 
   &.top {
     top: var(--g-header-actual-height);
