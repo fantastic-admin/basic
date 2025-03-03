@@ -48,7 +48,7 @@ function handleItemClick(item: { handle?: () => void }) {
     <ContextMenuTrigger as-child>
       <slot />
     </ContextMenuTrigger>
-    <ContextMenuContent class="z-1050">
+    <ContextMenuContent class="z-2050">
       <template v-if="!!slots.label">
         <ContextMenuLabel>
           <slot name="label" />
