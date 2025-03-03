@@ -1,12 +1,14 @@
 <script setup lang="ts">
+import type { HTMLAttributes } from 'vue'
 import { cn } from '@/utils'
 
 defineOptions({
   name: 'FaDivider',
 })
 
-defineProps<{
+const props = defineProps<{
   position?: 'start' | 'end'
+  class?: HTMLAttributes['class']
 }>()
 
 const slots = defineSlots<{
@@ -20,7 +22,7 @@ const slots = defineSlots<{
       'before:(flex-basis-0)': position === 'start',
       'after:(flex-basis-0)': position === 'end',
       'gap-4': !!slots.default,
-    })"
+    }, props.class)"
   >
     <slot />
   </div>
