@@ -155,6 +155,8 @@ const routes: RouteRecordRaw = {
       meta: {
         title: '文件预览',
         icon: 'i-mdi:file-eye-outline',
+        // TODO: 临时禁用 https://github.com/501351981/vue-office/issues/438
+        menu: false,
       },
     },
     {
