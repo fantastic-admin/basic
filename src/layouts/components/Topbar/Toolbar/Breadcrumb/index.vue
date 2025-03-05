@@ -8,10 +8,11 @@ const route = useRoute()
 
 const settingsStore = useSettingsStore()
 
-const breadcrumbList = ref<{ path: string, title: string }[]>([])
-watch(() => route.matched, () => {
+// 面包屑备份
+let breadcrumbListBackup: any = []
+const breadcrumbList = computed(() => {
   if (route.name === 'reload') {
-    return
+    return breadcrumbListBackup
   }
   const list = []
   if (settingsStore.settings.home.enable) {
@@ -28,9 +29,8 @@ watch(() => route.matched, () => {
       })
     }
   })
-  breadcrumbList.value = list
-}, {
-  immediate: true,
+  breadcrumbListBackup = list
+  return list
 })
 
 function pathCompile(path: string) {
