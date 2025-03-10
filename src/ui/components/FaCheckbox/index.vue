@@ -16,7 +16,7 @@ const id = useId()
 
 <template>
   <div class="flex-center-start gap-2">
-    <Checkbox :id v-model:checked="value" :disabled />
+    <Checkbox :id v-model="value" :disabled />
     <label :for="id" class="cursor-pointer text-sm">
       <slot />
     </label>
