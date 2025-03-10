@@ -102,16 +102,7 @@ const transitionClass = computed(() => {
 })
 
 const hasChildren = computed(() => {
-  let flag = true
-  if (props.menu.children) {
-    if (props.menu.children.every((item: any) => item.meta?.menu === false)) {
-      flag = false
-    }
-  }
-  else {
-    flag = false
-  }
-  return flag
+  return props.menu.children?.some((item: any) => item.meta?.menu !== false) ?? false
 })
 
 function handleClick() {
