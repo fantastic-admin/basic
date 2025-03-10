@@ -37,7 +37,7 @@ function toggleColorScheme(event: MouseEvent) {
 </script>
 
 <template>
-  <FaButton variant="ghost" size="icon" @click="toggleColorScheme">
+  <FaButton variant="ghost" size="icon" class="size-9" @click="toggleColorScheme">
     <FaIcon
       :name="{
         light: 'i-ri:sun-line',

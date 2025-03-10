@@ -8,9 +8,9 @@
     "baseColor": "neutral",
     "cssVariables": true
   },
-  "framework": "vite",
   "aliases": {
     "components": "@/ui/shadcn",
-    "utils": "@/utils"
+    "utils": "@/utils",
+    "lib": "@/utils"
   }
 }

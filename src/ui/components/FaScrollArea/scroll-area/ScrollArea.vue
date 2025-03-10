@@ -1,13 +1,12 @@
 <script setup lang="ts">
-import type { ScrollAreaRootProps } from 'radix-vue'
+import type { ScrollAreaRootProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/utils'
 import {
   ScrollAreaCorner,
   ScrollAreaRoot,
-
   ScrollAreaViewport,
-} from 'radix-vue'
+} from 'reka-ui'
 import { computed } from 'vue'
 import ScrollBar from './ScrollBar.vue'
 

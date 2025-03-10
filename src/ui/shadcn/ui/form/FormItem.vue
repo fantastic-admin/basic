@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { cn } from '@/utils'
-import { useId } from 'radix-vue'
+import { useId } from 'reka-ui'
 import { type HTMLAttributes, provide } from 'vue'
 import { FORM_ITEM_INJECTION_KEY } from './injectionKeys'
 
