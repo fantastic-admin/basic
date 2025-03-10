@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { TooltipContentProps, TooltipProviderProps } from 'radix-vue'
+import type { TooltipContentProps, TooltipProviderProps } from 'reka-ui'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
 
 defineOptions({

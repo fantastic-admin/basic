@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { PopoverContentProps } from 'radix-vue'
+import type { PopoverContentProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import {
   Popover,

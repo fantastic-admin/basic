@@ -3,10 +3,10 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"],
-      "#/*": ["src/types/*"]
+      "@/*": ["./src/*"],
+      "#/*": ["./src/types/*"]
     },
     "resolveJsonModule": true,
     "types": [
