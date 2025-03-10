@@ -29,13 +29,6 @@ const isItemActive = computed(() => {
   return isActived.value && (!props.subMenu || rootMenu.isMenuPopup)
 })
 
-// 缩进样式
-const indentStyle = computed(() => {
-  return !rootMenu.isMenuPopup
-    ? `padding-left: ${20 * (props.level ?? 0)}px`
-    : ''
-})
-
 defineExpose({
   ref: itemRef,
 })
@@ -68,11 +61,13 @@ defineExpose({
           }"
         >
           <div
-            class="inline-flex flex-1 items-center justify-center gap-[12px]" :class="{
+            class="inline-flex flex-1 items-center justify-center gap-[12px] pl-[calc(var(--indent-level)*20px)]" :class="{
               'flex-col': rootMenu.isMenuPopup && level === 0 && rootMenu.props.mode === 'vertical',
               'gap-1!': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName,
               'w-full': rootMenu.isMenuPopup && level === 0 && rootMenu.props.showCollapseName && rootMenu.props.mode === 'vertical',
-            }" :style="indentStyle"
+            }" :style="{
+              '--indent-level': !rootMenu.isMenuPopup ? props.level ?? 0 : 0,
+            }"
           >
             <FaIcon v-if="props.item.meta?.icon" :name="props.item.meta.icon" class="menu-item-container-icon size-5 transition-transform group-hover-scale-120" />
             <span
