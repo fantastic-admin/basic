@@ -36,9 +36,8 @@ const props = withDefaults(
     footer?: boolean
     closeOnClickOverlay?: boolean
     closeOnPressEscape?: boolean
-    class?: HTMLAttributes['class']
-    headerClass?: HTMLAttributes['class']
     contentClass?: HTMLAttributes['class']
+    headerClass?: HTMLAttributes['class']
     footerClass?: HTMLAttributes['class']
   }>(),
   {
@@ -139,7 +138,7 @@ function handleAnimationEnd() {
       :open="isOpen"
       :overlay="props.overlay"
       :overlay-blur="props.overlayBlur"
-      class="w-full flex flex-col gap-0 p-0"
+      :class="cn('w-full flex flex-col gap-0 p-0', props.contentClass)"
       :side="props.side"
       @open-auto-focus="handleFocusOutside"
       @close-auto-focus="handleFocusOutside"
