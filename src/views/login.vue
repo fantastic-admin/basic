@@ -60,7 +60,7 @@ const formType = ref<'login' | 'register' | 'resetPassword'>('login')
       </Transition>
     </div>
   </div>
-  <FaCopyright />
+  <FaCopyright class="copyright" />
 </template>
 
 <style scoped>
