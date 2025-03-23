@@ -98,7 +98,6 @@
     "typescript": "^5.8.2",
     "unocss": "^65.5.0",
     "unocss-preset-animations": "^1.1.1",
-    "unocss-preset-scrollbar": "^3.2.0",
     "unplugin-auto-import": "^19.1.1",
     "unplugin-turbo-console": "^1.11.3",
     "unplugin-vue-components": "^28.4.1",
