@@ -148,17 +148,16 @@ const routes: RouteRecordRaw = {
         icon: 'i-mdi:table-large',
       },
     },
-    {
-      path: 'file-preview',
-      name: 'pluginExampleFilePreview',
-      component: () => import('@/views/plugin_example/file-preview.vue'),
-      meta: {
-        title: '文件预览',
-        icon: 'i-mdi:file-eye-outline',
-        // TODO: 临时禁用 https://github.com/501351981/vue-office/issues/438
-        menu: false,
-      },
-    },
+    // TODO: 临时禁用 https://github.com/501351981/vue-office/issues/438
+    // {
+    //   path: 'file-preview',
+    //   name: 'pluginExampleFilePreview',
+    //   component: () => import('@/views/plugin_example/file-preview.vue'),
+    //   meta: {
+    //     title: '文件预览',
+    //     icon: 'i-mdi:file-eye-outline',
+    //   },
+    // },
     {
       path: 'cropper',
       name: 'pluginExampleCropper',
