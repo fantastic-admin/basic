@@ -72,8 +72,8 @@ importers:
         specifier: ^6.14.0
         version: 6.14.0
       reka-ui:
-        specifier: ^2.0.2
-        version: 2.0.2(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
+        specifier: ^2.1.1
+        version: 2.1.1(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2))
       scule:
         specifier: ^1.3.0
         version: 1.3.0
@@ -5089,8 +5089,8 @@ packages:
     resolution: {integrity: sha512-cnE+y8bz4NhMjISKbgeVJtqNbtf5QpjZP+Bslo+UqkIt9QPnX9q095eiRRASJG1/tz6dlNr6Z5NsBiWYokp6EQ==}
     hasBin: true
 
-  reka-ui@2.0.2:
-    resolution: {integrity: sha512-pC2UF6Z+kJF96aJvIErhkSO4DJYIeq9pgvh3pntNqcZb3zFGMzw8h2uny+GnLX2CKiQV54kZNYXxecYIiPMGyg==}
+  reka-ui@2.1.1:
+    resolution: {integrity: sha512-awvpQ041LPXAvf2uRVFwedsyz9SwsuoWlRql1fg4XimUCxEI2GOfHo6FIdL44dSPb/eG/gWbdGhoGHLlbX5gPA==}
     peerDependencies:
       vue: '>= 3.2.0'
 
@@ -11829,7 +11829,7 @@ snapshots:
     dependencies:
       jsesc: 3.0.2
 
-  reka-ui@2.0.2(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2)):
+  reka-ui@2.1.1(typescript@5.8.2)(vue@3.5.13(typescript@5.8.2)):
     dependencies:
       '@floating-ui/dom': 1.6.13
       '@floating-ui/vue': 1.1.6(vue@3.5.13(typescript@5.8.2))
@@ -11840,7 +11840,7 @@ snapshots:
       '@vueuse/shared': 12.8.2(typescript@5.8.2)
       aria-hidden: 1.2.4
       defu: 6.1.4
-      ohash: 1.1.6
+      ohash: 2.0.11
       vue: 3.5.13(typescript@5.8.2)
     transitivePeerDependencies:
       - '@vue/composition-api'
