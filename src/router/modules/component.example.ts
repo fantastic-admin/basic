@@ -199,6 +199,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'slider',
+          name: 'componentExampleBuiltInSlider',
+          component: () => import('@/views/component_built_in_example/slider.vue'),
+          meta: {
+            title: '滑块',
+          },
+        },
+        {
           path: 'switch',
           name: 'componentExampleBuiltInSwitch',
           component: () => import('@/views/component_built_in_example/switch.vue'),
