@@ -47,7 +47,7 @@ function setupRoutes(router: Router) {
       }
       else {
         try {
-        // 获取用户权限
+          // 获取用户权限
           settingsStore.settings.app.enablePermission && await userStore.getPermissions()
           // 生成动态路由
           switch (settingsStore.settings.app.routeBaseOn) {
@@ -85,7 +85,9 @@ function setupRoutes(router: Router) {
           }
           routeStore.setCurrentRemoveRoutes(removeRoutes)
         }
-        catch {}
+        catch {
+          userStore.logout()
+        }
         // 动态路由生成并注册后，重新进入当前路由
         next({
           path: to.path,
