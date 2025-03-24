@@ -34,6 +34,7 @@ declare module 'vue' {
     FaScrollArea: typeof import('./../ui/components/FaScrollArea/index.vue')['default']
     FaSearchBar: typeof import('./../ui/components/FaSearchBar/index.vue')['default']
     FaSelect: typeof import('./../ui/components/FaSelect/index.vue')['default']
+    FaSlider: typeof import('./../ui/components/FaSlider/index.vue')['default']
     FaSmartFixedBlock: typeof import('./../ui/components/FaSmartFixedBlock/index.vue')['default']
     FaSwitch: typeof import('./../ui/components/FaSwitch/index.vue')['default']
     FaSystemInfo: typeof import('./../ui/components/FaSystemInfo/index.vue')['default']
