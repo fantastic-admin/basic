@@ -12,27 +12,6 @@ export default function useTabbar() {
     return route.fullPath
   }
 
-  function open(to: RouteLocationRaw) {
-    const index = tabbarStore.list.findIndex(item => item.tabId === getId())
-    tabbarStore.$patch({
-      leaveIndex: index,
-    })
-    router.push(to)
-  }
-
-  function go(delta: number) {
-    const tabId = getId()
-    router.go(delta)
-    tabbarStore.remove(tabId)
-  }
-
-  function replace(to: RouteLocationRaw) {
-    const tabId = getId()
-    router.replace(to).then(() => {
-      tabbarStore.remove(tabId)
-    })
-  }
-
   function close(to: RouteLocationRaw) {
     const tabId = getId()
     router.push(to).then(() => {
@@ -170,9 +149,6 @@ export default function useTabbar() {
 
   return {
     getId,
-    open,
-    go,
-    replace,
     close,
     closeById,
     closeOtherSide,
