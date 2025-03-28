@@ -7,11 +7,11 @@ meta:
 import useSettingsStore from '@/store/modules/settings'
 
 const settingsStore = useSettingsStore()
-
+const router = useRouter()
 const tabbar = useTabbar()
 
 function open() {
-  tabbar.open(settingsStore.settings.home.fullPath)
+  router.push(settingsStore.settings.home.fullPath)
 }
 function close() {
   tabbar.close(settingsStore.settings.home.fullPath)
