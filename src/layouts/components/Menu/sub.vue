@@ -191,12 +191,12 @@ function handleMouseleave() {
   <Teleport v-if="hasChildren" to="body" :disabled="!rootMenu.isMenuPopup">
     <Transition v-bind="transitionClass" v-on="transitionEvent">
       <FaScrollArea
-        v-if="opened" ref="subMenuRef" :scrollbar="false" :mask="rootMenu.isMenuPopup" class="sub-menu static h-[calc-size(auto,size)] rounded-lg" :class="{
+        v-if="opened" ref="subMenuRef" :scrollbar="false" :mask="rootMenu.isMenuPopup" :class="cn('sub-menu static h-[calc-size(auto,size)] rounded-lg', {
           'bg-[var(--g-sub-sidebar-bg)]': rootMenu.isMenuPopup,
-          'border shadow-xl fixed! z-3000 w-[200px]': rootMenu.isMenuPopup,
+          'border shadow-xl fixed z-3000 w-[200px]': rootMenu.isMenuPopup,
           'mx-1': rootMenu.isMenuPopup && (rootMenu.props.mode === 'vertical' || level !== 0),
           'py-1': rootMenu.isMenuPopup,
-        }"
+        })"
       >
         <template v-for="item in menu.children" :key="item.path ?? JSON.stringify(item)">
           <SubMenu v-if="item.meta?.menu !== false" :unique-key="[...uniqueKey, item.path ?? JSON.stringify(item)]" :menu="item" :level="level + 1" />
