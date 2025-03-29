@@ -62,7 +62,7 @@ watch(() => menuStore.actived, (val, oldVal) => {
             <div v-show="mainIndex === menuStore.actived">
               <Menu
                 :menu="mainItem.children" :value="route.meta.activeMenu || route.path" :default-openeds="menuStore.defaultOpenedPaths" :accordion="settingsStore.settings.menu.subMenuUniqueOpened" :collapse="settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse" class="menu" :class="{
-                  '-mt-2': !['head', 'single'].includes(settingsStore.settings.menu.mode),
+                  '-mt-2': !((settingsStore.mode === 'pc' && settingsStore.settings.menu.subMenuCollapse) || ['head', 'single'].includes(settingsStore.settings.menu.mode)),
                 }"
               />
             </div>
