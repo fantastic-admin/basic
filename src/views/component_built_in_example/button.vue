@@ -29,6 +29,9 @@ meta:
         <FaButton disabled>
           按钮
         </FaButton>
+        <FaButton loading>
+          按钮
+        </FaButton>
       </div>
     </FaPageMain>
   </div>
