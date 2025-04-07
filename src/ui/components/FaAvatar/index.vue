@@ -3,6 +3,10 @@ import type { HTMLAttributes } from 'vue'
 import type { AvatarVariants } from './avatar'
 import { Avatar, AvatarFallback, AvatarImage } from './avatar'
 
+defineOptions({
+  name: 'FaAvatar',
+})
+
 const props = defineProps<{
   src: string
   fallback?: string
