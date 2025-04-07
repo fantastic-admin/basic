@@ -35,6 +35,10 @@ const emits = defineEmits<{
     file: UploadUserFile,
     fileList: UploadUserFile[],
   ]
+  onRemove: [
+    file: UploadUserFile,
+    fileList: UploadUserFile[],
+  ]
 }>()
 
 const beforeUpload: UploadProps['beforeUpload'] = (file) => {
@@ -57,6 +61,10 @@ const onExceed: UploadProps['onExceed'] = () => {
 
 const onSuccess: UploadProps['onSuccess'] = (res, file, fileList) => {
   emits('onSuccess', res, file, fileList)
+}
+
+const onRemove: UploadProps['onRemove'] = (file, fileList) => {
+  emits('onRemove', file, fileList)
 }
 
 const onPreview: UploadProps['onPreview'] = (e) => {
@@ -92,6 +100,7 @@ const onPreview: UploadProps['onPreview'] = (e) => {
     :before-upload="beforeUpload"
     :on-exceed="onExceed"
     :on-success="onSuccess"
+    :on-remove="onRemove"
     :on-preview="onPreview"
     :http-request="httpRequest"
     :file-list="files"
