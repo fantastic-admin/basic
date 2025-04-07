@@ -3,6 +3,10 @@ import type { SliderRootProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { Slider } from './slider'
 
+defineOptions({
+  name: 'FaSlider',
+})
+
 const props = withDefaults(defineProps<{
   defaultValue?: SliderRootProps['defaultValue']
   disabled?: SliderRootProps['disabled']
