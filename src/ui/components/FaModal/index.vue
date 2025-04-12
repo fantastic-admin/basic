@@ -224,7 +224,7 @@ function handleAnimationEnd() {
           <FaButton v-if="showCancelButton" variant="outline" @click="onCancel">
             {{ cancelButtonText }}
           </FaButton>
-          <FaButton v-if="showConfirmButton" @click="onConfirm">
+          <FaButton v-if="showConfirmButton" :disabled="confirmButtonDisabled" :loading="confirmButtonLoading" @click="onConfirm">
             {{ confirmButtonText }}
           </FaButton>
         </slot>

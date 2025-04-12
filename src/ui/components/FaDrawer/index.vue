@@ -179,10 +179,10 @@ function handleAnimationEnd() {
         })"
       >
         <slot name="footer">
-          <FaButton variant="outline" @click="onCancel">
+          <FaButton v-if="showCancelButton" variant="outline" @click="onCancel">
             {{ cancelButtonText }}
           </FaButton>
-          <FaButton @click="onConfirm">
+          <FaButton v-if="showConfirmButton" :disabled="confirmButtonDisabled" :loading="confirmButtonLoading" @click="onConfirm">
             {{ confirmButtonText }}
           </FaButton>
         </slot>
