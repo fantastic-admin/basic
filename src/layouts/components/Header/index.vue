@@ -46,6 +46,7 @@ const { switchTo } = useMenu()
             </template>
           </div>
         </FaScrollArea>
+        <component :is="useSlots('header-after-menu')" />
         <div class="flex-center">
           <AccountButton only-avatar dropdown-side="bottom" class="size-12 p-2" />
         </div>

@@ -5,7 +5,7 @@ function upgrade() {
 </script>
 
 <template>
-  <div class="flex-center p-4">
+  <div class="flex-center">
     <FaPopover align="end" side="right" class="min-w-auto p-0">
       <FaButton size="icon" variant="ghost" class="size-12">
         <FaIcon name="i-noto:crown" class="text-8 filter-grayscale" />
