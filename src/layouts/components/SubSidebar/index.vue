@@ -74,6 +74,7 @@ watch(() => menuStore.actived, (val, oldVal) => {
           <FaIcon name="toolbar-collapse" class="size-4" />
         </FaButton>
       </div>
+      <component :is="useSlots('sub-sidebar-after-menu')" />
       <div v-if="settingsStore.settings.menu.mode === 'single'" class="flex-center px-4 pb-3">
         <AccountButton :only-avatar="settingsStore.settings.menu.subMenuCollapse" dropdown-align="center" :dropdown-side="settingsStore.settings.menu.subMenuCollapse ? 'right' : 'top'" button-variant="secondary" :class="{ 'w-full': !settingsStore.settings.menu.subMenuCollapse }" />
       </div>
