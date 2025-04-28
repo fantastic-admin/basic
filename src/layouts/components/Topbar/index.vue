@@ -10,11 +10,12 @@ defineOptions({
 const settingsStore = useSettingsStore()
 
 const enableToolbar = computed(() => {
-  return !(
-    settingsStore.settings.menu.mode === 'head' && (
-      !settingsStore.settings.toolbar.breadcrumb || settingsStore.settings.app.routeBaseOn === 'filesystem'
-    )
-  )
+  return Object.keys(settingsStore.settings.toolbar).some((key) => {
+    if (settingsStore.settings.app.routeBaseOn === 'filesystem' && key === 'breadcrumb') {
+      return false
+    }
+    return settingsStore.settings.toolbar[key as keyof typeof settingsStore.settings.toolbar]
+  })
 })
 
 const scrollTop = ref(0)

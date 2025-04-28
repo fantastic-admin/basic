@@ -3,7 +3,6 @@ import { useSlots } from '@/slots'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import Logo from '../Logo/index.vue'
-import ToolbarRightSide from '../Topbar/Toolbar/rightSide.vue'
 
 defineOptions({
   name: 'LayoutHeader',
@@ -18,8 +17,8 @@ const { switchTo } = useMenu()
 <template>
   <Transition name="header">
     <header v-if="settingsStore.mode === 'pc' && settingsStore.settings.menu.mode === 'head'">
-      <component :is="useSlots('header-start')" />
       <div class="header-container">
+        <component :is="useSlots('header-start')" />
         <Logo class="title" />
         <component :is="useSlots('header-after-logo')" />
         <FaScrollArea :scrollbar="false" mask horizontal gradient-color="var(--g-header-bg)" class="menu-container h-full flex-1">
@@ -47,9 +46,11 @@ const { switchTo } = useMenu()
             </template>
           </div>
         </FaScrollArea>
-        <ToolbarRightSide />
+        <div class="flex-center">
+          <AccountButton only-avatar dropdown-side="bottom" class="size-12 p-2" />
+        </div>
+        <component :is="useSlots('header-end')" />
       </div>
-      <component :is="useSlots('header-end')" />
     </header>
   </Transition>
 </template>
@@ -78,7 +79,7 @@ header {
     justify-content: space-between;
     width: 100%;
     height: 100%;
-    padding: 0 12px 0 20px;
+    padding: 0 12px;
     margin: 0 auto;
 
     :deep(a.title) {

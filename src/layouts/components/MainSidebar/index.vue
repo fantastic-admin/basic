@@ -65,6 +65,9 @@ onUnmounted(() => {
           </template>
         </div>
       </FaScrollArea>
+      <div class="flex-center px-4 py-3">
+        <AccountButton only-avatar :button-variant="settingsStore.settings.menu.mode === 'side' ? 'secondary' : 'ghost'" class="size-12 p-2" />
+      </div>
       <component :is="useSlots('main-sidebar-bottom')" />
     </div>
   </Transition>
