@@ -32,9 +32,6 @@ importers:
       '@vue-office/excel':
         specifier: ^1.7.14
         version: 1.7.14(vue-demi@0.14.10(vue@3.5.13(typescript@5.8.2)))(vue@3.5.13(typescript@5.8.2))
-      '@vue-office/pdf':
-        specifier: ^2.0.10
-        version: 2.0.10(vue-demi@0.14.10(vue@3.5.13(typescript@5.8.2)))(vue@3.5.13(typescript@5.8.2))
       '@vueuse/components':
         specifier: ^13.0.0
         version: 13.0.0(vue@3.5.13(typescript@5.8.2))
@@ -2316,16 +2313,6 @@ packages:
 
   '@vue-office/excel@1.7.14':
     resolution: {integrity: sha512-pVUgt+emDQUnW7q22CfnQ+jl43mM/7IFwYzOg7lwOwPEbiVB4K4qEQf+y/bc4xGXz75w1/e3Kz3G6wAafmFBFg==}
-    peerDependencies:
-      '@vue/composition-api': ^1.7.1
-      vue: ^2.0.0 || >=3.0.0
-      vue-demi: ^0.14.6
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-
-  '@vue-office/pdf@2.0.10':
-    resolution: {integrity: sha512-yHVLrMAKpMPBkhBwofFyGEtEeJF0Zd7oGmf56Pe5aj/xObdRq3E1CIZqTqhWJNgHV8oLQqaX0vs4p5T1zq+GIA==}
     peerDependencies:
       '@vue/composition-api': ^1.7.1
       vue: ^2.0.0 || >=3.0.0
@@ -9637,11 +9624,6 @@ snapshots:
       vue-demi: 0.14.10(vue@3.5.13(typescript@5.8.2))
 
   '@vue-office/excel@1.7.14(vue-demi@0.14.10(vue@3.5.13(typescript@5.8.2)))(vue@3.5.13(typescript@5.8.2))':
-    dependencies:
-      vue: 3.5.13(typescript@5.8.2)
-      vue-demi: 0.14.10(vue@3.5.13(typescript@5.8.2))
-
-  '@vue-office/pdf@2.0.10(vue-demi@0.14.10(vue@3.5.13(typescript@5.8.2)))(vue@3.5.13(typescript@5.8.2))':
     dependencies:
       vue: 3.5.13(typescript@5.8.2)
       vue-demi: 0.14.10(vue@3.5.13(typescript@5.8.2))

@@ -27,7 +27,6 @@
     "@visactor/vchart": "^1.13.8",
     "@vue-office/docx": "^1.6.3",
     "@vue-office/excel": "^1.7.14",
-    "@vue-office/pdf": "^2.0.10",
     "@vueuse/components": "^13.0.0",
     "@vueuse/core": "^13.0.0",
     "@vueuse/integrations": "^13.0.0",
