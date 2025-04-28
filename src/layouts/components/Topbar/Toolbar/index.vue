@@ -1,13 +1,10 @@
 <script setup lang="ts">
-import useSettingsStore from '@/store/modules/settings'
 import LeftSide from './leftSide.vue'
 import RightSide from './rightSide.vue'
 
 defineOptions({
   name: 'Toolbar',
 })
-
-const settingsStore = useSettingsStore()
 </script>
 
 <template>
@@ -15,7 +12,7 @@ const settingsStore = useSettingsStore()
     <div class="left-side h-full flex items-center of-hidden pe-16 ps-2">
       <LeftSide />
     </div>
-    <div v-if="['side', 'single'].includes(settingsStore.settings.menu.mode) || settingsStore.mode === 'mobile'" class="h-full flex flex-shrink-0 items-center justify-end px-2">
+    <div class="h-full flex flex-shrink-0 items-center justify-end px-2">
       <RightSide />
     </div>
   </div>

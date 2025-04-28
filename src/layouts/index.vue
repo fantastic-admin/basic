@@ -58,7 +58,12 @@ const topbarActualHeight = computed(() => {
   if (settingsStore.settings.tabbar.enable) {
     actualHeight += Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-tabbar-height'))
   }
-  if (!['head'].includes(settingsStore.settings.menu.mode) || settingsStore.settings.toolbar.breadcrumb) {
+  if (Object.keys(settingsStore.settings.toolbar).some((key) => {
+    if (settingsStore.settings.app.routeBaseOn === 'filesystem' && key === 'breadcrumb') {
+      return false
+    }
+    return settingsStore.settings.toolbar[key as keyof typeof settingsStore.settings.toolbar]
+  })) {
     actualHeight += Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-toolbar-height'))
   }
   return actualHeight
