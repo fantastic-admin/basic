@@ -193,11 +193,17 @@ function handleCopy() {
     </div>
     <div>
       <FaDivider>工具栏</FaDivider>
+      <div class="setting-item">
+        <div class="label">
+          是否启用
+        </div>
+        <FaSwitch v-model="settingsStore.settings.toolbar.enable" />
+      </div>
       <div v-if="settingsStore.mode === 'pc'" class="setting-item">
         <div class="label">
           面包屑导航
         </div>
-        <FaSwitch v-model="settingsStore.settings.toolbar.breadcrumb" />
+        <FaSwitch v-model="settingsStore.settings.toolbar.breadcrumb" :disabled="!settingsStore.settings.toolbar.enable" />
       </div>
       <div class="setting-item">
         <div class="label">
@@ -206,13 +212,13 @@ function handleCopy() {
             <FaIcon name="i-ri:question-line" />
           </FaTooltip>
         </div>
-        <FaSwitch v-model="settingsStore.settings.toolbar.navSearch" />
+        <FaSwitch v-model="settingsStore.settings.toolbar.navSearch" :disabled="!settingsStore.settings.toolbar.enable" />
       </div>
       <div v-if="settingsStore.mode === 'pc'" class="setting-item">
         <div class="label">
           全屏
         </div>
-        <FaSwitch v-model="settingsStore.settings.toolbar.fullscreen" />
+        <FaSwitch v-model="settingsStore.settings.toolbar.fullscreen" :disabled="!settingsStore.settings.toolbar.enable" />
       </div>
       <div class="setting-item">
         <div class="label">
@@ -221,7 +227,7 @@ function handleCopy() {
             <FaIcon name="i-ri:question-line" />
           </FaTooltip>
         </div>
-        <FaSwitch v-model="settingsStore.settings.toolbar.pageReload" />
+        <FaSwitch v-model="settingsStore.settings.toolbar.pageReload" :disabled="!settingsStore.settings.toolbar.enable" />
       </div>
       <div class="setting-item">
         <div class="label">
@@ -230,7 +236,7 @@ function handleCopy() {
             <FaIcon name="i-ri:question-line" />
           </FaTooltip>
         </div>
-        <FaSwitch v-model="settingsStore.settings.toolbar.colorScheme" />
+        <FaSwitch v-model="settingsStore.settings.toolbar.colorScheme" :disabled="!settingsStore.settings.toolbar.enable" />
       </div>
     </div>
     <div>
@@ -239,7 +245,7 @@ function handleCopy() {
         <div class="label">
           是否启用快捷键
         </div>
-        <FaSwitch v-model="settingsStore.settings.mainPage.enableHotkeys" />
+        <FaSwitch v-model="settingsStore.settings.mainPage.enableHotkeys" :disabled="!settingsStore.settings.toolbar.enable" />
       </div>
     </div>
     <div>

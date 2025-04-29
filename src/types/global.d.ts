@@ -149,6 +149,11 @@ declare namespace Settings {
   }
   interface toolbar {
     /**
+     * 是否开启工具栏
+     * @默认值 `true`
+     */
+    enable?: boolean
+    /**
      * 是否开启面包屑导航
      * @默认值 `true`
      */

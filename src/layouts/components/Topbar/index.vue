@@ -10,7 +10,7 @@ defineOptions({
 const settingsStore = useSettingsStore()
 
 const enableToolbar = computed(() => {
-  return Object.keys(settingsStore.settings.toolbar).some((key) => {
+  return settingsStore.settings.toolbar.enable && Object.keys(settingsStore.settings.toolbar).some((key) => {
     if (settingsStore.settings.app.routeBaseOn === 'filesystem' && key === 'breadcrumb') {
       return false
     }
