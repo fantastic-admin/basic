@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { UploadProps } from 'element-plus'
-import { ElMessage } from 'element-plus'
+import { toast } from 'vue-sonner'
 
 defineOptions({
   name: 'ImageUpload',
@@ -67,10 +67,10 @@ const beforeUpload: UploadProps['beforeUpload'] = (file) => {
   const isTypeOk = props.ext.includes(fileExt)
   const isSizeOk = file.size / 1024 / 1024 < props.size
   if (!isTypeOk) {
-    ElMessage.error(`上传图片只支持 ${props.ext.join(' / ')} 格式！`)
+    toast.error(`上传图片只支持 ${props.ext.join(' / ')} 格式！`)
   }
   if (!isSizeOk) {
-    ElMessage.error(`上传图片大小不能超过 ${props.size}MB！`)
+    toast.error(`上传图片大小不能超过 ${props.size}MB！`)
   }
   if (isTypeOk && isSizeOk) {
     uploadData.value.progress.preview = URL.createObjectURL(file)
