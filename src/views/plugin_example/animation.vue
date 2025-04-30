@@ -201,12 +201,15 @@ function open(url: string) {
 <template>
   <div>
     <Alert />
-    <FaPageHeader title="过渡动画" description="结合 <transition> 组件使用">
-      <template #content>
-        <p>
-          安装命令：
-          <Command text="pnpm add animate.css" />
-        </p>
+    <FaPageHeader title="过渡动画">
+      <template #description>
+        <div class="space-y-2">
+          <p>结合 &lt;Transition&gt; 组件使用</p>
+          <p>
+            安装命令：
+            <Command text="pnpm add animate.css" />
+          </p>
+        </div>
       </template>
       <FaButton variant="outline" @click="open('https://github.com/animate-css/animate.css')">
         <FaIcon name="i-ep:link" />

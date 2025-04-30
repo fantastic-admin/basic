@@ -39,7 +39,7 @@ function open(url: string) {
 <template>
   <div>
     <FaPageHeader title="基础组件">
-      <template #content>
+      <template #description>
         <div class="space-y-2">
           <p>框架内置 Element Plus 组件库，本页仅展示部分组件，更多组件及使用说明请查看 Element Plus 官网</p>
           <FaButton variant="link" class="h-auto p-0" @click="eventBus.emit('global-ui-component-switch')">
