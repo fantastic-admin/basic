@@ -76,16 +76,6 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
-        path: 'quickadmin',
-        redirect: '',
-        name: 'recommandQuickadmin',
-        meta: {
-          title: 'QuickAdmin 快速开发管理框架',
-          icon: 'https://doc.quickadmin.cn/logo.png',
-          link: 'https://doc.quickadmin.cn',
-        },
-      },
-      {
         path: 'vexip',
         redirect: '',
         name: 'recommandVexip',
