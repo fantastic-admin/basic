@@ -25,11 +25,11 @@ export default function useTabbar() {
       // 如果关闭的标签正好是当前路由
       if (tabId === activedTabId) {
         const index = tabbarStore.list.findIndex(item => item.tabId === tabId)
-        if (index < tabbarStore.list.length - 1) {
-          close(tabbarStore.list[index + 1].fullPath)
+        if (index > 0) {
+          close(tabbarStore.list[index - 1].fullPath)
         }
         else {
-          close(tabbarStore.list[index - 1].fullPath)
+          close(tabbarStore.list[index + 1].fullPath)
         }
       }
       else {
