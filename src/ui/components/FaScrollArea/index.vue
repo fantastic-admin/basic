@@ -25,6 +25,10 @@ const props = withDefaults(
   },
 )
 
+const emits = defineEmits<{
+  onScroll: [Event]
+}>()
+
 const scrollAreaRef = useTemplateRef('scrollAreaRef')
 
 const arrivedState = ref<{
@@ -45,6 +49,10 @@ const showMaskEnd = computed(() => {
   }
   return !arrivedState.value?.bottom
 })
+
+function onScroll(event: Event) {
+  emits('onScroll', event)
+}
 
 function onWheel(event: WheelEvent) {
   if (props.horizontal) {
@@ -108,7 +116,7 @@ defineExpose({
       '--mask-scroll-container-gradient-color': props.gradientColor,
     } : {}"
   >
-    <ScrollArea ref="scrollAreaRef" :class="cn('relative z-0 flex-1', props.contentClass)" :scrollbar="props.scrollbar" :on-wheel="onWheel">
+    <ScrollArea ref="scrollAreaRef" :class="cn('relative z-0 flex-1', props.contentClass)" :scrollbar="props.scrollbar" :on-scroll="onScroll" :on-wheel="onWheel">
       <slot />
       <ScrollBar v-if="props.horizontal" orientation="horizontal" :class="{ 'opacity-0 pointer-events-none': !props.scrollbar }" />
     </ScrollArea>
