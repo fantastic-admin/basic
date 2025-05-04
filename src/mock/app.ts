@@ -18,7 +18,6 @@ export default defineFakeRoute([
               {
                 path: '/multilevel_menu_example',
                 component: 'Layout',
-                redirect: '/multilevel_menu_example/page',
                 name: 'multilevelMenuExample',
                 meta: {
                   title: '多级导航',
@@ -36,7 +35,6 @@ export default defineFakeRoute([
                   {
                     path: 'level2',
                     name: 'multilevelMenuExample2',
-                    redirect: '/multilevel_menu_example/level2/page',
                     meta: {
                       title: '导航2',
                     },
@@ -52,7 +50,6 @@ export default defineFakeRoute([
                       {
                         path: 'level3',
                         name: 'multilevelMenuExample2-2',
-                        redirect: '/multilevel_menu_example/level2/level3/page1',
                         meta: {
                           title: '导航2-2',
                         },

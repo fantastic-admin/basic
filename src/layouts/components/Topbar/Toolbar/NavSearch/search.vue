@@ -10,7 +10,7 @@ import { useFocus } from '@vueuse/core'
 import hotkeys from 'hotkeys-js'
 
 defineOptions({
-  name: 'Search',
+  name: 'NavSearchModal',
 })
 
 const isShow = defineModel<boolean>({
