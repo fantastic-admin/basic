@@ -33,12 +33,10 @@ function open(url: string) {
 <template>
   <div>
     <FaPageHeader title="VueUse" description="VueUse 是一个 Vue Composition API 实用程序的集合，更多 API 和例子请查看 VueUse 官网。">
-      <ElButton @click="open('https://vueuse.org/')">
-        <template #icon>
-          <FaIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://vueuse.org/')">
+        <FaIcon name="i-ep:link" />
         VueUse 官网
-      </ElButton>
+      </FaButton>
     </FaPageHeader>
     <FaPageMain title="防抖：debounce">
       <p class="mt-0">

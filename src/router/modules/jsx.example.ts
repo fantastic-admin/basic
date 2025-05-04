@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/jsx_example',
   component: Layout,
-  redirect: '/jsx_example/index',
   name: 'jsxExample',
   meta: {
     title: 'JSX',

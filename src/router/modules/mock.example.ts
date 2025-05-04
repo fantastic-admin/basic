@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/mock_example',
   component: Layout,
-  redirect: '/mock_example/index',
   name: 'mockExample',
   meta: {
     title: 'Mock',

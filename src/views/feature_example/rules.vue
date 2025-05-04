@@ -498,12 +498,10 @@ function open(url: string) {
 <template>
   <div>
     <FaPageHeader title="常用正则" description="正则来源于 Github 上 any-rule 项目">
-      <ElButton @click="open('https://github.com/any86/any-rule')">
-        <template #icon>
-          <FaIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://github.com/any86/any-rule')">
+        <FaIcon name="i-ep:link" />
         访问 any-rule
-      </ElButton>
+      </FaButton>
     </FaPageHeader>
     <FaPageMain v-for="(item, index) in rules" :key="index" :title="item.title">
       <div class="rule">

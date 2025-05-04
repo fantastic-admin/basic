@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/feature_example',
   component: Layout,
-  redirect: '/feature_example/clipboard',
   name: 'featureExample',
   meta: {
     title: '功能',

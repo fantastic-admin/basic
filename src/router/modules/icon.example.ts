@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/icon_example',
   component: Layout,
-  redirect: '/icon_example/svg',
   name: 'iconExample',
   meta: {
     title: '扩展图标',

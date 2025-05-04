@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/breadcrumb_example',
   component: Layout,
-  redirect: '/breadcrumb_example/list1',
   name: 'breadcrumbExample',
   meta: {
     title: '面包屑导航',
@@ -34,7 +33,6 @@ const routes: RouteRecordRaw = {
     },
     {
       path: 'list2',
-      redirect: '/breadcrumb_example/list2',
       meta: {
         title: '列表2（层级模式）',
       },

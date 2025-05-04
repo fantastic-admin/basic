@@ -47,12 +47,10 @@ function open(url: string) {
           </FaButton>
         </div>
       </template>
-      <ElButton @click="open('https://element-plus.org/#/zh-CN')">
-        <template #icon>
-          <FaIcon name="i-ep:link" />
-        </template>
+      <FaButton variant="outline" @click="open('https://element-plus.org/#/zh-CN')">
+        <FaIcon name="i-ep:link" />
         Element Plus 官网
-      </ElButton>
+      </FaButton>
     </FaPageHeader>
     <FaPageMain>
       <ElTabs type="border-card">

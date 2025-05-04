@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/link',
   component: Layout,
-  redirect: '/link/gitee',
   name: 'externalLinkExample',
   meta: {
     title: '外链',

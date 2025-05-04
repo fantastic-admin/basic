@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/permission_example',
   component: Layout,
-  redirect: '/permission_example/index',
   name: 'permissionExample',
   meta: {
     title: '权限验证',

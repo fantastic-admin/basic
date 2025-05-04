@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw[] = [
   {
     path: '/official',
-    redirect: '/official/fantastic-startkit',
     component: Layout,
     meta: {
       title: '官方周边',
@@ -48,7 +47,6 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/recommand',
-    redirect: '/recommand/vform',
     component: Layout,
     meta: {
       title: '友情推荐',

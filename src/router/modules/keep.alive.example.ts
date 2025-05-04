@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/keep_alive_example',
   component: Layout,
-  redirect: '/keep_alive_example/page',
   name: 'keepAliveExample',
   meta: {
     title: '页面缓存',
@@ -35,7 +34,6 @@ const routes: RouteRecordRaw = {
     },
     {
       path: 'nested',
-      redirect: '/keep_alive_example/nested/detail',
       meta: {
         title: '嵌套路由',
         menu: false,

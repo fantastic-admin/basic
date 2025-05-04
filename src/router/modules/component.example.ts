@@ -242,7 +242,6 @@ const routes: RouteRecordRaw = {
     },
     {
       path: 'extend',
-      redirect: 'pageheader',
       name: 'componentExampleExtend',
       meta: {
         title: '扩展组件',

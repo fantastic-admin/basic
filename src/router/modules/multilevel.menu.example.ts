@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/multilevel_menu_example',
   component: Layout,
-  redirect: '/multilevel_menu_example/page',
   name: 'multilevelMenuExample',
   meta: {
     title: '多级导航',
@@ -25,7 +24,6 @@ const routes: RouteRecordRaw = {
     {
       path: 'level2',
       name: 'multilevelMenuExample2',
-      redirect: '/multilevel_menu_example/level2/page',
       meta: {
         title: '导航2',
       },
@@ -41,7 +39,6 @@ const routes: RouteRecordRaw = {
         {
           path: 'level3',
           name: 'multilevelMenuExample2-2',
-          redirect: '/multilevel_menu_example/level2/level3/page1',
           meta: {
             title: '导航2-2',
           },

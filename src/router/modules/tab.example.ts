@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/tab_example',
   component: Layout,
-  redirect: '/tab_example/index',
   name: 'tabExample',
   meta: {
     title: '标签栏',

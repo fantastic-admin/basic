@@ -7,7 +7,6 @@ function Layout() {
 const routes: RouteRecordRaw = {
   path: '/plugin_example',
   component: Layout,
-  redirect: '/plugin_example/qrcode',
   name: 'pluginExample',
   meta: {
     title: '插件',
@@ -70,7 +69,6 @@ const routes: RouteRecordRaw = {
     },
     {
       path: 'chart',
-      redirect: '/chart/echarts',
       name: 'pluginExampleChart',
       meta: {
         title: '图表',
