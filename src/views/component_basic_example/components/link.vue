@@ -45,10 +45,13 @@
     <ElDivider content-position="left">
       下划线
     </ElDivider>
-    <ElLink :underline="false">
+    <ElLink underline="always">
+      始终有划线
+    </ElLink>
+    <ElLink underline="never">
       无下划线
     </ElLink>
-    <ElLink>有下划线</ElLink>
+    <ElLink>悬停有下划线</ElLink>
     <ElDivider content-position="left">
       图标
     </ElDivider>
