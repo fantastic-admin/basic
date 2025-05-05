@@ -103,6 +103,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'hovercard',
+          name: 'componentExampleBuiltInHoverCard',
+          component: () => import('@/views/component_built_in_example/hovercard.vue'),
+          meta: {
+            title: '悬浮卡片',
+          },
+        },
+        {
           path: 'input',
           name: 'componentExampleBuiltInInput',
           component: () => import('@/views/component_built_in_example/input.vue'),

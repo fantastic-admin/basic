@@ -21,6 +21,7 @@ declare module 'vue' {
     FaDrawer: typeof import('./../ui/components/FaDrawer/index.vue')['default']
     FaDropdown: typeof import('./../ui/components/FaDropdown/index.vue')['default']
     FaFixedActionBar: typeof import('./../ui/components/FaFixedActionBar/index.vue')['default']
+    FaHoverCard: typeof import('./../ui/components/FaHoverCard/index.vue')['default']
     FaIcon: typeof import('./../ui/components/FaIcon/index.vue')['default']
     FaInput: typeof import('./../ui/components/FaInput/index.vue')['default']
     FaKbd: typeof import('./../ui/components/FaKbd/index.vue')['default']
