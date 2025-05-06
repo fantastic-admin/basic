@@ -113,7 +113,7 @@ function setupRoutes(router: Router) {
 }
 
 // 当父级路由未配置重定向时，自动重定向到有访问权限的子路由
-function setupRedirectAuthChildendRoute(router: Router) {
+function setupRedirectAuthChildrenRoute(router: Router) {
   router.beforeEach((to, _from, next) => {
     const { auth } = useAuth()
     const currentRoute = router.getRoutes().find(route => route.path === (to.matched.at(-1)?.path ?? ''))
@@ -228,7 +228,7 @@ function setupOther(router: Router) {
 
 export default function setupGuards(router: Router) {
   setupRoutes(router)
-  setupRedirectAuthChildendRoute(router)
+  setupRedirectAuthChildrenRoute(router)
   setupProgress(router)
   setupTitle(router)
   setupKeepAlive(router)
