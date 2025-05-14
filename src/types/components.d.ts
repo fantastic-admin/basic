@@ -34,6 +34,7 @@ declare module 'vue' {
     FaPasswordStrength: typeof import('./../ui/components/FaPasswordStrength/index.vue')['default']
     FaPinInput: typeof import('./../ui/components/FaPinInput/index.vue')['default']
     FaPopover: typeof import('./../ui/components/FaPopover/index.vue')['default']
+    FaProgress: typeof import('./../ui/components/FaProgress/index.vue')['default']
     FaScrollArea: typeof import('./../ui/components/FaScrollArea/index.vue')['default']
     FaSearchBar: typeof import('./../ui/components/FaSearchBar/index.vue')['default']
     FaSelect: typeof import('./../ui/components/FaSelect/index.vue')['default']

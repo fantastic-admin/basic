@@ -183,6 +183,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'progress',
+          name: 'componentExampleBuiltInProgress',
+          component: () => import('@/views/component_built_in_example/progress.vue'),
+          meta: {
+            title: '进度条',
+          },
+        },
+        {
           path: 'scrollarea',
           name: 'componentExampleBuiltInScrollarea',
           component: () => import('@/views/component_built_in_example/scrollarea.vue'),
