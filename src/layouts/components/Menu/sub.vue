@@ -112,6 +112,9 @@ function handleClick() {
   if (rootMenu.isMenuPopup && hasChildren.value) {
     return
   }
+  if (props.menu.meta?.link) {
+    return
+  }
   if (hasChildren.value) {
     rootMenu.handleSubMenuClick(index, props.uniqueKey)
   }
