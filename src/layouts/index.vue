@@ -22,51 +22,37 @@ const settingsStore = useSettingsStore()
 const keepAliveStore = useKeepAliveStore()
 const menuStore = useMenuStore()
 
-// 头部当前实际高度
-const headerActualHeight = computed(() => {
-  let actualHeight = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-header-height'))
-  if (['single', 'side'].includes(settingsStore.settings.menu.mode) || settingsStore.mode === 'mobile') {
-    actualHeight = 0
-  }
-  return actualHeight
+// 头部是否隐藏
+const isHeaderHide = computed(() => {
+  return ['single', 'side'].includes(settingsStore.settings.menu.mode) || settingsStore.mode === 'mobile'
 })
 
-// 侧边栏主导航当前实际宽度
-const mainSidebarActualWidth = computed(() => {
-  let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-main-sidebar-width'))
-  if (settingsStore.settings.menu.mode === 'single' || (settingsStore.settings.menu.mode === 'head' && settingsStore.mode !== 'mobile')) {
-    actualWidth = 0
-  }
-  return actualWidth
+// 侧边栏主导航是否隐藏
+const isMainSidebarHide = computed(() => {
+  return settingsStore.settings.menu.mode === 'single'
+    || (settingsStore.settings.menu.mode === 'head' && settingsStore.mode !== 'mobile')
 })
 
-// 侧边栏次导航当前实际宽度
-const subSidebarActualWidth = computed(() => {
-  let actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-width'))
-  if (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile') {
-    actualWidth = Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-sub-sidebar-collapse-width'))
-  }
-  if (menuStore.sidebarMenus.every(item => item.meta?.menu === false)) {
-    actualWidth = 0
-  }
-  return actualWidth
+// 侧边栏次导航是否隐藏
+const isSubSidebarHide = computed(() => {
+  return (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile')
+    || menuStore.sidebarMenus.every(item => item.meta?.menu === false)
 })
 
-// 顶栏当前实际高度
-const topbarActualHeight = computed(() => {
-  let actualHeight = 0
-  if (settingsStore.settings.tabbar.enable) {
-    actualHeight += Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-tabbar-height'))
-  }
-  if (settingsStore.settings.toolbar.enable && Object.keys(settingsStore.settings.toolbar).some((key) => {
-    if (settingsStore.settings.app.routeBaseOn === 'filesystem' && key === 'breadcrumb') {
-      return false
-    }
-    return settingsStore.settings.toolbar[key as keyof typeof settingsStore.settings.toolbar]
-  })) {
-    actualHeight += Number.parseInt(getComputedStyle(document.documentElement).getPropertyValue('--g-toolbar-height'))
-  }
-  return actualHeight
+// 标签栏是否隐藏
+const isTabbarHide = computed(() => {
+  return !settingsStore.settings.tabbar.enable
+})
+
+// 工具栏是否隐藏
+const isToolbarHide = computed(() => {
+  return !settingsStore.settings.toolbar.enable
+    || !Object.keys(settingsStore.settings.toolbar).some((key) => {
+      if (settingsStore.settings.app.routeBaseOn === 'filesystem' && key === 'breadcrumb') {
+        return false
+      }
+      return settingsStore.settings.toolbar[key as keyof typeof settingsStore.settings.toolbar]
+    })
 })
 
 const isLink = computed(() => !!routeInfo.meta.link)
@@ -96,10 +82,11 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING
 <template>
   <div
     class="layout" :style="{
-      '--g-header-actual-height': `${headerActualHeight}px`,
-      '--g-main-sidebar-actual-width': `${mainSidebarActualWidth}px`,
-      '--g-sub-sidebar-actual-width': `${subSidebarActualWidth}px`,
-      '--g-topbar-actual-height': `${topbarActualHeight}px`,
+      '--g-header-actual-height': isHeaderHide ? '0px' : 'var(--g-header-height)',
+      '--g-main-sidebar-actual-width': isMainSidebarHide ? '0px' : 'var(--g-main-sidebar-width)',
+      '--g-sub-sidebar-actual-width': isSubSidebarHide ? '0px' : (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile' ? 'var(--g-sub-sidebar-collapse-width)' : 'var(--g-sub-sidebar-width)'),
+      '--g-tabbar-actual-height': isTabbarHide ? '0px' : 'var(--g-tabbar-height)',
+      '--g-toolbar-actual-height': isToolbarHide ? '0px' : 'var(--g-toolbar-height)',
     }"
   >
     <div id="app-main">
@@ -214,7 +201,7 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING
       position: relative;
       flex: auto;
       height: 100%;
-      margin: var(--g-topbar-actual-height) 0 0;
+      margin: calc(var(--g-tabbar-actual-height) + var(--g-toolbar-actual-height)) 0 0;
       overflow: hidden;
     }
   }

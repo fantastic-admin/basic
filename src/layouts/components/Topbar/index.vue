@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import useSettingsStore from '@/store/modules/settings'
+import { useElementSize } from '@vueuse/core'
 import Tabbar from './Tabbar/index.vue'
 import Toolbar from './Toolbar/index.vue'
 
@@ -20,11 +21,10 @@ const enableToolbar = computed(() => {
 
 const scrollTop = ref(0)
 const scrollOnHide = ref(false)
-const topbarHeight = computed(() => {
-  const tabbarHeight = settingsStore.settings.tabbar.enable ? Number.parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-tabbar-height')) : 0
-  const toolbarHeight = enableToolbar.value ? Number.parseInt(getComputedStyle(document.documentElement || document.body).getPropertyValue('--g-toolbar-height')) : 0
-  return tabbarHeight + toolbarHeight
-})
+
+const topbarRef = useTemplateRef('topbarRef')
+const { height: topbarHeight } = useElementSize(topbarRef)
+
 onMounted(() => {
   window.addEventListener('scroll', onScroll)
 })
@@ -42,7 +42,7 @@ watch(scrollTop, (val, oldVal) => {
 <template>
   <FaSmartFixedBlock position="top" :class="{ 'absolute!': settingsStore.settings.topbar.mode === 'static' }">
     <div
-      class="topbar-container transition-[transform,box-shadow]-300" :class="{
+      ref="topbarRef" class="topbar-container transition-[transform,box-shadow]-300" :class="{
         [`topbar-${settingsStore.settings.topbar.mode}`]: true,
         mask: scrollTop,
         hide: scrollOnHide,
