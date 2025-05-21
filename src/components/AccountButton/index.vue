@@ -41,7 +41,7 @@ const isProfileShow = ref(false)
       ],
     ]" class="flex-center"
   >
-    <template #label>
+    <template #header>
       <div class="space-y-2">
         <div class="text-xs text-secondary-foreground/50 font-light">
           当前登录账号

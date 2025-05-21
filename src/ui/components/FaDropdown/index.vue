@@ -31,7 +31,8 @@ const props = defineProps<{
 
 const slots = defineSlots<{
   default?: () => VNode
-  label?: () => VNode
+  header?: () => VNode
+  footer?: () => VNode
 }>()
 
 const myItems = computed(() => {
@@ -55,9 +56,9 @@ function handleItemClick(item: { handle?: () => void }) {
       <slot />
     </DropdownMenuTrigger>
     <DropdownMenuContent :align :align-offset :side :side-offset :collision-padding>
-      <template v-if="!!slots.label">
+      <template v-if="!!slots.header">
         <DropdownMenuLabel>
-          <slot name="label" />
+          <slot name="header" />
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
       </template>
@@ -71,6 +72,12 @@ function handleItemClick(item: { handle?: () => void }) {
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator v-if="index !== myItems.length - 1" />
+      </template>
+      <template v-if="!!slots.footer">
+        <DropdownMenuSeparator />
+        <DropdownMenuLabel>
+          <slot name="footer" />
+        </DropdownMenuLabel>
       </template>
     </DropdownMenuContent>
   </DropdownMenu>
