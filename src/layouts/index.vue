@@ -35,8 +35,7 @@ const isMainSidebarHide = computed(() => {
 
 // 侧边栏次导航是否隐藏
 const isSubSidebarHide = computed(() => {
-  return (settingsStore.settings.menu.subMenuCollapse && settingsStore.mode !== 'mobile')
-    || menuStore.sidebarMenus.every(item => item.meta?.menu === false)
+  return menuStore.sidebarMenus.every(item => item.meta?.menu === false)
 })
 
 // 标签栏是否隐藏
