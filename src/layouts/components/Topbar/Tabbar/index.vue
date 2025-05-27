@@ -30,10 +30,20 @@ const tabRef = useTemplateRef<HTMLElement[]>('tabRef')
 
 watch(() => route, (val) => {
   if (settingsStore.settings.tabbar.enable) {
-    tabbarStore.add(val).then(() => {
+    tabbarStore.add(val)
+    nextTick(() => {
       const index = tabbarStore.list.findIndex(item => item.tabId === activedTabId.value)
       if (index !== -1) {
-        tabRef.value && tabsRef.value?.scrollTo(tabRef.value[index].offsetLeft - tabsRef.value.ref?.$el.clientWidth * 0.4)
+        const tabEl = tabRef.value?.find(item => Number.parseInt(item.dataset.index!) === index)
+        const containerEl = tabsRef.value?.ref?.$el
+        if (tabEl && containerEl) {
+          const tabLeft = tabEl.offsetLeft
+          const tabWidth = tabEl.offsetWidth
+          const containerWidth = containerEl.clientWidth
+          // 计算滚动位置，使标签页居中
+          const scrollLeft = tabLeft - (containerWidth - tabWidth) / 2
+          tabsRef.value?.scrollTo(scrollLeft)
+        }
         tabbarScrollTip()
       }
     })
