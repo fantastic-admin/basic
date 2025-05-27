@@ -12,7 +12,7 @@ const useTabbarStore = defineStore(
     const leaveIndex = ref(-1)
 
     // 添加标签页
-    async function add(route: RouteLocationNormalized) {
+    function add(route: RouteLocationNormalized) {
       const names: string[] = []
       route.matched.forEach((v, i) => {
         if (i > 0) {
