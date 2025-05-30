@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/utils'
 import { Icon } from '@iconify/vue'
 import { UseImage } from '@vueuse/components'
+import { cn } from '@/utils'
 
 defineOptions({
   name: 'FaIcon',

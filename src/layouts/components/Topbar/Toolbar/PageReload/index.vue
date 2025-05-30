@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useSettingsStore from '@/store/modules/settings'
 import hotkeys from 'hotkeys-js'
+import useSettingsStore from '@/store/modules/settings'
 
 defineOptions({
   name: 'PageReload',

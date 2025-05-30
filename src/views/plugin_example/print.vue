@@ -4,8 +4,8 @@ meta:
 </route>
 
 <script setup lang="ts">
-import img from '@/assets/images/login-banner.png'
 import printJS from 'print-js'
+import img from '@/assets/images/login-banner.png'
 import Alert from './components/alert.vue'
 import Command from './components/command.vue'
 

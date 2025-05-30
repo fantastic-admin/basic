@@ -1,7 +1,7 @@
 import type { RecursiveRequired, Settings } from '#/global'
+import { cloneDeep } from 'es-toolkit'
 import settingsDefault from '@/settings.default'
 import { merge } from '@/utils/object'
-import { cloneDeep } from 'es-toolkit'
 
 const globalSettings: Settings.all = {
   app: {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import useSettingsStore from '@/store/modules/settings'
 import { useElementSize } from '@vueuse/core'
+import useSettingsStore from '@/store/modules/settings'
 import Tabbar from './Tabbar/index.vue'
 import Toolbar from './Toolbar/index.vue'
 

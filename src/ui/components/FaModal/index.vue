@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { ModalEmits, ModalProps } from '.'
-import { cn } from '@/utils'
 import { VisuallyHidden } from 'reka-ui'
+import { cn } from '@/utils'
 import {
   Dialog,
   DialogContent,

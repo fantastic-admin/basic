@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { ContextMenuItemEmits, ContextMenuItemProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/utils'
 import {
   ContextMenuItem,
   useForwardPropsEmits,
 } from 'reka-ui'
 import { computed } from 'vue'
+import { cn } from '@/utils'
 
 const props = defineProps<ContextMenuItemProps & { class?: HTMLAttributes['class'], inset?: boolean }>()
 const emits = defineEmits<ContextMenuItemEmits>()

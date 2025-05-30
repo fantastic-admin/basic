@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { SelectContentEmits, SelectContentProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/utils'
 import {
   SelectContent,
   SelectPortal,
@@ -9,6 +8,7 @@ import {
   useForwardPropsEmits,
 } from 'reka-ui'
 import { computed } from 'vue'
+import { cn } from '@/utils'
 import { SelectScrollDownButton, SelectScrollUpButton } from '.'
 
 defineOptions({

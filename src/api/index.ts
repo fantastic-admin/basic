@@ -1,7 +1,7 @@
-import useUserStore from '@/store/modules/user'
 import axios from 'axios'
 // import qs from 'qs'
 import { toast } from 'vue-sonner'
+import useUserStore from '@/store/modules/user'
 
 // 请求重试配置
 const MAX_RETRY_COUNT = 3 // 最大重试次数

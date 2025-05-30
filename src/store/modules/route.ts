@@ -1,9 +1,9 @@
 import type { Route } from '#/global'
 import type { RouteRecordRaw, RouterMatcher } from 'vue-router'
-import apiApp from '@/api/modules/app'
-import { systemRoutes as systemRoutesRaw } from '@/router/routes'
 import { cloneDeep } from 'es-toolkit'
 import { createRouterMatcher } from 'vue-router'
+import apiApp from '@/api/modules/app'
+import { systemRoutes as systemRoutesRaw } from '@/router/routes'
 import useSettingsStore from './settings'
 
 const useRouteStore = defineStore(

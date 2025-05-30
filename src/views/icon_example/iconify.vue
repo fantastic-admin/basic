@@ -4,9 +4,9 @@ meta:
 </route>
 
 <script setup lang="ts">
-import { icons } from '@/iconify'
 import { useClipboard } from '@vueuse/core'
 import { toast } from 'vue-sonner'
+import { icons } from '@/iconify'
 
 const { copy, isSupported } = useClipboard()
 

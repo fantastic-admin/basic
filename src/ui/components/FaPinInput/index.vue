@@ -39,7 +39,7 @@ const id = useId()
 </script>
 
 <template>
-  <PinInput :id :model-value="value" placeholder="○" otp type="number" @complete="handleComplete" @update:model-value="arrStr => value = arrStr.filter(Boolean)">
+  <PinInput :id :model-value="value" placeholder="○" otp @complete="handleComplete" @update:model-value="arrStr => value = arrStr.filter(Boolean)">
     <PinInputGroup>
       <PinInputInput v-for="(item, index) in length" :key="item" :index="index" />
     </PinInputGroup>
