@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { Menu } from '@/types/global'
+import { useFocus } from '@vueuse/core'
+import hotkeys from 'hotkeys-js'
 import Breadcrumb from '@/layouts/components/Breadcrumb/index.vue'
 import BreadcrumbItem from '@/layouts/components/Breadcrumb/item.vue'
 import useMenuStore from '@/store/modules/menu'
 import useRouteStore from '@/store/modules/route'
 import useSettingsStore from '@/store/modules/settings'
 import { resolveRoutePath } from '@/utils'
-import { useFocus } from '@vueuse/core'
-import hotkeys from 'hotkeys-js'
 
 defineOptions({
   name: 'NavSearchModal',

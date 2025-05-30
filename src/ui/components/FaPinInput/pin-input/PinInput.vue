@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/utils'
 import { PinInputRoot, useForwardPropsEmits } from 'reka-ui'
 import { computed } from 'vue'
+import { cn } from '@/utils'
 
 const props = withDefaults(defineProps<PinInputRootProps & { class?: HTMLAttributes['class'] }>(), {
   modelValue: () => [],

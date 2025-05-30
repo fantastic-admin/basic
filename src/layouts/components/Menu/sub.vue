@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { SubMenuProps } from './types'
-import { cn } from '@/utils'
 import { useTimeoutFn } from '@vueuse/core'
+import { cn } from '@/utils'
 import Item from './item.vue'
 import { rootMenuInjectionKey } from './types'
 

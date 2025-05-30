@@ -1,8 +1,8 @@
 <script setup lang="ts">
+import hotkeys from 'hotkeys-js'
 import { useSlots } from '@/slots'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
-import hotkeys from 'hotkeys-js'
 import Logo from '../Logo/index.vue'
 
 defineOptions({

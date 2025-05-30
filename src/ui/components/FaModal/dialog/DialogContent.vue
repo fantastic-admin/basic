@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import type { DialogContentEmits, DialogContentProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
-import { cn } from '@/utils'
 import { useScrollLock } from '@vueuse/core'
 import { Maximize, Minimize, X } from 'lucide-vue-next'
 import {
@@ -11,6 +10,7 @@ import {
   useForwardPropsEmits,
 } from 'reka-ui'
 import { computed } from 'vue'
+import { cn } from '@/utils'
 
 const props = defineProps<DialogContentProps & {
   class?: HTMLAttributes['class']

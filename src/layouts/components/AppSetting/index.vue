@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { useClipboard } from '@vueuse/core'
+import { toast } from 'vue-sonner'
 import settingsDefault from '@/settings.default'
 import useMenuStore from '@/store/modules/menu'
 import useSettingsStore from '@/store/modules/settings'
 import eventBus from '@/utils/eventBus'
 import { diffTwoObj } from '@/utils/object'
-import { useClipboard } from '@vueuse/core'
-import { toast } from 'vue-sonner'
 
 defineOptions({
   name: 'AppSetting',

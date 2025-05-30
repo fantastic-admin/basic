@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import useUserStore from '@/store/modules/user'
-import { FormControl, FormField, FormItem, FormMessage } from '@/ui/shadcn/ui/form'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
+import useUserStore from '@/store/modules/user'
+import { FormControl, FormField, FormItem, FormMessage } from '@/ui/shadcn/ui/form'
 
 defineOptions({
   name: 'LoginForm',

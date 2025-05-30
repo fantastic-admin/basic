@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { Tabbar } from '#/global'
-import { useSlots } from '@/slots'
-import useSettingsStore from '@/store/modules/settings'
-import useTabbarStore from '@/store/modules/tabbar'
 import { useMagicKeys } from '@vueuse/core'
 import hotkeys from 'hotkeys-js'
 import { toast } from 'vue-sonner'
+import { useSlots } from '@/slots'
+import useSettingsStore from '@/store/modules/settings'
+import useTabbarStore from '@/store/modules/tabbar'
 
 defineOptions({
   name: 'Tabbar',
@@ -157,7 +157,7 @@ onUnmounted(() => {
   <div class="tabbar">
     <component :is="useSlots('tabbar-start')" />
     <div class="tabbar-container">
-      <FaScrollArea ref="tabsRef" horizontal :scrollbar="false" mask gradient-color="var(--g-tabbar-bg)" class="tabs">
+      <FaScrollArea ref="tabsRef" :scrollbar="false" mask horizontal gradient-color="var(--g-tabbar-bg)" class="tabs">
         <TransitionGroup ref="tabContainerRef" name="tabbar" tag="div" class="tab-container">
           <div
             v-for="(element, index) in tabbarStore.list" :key="element.tabId"

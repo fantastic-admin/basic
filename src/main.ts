@@ -1,12 +1,10 @@
 // 加载 iconify 图标
 import { downloadAndInstall } from '@/iconify'
-
 import icons from '@/iconify/index.json'
 // 自定义指令
 import directive from '@/utils/directive'
 
 import App from './App.vue'
-
 import router from './router'
 import pinia from './store'
 import uiProvider from './ui/provider'
