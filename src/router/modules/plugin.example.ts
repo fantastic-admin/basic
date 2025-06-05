@@ -99,6 +99,14 @@ const routes: RouteRecordRaw = {
             title: 'G2plot',
           },
         },
+        {
+          path: 'vue-data-ui',
+          name: 'pluginExampleChartVueDataUi',
+          component: () => import('@/views/plugin_example/vue-data-ui.vue'),
+          meta: {
+            title: 'VueDataUI',
+          },
+        },
       ],
     },
     {

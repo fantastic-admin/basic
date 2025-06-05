@@ -64,6 +64,7 @@
     "vee-validate": "^4.15.0",
     "vue": "^3.5.16",
     "vue-currency-input": "^3.2.1",
+    "vue-data-ui": "^2.9.6",
     "vue-esign": "^1.1.4",
     "vue-hooks-plus": "^2.3.1",
     "vue-router": "^4.5.1",
