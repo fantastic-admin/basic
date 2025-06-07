@@ -20,6 +20,16 @@ const props = withDefaults(
   },
 )
 
+// 用于缓存对象到 ID 的映射
+const idMap = new WeakMap<object, string>()
+// 获取对象的唯一 ID，如果已存在则返回缓存的 ID，否则生成新的
+function getUseId(obj: object): string {
+  if (!idMap.has(obj)) {
+    idMap.set(obj, useId())
+  }
+  return idMap.get(obj)!
+}
+
 const activeIndex = ref<MenuInjection['activeIndex']>(props.value)
 const items = ref<MenuInjection['items']>({})
 const subMenus = ref<MenuInjection['subMenus']>({})
@@ -32,7 +42,7 @@ const isMenuPopup = computed<MenuInjection['isMenuPopup']>(() => {
 // 解析传入的 menu 数据，并保存到 items 和 subMenus 对象中
 function initItems(menu: MenuProps['menu'], parentPaths: string[] = []) {
   menu.forEach((item) => {
-    const index = item.path ?? JSON.stringify(item)
+    const index = item.path ?? getUseId(item)
     if (item.children) {
       const indexPath = [...parentPaths, index]
       subMenus.value[index] = {
@@ -144,6 +154,7 @@ watch(() => props.collapse, (value) => {
 
 provide(rootMenuInjectionKey, reactive({
   props,
+  getUseId,
   items,
   subMenus,
   activeIndex,
@@ -164,10 +175,10 @@ provide(rootMenuInjectionKey, reactive({
       'py-1': props.mode === 'vertical',
     })"
   >
-    <template v-for="item in menu" :key="item.path ?? JSON.stringify(item)">
+    <template v-for="item in menu" :key="item.path ?? getUseId(item)">
       <template v-if="item.meta?.menu !== false">
-        <SubMenu v-if="item.children?.length" :menu="item" :unique-key="[item.path ?? JSON.stringify(item)]" />
-        <Item v-else :item="item" :unique-key="[item.path ?? JSON.stringify(item)]" @click="handleMenuItemClick(item.path ?? JSON.stringify(item))" />
+        <SubMenu v-if="item.children?.length" :menu="item" :unique-key="[item.path ?? getUseId(item)]" />
+        <Item v-else :item="item" :unique-key="[item.path ?? getUseId(item)]" @click="handleMenuItemClick(item.path ?? getUseId(item))" />
       </template>
     </template>
   </div>
