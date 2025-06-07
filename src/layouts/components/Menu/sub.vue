@@ -16,10 +16,11 @@ const props = withDefaults(
   },
 )
 
-const index = props.menu.path ?? JSON.stringify(props.menu)
 const itemRef = useTemplateRef('itemRef')
 const subMenuRef = useTemplateRef('subMenuRef')
 const rootMenu = inject(rootMenuInjectionKey)!
+
+const index = props.menu.path ?? rootMenu.getUseId(props.menu)
 
 const opened = computed(() => {
   return rootMenu.openedMenus.includes(props.uniqueKey.at(-1)!)
@@ -201,8 +202,8 @@ function handleMouseleave() {
           'py-1': rootMenu.isMenuPopup,
         })"
       >
-        <template v-for="item in menu.children" :key="item.path ?? JSON.stringify(item)">
-          <SubMenu v-if="item.meta?.menu !== false" :unique-key="[...uniqueKey, item.path ?? JSON.stringify(item)]" :menu="item" :level="level + 1" />
+        <template v-for="item in menu.children" :key="item.path ?? rootMenu.getUseId(item)">
+          <SubMenu v-if="item.meta?.menu !== false" :unique-key="[...uniqueKey, item.path ?? rootMenu.getUseId(item)]" :menu="item" :level="level + 1" />
         </template>
       </FaScrollArea>
     </Transition>
