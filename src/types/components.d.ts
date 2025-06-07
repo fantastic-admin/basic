@@ -13,6 +13,7 @@ declare module 'vue' {
     FaAvatar: typeof import('./../ui/components/FaAvatar/index.vue')['default']
     FaBackToTop: typeof import('./../ui/components/FaBackToTop/index.vue')['default']
     FaButton: typeof import('./../ui/components/FaButton/index.vue')['default']
+    FaButtonGroup: typeof import('./../ui/components/FaButtonGroup/index.vue')['default']
     FaCard: typeof import('./../ui/components/FaCard/index.vue')['default']
     FaCheckbox: typeof import('./../ui/components/FaCheckbox/index.vue')['default']
     FaContextMenu: typeof import('./../ui/components/FaContextMenu/index.vue')['default']
