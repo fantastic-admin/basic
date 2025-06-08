@@ -131,7 +131,7 @@ const useRouteStore = defineStore(
         })
         routesMatcher.value = createRouterMatcher(routes, {})
         isGenerate.value = true
-      }).catch(() => {})
+      })
     }
     // 生成路由（文件系统生成）
     function generateRoutesAtFilesystem(asyncRoutes: RouteRecordRaw[]) {

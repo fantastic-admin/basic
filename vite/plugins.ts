@@ -98,10 +98,12 @@ export default function createVitePlugins(mode: string, isBuild = false) {
     }),
 
     // https://github.com/nonzzz/vite-plugin-compression
-    viteEnv.VITE_BUILD_COMPRESS?.split(',').includes('gzip') && compression(),
-    viteEnv.VITE_BUILD_COMPRESS?.split(',').includes('brotli') && compression({
+    viteEnv.VITE_BUILD_COMPRESS && compression({
       exclude: [/\.(br)$/, /\.(gz)$/],
-      algorithm: 'brotliCompress',
+      algorithms: viteEnv.VITE_BUILD_COMPRESS.split(',').map((item: string) => ({
+        gzip: 'gzip',
+        brotli: 'brotliCompress',
+      }[item])),
     }),
 
     viteEnv.VITE_BUILD_ARCHIVE && Archiver({
