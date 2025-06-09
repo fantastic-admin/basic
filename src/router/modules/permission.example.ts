@@ -14,7 +14,7 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
-      path: 'index',
+      path: '',
       name: 'permissionExampleIndex',
       component: () => import('@/views/permission_example/index.vue'),
       meta: {

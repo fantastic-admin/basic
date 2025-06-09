@@ -14,7 +14,7 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
-      path: 'index',
+      path: '',
       name: 'jsxExampleIndex',
       component: () => import('@/views/jsx_example/index.vue'),
       meta: {

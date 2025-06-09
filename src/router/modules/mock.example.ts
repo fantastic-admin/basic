@@ -14,7 +14,7 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
-      path: 'index',
+      path: '',
       name: 'mockExampleIndex',
       component: () => import('@/views/mock_example/index.vue'),
       meta: {
