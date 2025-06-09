@@ -6,14 +6,12 @@ import menu from '@/menu'
 import { resolveRoutePath } from '@/utils'
 import useRouteStore from './route'
 import useSettingsStore from './settings'
-import useUserStore from './user'
 
 const useMenuStore = defineStore(
   // 唯一ID
   'menu',
   () => {
     const settingsStore = useSettingsStore()
-    const userStore = useUserStore()
     const routeStore = useRouteStore()
 
     const filesystemMenusRaw = ref<Menu.recordMainRaw[]>([])
@@ -78,10 +76,7 @@ const useMenuStore = defineStore(
       else {
         returnMenus = filesystemMenusRaw.value
       }
-      // 如果权限功能开启，则需要对导航数据进行筛选过滤
-      if (settingsStore.settings.app.enablePermission) {
-        returnMenus = filterAsyncMenus(returnMenus, userStore.permissions)
-      }
+      returnMenus = filterAsyncMenus(returnMenus)
       return returnMenus
     })
     // 次导航数据
@@ -155,35 +150,15 @@ const useMenuStore = defineStore(
       return defaultOpenedPaths
     }
 
-    // 判断是否有权限
-    function hasPermission(permissions: string[], menu: Menu.recordMainRaw | Menu.recordRaw) {
-      let isAuth = false
-      if (menu.meta?.auth) {
-        isAuth = permissions.some((auth) => {
-          if (typeof menu.meta?.auth === 'string') {
-            return menu.meta.auth !== '' ? menu.meta.auth === auth : true
-          }
-          else if (typeof menu.meta?.auth === 'object') {
-            return menu.meta.auth.length > 0 ? menu.meta.auth.includes(auth) : true
-          }
-          else {
-            return false
-          }
-        })
-      }
-      else {
-        isAuth = true
-      }
-      return isAuth
-    }
+    const auth = useAuth()
     // 根据权限过滤导航
-    function filterAsyncMenus<T extends Menu.recordMainRaw[] | Menu.recordRaw[]>(menus: T, permissions: string[]): T {
+    function filterAsyncMenus<T extends Menu.recordMainRaw[] | Menu.recordRaw[]>(menus: T): T {
       const res: any = []
       menus.forEach((menu) => {
-        if (hasPermission(permissions, menu)) {
+        if (auth.auth(menu.meta?.auth ?? '')) {
           const tmpMenu = cloneDeep(menu)
           if (tmpMenu.children && tmpMenu.children.length > 0) {
-            tmpMenu.children = filterAsyncMenus(tmpMenu.children, permissions) as Menu.recordRaw[]
+            tmpMenu.children = filterAsyncMenus(tmpMenu.children) as Menu.recordRaw[]
             tmpMenu.children.length > 0 && res.push(tmpMenu)
           }
           else {
