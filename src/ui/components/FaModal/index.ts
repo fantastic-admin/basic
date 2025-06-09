@@ -30,6 +30,7 @@ export interface ModalProps {
   headerClass?: HTMLAttributes['class']
   contentClass?: HTMLAttributes['class']
   footerClass?: HTMLAttributes['class']
+  modalId?: string
 }
 export interface ModalEmits {
   'update:modelValue': [value: boolean]
@@ -66,6 +67,7 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
+          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -87,6 +89,7 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
+          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -108,6 +111,7 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
+          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -129,6 +133,7 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
+          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -150,6 +155,7 @@ export function useFaModal() {
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
           showCancelButton: true,
+          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },

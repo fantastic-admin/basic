@@ -60,9 +60,7 @@ defineExpose({
   areaRef: dialogAreaRef,
 })
 
-const id = useId()
-provide('ModalId', id)
-
+const modalId = useId()
 const isOpen = ref(props.modelValue)
 const isMaximize = ref(props.maximize)
 
@@ -122,7 +120,7 @@ function handleFocusOutside(e: Event) {
 }
 
 function handleClickOutside(e: Event) {
-  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.modalId !== id) {
+  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.modalId !== modalId) {
     e.preventDefault()
     e.stopPropagation()
   }
@@ -154,6 +152,7 @@ function handleAnimationEnd() {
   <Dialog :modal="false" :open="isOpen" @update:open="updateOpen">
     <DialogContent
       ref="dialogContentRef"
+      :modal-id="modalId"
       :open="isOpen"
       :closable="props.closable"
       :overlay="props.overlay"

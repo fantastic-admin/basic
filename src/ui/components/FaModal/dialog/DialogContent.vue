@@ -13,6 +13,7 @@ import { computed } from 'vue'
 import { cn } from '@/utils'
 
 const props = defineProps<DialogContentProps & {
+  modalId: string
   class?: HTMLAttributes['class']
   open?: boolean
   maximize?: boolean
@@ -54,8 +55,6 @@ watch(showOverlay, (val) => {
     isLocked.value = false
   }
 })
-
-const id = inject('ModalId')
 </script>
 
 <template>
@@ -73,7 +72,7 @@ const id = inject('ModalId')
     >
       <div
         v-if="showOverlay"
-        :data-modal-id="id"
+        :data-modal-id="props.modalId"
         :class="cn('fixed inset-0 z-2000 data-[state=closed]:animate-out data-[state=open]:animate-in bg-black/50 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0', {
           'backdrop-blur-sm': props.overlayBlur,
         })"
