@@ -22,6 +22,10 @@ export interface ModalProps {
   cancelButtonText?: string
   confirmButtonDisabled?: boolean
   confirmButtonLoading?: boolean
+  beforeClose?: (
+    action: 'confirm' | 'cancel' | 'close',
+    done: () => void
+  ) => void
   header?: boolean
   footer?: boolean
   closeOnClickOverlay?: boolean
@@ -30,7 +34,6 @@ export interface ModalProps {
   headerClass?: HTMLAttributes['class']
   contentClass?: HTMLAttributes['class']
   footerClass?: HTMLAttributes['class']
-  modalId?: string
 }
 export interface ModalEmits {
   'update:modelValue': [value: boolean]
@@ -44,13 +47,13 @@ export interface ModalEmits {
 
 type alertOptions = Pick<ModalProps, 'title' | 'description' | 'icon' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
   content: string
-  onConfirm?: () => any
+  onConfirm?: () => void
 }
 
-type confirmOptions = Pick<ModalProps, 'title' | 'description' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'cancelButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
+type confirmOptions = Pick<ModalProps, 'title' | 'description' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'cancelButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'beforeClose' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
   content: string
-  onConfirm?: () => any
-  onCancel?: () => any
+  onConfirm?: () => void
+  onCancel?: () => void
 }
 
 export function useFaModal() {
@@ -67,7 +70,6 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
-          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -89,7 +91,6 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
-          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -111,7 +112,6 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
-          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -133,7 +133,6 @@ export function useFaModal() {
           closeOnClickOverlay: false,
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
-          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },
@@ -155,7 +154,6 @@ export function useFaModal() {
           contentClass: 'py-0 min-h-auto',
           footerClass: 'p-4',
           showCancelButton: true,
-          modalId: useId(),
           onClosed: () => {
             app.unmount()
           },

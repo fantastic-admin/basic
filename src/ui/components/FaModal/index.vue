@@ -83,6 +83,7 @@ function setTransform() {
 }
 
 watch(isOpen, (val) => {
+  emits('update:modelValue', val)
   if (val) {
     nextTick(() => {
       if (dialogContentRef.value) {
@@ -90,28 +91,69 @@ watch(isOpen, (val) => {
         setTransform()
       }
     })
-  }
-})
-
-function updateOpen(value: boolean) {
-  isOpen.value = value
-  emits('update:modelValue', value)
-  if (value) {
     emits('open')
   }
   else {
     emits('close')
   }
+})
+
+async function updateOpen(value: boolean) {
+  if (value) {
+    isOpen.value = value
+    emits('open')
+  }
+  else {
+    if (props.beforeClose) {
+      await props.beforeClose(
+        'close',
+        () => {
+          isOpen.value = value
+          emits('close')
+        },
+      )
+    }
+    else {
+      isOpen.value = value
+      emits('close')
+    }
+  }
 }
 
-function onConfirm() {
-  updateOpen(false)
-  emits('confirm')
+const isConfirmButtonLoading = ref(false)
+
+async function onConfirm() {
+  if (props.beforeClose) {
+    isConfirmButtonLoading.value = true
+    await props.beforeClose(
+      'confirm',
+      () => {
+        isOpen.value = false
+        emits('confirm')
+      },
+    )
+    isConfirmButtonLoading.value = false
+  }
+  else {
+    isOpen.value = false
+    emits('confirm')
+  }
 }
 
-function onCancel() {
-  updateOpen(false)
-  emits('cancel')
+async function onCancel() {
+  if (props.beforeClose) {
+    await props.beforeClose(
+      'cancel',
+      () => {
+        isOpen.value = false
+        emits('cancel')
+      },
+    )
+  }
+  else {
+    isOpen.value = false
+    emits('cancel')
+  }
 }
 
 function handleFocusOutside(e: Event) {
@@ -223,7 +265,7 @@ function handleAnimationEnd() {
           <FaButton v-if="showCancelButton" variant="outline" @click="onCancel">
             {{ cancelButtonText }}
           </FaButton>
-          <FaButton v-if="showConfirmButton" :disabled="confirmButtonDisabled" :loading="confirmButtonLoading" @click="onConfirm">
+          <FaButton v-if="showConfirmButton" :disabled="confirmButtonDisabled" :loading="confirmButtonLoading || isConfirmButtonLoading" @click="onConfirm">
             {{ confirmButtonText }}
           </FaButton>
         </slot>
