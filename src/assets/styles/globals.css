@@ -53,7 +53,6 @@
 * {
   scrollbar-color: hsl(var(--border)) transparent;
   scrollbar-width: thin;
-  border-color: hsl(var(--border));
 }
 
 html,
@@ -64,9 +63,6 @@ body {
 body {
   box-sizing: border-box;
   margin: 0;
-  font-family: var(--font-family);
-  color: hsl(var(--foreground));
-  background: hsl(var(--background));
   -webkit-tap-highlight-color: transparent;
 }
 

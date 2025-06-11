@@ -20,8 +20,9 @@ import 'vxe-pc-ui/lib/style.css'
 
 // 加载 svg 图标
 import 'virtual:svg-icons-register'
-import 'virtual:uno.css'
+// UnoCSS
 import '@unocss/reset/tailwind-compat.css'
+import 'virtual:uno.css'
 // 全局样式
 import '@/assets/styles/globals.css'
 
