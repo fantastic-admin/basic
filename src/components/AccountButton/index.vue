@@ -67,7 +67,7 @@ const isProfileShow = ref(false)
       <FaAvatar :src="userStore.avatar" :class="cn('size-6', { 'size-full': onlyAvatar })">
         <FaIcon name="i-carbon:user-avatar-filled" class="size-6 text-secondary-foreground/50" />
       </FaAvatar>
-      <div v-if="settingsStore.mode === 'pc' && !onlyAvatar" class="min-w-0 flex-center-between flex-1 gap-2">
+      <div v-if="!onlyAvatar" class="min-w-0 flex-center-between flex-1 gap-2">
         <div class="flex-1 truncate text-start">
           {{ userStore.account }}
         </div>
