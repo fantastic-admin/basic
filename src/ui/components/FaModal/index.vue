@@ -40,6 +40,7 @@ const props = withDefaults(
     footer: true,
     closeOnClickOverlay: true,
     closeOnPressEscape: true,
+    destroyOnClose: true,
   },
 )
 
@@ -67,6 +68,20 @@ const isMaximize = ref(props.maximize)
 watch(() => props.modelValue, (newValue) => {
   isOpen.value = newValue
 })
+
+const hasOpened = ref(false)
+const isClosed = ref(true)
+
+watch(() => isOpen.value, (value) => {
+  isClosed.value = false
+  if (value && !hasOpened.value) {
+    hasOpened.value = true
+  }
+}, {
+  immediate: true,
+})
+
+const forceMount = computed(() => !props.destroyOnClose && hasOpened.value)
 
 const { isDragging, transform } = useDraggable(
   dialogRef,
@@ -186,6 +201,7 @@ function handleAnimationEnd() {
   }
   else {
     emits('closed')
+    isClosed.value = true
   }
 }
 </script>
@@ -201,10 +217,12 @@ function handleAnimationEnd() {
       :overlay-blur="props.overlayBlur"
       :maximize="isMaximize"
       :maximizable="props.maximizable"
+      :force-mount="forceMount"
       :class="cn('left-0 right-0 top-0 md:top-[5vh] flex flex-col p-0 gap-0 mx-auto h-[calc-size(auto,size)] min-h-full md:min-h-auto max-h-full md:max-h-[90vh] translate-x-0 translate-y-0', props.class, {
         'md:top-0 size-full max-w-full max-h-full md:max-h-full': isMaximize,
         'md:top-1/2 md:-translate-y-1/2!': props.alignCenter,
         'duration-0': isDragging,
+        'hidden': isClosed,
       })"
       @open-auto-focus="handleFocusOutside"
       @close-auto-focus="handleFocusOutside"
