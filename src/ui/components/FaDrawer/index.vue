@@ -36,6 +36,7 @@ const props = withDefaults(
     footer?: boolean
     closeOnClickOverlay?: boolean
     closeOnPressEscape?: boolean
+    destroyOnClose?: boolean
     contentClass?: HTMLAttributes['class']
     headerClass?: HTMLAttributes['class']
     footerClass?: HTMLAttributes['class']
@@ -59,6 +60,7 @@ const props = withDefaults(
     footer: true,
     closeOnClickOverlay: true,
     closeOnPressEscape: true,
+    destroyOnClose: true,
   },
 )
 
@@ -80,6 +82,20 @@ const isOpen = ref(props.modelValue)
 watch(() => props.modelValue, (newValue) => {
   isOpen.value = newValue
 })
+
+const hasOpened = ref(false)
+const isClosed = ref(true)
+
+watch(() => isOpen.value, (value) => {
+  isClosed.value = false
+  if (value && !hasOpened.value) {
+    hasOpened.value = true
+  }
+}, {
+  immediate: true,
+})
+
+const forceMount = computed(() => !props.destroyOnClose && hasOpened.value)
 
 function updateOpen(value: boolean) {
   isOpen.value = value
@@ -127,6 +143,7 @@ function handleAnimationEnd() {
   }
   else {
     emits('closed')
+    isClosed.value = true
   }
 }
 </script>
@@ -138,8 +155,11 @@ function handleAnimationEnd() {
       :open="isOpen"
       :overlay="props.overlay"
       :overlay-blur="props.overlayBlur"
-      :class="cn('w-full flex flex-col gap-0 p-0', props.contentClass)"
+      :class="cn('w-full flex flex-col gap-0 p-0', props.contentClass, {
+        hidden: isClosed,
+      })"
       :side="props.side"
+      :force-mount="forceMount"
       @open-auto-focus="handleFocusOutside"
       @close-auto-focus="handleFocusOutside"
       @focus-outside="handleFocusOutside"

@@ -30,6 +30,7 @@ export interface ModalProps {
   footer?: boolean
   closeOnClickOverlay?: boolean
   closeOnPressEscape?: boolean
+  destroyOnClose?: boolean
   class?: HTMLAttributes['class']
   headerClass?: HTMLAttributes['class']
   contentClass?: HTMLAttributes['class']
