@@ -111,6 +111,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'imagepreview',
+          name: 'componentExampleBuiltInImagePreview',
+          component: () => import('@/views/component_built_in_example/imagepreview.vue'),
+          meta: {
+            title: '图片预览',
+          },
+        },
+        {
           path: 'input',
           name: 'componentExampleBuiltInInput',
           component: () => import('@/views/component_built_in_example/input.vue'),
@@ -269,14 +277,6 @@ const routes: RouteRecordRaw = {
           component: () => import('@/views/component_extend_example/upload.vue'),
           meta: {
             title: '上传',
-          },
-        },
-        {
-          path: 'imagepreview',
-          name: 'componentExampleExtendImagePreview',
-          component: () => import('@/views/component_extend_example/image.preview.vue'),
-          meta: {
-            title: '图片预览',
           },
         },
         {
