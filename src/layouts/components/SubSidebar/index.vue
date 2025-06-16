@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import { useSlots } from '@/slots'
-import useMenuStore from '@/store/modules/menu'
-import useSettingsStore from '@/store/modules/settings'
 import Logo from '../Logo/index.vue'
 import Menu from '../Menu/index.vue'
 

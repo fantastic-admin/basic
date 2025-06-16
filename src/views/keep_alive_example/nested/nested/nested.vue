@@ -4,8 +4,6 @@ meta:
 </route>
 
 <script setup lang="ts">
-import useKeepAliveStore from '@/store/modules/keepAlive'
-
 defineOptions({
   name: 'TabExampleNested2',
 })

@@ -4,9 +4,8 @@ import { cloneDeep } from 'es-toolkit'
 import { createRouterMatcher } from 'vue-router'
 import apiApp from '@/api/modules/app'
 import { systemRoutes as systemRoutesRaw } from '@/router/routes'
-import useSettingsStore from './settings'
 
-const useRouteStore = defineStore(
+export const useRouteStore = defineStore(
   // 唯一ID
   'route',
   () => {
@@ -169,5 +168,3 @@ const useRouteStore = defineStore(
     }
   },
 )
-
-export default useRouteStore

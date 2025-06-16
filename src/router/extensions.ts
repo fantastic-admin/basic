@@ -1,7 +1,5 @@
 import type { RouteLocationRaw, Router } from 'vue-router'
 import pinia from '@/store'
-import useSettingsStore from '@/store/modules/settings'
-import useTabbarStore from '@/store/modules/tabbar'
 
 function getId(router: Router) {
   return router.currentRoute.value.fullPath

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { compile } from 'path-to-regexp'
-import useSettingsStore from '@/store/modules/settings'
 import Breadcrumb from '../../../Breadcrumb/index.vue'
 import BreadcrumbItem from '../../../Breadcrumb/item.vue'
 

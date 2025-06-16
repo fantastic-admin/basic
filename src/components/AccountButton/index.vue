@@ -1,7 +1,5 @@
 <script setup lang="ts">
 import type { HTMLAttributes } from 'vue'
-import useSettingsStore from '@/store/modules/settings'
-import useUserStore from '@/store/modules/user'
 import { cn } from '@/utils'
 import eventBus from '@/utils/eventBus'
 import Profile from './profile.vue'

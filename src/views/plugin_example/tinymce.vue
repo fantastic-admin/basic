@@ -6,7 +6,6 @@ meta:
 <script setup lang="ts">
 import TinymceEditor from '@tinymce/tinymce-vue'
 import tinymce from 'tinymce/tinymce'
-import useSettingsStore from '@/store/modules/settings'
 import Alert from './components/alert.vue'
 import Command from './components/command.vue'
 import 'tinymce/themes/silver/theme'
