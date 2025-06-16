@@ -4,7 +4,7 @@ import { cloneDeep } from 'es-toolkit'
 import settingsDefault from '@/settings'
 import { merge } from '@/utils/object'
 
-const useSettingsStore = defineStore(
+export const useSettingsStore = defineStore(
   // 唯一ID
   'settings',
   () => {
@@ -172,5 +172,3 @@ const useSettingsStore = defineStore(
     }
   },
 )
-
-export default useSettingsStore

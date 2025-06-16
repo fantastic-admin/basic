@@ -1,4 +1,4 @@
-const useKeepAliveStore = defineStore(
+export const useKeepAliveStore = defineStore(
   // 唯一ID
   'keepAlive',
   () => {
@@ -38,5 +38,3 @@ const useKeepAliveStore = defineStore(
     }
   },
 )
-
-export default useKeepAliveStore

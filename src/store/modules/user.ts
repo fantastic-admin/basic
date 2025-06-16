@@ -1,11 +1,7 @@
 import apiUser from '@/api/modules/user'
 import router from '@/router'
-import useMenuStore from './menu'
-import useRouteStore from './route'
-import useSettingsStore from './settings'
-import useTabbarStore from './tabbar'
 
-const useUserStore = defineStore(
+export const useUserStore = defineStore(
   // 唯一ID
   'user',
   () => {
@@ -109,5 +105,3 @@ const useUserStore = defineStore(
     }
   },
 )
-
-export default useUserStore

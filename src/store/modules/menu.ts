@@ -4,10 +4,8 @@ import { cloneDeep } from 'es-toolkit'
 import apiApp from '@/api/modules/app'
 import menu from '@/menu'
 import { resolveRoutePath } from '@/utils'
-import useRouteStore from './route'
-import useSettingsStore from './settings'
 
-const useMenuStore = defineStore(
+export const useMenuStore = defineStore(
   // 唯一ID
   'menu',
   () => {
@@ -217,5 +215,3 @@ const useMenuStore = defineStore(
     }
   },
 )
-
-export default useMenuStore

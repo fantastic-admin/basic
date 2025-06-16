@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useSlots } from '@/slots'
-import useSettingsStore from '@/store/modules/settings'
 import ColorScheme from './ColorScheme/index.vue'
 import Fullscreen from './Fullscreen/index.vue'
 import NavSearch from './NavSearch/index.vue'

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import useSettingsStore from '@/store/modules/settings'
 import Search from './search.vue'
 
 defineOptions({

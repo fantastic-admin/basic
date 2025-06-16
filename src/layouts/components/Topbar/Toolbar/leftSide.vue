@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useSlots } from '@/slots'
-import useSettingsStore from '@/store/modules/settings'
 import Breadcrumb from './Breadcrumb/index.vue'
 
 defineOptions({

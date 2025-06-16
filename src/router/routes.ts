@@ -2,7 +2,6 @@ import type { Route } from '#/global'
 import type { RouteRecordRaw } from 'vue-router'
 import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'virtual:meta-layouts'
-import useSettingsStore from '@/store/modules/settings'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
 
 // 固定路由（默认路由）
