@@ -1,5 +1,7 @@
 /* 页面布局 CSS 变量 */
 :root {
+  color-scheme: light;
+
   /* 头部高度 */
   --g-header-height: 60px;
 
@@ -16,42 +18,44 @@
 
   /* 工具栏高度 */
   --g-toolbar-height: 50px;
+
+  /* 滚动条颜色 */
+  --scrollbar-color: 240 5.9% 90%;
+
+  &.dark {
+    color-scheme: dark;
+
+    --scrollbar-color: 240 3.7% 15.9%;
+  }
 }
 
 /* 明暗模式 CSS 变量 */
-/* stylelint-disable-next-line no-duplicate-selectors */
-:root {
-  color-scheme: light;
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation: none;
+}
 
-  &::view-transition-old(root),
-  &::view-transition-new(root) {
-    mix-blend-mode: normal;
-    animation: none;
-  }
+::view-transition-old(root) {
+  z-index: 0;
+}
 
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+.dark {
   &::view-transition-old(root) {
     z-index: 1;
   }
 
   &::view-transition-new(root) {
-    z-index: 9999;
-  }
-
-  &.dark {
-    color-scheme: dark;
-
-    &::view-transition-old(root) {
-      z-index: 9999;
-    }
-
-    &::view-transition-new(root) {
-      z-index: 1;
-    }
+    z-index: 0;
   }
 }
 
 * {
-  scrollbar-color: hsl(var(--border)) transparent;
+  scrollbar-color: hsl(var(--scrollbar-color)) transparent;
   scrollbar-width: thin;
 }
 
