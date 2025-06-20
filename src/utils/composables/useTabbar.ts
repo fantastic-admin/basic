@@ -1,4 +1,3 @@
-import type { RouteLocationRaw } from 'vue-router'
 import { toast } from 'vue-sonner'
 
 export default function useTabbar() {
@@ -11,13 +10,6 @@ export default function useTabbar() {
     return route.fullPath
   }
 
-  function close(to: RouteLocationRaw) {
-    const tabId = getId()
-    router.push(to).then(() => {
-      tabbarStore.remove(tabId)
-    })
-  }
-
   function closeById(tabId = getId()) {
     if (checkClose(tabId, false)) {
       const activedTabId = getId()
@@ -25,10 +17,10 @@ export default function useTabbar() {
       if (tabId === activedTabId) {
         const index = tabbarStore.list.findIndex(item => item.tabId === tabId)
         if (index > 0) {
-          close(tabbarStore.list[index - 1].fullPath)
+          router.close(tabbarStore.list[index - 1].fullPath)
         }
         else {
-          close(tabbarStore.list[index + 1].fullPath)
+          router.close(tabbarStore.list[index + 1].fullPath)
         }
       }
       else {
