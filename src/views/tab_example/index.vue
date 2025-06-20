@@ -12,7 +12,7 @@ function open() {
   router.push(settingsStore.settings.home.fullPath)
 }
 function close() {
-  tabbar.close(settingsStore.settings.home.fullPath)
+  router.close(settingsStore.settings.home.fullPath)
 }
 function closeById() {
   tabbar.closeById()

@@ -55,8 +55,30 @@ function extendReplace(router: Router) {
   }
 }
 
+declare module 'vue-router' {
+  interface Router {
+    /**
+     * 本方法为框架扩展语法，等同于 `push` 方法，并且同时会关闭当前标签页
+     */
+    close: (to: RouteLocationRaw) => Promise<NavigationFailure | void | undefined>
+  }
+}
+
+function extendClose(router: Router) {
+  router.close = function (to: RouteLocationRaw) {
+    const settingsStore = useSettingsStore(pinia)
+    if (settingsStore.settings.tabbar.enable) {
+      const tabId = getId(router)
+      const tabbarStore = useTabbarStore(pinia)
+      tabbarStore.remove(tabId)
+    }
+    return router.push(to)
+  }
+}
+
 export default function setupExtensions(router: Router) {
   extendPush(router)
   extendGo(router)
   extendReplace(router)
+  extendClose(router)
 }
