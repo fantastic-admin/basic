@@ -11,9 +11,8 @@ import App from './App.vue'
 import router from './router'
 import pinia from './store'
 import uiProvider from './ui/provider'
-import '@/utils/baidu'
-
 import '@/utils/systemCopyright'
+import '@/utils/baidu'
 
 import 'vxe-table/lib/style.css'
 import 'vxe-pc-ui/lib/style.css'
