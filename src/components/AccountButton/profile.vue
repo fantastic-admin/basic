@@ -16,8 +16,8 @@ const tabs = ref([
 
 <template>
   <div class="min-h-full w-full">
-    <div class="fixed inset-s-0 bottom-0 top-0 h-full w-40 border-e">
-      <div v-for="(tab, index) in tabs" :key="index" class="cursor-pointer px-4 py-3 transition-background-color space-y-2 hover-bg-accent/50" :class="{ 'bg-accent hover-bg-accent!': active === index }" @click="active = index">
+    <div class="fixed right-0 top-0 z-1 flex flex-row overflow-auto border-b border-e bg-background md:(inset-s-0 bottom-0 h-full w-40 flex-col)">
+      <div v-for="(tab, index) in tabs" :key="index" class="flex-shrink-0 cursor-pointer px-4 py-3 transition-background-color space-y-2 hover-bg-accent/50" :class="{ 'bg-accent hover-bg-accent!': active === index }" @click="active = index">
         <div class="text-base text-accent-foreground leading-tight">
           {{ tab.title }}
         </div>
@@ -26,7 +26,7 @@ const tabs = ref([
         </div>
       </div>
     </div>
-    <div class="ms-40 min-h-full flex-col-center p-10">
+    <div class="min-h-full flex-col-center p-10 pt-20 md:(ms-40 pt-10)">
       <div v-if="active === 0">
         请开发者自行扩展
       </div>
