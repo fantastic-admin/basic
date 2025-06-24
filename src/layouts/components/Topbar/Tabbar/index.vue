@@ -83,16 +83,19 @@ function contextMenuItems(routeItem: Tabbar.recordRaw) {
     [
       {
         label: '关闭其他标签页',
+        icon: 'i-mdi:close',
         disabled: !tabbar.checkCloseOtherSide(routeItem.tabId),
         handle: () => tabbar.closeOtherSide(routeItem.tabId),
       },
       {
         label: '关闭左侧标签页',
+        icon: 'i-mdi:arrow-expand-left',
         disabled: !tabbar.checkCloseLeftSide(routeItem.tabId),
         handle: () => tabbar.closeLeftSide(routeItem.tabId),
       },
       {
         label: '关闭右侧标签页',
+        icon: 'i-mdi:arrow-expand-right',
         disabled: !tabbar.checkCloseRightSide(routeItem.tabId),
         handle: () => tabbar.closeRightSide(routeItem.tabId),
       },
