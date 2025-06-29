@@ -19,6 +19,7 @@ watch(copied, (val) => {
 
 <template>
   <FaKbd class="mx-1 cursor-pointer" @click="isSupported && copy(props.text)">
+    <FaIcon name="i-lucide:copy" class="size-3" />
     {{ text }}
   </FaKbd>
 </template>
