@@ -19,7 +19,7 @@ export default {
     const actions = [
       {
         type: 'add',
-        path: 'src/store/{{camelCase name}}.ts',
+        path: 'src/store/modules/{{camelCase name}}.ts',
         templateFile: 'plop-templates/store/index.hbs',
       },
     ]
