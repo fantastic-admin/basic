@@ -3,6 +3,14 @@ meta:
   enabled: false
 </route>
 
+<script setup lang="ts">
+import { useFaImagePreview } from '@/ui/components/FaImagePreview'
+
+function open() {
+  useFaImagePreview().open('https://fantastic-admin.hurui.me/logo.svg')
+}
+</script>
+
 <template>
   <div>
     <FaPageHeader title="图片预览" description="FaImagePreview" />
@@ -23,6 +31,11 @@ meta:
           </template>
         </FaImagePreview>
       </div>
+    </FaPageMain>
+    <FaPageMain title="函数式调用">
+      <FaButton @click="open">
+        预览
+      </FaButton>
     </FaPageMain>
   </div>
 </template>
