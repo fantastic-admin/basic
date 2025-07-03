@@ -80,6 +80,9 @@ importers:
       es-toolkit:
         specifier: ^1.39.5
         version: 1.39.5
+      filesize:
+        specifier: ^10.1.6
+        version: 10.1.6
       hotkeys-js:
         specifier: ^3.13.14
         version: 3.13.14

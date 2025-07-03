@@ -119,6 +119,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'imageupload',
+          name: 'componentExampleBuiltInImageUpload',
+          component: () => import('@/views/component_built_in_example/imageupload.vue'),
+          meta: {
+            title: '图片上传',
+          },
+        },
+        {
           path: 'input',
           name: 'componentExampleBuiltInInput',
           component: () => import('@/views/component_built_in_example/input.vue'),
