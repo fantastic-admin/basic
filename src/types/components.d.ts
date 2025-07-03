@@ -25,6 +25,7 @@ declare module 'vue' {
     FaHoverCard: typeof import('./../ui/components/FaHoverCard/index.vue')['default']
     FaIcon: typeof import('./../ui/components/FaIcon/index.vue')['default']
     FaImagePreview: typeof import('./../ui/components/FaImagePreview/index.vue')['default']
+    FaImageUpload: typeof import('./../ui/components/FaImageUpload/index.vue')['default']
     FaInput: typeof import('./../ui/components/FaInput/index.vue')['default']
     FaKbd: typeof import('./../ui/components/FaKbd/index.vue')['default']
     FaModal: typeof import('./../ui/components/FaModal/index.vue')['default']
@@ -47,8 +48,6 @@ declare module 'vue' {
     FaToast: typeof import('./../ui/components/FaToast/index.vue')['default']
     FaTooltip: typeof import('./../ui/components/FaTooltip/index.vue')['default']
     FileUpload: typeof import('./../components/FileUpload/index.vue')['default']
-    ImagesUpload: typeof import('./../components/ImagesUpload/index.vue')['default']
-    ImageUpload: typeof import('./../components/ImageUpload/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
