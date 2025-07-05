@@ -24,14 +24,14 @@ const props = defineProps<{
 <style scoped>
 .horizontal-group {
   :deep(> button) {
-    &:first-child {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+    &:first-child:not(:last-child) {
+      border-start-end-radius: 0;
+      border-end-end-radius: 0;
     }
 
-    &:last-child {
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
+    &:last-child:not(:first-child) {
+      border-start-start-radius: 0;
+      border-end-start-radius: 0;
     }
 
     &:not(:first-child, :last-child) {
@@ -42,14 +42,14 @@ const props = defineProps<{
 
 .vertical-group {
   :deep(> button) {
-    &:first-child {
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
+    &:first-child:not(:last-child) {
+      border-end-start-radius: 0;
+      border-end-end-radius: 0;
     }
 
-    &:last-child {
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
+    &:last-child:not(:first-child) {
+      border-start-start-radius: 0;
+      border-start-end-radius: 0;
     }
 
     &:not(:first-child, :last-child) {
