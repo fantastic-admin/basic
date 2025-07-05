@@ -21,7 +21,7 @@ function handleSuccess() {
     <FaPageMain>
       <FaImageUpload
         v-model="files1"
-        action="/mock/upload/image"
+        action="/mock/upload"
         :after-upload="(response) => response.data.url"
         @on-success="handleSuccess"
       />
@@ -29,7 +29,7 @@ function handleSuccess() {
     <FaPageMain title="多图上传">
       <FaImageUpload
         v-model="files2"
-        action="/mock/upload/image"
+        action="/mock/upload"
         :after-upload="(response) => response.data.url"
         :max="2"
         @on-success="handleSuccess"
@@ -38,7 +38,7 @@ function handleSuccess() {
     <FaPageMain title="自定义默认内容、容器大小、建议尺寸、限制类型、不限制数量">
       <FaImageUpload
         v-model="files3"
-        action="/mock/upload/image"
+        action="/mock/upload"
         :after-upload="(response) => response.data.url"
         :width="200"
         :height="130"

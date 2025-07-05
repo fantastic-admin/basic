@@ -94,6 +94,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'fileupload',
+          name: 'componentExampleBuiltInFileUpload',
+          component: () => import('@/views/component_built_in_example/fileupload.vue'),
+          meta: {
+            title: '文件上传',
+          },
+        },
+        {
           path: 'fixedactionbar',
           name: 'componentExampleBuiltInFixedactionbar',
           component: () => import('@/views/component_built_in_example/fixedactionbar.vue'),
