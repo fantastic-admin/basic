@@ -280,31 +280,6 @@ const routes: RouteRecordRaw = {
         },
       ],
     },
-    {
-      path: 'extend',
-      name: 'componentExampleExtend',
-      meta: {
-        title: '扩展组件',
-      },
-      children: [
-        {
-          path: 'upload',
-          name: 'componentExampleExtendUpload',
-          component: () => import('@/views/component_extend_example/upload.vue'),
-          meta: {
-            title: '上传',
-          },
-        },
-        {
-          path: 'pcas',
-          name: 'componentExampleExtendPcas',
-          component: () => import('@/views/component_extend_example/pcas.vue'),
-          meta: {
-            title: '省市区街道联动',
-          },
-        },
-      ],
-    },
   ],
 }
 
