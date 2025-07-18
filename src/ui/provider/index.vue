@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import zhCN from 'element-plus/es/locale/lang/zh-cn.mjs'
+import zhCN from 'element-plus/es/locale/lang/zh-cn'
 
 const settingsStore = useSettingsStore()
 
