@@ -7,7 +7,7 @@ export default function useTabbar() {
   const tabbarStore = useTabbarStore()
 
   function getId() {
-    return route.fullPath
+    return route.path
   }
 
   function closeById(tabId = getId()) {

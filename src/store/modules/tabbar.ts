@@ -19,7 +19,7 @@ export const useTabbarStore = defineStore(
         }
       })
       const meta = route.matched.at(-1)?.meta
-      const tabId = route.fullPath
+      const tabId = route.path
       if (route.name !== 'reload') {
         // 记录查找到的标签页
         const findTab = list.value.find((item) => {
