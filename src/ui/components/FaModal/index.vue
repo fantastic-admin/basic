@@ -61,7 +61,7 @@ defineExpose({
   areaRef: dialogAreaRef,
 })
 
-const modalId = useId()
+const modalId = shallowRef(props.id ?? useId())
 const isOpen = ref(props.modelValue)
 const isMaximize = ref(props.maximize)
 
@@ -72,9 +72,16 @@ watch(() => props.modelValue, (newValue) => {
 const hasOpened = ref(false)
 const isClosed = ref(true)
 
-watch(() => isOpen.value, (value) => {
+watch(isOpen, (val) => {
+  emits('update:modelValue', val)
+  if (val) {
+    emits('open')
+  }
+  else {
+    emits('close')
+  }
   isClosed.value = false
-  if (value && !hasOpened.value) {
+  if (val && !hasOpened.value) {
     hasOpened.value = true
   }
 }, {
@@ -98,7 +105,6 @@ function setTransform() {
 }
 
 watch(isOpen, (val) => {
-  emits('update:modelValue', val)
   if (val) {
     nextTick(() => {
       if (dialogContentRef.value) {
@@ -106,10 +112,6 @@ watch(isOpen, (val) => {
         setTransform()
       }
     })
-    emits('open')
-  }
-  else {
-    emits('close')
   }
 })
 
@@ -177,7 +179,7 @@ function handleFocusOutside(e: Event) {
 }
 
 function handleClickOutside(e: Event) {
-  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.modalId !== modalId) {
+  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.modalId !== modalId.value) {
     e.preventDefault()
     e.stopPropagation()
   }

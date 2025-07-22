@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { HTMLAttributes } from 'vue'
+import type { DrawerEmits, DrawerProps } from '.'
 import { cn } from '@/utils'
 import {
   Sheet,
@@ -15,32 +15,7 @@ defineOptions({
 })
 
 const props = withDefaults(
-  defineProps<{
-    modelValue?: boolean
-    side?: 'top' | 'bottom' | 'left' | 'right'
-    title: string
-    description?: string
-    loading?: boolean
-    closable?: boolean
-    centered?: boolean
-    bordered?: boolean
-    overlay?: boolean
-    overlayBlur?: boolean
-    showConfirmButton?: boolean
-    showCancelButton?: boolean
-    confirmButtonText?: string
-    cancelButtonText?: string
-    confirmButtonDisabled?: boolean
-    confirmButtonLoading?: boolean
-    header?: boolean
-    footer?: boolean
-    closeOnClickOverlay?: boolean
-    closeOnPressEscape?: boolean
-    destroyOnClose?: boolean
-    contentClass?: HTMLAttributes['class']
-    headerClass?: HTMLAttributes['class']
-    footerClass?: HTMLAttributes['class']
-  }>(),
+  defineProps<DrawerProps>(),
   {
     modelValue: false,
     side: 'right',
@@ -64,19 +39,9 @@ const props = withDefaults(
   },
 )
 
-const emits = defineEmits<{
-  'update:modelValue': [value: boolean]
-  'open': []
-  'opened': []
-  'close': []
-  'closed': []
-  'confirm': []
-  'cancel': []
-}>()
+const emits = defineEmits<DrawerEmits>()
 
-const id = useId()
-provide('DrawerId', id)
-
+const drawerId = shallowRef(props.id ?? useId())
 const isOpen = ref(props.modelValue)
 
 watch(() => props.modelValue, (newValue) => {
@@ -86,9 +51,16 @@ watch(() => props.modelValue, (newValue) => {
 const hasOpened = ref(false)
 const isClosed = ref(true)
 
-watch(() => isOpen.value, (value) => {
+watch(isOpen, (val) => {
+  emits('update:modelValue', val)
+  if (val) {
+    emits('open')
+  }
+  else {
+    emits('close')
+  }
   isClosed.value = false
-  if (value && !hasOpened.value) {
+  if (val && !hasOpened.value) {
     hasOpened.value = true
   }
 }, {
@@ -97,25 +69,62 @@ watch(() => isOpen.value, (value) => {
 
 const forceMount = computed(() => !props.destroyOnClose && hasOpened.value)
 
-function updateOpen(value: boolean) {
-  isOpen.value = value
-  emits('update:modelValue', value)
+async function updateOpen(value: boolean) {
   if (value) {
+    isOpen.value = value
     emits('open')
   }
   else {
-    emits('close')
+    if (props.beforeClose) {
+      await props.beforeClose(
+        'close',
+        () => {
+          isOpen.value = value
+          emits('close')
+        },
+      )
+    }
+    else {
+      isOpen.value = value
+      emits('close')
+    }
   }
 }
 
-function onConfirm() {
-  updateOpen(false)
-  emits('confirm')
+const isConfirmButtonLoading = ref(false)
+
+async function onConfirm() {
+  if (props.beforeClose) {
+    isConfirmButtonLoading.value = true
+    await props.beforeClose(
+      'confirm',
+      () => {
+        isOpen.value = false
+        emits('confirm')
+      },
+    )
+    isConfirmButtonLoading.value = false
+  }
+  else {
+    isOpen.value = false
+    emits('confirm')
+  }
 }
 
-function onCancel() {
-  updateOpen(false)
-  emits('cancel')
+async function onCancel() {
+  if (props.beforeClose) {
+    await props.beforeClose(
+      'cancel',
+      () => {
+        isOpen.value = false
+        emits('cancel')
+      },
+    )
+  }
+  else {
+    isOpen.value = false
+    emits('cancel')
+  }
 }
 
 function handleFocusOutside(e: Event) {
@@ -124,7 +133,7 @@ function handleFocusOutside(e: Event) {
 }
 
 function handleClickOutside(e: Event) {
-  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.drawerId !== id) {
+  if (!props.closeOnClickOverlay || (e.target as HTMLElement).dataset.drawerId !== drawerId.value) {
     e.preventDefault()
     e.stopPropagation()
   }
@@ -151,8 +160,9 @@ function handleAnimationEnd() {
 <template>
   <Sheet :modal="false" :open="isOpen" @update:open="updateOpen">
     <SheetContent
-      :closable="props.closable"
+      :drawer-id="drawerId"
       :open="isOpen"
+      :closable="props.closable"
       :overlay="props.overlay"
       :overlay-blur="props.overlayBlur"
       :class="cn('w-full flex flex-col gap-0 p-0', props.contentClass, {
@@ -187,10 +197,10 @@ function handleAnimationEnd() {
           <div class="p-4">
             <slot />
           </div>
+          <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
+            <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
+          </div>
         </FaScrollArea>
-        <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
-          <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
-        </div>
       </div>
       <SheetFooter
         v-if="footer" :class="cn('p-2 gap-y-2', props.footerClass, {

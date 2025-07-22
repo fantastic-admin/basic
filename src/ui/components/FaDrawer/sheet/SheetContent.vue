@@ -15,6 +15,7 @@ import { cn } from '@/utils'
 import { sheetVariants } from '.'
 
 interface SheetContentProps extends DialogContentProps {
+  drawerId: string
   class?: HTMLAttributes['class']
   open?: boolean
   side?: SheetVariants['side']
@@ -51,8 +52,6 @@ watch(showOverlay, (val) => {
     isLocked.value = false
   }
 })
-
-const id = inject('DrawerId')
 </script>
 
 <template>
@@ -70,7 +69,7 @@ const id = inject('DrawerId')
     >
       <div
         v-if="showOverlay"
-        :data-drawer-id="id"
+        :data-drawer-id="props.drawerId"
         :class="cn('fixed inset-0 z-2000 data-[state=closed]:animate-out data-[state=open]:animate-in bg-black/50 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0', {
           'backdrop-blur-sm': props.overlayBlur,
         })"

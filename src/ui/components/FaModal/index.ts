@@ -1,7 +1,9 @@
-import type { HTMLAttributes } from 'vue'
+import type { Component, HTMLAttributes } from 'vue'
+import { isVNode } from 'vue'
 import Modal from './index.vue'
 
 export interface ModalProps {
+  id?: string
   modelValue?: boolean
   title?: string
   description?: string
@@ -46,125 +48,142 @@ export interface ModalEmits {
   'cancel': []
 }
 
-type alertOptions = Pick<ModalProps, 'title' | 'description' | 'icon' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
-  content: string
-  onConfirm?: () => void
-}
-
-type confirmOptions = Pick<ModalProps, 'title' | 'description' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'cancelButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'beforeClose' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass'> & {
-  content: string
+type BaseOptions = Omit<ModalProps, 'modelValue'> & {
+  content?: Component | VNode | string
+  onOpen?: () => void
+  onOpened?: () => void
+  onClose?: () => void
+  onClosed?: () => void
   onConfirm?: () => void
   onCancel?: () => void
 }
 
+type alertOptions = Pick<BaseOptions, 'title' | 'description' | 'icon' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass' | 'content' | 'onConfirm'>
+
+type confirmOptions = Pick<BaseOptions, 'title' | 'description' | 'alignCenter' | 'overlay' | 'overlayBlur' | 'confirmButtonText' | 'cancelButtonText' | 'confirmButtonDisabled' | 'confirmButtonLoading' | 'beforeClose' | 'closeOnClickOverlay' | 'closeOnPressEscape' | 'class' | 'headerClass' | 'contentClass' | 'footerClass' | 'content' | 'onConfirm' | 'onCancel'>
+
 export function useFaModal() {
-  function info(options: alertOptions) {
+  function create(initialOptions: BaseOptions) {
     const container = document.createElement('div')
+    const visible = ref(false)
+    const options = reactive({ ...initialOptions })
     const app = createApp({
       render() {
         return h(Modal, Object.assign({
-          modelValue: true,
-          icon: 'info',
-          closable: false,
-          border: false,
-          alignCenter: true,
-          closeOnClickOverlay: false,
-          contentClass: 'py-0 min-h-auto',
-          footerClass: 'p-4',
-          onClosed: () => {
-            app.unmount()
+          'id': useId(),
+          'modelValue': visible.value,
+          'onUpdate:modelValue': (val: boolean) => {
+            visible.value = val
           },
-        }, options), () => options.content)
+        }, options), {
+          default: () => {
+            if (typeof options.content === 'string') {
+              return options.content
+            }
+            else if (isVNode(options.content)) {
+              return options.content
+            }
+            else if (options.content) {
+              return h(options.content)
+            }
+            return null
+          },
+        })
       },
     })
+    // 继承主应用的上下文
+    const instance = getCurrentInstance()
+    if (instance && instance.appContext) {
+      Object.assign(app._context, instance.appContext)
+    }
     app.mount(container)
+    const open = () => {
+      visible.value = true
+    }
+    const close = () => {
+      visible.value = false
+    }
+    const update = (newOptions: BaseOptions) => {
+      Object.assign(options, newOptions)
+    }
+    return {
+      open,
+      close,
+      update,
+    }
+  }
+  function info(options: alertOptions) {
+    const defaultOptions: BaseOptions = {
+      icon: 'info',
+      closable: false,
+      border: false,
+      alignCenter: true,
+      closeOnClickOverlay: false,
+      destroyOnClose: true,
+      contentClass: 'py-0 min-h-auto',
+      footerClass: 'p-4',
+    }
+    const { open } = create(Object.assign(defaultOptions, options))
+    open()
   }
   function success(options: alertOptions) {
-    const container = document.createElement('div')
-    const app = createApp({
-      render() {
-        return h(Modal, Object.assign({
-          modelValue: true,
-          icon: 'success',
-          closable: false,
-          border: false,
-          alignCenter: true,
-          closeOnClickOverlay: false,
-          contentClass: 'py-0 min-h-auto',
-          footerClass: 'p-4',
-          onClosed: () => {
-            app.unmount()
-          },
-        }, options), () => options.content)
-      },
-    })
-    app.mount(container)
+    const defaultOptions: BaseOptions = {
+      icon: 'success',
+      closable: false,
+      border: false,
+      alignCenter: true,
+      closeOnClickOverlay: false,
+      destroyOnClose: true,
+      contentClass: 'py-0 min-h-auto',
+      footerClass: 'p-4',
+    }
+    const { open } = create(Object.assign(defaultOptions, options))
+    open()
   }
   function warning(options: alertOptions) {
-    const container = document.createElement('div')
-    const app = createApp({
-      render() {
-        return h(Modal, Object.assign({
-          modelValue: true,
-          icon: 'warning',
-          closable: false,
-          border: false,
-          alignCenter: true,
-          closeOnClickOverlay: false,
-          contentClass: 'py-0 min-h-auto',
-          footerClass: 'p-4',
-          onClosed: () => {
-            app.unmount()
-          },
-        }, options), () => options.content)
-      },
-    })
-    app.mount(container)
+    const defaultOptions: BaseOptions = {
+      icon: 'warning',
+      closable: false,
+      border: false,
+      alignCenter: true,
+      closeOnClickOverlay: false,
+      destroyOnClose: true,
+      contentClass: 'py-0 min-h-auto',
+      footerClass: 'p-4',
+    }
+    const { open } = create(Object.assign(defaultOptions, options))
+    open()
   }
   function error(options: alertOptions) {
-    const container = document.createElement('div')
-    const app = createApp({
-      render() {
-        return h(Modal, Object.assign({
-          modelValue: true,
-          icon: 'error',
-          closable: false,
-          border: false,
-          alignCenter: true,
-          closeOnClickOverlay: false,
-          contentClass: 'py-0 min-h-auto',
-          footerClass: 'p-4',
-          onClosed: () => {
-            app.unmount()
-          },
-        }, options), () => options.content)
-      },
-    })
-    app.mount(container)
+    const defaultOptions: BaseOptions = {
+      icon: 'error',
+      closable: false,
+      border: false,
+      alignCenter: true,
+      closeOnClickOverlay: false,
+      destroyOnClose: true,
+      contentClass: 'py-0 min-h-auto',
+      footerClass: 'p-4',
+    }
+    const { open } = create(Object.assign(defaultOptions, options))
+    open()
   }
   function confirm(options: confirmOptions) {
-    const container = document.createElement('div')
-    const app = createApp({
-      render() {
-        return h(Modal, Object.assign({
-          modelValue: true,
-          closable: false,
-          border: false,
-          alignCenter: true,
-          closeOnClickOverlay: false,
-          contentClass: 'py-0 min-h-auto',
-          footerClass: 'p-4',
-          showCancelButton: true,
-          onClosed: () => {
-            app.unmount()
-          },
-        }, options), () => options.content)
-      },
-    })
-    app.mount(container)
+    const defaultOptions: BaseOptions = {
+      closable: false,
+      border: false,
+      alignCenter: true,
+      showCancelButton: true,
+      closeOnClickOverlay: false,
+      destroyOnClose: true,
+      contentClass: 'py-0 min-h-auto',
+      footerClass: 'p-4',
+    }
+    const { open } = create(Object.assign(defaultOptions, options))
+    open()
   }
-
   return {
+    create,
     info,
     success,
     warning,
