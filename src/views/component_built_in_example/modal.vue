@@ -3,7 +3,7 @@ meta:
   enabled: false
 </route>
 
-<script setup lang="ts">
+<script setup lang="tsx">
 import { toast } from 'vue-sonner'
 import { useFaModal } from '@/ui/components/FaModal'
 
@@ -17,6 +17,7 @@ const modalInfo = ref({
   footer: true,
   contentHeight: '',
   loading: false,
+  class: '',
 })
 watch(() => modalInfo.value.loading, (loading) => {
   if (loading) {
@@ -109,36 +110,47 @@ function showModalPromiseConfirm() {
     },
   })
 }
+
+const TestComponent = defineComponent({
+  setup() {
+    const val = ref('123')
+    return () => (
+      <div>
+        <input v-model={val.value} class="w-full border rounded-md p-2" />
+      </div>
+    )
+  },
+})
+
+const { open: open2 } = useFaModal().create({
+  title: '标题',
+  description: '这里是一段描述介绍',
+  beforeClose: (action, done) => {
+    if (action === 'close') {
+      useFaModal().confirm({
+        title: '提示',
+        content: '确定要关闭吗？',
+        onConfirm: () => {
+          done()
+        },
+      })
+    }
+    else {
+      done()
+    }
+  },
+  content: h(TestComponent),
+})
 </script>
 
 <template>
   <div>
     <FaPageHeader title="弹窗" description="FaModal" />
     <FaPageMain>
-      <div class="flex gap-4">
-        <FaButton @click="modal = true">
-          打开
-        </FaButton>
-        <FaButton @click="showModalInfo">
-          Info
-        </FaButton>
-        <FaButton @click="showModalSuccess">
-          Success
-        </FaButton>
-        <FaButton @click="showModalWarning">
-          Warning
-        </FaButton>
-        <FaButton @click="showModalError">
-          Error
-        </FaButton>
-        <FaButton @click="showModalConfirm">
-          Confirm
-        </FaButton>
-        <FaButton @click="showModalPromiseConfirm">
-          Confirm with promise
-        </FaButton>
-      </div>
-      <FaModal v-model="modal" title="标题" description="这里是一段描述介绍" :maximizable="modalInfo.maximizable" :closable="modalInfo.closable" :draggable="modalInfo.draggable" :center="modalInfo.center" :loading="modalInfo.loading" :header="modalInfo.header" :footer="modalInfo.footer" :before-close="handleBeforeClose">
+      <FaButton @click="modal = true">
+        打开
+      </FaButton>
+      <FaModal v-model="modal" title="标题" description="这里是一段描述介绍" :maximizable="modalInfo.maximizable" :closable="modalInfo.closable" :draggable="modalInfo.draggable" :center="modalInfo.center" :loading="modalInfo.loading" :header="modalInfo.header" :footer="modalInfo.footer" :before-close="handleBeforeClose" :class="modalInfo.class">
         <div :class="modalInfo.contentHeight">
           <div class="flex-start-center flex-wrap gap-2">
             <FaButton :variant="modalInfo.maximizable ? 'default' : 'outline'" class="w-full" @click="modalInfo.maximizable = !modalInfo.maximizable">
@@ -165,9 +177,39 @@ function showModalPromiseConfirm() {
             <FaButton variant="outline" class="w-full" @click="modalInfo.loading = true">
               显示加载中
             </FaButton>
+            <FaButton :variant="!!modalInfo.class ? 'default' : 'outline'" class="w-full" @click="modalInfo.class = !!modalInfo.class ? '' : 'max-w-2xl'">
+              调整最大宽度
+            </FaButton>
           </div>
         </div>
       </FaModal>
+    </FaPageMain>
+    <FaPageMain title="对话框">
+      <div class="flex gap-4">
+        <FaButton @click="showModalInfo">
+          Info
+        </FaButton>
+        <FaButton @click="showModalSuccess">
+          Success
+        </FaButton>
+        <FaButton @click="showModalWarning">
+          Warning
+        </FaButton>
+        <FaButton @click="showModalError">
+          Error
+        </FaButton>
+        <FaButton @click="showModalConfirm">
+          Confirm
+        </FaButton>
+        <FaButton @click="showModalPromiseConfirm">
+          Confirm with promise
+        </FaButton>
+      </div>
+    </FaPageMain>
+    <FaPageMain title="函数式调用">
+      <FaButton @click="open2">
+        打开
+      </FaButton>
     </FaPageMain>
   </div>
 </template>
