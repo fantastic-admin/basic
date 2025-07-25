@@ -6,7 +6,6 @@ export default antfu(
     ignores: [
       'public',
       'dist*',
-      'src/ui/shadcn/ui',
     ],
   },
   {
