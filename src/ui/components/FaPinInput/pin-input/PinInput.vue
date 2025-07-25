@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PinInputRootEmits, PinInputRootProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
+import { reactiveOmit } from '@vueuse/core'
 import { PinInputRoot, useForwardPropsEmits } from 'reka-ui'
-import { computed } from 'vue'
 import { cn } from '@/utils'
 
 const props = withDefaults(defineProps<PinInputRootProps & { class?: HTMLAttributes['class'] }>(), {
@@ -10,10 +10,7 @@ const props = withDefaults(defineProps<PinInputRootProps & { class?: HTMLAttribu
 })
 const emits = defineEmits<PinInputRootEmits>()
 
-const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
-  return delegated
-})
+const delegatedProps = reactiveOmit(props, 'class')
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 </script>
