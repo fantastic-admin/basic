@@ -160,54 +160,49 @@ function setupTitle(router: Router) {
 
 // 页面缓存
 function setupKeepAlive(router: Router) {
-  router.afterEach((to, from) => {
+  router.afterEach(async (to, from) => {
     const keepAliveStore = useKeepAliveStore()
-    // 判断当前页面是否开启缓存，如果开启，则将当前页面的 name 信息存入 keep-alive 全局状态
-    if (to.meta.cache) {
-      const componentName = to.matched.at(-1)?.components?.default.name
-      if (componentName) {
-        keepAliveStore.add(componentName)
-      }
-      else {
-        // turbo-console-disable-next-line
-        console.warn('[Fantastic-admin] 该页面组件未设置组件名，会导致缓存失效，请检查')
-      }
-    }
-    // 判断离开页面是否开启缓存，如果开启，则根据缓存规则判断是否需要清空 keep-alive 全局状态里离开页面的 name 信息
-    if (from.meta.cache) {
-      const componentName = from.matched.at(-1)?.components?.default.name
-      if (componentName) {
-        // 通过 meta.cache 判断针对哪些页面进行缓存
-        switch (typeof from.meta.cache) {
-          case 'string':
-            if (from.meta.cache !== to.name) {
-              keepAliveStore.remove(componentName)
-            }
-            break
-          case 'object':
-            if (!from.meta.cache.includes(to.name as string)) {
-              keepAliveStore.remove(componentName)
-            }
-            break
-        }
-        // 通过 meta.noCache 判断针对哪些页面不需要进行缓存
-        if (from.meta.noCache) {
-          switch (typeof from.meta.noCache) {
-            case 'string':
-              if (from.meta.noCache === to.name) {
-                keepAliveStore.remove(componentName)
-              }
-              break
-            case 'object':
-              if (from.meta.noCache.includes(to.name as string)) {
-                keepAliveStore.remove(componentName)
-              }
-              break
+    if (to.fullPath !== from.fullPath) {
+      if (to.meta.cache) {
+        const componentName = to.matched.at(-1)?.components?.default.name
+        if (componentName) {
+          // 缓存当前页面前，先判断是否需要进行清除缓存，判断依据：
+          // 1. 如果 to.meta.cache 为 boolean 类型，并且不为 true，则需要清除缓存
+          // 2. 如果 to.meta.cache 为 string 类型，并且与 from.name 不一致，则需要清除缓存
+          // 3. 如果 to.meta.cache 为 array 类型，并且不包含 from.name，则需要清除缓存
+          // 4. 如果 to.meta.noCache 为 string 类型，并且与 from.name 一致，则需要清除缓存
+          // 5. 如果 to.meta.noCache 为 array 类型，并且包含 from.name，则需要清除缓存
+          // 6. 如果是刷新页面，则需要清除缓存
+          let shouldClearCache = false
+          if (typeof to.meta.cache === 'boolean') {
+            shouldClearCache = !to.meta.cache
           }
+          else if (typeof to.meta.cache === 'string') {
+            shouldClearCache = to.meta.cache !== from.name
+          }
+          else if (Array.isArray(to.meta.cache)) {
+            shouldClearCache = !to.meta.cache.includes(from.name as string)
+          }
+          if (to.meta.noCache) {
+            if (typeof to.meta.noCache === 'string') {
+              shouldClearCache = to.meta.noCache === from.name
+            }
+            else if (Array.isArray(to.meta.noCache)) {
+              shouldClearCache = to.meta.noCache.includes(from.name as string)
+            }
+          }
+          if (from.name === 'reload') {
+            shouldClearCache = true
+          }
+          if (shouldClearCache) {
+            keepAliveStore.remove(componentName)
+            await nextTick()
+          }
+          keepAliveStore.add(componentName)
         }
-        // 如果进入的是 reload 页面，则也将离开页面的缓存清空
-        if (to.name === 'reload') {
-          keepAliveStore.remove(componentName)
+        else {
+          // turbo-console-disable-next-line
+          console.warn('[Fantastic-admin] 该页面组件未设置组件名，会导致缓存失效，请检查')
         }
       }
     }
