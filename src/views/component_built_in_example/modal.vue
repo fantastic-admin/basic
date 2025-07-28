@@ -87,7 +87,33 @@ function showModalConfirm() {
     },
   })
 }
-
+function showModalDoubleConfirm() {
+  const { update } = useFaModal().confirm({
+    title: '温馨提醒',
+    content: '这是 confirm 弹窗',
+    beforeClose: (action, done) => {
+      if (action === 'confirm') {
+        update({
+          title: '二次确认',
+          content: '确定要关闭吗？',
+          confirmButtonText: '我确定',
+          cancelButtonText: '我取消',
+          beforeClose: (action) => {
+            if (action === 'confirm') {
+              done()
+            }
+            else {
+              done()
+            }
+          },
+        })
+      }
+      else {
+        done()
+      }
+    },
+  })
+}
 function showModalPromiseConfirm() {
   useFaModal().confirm({
     title: '温馨提醒',
@@ -200,6 +226,9 @@ const { open: open2 } = useFaModal().create({
         </FaButton>
         <FaButton @click="showModalConfirm">
           Confirm
+        </FaButton>
+        <FaButton @click="showModalDoubleConfirm">
+          Double Confirm
         </FaButton>
         <FaButton @click="showModalPromiseConfirm">
           Confirm with promise
