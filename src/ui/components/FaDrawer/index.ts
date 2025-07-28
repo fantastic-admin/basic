@@ -1,5 +1,5 @@
 import type { Component, HTMLAttributes } from 'vue'
-import { isVNode } from 'vue'
+import { createVNode, isVNode, render } from 'vue'
 import Drawer from './index.vue'
 
 export interface DrawerProps {
@@ -59,36 +59,49 @@ export function useFaDrawer() {
     const container = document.createElement('div')
     const visible = ref(false)
     const options = reactive({ ...initialOptions })
-    const app = createApp({
-      render() {
-        return h(Drawer, Object.assign({
-          'id': useId(),
-          'modelValue': visible.value,
-          'onUpdate:modelValue': (val: boolean) => {
-            visible.value = val
-          },
-        }, options), {
-          default: () => {
-            if (typeof options.content === 'string') {
-              return options.content
-            }
-            else if (isVNode(options.content)) {
-              return options.content
-            }
-            else if (options.content) {
-              return h(options.content)
-            }
-            return null
-          },
-        })
-      },
-    })
-    // 继承主应用的上下文
     const instance = getCurrentInstance()
-    if (instance && instance.appContext) {
-      Object.assign(app._context, instance.appContext)
+    let vnode: VNode | null = null
+
+    const updateVNode = () => {
+      vnode = createVNode(Drawer, Object.assign({
+        'id': instance && instance.uid ? `FaDrawer-${instance.uid}` : undefined,
+        'modelValue': visible.value,
+        'onUpdate:modelValue': (val: boolean) => {
+          visible.value = val
+        },
+        ...options,
+      }), {
+        default: () => {
+          if (typeof options.content === 'string') {
+            return options.content
+          }
+          else if (isVNode(options.content)) {
+            return options.content
+          }
+          else if (options.content) {
+            return h(options.content)
+          }
+          return null
+        },
+      })
+      // 继承主应用的上下文
+      if (instance && instance.appContext) {
+        vnode.appContext = instance.appContext
+      }
+      render(vnode, container)
     }
-    app.mount(container)
+
+    // 监听 visible 和 options 变化，自动重新渲染
+    watch([visible, options], () => {
+      updateVNode()
+    }, {
+      immediate: true,
+      deep: true,
+    })
+
+    // 挂载到当前实例
+    instance?.proxy?.$el?.appendChild(container)
+
     const open = () => {
       visible.value = true
     }
