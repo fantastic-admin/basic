@@ -5,6 +5,7 @@ import Drawer from './index.vue'
 export interface DrawerProps {
   id?: string
   modelValue?: boolean
+  zIndex?: number
   side?: 'top' | 'bottom' | 'left' | 'right'
   title?: string
   description?: string

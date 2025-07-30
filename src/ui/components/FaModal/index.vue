@@ -20,6 +20,7 @@ const props = withDefaults(
   defineProps<ModalProps>(),
   {
     modelValue: false,
+    zIndex: 2000,
     loading: false,
     closable: true,
     maximize: false,
@@ -214,6 +215,7 @@ function handleAnimationEnd() {
       ref="dialogContentRef"
       :modal-id="modalId"
       :open="isOpen"
+      :z-index="props.zIndex"
       :closable="props.closable"
       :overlay="props.overlay"
       :overlay-blur="props.overlayBlur"
