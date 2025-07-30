@@ -269,6 +269,10 @@ function handleAnimationEnd() {
           </DialogDescription>
         </slot>
       </DialogHeader>
+      <VisuallyHidden v-else>
+        <DialogTitle />
+        <DialogDescription />
+      </VisuallyHidden>
       <FaScrollArea v-if="!!slots.default" ref="dialogAreaRef" class="flex-1">
         <div :class="cn('min-h-40 p-4', props.contentClass)">
           <slot />
