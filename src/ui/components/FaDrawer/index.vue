@@ -18,6 +18,7 @@ const props = withDefaults(
   defineProps<DrawerProps>(),
   {
     modelValue: false,
+    zIndex: 2000,
     side: 'right',
     loading: false,
     closable: true,
@@ -162,6 +163,7 @@ function handleAnimationEnd() {
     <SheetContent
       :drawer-id="drawerId"
       :open="isOpen"
+      :z-index="props.zIndex"
       :closable="props.closable"
       :overlay="props.overlay"
       :overlay-blur="props.overlayBlur"

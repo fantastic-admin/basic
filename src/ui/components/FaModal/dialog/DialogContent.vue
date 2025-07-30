@@ -13,13 +13,14 @@ import { cn } from '@/utils'
 
 const props = defineProps<DialogContentProps & {
   modalId: string
-  class?: HTMLAttributes['class']
   open?: boolean
+  zIndex?: number
   maximize?: boolean
   maximizable?: boolean
   closable?: boolean
   overlay?: boolean
   overlayBlur?: boolean
+  class?: HTMLAttributes['class']
 }>()
 const emits = defineEmits<DialogContentEmits & {
   toggleMaximize: [val: boolean]
@@ -68,9 +69,12 @@ watch(showOverlay, (val) => {
       <div
         v-if="showOverlay"
         :data-modal-id="props.modalId"
-        :class="cn('fixed inset-0 z-2000 data-[state=closed]:animate-out data-[state=open]:animate-in bg-black/50 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0', {
+        :class="cn('fixed inset-0 data-[state=closed]:animate-out data-[state=open]:animate-in bg-black/50 data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0', {
           'backdrop-blur-sm': props.overlayBlur,
         })"
+        :style="{
+          zIndex: props.zIndex,
+        }"
       />
     </Transition>
     <DialogContent
@@ -78,9 +82,12 @@ watch(showOverlay, (val) => {
       v-bind="forwarded"
       :class="
         cn(
-          'fixed left-1/2 top-1/2 z-2000 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-0 data-[state=closed]:slide-out-to-top-1/5 data-[state=open]:slide-in-from-left-0 data-[state=open]:slide-in-from-top-1/5 sm:rounded-lg',
+          'fixed left-1/2 top-1/2 grid w-full max-w-lg -translate-x-1/2 -translate-y-1/2 gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-0 data-[state=closed]:slide-out-to-top-1/5 data-[state=open]:slide-in-from-left-0 data-[state=open]:slide-in-from-top-1/5 sm:rounded-lg',
           props.class,
         )"
+      :style="{
+        zIndex: props.zIndex,
+      }"
       @animationend="emits('animationEnd')"
     >
       <slot />

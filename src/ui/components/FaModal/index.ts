@@ -5,6 +5,7 @@ import Modal from './index.vue'
 export interface ModalProps {
   id?: string
   modelValue?: boolean
+  zIndex?: number
   title?: string
   description?: string
   icon?: 'info' | 'success' | 'warning' | 'error'
