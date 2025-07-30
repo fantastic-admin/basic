@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { DrawerEmits, DrawerProps } from '.'
+import { VisuallyHidden } from 'reka-ui'
 import { cn } from '@/utils'
 import {
   Sheet,
@@ -41,6 +42,12 @@ const props = withDefaults(
 )
 
 const emits = defineEmits<DrawerEmits>()
+
+const slots = defineSlots<{
+  header?: () => VNode
+  default?: () => VNode
+  footer?: () => VNode
+}>()
 
 const drawerId = shallowRef(props.id ?? useId())
 const isOpen = ref(props.modelValue)
@@ -185,6 +192,10 @@ function handleAnimationEnd() {
           'border-b': props.bordered,
         })"
       >
+        <VisuallyHidden v-if="!!slots.header">
+          <SheetTitle />
+          <SheetDescription />
+        </VisuallyHidden>
         <slot name="header">
           <SheetTitle :class="{ 'text-center': props.centered }">
             {{ title }}
@@ -194,8 +205,12 @@ function handleAnimationEnd() {
           </SheetDescription>
         </slot>
       </SheetHeader>
+      <VisuallyHidden v-else>
+        <SheetTitle />
+        <SheetDescription />
+      </VisuallyHidden>
       <div class="m-0 flex-1 of-y-hidden">
-        <FaScrollArea class="h-full">
+        <FaScrollArea v-if="!!slots.default" class="h-full">
           <div class="p-4">
             <slot />
           </div>
