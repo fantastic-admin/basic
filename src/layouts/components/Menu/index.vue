@@ -43,7 +43,7 @@ const isMenuPopup = computed<MenuInjection['isMenuPopup']>(() => {
 function initItems(menu: MenuProps['menu'], parentPaths: string[] = []) {
   menu.forEach((item) => {
     const index = item.path ?? getUseId(item)
-    if (item.children) {
+    if (item.children?.some(item => item.meta?.menu !== false)) {
       const indexPath = [...parentPaths, index]
       subMenus.value[index] = {
         index,
