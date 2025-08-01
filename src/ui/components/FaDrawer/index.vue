@@ -220,7 +220,7 @@ function handleAnimationEnd() {
         </FaScrollArea>
       </div>
       <SheetFooter
-        v-if="footer" :class="cn('p-2 gap-y-2', props.footerClass, {
+        v-if="footer" :class="cn('p-3 gap-y-2', props.footerClass, {
           'sm:justify-center': props.centered,
           'border-t': props.bordered,
         })"
