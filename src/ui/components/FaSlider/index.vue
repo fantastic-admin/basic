@@ -16,6 +16,7 @@ const props = withDefaults(defineProps<{
   step?: SliderRootProps['step']
   orientation?: SliderRootProps['orientation']
   thumbAlignment?: SliderRootProps['thumbAlignment']
+  tooltip?: boolean
   class?: HTMLAttributes['class']
 }>(), {
   defaultValue: () => [0],
@@ -26,6 +27,7 @@ const props = withDefaults(defineProps<{
   step: 1,
   orientation: 'horizontal',
   thumbAlignment: 'contain',
+  tooltip: true,
 })
 
 const modelValue = defineModel<number[]>()
