@@ -282,7 +282,7 @@ function handleAnimationEnd() {
         </div>
       </FaScrollArea>
       <DialogFooter
-        v-if="footer" :class="cn('p-2 gap-y-2', props.footerClass, {
+        v-if="footer" :class="cn('p-3 gap-y-2', props.footerClass, {
           'md:justify-center': props.center,
           'border-t': props.border,
         })"
