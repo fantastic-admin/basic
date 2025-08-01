@@ -3,6 +3,10 @@ meta:
   enabled: false
 </route>
 
+<script setup lang="ts">
+const hand = ref<'peace' | 'rock' | 'paper'>('peace')
+</script>
+
 <template>
   <div>
     <FaPageHeader title="按钮" description="FaButton" />
@@ -64,6 +68,20 @@ meta:
             删除
           </FaButton>
         </FaButtonGroup>
+        <div class="flex flex-col gap-2">
+          <div>单选按钮组</div>
+          <FaButtonGroup class="gap-0 space-x-[-1px]">
+            <FaButton :variant="hand === 'peace' ? 'default' : 'outline'" size="icon" :class="{ 'z-1': hand === 'peace' }" @click="hand = 'peace'">
+              <FaIcon name="i-fa-regular:hand-peace" class="size-4" />
+            </FaButton>
+            <FaButton :variant="hand === 'rock' ? 'default' : 'outline'" size="icon" :class="{ 'z-1': hand === 'rock' }" @click="hand = 'rock'">
+              <FaIcon name="i-fa-regular:hand-rock" class="size-4" />
+            </FaButton>
+            <FaButton :variant="hand === 'paper' ? 'default' : 'outline'" size="icon" :class="{ 'z-1': hand === 'paper' }" @click="hand = 'paper'">
+              <FaIcon name="i-fa-regular:hand-paper" class="size-4" />
+            </FaButton>
+          </FaButtonGroup>
+        </div>
       </div>
     </FaPageMain>
   </div>
