@@ -263,6 +263,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'textarea',
+          name: 'componentExampleBuiltInTextarea',
+          component: () => import('@/views/component_built_in_example/textarea.vue'),
+          meta: {
+            title: '文本域',
+          },
+        },
+        {
           path: 'toast',
           name: 'componentExampleBuiltInToast',
           component: () => import('@/views/component_built_in_example/toast.vue'),

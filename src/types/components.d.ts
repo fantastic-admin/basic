@@ -47,6 +47,7 @@ declare module 'vue' {
     FaSwitch: typeof import('./../ui/components/FaSwitch/index.vue')['default']
     FaSystemInfo: typeof import('./../ui/components/FaSystemInfo/index.vue')['default']
     FaTabs: typeof import('./../ui/components/FaTabs/index.vue')['default']
+    FaTextarea: typeof import('./../ui/components/FaTextarea/index.vue')['default']
     FaToast: typeof import('./../ui/components/FaToast/index.vue')['default']
     FaTooltip: typeof import('./../ui/components/FaTooltip/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
