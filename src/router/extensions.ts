@@ -66,13 +66,15 @@ declare module 'vue-router' {
 
 function extendClose(router: Router) {
   router.close = function (to: RouteLocationRaw) {
-    const settingsStore = useSettingsStore(pinia)
-    if (settingsStore.settings.tabbar.enable) {
-      const tabId = getId(router)
-      const tabbarStore = useTabbarStore(pinia)
-      tabbarStore.remove(tabId)
-    }
-    return router.push(to)
+    const currentRoute = router.currentRoute.value
+    const tabId = getId(router)
+    return router.push(to).then(() => {
+      const settingsStore = useSettingsStore(pinia)
+      if (settingsStore.settings.tabbar.enable && currentRoute.meta.tabMerge !== 'activeMenu') {
+        const tabbarStore = useTabbarStore(pinia)
+        tabbarStore.remove(tabId)
+      }
+    })
   }
 }
 
