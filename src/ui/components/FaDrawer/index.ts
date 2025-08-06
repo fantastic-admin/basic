@@ -103,6 +103,19 @@ export function useFaDrawer() {
     // 挂载到当前实例
     instance?.proxy?.$el?.appendChild(container)
 
+    // 监听组件卸载，自动清理
+    if (instance) {
+      onUnmounted(() => {
+        if (vnode) {
+          render(null, container)
+          vnode = null
+        }
+        if (container.parentNode) {
+          container.parentNode.removeChild(container)
+        }
+      })
+    }
+
     const open = () => {
       visible.value = true
     }
