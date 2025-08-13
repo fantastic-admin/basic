@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { AcceptableValue } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '@/utils'
 import {
@@ -18,13 +19,13 @@ const props = defineProps<{
   disabled?: boolean
   options: {
     label: string
-    value: string
+    value: AcceptableValue
     disabled?: boolean
   }[]
   class?: HTMLAttributes['class']
 }>()
 
-const value = defineModel<string>()
+const value = defineModel<AcceptableValue>()
 
 const selectedOption = computed({
   get() {
@@ -43,7 +44,7 @@ const selectedOption = computed({
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
-        <SelectItem v-for="option in options" :key="option.value" :value="option.value" :disabled="option.disabled">
+        <SelectItem v-for="(option, index) in options" :key="index" :value="option.value" :disabled="option.disabled">
           {{ option.label }}
         </SelectItem>
       </SelectGroup>
