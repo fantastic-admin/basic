@@ -103,6 +103,34 @@ function contextMenuItems(routeItem: Tabbar.recordRaw) {
   ]
 }
 
+const visibleTabIndex = ref<number[]>([])
+function getVisibleTabs() {
+  const containerWidth = tabsRef.value?.ref?.$el.clientWidth ?? 0
+  const scrollLeft = tabsRef.value?.ref?.el?.viewportElement?.scrollLeft ?? 0
+  visibleTabIndex.value = []
+  if (tabRef.value) {
+    for (let i = 0; i < tabRef.value.length; i++) {
+      const tab = tabRef.value[i]
+      const tabLeft = tab.offsetLeft
+      const tabRight = tabLeft + tab.offsetWidth
+      // 检查标签页是否在可视区域内
+      if (tabLeft < scrollLeft + containerWidth && tabRight > scrollLeft) {
+        if (i >= 0 && i < tabbarStore.list.length) {
+          visibleTabIndex.value.push(i)
+        }
+      }
+    }
+  }
+}
+function getVisibleTabIndex(arrayIndex: number) {
+  return visibleTabIndex.value.findIndex(visibleTab => visibleTab === arrayIndex) ?? -1
+}
+watch(() => keys.alt, (val) => {
+  if (val) {
+    getVisibleTabs()
+  }
+})
+
 onMounted(() => {
   hotkeys('alt+left,alt+right,alt+w,alt+1,alt+2,alt+3,alt+4,alt+5,alt+6,alt+7,alt+8,alt+9,alt+0', (e, handle) => {
     if (settingsStore.settings.tabbar.enable && settingsStore.settings.tabbar.enableHotkeys) {
@@ -138,7 +166,9 @@ onMounted(() => {
         case 'alt+9':
         {
           const number = Number(handle.key.split('+')[1])
-          tabbarStore.list[number - 1]?.fullPath && router.push(tabbarStore.list[number - 1].fullPath)
+          if (visibleTabIndex.value[number - 1] !== undefined) {
+            router.push(tabbarStore.list[visibleTabIndex.value[number - 1]].fullPath)
+          }
           break
         }
         // 切换到最后一个标签页
@@ -179,8 +209,8 @@ onUnmounted(() => {
                     <div v-if="tabbarStore.list.length > 1" class="action-icon" @click.stop="tabbar.closeById(element.tabId)">
                       <FaIcon name="i-ri:close-fill" />
                     </div>
-                    <div v-show="keys.alt && index < 9" class="hotkey-number">
-                      {{ index + 1 }}
+                    <div v-show="keys.alt && getVisibleTabIndex(index) >= 0 && getVisibleTabIndex(index) < 9" class="hotkey-number">
+                      {{ getVisibleTabIndex(index) + 1 }}
                     </div>
                   </div>
                   <template #content>
