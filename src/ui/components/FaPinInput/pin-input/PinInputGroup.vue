@@ -7,11 +7,12 @@ import { cn } from '@/utils'
 
 const props = defineProps<PrimitiveProps & { class?: HTMLAttributes['class'] }>()
 const delegatedProps = reactiveOmit(props, 'class')
+
 const forwardedProps = useForwardProps(delegatedProps)
 </script>
 
 <template>
   <Primitive v-bind="forwardedProps" :class="cn('flex items-center', props.class)">
     <slot />
-  </primitive>
+  </Primitive>
 </template>
