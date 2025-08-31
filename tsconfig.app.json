@@ -18,6 +18,7 @@
     "allowJs": false,
     "strict": true,
     "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
