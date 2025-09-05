@@ -1,3 +1,5 @@
+**中文** | [English](./README.EN.md)
+
 <p align="center">
   <img src="https://fantastic-admin.hurui.me/logo.svg" width="200" height="200" />
 </p>
