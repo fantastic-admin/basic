@@ -62,6 +62,14 @@ const routes: RouteRecordRaw = {
           },
         },
         {
+          path: 'collapsible',
+          name: 'componentExampleBuiltInCollapsible',
+          component: () => import('@/views/component_built_in_example/collapsible.vue'),
+          meta: {
+            title: '折叠面板',
+          },
+        },
+        {
           path: 'contextmenu',
           name: 'componentExampleBuiltInContextMenu',
           component: () => import('@/views/component_built_in_example/contextmenu.vue'),
