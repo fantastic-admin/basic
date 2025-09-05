@@ -182,7 +182,7 @@ function onMove(index: number, direction: 'forward' | 'backward') {
         </div>
       </div>
       <button
-        v-if="images.length < props.max || props.max === 0" class="relative flex-center overflow-hidden bg-transparent" :class="{
+        v-if="images.length < props.max || props.max === 0" type="button" class="relative flex-center overflow-hidden bg-transparent" :class="{
           'cursor-not-allowed': props.disabled || isUploading,
         }" :style="{
           width: `${props.width}px`,

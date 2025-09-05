@@ -163,6 +163,7 @@ function removeFile(idx: number) {
 <template>
   <div class="space-y-2">
     <button
+      type="button"
       class="h-40 w-full flex flex-col cursor-pointer items-center justify-center border border-2 rounded-lg border-dashed bg-transparent p-4 transition-all"
       :class="{
         'border-primary bg-primary/5': isDragging,
