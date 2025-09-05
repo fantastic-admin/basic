@@ -5,6 +5,7 @@ meta:
 
 <script setup lang="ts">
 const checked = ref(false)
+const checked2 = ref<'indeterminate' | boolean>('indeterminate')
 </script>
 
 <template>
@@ -17,6 +18,11 @@ const checked = ref(false)
         </FaCheckbox>
         {{ checked }}
       </div>
+    </FaPageMain>
+    <FaPageMain title="半选状态">
+      <FaCheckbox v-model="checked2">
+        复选框
+      </FaCheckbox>
     </FaPageMain>
   </div>
 </template>
