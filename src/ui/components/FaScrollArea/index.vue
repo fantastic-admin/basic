@@ -60,11 +60,6 @@ function onWheel(event: WheelEvent) {
       left: event.deltaY || event.detail,
     })
   }
-  else {
-    scrollAreaRef.value?.el?.viewportElement?.scrollBy({
-      top: event.deltaY || event.detail,
-    })
-  }
 }
 
 const scrollContainerRef = useTemplateRef('scrollContainerRef')
