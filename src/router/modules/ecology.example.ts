@@ -89,7 +89,7 @@ const routes: RouteRecordRaw[] = [
         name: 'recommandMineadmin',
         meta: {
           title: 'MineAdmin 开箱即用后台系统',
-          icon: 'https://doc.mineadmin.com/logo.svg',
+          icon: 'https://www.mineadmin.com/favicon.ico',
           link: 'https://github.com/mineadmin/mineadmin',
         },
       },

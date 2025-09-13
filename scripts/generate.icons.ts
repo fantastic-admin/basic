@@ -51,6 +51,9 @@ const answers = await p.group(
   },
 )
 
+const spinner = p.spinner()
+spinner.start('正在生成图标集...')
+
 await fs.writeJSON(
   path.resolve(process.cwd(), 'src/iconify/index.json'),
   {
@@ -101,5 +104,5 @@ eslint.on('close', (code) => {
     p.log.error(`ESLint 执行失败，退出码: ${code}`)
     process.exit(code)
   }
-  p.outro('图标集生成完成！')
+  spinner.stop('图标集生成完成！')
 })

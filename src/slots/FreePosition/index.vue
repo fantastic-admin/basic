@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import isBetween from 'dayjs/plugin/isBetween'
 import { ElNotification } from 'element-plus'
+import { createVNode } from 'vue'
+import FaButton from '@/ui/components/FaButton/index.vue'
+import { faNotification } from '@/ui/components/FaNotification'
 import dayjs from '@/utils/dayjs'
 import eventBus from '@/utils/eventBus'
 
@@ -21,16 +24,19 @@ function open(url: string) {
 onMounted(() => {
   eventBus.on('global-ui-component-switch', () => switchUI())
   dayjs.extend(isBetween)
-  if (dayjs().isBetween('2024-10-17', '2024-11-17')) {
-    ElNotification({
-      type: 'info',
-      title: '「 四周年庆，全年最低价 」',
-      dangerouslyUseHTMLString: true,
-      message: `
-  <p>为庆祝 Fantastic-admin 正式发布四周年，我们在 <b>2024/10/17 - 2024/11/17</b> 期间推出一系列优惠。</p>
-  <p style="text-align: right;"><a href="https://fantastic-admin.hurui.me/buy-4yr.html" target="_blank">查看详情</a></p>
-      `,
-      position: 'bottom-right',
+  if (dayjs().isBetween('2025-09-17', '2025-10-17')) {
+    faNotification({
+      title: '「 五周年庆，全年最低价 」',
+      description: h('div', {
+        innerHTML: ` <p>为庆祝 Fantastic-admin 正式发布五周年，我们在 <b>2025/09/17 - 2025/10/17</b> 期间推出一系列优惠。</p>`,
+      }),
+      action: createVNode(FaButton, {
+        innerHTML: '查看详情',
+        variant: 'destructive',
+        onClick: () => {
+          window.open('https://fantastic-admin.hurui.me/buy-anniversary.html', '_blank')
+        },
+      }),
       duration: 0,
     })
   }
