@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Dialog, DialogContent } from './dialog'
+import { VisuallyHidden } from 'reka-ui'
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from './dialog'
 
 const props = defineProps<{
   src: string | string[]
@@ -122,6 +123,10 @@ function handleAnimationEnd() {
 <template>
   <Dialog v-model:open="isOpen">
     <DialogContent class="size-full" @animation-end="handleAnimationEnd">
+      <VisuallyHidden>
+        <DialogTitle />
+        <DialogDescription />
+      </VisuallyHidden>
       <div class="relative size-full flex-center" @wheel="handleWheel">
         <img
           :src="srcList[index]"
