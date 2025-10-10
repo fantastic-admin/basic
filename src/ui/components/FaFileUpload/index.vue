@@ -175,10 +175,12 @@ function removeFile(idx: number) {
       @drop="handleDrop"
       @click="fileInputRef?.click()"
     >
-      <FaIcon name="i-icon-park-outline:upload" class="mb-2 text-2xl text-card-foreground/50" />
-      <div class="text-sm text-card-foreground/70">
-        将文件拖到此处，或<span class="cursor-pointer text-primary font-bold">点击上传</span>
-      </div>
+      <slot>
+        <FaIcon name="i-icon-park-outline:upload" class="mb-2 text-2xl text-card-foreground/50" />
+        <div class="text-sm text-card-foreground/70">
+          将文件拖到此处，或<span class="cursor-pointer text-primary font-bold">点击上传</span>
+        </div>
+      </slot>
       <input ref="fileInputRef" type="file" :multiple="props.multiple" :disabled="props.disabled" class="hidden" @change="e => onSelectFile((e.target as HTMLInputElement).files)">
     </button>
     <div v-if="!props.hideTips && !props.disabled" class="flex flex-wrap gap-1 text-xs text-card-foreground/50 empty:hidden">
