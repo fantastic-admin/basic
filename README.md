@@ -6,7 +6,7 @@
 
 <h1 align="center">Fantastic-admin</h1>
 
-<p align="center">一款<b>开箱即用</b>的 Vue3 中后台管理系统框架</p>
+<p align="center">一款<b>开箱即用</b>的 Vue3 后台管理系统框架</p>
 
 <p align="center">
   <a href="https://fantastic-admin.hurui.me" target="_blank">官网</a>
@@ -96,7 +96,7 @@
   </tr>
   <tr>
     <th colspan="3" align="center">
-      一款干啥都快人一步的 Vue 中后台管理系统框架
+      一款干啥都快人一步的 Vue 后台管理系统框架
     </th>
   </tr>
   <tr>
