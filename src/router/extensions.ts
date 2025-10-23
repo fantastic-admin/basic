@@ -1,4 +1,4 @@
-import type { RouteLocationRaw, Router } from 'vue-router'
+import type { NavigationFailure, RouteLocationRaw, Router } from 'vue-router'
 import pinia from '@/store'
 
 function getId(router: Router) {
