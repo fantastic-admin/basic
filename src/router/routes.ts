@@ -73,9 +73,9 @@ const constantRoutesByFilesystem = generatedRoutes.filter((item) => {
   return item.meta?.enabled !== false && item.meta?.constant === true
 })
 
-const asyncRoutesByFilesystem = setupLayouts(generatedRoutes.filter((item) => {
+const asyncRoutesByFilesystem = [...setupLayouts(generatedRoutes.filter((item) => {
   return item.meta?.enabled !== false && item.meta?.constant !== true && item.meta?.layout !== false
-}))
+}))]
 
 export {
   asyncRoutes,
