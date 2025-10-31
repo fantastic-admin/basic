@@ -138,17 +138,25 @@ function showModalPromiseConfirm() {
 }
 
 const TestComponent = defineComponent({
-  setup() {
+  props: {
+    close: {
+      type: Function,
+    },
+  },
+  setup(props) {
     const val = ref('123')
     return () => (
-      <div>
+      <div class="flex flex-col gap-4">
         <input v-model={val.value} class="w-full border rounded-md p-2" />
+        <fa-button onClick={() => props.close?.()}>
+          组件内部关闭弹窗
+        </fa-button>
       </div>
     )
   },
 })
 
-const { open: open2 } = useFaModal().create({
+const { open: open2, close: close2 } = useFaModal().create({
   title: '标题',
   description: '这里是一段描述介绍',
   beforeClose: (action, done) => {
@@ -165,7 +173,9 @@ const { open: open2 } = useFaModal().create({
       done()
     }
   },
-  content: h(TestComponent),
+  content: h(TestComponent, {
+    close: () => close2(),
+  }),
 })
 </script>
 
