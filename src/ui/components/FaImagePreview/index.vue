@@ -21,6 +21,12 @@ const isLoading = ref(true)
 const isError = ref(false)
 const isOpen = ref(false)
 
+// 监听 src 变化，重置加载状态
+watch(() => props.src, () => {
+  isLoading.value = true
+  isError.value = false
+}, { immediate: false })
+
 function handleLoad() {
   isLoading.value = false
   emits('load')
