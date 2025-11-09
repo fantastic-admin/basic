@@ -42,6 +42,7 @@ const props = withDefaults(
     closeOnClickOverlay: true,
     closeOnPressEscape: true,
     destroyOnClose: true,
+    openAutoFocus: false,
   },
 )
 
@@ -55,12 +56,7 @@ const slots = defineSlots<{
 
 const dialogContentRef = useTemplateRef('dialogContentRef')
 const dialogHeaderRef = ref()
-const dialogAreaRef = useTemplateRef('dialogAreaRef')
 const dialogRef = ref()
-
-defineExpose({
-  areaRef: dialogAreaRef,
-})
 
 const modalId = shallowRef(props.id ?? useId())
 const isOpen = ref(props.modelValue)
@@ -174,6 +170,13 @@ async function onCancel() {
   }
 }
 
+function handleOpenAutoFocus(e: Event) {
+  if (!props.openAutoFocus) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+}
+
 function handleFocusOutside(e: Event) {
   e.preventDefault()
   e.stopPropagation()
@@ -222,13 +225,13 @@ function handleAnimationEnd() {
       :maximize="isMaximize"
       :maximizable="props.maximizable"
       :force-mount="forceMount"
-      :class="cn('left-0 right-0 top-0 md:top-[5vh] flex flex-col p-0 gap-0 mx-auto h-[calc-size(auto,size)] min-h-full md:min-h-auto max-h-full md:max-h-[90vh] translate-x-0 translate-y-0', props.class, {
+      :class="cn('left-0 right-0 top-0 md:top-[5vh] flex flex-col p-0 gap-0 mx-auto h-[calc-size(auto,size)] min-h-full overflow-hidden md:min-h-auto max-h-full md:max-h-[90vh] translate-x-0 translate-y-0', props.class, {
         'md:top-0 size-full max-w-full max-h-full md:max-h-full': isMaximize,
         'md:top-1/2 md:-translate-y-1/2!': props.alignCenter,
         'duration-0': isDragging,
         'hidden': isClosed,
       })"
-      @open-auto-focus="handleFocusOutside"
+      @open-auto-focus="handleOpenAutoFocus"
       @close-auto-focus="handleFocusOutside"
       @focus-outside="handleFocusOutside"
       @pointer-down-outside="handleClickOutside"
@@ -273,14 +276,12 @@ function handleAnimationEnd() {
         <DialogTitle />
         <DialogDescription />
       </VisuallyHidden>
-      <FaScrollArea v-if="!!slots.default" ref="dialogAreaRef" class="flex-1">
-        <div :class="cn('min-h-40 p-4', props.contentClass)">
-          <slot />
-        </div>
-        <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
-          <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
-        </div>
-      </FaScrollArea>
+      <div v-if="!!slots.default" :class="cn('relative flex-1 min-h-40 p-4 overflow-y-auto', props.contentClass)">
+        <slot />
+      </div>
+      <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
+        <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
+      </div>
       <DialogFooter
         v-if="footer" :class="cn('p-3 gap-y-2', props.footerClass, {
           'md:justify-center': props.center,
