@@ -12,9 +12,9 @@ const open = ref(false)
     <FaPageHeader title="折叠面板" description="FaCollapsible" />
     <FaPageMain>
       <FaCollapsible>
-        <template #trigger="{ open }">
+        <template #trigger="{ open: openStatus }">
           <FaButton>
-            {{ open ? '收起' : '展开' }}
+            {{ openStatus ? '收起' : '展开' }}
           </FaButton>
         </template>
         <div class="mt-4 space-y-2">
