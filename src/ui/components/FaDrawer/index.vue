@@ -38,6 +38,7 @@ const props = withDefaults(
     closeOnClickOverlay: true,
     closeOnPressEscape: true,
     destroyOnClose: true,
+    openAutoFocus: false,
   },
 )
 
@@ -135,6 +136,13 @@ async function onCancel() {
   }
 }
 
+function handleOpenAutoFocus(e: Event) {
+  if (!props.openAutoFocus) {
+    e.preventDefault()
+    e.stopPropagation()
+  }
+}
+
 function handleFocusOutside(e: Event) {
   e.preventDefault()
   e.stopPropagation()
@@ -179,7 +187,7 @@ function handleAnimationEnd() {
       })"
       :side="props.side"
       :force-mount="forceMount"
-      @open-auto-focus="handleFocusOutside"
+      @open-auto-focus="handleOpenAutoFocus"
       @close-auto-focus="handleFocusOutside"
       @focus-outside="handleFocusOutside"
       @pointer-down-outside="handleClickOutside"
@@ -209,15 +217,11 @@ function handleAnimationEnd() {
         <SheetTitle />
         <SheetDescription />
       </VisuallyHidden>
-      <div class="m-0 flex-1 of-y-hidden">
-        <FaScrollArea v-if="!!slots.default" class="h-full">
-          <div class="p-4">
-            <slot />
-          </div>
-          <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
-            <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
-          </div>
-        </FaScrollArea>
+      <div v-if="!!slots.default" class="relative m-0 flex-1 overflow-y-auto p-4">
+        <slot />
+      </div>
+      <div v-show="props.loading" class="absolute inset-0 z-1000 size-full flex-center bg-popover/75">
+        <FaIcon name="i-line-md:loading-twotone-loop" class="size-10" />
       </div>
       <SheetFooter
         v-if="footer" :class="cn('p-3 gap-y-2', props.footerClass, {

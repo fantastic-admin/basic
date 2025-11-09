@@ -30,6 +30,7 @@ export interface DrawerProps {
   closeOnClickOverlay?: boolean
   closeOnPressEscape?: boolean
   destroyOnClose?: boolean
+  openAutoFocus?: boolean
   contentClass?: HTMLAttributes['class']
   headerClass?: HTMLAttributes['class']
   footerClass?: HTMLAttributes['class']

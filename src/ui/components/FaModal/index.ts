@@ -34,6 +34,7 @@ export interface ModalProps {
   closeOnClickOverlay?: boolean
   closeOnPressEscape?: boolean
   destroyOnClose?: boolean
+  openAutoFocus?: boolean
   class?: HTMLAttributes['class']
   headerClass?: HTMLAttributes['class']
   contentClass?: HTMLAttributes['class']
@@ -147,6 +148,7 @@ export function useFaModal() {
       alignCenter: true,
       closeOnClickOverlay: false,
       destroyOnClose: true,
+      openAutoFocus: true,
       contentClass: 'py-0 min-h-auto',
       footerClass: 'p-4',
     }
@@ -161,6 +163,7 @@ export function useFaModal() {
       alignCenter: true,
       closeOnClickOverlay: false,
       destroyOnClose: true,
+      openAutoFocus: true,
       contentClass: 'py-0 min-h-auto',
       footerClass: 'p-4',
     }
@@ -175,6 +178,7 @@ export function useFaModal() {
       alignCenter: true,
       closeOnClickOverlay: false,
       destroyOnClose: true,
+      openAutoFocus: true,
       contentClass: 'py-0 min-h-auto',
       footerClass: 'p-4',
     }
@@ -189,6 +193,7 @@ export function useFaModal() {
       alignCenter: true,
       closeOnClickOverlay: false,
       destroyOnClose: true,
+      openAutoFocus: true,
       contentClass: 'py-0 min-h-auto',
       footerClass: 'p-4',
     }
@@ -203,6 +208,7 @@ export function useFaModal() {
       showCancelButton: true,
       closeOnClickOverlay: false,
       destroyOnClose: true,
+      openAutoFocus: true,
       contentClass: 'py-0 min-h-auto',
       footerClass: 'p-4',
     }

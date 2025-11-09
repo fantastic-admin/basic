@@ -30,7 +30,7 @@ const searchInput = ref('')
 const searchInputRef = useTemplateRef('searchInputRef')
 const { focused: searchInputFocused } = useFocus(searchInputRef)
 const sourceList = ref<listTypes[]>([])
-const actived = ref(-1)
+const actived = ref(0)
 
 const searchResultRef = useTemplateRef('searchResultRef')
 const searchResultItemRef = useTemplateRef<HTMLElement[]>('searchResultItemRef')
@@ -69,7 +69,7 @@ const resultList = computed(() => {
 watch(() => isShow.value, (val) => {
   if (val) {
     searchInput.value = ''
-    actived.value = -1
+    actived.value = 0
     // 当搜索显示的时候绑定上、下、回车快捷键，隐藏的时候再解绑。另外当 input 处于 focus 状态时，采用 vue 来绑定键盘事件
     hotkeys('up', keyUp)
     hotkeys('down', keyDown)
@@ -89,7 +89,7 @@ watch(() => isShow.value, (val) => {
   }
 })
 watch(() => resultList.value, () => {
-  actived.value = -1
+  actived.value = 0
   handleScroll()
 })
 
@@ -158,15 +158,13 @@ function keyDown() {
   }
 }
 function keyEnter() {
-  if (actived.value !== -1) {
-    searchResultItemRef.value?.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.click()
-  }
+  searchResultItemRef.value?.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.click()
 }
 function handleScroll() {
-  if (searchResultRef.value?.areaRef?.ref?.el?.viewportElement) {
-    const contentDom = searchResultRef.value.areaRef.ref.el.viewportElement
+  if (searchResultRef.value?.ref?.el?.viewportElement) {
+    const contentDom = searchResultRef.value.ref.el.viewportElement
     let scrollTo = 0
-    if (actived.value !== -1) {
+    if (resultList.value.length > 0) {
       scrollTo = contentDom.scrollTop
       const activedOffsetTop = searchResultItemRef.value?.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.offsetTop ?? 0
       const activedClientHeight = searchResultItemRef.value?.find(item => Number.parseInt(item.dataset.index!) === actived.value)?.clientHeight ?? 0
@@ -197,7 +195,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
 </script>
 
 <template>
-  <FaModal ref="searchResultRef" v-model="isShow" border :footer="settingsStore.mode === 'pc'" :closable="false" class="w-full lg-max-w-2xl" content-class="flex flex-col p-0 min-h-auto" header-class="p-0" footer-class="p-0" @opened="searchInputFocused = true">
+  <FaModal v-model="isShow" border :footer="settingsStore.mode === 'pc'" :closable="false" class="w-full lg-max-w-2xl" content-class="flex flex-col p-0 min-h-auto" header-class="p-0" footer-class="p-0" @opened="searchInputFocused = true">
     <template #header>
       <div class="h-12 flex flex-shrink-0 items-center">
         <div class="h-full w-14 flex-center">
@@ -236,7 +234,7 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
         </div>
       </div>
     </template>
-    <div>
+    <FaScrollArea ref="searchResultRef">
       <template v-if="resultList.length > 0">
         <div v-for="(item, index) in resultList" ref="searchResultItemRef" :key="item.path" class="p-4" :data-index="index" @click="pageJump(item.path, item.link)" @mouseover="actived = index">
           <a class="flex cursor-pointer items-center border rounded-lg" :class="{ '-mt-4': index !== 0, 'bg-accent': index === actived }">
@@ -268,6 +266,6 @@ function pageJump(path: listTypes['path'], link: listTypes['link']) {
           </p>
         </div>
       </template>
-    </div>
+    </FaScrollArea>
   </FaModal>
 </template>
