@@ -23,7 +23,6 @@ const form = useForm({
   validationSchema: toTypedSchema(
     z.object({
       account: z.string().min(1, '请输入用户名'),
-      captcha: z.string().min(6, '请输入验证码'),
       password: z.string().min(1, '请输入密码').min(6, '密码长度为6到18位').max(18, '密码长度为6到18位'),
       checkPassword: z.string().min(1, '请再次输入密码'),
     }).refine(data => data.password === data.checkPassword, {
@@ -33,7 +32,6 @@ const form = useForm({
   ),
   initialValues: {
     account: props.account ?? '',
-    captcha: '',
     password: '',
     checkPassword: '',
   },
