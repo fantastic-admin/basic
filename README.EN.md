@@ -6,7 +6,7 @@
 
 <h1 align="center">Fantastic-admin</h1>
 
-<p align="center">A <b>out-of-the-box</b> Vue3 back-office management system framework</p>
+<p align="center">An <b>out-of-the-box</b> Vue3 management system framework</p>
 
 <p align="center">
   <a href="https://fantastic-admin.hurui.me" target="_blank">Official Website</a>
