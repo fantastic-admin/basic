@@ -8,7 +8,7 @@ defineOptions({
 </script>
 
 <template>
-  <div class="toolbar-container flex items-center justify-between">
+  <div class="toolbar-container h-[var(--g-toolbar-height)] flex items-center justify-between bg-[var(--g-toolbar-bg)]">
     <div class="left-side h-full flex items-center of-hidden pe-16 ps-2">
       <LeftSide />
     </div>
@@ -19,13 +19,7 @@ defineOptions({
 </template>
 
 <style scoped>
-.toolbar-container {
-  height: var(--g-toolbar-height);
-  background-color: var(--g-toolbar-bg);
-  transition: background-color 0.3s;
-
-  .left-side {
-    mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 50px), transparent);
-  }
+.left-side {
+  mask-image: linear-gradient(to right, #000 0%, #000 calc(100% - 50px), transparent);
 }
 </style>
