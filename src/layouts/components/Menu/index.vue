@@ -170,7 +170,7 @@ provide(rootMenuInjectionKey, reactive({
 
 <template>
   <div
-    :class="cn('h-full w-full flex flex-col of-hidden transition-all-300', {
+    :class="cn('h-full w-full flex flex-col of-hidden', {
       'flex-row w-auto': isMenuPopup && props.mode === 'horizontal',
       'py-1': props.mode === 'vertical',
     })"

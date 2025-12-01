@@ -59,6 +59,12 @@
   scrollbar-width: thin;
 }
 
+.disable-color-scheme-transition-duration *,
+.disable-color-scheme-transition-duration *::before,
+.disable-color-scheme-transition-duration *::after {
+  transition-duration: 0ms !important;
+}
+
 html,
 body {
   height: 100%;

@@ -29,7 +29,7 @@ const { switchTo } = useMenu()
                 }"
               >
                 <div
-                  v-if="item.children && item.children.length !== 0" class="group menu-item-container relative h-full w-full flex cursor-pointer items-center justify-between gap-1 rounded-lg px-3 text-[var(--g-header-menu-color)] transition-all hover-(bg-[var(--g-header-menu-hover-bg)] text-[var(--g-header-menu-hover-color)])" :class="{
+                  v-if="item.children && item.children.length !== 0" class="group menu-item-container relative h-full w-full flex cursor-pointer items-center justify-between gap-1 rounded-lg px-3 text-[var(--g-header-menu-color)] transition-colors hover-(bg-[var(--g-header-menu-hover-bg)] text-[var(--g-header-menu-hover-color)])" :class="{
                     'text-[var(--g-header-menu-active-color)]! bg-[var(--g-header-menu-active-bg)]!': index === menuStore.actived,
                   }" :title="typeof item.meta?.title === 'function' ? item.meta?.title() : item.meta?.title" @click="switchTo(index)"
                 >

@@ -12,6 +12,12 @@ export const useSettingsStore = defineStore(
 
     const prefersColorScheme = window.matchMedia('(prefers-color-scheme: dark)')
     watch(() => settings.value.app.colorScheme, (val) => {
+      document.documentElement.classList.add('disable-color-scheme-transition-duration')
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.documentElement.classList.remove('disable-color-scheme-transition-duration')
+        })
+      })
       if (val === '') {
         prefersColorScheme.addEventListener('change', updateTheme)
       }
