@@ -61,11 +61,13 @@
 
 ## 支持
 
-如果觉得 Fantastic-admin 这个框架不错，或者已经在使用了，希望你可以在 **Github** 或者 **Gitee(码云)** 帮我点个 ⭐ ，这将对我是极大的鼓励。
+如果觉得 Fantastic-admin 这个框架不错，或者已经在使用了，希望你可以在 **Github** / **Gitee** / **GitCode** 帮我点个 ⭐ ，这将对我是极大的鼓励。
 
 [![star](https://img.shields.io/github/stars/fantastic-admin/basic?style=social)](https://github.com/fantastic-admin/basic)
 
 [![star](https://gitee.com/fantastic-admin/basic/badge/star.svg?theme=dark)](https://gitee.com/fantastic-admin/basic)
+
+[![star](https://atomgit.com/fantastic-admin/basic/star/badge.svg)](https://atomgit.com/fantastic-admin/basic)
 
 <details>
 <summary>Github Stars 曲线</summary>
