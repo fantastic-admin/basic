@@ -99,6 +99,7 @@ const options = computed(() => {
   }
 })
 
+// @ts-expect-error: 'carouselRef' is declared but its value is never read. Maybe it's a bug?
 const { inputRef, setValue, setOptions, numberValue, formattedValue } = useCurrencyInput(options.value as CurrencyInputOptions)
 
 watch(options, (value) => {
