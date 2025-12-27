@@ -1,6 +1,6 @@
 {
   "type": "module",
-  "version": "5.8.0",
+  "version": "5.9.0",
   "packageManager": "pnpm@10.26.2",
   "engines": {
     "node": "^20.19.0 || >=22.12.0"
