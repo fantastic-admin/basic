@@ -214,7 +214,7 @@ function handleMouseleave() {
           'bg-[var(--g-sub-sidebar-bg)]': rootMenu.isMenuPopup,
           'border shadow-xl fixed z-3000 w-[200px]': rootMenu.isMenuPopup,
           'mx-1': rootMenu.isMenuPopup && (rootMenu.props.mode === 'vertical' || level !== 0),
-          'py-1': rootMenu.isMenuPopup,
+          'py-1 overscroll-contain': rootMenu.isMenuPopup,
         })"
       >
         <template v-for="item in menu.children" :key="item.path ?? rootMenu.getUseId(item)">
