@@ -54,7 +54,7 @@ watch(() => menuStore.actived, (val, oldVal) => {
         }"
       />
       <component :is="useSlots('sub-sidebar-after-logo')" />
-      <FaScrollArea :scrollbar="false" mask gradient-color="var(--g-sub-sidebar-bg)" class="flex-1">
+      <FaScrollArea :scrollbar="false" mask gradient-color="var(--g-sub-sidebar-bg)" class="flex-1 overscroll-contain">
         <TransitionGroup :name="transitionName">
           <template v-for="(mainItem, mainIndex) in menuStore.allMenus" :key="mainIndex">
             <div v-show="mainIndex === menuStore.actived">
