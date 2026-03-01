@@ -1,7 +1,7 @@
 [中文](./README.md) | **English**
 
 <p align="center">
-  <img src="https://fantastic-admin.hurui.me/logo.svg" width="200" height="200" />
+  <img src="https://fantastic-admin.hurui.me/logo.svg" width="200" height="200" alt="Fantastic-admin" />
 </p>
 
 <h1 align="center">Fantastic-admin</h1>
@@ -15,8 +15,8 @@
 <p>
 
 <p align="center">
-  <a href="###"><img src="https://img.shields.io/github/license/fantastic-admin/basic?label=License&style=flat-square" /></a>
-  <a href="https://github.com/fantastic-admin/basic/releases" target="_blank"><img src="https://img.shields.io/github/v/release/fantastic-admin/basic?label=Version&style=flat-square" /></a>
+  <a href="###"><img src="https://img.shields.io/github/license/fantastic-admin/basic?label=License&style=flat-square" alt="" /></a>
+  <a href="https://github.com/fantastic-admin/basic/releases" target="_blank"><img src="https://img.shields.io/github/v/release/fantastic-admin/basic?label=Version&style=flat-square" alt="" /></a>
 </p>
 
 ## Features
@@ -48,14 +48,14 @@
 
 <table>
   <tr>
-    <td><img src="https://fantastic-admin.hurui.me/preview1.png" /></td>
-    <td><img src="https://fantastic-admin.hurui.me/preview2.png" /></td>
-    <td><img src="https://fantastic-admin.hurui.me/preview3.png" /></td>
+    <td><img src="https://fantastic-admin.hurui.me/preview1.png" alt="" /></td>
+    <td><img src="https://fantastic-admin.hurui.me/preview2.png" alt="" /></td>
+    <td><img src="https://fantastic-admin.hurui.me/preview3.png" alt="" /></td>
   </tr>
   <tr>
-    <td><img src="https://fantastic-admin.hurui.me/preview4.png" /></td>
-    <td><img src="https://fantastic-admin.hurui.me/preview5.png" /></td>
-    <td><img src="https://fantastic-admin.hurui.me/preview6.png" /></td>
+    <td><img src="https://fantastic-admin.hurui.me/preview4.png" alt="" /></td>
+    <td><img src="https://fantastic-admin.hurui.me/preview5.png" alt="" /></td>
+    <td><img src="https://fantastic-admin.hurui.me/preview6.png" alt="" /></td>
   </tr>
 </table>
 
@@ -98,14 +98,14 @@ If you think the Fantastic-admin framework is good, or you are already using it,
     </th>
   </tr>
   <tr>
-    <td><img src="https://one-step-admin.hurui.me/preview1.png" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview2.png" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview3.png" /></td>
+    <td><img src="https://one-step-admin.hurui.me/preview1.png" alt="" /></td>
+    <td><img src="https://one-step-admin.hurui.me/preview2.png" alt="" /></td>
+    <td><img src="https://one-step-admin.hurui.me/preview3.png" alt="" /></td>
   </tr>
   <tr>
-    <td><img src="https://one-step-admin.hurui.me/preview4.png" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview5.png" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview6.png" /></td>
+    <td><img src="https://one-step-admin.hurui.me/preview4.png" alt="" /></td>
+    <td><img src="https://one-step-admin.hurui.me/preview5.png" alt="" /></td>
+    <td><img src="https://one-step-admin.hurui.me/preview6.png" alt="" /></td>
   </tr>
 </table>
 
@@ -121,9 +121,9 @@ If you think the Fantastic-admin framework is good, or you are already using it,
     </th>
   </tr>
   <tr>
-    <td><img src="https://fantastic-mobile.hurui.me/preview1.png" /></td>
-    <td><img src="https://fantastic-mobile.hurui.me/preview2.png" /></td>
-    <td><img src="https://fantastic-mobile.hurui.me/preview3.png" /></td>
-    <td><img src="https://fantastic-mobile.hurui.me/preview4.png" /></td>
+    <td><img src="https://fantastic-mobile.hurui.me/preview1.png" alt="" /></td>
+    <td><img src="https://fantastic-mobile.hurui.me/preview2.png" alt="" /></td>
+    <td><img src="https://fantastic-mobile.hurui.me/preview3.png" alt="" /></td>
+    <td><img src="https://fantastic-mobile.hurui.me/preview4.png" alt="" /></td>
   </tr>
 </table>

@@ -80,11 +80,11 @@ const state = ref<State>({
 function dispatch(action: Action) {
   switch (action.type) {
     case actionTypes.ADD_TOAST:
-      state.value.toasts = [action.toast, ...state.value.toasts].slice(0, TOAST_LIMIT)
+      state.value.toasts = [action.toast as any, ...state.value.toasts as any].slice(0, TOAST_LIMIT)
       break
 
     case actionTypes.UPDATE_TOAST:
-      state.value.toasts = state.value.toasts.map(t =>
+      state.value.toasts = state.value.toasts.map((t: any) =>
         t.id === action.toast.id ? { ...t, ...action.toast } : t,
       )
       break
@@ -101,7 +101,7 @@ function dispatch(action: Action) {
         })
       }
 
-      state.value.toasts = state.value.toasts.map(t =>
+      state.value.toasts = state.value.toasts.map((t: any) =>
         t.id === toastId || toastId === undefined
           ? {
               ...t,
@@ -116,7 +116,7 @@ function dispatch(action: Action) {
       if (action.toastId === undefined) {
         state.value.toasts = []
       }
-      else { state.value.toasts = state.value.toasts.filter(t => t.id !== action.toastId) }
+      else { state.value.toasts = state.value.toasts.filter((t: any) => t.id !== action.toastId) }
 
       break
   }

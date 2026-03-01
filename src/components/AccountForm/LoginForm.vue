@@ -83,7 +83,7 @@ function testAccount(account: string) {
         <FormField v-slot="{ componentField, errors }" name="account">
           <FormItem class="relative pb-6 space-y-0">
             <FormControl>
-              <FaInput type="text" placeholder="请输入用户名" class="w-full" :class="errors.length && 'border-destructive'" v-bind="componentField" />
+              <FaInput type="text" placeholder="请输入用户名" class="w-full" :class="errors.length > 0 && 'border-destructive'" v-bind="componentField" />
             </FormControl>
             <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
               <FormMessage class="absolute bottom-1 text-xs" />
@@ -93,7 +93,7 @@ function testAccount(account: string) {
         <FormField v-slot="{ componentField, errors }" name="password">
           <FormItem class="relative pb-6 space-y-0">
             <FormControl>
-              <FaInput type="password" placeholder="请输入密码" class="w-full" :class="errors.length && 'border-destructive'" v-bind="componentField" />
+              <FaInput type="password" placeholder="请输入密码" class="w-full" :class="errors.length > 0 && 'border-destructive'" v-bind="componentField" />
             </FormControl>
             <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
               <FormMessage class="absolute bottom-1 text-xs" />

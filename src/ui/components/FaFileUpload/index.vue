@@ -80,7 +80,7 @@ function onSelectFile(files: FileList | File[] | null) {
   if (!files) {
     return
   }
-  const selectedFiles = Array.from(files)
+  const selectedFiles = [...files]
   // 数量限制
   const remain = props.max > 0 ? props.max - fileList.value.length : selectedFiles.length
   const filesToAdd: File[] = []

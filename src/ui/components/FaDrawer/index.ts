@@ -94,7 +94,7 @@ export function useFaDrawer() {
     }
 
     // 监听 visible 和 options 变化，自动重新渲染
-    watch([visible, options], () => {
+    watch([visible, options as object], () => {
       updateVNode()
     }, {
       immediate: true,

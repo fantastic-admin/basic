@@ -173,7 +173,12 @@ onMounted(() => {
         }
         // 切换到最后一个标签页
         case 'alt+0':
-          router.push(tabbarStore.list[tabbarStore.list.length - 1].fullPath)
+          {
+            const last = tabbarStore.list.at(-1)
+            if (last) {
+              router.push(last.fullPath)
+            }
+          }
           break
       }
     }
