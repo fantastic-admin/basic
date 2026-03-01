@@ -33,7 +33,7 @@ function toggleColorScheme(event: MouseEvent) {
     ]
     document.documentElement.animate(
       {
-        clipPath: settingsStore.currentColorScheme === 'light' ? clipPath : [...clipPath].reverse(),
+        clipPath: settingsStore.currentColorScheme === 'light' ? clipPath : clipPath.toReversed(),
       },
       {
         duration: 500,

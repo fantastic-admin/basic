@@ -72,7 +72,7 @@ function open(url: string) {
         <div class="space-y-2">
           <p>
             安装命令：
-            <Command text="pnpm add tinymce @tinymce/tinymce-vue" />
+            <Command text="pnpm add tinymce@7.9.2 @tinymce/tinymce-vue" />
           </p>
           <p>
             安装成功后，在框架 /public 目录下创建 tinymce 文件夹，并将 /node_modules/tinymce 目录下的 skins 文件夹复制到 /public/tinymce 目录下；然后在到 TinyMCE 官网

@@ -41,7 +41,7 @@ function open(url: string) {
       <template #description>
         <p>
           安装命令：
-          <Command text="pnpm add cropperjs" />
+          <Command text="pnpm add cropperjs@1.6.2" />
         </p>
       </template>
       <FaButton variant="outline" @click="open('https://github.com/fengyuanchen/cropperjs')">

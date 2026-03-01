@@ -131,16 +131,18 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       transform: (code, id) => {
         if (/src\/main.ts$/.test(id)) {
           if (viteEnv.VITE_APP_DEBUG_TOOL === 'eruda') {
-            code = code.concat(`
-              import eruda from 'eruda'
-              eruda.init()
-            `)
+            code = `
+${code}
+import eruda from 'eruda'
+eruda.init()
+            `
           }
           else if (viteEnv.VITE_APP_DEBUG_TOOL === 'vconsole') {
-            code = code.concat(`
-              import VConsole from 'vconsole'
-              new VConsole()
-            `)
+            code = `
+${code}
+import VConsole from 'vconsole'
+new VConsole()
+            `
           }
           return {
             code,
@@ -157,12 +159,13 @@ export default function createVitePlugins(mode: string, isBuild = false) {
         if (/src\/main.ts$/.test(id)) {
           if (viteEnv.VITE_APP_DISABLE_DEVTOOL) {
             // ?ddtk=example
-            code = code.concat(`
-              import DisableDevtool from 'disable-devtool'
-              DisableDevtool({
-                md5: '1a79a4d60de6718e8e5b326e338ae533',
-              })
-            `)
+            code = `
+${code}
+import DisableDevtool from 'disable-devtool'
+DisableDevtool({
+  md5: '1a79a4d60de6718e8e5b326e338ae533',
+})
+            `
           }
           return {
             code,

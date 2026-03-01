@@ -30,7 +30,7 @@ if (isSupprotColorMix) {
 </script>
 
 <template>
-  <ElConfigProvider :locale="zhCN" :button="{ autoInsertSpace: true }">
+  <ElConfigProvider :locale="zhCN as any" :button="{ autoInsertSpace: true }">
     <slot />
   </ElConfigProvider>
 </template>

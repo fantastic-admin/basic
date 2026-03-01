@@ -54,7 +54,7 @@ function onSelectFile(e: Event) {
   if (!input.files) {
     return
   }
-  const selectedFiles = Array.from(input.files)
+  const selectedFiles = [...input.files]
   const remain = props.max === 0 ? selectedFiles.length : props.max - images.value.length
   const filesToAdd: File[] = []
   for (const file of selectedFiles.slice(0, remain)) {
