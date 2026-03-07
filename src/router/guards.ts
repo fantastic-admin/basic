@@ -4,7 +4,7 @@ import { asyncRoutes, asyncRoutesByFilesystem } from './routes'
 import '@/assets/styles/nprogress.css'
 
 function setupRoutes(router: Router) {
-  router.beforeEach(async (to, _from, next) => {
+  router.beforeEach(async (to) => {
     const settingsStore = useSettingsStore()
     const userStore = useUserStore()
     const routeStore = useRouteStore()
@@ -17,27 +17,19 @@ function setupRoutes(router: Router) {
         settingsStore.settings.menu.mode !== 'single' && menuStore.setActived(to.path)
         // 如果已登录状态下，进入登录页会强制跳转到主页
         if (to.name === 'login') {
-          next({
+          return {
             path: settingsStore.settings.home.fullPath,
             replace: true,
-          })
+          }
         }
         // 如果未开启主页，但进入的是主页，则会进入侧边栏导航第一个模块
         else if (!settingsStore.settings.home.enable && to.fullPath === settingsStore.settings.home.fullPath) {
           if (menuStore.sidebarMenus.length > 0) {
-            next({
+            return {
               path: menuStore.sidebarMenusFirstDeepestPath,
               replace: true,
-            })
+            }
           }
-          // 如果侧边栏导航第一个模块均无法命中，则还是进入主页
-          else {
-            next()
-          }
-        }
-        // 正常访问页面
-        else {
-          next()
         }
       }
       else {
@@ -84,24 +76,21 @@ function setupRoutes(router: Router) {
           userStore.logout()
         }
         // 动态路由生成并注册后，重新进入当前路由
-        next({
+        return {
           path: to.path,
           query: to.query,
           replace: true,
-        })
+        }
       }
     }
     else {
       if (to.name !== 'login') {
-        next({
+        return {
           name: 'login',
           query: {
             redirect: to.fullPath !== settingsStore.settings.home.fullPath ? to.fullPath : undefined,
           },
-        })
-      }
-      else {
-        next()
+        }
       }
     }
   })
@@ -109,20 +98,14 @@ function setupRoutes(router: Router) {
 
 // 当父级路由未配置重定向时，自动重定向到有访问权限的子路由
 function setupRedirectAuthChildrenRoute(router: Router) {
-  router.beforeEach((to, _from, next) => {
+  router.beforeEach((to) => {
     const { auth } = useAuth()
     const currentRoute = router.getRoutes().find(route => route.path === (to.matched.at(-1)?.path ?? ''))
     if (!currentRoute?.redirect) {
       const findAuthRoute = currentRoute?.children?.find(route => route.meta?.menu !== false && auth(route.meta?.auth ?? ''))
       if (findAuthRoute) {
-        next(findAuthRoute)
+        return findAuthRoute
       }
-      else {
-        next()
-      }
-    }
-    else {
-      next()
     }
   })
 }
@@ -130,12 +113,11 @@ function setupRedirectAuthChildrenRoute(router: Router) {
 // 进度条
 function setupProgress(router: Router) {
   const { isLoading } = useNProgress()
-  router.beforeEach((_to, _from, next) => {
+  router.beforeEach(() => {
     const settingsStore = useSettingsStore()
     if (settingsStore.settings.app.enableProgress) {
       isLoading.value = true
     }
-    next()
   })
   router.afterEach(() => {
     const settingsStore = useSettingsStore()
