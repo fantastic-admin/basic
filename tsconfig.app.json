@@ -3,7 +3,6 @@
   "compilerOptions": {
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
       "#/*": ["./src/types/*"]
