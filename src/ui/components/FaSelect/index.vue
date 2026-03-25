@@ -29,10 +29,10 @@ const value = defineModel<AcceptableValue>()
 
 const selectedOption = computed({
   get() {
-    return props.options.find(option => option.value === value.value) ?? props.options[0]
+    return props.options.length > 0 ? props.options.find(option => option.value === value.value) ?? props.options[0] : null
   },
   set(val) {
-    value.value = val.value
+    value.value = val?.value || null
   },
 })
 </script>
@@ -40,7 +40,7 @@ const selectedOption = computed({
 <template>
   <Select v-model="value" :disabled>
     <SelectTrigger :class="cn('w-[200px]', props.class)">
-      <SelectValue :placeholder="selectedOption.label" />
+      <SelectValue :placeholder="selectedOption?.label" />
     </SelectTrigger>
     <SelectContent>
       <SelectGroup>
