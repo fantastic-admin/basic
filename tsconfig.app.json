@@ -18,6 +18,7 @@
     "strict": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedIndexedAccess": false,
+    "noUncheckedSideEffectImports": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "sourceMap": true,
