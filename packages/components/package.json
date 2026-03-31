@@ -1,0 +1,40 @@
+{
+  "name": "@fantastic-admin/components",
+  "type": "module",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts",
+    "./resolver": "./resolver.ts"
+  },
+  "peerDependencies": {
+    "@vueuse/components": "catalog:",
+    "@vueuse/core": "catalog:",
+    "unplugin-auto-import": "catalog:",
+    "unplugin-vue-components": "catalog:",
+    "vite": "catalog:",
+    "vue": "catalog:",
+    "vue-router": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "unplugin-auto-import": {
+      "optional": true
+    },
+    "unplugin-vue-components": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@iconify/vue": "catalog:",
+    "axios": "catalog:",
+    "class-variance-authority": "catalog:",
+    "clsx": "catalog:",
+    "es-toolkit": "catalog:",
+    "filesize": "catalog:",
+    "lucide-vue-next": "catalog:",
+    "reka-ui": "catalog:",
+    "tailwind-merge": "catalog:",
+    "vue-input-otp": "catalog:",
+    "vue-sonner": "catalog:"
+  },
+  "devDependencies": {}
+}

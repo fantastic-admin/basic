@@ -1,0 +1,16 @@
+{
+  "name": "@fantastic-admin/copyright",
+  "type": "module",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "peerDependencies": {
+    "vite": "catalog:"
+  },
+  "dependencies": {
+    "boxen": "catalog:",
+    "picocolors": "catalog:",
+    "vite-plugin-banner": "catalog:"
+  }
+}

@@ -1,0 +1,70 @@
+<script setup lang="ts">
+import { useRequest } from 'vue-hooks-plus'
+import Alert from './components/alert.vue'
+import Command from './components/command.vue'
+
+function getUsername(): Promise<string> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(String(Date.now()))
+    }, 1000)
+  })
+}
+
+const time = ref(900)
+
+const computedTime = computed(() => time.value + 100)
+
+const { data, run, loading, cancel } = useRequest(() => getUsername(), {
+  manual: true,
+  pollingInterval: computedTime,
+  pollingWhenHidden: false,
+})
+
+function start() {
+  run()
+}
+
+function update() {
+  time.value += 100
+}
+
+function open(url: string) {
+  window.open(url, '_blank')
+}
+</script>
+
+<template>
+  <div>
+    <Alert />
+    <FaPageHeader title="VueHooks Plus">
+      <template #description>
+        <Command text="pnpm add vue-hooks-plus" />
+      </template>
+      <FaButton variant="outline" size="icon" @click="open('https://github.com/InhiblabCore/vue-hooks-plus')">
+        <FaIcon name="i-simple-icons:github" />
+      </FaButton>
+    </FaPageHeader>
+    <FaPageMain title="轮询">
+      <div class="space-y-2">
+        <div>
+          Data：<span>{{ loading ? 'loading' : data }}</span>
+        </div>
+        <div>
+          PollingInterval：{{ computedTime }}ms
+        </div>
+        <div class="space-x-2">
+          <FaButton @click="start()">
+            Start
+          </FaButton>
+          <FaButton @click="update()">
+            time + 100ms
+          </FaButton>
+          <FaButton @click="cancel()">
+            Stop
+          </FaButton>
+        </div>
+      </div>
+    </FaPageMain>
+  </div>
+</template>

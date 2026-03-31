@@ -1,0 +1,8 @@
+{
+  "name": "@fantastic-admin/themes",
+  "type": "module",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts"
+  }
+}

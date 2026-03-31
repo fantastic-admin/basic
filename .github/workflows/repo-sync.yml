@@ -1,0 +1,36 @@
+name: repo-sync
+
+on:
+  # 每天 00:05 自动同步
+  schedule:
+    - cron: '5 0 * * *'
+  # 手动触发部署
+  workflow_dispatch:
+
+jobs:
+  sync-to-gitee:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to Gitee
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 注意在 Settings->Secrets 配置 GITEE_RSA_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.GITEE_RSA_PRIVATE_KEY }}
+        with:
+          # 注意替换为你的 GitHub 源仓库地址
+          source-repo: git@github.com:fantastic-admin/basic.git
+          # 注意替换为你的 Gitee 目标仓库地址
+          destination-repo: git@gitee.com:fantastic-admin/basic.git
+  sync-to-atomgit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Sync to AtomGit
+        uses: wearerequired/git-mirror-action@master
+        env:
+          # 注意在 Settings->Secrets 配置 ATOMGIT_RSA_PRIVATE_KEY
+          SSH_PRIVATE_KEY: ${{ secrets.ATOMGIT_RSA_PRIVATE_KEY }}
+        with:
+          # 注意替换为你的 GitHub 源仓库地址
+          source-repo: git@github.com:fantastic-admin/basic.git
+          # 注意替换为你的 AtomGit 目标仓库地址
+          destination-repo: git@gitcode.com:fantastic-admin/basic.git

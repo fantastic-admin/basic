@@ -1,0 +1,37 @@
+import type { RouteRecordRaw } from 'vue-router'
+
+function Layout() {
+  return import('@/layouts/index.vue')
+}
+
+const routes: RouteRecordRaw = {
+  path: '/link',
+  component: Layout,
+  name: 'externalLinkExample',
+  meta: {
+    title: '外链',
+    icon: 'i-ri:external-link-fill',
+  },
+  children: [
+    {
+      path: 'github',
+      redirect: '',
+      name: 'linkExampleWindowGithub',
+      meta: {
+        title: 'Github',
+        link: 'https://github.com/fantastic-admin/basic',
+      },
+    },
+    {
+      path: 'gitee',
+      redirect: '',
+      name: 'linkExampleWindowGitee',
+      meta: {
+        title: 'Gitee',
+        link: 'https://gitee.com/fantastic-admin/basic',
+      },
+    },
+  ],
+}
+
+export default routes

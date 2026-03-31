@@ -1,0 +1,12 @@
+{
+  "name": "@fantastic-admin/types",
+  "type": "module",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts",
+    "./global": "./global.d.ts"
+  },
+  "peerDependencies": {
+    "vue-router": "catalog:"
+  }
+}

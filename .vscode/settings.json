@@ -1,0 +1,33 @@
+{
+  "npm.packageManager": "pnpm",
+  "js/ts.tsdk.path": "node_modules/typescript/lib",
+  "search.exclude": {
+    "**/dist*": true
+  },
+  "prettier.enable": false,
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.stylelint": "explicit",
+    "source.organizeImports": "never"
+  },
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact",
+    "vue",
+    "html",
+    "markdown",
+    "json",
+    "jsonc",
+    "yaml"
+  ],
+  "stylelint.validate": [
+    "css",
+    "postcss",
+    "scss",
+    "vue"
+  ]
+}

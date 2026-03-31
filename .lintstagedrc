@@ -1,0 +1,4 @@
+{
+  "*.{ts,tsx,vue}": "eslint --cache --fix",
+  "*.{css,scss,vue}": "stylelint --cache --fix"
+}

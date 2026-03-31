@@ -1,0 +1,60 @@
+{
+  "name": "fantastic-admin",
+  "type": "module",
+  "version": "5.10.1",
+  "private": true,
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "scripts": {
+    "dev": "tsx scripts/dev.ts",
+    "build": "tsx scripts/build.ts",
+    "serve": "tsx scripts/serve.ts",
+    "lint": "run-s lint:tsc lint:eslint lint:stylelint",
+    "lint:tsc": "pnpm --filter './apps/*' -r run lint",
+    "lint:eslint": "eslint . --cache --fix",
+    "lint:stylelint": "stylelint \"{apps,packages}/**/*.{css,scss,vue}\" --cache --fix",
+    "preinstall": "npx only-allow pnpm",
+    "postinstall": "simple-git-hooks",
+    "taze": "taze minor -wIr",
+    "commit": "git cz",
+    "release": "bumpp"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "catalog:",
+    "@clack/prompts": "catalog:",
+    "@fantastic-admin/themes": "workspace:*",
+    "@iconify/json": "catalog:",
+    "@stylistic/stylelint-config": "catalog:",
+    "@types/node": "catalog:",
+    "@unocss/core": "catalog:",
+    "@unocss/eslint-plugin": "catalog:",
+    "autoprefixer": "catalog:",
+    "bumpp": "catalog:",
+    "cz-git": "catalog:",
+    "eslint": "catalog:",
+    "lint-staged": "catalog:",
+    "npm-run-all2": "catalog:",
+    "simple-git-hooks": "catalog:",
+    "stylelint": "catalog:",
+    "stylelint-config-recess-order": "catalog:",
+    "stylelint-config-standard-scss": "catalog:",
+    "stylelint-config-standard-vue": "catalog:",
+    "stylelint-scss": "catalog:",
+    "taze": "catalog:",
+    "tsx": "catalog:",
+    "typescript": "catalog:",
+    "unocss": "catalog:",
+    "unocss-preset-animations": "catalog:"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm lint-staged",
+    "preserveUnused": true
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-git"
+    }
+  }
+}
