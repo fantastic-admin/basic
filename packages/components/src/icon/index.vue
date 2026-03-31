@@ -54,7 +54,7 @@ const outputType = computed(() => {
         <Icon :icon="name" class="shrink-0 size-inherit!" />
       </span>
       <svg v-else-if="outputType === 'svg'" :key="`svg-${name}`" class="shrink-0 size-inherit inset-0 absolute" aria-hidden="true">
-        <use :xlink:href="`/__spritemap#sprite-${name}`" />
+        <use :xlink:href="`./__spritemap#sprite-${name}`" />
       </svg>
       <span v-else-if="outputType === 'img'" :key="`img-${name}`" class="flex shrink-0 size-inherit items-center inset-0 justify-center absolute">
         <UseImage :src="name" class="shrink-0 size-inherit">
