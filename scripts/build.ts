@@ -9,6 +9,7 @@ import * as p from '@clack/prompts'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const rootDir = path.resolve(__dirname, '..')
+const isWindows = process.platform === 'win32'
 
 let childProcess: ReturnType<typeof spawn> | null = null
 
@@ -59,6 +60,7 @@ async function runBuild(packageName: string, script: string): Promise<void> {
     childProcess = spawn('pnpm', ['--filter', packageName, 'run', script], {
       stdio: 'inherit',
       cwd: rootDir,
+      shell: isWindows,
     })
 
     childProcess.on('close', (code) => {
