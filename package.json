@@ -16,7 +16,7 @@
     "lint:eslint": "eslint . --cache --fix",
     "lint:stylelint": "stylelint \"{apps,packages}/**/*.{css,scss,vue}\" --cache --fix",
     "preinstall": "npx only-allow pnpm",
-    "postinstall": "simple-git-hooks && tsx scripts/postinstall.ts",
+    "postinstall": "simple-git-hooks",
     "taze": "taze minor -wIr",
     "commit": "git cz",
     "release": "bumpp"

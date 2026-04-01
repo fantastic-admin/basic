@@ -42,7 +42,7 @@ jobs:
         with:
           type: zip
           filename: fantastic-admin.${{ steps.last_release.outputs.tag_name }}.zip
-          exclusions: '/.git/* /.github/*'
+          exclusions: '/.git/* /.github/* /.agents/* /.claude/* /CLAUDE.md'
 
       - name: Upload Archive To Release
         uses: xresloader/upload-to-github-release@v1
@@ -52,35 +52,3 @@ jobs:
           release_id: ${{ steps.last_release.outputs.id }}
           draft: false
           file: fantastic-admin.${{ steps.last_release.outputs.tag_name }}.zip
-
-  upload-archive-without-example:
-    needs: release
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
-
-      - name: Get Release
-        id: last_release
-        uses: joutvhu/get-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          latest: true
-
-      - name: Create Archive
-        uses: thedoctor0/zip-release@main
-        with:
-          type: zip
-          filename: fantastic-admin.without-example.${{ steps.last_release.outputs.tag_name }}.zip
-          exclusions: '/.git/* /.github/* /apps/example*/*'
-
-      - name: Upload Archive To Release
-        uses: xresloader/upload-to-github-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          release_id: ${{ steps.last_release.outputs.id }}
-          draft: false
-          file: fantastic-admin.without-example.${{ steps.last_release.outputs.tag_name }}.zip
