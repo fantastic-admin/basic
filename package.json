@@ -8,9 +8,9 @@
     "node": "^20.19.0 || ^22.13.0 || >=24"
   },
   "scripts": {
-    "dev": "tsx scripts/dev.ts",
-    "build": "tsx scripts/build.ts",
-    "serve": "tsx scripts/serve.ts",
+    "dev": "tsx scripts/cli.ts --mode=dev",
+    "build": "tsx scripts/cli.ts --mode=build",
+    "serve": "tsx scripts/cli.ts --mode=serve",
     "lint": "run-s lint:tsc lint:eslint lint:stylelint",
     "lint:tsc": "pnpm --filter './apps/*' -r run lint",
     "lint:eslint": "eslint . --cache --fix",
