@@ -4,6 +4,7 @@
     "types": ["node"]
   },
   "include": [
-    "index.ts"
+    "index.ts",
+    "build.config.ts"
   ]
 }

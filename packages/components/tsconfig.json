@@ -6,6 +6,7 @@
   },
   "include": [
     "auto-imports.d.ts",
+    "build.config.ts",
     "global.d.ts",
     "index.ts",
     "resolver.ts",
