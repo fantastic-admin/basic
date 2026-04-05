@@ -63,7 +63,7 @@ const isSubSidebarEnable = computed(() => {
         )
         || (
           appSettingsStore.settings.menu.mainMenuClickMode !== 'switch'
-          && appMenuStore.sidebarMenus.filter(item => item.meta?.menu !== false).length > 1
+          && appMenuStore.sidebarMenus.some(item => item.meta?.menu !== false)
         )
       )
     )
