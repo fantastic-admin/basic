@@ -19,7 +19,7 @@ async function accountSwitch(val: any) {
 }
 function goTest() {
   router.push({
-    name: 'permissionExampleTest',
+    name: 'authExampleTest',
   })
 }
 function permissionCheck(permissions: string | string[]) {

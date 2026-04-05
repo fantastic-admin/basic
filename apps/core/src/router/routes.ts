@@ -1,6 +1,7 @@
 import type { RouteRecordMainRaw } from '@fantastic-admin/types'
 import type { RouteRecordRaw } from 'vue-router'
 import pinia from '@/store'
+import MultilevelMenuExample from './modules/multilevel.menu.example'
 
 // 固定路由（默认路由）
 const constantRoutes: RouteRecordRaw[] = [
@@ -54,7 +55,17 @@ const systemRoutes: RouteRecordRaw[] = [
 ]
 
 // 动态路由（异步路由、导航菜单路由）
-const asyncRoutes: RouteRecordMainRaw[] = []
+const asyncRoutes: RouteRecordMainRaw[] = [
+  {
+    meta: {
+      title: '演示',
+      icon: 'i-ri:function-ai-line',
+    },
+    children: [
+      MultilevelMenuExample,
+    ],
+  },
+]
 
 export {
   asyncRoutes,

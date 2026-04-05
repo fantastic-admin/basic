@@ -97,7 +97,7 @@ export const useAppRouteStore = defineStore(
       isGenerate.value = true
     }
     // 格式化后端路由数据
-    function formatBackRoutes(routes: any, views = import.meta.glob('../../views/**/*.vue')): RouteRecordMainRaw[] {
+    function formatBackRoutes(routes: any, views = import.meta.glob('@/views/**/*.vue')): RouteRecordMainRaw[] {
       return routes.map((route: any) => {
         switch (route.component) {
           case 'Layout':
@@ -105,7 +105,7 @@ export const useAppRouteStore = defineStore(
             break
           default:
             if (route.component) {
-              route.component = views[`../../views/${route.component}`]
+              route.component = views[`/src/views/${route.component}`]
             }
             else {
               delete route.component
