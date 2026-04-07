@@ -164,30 +164,6 @@ new VConsole()
       },
     },
 
-    {
-      name: 'vite-plugin-disable-devtool',
-      enforce: 'pre',
-      apply: 'build',
-      transform: (code, id) => {
-        if (/src\/main.ts$/.test(id)) {
-          if (viteEnv.VITE_APP_DISABLE_DEVTOOL) {
-            // ?ddtk=example
-            code = `
-${code}
-import DisableDevtool from 'disable-devtool'
-DisableDevtool({
-  md5: '1a79a4d60de6718e8e5b326e338ae533',
-})
-            `
-          }
-          return {
-            code,
-            map: null,
-          }
-        }
-      },
-    },
-
     createFantasticAdminCopyrightPlugins(),
   ]
   return vitePlugins
