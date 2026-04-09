@@ -29,7 +29,7 @@ const routes: RouteRecordRaw = {
       name: 'standardModuleExampleDetail',
       component: () => import('@/views/standard_module_example/detail.vue'),
       meta: {
-        title: '...',
+        title: '详情',
         menu: false,
         activeMenu: '/standard_module_example',
         keepAlive: true,
