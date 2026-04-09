@@ -14,6 +14,7 @@ import JsxExample from './modules/jsx.example'
 import KeepAliveExample from './modules/keep.alive.example'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
 import PluginExample from './modules/plugin.example'
+import StandardModuleExample from './modules/standard.module.example'
 import TabbarExample from './modules/tabbar.example'
 
 // 固定路由（默认路由）
@@ -87,6 +88,7 @@ const asyncRoutes: RouteRecordMainRaw[] = [
       FakeExample,
       JsxExample,
       ExternalLinkExample,
+      StandardModuleExample,
     ],
   },
   {
