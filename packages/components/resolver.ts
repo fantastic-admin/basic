@@ -30,6 +30,7 @@ const COMPONENT_NAMES = [
   'FaNumberField',
   'FaPageHeader',
   'FaPageMain',
+  'FaPagination',
   'FaPasswordStrength',
   'FaPopover',
   'FaProgress',

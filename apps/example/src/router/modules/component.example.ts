@@ -191,6 +191,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'pagination',
+      name: 'componentExamplePagination',
+      component: () => import('@/views/component_example/pagination/index.vue'),
+      meta: {
+        title: '分页',
+      },
+    },
+    {
       path: 'password_strength',
       name: 'componentExamplePasswordStrength',
       component: () => import('@/views/component_example/password_strength/index.vue'),
