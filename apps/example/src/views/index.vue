@@ -31,7 +31,7 @@ const products = ref([
     logo: 'https://fantastic-admin.hurui.me/logo.svg',
     url: 'https://fantastic-admin.hurui.me',
     images: [
-      'https://fantastic-admin.hurui.me/preview1.png',
+      'https://fantastic-admin.hurui.me/hero_preview.png',
     ],
   },
   {

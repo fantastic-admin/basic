@@ -1,14 +1,16 @@
 autoInstallPeers: true
-
 catalogMode: prefer
 cleanupUnusedCatalogs: true
 engineStrict: true
 ignoreWorkspaceRootCheck: true
 shamefullyHoist: true
 shellEmulator: true
+verifyDepsBeforeRun: prompt
+
 packages:
   - apps/*
   - packages/*
+
 catalog:
   '@antfu/eslint-config': ^8.1.1
   '@antv/g2plot': ^2.4.35
@@ -121,4 +123,16 @@ catalog:
   vxe-table: ^4.18.11
   xe-utils: ^4.0.4
   zod: ^4.3.6
-verifyDepsBeforeRun: prompt
+catalogs:
+  ant-design-vue:
+    ant-design-vue: ^4.2.6
+  antdv-next:
+    antdv-next: ^1.1.9
+  arco-design-vue:
+    '@arco-design/web-vue': ^2.57.0
+  naive-ui:
+    naive-ui: ^2.44.1
+  tdesign:
+    tdesign-vue-next: ^1.18.6
+  vexip-ui:
+    vexip-ui: ^2.3.39
