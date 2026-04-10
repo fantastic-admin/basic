@@ -10,9 +10,8 @@ watch(versionType, (val) => {
 
 const products = ref([
   {
-    id: 'startkit',
     name: 'Fantastic-startkit',
-    tagline: '一款简单好用的 Vue3 项目启动套件',
+    tagline: '简单好用的 Vue3 项目启动套件',
     logo: 'https://cn.vuejs.org/logo.svg',
     url: 'https://hooray.github.io/fantastic-startkit',
     features: [
@@ -25,19 +24,17 @@ const products = ref([
     ],
   },
   {
-    id: 'admin',
-    name: 'Fantastic-admin',
-    tagline: '一款开箱即用的 Vue 中后台管理系统框架',
-    logo: 'https://fantastic-admin.hurui.me/logo.svg',
-    url: 'https://fantastic-admin.hurui.me',
+    name: 'Fantastic-mobile',
+    tagline: '让你的 H5 项目拥有稳固的工程底座',
+    logo: 'https://fantastic-mobile.hurui.me/logo.png',
+    url: 'https://fantastic-mobile.hurui.me',
     images: [
-      'https://fantastic-admin.hurui.me/hero_preview.png',
+      'https://fantastic-mobile.hurui.me/hero_preview.png',
     ],
   },
   {
-    id: 'onestep',
     name: 'One-step-admin',
-    tagline: '一款干啥都快人一步的 Vue 中后台系统框架',
+    tagline: '干啥都快人一步的 Vue 中后台系统框架',
     logo: 'https://one-step-admin.hurui.me/logo.png',
     url: 'https://one-step-admin.hurui.me',
     images: [
@@ -192,7 +189,7 @@ function open(url: string) {
         <div class="gap-4 grid md-grid-cols-3">
           <div
             v-for="(product, i) in products"
-            :key="product.id"
+            :key="product.name"
             class="group card-enter border rounded-xl bg-neutral-950/[.012] dark:bg-white/5"
             :style="{ animationDelay: `${i * 80}ms` }"
           >
