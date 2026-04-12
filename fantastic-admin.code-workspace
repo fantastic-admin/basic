@@ -1,6 +1,17 @@
 {
   "folders": [
-    { "name": "core", "path": "apps/core" },
-    { "name": "example", "path": "apps/example" },
+    { "name": "apps/core", "path": "apps/core" },
+    { "name": "apps/core-ant-design-vue", "path": "apps/core-ant-design-vue" },
+    { "name": "apps/core-antdv-next", "path": "apps/core-antdv-next" },
+    { "name": "apps/core-arco-design-vue", "path": "apps/core-arco-design-vue" },
+    { "name": "apps/core-naive-ui", "path": "apps/core-naive-ui" },
+    { "name": "apps/core-tdesign", "path": "apps/core-tdesign" },
+    { "name": "apps/core-vexip-ui", "path": "apps/core-vexip-ui" },
+    { "name": "apps/example", "path": "apps/example" },
+    { "name": "packages/components", "path": "packages/components" },
+    { "name": "packages/copyright", "path": "packages/copyright" },
+    { "name": "packages/settings", "path": "packages/settings" },
+    { "name": "packages/themes", "path": "packages/themes" },
+    { "name": "packages/types", "path": "packages/types" },
   ]
 }
