@@ -25,8 +25,6 @@ const components = {
   评分: Rate,
 }
 
-const UIdialog = ref(false)
-
 function open(url: string) {
   window.open(url, '_blank')
 }
@@ -38,37 +36,9 @@ function open(url: string) {
       <template #description>
         <div class="space-y-2">
           <p>框架内置 Element Plus 组件库，本页仅展示部分组件，更多组件及使用说明请查看 Element Plus 官网</p>
-          <FaButton variant="link" class="p-0 h-auto" @click="UIdialog = true">
+          <FaButton variant="link" class="p-0 h-auto" @click="open('https://fantastic-admin.hurui.me/guide/other-ui.html')">
             不想使用 Element Plus ？
           </FaButton>
-          <FaModal v-model="UIdialog" title="切换组件库" description="本框架除了搭载 Element Plus 组件库，同时也支持以下的 UI 组件库，你可以根据实际需求选择喜爱的组件库。" :footer="false">
-            <div class="flex-col-center gap-2">
-              <FaButton variant="outline" class="w-full" @click="open('https://fantastic-admin.hurui.me/antd-example/')">
-                <FaIcon name="https://antdv.com/favicon.ico" />
-                Ant Design Vue
-              </FaButton>
-              <FaButton variant="outline" class="w-full" @click="open('https://fantastic-admin.hurui.me/idux-example/')">
-                <FaIcon name="https://www.antdv-next.com/antdv-next.svg" />
-                Antdv Next
-              </FaButton>
-              <FaButton variant="outline" class="w-full" @click="open('https://fantastic-admin.hurui.me/arco-example/')">
-                <FaIcon name="https://unpkg.byted-static.com/latest/byted/arco-config/assets/favicon.ico" />
-                Arco Design Vue
-              </FaButton>
-              <FaButton variant="outline" class="w-full" @click="open('https://fantastic-admin.hurui.me/naive-example/')">
-                <FaIcon name="i-logos:naiveui" />
-                Naive UI
-              </FaButton>
-              <FaButton variant="outline" class="w-full" @click="open('https://fantastic-admin.hurui.me/tdesign-example/')">
-                <FaIcon name="https://static.tdesign.tencent.com/favicon.ico" />
-                TDesign
-              </FaButton>
-              <FaButton variant="outline" class="w-full" @click="open('https://fantastic-admin.hurui.me/vexip-example/')">
-                <FaIcon name="https://www.vexipui.com/vexip-ui.svg" />
-                Vexip UI
-              </FaButton>
-            </div>
-          </FaModal>
         </div>
       </template>
       <FaButton variant="outline" @click="open('https://element-plus.org/#/zh-CN')">
