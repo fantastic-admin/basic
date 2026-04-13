@@ -11,7 +11,7 @@ const appSettingsStore = useAppSettingsStore()
 
 <template>
   <div class="flex items-center">
-    <FaButton v-if="appSettingsStore.mode === 'mobile'" variant="ghost" size="icon" class="h-9 w-9 -rotate-z-180" @click="appSettingsStore.toggleSidebarCollapse()">
+    <FaButton v-if="appSettingsStore.mode === 'mobile'" variant="ghost" size="icon" class="size-9" @click="appSettingsStore.toggleSidebarCollapse()">
       <FaIcon name="app-toolbar-collapse" class="size-4" />
     </FaButton>
     <Component :is="useSlots('toolbar-start')" />

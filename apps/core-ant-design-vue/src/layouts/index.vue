@@ -5,6 +5,7 @@ import { useSlots } from '@/slots'
 import { cn } from '@/utils'
 import eventBus from '@/utils/eventBus'
 import AppSetting from './components/AppSetting/index.vue'
+import FloatingSidebarMenuButton from './components/FloatingSidebarMenuButton/index.vue'
 import Header from './components/Header/index.vue'
 import Hotkeys from './components/Hotkeys/index.vue'
 import MainSidebar from './components/MainSidebar/index.vue'
@@ -158,6 +159,7 @@ const enableAppSetting = import.meta.env.VITE_APP_SETTING
       </div>
       <!-- 移动端下，展开侧边栏时的遮罩层 -->
       <div :class="cn('invisible fixed inset-0 z-1009 bg-black/50 op-0 backdrop-blur-sm transition-opacity', { 'op-100 visible': appSettingsStore.mode === 'mobile' && !appSettingsStore.settings.menu.subMenuCollapse })" @click="appSettingsStore.toggleSidebarCollapse()" />
+      <FloatingSidebarMenuButton />
       <div class="main-container pb-[calc(var(--g-slots-layout-bottom-height)+var(--g-main-container-padding-bottom,0px))] pt-[calc(var(--g-slots-layout-top-height)+var(--g-header-actual-height)+var(--g-topbar-actual-height))]">
         <div
           class="fixed-content-around-area w-full inset-t-[calc(var(--g-slots-layout-top-height)+var(--g-header-actual-height))] inset-inline-1/2 fixed z-1005" :style="{
