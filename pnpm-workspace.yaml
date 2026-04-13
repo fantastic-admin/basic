@@ -12,18 +12,18 @@ packages:
   - packages/*
 
 catalog:
-  '@antfu/eslint-config': ^8.1.1
+  '@antfu/eslint-config': ^8.2.0
   '@antv/g2plot': ^2.4.35
   '@bytemd/plugin-gfm': ^1.22.0
   '@bytemd/vue-next': ^1.22.0
   '@clack/prompts': ^1.2.0
   '@faker-js/faker': ^10.4.0
-  '@iconify/json': ^2.2.460
+  '@iconify/json': ^2.2.461
   '@iconify/vue': ^5.0.0
   '@spiriit/vite-plugin-svg-spritemap': ^7.0.0
   '@stylistic/stylelint-config': ^5.0.0
   '@tinymce/tinymce-vue': ^6.3.0
-  '@types/node': ^25.5.2
+  '@types/node': ^25.6.0
   '@types/nprogress': ^0.2.3
   '@types/path-browserify': ^1.0.3
   '@types/qs': ^6.15.0
@@ -53,7 +53,7 @@ catalog:
   dayjs: ^1.11.20
   defu: ^6.1.7
   echarts: ^6.0.0
-  element-plus: ^2.13.6
+  element-plus: ^2.13.7
   eruda: ^3.4.3
   es-toolkit: ^1.45.1
   eslint: ^10.2.0
@@ -70,7 +70,7 @@ catalog:
   picocolors: ^1.1.1
   pinia: ^3.0.4
   pinia-plugin-persistedstate: ^4.7.1
-  pinyin-pro: ^3.28.0
+  pinyin-pro: ^3.28.1
   postcss: ^8.5.9
   postcss-nested: ^7.0.2
   print-js: ^1.6.0
@@ -80,7 +80,7 @@ catalog:
   scule: ^1.3.0
   simple-git-hooks: ^2.13.1
   splitpanes: ^4.0.4
-  stylelint: ^17.6.0
+  stylelint: ^17.7.0
   stylelint-config-recess-order: ^7.7.0
   stylelint-config-standard-scss: ^17.0.0
   stylelint-config-standard-vue: ^1.0.0
@@ -110,9 +110,9 @@ catalog:
   vite-plugin-env-parse: ^1.0.15
   vite-plugin-fake-server: ^2.2.3
   vite-plugin-vue-devtools: ^8.1.1
-  vue: v3.5.29
+  vue: ^3.5.32
   vue-currency-input: ^3.2.2
-  vue-data-ui: ^3.17.11
+  vue-data-ui: ^3.17.13
   vue-esign: ^1.1.4
   vue-hooks-plus: ^2.4.3
   vue-input-otp: ^0.3.2
@@ -133,6 +133,6 @@ catalogs:
   naive-ui:
     naive-ui: ^2.44.1
   tdesign:
-    tdesign-vue-next: ^1.18.6
+    tdesign-vue-next: ^1.19.0
   vexip-ui:
     vexip-ui: ^2.3.39
