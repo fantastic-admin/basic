@@ -21,8 +21,8 @@ function open(url: string) {
         <FaIcon name="i-simple-icons:github" />
       </FaButton>
     </FaPageHeader>
-    <FaPageMain>
-      <Splitpanes class="default-theme" style="height: 400px;">
+    <FaPageMain main-class="h-200">
+      <Splitpanes class="default-theme">
         <Pane min-size="20">
           1
         </Pane>

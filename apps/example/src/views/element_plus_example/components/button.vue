@@ -188,7 +188,7 @@
     <ElDivider content-position="left">
       按钮组
     </ElDivider>
-    <ElButtonGroup style="margin-inline-end: 10px;">
+    <ElButtonGroup class="me-4">
       <ElButton type="primary">
         <FaIcon name="i-ep:arrow-left" class="el-icon--left" />
         上一页
@@ -224,7 +224,7 @@
     <ElDivider content-position="left">
       不同尺寸
     </ElDivider>
-    <div style="margin-bottom: 10px;">
+    <div class="mb-4">
       <ElButton size="large">
         大号按钮
       </ElButton>
