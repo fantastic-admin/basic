@@ -15,15 +15,6 @@ const props = defineProps<{
   class?: HTMLAttributes['class']
 }>()
 
-const IconWrapper = defineComponent({
-  render() {
-    const content = this.$slots.default?.()
-    return props.transition
-      ? h(Transition, { name: 'icon-flip' }, () => content)
-      : content
-  },
-})
-
 const outputType = computed(() => {
   if (!props.name) {
     return
@@ -43,6 +34,20 @@ const outputType = computed(() => {
   else {
     return 'svg'
   }
+})
+
+const iconKey = computed(() => `${outputType.value ?? 'empty'}-${props.name}`)
+
+const IconWrapper = defineComponent({
+  render() {
+    const content = this.$slots.default?.()
+    return props.transition
+      ? h(Transition, { name: 'icon-switch' }, () => h('span', {
+          key: iconKey.value,
+          class: 'icon-switch-layer',
+        }, content))
+      : content
+  },
 })
 </script>
 
@@ -71,21 +76,43 @@ const outputType = computed(() => {
 </template>
 
 <style scoped>
-.icon-flip-enter-active {
-  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+.icon-switch-layer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.icon-flip-leave-active {
-  transition: all 0.2s cubic-bezier(0.36, 0, 0.66, -0.56);
+.icon-switch-enter-active,
+.icon-switch-leave-active {
+  transform-origin: center;
+  backface-visibility: hidden;
+  transition:
+    opacity 0.2s,
+    transform 0.2s,
+    filter 0.2s;
+  will-change: opacity, transform, filter;
 }
 
-.icon-flip-enter-from {
+.icon-switch-enter-from,
+.icon-switch-leave-to {
   opacity: 0;
-  transform: scale(0.5) rotate(90deg);
+  filter: blur(4px);
 }
 
-.icon-flip-leave-to {
-  opacity: 0;
-  transform: scale(0.5) rotate(-90deg);
+.icon-switch-enter-from {
+  transform: scale(0.6);
+}
+
+.icon-switch-leave-to {
+  transform: scale(0.6);
+}
+
+.icon-switch-enter-to,
+.icon-switch-leave-from {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
 }
 </style>
