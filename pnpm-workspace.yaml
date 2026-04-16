@@ -129,7 +129,7 @@ catalogs:
   antdv-next:
     antdv-next: ^1.2.0
   arco-design-vue:
-    '@arco-design/web-vue': ^2.57.0
+    '@arco-design/web-vue': ^2.58.0
   naive-ui:
     naive-ui: ^2.44.1
   tdesign:
