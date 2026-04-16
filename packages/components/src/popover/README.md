@@ -2,24 +2,14 @@
 
 灵活的弹出容器组件，支持自定义内容和多种弹出位置。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const open = ref(false)
-</script>
-
-<template>
-  <FaPopover v-model:open="open">
-    <FaButton>打开弹出框</FaButton>
-    <template #panel>
-      <div class="p-4">
-        <p>弹出框内容</p>
-      </div>
-    </template>
-  </FaPopover>
-</template>
-```
+- 高级筛选面板
+- 快速操作面板
+- 信息详情卡片
+- 颜色/日期选择器
+- 简易表单弹窗
+- 上下文信息展示
 
 ## Props
 
@@ -40,11 +30,26 @@ const open = ref(false)
 | `default` | 触发元素 |
 | `panel` | 弹出面板内容 |
 
-## Events
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const open = ref(false)
+</script>
+
+<template>
+  <FaPopover v-model:open="open">
+    <FaButton>打开弹出框</FaButton>
+    <template #panel>
+      <div class="p-4">
+        <p>弹出框内容</p>
+      </div>
+    </template>
+  </FaPopover>
+</template>
+```
 
 ### 基础弹出框
 
@@ -208,12 +213,3 @@ const form = ref({ name: '', email: '' })
 3. **自动定位**：组件会自动调整位置避免超出视口
 4. **焦点管理**：打开时会自动阻止焦点自动聚焦到弹出内容
 5. **点击外部**：点击弹出框外部会自动关闭
-
-## 典型使用场景
-
-- 高级筛选面板
-- 快速操作面板
-- 信息详情卡片
-- 颜色/日期选择器
-- 简易表单弹窗
-- 上下文信息展示

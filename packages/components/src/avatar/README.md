@@ -2,13 +2,14 @@
 
 用户头像组件，支持图片加载失败时显示降级内容。
 
-## 基础用法
+## 使用场景
 
-```vue
-<template>
-  <FaAvatar src="https://example.com/avatar.jpg" fallback="张三" />
-</template>
-```
+- 用户头像显示
+- 评论区头像
+- 聊天消息头像
+- 团队成员展示
+- 个人中心头像
+- 头像上传预览
 
 ## Props
 
@@ -24,11 +25,15 @@
 |------|------|
 | `default` | 自定义降级内容（覆盖 fallback） |
 
-## Events
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<template>
+  <FaAvatar src="https://example.com/avatar.jpg" fallback="张三" />
+</template>
+```
 
 ### 基础头像
 
@@ -106,12 +111,3 @@
 2. **默认尺寸**：头像默认尺寸由 CSS 类控制，可通过 `class` 属性调整
 3. **形状**：默认为圆角方形，添加 `rounded-full` 类可变为圆形
 4. **降级文本**：`fallback` 默认只显示前 2 个字符
-
-## 典型使用场景
-
-- 用户头像显示
-- 评论区头像
-- 聊天消息头像
-- 团队成员展示
-- 个人中心头像
-- 头像上传预览

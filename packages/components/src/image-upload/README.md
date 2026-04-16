@@ -2,20 +2,14 @@
 
 专门用于图片上传的组件，支持预览、排序和拖拽上传。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const images = ref([])
-</script>
-
-<template>
-  <FaImageUpload 
-    v-model="images"
-    action="/api/upload"
-  />
-</template>
-```
+- 用户头像上传
+- 商品图片上传
+- 文章配图上传
+- 相册图片上传
+- 证据/凭证图片上传
+- Banner 图上传
 
 ## Props
 
@@ -37,17 +31,11 @@ const images = ref([])
 | `hideTips` | `boolean` | `false` | 是否隐藏提示 |
 | `disabled` | `boolean` | `false` | 是否禁用 |
 
-## Model
+### Model
 
 | 名称 | 类型 | 说明 |
 |------|------|------|
 | `modelValue` | `string[]` | 已上传图片 URL 列表（必需） |
-
-## Events
-
-| 事件名 | 参数 | 说明 |
-|--------|------|------|
-| `onSuccess` | `response: any, file: File` | 单张图片上传成功时触发 |
 
 ## Slots
 
@@ -55,7 +43,28 @@ const images = ref([])
 |------|------|
 | `default` | 自定义上传按钮内容 |
 
+## Events
+
+| 事件名 | 参数 | 说明 |
+|--------|------|------|
+| `onSuccess` | `response: any, file: File` | 单张图片上传成功时触发 |
+
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const images = ref([])
+</script>
+
+<template>
+  <FaImageUpload 
+    v-model="images"
+    action="/api/upload"
+  />
+</template>
+```
 
 ### 基础图片上传
 
@@ -300,12 +309,3 @@ function handleSubmit() {
 4. **上传进度**：上传时显示进度条
 5. **格式校验**：根据 `ext` 属性校验图片格式
 6. **大小限制**：根据 `size` 属性校验图片大小
-
-## 典型使用场景
-
-- 用户头像上传
-- 商品图片上传
-- 文章配图上传
-- 相册图片上传
-- 证据/凭证图片上传
-- Banner 图上传

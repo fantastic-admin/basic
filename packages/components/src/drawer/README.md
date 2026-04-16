@@ -2,20 +2,13 @@
 
 侧滑抽屉组件，支持从四个方向弹出，内置头部、内容区和底部操作区。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const open = ref(false)
-</script>
-
-<template>
-  <FaButton @click="open = true">打开抽屉</FaButton>
-  <FaDrawer v-model="open" title="抽屉标题">
-    <div>抽屉内容</div>
-  </FaDrawer>
-</template>
-```
+- 表单编辑
+- 详情展示
+- 过滤筛选条件
+- 配置设置
+- 确认对话框（使用 show-cancel-button）
 
 ## Props
 
@@ -70,11 +63,42 @@ const open = ref(false)
 | `confirm` | 点击确定按钮时触发 |
 | `cancel` | 点击取消按钮时触发 |
 
-## Exposed Methods
+## API
 
-无
+### 函数式调用
+
+```vue
+<script setup lang="ts">
+const drawer = useFaDrawer()
+
+function openDrawer() {
+  drawer.create({
+    title: '提示',
+    content: '这是一个抽屉',
+    onConfirm: () => {
+      console.log('确认操作')
+    },
+  }).open()
+}
+</script>
+```
 
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const open = ref(false)
+</script>
+
+<template>
+  <FaButton @click="open = true">打开抽屉</FaButton>
+  <FaDrawer v-model="open" title="抽屉标题">
+    <div>抽屉内容</div>
+  </FaDrawer>
+</template>
+```
 
 ### 基础抽屉
 
@@ -250,24 +274,6 @@ function handleSubmit() {
 </template>
 ```
 
-## 函数式调用
-
-```vue
-<script setup lang="ts">
-const drawer = useFaDrawer()
-
-function openDrawer() {
-  drawer.create({
-    title: '提示',
-    content: '这是一个抽屉',
-    onConfirm: () => {
-      console.log('确认操作')
-    },
-  }).open()
-}
-</script>
-```
-
 ## 注意事项
 
 1. **v-model 绑定**：使用 `v-model` 控制抽屉打开状态
@@ -276,11 +282,3 @@ function openDrawer() {
 4. **加载状态**：`loading` 会显示遮罩层，`confirmButtonLoading` 只影响按钮
 5. **动画事件**：`opened` 和 `closed` 在动画完成后触发
 6. **默认关闭行为**：点击确定/取消按钮会自动关闭抽屉，如需阻止请在 `beforeClose` 中处理
-
-## 典型使用场景
-
-- 表单编辑
-- 详情展示
-- 过滤筛选条件
-- 配置设置
-- 确认对话框（使用 show-cancel-button）

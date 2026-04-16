@@ -2,20 +2,14 @@
 
 模态对话框组件，支持拖拽、最大化、自定义内容和多种显示模式。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const open = ref(false)
-</script>
-
-<template>
-  <FaButton @click="open = true">打开对话框</FaButton>
-  <FaModal v-model="open" title="对话框标题">
-    <div>对话框内容</div>
-  </FaModal>
-</template>
-```
+- 确认对话框
+- 表单编辑
+- 详情展示
+- 消息提示（alert）
+- 警告提示
+- 配置设置
 
 ## Props
 
@@ -75,11 +69,83 @@ const open = ref(false)
 | `confirm` | 点击确定按钮时触发 |
 | `cancel` | 点击取消按钮时触发 |
 
-## Exposed Methods
+## API
 
-无
+### 函数式调用
+
+```vue
+<script setup lang="ts">
+const modal = useFaModal()
+
+function showAlert() {
+  modal.info({
+    title: '提示',
+    content: '这是一条提示信息',
+    onConfirm: () => {
+      console.log('确认')
+    },
+  })
+}
+
+function showSuccess() {
+  modal.success({
+    title: '成功',
+    content: '操作成功完成',
+  })
+}
+
+function showConfirm() {
+  modal.confirm({
+    title: '确认',
+    content: '确定要删除吗？',
+    onConfirm: () => {
+      console.log('删除')
+    },
+  })
+}
+
+function showError() {
+  modal.error({
+    title: '错误',
+    content: '操作失败',
+  })
+}
+
+function showWarning() {
+  modal.warning({
+    title: '警告',
+    content: '此操作有风险',
+  })
+}
+</script>
+
+<template>
+  <div class="flex gap-2">
+    <FaButton @click="showAlert">信息提示</FaButton>
+    <FaButton @click="showSuccess">成功提示</FaButton>
+    <FaButton @click="showConfirm">确认对话框</FaButton>
+    <FaButton @click="showError">错误提示</FaButton>
+    <FaButton @click="showWarning">警告提示</FaButton>
+  </div>
+</template>
+```
 
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const open = ref(false)
+</script>
+
+<template>
+  <FaButton @click="open = true">打开对话框</FaButton>
+  <FaModal v-model="open" title="对话框标题">
+    <div>对话框内容</div>
+  </FaModal>
+</template>
+```
 
 ### 基础对话框
 
@@ -281,65 +347,6 @@ function handleSubmit() {
 </template>
 ```
 
-## 函数式调用
-
-```vue
-<script setup lang="ts">
-const modal = useFaModal()
-
-function showAlert() {
-  modal.info({
-    title: '提示',
-    content: '这是一条提示信息',
-    onConfirm: () => {
-      console.log('确认')
-    },
-  })
-}
-
-function showSuccess() {
-  modal.success({
-    title: '成功',
-    content: '操作成功完成',
-  })
-}
-
-function showConfirm() {
-  modal.confirm({
-    title: '确认',
-    content: '确定要删除吗？',
-    onConfirm: () => {
-      console.log('删除')
-    },
-  })
-}
-
-function showError() {
-  modal.error({
-    title: '错误',
-    content: '操作失败',
-  })
-}
-
-function showWarning() {
-  modal.warning({
-    title: '警告',
-    content: '此操作有风险',
-  })
-}
-</script>
-
-<template>
-  <div class="flex gap-2">
-    <FaButton @click="showAlert">信息提示</FaButton>
-    <FaButton @click="showSuccess">成功提示</FaButton>
-    <FaButton @click="showConfirm">确认对话框</FaButton>
-    <FaButton @click="showError">错误提示</FaButton>
-    <FaButton @click="showWarning">警告提示</FaButton>
-  </div>
-</template>
-```
-
 ## 注意事项
 
 1. **v-model 绑定**：使用 `v-model` 控制对话框打开状态
@@ -348,12 +355,3 @@ function showWarning() {
 4. **拖拽限制**：拖拽仅在有标题栏且非最大化状态下有效
 5. **动画事件**：`opened` 和 `closed` 在动画完成后触发
 6. **函数式调用**：`useFaModal()` 提供 `info`、`success`、`warning`、`error`、`confirm` 方法
-
-## 典型使用场景
-
-- 确认对话框
-- 表单编辑
-- 详情展示
-- 消息提示（alert）
-- 警告提示
-- 配置设置

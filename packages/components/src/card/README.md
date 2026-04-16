@@ -2,15 +2,13 @@
 
 基础卡片容器组件，支持标题、描述、内容和页脚区域。
 
-## 基础用法
+## 使用场景
 
-```vue
-<template>
-  <FaCard title="卡片标题" description="卡片描述">
-    卡片内容
-  </FaCard>
-</template>
-```
+- 信息展示卡片
+- 表单容器
+- 数据统计卡片
+- 列表项容器
+- 对话框内容区
 
 ## Props
 
@@ -31,11 +29,17 @@
 | `default` | 卡片内容 |
 | `footer` | 卡片页脚 |
 
-## Events
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<template>
+  <FaCard title="卡片标题" description="卡片描述">
+    卡片内容
+  </FaCard>
+</template>
+```
 
 ### 基础卡片
 
@@ -131,11 +135,3 @@
 2. **slot 优先**：如果提供了 `header` slot，会覆盖 `title` 和 `description` props
 3. **结构组成**：卡片由 CardHeader、CardContent、CardFooter 三部分组成
 4. **响应式**：卡片宽度自适应父容器，可通过 `class` 设置固定宽度
-
-## 典型使用场景
-
-- 信息展示卡片
-- 表单容器
-- 数据统计卡片
-- 列表项容器
-- 对话框内容区

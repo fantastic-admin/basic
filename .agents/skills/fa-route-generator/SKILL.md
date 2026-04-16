@@ -76,11 +76,6 @@ export default routes
 
 定位路由文件（在 `apps/<app>/src/router/modules/` 下搜索），读取后按需修改 meta 属性。常见修改：
 
-**标签页合并**（新增页/编辑页合并到同一标签，避免开多个标签）：
-```typescript
-meta: { activeMenu: '/user', tabMerge: 'activeMenu' }
-```
-
 **权限控制**：
 ```typescript
 meta: { auth: 'user:view' }  // 或数组 ['user:view', 'user:edit']
@@ -92,11 +87,6 @@ meta: { auth: 'user:view' }  // 或数组 ['user:view', 'user:edit']
 meta: { keepAlive: ['productDetail'] }
 // 详情页
 meta: { menu: false, activeMenu: '/product', noKeepAlive: 'productList' }
-```
-
-**徽章**：
-```typescript
-meta: { badge: 'NEW' }  // 文字；或 [true, 'destructive'] 红点
 ```
 
 **隐藏菜单项**：
@@ -115,4 +105,4 @@ meta: { menu: false, activeMenu: '/parent/path' }
 
 详细属性说明见 [references/route-meta.md](references/route-meta.md)，更多示例见 [references/examples.md](references/examples.md)。
 
-常用属性：`title`（必需）、`icon`、`menu`、`auth`、`keepAlive`、`badge`、`activeMenu`、`tabMerge`、`breadcrumb`
+常用属性：`title`（必需）、`icon`、`menu`、`auth`、`keepAlive`、`activeMenu`、`breadcrumb`

@@ -2,7 +2,52 @@
 
 下拉选择器组件，支持单选、多选、分组和自定义选项。
 
-## 基础用法
+## 使用场景
+
+- 表单下拉选择
+- 筛选条件选择
+- 城市/地区选择
+- 分类/标签选择
+- 单选/多选配置项
+
+## Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `multiple` | `boolean` | `false` | 是否多选 |
+| `disabled` | `boolean` | `false` | 是否禁用 |
+| `options` | `(Option \| GroupOption)[]` | **必需** | 选项数据 |
+| `placeholder` | `string` | - | 占位提示文本 |
+| `class` | `HTMLAttributes['class']` | - | 自定义 CSS 类 |
+
+### Option 接口
+
+```ts
+interface Option {
+  label: string
+  value: AcceptableValue
+  disabled?: boolean
+}
+```
+
+### GroupOption 接口（分组选项）
+
+```ts
+interface GroupOption {
+  label: string
+  options: Option[]
+}
+```
+
+## Events
+
+| 事件名 | 说明 | 回调参数 |
+|--------|------|----------|
+| `change` | 选项变化时触发 | `value: AcceptableValue \| undefined` |
+
+## 示例
+
+### 基础用法
 
 ```vue
 <script setup lang="ts">
@@ -19,51 +64,6 @@ const options = [
   <FaSelect v-model="value" :options placeholder="请选择..." />
 </template>
 ```
-
-## Props
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `multiple` | `boolean` | `false` | 是否多选 |
-| `disabled` | `boolean` | `false` | 是否禁用 |
-| `options` | `(Option \| GroupOption)[]` | **必需** | 选项数据 |
-| `placeholder` | `string` | - | 占位提示文本 |
-| `class` | `HTMLAttributes['class']` | - | 自定义 CSS 类 |
-
-## Option 接口
-
-```ts
-interface Option {
-  label: string
-  value: AcceptableValue
-  disabled?: boolean
-}
-```
-
-## GroupOption 接口（分组选项）
-
-```ts
-interface GroupOption {
-  label: string
-  options: Option[]
-}
-```
-
-## Slots
-
-无
-
-## Events
-
-| 事件名 | 说明 | 回调参数 |
-|--------|------|----------|
-| `change` | 选项变化时触发 | `value: AcceptableValue \| undefined` |
-
-## Exposed Methods
-
-无
-
-## 示例
 
 ### 基础单选
 
@@ -196,11 +196,3 @@ const cities = [
 3. **值类型**：`value` 可以是字符串、数字等类型
 4. **分组显示**：当 `options` 中包含 `options` 属性时，会自动识别为分组选项
 5. **z-index**：下拉菜单的 z-index 默认为 2000，确保在其他内容上方显示
-
-## 典型使用场景
-
-- 表单下拉选择
-- 筛选条件选择
-- 城市/地区选择
-- 分类/标签选择
-- 单选/多选配置项

@@ -2,17 +2,13 @@
 
 基础输入框组件，支持密码显示切换、清空按钮和前后缀插槽。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const value = ref('')
-</script>
-
-<template>
-  <FaInput v-model="value" placeholder="请输入..." />
-</template>
-```
+- 表单输入字段
+- 搜索框
+- 密码输入
+- 带单位的数值输入
+- 带前缀的账号输入（如 +86）
 
 ## Props
 
@@ -47,6 +43,18 @@ const value = ref('')
 | `ref` | 获取原生 input 元素引用 |
 
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const value = ref('')
+</script>
+
+<template>
+  <FaInput v-model="value" placeholder="请输入..." />
+</template>
+```
 
 ### 基础输入框
 
@@ -190,11 +198,3 @@ const strength = computed(() => {
 3. **清空按钮**：`clearable` 模式下，仅当输入框有值且获得焦点或悬停时显示清空按钮
 4. **原生属性**：支持所有原生 input 属性（placeholder、autocomplete 等）
 5. **对齐方式**：`align="inline"` 时前后缀与输入内容同行，`align="block"` 时上下排列
-
-## 典型使用场景
-
-- 表单输入字段
-- 搜索框
-- 密码输入
-- 带单位的数值输入
-- 带前缀的账号输入（如 +86）

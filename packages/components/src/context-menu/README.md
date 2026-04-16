@@ -2,7 +2,51 @@
 
 右键点击时弹出的上下文菜单，支持分组、子菜单和图标。
 
-## 基础用法
+## 使用场景
+
+- 表格行操作菜单
+- 文件/文件夹右键菜单
+- 画布/编辑器上下文菜单
+- 列表项操作菜单
+- 图片/媒体文件操作菜单
+
+## Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `items` | `(MenuItem \| MenuSubItem)[][]` | **必需** | 菜单项数组（二维数组） |
+
+### MenuItem 接口
+
+```ts
+interface MenuItem {
+  label: string
+  icon?: string
+  variant?: 'default' | 'destructive'
+  disabled?: boolean
+  handle?: () => void
+}
+```
+
+### MenuSubItem 接口（子菜单）
+
+```ts
+interface MenuSubItem {
+  label: string
+  items: (MenuItem | MenuSubItem)[][]
+}
+```
+
+## Slots
+
+| 名称 | 说明 |
+|------|------|
+| `default` | 触发元素（必填） |
+| `label` | 菜单头部标签 |
+
+## 示例
+
+### 基础用法
 
 ```vue
 <script setup lang="ts">
@@ -22,42 +66,6 @@ const items = [
   </FaContextMenu>
 </template>
 ```
-
-## Props
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `items` | `(MenuItem \| MenuSubItem)[][]` | **必需** | 菜单项数组（二维数组） |
-
-## Slots
-
-| 名称 | 说明 |
-|------|------|
-| `default` | 触发元素（必填） |
-| `label` | 菜单头部标签 |
-
-## MenuItem 接口
-
-```ts
-interface MenuItem {
-  label: string
-  icon?: string
-  variant?: 'default' | 'destructive'
-  disabled?: boolean
-  handle?: () => void
-}
-```
-
-## MenuSubItem 接口（子菜单）
-
-```ts
-interface MenuSubItem {
-  label: string
-  items: (MenuItem | MenuSubItem)[][]
-}
-```
-
-## 示例
 
 ### 基础右键菜单
 
@@ -268,11 +276,3 @@ function getFileMenu(file: any) {
 3. **触发区域**：default slot 的元素为右键触发区域
 4. **子菜单**：通过 `items` 属性嵌套实现多级菜单
 5. **危险操作**：设置 `variant: 'destructive'` 标记为危险操作（红色）
-
-## 典型使用场景
-
-- 表格行操作菜单
-- 文件/文件夹右键菜单
-- 画布/编辑器上下文菜单
-- 列表项操作菜单
-- 图片/媒体文件操作菜单

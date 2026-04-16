@@ -2,7 +2,36 @@
 
 全局轻提示组件，用于展示操作反馈消息。
 
-## 基础用法
+## 使用场景
+
+- 表单提交反馈
+- 操作成功/失败提示
+- 删除确认反馈
+- 上传/下载进度提示
+- 系统通知
+- 数据保存提示
+
+## Props
+
+无（通过 `toast` 函数调用配置）
+
+## API
+
+### toast 方法
+
+| 方法 | 说明 |
+|------|------|
+| `toast(message)` | 普通提示 |
+| `toast.success(message)` | 成功提示 |
+| `toast.error(message)` | 错误提示 |
+| `toast.warning(message)` | 警告提示 |
+| `toast.info(message)` | 信息提示 |
+| `toast.loading(message)` | 加载提示 |
+| `toast.promise(promise, options)` | Promise 提示 |
+
+## 示例
+
+### 基础用法
 
 ```vue
 <script setup lang="ts">
@@ -19,28 +48,6 @@ function showToast() {
   <FaToast />
 </template>
 ```
-
-## Props
-
-无（通过 `toast` 函数调用配置）
-
-## Slots
-
-无
-
-## toast 方法
-
-| 方法 | 说明 |
-|------|------|
-| `toast(message)` | 普通提示 |
-| `toast.success(message)` | 成功提示 |
-| `toast.error(message)` | 错误提示 |
-| `toast.warning(message)` | 警告提示 |
-| `toast.info(message)` | 信息提示 |
-| `toast.loading(message)` | 加载提示 |
-| `toast.promise(promise, options)` | Promise 提示 |
-
-## 示例
 
 ### 成功提示
 
@@ -242,12 +249,3 @@ import { Toaster } from 'vue-sonner'
 3. **自动消失**：提示默认 3 秒后自动消失
 4. **堆叠显示**：多个提示会堆叠显示
 5. **可点击关闭**：每个提示都可以手动点击关闭
-
-## 典型使用场景
-
-- 表单提交反馈
-- 操作成功/失败提示
-- 删除确认反馈
-- 上传/下载进度提示
-- 系统通知
-- 数据保存提示

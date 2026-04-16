@@ -2,15 +2,13 @@
 
 基础按钮组件，支持多种样式变体和尺寸，内置加载状态支持。
 
-## 基础用法
+## 使用场景
 
-```vue
-<template>
-  <FaButton>默认按钮</FaButton>
-  <FaButton variant="destructive">危险按钮</FaButton>
-  <FaButton variant="outline">边框按钮</FaButton>
-</template>
-```
+- 表单提交按钮
+- 操作触发按钮（新增、编辑、删除）
+- 导航链接按钮
+- 工具栏操作按钮
+- 对话框/抽屉底部操作按钮
 
 ## Props
 
@@ -28,11 +26,17 @@
 |------|------|
 | `default` | 按钮内容（图标、文字等） |
 
-## Events
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<template>
+  <FaButton>默认按钮</FaButton>
+  <FaButton variant="destructive">危险按钮</FaButton>
+  <FaButton variant="outline">边框按钮</FaButton>
+</template>
+```
 
 ### 不同样式变体
 
@@ -119,11 +123,3 @@ function handleClick() {
    - `ghost`：幽灵按钮，用于更次要的操作
    - `link`：链接样式
    - `expand`：展开动画效果按钮
-
-## 典型使用场景
-
-- 表单提交按钮
-- 操作触发按钮（新增、编辑、删除）
-- 导航链接按钮
-- 工具栏操作按钮
-- 对话框/抽屉底部操作按钮

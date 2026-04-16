@@ -1,30 +1,9 @@
 # 主题设置 (theme)
 
 ## 目录
-- [主题同步 (sync)](#主题同步-sync)
-- [亮色主题 (light)](#亮色主题-light)
-- [暗色主题 (dark)](#暗色主题-dark)
 - [颜色方案 (colorScheme)](#颜色方案-colorscheme)
 - [圆角系数 (radius)](#圆角系数-radius)
 - [色弱模式 (colorAmblyopia)](#色弱模式-coloramblyopia)
-
-## 主题同步 (sync)
-
-- **类型**: `boolean`
-- **默认值**: `true`
-- **说明**: 当开启时,切换颜色方案将共用一套主题
-
-## 亮色主题 (light)
-
-- **类型**: `keyof typeof themes`
-- **默认值**: `'default'`
-- **说明**: 指定亮色模式下的主题
-
-## 暗色主题 (dark)
-
-- **类型**: `keyof typeof themes`
-- **默认值**: `'default'`
-- **说明**: 指定暗色模式下的主题
 
 ## 颜色方案 (colorScheme)
 
@@ -54,7 +33,6 @@
 
 ```typescript
 theme: {
-  sync: true,
   light: 'default',
   dark: 'default',
   colorScheme: 'light',
@@ -76,15 +54,6 @@ theme: {
 ```typescript
 theme: {
   colorScheme: '',
-}
-```
-
-**使用不同的亮色和暗色主题:**
-```typescript
-theme: {
-  sync: false,
-  light: 'default',
-  dark: 'custom-dark',
 }
 ```
 

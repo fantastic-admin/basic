@@ -4,7 +4,6 @@
 - [标签栏 (tabbar)](#标签栏-tabbar)
 - [工具栏 (toolbar)](#工具栏-toolbar)
 - [顶栏模式 (mode)](#顶栏模式-mode)
-- [切换显示位置 (switchTabbarAndToolbar)](#切换显示位置-switchtabbarandtoolbar)
 
 ## 标签栏 (tabbar)
 
@@ -27,14 +26,6 @@
   - `'fixed'` - 固定,不跟随页面滚动,始终固定在顶部
   - `'sticky'` - 粘性,页面往下滚动时隐藏,往上滚动时显示
 
-## 切换显示位置 (switchTabbarAndToolbar)
-
-- **类型**: `boolean`
-- **默认值**: `false`
-- **说明**: 控制标签栏和工具栏的显示顺序
-  - `false` - 标签栏在工具栏上面
-  - `true` - 工具栏在标签栏上面
-
 ## 完整示例
 
 ```typescript
@@ -42,7 +33,6 @@ topbar: {
   tabbar: true,
   toolbar: true,
   mode: 'fixed',
-  switchTabbarAndToolbar: false,
 }
 ```
 
@@ -67,12 +57,5 @@ topbar: {
 ```typescript
 topbar: {
   mode: 'sticky',
-}
-```
-
-**工具栏在标签栏上面:**
-```typescript
-topbar: {
-  switchTabbarAndToolbar: true,
 }
 ```

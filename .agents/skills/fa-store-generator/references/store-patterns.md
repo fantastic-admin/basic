@@ -167,9 +167,6 @@ export const useDictionaryStore = defineStore('dictionary', () => {
 | `useAppSettingsStore` | `modules/app/settings.ts` | 主题、语言、布局配置 |
 | `useAppMenuStore` | `modules/app/menu.ts` | 菜单生成与导航状态 |
 | `useAppTabbarStore` | `modules/app/tabbar.ts` | 标签栏管理 |
-| `useAppNotificationStore` | `modules/app/notification.ts` | 通知系统 |
-| `useDictionaryStore` | `modules/dictionary.ts` | 字典数据缓存 |
-| `useMenuBadgeStore` | `modules/menuBadge.ts` | 菜单徽章状态 |
 
 ---
 

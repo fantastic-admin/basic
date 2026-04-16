@@ -2,7 +2,23 @@
 
 实时显示密码强度指示，帮助用户创建更安全的密码。
 
-## 基础用法
+## 使用场景
+
+- 用户注册密码设置
+- 修改密码页面
+- 重置密码表单
+- 账号安全设置
+- 密码强度要求提示
+
+## Props
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `password` | `string` | `''` | 密码值 |
+
+## 示例
+
+### 基础用法
 
 ```vue
 <script setup lang="ts">
@@ -16,32 +32,6 @@ const password = ref('')
   </div>
 </template>
 ```
-
-## Props
-
-| 属性 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `password` | `string` | `''` | 密码值 |
-
-## Slots
-
-无
-
-## Events
-
-无
-
-## 强度规则
-
-密码强度根据以下规则计算（满分 5 分）：
-
-1. 长度至少 8 个字符
-2. 包含大写字母
-3. 包含小写字母
-4. 包含数字
-5. 包含特殊字符
-
-## 示例
 
 ### 基础密码强度
 
@@ -125,14 +115,15 @@ function handleChangePassword() {
 
 ```vue
 <script setup lang="ts">
+const { t } = useI18n()
 const password = ref('')
 
 const rules = computed(() => [
-  { text: '长度至少为8个字符', met: password.value.length >= 8 },
-  { text: '包含大写字母', met: /[A-Z]/.test(password.value) },
-  { text: '包含小写字母', met: /[a-z]/.test(password.value) },
-  { text: '包含数字', met: /\d/.test(password.value) },
-  { text: '包含特殊字符', met: /[^A-Z0-9]/i.test(password.value) },
+  { text: t('hasLength'), met: password.value.length >= 8 },
+  { text: t('hasUppercase'), met: /[A-Z]/.test(password.value) },
+  { text: t('hasLowercase'), met: /[a-z]/.test(password.value) },
+  { text: t('hasNumber'), met: /\d/.test(password.value) },
+  { text: t('hasSpecialChar'), met: /[^A-Z0-9]/i.test(password.value) },
 ])
 </script>
 
@@ -196,6 +187,16 @@ const strength = computed(() => {
 
 ## 注意事项
 
+### 强度规则
+
+密码强度根据以下规则计算（满分 5 分）：
+
+1. 长度至少 8 个字符
+2. 包含大写字母
+3. 包含小写字母
+4. 包含数字
+5. 包含特殊字符
+
 1. **实时反馈**：密码强度会随输入实时更新
 2. **颜色指示**：
    - 红色：非常弱（0 分）
@@ -204,11 +205,3 @@ const strength = computed(() => {
    - 绿色：强（5 分）
 3. **提示工具**：鼠标悬停问号图标查看详细建议
 4. **国际化**：组件内置多语言支持
-
-## 典型使用场景
-
-- 用户注册密码设置
-- 修改密码页面
-- 重置密码表单
-- 账号安全设置
-- 密码强度要求提示

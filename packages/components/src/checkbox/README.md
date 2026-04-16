@@ -2,17 +2,12 @@
 
 简洁的复选框组件，支持双向绑定和标签内容插槽。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const checked = ref(false)
-</script>
-
-<template>
-  <FaCheckbox v-model="checked">同意协议</FaCheckbox>
-</template>
-```
+- 表单中的同意协议选项
+- 多选过滤条件
+- 设置选项开关
+- 列表项批量选择
 
 ## Props
 
@@ -31,11 +26,19 @@ const checked = ref(false)
 
 通过 `v-model` 双向绑定，无需单独事件
 
-## Exposed Methods
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const checked = ref(false)
+</script>
+
+<template>
+  <FaCheckbox v-model="checked">同意协议</FaCheckbox>
+</template>
+```
 
 ### 基础复选框
 
@@ -129,10 +132,3 @@ function handleSubmit() {
 3. **空标签隐藏**：当不提供默认插槽内容时，标签元素会自动隐藏
 4. **禁用状态**：禁用状态下复选框和标签都无法点击
 5. **无障碍支持**：原生支持键盘操作（空格键切换状态）
-
-## 典型使用场景
-
-- 表单中的同意协议选项
-- 多选过滤条件
-- 设置选项开关
-- 列表项批量选择

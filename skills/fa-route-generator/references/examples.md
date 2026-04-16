@@ -221,11 +221,6 @@ const routes: RouteRecordRaw = {
       meta: {
         title: '用户列表',
         auth: ['admin:view', 'admin:edit'], // 需要其中一个权限
-        auths: [
-          { name: '查看用户', value: 'admin:view' },
-          { name: '编辑用户', value: 'admin:edit' },
-          { name: '删除用户', value: 'admin:delete' },
-        ],
       },
     },
   ],
@@ -253,50 +248,6 @@ const routes: RouteRecordRaw = {
         link: 'https://github.com',
       },
     },
-    {
-      path: 'docs',
-      name: 'externalDocs',
-      component: () => import('@/views/external/iframe.vue'),
-      meta: {
-        title: '文档',
-        iframe: 'https://fantastic-admin.hurui.me',
-      },
-    },
-  ],
-}
-```
-
-### 带徽章的路由
-
-```typescript
-const routes: RouteRecordRaw = {
-  path: '/features',
-  component: Layout,
-  name: 'features',
-  meta: {
-    title: '功能特性',
-    icon: 'i-ep:star',
-    badge: 'NEW', // 显示 NEW 徽章
-  },
-  children: [
-    {
-      path: 'pro',
-      name: 'featuresPro',
-      component: () => import('@/views/features/pro.vue'),
-      meta: {
-        title: '专业版功能',
-        badge: ['PRO', 'destructive'], // 显示红色 PRO 徽章
-      },
-    },
-    {
-      path: 'beta',
-      name: 'featuresBeta',
-      component: () => import('@/views/features/beta.vue'),
-      meta: {
-        title: 'Beta 功能',
-        badge: () => 'BETA', // 动态徽章
-      },
-    },
   ],
 }
 ```
@@ -318,8 +269,8 @@ const routes: RouteRecordRaw = {
       path: 'always',
       name: 'menuAlways',
       meta: {
-        title: '始终展开',
-        expand: [true, true], // 默认展开且不允许收起
+        title: '默认展开',
+        expand: true,
       },
       children: [
         {
@@ -331,31 +282,6 @@ const routes: RouteRecordRaw = {
           },
         },
       ],
-    },
-  ],
-}
-```
-
-### 带查询参数的路由
-
-```typescript
-const routes: RouteRecordRaw = {
-  path: '/report',
-  component: Layout,
-  name: 'report',
-  meta: {
-    title: '报表',
-    icon: 'i-ep:data-analysis',
-  },
-  children: [
-    {
-      path: 'sales',
-      name: 'reportSales',
-      component: () => import('@/views/report/sales.vue'),
-      meta: {
-        title: '销售报表',
-        query: { type: 'monthly' }, // 点击导航时携带参数
-      },
     },
   ],
 }

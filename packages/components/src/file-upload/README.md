@@ -2,20 +2,14 @@
 
 支持拖拽和点击上传的文件上传组件，带进度显示和文件管理功能。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const fileList = ref([])
-</script>
-
-<template>
-  <FaFileUpload 
-    v-model="fileList"
-    action="/api/upload"
-  />
-</template>
-```
+- 头像/图片上传
+- 附件文件上传
+- 批量文件上传
+- 资料文件上传
+- 证据/凭证上传
+- 文档上传
 
 ## Props
 
@@ -34,13 +28,13 @@ const fileList = ref([])
 | `hideTips` | `boolean` | `false` | 是否隐藏提示信息 |
 | `disabled` | `boolean` | `false` | 是否禁用 |
 
-## Model
+### Model
 
 | 名称 | 类型 | 说明 |
 |------|------|------|
 | `modelValue` | `FileItem[]` | 已上传的文件列表（必需） |
 
-## FileItem 接口
+### FileItem 接口
 
 ```ts
 interface FileItem {
@@ -53,6 +47,12 @@ interface FileItem {
 }
 ```
 
+## Slots
+
+| 名称 | 说明 |
+|------|------|
+| `default` | 自定义上传区域内容 |
+
 ## Events
 
 | 事件名 | 参数 | 说明 |
@@ -60,13 +60,22 @@ interface FileItem {
 | `onSuccess` | `response: any, file: File` | 单个文件上传成功时触发 |
 | `onClick` | `fileItem: FileItem, index: number` | 点击文件项时触发 |
 
-## Slots
-
-| 名称 | 说明 |
-|------|------|
-| `default` | 自定义上传区域内容 |
-
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const fileList = ref([])
+</script>
+
+<template>
+  <FaFileUpload 
+    v-model="fileList"
+    action="/api/upload"
+  />
+</template>
+```
 
 ### 基础上传
 
@@ -291,12 +300,3 @@ function handleFileClick(fileItem: FileItem) {
 4. **重新上传**：失败的文件可以点击重试
 5. **删除文件**：上传成功的文件可以删除
 6. **拖拽上传**：支持拖拽文件到上传区域
-
-## 典型使用场景
-
-- 头像/图片上传
-- 附件文件上传
-- 批量文件上传
-- 资料文件上传
-- 证据/凭证上传
-- 文档上传

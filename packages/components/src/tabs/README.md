@@ -2,26 +2,13 @@
 
 标签页切换组件，支持图标和自定义样式。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const activeTab = ref('1')
-const list = [
-  { label: '标签一', value: '1' },
-  { label: '标签二', value: '2' },
-  { label: '标签三', value: '3' },
-]
-</script>
-
-<template>
-  <FaTabs v-model="activeTab" :list>
-    <template #1>内容一</template>
-    <template #2>内容二</template>
-    <template #3>内容三</template>
-  </FaTabs>
-</template>
-```
+- 设置页面分类
+- 详情信息分栏
+- 数据视图切换（列表/图表）
+- 表单分步
+- 内容分类展示
 
 ## Props
 
@@ -46,6 +33,27 @@ const list = [
 | `update:modelValue` | `value: string \| number` | 标签切换时触发 |
 
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const activeTab = ref('1')
+const list = [
+  { label: '标签一', value: '1' },
+  { label: '标签二', value: '2' },
+  { label: '标签三', value: '3' },
+]
+</script>
+
+<template>
+  <FaTabs v-model="activeTab" :list>
+    <template #1>内容一</template>
+    <template #2>内容二</template>
+    <template #3>内容三</template>
+  </FaTabs>
+</template>
+```
 
 ### 基础标签页
 
@@ -207,11 +215,3 @@ const list = [
 2. **value 唯一性**：确保每个标签的 `value` 唯一
 3. **类型支持**：`value` 支持字符串和数字两种类型
 4. **图标可选**：标签可以设置图标也可以不设置
-
-## 典型使用场景
-
-- 设置页面分类
-- 详情信息分栏
-- 数据视图切换（列表/图表）
-- 表单分步
-- 内容分类展示

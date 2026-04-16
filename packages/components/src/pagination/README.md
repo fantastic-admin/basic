@@ -2,19 +2,13 @@
 
 功能完整的分页组件，支持总条数显示、每页条数选择、页码跳转和自定义布局。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const page = ref(1)
-const size = ref(10)
-const total = ref(100)
-</script>
-
-<template>
-  <FaPagination v-model:page="page" v-model:size="size" :total="total" />
-</template>
-```
+- 数据列表分页
+- 表格分页
+- 搜索结果分页
+- 文章列表分页
+- 评论列表分页
 
 ## Props
 
@@ -33,11 +27,21 @@ const total = ref(100)
 | `pageChange` | `page: number` | 页码变化时触发 |
 | `sizeChange` | `size: number` | 每页条数变化时触发 |
 
-## Slots
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const page = ref(1)
+const size = ref(10)
+const total = ref(100)
+</script>
+
+<template>
+  <FaPagination v-model:page="page" v-model:size="size" :total="total" />
+</template>
+```
 
 ### 基础分页
 
@@ -198,7 +202,9 @@ watch([page, size], loadData)
 </template>
 ```
 
-## 布局配置说明
+## 注意事项
+
+### 布局配置说明
 
 `layout` 属性控制分页组件的布局和元素顺序，支持以下元素：
 
@@ -223,18 +229,8 @@ watch([page, size], loadData)
 <FaPagination layout="total, sizes, pager" />
 ```
 
-## 注意事项
-
 1. **必需属性**：`total`、`page`、`size` 为必需属性
 2. **双向绑定**：`page` 和 `size` 支持 `v-model` 双向绑定
 3. **页码范围**：跳转页码会自动限制在有效范围内
 4. **自动聚焦**：跳转输入框获得焦点时会自动选中文本
 5. **回车跳转**：在跳转输入框中按回车键可触发跳转
-
-## 典型使用场景
-
-- 数据列表分页
-- 表格分页
-- 搜索结果分页
-- 文章列表分页
-- 评论列表分页

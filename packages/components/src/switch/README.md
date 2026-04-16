@@ -2,17 +2,13 @@
 
 开关切换组件，支持图标和状态变化前的回调处理。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const enabled = ref(false)
-</script>
-
-<template>
-  <FaSwitch v-model="enabled" />
-</template>
-```
+- 深色模式切换
+- 通知设置开关
+- 功能启用/禁用
+- 布尔值配置项
+- 快速状态切换
 
 ## Props
 
@@ -23,19 +19,23 @@ const enabled = ref(false)
 | `offIcon` | `string` | - | 关闭状态图标 |
 | `beforeChange` | `() => boolean \| Promise<boolean>` | - | 状态变化前回调 |
 
-## Slots
-
-无
-
 ## Events
 
 通过 `v-model` 双向绑定，无需单独事件
 
-## Exposed Methods
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const enabled = ref(false)
+</script>
+
+<template>
+  <FaSwitch v-model="enabled" />
+</template>
+```
 
 ### 基础开关
 
@@ -157,11 +157,3 @@ const settings = reactive({
 3. **异步确认**：`beforeChange` 支持返回 Promise，可用于异步确认操作
 4. **取消变化**：`beforeChange` 返回 false 或 Promise resolve false 时，状态不会改变
 5. **禁用状态**：禁用状态下开关无法点击，也无法切换状态
-
-## 典型使用场景
-
-- 深色模式切换
-- 通知设置开关
-- 功能启用/禁用
-- 布尔值配置项
-- 快速状态切换

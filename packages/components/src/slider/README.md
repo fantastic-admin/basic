@@ -2,33 +2,12 @@
 
 滑块组件，基于 Reka UI 的 Slider 组件封装，支持单选和多选。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const value = ref<number[]>([0])
-</script>
+- 滑块组件，基于 Reka UI 的 Slider 组件封装，支持单选和多选。
+- 常见用法：垂直滑块、范围选择、自定义步长。
 
-<template>
-  <FaSlider v-model="value" />
-</template>
-```
-
-## 垂直滑块
-
-```vue
-<script setup lang="ts">
-const value = ref<number[]>([0])
-</script>
-
-<template>
-  <FaSlider v-model="value" orientation="vertical" />
-</template>
-```
-
-## API
-
-### Props
+## Props
 
 | 参数 | 说明 | 类型 | 默认值 |
 |------|------|------|--------|
@@ -43,19 +22,43 @@ const value = ref<number[]>([0])
 | thumbAlignment | 滑块对齐方式 | `'contain' \| 'cover'` | `'contain'` |
 | tooltip | 是否显示提示 | `boolean` | `true` |
 
-### Events
-
-| 事件名 | 说明 | 回调参数 |
-|--------|------|----------|
-| update:modelValue | 值更新时触发 | `(value: number[])` |
-
-### Slots
+## Slots
 
 | 名称 | 说明 |
 |------|------|
 | - | 无插槽 |
 
+## Events
+
+| 事件名 | 说明 | 回调参数 |
+|--------|------|----------|
+| update:modelValue | 值更新时触发 | `(value: number[])` |
+
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const value = ref<number[]>([0])
+</script>
+
+<template>
+  <FaSlider v-model="value" />
+</template>
+```
+
+### 垂直滑块
+
+```vue
+<script setup lang="ts">
+const value = ref<number[]>([0])
+</script>
+
+<template>
+  <FaSlider v-model="value" orientation="vertical" />
+</template>
+```
 
 ### 范围选择
 
@@ -80,3 +83,7 @@ const value = ref<number[]>([50])
   <FaSlider v-model="value" :step="10" :min="0" :max="100" />
 </template>
 ```
+
+## 注意事项
+
+- 无特殊限制，建议按示例中的受控方式接入，并结合业务容器尺寸验证最终展示效果。

@@ -2,24 +2,13 @@
 
 可折叠的搜索区域容器组件，用于表单筛选条件区域。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const fold = ref(true)
-</script>
-
-<template>
-  <FaSearchBar v-model:fold="fold">
-    <template #default="{ fold, toggle }">
-      <div class="flex gap-4">
-        <FaInput placeholder="关键词" />
-        <FaButton>搜索</FaButton>
-      </div>
-    </template>
-  </FaSearchBar>
-</template>
-```
+- 列表页面筛选区
+- 高级搜索表单
+- 数据查询条件
+- 报表筛选选区
+- 可折叠的表单区域
 
 ## Props
 
@@ -42,6 +31,25 @@ const fold = ref(true)
 | `toggle` | `value: boolean` | 折叠状态变化时触发 |
 
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const fold = ref(true)
+</script>
+
+<template>
+  <FaSearchBar v-model:fold="fold">
+    <template #default="{ fold, toggle }">
+      <div class="flex gap-4">
+        <FaInput placeholder="关键词" />
+        <FaButton>搜索</FaButton>
+      </div>
+    </template>
+  </FaSearchBar>
+</template>
+```
 
 ### 基础搜索栏
 
@@ -242,11 +250,3 @@ const showAdvanced = ref(false)
 2. **折叠按钮**：默认在底部显示折叠/展开按钮
 3. **双向绑定**：`fold` 支持 `v-model` 双向绑定
 4. **内容控制**：需要在 slot 内根据 `fold` 值控制内容的显示
-
-## 典型使用场景
-
-- 列表页面筛选区
-- 高级搜索表单
-- 数据查询条件
-- 报表筛选选区
-- 可折叠的表单区域

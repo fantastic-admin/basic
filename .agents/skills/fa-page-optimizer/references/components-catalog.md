@@ -12,9 +12,6 @@
 **变体**: default, destructive, outline, secondary, ghost, link
 **特性**: loading 状态、disabled 状态
 
-### FaBadge
-**用途**: 徽章标签，用于状态标识和分类
-
 ### FaIcon
 **用途**: 图标组件，基于 [iconify](https://icon-sets.iconify.design/)
 **示例**: <FaIcon name="i-mdi:home" />
@@ -33,9 +30,6 @@
 
 ### FaDivider
 **用途**: 分割线组件
-
-### FaLayoutContainer
-**用途**: 布局容器组件
 
 ### FaPageHeader
 **用途**: 页面头部组件
@@ -275,7 +269,6 @@
 | `<div class="card">` | `FaCard` | 标准化的卡片布局 |
 | `<hr>` | `FaDivider` | 统一的分割线样式 |
 | `<img>` (头像) | `FaAvatar` | 头像专用组件 |
-| `<span class="badge">` | `FaBadge` | 统一的徽章样式 |
 
 ### 替换常见功能实现
 

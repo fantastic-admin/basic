@@ -2,17 +2,13 @@
 
 多行文本输入组件，支持前后缀插槽和自定义样式。
 
-## 基础用法
+## 使用场景
 
-```vue
-<script setup lang="ts">
-const value = ref('')
-</script>
-
-<template>
-  <FaTextarea v-model="value" placeholder="请输入内容..." />
-</template>
-```
+- 文章/内容编辑器
+- 评论输入框
+- 意见反馈
+- 多行表单字段
+- 代码/文本展示
 
 ## Props
 
@@ -31,15 +27,19 @@ const value = ref('')
 | `start` | 文本域前缀内容 |
 | `end` | 文本域后缀内容 |
 
-## Events
-
-无
-
-## Exposed Methods
-
-无
-
 ## 示例
+
+### 基础用法
+
+```vue
+<script setup lang="ts">
+const value = ref('')
+</script>
+
+<template>
+  <FaTextarea v-model="value" placeholder="请输入内容..." />
+</template>
+```
 
 ### 基础文本域
 
@@ -161,11 +161,3 @@ const isOverLimit = computed(() => charCount.value > maxLength)
 3. **自动调整**：可通过 CSS 实现自动高度调整
 4. **对齐方式**：`align="block"` 时前后缀会上下排列
 5. **滚动行为**：超出高度时自动显示滚动条
-
-## 典型使用场景
-
-- 文章/内容编辑器
-- 评论输入框
-- 意见反馈
-- 多行表单字段
-- 代码/文本展示
