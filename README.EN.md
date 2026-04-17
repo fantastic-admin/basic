@@ -56,57 +56,6 @@ If you find Fantastic-admin useful, or you are already using it, please consider
 
 ## Ecosystem
 
-<table>
-  <tr>
-    <th colspan="3" align="center">
-      <a href="https://hooray.github.io/fantastic-startkit/" target="_blank">Fantastic-startkit</a>
-    </th>
-  </tr>
-  <tr>
-    <th colspan="3" align="center">
-      A simple and easy-to-use Vue 3 project starter kit
-    </th>
-  </tr>
-</table>
-
-<table>
-  <tr>
-    <th colspan="3" align="center">
-      <a href="https://one-step-admin.hurui.me" target="_blank">One-step-admin</a>
-    </th>
-  </tr>
-  <tr>
-    <th colspan="3" align="center">
-      A Vue admin framework built to help you move faster than the rest
-    </th>
-  </tr>
-  <tr>
-    <td><img src="https://one-step-admin.hurui.me/preview1.png" alt="" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview2.png" alt="" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview3.png" alt="" /></td>
-  </tr>
-  <tr>
-    <td><img src="https://one-step-admin.hurui.me/preview4.png" alt="" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview5.png" alt="" /></td>
-    <td><img src="https://one-step-admin.hurui.me/preview6.png" alt="" /></td>
-  </tr>
-</table>
-
-<table>
-  <tr>
-    <th colspan="4" align="center">
-      <a href="https://fantastic-mobile.hurui.me" target="_blank">Fantastic-mobile</a>
-    </th>
-  </tr>
-  <tr>
-    <th colspan="4" align="center">
-      A distinctive mobile H5 framework
-    </th>
-  </tr>
-  <tr>
-    <td><img src="https://fantastic-mobile.hurui.me/preview1.png" alt="" /></td>
-    <td><img src="https://fantastic-mobile.hurui.me/preview2.png" alt="" /></td>
-    <td><img src="https://fantastic-mobile.hurui.me/preview3.png" alt="" /></td>
-    <td><img src="https://fantastic-mobile.hurui.me/preview4.png" alt="" /></td>
-  </tr>
-</table>
+- [`Fantastic-startkit`](https://hooray.github.io/fantastic-startkit/) - A simple and easy-to-use Vue 3 project starter kit
+- [`Fantastic-mobile`](https://fantastic-mobile.hurui.me/) - Let your H5 project have a solid engineering base
+- [`One-step-admin`](https://one-step-admin.hurui.me) - A Vue admin framework built to help you move faster than the rest
