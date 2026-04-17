@@ -90,7 +90,7 @@ function isBuildScript(scriptName: string): boolean {
 }
 
 function isDevScript(scriptName: string): boolean {
-  return scriptName === 'dev'
+  return scriptName === 'dev' || scriptName.startsWith('dev:')
 }
 
 function isServeScript(scriptName: string): boolean {
