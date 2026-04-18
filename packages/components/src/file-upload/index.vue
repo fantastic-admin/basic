@@ -49,18 +49,83 @@ export interface FileItem {
   file?: File
 }
 
+const containerRef = useTemplateRef<HTMLElement>('containerRef')
 const fileInputRef = useTemplateRef<HTMLInputElement>('fileInputRef')
 const isDragging = ref(false)
+const isHoveringContainer = ref(false)
+const isContainerFocused = ref(false)
+const isMaxReached = computed(() => props.max > 0 && fileList.value.length >= props.max)
+const canHandlePaste = computed(() =>
+  !props.disabled
+  && !isMaxReached.value
+  && (isHoveringContainer.value || isContainerFocused.value),
+)
+const extAliasMap: Record<string, string[]> = {
+  'jpeg': ['jpg', 'jpeg'],
+  'jpg': ['jpg', 'jpeg'],
+  'plain': ['txt'],
+  'msword': ['doc'],
+  'vnd.openxmlformats-officedocument.wordprocessingml.document': ['docx'],
+  'vnd.ms-excel': ['xls'],
+  'vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['xlsx'],
+  'vnd.ms-powerpoint': ['ppt'],
+  'vnd.openxmlformats-officedocument.presentationml.presentation': ['pptx'],
+  'x-zip-compressed': ['zip'],
+  'zip': ['zip'],
+  'x-rar-compressed': ['rar'],
+  'vnd.rar': ['rar'],
+  'rar': ['rar'],
+  'x-7z-compressed': ['7z'],
+}
+const acceptedExts = computed(() => new Set(props.ext.flatMap(ext => normalizeExtVariants(ext))))
 
-function formatText(template: string, params: Record<string, string | number>) {
-  return Object.entries(params).reduce((result, [key, value]) => {
-    return result.replaceAll(`{${key}}`, String(value))
-  }, template)
+function normalizeExt(ext?: string) {
+  if (!ext) {
+    return ''
+  }
+  return ext.toLowerCase().trim().replace(/^\./, '').split('+')[0] ?? ''
+}
+
+function normalizeExtVariants(ext?: string) {
+  const normalizedExt = normalizeExt(ext)
+  if (!normalizedExt) {
+    return []
+  }
+  return extAliasMap[normalizedExt] ?? [normalizedExt]
+}
+
+function getFileExtVariants(file: File) {
+  const extVariants = new Set<string>()
+  const fileNameExt = file.name.split('.').pop()
+  normalizeExtVariants(fileNameExt).forEach(ext => extVariants.add(ext))
+  const mimeExt = file.type.split('/')[1]
+  normalizeExtVariants(mimeExt).forEach(ext => extVariants.add(ext))
+  return extVariants
+}
+
+function validateFile(file: File) {
+  if (acceptedExts.value.size > 0) {
+    const fileExtVariants = getFileExtVariants(file)
+    const isAccepted = [...fileExtVariants].some(ext => acceptedExts.value.has(ext))
+    if (!isAccepted) {
+      toast.error(`上传文件只支持 ${props.ext.join(' / ')} 格式`, {
+        description: file.name || file.type,
+      })
+      return false
+    }
+  }
+  if (props.size > 0 && file.size > props.size) {
+    toast.error(`上传文件大小不能超过 ${filesize(props.size, { standard: 'jedec' })}`, {
+      description: `${file.name || file.type} (${filesize(file.size, { standard: 'jedec' })})`,
+    })
+    return false
+  }
+  return true
 }
 
 function handleDragOver(e: DragEvent) {
   e.preventDefault()
-  if (props.disabled) {
+  if (props.disabled || isMaxReached.value) {
     return
   }
   isDragging.value = true
@@ -73,43 +138,74 @@ function handleDragLeave(e: DragEvent) {
 
 function handleDrop(e: DragEvent) {
   e.preventDefault()
-  if (props.disabled) {
+  if (props.disabled || isMaxReached.value) {
     return
   }
   isDragging.value = false
   if (e.dataTransfer?.files) {
-    onSelectFile(e.dataTransfer.files)
+    handleFiles(e.dataTransfer.files)
   }
 }
 
-function onSelectFile(files: FileList | File[] | null) {
-  if (!files) {
+function onPaste(e: ClipboardEvent) {
+  if (e.defaultPrevented || !canHandlePaste.value) {
     return
   }
-  const selectedFiles = [...files]
-  // 数量限制
-  const remain = props.max > 0 ? props.max - fileList.value.length : selectedFiles.length
-  const filesToAdd: File[] = []
-  for (const file of selectedFiles.slice(0, remain)) {
-    // 类型校验
-    if (props.ext.length > 0) {
-      const ext = file.name.split('.').pop()?.toLowerCase()
-      if (!props.ext.map(e => e.toLowerCase()).includes(ext || '')) {
-        toast.error(formatText('上传文件只支持 {ext} 格式', { ext: props.ext.join(' / ') }))
-        continue
-      }
-    }
-    // 大小校验
-    if (props.size > 0) {
-      if (file.size > props.size) {
-        toast.error(formatText('上传文件大小不能超过 {size}', { size: filesize(props.size, { standard: 'jedec' }) }))
-        continue
-      }
-    }
-    filesToAdd.push(file)
+  const filesFromItems = [...(e.clipboardData?.items ?? [])]
+    .filter(item => item.kind === 'file')
+    .map(item => item.getAsFile())
+    .filter((file): file is File => file !== null)
+  const files = filesFromItems.length > 0
+    ? filesFromItems
+    : [...(e.clipboardData?.files ?? [])]
+
+  if (files.length > 0 && handleFiles(files)) {
+    e.preventDefault()
   }
-  fileInputRef.value!.value = ''
+}
+
+function onContainerFocusIn() {
+  isContainerFocused.value = true
+}
+
+function onContainerFocusOut(e: FocusEvent) {
+  const nextFocusedElement = e.relatedTarget
+  if (nextFocusedElement instanceof Node && containerRef.value?.contains(nextFocusedElement)) {
+    return
+  }
+  isContainerFocused.value = false
+}
+
+onMounted(() => {
+  window.addEventListener('paste', onPaste)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('paste', onPaste)
+})
+
+function onSelectFile(files: FileList | File[] | null) {
+  handleFiles(files)
+}
+
+function handleFiles(files: FileList | File[] | null) {
+  if (!files || props.disabled || isMaxReached.value) {
+    return false
+  }
+  const selectedFiles = [...files]
+  const remain = props.max > 0 ? props.max - fileList.value.length : selectedFiles.length
+  if (remain <= 0) {
+    return false
+  }
+  if (fileInputRef.value) {
+    fileInputRef.value.value = ''
+  }
+  const filesToAdd = selectedFiles.slice(0, remain).filter(validateFile)
+  if (filesToAdd.length === 0) {
+    return false
+  }
   filesToAdd.forEach(file => uploadFile(file))
+  return true
 }
 
 function uploadFile(file: File, index?: number) {
@@ -167,15 +263,23 @@ function removeFile(idx: number) {
 </script>
 
 <template>
-  <div class="space-y-2">
+  <div
+    ref="containerRef"
+    class="space-y-2"
+    :tabindex="props.disabled ? undefined : 0"
+    @mouseenter="isHoveringContainer = true"
+    @mouseleave="isHoveringContainer = false"
+    @focusin="onContainerFocusIn"
+    @focusout="onContainerFocusOut"
+  >
     <button
       type="button"
       class="p-4 border border-2 rounded-lg border-dashed bg-transparent flex flex-col h-40 w-full cursor-pointer transition-all items-center justify-center"
       :class="{
         'border-primary bg-primary/5': isDragging,
-        'opacity-50 cursor-not-allowed': props.disabled || (props.max > 0 && fileList.length >= props.max),
+        'opacity-50 cursor-not-allowed': props.disabled || isMaxReached,
       }"
-      :disabled="props.disabled || (props.max > 0 && fileList.length >= props.max)"
+      :disabled="props.disabled || isMaxReached"
       @dragover="handleDragOver"
       @dragleave="handleDragLeave"
       @drop="handleDrop"
@@ -191,13 +295,16 @@ function removeFile(idx: number) {
     </button>
     <div v-if="!props.hideTips && !props.disabled" class="text-xs text-card-foreground/50 flex flex-wrap gap-1 empty:hidden">
       <div v-if="props.ext.length > 0" class="after:content-[';_'] last:after:content-empty">
-        {{ formatText('支持 {ext} 格式', { ext: props.ext.join(' / ') }) }}
+        支持 {{ props.ext.join(' / ') }} 格式
+      </div>
+      <div class="after:content-[';_'] last:after:content-empty">
+        支持粘贴上传
       </div>
       <div v-if="props.size > 0" class="after:content-[';_'] last:after:content-empty">
-        {{ formatText('大小不超过 {size}', { size: filesize(props.size, { standard: 'jedec' }) }) }}
+        大小不超过 {{ filesize(props.size, { standard: 'jedec' }) }}
       </div>
       <div v-if="props.max > 0" class="after:content-[';_'] last:after:content-empty">
-        {{ formatText('数量不超过 {max} 个', { max: props.max }) }}
+        数量不超过 {{ props.max }} 个
       </div>
     </div>
     <div v-if="fileList.length > 0" class="gap-2 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
