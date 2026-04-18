@@ -53,7 +53,7 @@ const AUTO_IMPORT_NAMES = [
   'faToast',
 ] as const
 
-export const FantasticAutoImports: ImportsMap = {
+export const FantasticComponentsAutoImports: ImportsMap = {
   [PACKAGE_NAME]: [...AUTO_IMPORT_NAMES],
 }
 
