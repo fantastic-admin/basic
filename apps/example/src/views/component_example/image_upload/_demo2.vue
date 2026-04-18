@@ -10,7 +10,7 @@ function handleSuccess() {
   <FaImageUpload
     v-model="files"
     action="/fake/upload"
-    :after-upload="(response) => response.data.url"
+    :after-upload="(response) => `${response.data.url}?fake=${Math.random()}`"
     :max="2"
     @on-success="handleSuccess"
   />

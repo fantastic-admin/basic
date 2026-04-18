@@ -49,8 +49,15 @@ const emits = defineEmits<{
 
 const images = defineModel<string[]>('modelValue', { required: true })
 
+interface ImageItem {
+  key: string
+  src: string
+}
+
 const activeUploadCount = ref(0)
 const uploadProgress = ref(0)
+const imageItemSeed = shallowRef(0)
+const imageItems = ref<ImageItem[]>([])
 const containerRef = useTemplateRef<HTMLElement>('containerRef')
 const fileInputRef = useTemplateRef<HTMLInputElement>('fileInputRef')
 const isHoveringContainer = ref(false)
@@ -62,6 +69,35 @@ const canHandlePaste = computed(() =>
   && !isUploading.value
   && (isHoveringContainer.value || isContainerFocused.value),
 )
+
+watch(images, (currentImages) => {
+  const reusableItems = new Map<string, ImageItem[]>()
+  imageItems.value.forEach((item) => {
+    const itemsForSrc = reusableItems.get(item.src)
+    if (itemsForSrc) {
+      itemsForSrc.push(item)
+    }
+    else {
+      reusableItems.set(item.src, [item])
+    }
+  })
+
+  imageItems.value = currentImages.map((src) => {
+    const reusableItem = reusableItems.get(src)?.shift()
+    if (reusableItem) {
+      return reusableItem
+    }
+
+    imageItemSeed.value += 1
+    return {
+      key: `fa-image-upload-item-${imageItemSeed.value}`,
+      src,
+    }
+  })
+}, {
+  deep: true,
+  immediate: true,
+})
 
 function normalizeExt(ext?: string) {
   if (!ext) {
@@ -231,6 +267,20 @@ function onMove(index: number, direction: 'forward' | 'backward') {
     images.value[index] = images.value.splice(index + 1, 1, images.value[index])[0]
   }
 }
+
+function onBeforeLeave(el: Element) {
+  if (!(el instanceof HTMLElement) || !(el.parentElement instanceof HTMLElement)) {
+    return
+  }
+
+  const elementRect = el.getBoundingClientRect()
+  const listRect = el.parentElement.getBoundingClientRect()
+
+  el.style.left = `${elementRect.left - listRect.left}px`
+  el.style.top = `${elementRect.top - listRect.top}px`
+  el.style.width = `${elementRect.width}px`
+  el.style.height = `${elementRect.height}px`
+}
 </script>
 
 <template>
@@ -243,14 +293,19 @@ function onMove(index: number, direction: 'forward' | 'backward') {
     @focusin="onContainerFocusIn"
     @focusout="onContainerFocusOut"
   >
-    <div class="flex flex-wrap gap-2">
+    <TransitionGroup
+      tag="div"
+      name="fa-image-upload-list"
+      class="fa-image-upload-list flex flex-wrap gap-2"
+      @before-leave="onBeforeLeave"
+    >
       <div
-        v-for="(img, index) in images" :key="img" class="group/image-upload border rounded-lg flex items-center justify-center relative overflow-hidden" :style="{
+        v-for="(item, index) in imageItems" :key="item.key" class="fa-image-upload-item group/image-upload border rounded-lg flex items-center justify-center relative overflow-hidden" :style="{
           width: `${props.width}px`,
           height: `${props.height}px`,
         }"
       >
-        <img :src="img" class="h-full w-full object-contain">
+        <img :src="item.src" class="h-full w-full object-contain">
         <div v-if="!props.disabled" class="text-white p-2 rounded-lg bg-black/50 opacity-0 grid grid-cols-2 transition-opacity inset-0 place-items-center absolute group-hover/image-upload:opacity-100">
           <div class="opacity-60 flex-center cursor-pointer transition-all hover:(opacity-100 scale-110)" @click.prevent="onPreview(index)">
             <FaIcon name="i-icon-park-outline:preview-open" class="size-6" />
@@ -300,7 +355,7 @@ function onMove(index: number, direction: 'forward' | 'backward') {
         </template>
         <input ref="fileInputRef" type="file" accept="image/*" :multiple="props.multiple" class="hidden" @change="onSelectFile">
       </button>
-    </div>
+    </TransitionGroup>
     <div v-if="!props.hideTips" class="text-xs text-card-foreground/50 flex flex-wrap gap-1 empty:hidden">
       <div v-if="props.dimension" class="after:content-[';_'] last:after:content-empty">
         建议尺寸为 {{ props.dimension.width }}*{{ props.dimension.height }}
@@ -320,3 +375,39 @@ function onMove(index: number, direction: 'forward' | 'backward') {
     </div>
   </div>
 </template>
+
+<style scoped>
+.fa-image-upload-list {
+  --fa-image-upload-ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+}
+
+.fa-image-upload-item {
+  transform-origin: center;
+}
+
+.fa-image-upload-list-enter-active,
+.fa-image-upload-list-leave-active {
+  transition:
+    opacity 180ms var(--fa-image-upload-ease),
+    transform 240ms var(--fa-image-upload-ease);
+}
+
+.fa-image-upload-list-move {
+  transition: transform 240ms var(--fa-image-upload-ease);
+  will-change: transform;
+}
+
+.fa-image-upload-list-enter-from,
+.fa-image-upload-list-leave-to {
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+.fa-image-upload-list-leave-active {
+  position: absolute;
+  z-index: 2;
+  pointer-events: none;
+}
+</style>
