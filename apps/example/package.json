@@ -17,6 +17,7 @@
     "@bytemd/plugin-gfm": "catalog:",
     "@bytemd/vue-next": "catalog:",
     "@fantastic-admin/components": "workspace:*",
+    "@fantastic-admin/composables": "workspace:*",
     "@fantastic-admin/settings": "workspace:*",
     "@fantastic-admin/types": "workspace:*",
     "@tinymce/tinymce-vue": "catalog:",

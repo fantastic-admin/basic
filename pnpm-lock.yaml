@@ -452,6 +452,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -645,6 +648,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -838,6 +844,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1031,6 +1040,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1224,6 +1236,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1417,6 +1432,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1610,6 +1628,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1812,6 +1833,9 @@ importers:
       '@fantastic-admin/components':
         specifier: workspace:*
         version: link:../../packages/components
+      '@fantastic-admin/composables':
+        specifier: workspace:*
+        version: link:../../packages/composables
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -2110,6 +2134,15 @@ importers:
       vue-sonner:
         specifier: 'catalog:'
         version: 2.0.9
+
+  packages/composables:
+    dependencies:
+      unplugin-auto-import:
+        specifier: 'catalog:'
+        version: 21.0.0(@vueuse/core@14.2.1(vue@3.5.32(typescript@6.0.2)))
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.32(typescript@6.0.2)
 
   packages/copyright:
     dependencies:

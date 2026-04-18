@@ -1,3 +1,5 @@
+import { ref } from 'vue'
+
 export function usePagination() {
   const pagination = ref({
     page: 1,

@@ -1,0 +1,24 @@
+{
+  "name": "@fantastic-admin/composables",
+  "type": "module",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./index.ts",
+    "./resolver": {
+      "types": "./resolver.ts",
+      "import": "./dist/resolver.mjs"
+    }
+  },
+  "scripts": {
+    "stub": "pnpm unbuild --stub"
+  },
+  "peerDependencies": {
+    "unplugin-auto-import": "catalog:",
+    "vue": "catalog:"
+  },
+  "peerDependenciesMeta": {
+    "unplugin-auto-import": {
+      "optional": true
+    }
+  }
+}
