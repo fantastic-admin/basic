@@ -174,6 +174,9 @@ function handleOpenAutoFocus(e: Event) {
   if (!props.openAutoFocus) {
     e.preventDefault()
     e.stopPropagation()
+    nextTick(() => {
+      dialogContentRef.value?.el?.$el?.focus()
+    })
   }
 }
 

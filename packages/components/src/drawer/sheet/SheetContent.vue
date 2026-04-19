@@ -38,6 +38,12 @@ const delegatedProps = reactiveOmit(props, 'class', 'side')
 
 const forwarded = useForwardPropsEmits(delegatedProps, emits)
 
+const sheetContentRef = useTemplateRef<ComponentPublicInstance<typeof DialogContent>>('sheetContentRef')
+
+defineExpose({
+  el: sheetContentRef,
+})
+
 const showOverlay = computed(() => props.open && props.overlay)
 </script>
 
@@ -67,6 +73,7 @@ const showOverlay = computed(() => props.open && props.overlay)
     </Transition>
     <SheetOverlay class="hidden" />
     <DialogContent
+      ref="sheetContentRef"
       data-slot="sheet-content"
       :class="cn(
         'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out fixed z-50 flex flex-col gap-4 shadow-lg transition ease-in-out data-[state=closed]:duration-300 data-[state=open]:duration-500',

@@ -50,6 +50,7 @@ const slots = defineSlots<{
   footer?: () => VNode
 }>()
 
+const sheetContentRef = useTemplateRef('sheetContentRef')
 const drawerId = shallowRef(props.id ?? useId())
 const isOpen = ref(props.modelValue)
 
@@ -140,6 +141,9 @@ function handleOpenAutoFocus(e: Event) {
   if (!props.openAutoFocus) {
     e.preventDefault()
     e.stopPropagation()
+    nextTick(() => {
+      sheetContentRef.value?.el?.$el?.focus()
+    })
   }
 }
 
@@ -176,6 +180,7 @@ function handleAnimationEnd() {
 <template>
   <Sheet :open="isOpen" @update:open="updateOpen">
     <SheetContent
+      ref="sheetContentRef"
       :drawer-id="drawerId"
       :open="isOpen"
       :z-index="props.zIndex"
