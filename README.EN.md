@@ -1,5 +1,5 @@
 [中文](./readme.md) | **English**
-<img src="https://fantastic-admin.hurui.me/logo.svg" align="right" width="80" height="80" alt="logo" />
+<a href="https://fantastic-admin.hurui.me" target="_blank"><img src="https://fantastic-admin.hurui.me/logo.svg" align="right" height="80" alt="logo" /></a>
 
 # Fantastic-admin
 
