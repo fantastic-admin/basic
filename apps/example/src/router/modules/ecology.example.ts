@@ -95,6 +95,16 @@ const routes: RouteRecordRaw[] = [
           link: 'https://github.com/mineadmin/mineadmin',
         },
       },
+      {
+        path: 'antdv-next',
+        redirect: '',
+        name: 'recommandAntdvNext',
+        meta: {
+          title: 'Antdv Next 组件库',
+          icon: 'https://www.antdv-next.com/antdv-next.svg',
+          link: 'https://www.antdv-next.com/',
+        },
+      },
     ],
   },
 ]
