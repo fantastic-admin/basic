@@ -1,15 +1,14 @@
 import { spawn } from 'node:child_process'
-import fs from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
 import * as p from '@clack/prompts'
 import { lookupCollection, lookupCollections } from '@iconify/json'
+import fs from 'fs-extra'
 
 // 拿到全部图标集的原始数据
 const raw = await lookupCollections()
 
-let lastChoose = fs.readFileSync(path.resolve(process.cwd(), 'src/iconify/index.json'), 'utf-8')
-lastChoose = JSON.parse(lastChoose)
+const lastChoose = fs.readFileSync(path.resolve(process.cwd(), 'src/iconify/index.json'), 'utf-8')
 
 // 取出可使用的图标集数据用于选择，并按名称排序
 const collections = Object.entries(raw).map(([id, item]) => ({
@@ -35,7 +34,7 @@ const answers = await p.group(
           value: item.id,
           hint: `${item.total} 个图标`,
         })),
-        initialValues: lastChoose.collections,
+        initialValues: JSON.parse(lastChoose).collections,
       }),
     isOfflineUse: () =>
       p.confirm({

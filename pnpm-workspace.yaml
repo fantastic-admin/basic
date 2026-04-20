@@ -23,6 +23,7 @@ catalog:
   '@spiriit/vite-plugin-svg-spritemap': ^7.0.0
   '@stylistic/stylelint-config': ^5.0.0
   '@tinymce/tinymce-vue': ^6.3.0
+  '@types/fs-extra': ^11.0.4
   '@types/node': ^25.6.0
   '@types/nprogress': ^0.2.3
   '@types/path-browserify': ^1.0.3
@@ -58,6 +59,7 @@ catalog:
   es-toolkit: ^1.45.1
   eslint: ^10.2.0
   filesize: ^11.0.15
+  fs-extra: ^11.3.4
   hotkeys-js: ^4.0.3
   http-server: ^14.1.1
   lint-staged: ^16.4.0
