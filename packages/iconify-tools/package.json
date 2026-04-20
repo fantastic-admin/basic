@@ -1,0 +1,19 @@
+{
+  "name": "@fantastic-admin/iconify-tools",
+  "type": "module",
+  "version": "0.0.0",
+  "bin": {
+    "fa-iconify-tools": "./bin/index.mjs"
+  },
+  "peerDependencies": {
+    "@iconify/json": "catalog:"
+  },
+  "dependencies": {
+    "@clack/prompts": "catalog:",
+    "fs-extra": "catalog:",
+    "tsx": "catalog:"
+  },
+  "devDependencies": {
+    "@types/fs-extra": "catalog:"
+  }
+}

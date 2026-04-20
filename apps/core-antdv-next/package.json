@@ -9,7 +9,7 @@
     "serve": "http-server ./dist -o",
     "serve:test": "http-server ./dist-test -o",
     "svgo": "svgo -f src/assets/icons",
-    "generate:icons": "tsx ./scripts/generate.icons.ts",
+    "generate:icons": "fa-iconify-tools",
     "lint": "vue-tsc -b"
   },
   "dependencies": {
@@ -28,7 +28,6 @@
     "dayjs": "catalog:",
     "eruda": "catalog:",
     "es-toolkit": "catalog:",
-    "fs-extra": "catalog:",
     "hotkeys-js": "catalog:",
     "lucide-vue-next": "catalog:",
     "mitt": "catalog:",
@@ -51,12 +50,11 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "@clack/prompts": "catalog:",
     "@faker-js/faker": "catalog:",
     "@fantastic-admin/copyright": "workspace:*",
+    "@fantastic-admin/iconify-tools": "workspace:*",
     "@iconify/vue": "catalog:",
     "@spiriit/vite-plugin-svg-spritemap": "catalog:",
-    "@types/fs-extra": "catalog:",
     "@types/nprogress": "catalog:",
     "@types/path-browserify": "catalog:",
     "@types/qs": "catalog:",
@@ -69,7 +67,6 @@
     "postcss-nested": "catalog:",
     "sass-embedded": "catalog:",
     "svgo": "catalog:",
-    "tsx": "catalog:",
     "unplugin-auto-import": "catalog:",
     "unplugin-turbo-console": "catalog:",
     "unplugin-vue-components": "catalog:",
