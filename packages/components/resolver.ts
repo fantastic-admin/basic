@@ -53,11 +53,11 @@ const AUTO_IMPORT_NAMES = [
   'faToast',
 ] as const
 
-export const FantasticComponentsAutoImports: ImportsMap = {
+export const ComponentsAutoImports: ImportsMap = {
   [PACKAGE_NAME]: [...AUTO_IMPORT_NAMES],
 }
 
-export function FantasticComponentsResolver(): ComponentResolver {
+export function ComponentsResolver(): ComponentResolver {
   const names = new Set<string>(COMPONENT_NAMES)
   return {
     type: 'component',
@@ -72,7 +72,7 @@ export function FantasticComponentsResolver(): ComponentResolver {
   }
 }
 
-export const FantasticComponentsType: TypeImport = {
+export const ComponentsType: TypeImport = {
   from: PACKAGE_NAME,
   names: [...COMPONENT_NAMES],
 }

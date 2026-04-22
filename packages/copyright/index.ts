@@ -3,19 +3,19 @@ import boxen from 'boxen'
 import picocolors from 'picocolors'
 import banner from 'vite-plugin-banner'
 
-export interface FantasticAdminCopyrightOptions {
+export interface CopyrightOptions {
   edition?: string
   website?: string
 }
 
-function resolveOptions(options: FantasticAdminCopyrightOptions = {}) {
+function resolveOptions(options: CopyrightOptions = {}) {
   return {
     edition: options.edition ?? '基础版',
     website: options.website ?? 'https://fantastic-admin.hurui.me',
   }
 }
 
-export function createFantasticAdminBannerPlugin(options: FantasticAdminCopyrightOptions = {}): PluginOption {
+function createBannerPlugin(options: CopyrightOptions = {}): PluginOption {
   const { website } = resolveOptions(options)
 
   return banner(`
@@ -27,7 +27,7 @@ export function createFantasticAdminBannerPlugin(options: FantasticAdminCopyrigh
   `)
 }
 
-export function createFantasticAdminTerminalInfoPlugin(options: FantasticAdminCopyrightOptions = {}): PluginOption {
+function createTerminalInfoPlugin(options: CopyrightOptions = {}): PluginOption {
   const { edition, website } = resolveOptions(options)
 
   return {
@@ -52,7 +52,7 @@ export function createFantasticAdminTerminalInfoPlugin(options: FantasticAdminCo
   }
 }
 
-export function createFantasticAdminSystemCopyrightPlugin(options: FantasticAdminCopyrightOptions = {}): PluginOption {
+function createSystemCopyrightPlugin(options: CopyrightOptions = {}): PluginOption {
   const { website } = resolveOptions(options)
   const fontFamily = 'font-family: "JetBrains Mono", "SF Mono", "Cascadia Code", Menlo, Consolas, "Liberation Mono", monospace;'
   const mainStyle = `${fontFamily} font-size: 14px; font-weight: 700; padding: 6px 8px; color: #35495e; background: #42b883;`
@@ -86,10 +86,10 @@ ${code}
   }
 }
 
-export function createFantasticAdminCopyrightPlugins(options: FantasticAdminCopyrightOptions = {}): PluginOption[] {
+export function createCopyrightPlugins(options: CopyrightOptions = {}): PluginOption[] {
   return [
-    createFantasticAdminBannerPlugin(options),
-    createFantasticAdminTerminalInfoPlugin(options),
-    createFantasticAdminSystemCopyrightPlugin(options),
+    createBannerPlugin(options),
+    createTerminalInfoPlugin(options),
+    createSystemCopyrightPlugin(options),
   ]
 }

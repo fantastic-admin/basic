@@ -1,8 +1,8 @@
 import type { PluginOption } from 'vite'
 import process from 'node:process'
-import { FantasticComponentsAutoImports, FantasticComponentsResolver, FantasticComponentsType } from '@fantastic-admin/components/resolver'
-import { FantasticComposablesAutoImports } from '@fantastic-admin/composables/resolver'
-import { createFantasticAdminCopyrightPlugins } from '@fantastic-admin/copyright'
+import { ComponentsAutoImports as FantasticAdminComponentsAutoImports, ComponentsResolver as FantasticAdminComponentsResolver, ComponentsType as FantasticAdminComponentsType } from '@fantastic-admin/components/resolver'
+import { ComposablesAutoImports as FantasticAdminComposablesAutoImports } from '@fantastic-admin/composables/resolver'
+import { createCopyrightPlugins as createFantasticAdminCopyrightPlugins } from '@fantastic-admin/copyright'
 import VitePluginSvgSpritemap from '@spiriit/vite-plugin-svg-spritemap'
 import vueLegacy from '@vitejs/plugin-legacy'
 import vue from '@vitejs/plugin-vue'
@@ -48,8 +48,8 @@ export default function createVitePlugins(mode: string, isBuild = false) {
         'vue',
         'vue-router',
         'pinia',
-        FantasticComponentsAutoImports,
-        FantasticComposablesAutoImports,
+        FantasticAdminComponentsAutoImports,
+        FantasticAdminComposablesAutoImports,
       ],
       dts: './src/types/auto-imports.d.ts',
       dirs: [
@@ -65,10 +65,10 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       ],
       dts: './src/types/components.d.ts',
       resolvers: [
-        FantasticComponentsResolver(),
+        FantasticAdminComponentsResolver(),
       ],
       types: [
-        FantasticComponentsType,
+        FantasticAdminComponentsType,
       ],
     }),
 

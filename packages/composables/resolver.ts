@@ -6,6 +6,6 @@ const AUTO_IMPORT_NAMES = [
   'usePagination',
 ] as const
 
-export const FantasticComposablesAutoImports: ImportsMap = {
+export const ComposablesAutoImports: ImportsMap = {
   [PACKAGE_NAME]: [...AUTO_IMPORT_NAMES],
 }
