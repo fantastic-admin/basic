@@ -1,23 +1,23 @@
 export const lightTheme = {
   // shadcn
-  '--background': '1 0 0',
-  '--foreground': '0.141 0.005 285.823',
-  '--card': '1 0 0',
-  '--card-foreground': '0.141 0.005 285.823',
-  '--popover': '1 0 0',
-  '--popover-foreground': '0.141 0.005 285.823',
-  '--primary': '0.21 0.006 285.885',
-  '--primary-foreground': '0.985 0 0',
-  '--secondary': '0.967 0.001 286.375',
-  '--secondary-foreground': '0.21 0.006 285.885',
-  '--muted': '0.967 0.001 286.375',
-  '--muted-foreground': '0.552 0.016 285.938',
-  '--accent': '0.967 0.001 286.375',
-  '--accent-foreground': '0.21 0.006 285.885',
-  '--destructive': '0.577 0.245 27.325',
-  '--border': '0.92 0.004 286.32',
-  '--input': '0.92 0.004 286.32',
-  '--ring': '0.705 0.015 286.067',
+  '--background': '1 0 0', // oklch(1 0 0)
+  '--foreground': '0.145 0 0', // oklch(0.145 0 0)
+  '--card': '1 0 0', // oklch(1 0 0)
+  '--card-foreground': '0.145 0 0', // oklch(0.145 0 0)
+  '--popover': '1 0 0', // oklch(1 0 0)
+  '--popover-foreground': '0.145 0 0', // oklch(0.145 0 0)
+  '--primary': '0.205 0 0', // oklch(0.205 0 0)
+  '--primary-foreground': '0.985 0 0', // oklch(0.985 0 0)
+  '--secondary': '0.97 0 0', // oklch(0.97 0 0)
+  '--secondary-foreground': '0.205 0 0', // oklch(0.205 0 0)
+  '--muted': '0.97 0 0', // oklch(0.97 0 0)
+  '--muted-foreground': '0.556 0 0', // oklch(0.556 0 0)
+  '--accent': '0.97 0 0', // oklch(0.97 0 0)
+  '--accent-foreground': '0.205 0 0', // oklch(0.205 0 0)
+  '--destructive': '0.577 0.245 27.325', // oklch(0.577 0.245 27.325)
+  '--border': '0.922 0 0', // oklch(0.922 0 0)
+  '--input': '0.922 0 0', // oklch(0.922 0 0)
+  '--ring': '0.708 0 0', // oklch(0.708 0 0)
   // 主要区域
   '--g-main-area-bg': 'oklch(0.9612 0 0)',
   // 头部
@@ -55,24 +55,24 @@ export const lightTheme = {
 
 export const darkTheme = {
   // shadcn
-  '--background': '0.141 0.005 285.823',
-  '--foreground': '0.985 0 0',
-  '--card': '0.21 0.006 285.885',
-  '--card-foreground': '0.985 0 0',
-  '--popover': '0.21 0.006 285.885',
-  '--popover-foreground': '0.985 0 0',
-  '--primary': '0.92 0.004 286.32',
-  '--primary-foreground': '0.21 0.006 285.885',
-  '--secondary': '0.274 0.006 286.033',
-  '--secondary-foreground': '0.985 0 0',
-  '--muted': '0.274 0.006 286.033',
-  '--muted-foreground': '0.705 0.015 286.067',
-  '--accent': '0.274 0.006 286.033',
-  '--accent-foreground': '0.985 0 0',
-  '--destructive': '0.704 0.191 22.216',
-  '--border': '0.252 0.002 286.27',
-  '--input': '0.341 0 0',
-  '--ring': '0.552 0.016 285.938',
+  '--background': '0.145 0 0', // oklch(0.145 0 0)
+  '--foreground': '0.985 0 0', // oklch(0.985 0 0)
+  '--card': '0.205 0 0', // oklch(0.205 0 0)
+  '--card-foreground': '0.985 0 0', // oklch(0.985 0 0)
+  '--popover': '0.205 0 0', // oklch(0.205 0 0)
+  '--popover-foreground': '0.985 0 0', // oklch(0.985 0 0)
+  '--primary': '0.922 0 0', // oklch(0.922 0 0)
+  '--primary-foreground': '0.205 0 0', // oklch(0.205 0 0)
+  '--secondary': '0.269 0 0', // oklch(0.269 0 0)
+  '--secondary-foreground': '0.985 0 0', // oklch(0.985 0 0)
+  '--muted': '0.269 0 0', // oklch(0.269 0 0)
+  '--muted-foreground': '0.708 0 0', // oklch(0.708 0 0)
+  '--accent': '0.269 0 0', // oklch(0.269 0 0)
+  '--accent-foreground': '0.985 0 0', // oklch(0.985 0 0)
+  '--destructive': '0.704 0.191 22.216', // oklch(0.704 0.191 22.216)
+  '--border': '0.252 0 0', // oklch(0.252 0 0)
+  '--input': '0.341 0 0', // oklch(0.341 0 0)
+  '--ring': '0.556 0 0', // oklch(0.556 0 0)
   // 主要区域
   '--g-main-area-bg': 'oklch(var(--background))',
   // 头部
