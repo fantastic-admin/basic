@@ -1,6 +1,6 @@
 # FaSelect 选择器组件
 
-下拉选择器组件，支持单选、多选、分组和自定义选项。
+下拉选择器组件，支持单选、多选、分组和下拉内容定位方式。
 
 ## 使用场景
 
@@ -16,6 +16,7 @@
 |------|------|--------|------|
 | `multiple` | `boolean` | `false` | 是否多选 |
 | `disabled` | `boolean` | `false` | 是否禁用 |
+| `position` | `'popper' \| 'item-aligned'` | `'popper'` | 下拉内容的定位模式 |
 | `options` | `(Option \| GroupOption)[]` | **必需** | 选项数据 |
 | `placeholder` | `string` | - | 占位提示文本 |
 | `class` | `HTMLAttributes['class']` | - | 自定义 CSS 类 |
@@ -155,6 +156,28 @@ function handleChange(value) {
 </template>
 ```
 
+### 定位模式
+
+```vue
+<script setup lang="ts">
+const popperValue = ref('2')
+const itemAlignedValue = ref('2')
+
+const options = [
+  { label: '选项 1', value: '1' },
+  { label: '选项 2', value: '2' },
+  { label: '选项 3', value: '3' },
+]
+</script>
+
+<template>
+  <div class="flex flex-col gap-4">
+    <FaSelect v-model="popperValue" :options="options" position="popper" />
+    <FaSelect v-model="itemAlignedValue" :options="options" position="item-aligned" />
+  </div>
+</template>
+```
+
 ### 禁用选择器
 
 ```vue
@@ -196,3 +219,4 @@ const cities = [
 3. **值类型**：`value` 可以是字符串、数字等类型
 4. **分组显示**：当 `options` 中包含 `options` 属性时，会自动识别为分组选项
 5. **z-index**：下拉菜单的 z-index 默认为 2000，确保在其他内容上方显示
+6. **定位模式**：`position="popper"` 时下拉内容跟随触发器定位，`position="item-aligned"` 时会更接近原生 Select 的对齐方式

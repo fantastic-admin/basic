@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { AcceptableValue } from 'reka-ui'
+import type { AcceptableValue, SelectContentProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { useTextDirection } from '@vueuse/core'
 import { cn } from '../../utils'
@@ -30,6 +30,7 @@ defineOptions({
 const props = defineProps<{
   multiple?: boolean
   disabled?: boolean
+  position?: SelectContentProps['position']
   options: (Option | GroupOption)[]
   placeholder?: string
   class?: HTMLAttributes['class']
@@ -97,7 +98,7 @@ const selectedOption = computed({
     <SelectTrigger :class="cn('w-[200px]', props.class)">
       <SelectValue :placeholder="props.placeholder" :selected-option="selectedOption?.label" />
     </SelectTrigger>
-    <SelectContent class="z-2000">
+    <SelectContent :position class="z-2000">
       <template v-for="option in props.options" :key="option.label">
         <SelectGroup v-if="option.hasOwnProperty('options')">
           <SelectLabel>{{ option.label }}</SelectLabel>
