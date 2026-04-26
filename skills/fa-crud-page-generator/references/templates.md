@@ -223,7 +223,7 @@ function onDel(row: any) {
           </div>
         </template>
       </FaSearchBar>
-      <div class="mx--5 my-4 border-t border-t-dashed" />
+      <div class="mx--4 my-4 border-t border-t-dashed" />
       <div class="flex-center-between gap-2">
         <FaButton v-if="batch.enable" variant="outline" :disabled="!batch.selectionDataList.length">
           批量操作
