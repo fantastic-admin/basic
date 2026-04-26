@@ -53,7 +53,7 @@ function handleCopy() {
         'columns-2': appSettingsStore.mode === 'pc',
       }"
     >
-      <FaPageMain title="主题" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="pb-0 border-none font-bold" main-class="space-y-4">
+      <FaPageMain title="主题" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="font-bold" main-class="space-y-4">
         <div class="setting-item">
           <div class="label">
             颜色方案
@@ -83,7 +83,7 @@ function handleCopy() {
           <FaSwitch v-model="appSettingsStore.settings.theme.colorAmblyopia" />
         </div>
       </FaPageMain>
-      <FaPageMain v-if="appSettingsStore.mode === 'pc'" title="导航菜单" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="pb-0 border-none font-bold" main-class="space-y-4">
+      <FaPageMain v-if="appSettingsStore.mode === 'pc'" title="导航菜单" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="font-bold" main-class="space-y-4">
         <div class="menu-mode">
           <FaTooltip text="侧边栏模式 (有主导航菜单)" :delay="500">
             <FaButton variant="outline" class="mode mode-side" :class="{ active: appSettingsStore.settings.menu.mode === 'side' }" @click="appSettingsStore.settings.menu.mode = 'side'">
@@ -145,7 +145,7 @@ function handleCopy() {
           <FaSwitch v-model="appSettingsStore.settings.menu.hotkeys" :disabled="appSettingsStore.settings.menu.mode === 'single'" />
         </div>
       </FaPageMain>
-      <FaPageMain title="顶栏" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="pb-0 border-none font-bold" main-class="space-y-4">
+      <FaPageMain title="顶栏" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="font-bold" main-class="space-y-4">
         <div class="setting-item">
           <div class="label">
             标签栏
@@ -175,7 +175,7 @@ function handleCopy() {
           </FaButtonGroup>
         </div>
       </FaPageMain>
-      <FaPageMain title="标签栏" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="pb-0 border-none font-bold" main-class="space-y-4">
+      <FaPageMain title="标签栏" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="font-bold" main-class="space-y-4">
         <div class="setting-item">
           <div class="label">
             显示图标
@@ -189,7 +189,7 @@ function handleCopy() {
           <FaSwitch v-model="appSettingsStore.settings.tabbar.hotkeys" />
         </div>
       </FaPageMain>
-      <FaPageMain title="工具栏" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="pb-0 border-none font-bold" main-class="space-y-4">
+      <FaPageMain title="工具栏" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="font-bold" main-class="space-y-4">
         <div v-if="appSettingsStore.mode === 'pc'" class="setting-item">
           <div class="label">
             <FaIcon name="i-ic:twotone-double-arrow" />
@@ -237,7 +237,7 @@ function handleCopy() {
           <FaSwitch v-model="appSettingsStore.settings.toolbar.colorScheme" />
         </div>
       </FaPageMain>
-      <FaPageMain title="页面" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="pb-0 border-none font-bold" main-class="space-y-4">
+      <FaPageMain title="页面" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="font-bold" main-class="space-y-4">
         <div class="setting-item">
           <div class="label">
             载入进度条
@@ -248,7 +248,7 @@ function handleCopy() {
           <FaSwitch v-model="appSettingsStore.settings.page.progress" />
         </div>
       </FaPageMain>
-      <FaPageMain title="应用" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="pb-0 border-none font-bold" main-class="space-y-4">
+      <FaPageMain title="应用" class="m-0 mb-4 break-inside-avoid light:border-none" title-class="font-bold" main-class="space-y-4">
         <div class="p-4 pb-4 pt-14 border rounded-lg relative space-y-4">
           <div class="font-bold px-4 py-2 border-b border-e rounded-rb-lg inset-s-0 inset-t-0 absolute">
             账号
