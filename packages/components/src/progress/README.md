@@ -1,4 +1,4 @@
-# FaProgress 进度条组件
+# FaProgress 进度条
 
 线性进度条组件，展示任务的完成进度。
 

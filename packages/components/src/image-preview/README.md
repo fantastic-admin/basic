@@ -1,4 +1,4 @@
-# FaImagePreview 图片预览组件
+# FaImagePreview 图片预览
 
 带加载状态和错误处理的图片预览组件，支持点击放大查看。
 

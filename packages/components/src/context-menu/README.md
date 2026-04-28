@@ -1,4 +1,4 @@
-# FaContextMenu 右键菜单组件
+# FaContextMenu 右键菜单
 
 右键点击时弹出的上下文菜单，支持分组、子菜单和图标。
 

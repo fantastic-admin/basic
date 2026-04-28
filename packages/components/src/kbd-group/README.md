@@ -1,4 +1,4 @@
-# FaKbdGroup 键盘组合组件
+# FaKbdGroup 键盘组合
 
 用于包裹多个 `FaKbd` 组件，展示组合按键的容器组件。
 

@@ -1,4 +1,4 @@
-# FaIcon 图标组件
+# FaIcon 图标
 
 统一的图标组件，支持 UnoCSS 图标类、Iconify、SVG 雪碧图和外部图片 URL 四种图标来源。
 

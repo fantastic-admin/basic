@@ -1,4 +1,4 @@
-# FaPasswordStrength 密码强度组件
+# FaPasswordStrength 密码强度
 
 实时显示密码强度指示，帮助用户创建更安全的密码。
 

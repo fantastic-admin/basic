@@ -1,4 +1,4 @@
-# FaPageHeader 页面头部组件
+# FaPageHeader 页面头部
 
 页面级标题组件，支持标题、描述和右侧操作区。
 

@@ -1,4 +1,4 @@
-# FaSearchBar 搜索栏组件
+# FaSearchBar 搜索栏
 
 可折叠的搜索区域容器组件，用于表单筛选条件区域。
 

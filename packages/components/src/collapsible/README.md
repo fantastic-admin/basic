@@ -1,4 +1,4 @@
-# FaCollapsible 折叠面板组件
+# FaCollapsible 折叠面板
 
 可折叠的内容面板，支持展开/收起动画。
 

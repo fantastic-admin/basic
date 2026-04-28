@@ -1,4 +1,4 @@
-# FaHoverCard 悬浮卡片组件
+# FaHoverCard 悬浮卡片
 
 鼠标悬停时显示的卡片，用于展示额外信息。
 

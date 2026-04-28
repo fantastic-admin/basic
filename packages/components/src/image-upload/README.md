@@ -1,4 +1,4 @@
-# FaImageUpload 图片上传组件
+# FaImageUpload 图片上传
 
 专门用于图片上传的组件，支持预览、排序和粘贴上传。
 
