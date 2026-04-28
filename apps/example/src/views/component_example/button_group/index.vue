@@ -9,30 +9,20 @@ import Demo5 from './_demo5.vue'
 <template>
   <div>
     <FaPageHeader title="按钮组" description="FaButtonGroup" />
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain title="垂直" main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain title="垂直" main-class="p-4">
+      <Demo2 />
     </FaPageMain>
-    <FaPageMain title="分割线" main-class="p-0">
-      <div class="p-4">
-        <Demo3 />
-      </div>
+    <FaPageMain title="分割线" main-class="p-4">
+      <Demo3 />
     </FaPageMain>
-    <FaPageMain title="嵌套" main-class="p-0">
-      <div class="p-4">
-        <Demo4 />
-      </div>
+    <FaPageMain title="嵌套" main-class="p-4">
+      <Demo4 />
     </FaPageMain>
-    <FaPageMain title="与其他组件组合" main-class="p-0">
-      <div class="p-4">
-        <Demo5 />
-      </div>
+    <FaPageMain title="与其他组件组合" main-class="p-4">
+      <Demo5 />
     </FaPageMain>
   </div>
 </template>

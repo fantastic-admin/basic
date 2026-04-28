@@ -13,15 +13,11 @@ import Demo2 from './_demo2.vue'
         </div>
       </template>
     </FaPageHeader>
-    <FaPageMain title="固定在页面顶部" main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain title="固定在页面顶部" main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain title="固定在页面底部" main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain title="固定在页面底部" main-class="p-4">
+      <Demo2 />
     </FaPageMain>
     <FaPageMain class="h-vh" />
   </div>

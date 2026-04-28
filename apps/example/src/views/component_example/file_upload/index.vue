@@ -7,20 +7,14 @@ import Demo3 from './_demo3.vue'
 <template>
   <div>
     <FaPageHeader title="文件上传" description="FaFileUpload" />
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain title="限制上传数量、大小、类型、点击事件" main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain title="限制上传数量、大小、类型、点击事件" main-class="p-4">
+      <Demo2 />
     </FaPageMain>
-    <FaPageMain title="自定义显示" main-class="p-0">
-      <div class="p-4">
-        <Demo3 />
-      </div>
+    <FaPageMain title="自定义显示" main-class="p-4">
+      <Demo3 />
     </FaPageMain>
   </div>
 </template>

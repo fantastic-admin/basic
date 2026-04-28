@@ -7,20 +7,14 @@ import Demo3 from './_demo3.vue'
 <template>
   <div>
     <FaPageHeader title="输入框" description="FaInput" />
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain title="密码框" main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain title="密码框" main-class="p-4">
+      <Demo2 />
     </FaPageMain>
-    <FaPageMain title="插槽" main-class="p-0">
-      <div class="p-4">
-        <Demo3 />
-      </div>
+    <FaPageMain title="插槽" main-class="p-4">
+      <Demo3 />
     </FaPageMain>
   </div>
 </template>

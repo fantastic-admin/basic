@@ -6,15 +6,11 @@ import Demo2 from './_demo2.vue'
 <template>
   <div>
     <FaPageHeader title="复选框" description="FaCheckbox" />
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain title="半选状态" main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain title="半选状态" main-class="p-4">
+      <Demo2 />
     </FaPageMain>
   </div>
 </template>

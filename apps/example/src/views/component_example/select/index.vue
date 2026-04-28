@@ -9,30 +9,20 @@ import Demo5 from './_demo5.vue'
 <template>
   <div>
     <FaPageHeader title="选择器" description="FaSelect" />
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain title="组" main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain title="组" main-class="p-4">
+      <Demo2 />
     </FaPageMain>
-    <FaPageMain title="多选" main-class="p-0">
-      <div class="p-4">
-        <Demo3 />
-      </div>
+    <FaPageMain title="多选" main-class="p-4">
+      <Demo3 />
     </FaPageMain>
-    <FaPageMain title="定位模式" main-class="p-0">
-      <div class="p-4">
-        <Demo4 />
-      </div>
+    <FaPageMain title="定位模式" main-class="p-4">
+      <Demo4 />
     </FaPageMain>
-    <FaPageMain title="在 FaModal 里展示" main-class="p-0">
-      <div class="p-4">
-        <Demo5 />
-      </div>
+    <FaPageMain title="在 FaModal 里展示" main-class="p-4">
+      <Demo5 />
     </FaPageMain>
   </div>
 </template>

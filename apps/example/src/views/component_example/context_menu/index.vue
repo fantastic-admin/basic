@@ -6,15 +6,11 @@ import Demo2 from './_demo2.vue'
 <template>
   <div>
     <FaPageHeader title="右键菜单" description="FaContextMenu" />
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain title="嵌套" main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain title="嵌套" main-class="p-4">
+      <Demo2 />
     </FaPageMain>
   </div>
 </template>

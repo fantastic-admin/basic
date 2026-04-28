@@ -8,25 +8,17 @@ import Demo4 from './_demo4.vue'
 <template>
   <div>
     <FaPageHeader title="内容块" description="FaPageMain" />
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo1 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo1 />
     </FaPageMain>
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo2 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo2 />
     </FaPageMain>
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo3 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo3 />
     </FaPageMain>
-    <FaPageMain main-class="p-0">
-      <div class="p-4">
-        <Demo4 />
-      </div>
+    <FaPageMain main-class="p-4">
+      <Demo4 />
     </FaPageMain>
   </div>
 </template>
