@@ -28,6 +28,7 @@ declare module 'vue' {
     FaPasswordStrength: typeof import('./index')['FaPasswordStrength']
     FaPopover: typeof import('./index')['FaPopover']
     FaProgress: typeof import('./index')['FaProgress']
+    FaRadioGroup: typeof import('./index')['FaRadioGroup']
     FaScrollArea: typeof import('./index')['FaScrollArea']
     FaSearchBar: typeof import('./index')['FaSearchBar']
     FaSelect: typeof import('./index')['FaSelect']

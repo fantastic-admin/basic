@@ -34,6 +34,7 @@ const COMPONENT_NAMES = [
   'FaPasswordStrength',
   'FaPopover',
   'FaProgress',
+  'FaRadioGroup',
   'FaScrollArea',
   'FaSearchBar',
   'FaSelect',

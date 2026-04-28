@@ -223,6 +223,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'radio_group',
+      name: 'componentExampleRadioGroup',
+      component: () => import('@/views/component_example/radio_group/index.vue'),
+      meta: {
+        title: '单选组',
+      },
+    },
+    {
       path: 'scroll_area',
       name: 'componentExampleScrollArea',
       component: () => import('@/views/component_example/scroll_area/index.vue'),
