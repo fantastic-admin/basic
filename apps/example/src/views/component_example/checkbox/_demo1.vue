@@ -5,7 +5,7 @@ const checked = ref(false)
 <template>
   <div class="flex gap-4">
     <FaCheckbox v-model="checked">
-      Checkbox
+      同意协议
     </FaCheckbox>
   </div>
 </template>

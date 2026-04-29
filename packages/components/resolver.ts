@@ -10,6 +10,7 @@ const COMPONENT_NAMES = [
   'FaButtonGroup',
   'FaCard',
   'FaCheckbox',
+  'FaCheckboxGroup',
   'FaCollapsible',
   'FaContextMenu',
   'FaDivider',

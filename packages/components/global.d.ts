@@ -5,6 +5,7 @@ declare module 'vue' {
     FaButtonGroup: typeof import('./index')['FaButtonGroup']
     FaCard: typeof import('./index')['FaCard']
     FaCheckbox: typeof import('./index')['FaCheckbox']
+    FaCheckboxGroup: typeof import('./index')['FaCheckboxGroup']
     FaCollapsible: typeof import('./index')['FaCollapsible']
     FaContextMenu: typeof import('./index')['FaContextMenu']
     FaDivider: typeof import('./index')['FaDivider']

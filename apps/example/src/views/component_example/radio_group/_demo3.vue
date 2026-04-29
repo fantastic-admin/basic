@@ -32,7 +32,6 @@ const currentLabel = computed(() =>
       :options="options"
       class="gap-4 md:grid-cols-3"
       option-class="rounded-xl border border-transparent px-1 py-1"
-      item-class="mt-1"
     >
       <template #option="{ option, checked, disabled }">
         <div

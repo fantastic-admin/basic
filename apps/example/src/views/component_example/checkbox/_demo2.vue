@@ -4,6 +4,6 @@ const checked = ref<'indeterminate' | boolean>('indeterminate')
 
 <template>
   <FaCheckbox v-model="checked">
-    Checkbox
+    部分选中
   </FaCheckbox>
 </template>

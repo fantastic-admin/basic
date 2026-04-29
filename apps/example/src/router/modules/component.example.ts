@@ -54,6 +54,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'checkbox_group',
+      name: 'componentExampleCheckboxGroup',
+      component: () => import('@/views/component_example/checkbox_group/index.vue'),
+      meta: {
+        title: '复选框组',
+      },
+    },
+    {
       path: 'collapsible',
       name: 'componentExampleCollapsible',
       component: () => import('@/views/component_example/collapsible/index.vue'),

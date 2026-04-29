@@ -11,6 +11,7 @@ const options = [
 <template>
   <div class="gap-4 grid">
     <FaRadioGroup v-model="value" :options="options" />
+    <FaRadioGroup v-model="value" :options="options" class="flex" />
     <div class="text-sm text-muted-foreground">
       当前值：{{ value }}
     </div>
