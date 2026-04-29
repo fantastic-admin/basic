@@ -17,17 +17,14 @@ defineOptions({
   name: 'FaRadioGroup',
 })
 
-const props = withDefaults(defineProps<{
+const props = defineProps<{
   options: RadioGroupOption[]
   disabled?: RadioGroupRootProps['disabled']
-  orientation?: RadioGroupRootProps['orientation']
   dir?: RadioGroupRootProps['dir']
   class?: HTMLAttributes['class']
   optionClass?: HTMLAttributes['class']
   itemClass?: HTMLAttributes['class']
-}>(), {
-  orientation: 'vertical',
-})
+}>()
 
 const emit = defineEmits<{
   change: [value: AcceptableValue | undefined]
@@ -76,7 +73,6 @@ function isOptionChecked(option: RadioGroupOption) {
   <RadioGroup
     v-model="value"
     :disabled="disabled"
-    :orientation="orientation"
     :dir="dir"
     :class="props.class"
   >
@@ -85,7 +81,7 @@ function isOptionChecked(option: RadioGroupOption) {
       :key="getOptionKey(option, index)"
       :class="
         cn(
-          'flex gap-3',
+          'flex gap-2',
           option.description ? 'items-start' : 'items-center',
           props.optionClass,
         )

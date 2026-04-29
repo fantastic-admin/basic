@@ -16,7 +16,6 @@
 |------|------|--------|------|
 | `options` | `RadioGroupOption[]` | **必需** | 单选组选项数据 |
 | `disabled` | `boolean` | `false` | 是否整体禁用 |
-| `orientation` | `'horizontal' \| 'vertical'` | `'vertical'` | 排列方向 |
 | `dir` | `'ltr' \| 'rtl'` | - | 文本方向 |
 | `class` | `HTMLAttributes['class']` | - | 单选组容器类名 |
 | `optionClass` | `HTMLAttributes['class']` | - | 每个选项外层容器类名 |
@@ -116,7 +115,7 @@ const options = [
 </template>
 ```
 
-### 横向排列
+### 多列排列
 
 ```vue
 <script setup lang="ts">
@@ -132,9 +131,8 @@ const options = [
 <template>
   <FaRadioGroup
     v-model="value"
-    orientation="horizontal"
     :options="options"
-    class="gap-4"
+    class="gap-4 md:grid-cols-3"
   />
 </template>
 ```
@@ -167,10 +165,8 @@ const options = [
 <template>
   <FaRadioGroup
     v-model="value"
-    orientation="horizontal"
     :options="options"
-    class="gap-4"
-    option-class="w-full sm:w-[260px]"
+    class="gap-4 md:grid-cols-3"
   >
     <template #option="{ option, checked }">
       <div
@@ -221,6 +217,7 @@ function handleChange(value) {
 1. **初始化值**：组件当前通过 `v-model` 管理选中值，不再提供 `defaultValue`。
 2. **选项结构**：`options` 至少需要 `label` 和 `value` 两个字段。
 3. **禁用优先级**：组件整体 `disabled` 为 `true` 时，会覆盖单项可用状态。
-4. **描述文案布局**：存在 `description` 时，选项会自动切换为顶部对齐布局。
-5. **自定义插槽**：使用 `option` 插槽后，默认 `RadioGroupItem` 会隐藏，需要由插槽内容自行承担完整视觉表现。
-6. **点击区域**：默认选项内容包裹在 `Label` 中，点击文字区域也能切换选中状态。
+4. **布局控制**：通过 `class` 和 `optionClass` 自定义多列或卡片式排列，不再提供 `orientation`。
+5. **描述文案布局**：存在 `description` 时，选项会自动切换为顶部对齐布局。
+6. **自定义插槽**：使用 `option` 插槽后，默认 `RadioGroupItem` 会隐藏，需要由插槽内容自行承担完整视觉表现。
+7. **点击区域**：默认选项内容包裹在 `Label` 中，点击文字区域也能切换选中状态。
