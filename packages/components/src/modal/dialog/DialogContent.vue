@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { DialogContentEmits, DialogContentProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
-import { reactiveOmit } from '@vueuse/core'
+import { reactiveOmit, useScrollLock } from '@vueuse/core'
 import { Maximize, Minimize, X } from 'lucide-vue-next'
 import {
   DialogClose,
@@ -47,6 +47,15 @@ defineExpose({
 })
 
 const showOverlay = computed(() => props.open && props.overlay)
+const isLocked = useScrollLock(document.body)
+watch(showOverlay, (val) => {
+  if (val) {
+    isLocked.value = true
+  }
+  else {
+    isLocked.value = false
+  }
+})
 </script>
 
 <template>
@@ -73,7 +82,7 @@ const showOverlay = computed(() => props.open && props.overlay)
         }"
       />
     </Transition>
-    <DialogOverlay class="hidden" />
+    <DialogOverlay />
     <DialogContent
       ref="dialogContentRef"
       v-bind="forwarded"

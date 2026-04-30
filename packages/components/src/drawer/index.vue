@@ -178,7 +178,7 @@ function handleAnimationEnd() {
 </script>
 
 <template>
-  <Sheet :open="isOpen" @update:open="updateOpen">
+  <Sheet :modal="false" :open="isOpen" @update:open="updateOpen">
     <SheetContent
       ref="sheetContentRef"
       :drawer-id="drawerId"

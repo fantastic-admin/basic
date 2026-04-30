@@ -216,7 +216,7 @@ function handleAnimationEnd() {
 </script>
 
 <template>
-  <Dialog :open="isOpen" @update:open="updateOpen">
+  <Dialog :modal="false" :open="isOpen" @update:open="updateOpen">
     <DialogContent
       ref="dialogContentRef"
       :modal-id="modalId"
