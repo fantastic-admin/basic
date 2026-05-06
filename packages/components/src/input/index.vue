@@ -10,7 +10,7 @@ defineOptions({
 })
 
 const props = withDefaults(defineProps<{
-  type?: 'text' | 'password'
+  type?: 'text' | 'password' | 'number' | 'email' | 'search' | 'tel' | 'url' | (string & NonNullable<unknown>)
   align?: 'inline' | 'block'
   disabled?: boolean
   clearable?: boolean
