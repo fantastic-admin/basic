@@ -38,6 +38,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       launchEditor: viteEnv.VITE_LAUNCH_EDITOR,
     }),
 
+    // https://github.com/yue1123/vite-plugin-env-parse
     envParse({
       dtsPath: 'src/types/env.d.ts',
     }),
@@ -83,6 +84,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
       include: 'src/api/modules',
       enableProd: isBuild && viteEnv.VITE_BUILD_FAKE,
     }),
+
     // https://github.com/nonzzz/vite-plugin-compression
     viteEnv.VITE_BUILD_COMPRESS && compression({
       exclude: [/\.(br)$/, /\.(gz)$/],
@@ -107,7 +109,6 @@ export default function createVitePlugins(mode: string, isBuild = false) {
     (() => {
       const moduleId = 'virtual:fantastic-admin/turbo-console'
       const resolvedModuleId = `\0${moduleId}`
-
       return {
         name: 'vite-plugin-turbo-console-bridge',
         resolveId(id) {

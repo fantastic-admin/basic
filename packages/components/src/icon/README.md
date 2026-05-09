@@ -54,7 +54,7 @@
 
 ```vue
 <template>
-  <FaIcon name="#icon-custom" />
+  <FaIcon name="icon-custom" />
 </template>
 ```
 
@@ -117,7 +117,7 @@ const isActive = ref(false)
 |------|------|------|
 | UnoCSS | `i-lucide:search` | 使用 UnoCSS 图标类 |
 | Iconify | `heroicons:information-circle` | 使用 Iconify 在线图标 |
-| SVG 雪碧图 | `#icon-my-icon` | 使用项目内 SVG 雪碧图 |
+| SVG 雪碧图 | `icon-my-icon` | 使用项目内 SVG 雪碧图 |
 | 图片 URL | `https://example.com/icon.svg` 或 `/assets/icon.svg` | 使用外部图片或本地图片 |
 
 1. **图标尺寸**：图标默认尺寸为 `1em`，可通过父元素的 `font-size` 或图标的 `class` 控制
