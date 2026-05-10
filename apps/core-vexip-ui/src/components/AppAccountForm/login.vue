@@ -113,7 +113,7 @@ function testAccount(account: string) {
             <FormField v-slot="{ componentField }" type="checkbox" name="remember">
               <FormItem>
                 <FormControl>
-                  <FaCheckbox v-bind="componentField">
+                  <FaCheckbox :model-value="componentField.modelValue" @update:model-value="componentField['onUpdate:modelValue']?.($event)">
                     记住我
                   </FaCheckbox>
                 </FormControl>
