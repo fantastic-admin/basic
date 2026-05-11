@@ -110,7 +110,7 @@ catalog:
   vite-plugin-banner: ^0.8.1
   vite-plugin-compression2: ^2.5.3
   vite-plugin-env-parse: ^1.0.15
-  vite-plugin-fake-server: ^2.2.3
+  vite-plugin-fake-server: ^2.2.4
   vite-plugin-vue-devtools: ^8.1.2
   vue: ^3.5.34
   vue-currency-input: ^3.2.2

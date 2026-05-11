@@ -313,8 +313,8 @@ catalogs:
       specifier: ^1.0.15
       version: 1.0.15
     vite-plugin-fake-server:
-      specifier: ^2.2.3
-      version: 2.2.3
+      specifier: ^2.2.4
+      version: 2.2.4
     vite-plugin-vue-devtools:
       specifier: ^8.1.2
       version: 8.1.2
@@ -638,7 +638,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -831,7 +831,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -1024,7 +1024,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -1217,7 +1217,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -1410,7 +1410,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -1603,7 +1603,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -1796,7 +1796,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -2052,7 +2052,7 @@ importers:
         version: 1.0.15(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))
       vite-plugin-fake-server:
         specifier: 'catalog:'
-        version: 2.2.3
+        version: 2.2.4
       vite-plugin-vue-devtools:
         specifier: 'catalog:'
         version: 8.1.2(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4))(vue@3.5.34(typescript@6.0.3))
@@ -9630,8 +9630,8 @@ packages:
     peerDependencies:
       vite: '*'
 
-  vite-plugin-fake-server@2.2.3:
-    resolution: {integrity: sha512-wIUOoSG+a5UfDwv2MGqDEoj+CokG4F5odTkmZ+NSGIdfHsI5nLwF87P5KUe3Kt6VnHFWWA1rhPUDucLijWyAMQ==}
+  vite-plugin-fake-server@2.2.4:
+    resolution: {integrity: sha512-6oL/FcM1QvIxFq8AYoV1kE46pye5U+EyolaCqhVsvl74XB/q3YSwZnTj+EIeG0V+FovShWfFndbE6thRSdJjtw==}
 
   vite-plugin-inspect@11.3.3:
     resolution: {integrity: sha512-u2eV5La99oHoYPHE6UvbwgEqKKOQGz86wMg40CCosP6q8BkB6e5xPneZfYagK4ojPJSj5anHCrnvC20DpwVdRA==}
@@ -18364,14 +18364,14 @@ snapshots:
     dependencies:
       vite: 8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4)
 
-  vite-plugin-fake-server@2.2.3:
+  vite-plugin-fake-server@2.2.4:
     dependencies:
       bundle-import: 0.0.2
       chokidar: 5.0.0
       esbuild: 0.27.4
       path-to-regexp: 8.4.2
       picocolors: 1.1.1
-      tinyglobby: 0.2.15
+      tinyglobby: 0.2.16
 
   vite-plugin-inspect@11.3.3(vite@8.0.11(@types/node@25.6.2)(esbuild@0.27.4)(jiti@2.6.1)(sass-embedded@1.99.0)(sass@1.99.0)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.4)):
     dependencies:
