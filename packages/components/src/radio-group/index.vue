@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="TOption extends RadioGroupOption">
 import type { AcceptableValue, RadioGroupRootProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '../../utils'
 import { Label } from '../label/label'
 import { RadioGroup, RadioGroupItem } from './radio-group'
 
-interface RadioGroupOption {
+export interface RadioGroupOption {
   label: string
   value: AcceptableValue
   description?: string
@@ -18,7 +18,7 @@ defineOptions({
 })
 
 const props = defineProps<{
-  options: RadioGroupOption[]
+  options: TOption[]
   disabled?: RadioGroupRootProps['disabled']
   dir?: RadioGroupRootProps['dir']
   class?: HTMLAttributes['class']
@@ -32,7 +32,7 @@ const emit = defineEmits<{
 
 const slots = defineSlots<{
   option?: (props: {
-    option: RadioGroupOption
+    option: TOption
     checked: boolean
     disabled: boolean
     id: string
@@ -46,11 +46,11 @@ watch(value, (newValue) => {
   emit('change', newValue)
 })
 
-function getOptionId(option: RadioGroupOption, index: number) {
+function getOptionId(option: TOption, index: number) {
   return option.id || `${baseId}-${index}`
 }
 
-function getOptionKey(option: RadioGroupOption, index: number) {
+function getOptionKey(option: TOption, index: number) {
   if (option.id) {
     return option.id
   }
@@ -60,11 +60,11 @@ function getOptionKey(option: RadioGroupOption, index: number) {
     : index
 }
 
-function isOptionDisabled(option: RadioGroupOption) {
+function isOptionDisabled(option: TOption) {
   return Boolean(props.disabled || option.disabled)
 }
 
-function isOptionChecked(option: RadioGroupOption) {
+function isOptionChecked(option: TOption) {
   return Object.is(value.value, option.value)
 }
 </script>

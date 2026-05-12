@@ -5,32 +5,30 @@ const options = [
   {
     label: '专注模式',
     value: 'focus',
+    badge: '录入',
     description: '突出主任务，弱化辅助信息，适合录入和审批场景。',
   },
   {
     label: '平衡模式',
     value: 'balanced',
+    badge: '推荐',
     description: '信息密度与可读性保持平衡，适合作为默认配置。',
   },
   {
     label: '高密度模式',
     value: 'dense',
+    badge: '大屏',
     description: '在大屏中同时承载更多信息，适合运营与监控看板。',
   },
 ]
-
-const currentLabel = computed(() =>
-  options.find(option => option.value === value.value)?.label ?? '',
-)
 </script>
 
 <template>
   <div class="gap-4 grid">
     <FaRadioGroup
       v-model="value"
-      orientation="horizontal"
       :options="options"
-      class="gap-4 md:grid-cols-3"
+      class="gap-2 md:grid-cols-3"
       option-class="rounded-xl border border-transparent px-1 py-1"
     >
       <template #option="{ option, checked, disabled }">
@@ -41,28 +39,24 @@ const currentLabel = computed(() =>
           ]"
         >
           <div class="gap-1 grid min-w-0">
-            <div class="text-sm font-medium truncate">
-              {{ option.label }}
+            <div class="flex gap-2 items-center">
+              <span class="text-sm font-medium truncate">{{ option.label }}</span>
+              <span class="text-xs text-muted-foreground px-1.5 py-0.5 rounded bg-muted">
+                {{ option.badge }}
+              </span>
             </div>
-            <div
-              v-if="option.description"
-              class="text-xs text-muted-foreground leading-5"
-            >
+            <div class="text-xs text-muted-foreground leading-5">
               {{ option.description }}
             </div>
           </div>
-          <span
-            class="text-xs font-medium shrink-0" :class="[
-              checked ? 'text-primary' : 'text-muted-foreground',
-            ]"
-          >
+          <span class="text-xs font-medium shrink-0" :class="checked ? 'text-primary' : 'text-muted-foreground'">
             {{ checked ? '已选中' : '可选择' }}
           </span>
         </div>
       </template>
     </FaRadioGroup>
     <div class="text-sm text-muted-foreground">
-      当前模式：{{ currentLabel }}
+      当前值：{{ value }}
     </div>
   </div>
 </template>

@@ -1,11 +1,11 @@
-<script setup lang="ts">
+<script setup lang="ts" generic="TOption extends CheckboxGroupOption">
 import type { AcceptableValue } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
 import { cn } from '../../utils'
 import { Checkbox } from '../checkbox/checkbox'
 import { Label } from '../label/label'
 
-interface CheckboxGroupOption {
+export interface CheckboxGroupOption {
   label: string
   value: AcceptableValue
   description?: string
@@ -18,7 +18,7 @@ defineOptions({
 })
 
 const props = defineProps<{
-  options: CheckboxGroupOption[]
+  options: TOption[]
   disabled?: boolean
   min?: number
   max?: number
@@ -35,7 +35,7 @@ const emit = defineEmits<{
 
 const slots = defineSlots<{
   option?: (props: {
-    option: CheckboxGroupOption
+    option: TOption
     checked: boolean
     disabled: boolean
     id: string
@@ -53,11 +53,11 @@ watch(value, (newValue) => {
   emit('change', newValue)
 })
 
-function getOptionId(option: CheckboxGroupOption, index: number) {
+function getOptionId(option: TOption, index: number) {
   return option.id || `${baseId}-${index}`
 }
 
-function getOptionKey(option: CheckboxGroupOption, index: number) {
+function getOptionKey(option: TOption, index: number) {
   if (option.id) {
     return option.id
   }
@@ -67,7 +67,7 @@ function getOptionKey(option: CheckboxGroupOption, index: number) {
     : index
 }
 
-function isOptionDisabled(option: CheckboxGroupOption) {
+function isOptionDisabled(option: TOption) {
   if (props.disabled || option.disabled) {
     return true
   }
@@ -85,15 +85,15 @@ function isOptionDisabled(option: CheckboxGroupOption) {
   return false
 }
 
-function findOptionIndex(option: CheckboxGroupOption) {
+function findOptionIndex(option: TOption) {
   return value.value.findIndex(item => Object.is(item, option.value))
 }
 
-function isOptionChecked(option: CheckboxGroupOption) {
+function isOptionChecked(option: TOption) {
   return findOptionIndex(option) > -1
 }
 
-function updateOptionChecked(option: CheckboxGroupOption, checked: boolean) {
+function updateOptionChecked(option: TOption, checked: boolean) {
   const nextValue = [...value.value]
   const optionIndex = nextValue.findIndex(item => Object.is(item, option.value))
 
@@ -109,7 +109,7 @@ function updateOptionChecked(option: CheckboxGroupOption, checked: boolean) {
   value.value = nextValue
 }
 
-function handleOptionModelValueChange(option: CheckboxGroupOption, checked: boolean | 'indeterminate') {
+function handleOptionModelValueChange(option: TOption, checked: boolean | 'indeterminate') {
   if (isOptionDisabled(option)) {
     return
   }
@@ -117,7 +117,7 @@ function handleOptionModelValueChange(option: CheckboxGroupOption, checked: bool
   updateOptionChecked(option, checked === true)
 }
 
-function handleCustomOptionClick(option: CheckboxGroupOption) {
+function handleCustomOptionClick(option: TOption) {
   if (!slots.option || isOptionDisabled(option)) {
     return
   }
@@ -125,7 +125,7 @@ function handleCustomOptionClick(option: CheckboxGroupOption) {
   updateOptionChecked(option, !isOptionChecked(option))
 }
 
-function handleCustomOptionKeydown(option: CheckboxGroupOption) {
+function handleCustomOptionKeydown(option: TOption) {
   if (!slots.option || isOptionDisabled(option)) {
     return
   }

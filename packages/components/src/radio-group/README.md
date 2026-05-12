@@ -24,7 +24,7 @@
 ### RadioGroupOption 接口
 
 ```ts
-interface RadioGroupOption {
+export interface RadioGroupOption {
   label: string
   value: AcceptableValue
   description?: string
@@ -37,7 +37,7 @@ interface RadioGroupOption {
 
 | 名称 | 说明 |
 |------|------|
-| `option` | 自定义选项内容，slot props: `{ option, checked, disabled, id }` |
+| `option` | 自定义选项内容，slot props: `{ option, checked, disabled, id }`，`option` 会保留 `options` 中的扩展字段类型 |
 
 ## Events
 
@@ -147,16 +147,19 @@ const options = [
   {
     label: '专注模式',
     value: 'focus',
+    badge: '录入',
     description: '突出主任务，弱化辅助信息。',
   },
   {
     label: '平衡模式',
     value: 'balanced',
+    badge: '推荐',
     description: '信息密度与可读性保持平衡。',
   },
   {
     label: '高密度模式',
     value: 'dense',
+    badge: '大屏',
     description: '适合大屏运营与监控看板。',
   },
 ]
@@ -176,8 +179,13 @@ const options = [
         ]"
       >
         <div class="min-w-0">
-          <div class="truncate font-medium">{{ option.label }}</div>
-          <div v-if="option.description" class="text-xs text-muted-foreground leading-5">
+          <div class="flex items-center gap-2">
+            <span class="truncate font-medium">{{ option.label }}</span>
+            <span class="rounded bg-muted px-1.5 py-0.5 text-xs text-muted-foreground">
+              {{ option.badge }}
+            </span>
+          </div>
+          <div class="text-xs text-muted-foreground leading-5">
             {{ option.description }}
           </div>
         </div>
