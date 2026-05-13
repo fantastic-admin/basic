@@ -1,35 +1,33 @@
 <script setup lang="ts">
 import axios from 'axios'
 import { filesize } from 'filesize'
-import { toast } from 'vue-sonner'
 
 defineOptions({
   name: 'FaFileUpload',
 })
 
 const props = withDefaults(defineProps<{
-  action: string
+  action?: string
   method?: string
   headers?: Headers | Record<string, any>
   data?: Record<string, any>
   name?: string
   afterUpload?: (response: any) => string | Promise<string>
+  beforeUpload?: (file: File) => boolean | Promise<boolean>
+  httpRequest?: (options: FileUploadRequestOptions) => any | Promise<any>
   multiple?: boolean
-  ext?: string[]
-  size?: number
   max?: number
-  hideTips?: boolean
+  directory?: boolean
   disabled?: boolean
 }>(), {
+  action: '',
   method: 'post',
   headers: () => ({}),
   data: () => ({}),
   name: 'file',
   multiple: false,
-  ext: () => [],
-  size: 10 * 1024 * 1024,
   max: 0,
-  hideTips: false,
+  directory: false,
   disabled: false,
 })
 
@@ -49,6 +47,16 @@ export interface FileItem {
   file?: File
 }
 
+export interface FileUploadRequestOptions {
+  action: string
+  method: string
+  headers: Headers | Record<string, any>
+  data: Record<string, any>
+  name: string
+  file: File
+  onProgress: (percent: number) => void
+}
+
 const containerRef = useTemplateRef<HTMLElement>('containerRef')
 const fileInputRef = useTemplateRef<HTMLInputElement>('fileInputRef')
 const isDragging = ref(false)
@@ -58,70 +66,9 @@ const isMaxReached = computed(() => props.max > 0 && fileList.value.length >= pr
 const canHandlePaste = computed(() =>
   !props.disabled
   && !isMaxReached.value
+  && !props.directory
   && (isHoveringContainer.value || isContainerFocused.value),
 )
-const extAliasMap: Record<string, string[]> = {
-  'jpeg': ['jpg', 'jpeg'],
-  'jpg': ['jpg', 'jpeg'],
-  'plain': ['txt'],
-  'msword': ['doc'],
-  'vnd.openxmlformats-officedocument.wordprocessingml.document': ['docx'],
-  'vnd.ms-excel': ['xls'],
-  'vnd.openxmlformats-officedocument.spreadsheetml.sheet': ['xlsx'],
-  'vnd.ms-powerpoint': ['ppt'],
-  'vnd.openxmlformats-officedocument.presentationml.presentation': ['pptx'],
-  'x-zip-compressed': ['zip'],
-  'zip': ['zip'],
-  'x-rar-compressed': ['rar'],
-  'vnd.rar': ['rar'],
-  'rar': ['rar'],
-  'x-7z-compressed': ['7z'],
-}
-const acceptedExts = computed(() => new Set(props.ext.flatMap(ext => normalizeExtVariants(ext))))
-
-function normalizeExt(ext?: string) {
-  if (!ext) {
-    return ''
-  }
-  return ext.toLowerCase().trim().replace(/^\./, '').split('+')[0] ?? ''
-}
-
-function normalizeExtVariants(ext?: string) {
-  const normalizedExt = normalizeExt(ext)
-  if (!normalizedExt) {
-    return []
-  }
-  return extAliasMap[normalizedExt] ?? [normalizedExt]
-}
-
-function getFileExtVariants(file: File) {
-  const extVariants = new Set<string>()
-  const fileNameExt = file.name.split('.').pop()
-  normalizeExtVariants(fileNameExt).forEach(ext => extVariants.add(ext))
-  const mimeExt = file.type.split('/')[1]
-  normalizeExtVariants(mimeExt).forEach(ext => extVariants.add(ext))
-  return extVariants
-}
-
-function validateFile(file: File) {
-  if (acceptedExts.value.size > 0) {
-    const fileExtVariants = getFileExtVariants(file)
-    const isAccepted = [...fileExtVariants].some(ext => acceptedExts.value.has(ext))
-    if (!isAccepted) {
-      toast.error(`上传文件只支持 ${props.ext.join(' / ')} 格式`, {
-        description: file.name || file.type,
-      })
-      return false
-    }
-  }
-  if (props.size > 0 && file.size > props.size) {
-    toast.error(`上传文件大小不能超过 ${filesize(props.size, { standard: 'jedec' })}`, {
-      description: `${file.name || file.type} (${filesize(file.size, { standard: 'jedec' })})`,
-    })
-    return false
-  }
-  return true
-}
 
 function handleDragOver(e: DragEvent) {
   e.preventDefault()
@@ -192,7 +139,7 @@ function handleFiles(files: FileList | File[] | null) {
   if (!files || props.disabled || isMaxReached.value) {
     return false
   }
-  const selectedFiles = [...files]
+  const selectedFiles = [...files].filter(file => file instanceof File)
   const remain = props.max > 0 ? props.max - fileList.value.length : selectedFiles.length
   if (remain <= 0) {
     return false
@@ -200,29 +147,53 @@ function handleFiles(files: FileList | File[] | null) {
   if (fileInputRef.value) {
     fileInputRef.value.value = ''
   }
-  const filesToAdd = selectedFiles.slice(0, remain).filter(validateFile)
+  const filesToAdd = selectedFiles.slice(0, remain)
   if (filesToAdd.length === 0) {
     return false
   }
-  filesToAdd.forEach(file => uploadFile(file))
+  filesToAdd.forEach((file) => {
+    void uploadFile(file)
+  })
   return true
 }
 
-function uploadFile(file: File, index?: number) {
+function getHeadersObject(headers: Headers | Record<string, any>) {
+  if (!(headers instanceof Headers)) {
+    return { ...headers }
+  }
+  const headersObj: Record<string, any> = {}
+  headers.forEach((value, key) => {
+    headersObj[key] = value
+  })
+  return headersObj
+}
+
+async function defaultHttpRequest(options: FileUploadRequestOptions) {
   const formData = new FormData()
-  Object.entries(props.data).forEach(([key, value]) => {
+  Object.entries(options.data).forEach(([key, value]) => {
     formData.append(key, value)
   })
-  formData.append(props.name, file)
-  let headersObj: Record<string, any> = {}
-  if (props.headers instanceof Headers) {
-    props.headers.forEach((value, key) => {
-      headersObj[key] = value
-    })
+  formData.append(options.name, options.file)
+  const response = await axios({
+    url: options.action,
+    method: options.method,
+    headers: getHeadersObject(options.headers),
+    data: formData,
+    onUploadProgress: (progressEvent) => {
+      if (progressEvent.total) {
+        options.onProgress(Math.round((progressEvent.loaded * 100) / progressEvent.total))
+      }
+    },
+  })
+  return response.data
+}
+
+async function uploadFile(file: File, index?: number) {
+  const canUpload = await props.beforeUpload?.(file)
+  if (canUpload === false) {
+    return
   }
-  else {
-    headersObj = { ...props.headers }
-  }
+
   if (index === undefined) {
     fileList.value.push({
       name: file.name,
@@ -233,28 +204,28 @@ function uploadFile(file: File, index?: number) {
     })
   }
   const currentFileIndex = index ?? fileList.value.length - 1
-  axios({
-    url: props.action,
-    method: props.method,
-    headers: headersObj,
-    data: formData,
-    onUploadProgress: (progressEvent) => {
-      if (progressEvent.total) {
-        fileList.value[currentFileIndex].progress = Math.round((progressEvent.loaded * 100) / progressEvent.total)
-      }
-    },
-  })
-    .then(async (response) => {
-      const url = await props.afterUpload?.(response.data)
-      if (url) {
-        fileList.value[currentFileIndex].url = url
-      }
-      emits('onSuccess', response.data, file)
-      fileList.value[currentFileIndex].status = 'success'
+  try {
+    const response = await (props.httpRequest ?? defaultHttpRequest)({
+      action: props.action,
+      method: props.method,
+      headers: props.headers,
+      data: props.data,
+      name: props.name,
+      file,
+      onProgress: (percent) => {
+        fileList.value[currentFileIndex].progress = percent
+      },
     })
-    .catch(() => {
-      fileList.value[currentFileIndex].status = 'error'
-    })
+    const url = await props.afterUpload?.(response)
+    if (url) {
+      fileList.value[currentFileIndex].url = url
+    }
+    emits('onSuccess', response, file)
+    fileList.value[currentFileIndex].status = 'success'
+  }
+  catch {
+    fileList.value[currentFileIndex].status = 'error'
+  }
 }
 
 function removeFile(idx: number) {
@@ -291,22 +262,17 @@ function removeFile(idx: number) {
           拖放或点击上传
         </div>
       </slot>
-      <input ref="fileInputRef" type="file" :multiple="props.multiple" :disabled="props.disabled" class="hidden" @change="e => onSelectFile((e.target as HTMLInputElement).files)">
+      <input
+        ref="fileInputRef"
+        type="file"
+        :multiple="props.directory || props.multiple"
+        :webkitdirectory="props.directory || undefined"
+        :directory="props.directory || undefined"
+        :disabled="props.disabled"
+        class="hidden"
+        @change="e => onSelectFile((e.target as HTMLInputElement).files)"
+      >
     </button>
-    <div v-if="!props.hideTips && !props.disabled" class="text-xs text-card-foreground/50 flex flex-wrap gap-1 empty:hidden">
-      <div v-if="props.ext.length > 0" class="after:content-[';_'] last:after:content-empty">
-        支持 {{ props.ext.join(' / ') }} 格式
-      </div>
-      <div class="after:content-[';_'] last:after:content-empty">
-        支持粘贴上传
-      </div>
-      <div v-if="props.size > 0" class="after:content-[';_'] last:after:content-empty">
-        大小不超过 {{ filesize(props.size, { standard: 'jedec' }) }}
-      </div>
-      <div v-if="props.max > 0" class="after:content-[';_'] last:after:content-empty">
-        数量不超过 {{ props.max }} 个
-      </div>
-    </div>
     <div v-if="fileList.length > 0" class="gap-2 grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))]">
       <div
         v-for="(item, index) in fileList"
