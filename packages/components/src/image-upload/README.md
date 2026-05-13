@@ -1,6 +1,6 @@
 # FaImageUpload 图片上传
 
-专门用于图片上传的组件，支持预览、排序和粘贴上传。
+专门用于图片上传的组件，支持预览、排序、粘贴上传、自定义上传请求和文件夹上传。
 
 ## 使用场景
 
@@ -15,21 +15,32 @@
 
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
-| `action` | `string` | **必需** | 上传接口地址 |
-| `method` | `string` | `'post'` | 请求方法 |
-| `headers` | `Headers \| Record<string, any>` | `{}` | 请求头 |
-| `data` | `Record<string, any>` | `{}` | 额外表单数据 |
-| `name` | `string` | `'file'` | 文件字段名 |
-| `afterUpload` | `(response: any) => string \| Promise<string>` | - | 上传成功后处理函数 |
-| `multiple` | `boolean` | `false` | 是否支持多选 |
-| `ext` | `string[]` | `[]` | 允许的图片格式 |
-| `max` | `number` | `1` | 最大上传数量 |
-| `dimension` | `{ width: number, height: number }` | - | 建议图片尺寸 |
+| `action` | `string` | `''` | 默认上传请求地址，使用 `httpRequest` 时可不传 |
+| `method` | `string` | `'post'` | 默认上传请求方法 |
+| `headers` | `Headers \| Record<string, any>` | `{}` | 默认上传请求头 |
+| `data` | `Record<string, any>` | `{}` | 默认上传附加表单数据 |
+| `name` | `string` | `'file'` | 默认上传文件字段名 |
+| `afterUpload` | `(response: any) => string \| Promise<string>` | - | 上传成功后从响应中提取图片 URL |
+| `beforeUpload` | `(file: File) => boolean \| Promise<boolean>` | - | 上传前钩子，返回 `false` 时跳过该文件 |
+| `httpRequest` | `(options: UploadRequestOptions) => any \| Promise<any>` | - | 自定义上传请求，返回值会传给 `afterUpload` 和 `onSuccess` |
+| `multiple` | `boolean` | `false` | 是否支持多选文件 |
+| `max` | `number` | `1` | 最大上传数量，`0` 表示不限制 |
 | `width` | `number` | `100` | 预览图宽度 (px) |
 | `height` | `number` | `100` | 预览图高度 (px) |
-| `size` | `number` | `5242880` (5MB) | 单张图片大小限制 |
-| `hideTips` | `boolean` | `false` | 是否隐藏提示 |
+| `directory` | `boolean` | `false` | 是否选择文件夹；启用后只能选择文件夹，文件夹内文件会扁平化上传 |
 | `disabled` | `boolean` | `false` | 是否禁用 |
+
+```ts
+interface UploadRequestOptions {
+  action: string
+  method: string
+  headers: Headers | Record<string, any>
+  data: Record<string, any>
+  name: string
+  file: File
+  onProgress: (percent: number) => void
+}
+```
 
 ### Model
 
@@ -51,7 +62,7 @@
 
 ## 粘贴上传
 
-将鼠标移入当前组件，或通过 `Tab` 聚焦当前组件后，可直接按 `Ctrl+V` / `Cmd+V` 粘贴剪贴板中的图片。粘贴上传会复用组件现有的数量、格式和大小校验逻辑。
+将鼠标移入当前组件，或通过 `Tab` 聚焦当前组件后，可直接按 `Ctrl+V` / `Cmd+V` 粘贴剪贴板中的图片。启用 `directory` 后，粘贴上传不可用。
 
 ## 示例
 
@@ -59,46 +70,18 @@
 
 ```vue
 <script setup lang="ts">
-const images = ref([])
+const images = ref<string[]>([])
+
+function afterUpload(response: any) {
+  return response.url
+}
 </script>
 
 <template>
-  <FaImageUpload 
+  <FaImageUpload
     v-model="images"
     action="/api/upload"
-  />
-</template>
-```
-
-### 基础图片上传
-
-```vue
-<script setup lang="ts">
-const images = ref([])
-</script>
-
-<template>
-  <FaImageUpload 
-    v-model="images"
-    action="/api/upload"
-  />
-</template>
-```
-
-### 头像上传（单张）
-
-```vue
-<script setup lang="ts">
-const avatar = ref([])
-</script>
-
-<template>
-  <FaImageUpload 
-    v-model="avatar"
-    action="/api/upload"
-    :max="1"
-    :width="150"
-    :height="150"
+    :after-upload="afterUpload"
   />
 </template>
 ```
@@ -107,106 +90,120 @@ const avatar = ref([])
 
 ```vue
 <script setup lang="ts">
-const gallery = ref([])
+const gallery = ref<string[]>([])
+
+function afterUpload(response: any) {
+  return response.data.url
+}
 </script>
 
 <template>
-  <FaImageUpload 
+  <FaImageUpload
     v-model="gallery"
     action="/api/upload"
     multiple
     :max="9"
     :width="120"
     :height="120"
-  />
-</template>
-```
-
-### 限制图片格式
-
-```vue
-<script setup lang="ts">
-const images = ref([])
-</script>
-
-<template>
-  <FaImageUpload 
-    v-model="images"
-    action="/api/upload"
-    :ext="['jpg', 'png', 'gif']"
-  />
-</template>
-```
-
-### 带尺寸提示
-
-```vue
-<script setup lang="ts">
-const images = ref([])
-</script>
-
-<template>
-  <FaImageUpload 
-    v-model="images"
-    action="/api/upload"
-    :dimension="{ width: 800, height: 600 }"
-    :max="1"
-  />
-</template>
-```
-
-### 处理上传结果
-
-```vue
-<script setup lang="ts">
-const images = ref([])
-
-function afterUpload(response: any) {
-  // 假设后端返回 { code: 200, data: { url: '...' } }
-  if (response.code === 200) {
-    return response.data.url
-  }
-  throw new Error('上传失败')
-}
-</script>
-
-<template>
-  <FaImageUpload 
-    v-model="images"
-    action="/api/upload"
     :after-upload="afterUpload"
   />
 </template>
 ```
 
-### 商品图片上传
+### 上传前校验
+
+组件不再内置图片格式、大小或尺寸校验。如需校验，请通过 `beforeUpload` 实现。
 
 ```vue
 <script setup lang="ts">
-const productImages = ref([])
+const images = ref<string[]>([])
 
-function handleSuccess(response: any) {
-  console.log('上传成功:', response)
+function beforeUpload(file: File) {
+  const isImage = file.type.startsWith('image/')
+  const isLt3M = file.size <= 3 * 1024 * 1024
+
+  if (!isImage) {
+    faToast.error('只能上传图片')
+    return false
+  }
+  if (!isLt3M) {
+    faToast.error('图片不能超过 3MB')
+    return false
+  }
+  return true
+}
+
+function afterUpload(response: any) {
+  return response.url
 }
 </script>
 
 <template>
-  <FaCard title="商品图片">
-    <FaImageUpload 
-      v-model="productImages"
-      action="/api/upload"
-      multiple
-      :max="9"
-      :width="150"
-      :height="150"
-      :ext="['jpg', 'png', 'webp']"
-      :size="3 * 1024 * 1024"
-      @on-success="handleSuccess"
-    />
-    <p class="text-sm text-muted-foreground mt-2">
-      建议尺寸 800x800，支持 JPG、PNG、WebP 格式，单张不超过 3MB
-    </p>
-  </FaCard>
+  <FaImageUpload
+    v-model="images"
+    action="/api/upload"
+    :before-upload="beforeUpload"
+    :after-upload="afterUpload"
+  />
+</template>
+```
+
+### 自定义上传请求
+
+```vue
+<script setup lang="ts">
+const images = ref<string[]>([])
+
+async function httpRequest({ file, onProgress }: any) {
+  onProgress(20)
+
+  const formData = new FormData()
+  formData.append('image', file)
+
+  const response = await fetch('/api/custom-upload', {
+    method: 'POST',
+    body: formData,
+  })
+
+  onProgress(100)
+  return await response.json()
+}
+
+function afterUpload(response: any) {
+  return response.data.url
+}
+</script>
+
+<template>
+  <FaImageUpload
+    v-model="images"
+    :http-request="httpRequest"
+    :after-upload="afterUpload"
+  />
+</template>
+```
+
+### 文件夹上传
+
+启用 `directory` 后，文件选择器只能选择文件夹。选择文件夹后，文件夹内的文件会作为扁平文件列表逐个上传。
+
+```vue
+<script setup lang="ts">
+const images = ref<string[]>([])
+
+function afterUpload(response: any) {
+  return response.url
+}
+</script>
+
+<template>
+  <FaImageUpload
+    v-model="images"
+    action="/api/upload"
+    directory
+    :max="0"
+    :after-upload="afterUpload"
+  />
 </template>
 ```
 
@@ -214,7 +211,7 @@ function handleSuccess(response: any) {
 
 ```vue
 <script setup lang="ts">
-const images = ref([])
+const images = ref<string[]>([])
 </script>
 
 <template>
@@ -227,89 +224,10 @@ const images = ref([])
 </template>
 ```
 
-### 带加载状态
-
-```vue
-<script setup lang="ts">
-const images = ref([])
-const uploading = ref(false)
-
-function handleUploadStart() {
-  uploading.value = true
-}
-
-function handleSuccess() {
-  uploading.value = false
-}
-</script>
-
-<template>
-  <div>
-    <FaImageUpload 
-      v-model="images"
-      action="/api/upload"
-      @on-success="handleSuccess"
-    />
-    <div v-if="uploading" class="mt-2 text-sm text-muted-foreground">
-      正在上传图片...
-    </div>
-  </div>
-</template>
-```
-
-### 图片编辑表单
-
-```vue
-<script setup lang="ts">
-const form = ref({
-  title: '',
-  cover: [],
-  gallery: [],
-})
-
-function handleSubmit() {
-  // 提交表单
-  console.log(form.value)
-}
-</script>
-
-<template>
-  <form class="space-y-6">
-    <FaInput v-model="form.title" label="标题" />
-    
-    <div>
-      <FaLabel label="封面图片" />
-      <FaImageUpload 
-        v-model="form.cover"
-        action="/api/upload"
-        :max="1"
-        :width="200"
-        :height="150"
-      />
-    </div>
-    
-    <div>
-      <FaLabel label="详情图片" />
-      <FaImageUpload 
-        v-model="form.gallery"
-        action="/api/upload"
-        multiple
-        :max="9"
-        :width="100"
-        :height="100"
-      />
-    </div>
-    
-    <FaButton @click="handleSubmit">保存</FaButton>
-  </form>
-</template>
-```
-
 ## 注意事项
 
-1. **图片预览**：上传成功后可点击预览大图
-2. **图片排序**：多图上传时可拖拽排序（通过左右箭头按钮）
-3. **删除图片**：鼠标悬停显示删除按钮
-4. **上传进度**：上传时显示进度条
-5. **格式校验**：根据 `ext` 属性校验图片格式
-6. **大小限制**：根据 `size` 属性校验图片大小
+1. **图片预览**：上传成功后可点击预览大图。
+2. **图片排序**：多图上传时可通过左右箭头调整顺序。
+3. **删除图片**：鼠标悬停显示删除按钮。
+4. **上传进度**：默认上传请求会自动更新进度；自定义 `httpRequest` 可调用 `onProgress` 更新进度。
+5. **上传校验**：组件不再内置格式、大小、尺寸校验，请使用 `beforeUpload` 自行处理。

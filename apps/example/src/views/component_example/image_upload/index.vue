@@ -2,6 +2,8 @@
 import Demo1 from './_demo1.vue'
 import Demo2 from './_demo2.vue'
 import Demo3 from './_demo3.vue'
+import Demo4 from './_demo4.vue'
+import Demo5 from './_demo5.vue'
 </script>
 
 <template>
@@ -13,8 +15,14 @@ import Demo3 from './_demo3.vue'
     <FaPageMain title="多图上传" main-class="p-4">
       <Demo2 />
     </FaPageMain>
-    <FaPageMain title="自定义默认内容、容器大小、建议尺寸、限制类型、不限制数量" main-class="p-4">
+    <FaPageMain title="上传前校验" main-class="p-4">
       <Demo3 />
+    </FaPageMain>
+    <FaPageMain title="自定义上传请求" main-class="p-4">
+      <Demo4 />
+    </FaPageMain>
+    <FaPageMain title="文件夹上传" main-class="p-4">
+      <Demo5 />
     </FaPageMain>
   </div>
 </template>

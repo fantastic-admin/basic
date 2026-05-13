@@ -1,45 +1,47 @@
 <script setup lang="ts">
 import axios from 'axios'
-import { filesize } from 'filesize'
-import { toast } from 'vue-sonner'
 import { cn } from '../../utils'
-import { useFaImagePreview } from '../image-preview'
+
+export interface UploadRequestOptions {
+  action: string
+  method: string
+  headers: Headers | Record<string, any>
+  data: Record<string, any>
+  name: string
+  file: File
+  onProgress: (percent: number) => void
+}
 
 defineOptions({
   name: 'FaImageUpload',
 })
 
 const props = withDefaults(defineProps<{
-  action: string
+  action?: string
   method?: string
   headers?: Headers | Record<string, any>
   data?: Record<string, any>
   name?: string
   afterUpload?: (response: any) => string | Promise<string>
+  beforeUpload?: (file: File) => boolean | Promise<boolean>
+  httpRequest?: (options: UploadRequestOptions) => any | Promise<any>
   multiple?: boolean
-  ext?: string[]
   max?: number
   width?: number
   height?: number
-  dimension?: {
-    width: number
-    height: number
-  }
-  size?: number
-  hideTips?: boolean
+  directory?: boolean
   disabled?: boolean
 }>(), {
+  action: '',
   method: 'post',
   headers: () => ({}),
   data: () => ({}),
   name: 'file',
   multiple: false,
-  ext: () => [],
   max: 1,
   width: 100,
   height: 100,
-  size: 5 * 1024 * 1024,
-  hideTips: false,
+  directory: false,
   disabled: false,
 })
 
@@ -63,10 +65,10 @@ const fileInputRef = useTemplateRef<HTMLInputElement>('fileInputRef')
 const isHoveringContainer = ref(false)
 const isContainerFocused = ref(false)
 const isUploading = computed(() => activeUploadCount.value > 0)
-const acceptedExts = computed(() => new Set(props.ext.flatMap(ext => normalizeExtVariants(ext))))
 const canHandlePaste = computed(() =>
   !props.disabled
   && !isUploading.value
+  && !props.directory
   && (isHoveringContainer.value || isContainerFocused.value),
 )
 
@@ -99,92 +101,69 @@ watch(images, (currentImages) => {
   immediate: true,
 })
 
-function normalizeExt(ext?: string) {
-  if (!ext) {
-    return ''
+function getHeadersObject(headers: Headers | Record<string, any>) {
+  if (!(headers instanceof Headers)) {
+    return { ...headers }
   }
-  return ext.toLowerCase().trim().replace(/^\./, '').split('+')[0] ?? ''
+  const headersObj: Record<string, any> = {}
+  headers.forEach((value, key) => {
+    headersObj[key] = value
+  })
+  return headersObj
 }
 
-function normalizeExtVariants(ext?: string) {
-  const normalizedExt = normalizeExt(ext)
-  if (!normalizedExt) {
-    return []
-  }
-  if (normalizedExt === 'jpg' || normalizedExt === 'jpeg') {
-    return ['jpg', 'jpeg']
-  }
-  return [normalizedExt]
-}
-
-function getFileExtVariants(file: File) {
-  const extVariants = new Set<string>()
-  const fileNameExt = file.name.split('.').pop()
-  normalizeExtVariants(fileNameExt).forEach(ext => extVariants.add(ext))
-  const mimeExt = file.type.split('/')[1]
-  normalizeExtVariants(mimeExt).forEach(ext => extVariants.add(ext))
-  return extVariants
-}
-
-function validateFile(file: File) {
-  if (acceptedExts.value.size > 0) {
-    const fileExtVariants = getFileExtVariants(file)
-    const isAccepted = [...fileExtVariants].some(ext => acceptedExts.value.has(ext))
-    if (!isAccepted) {
-      toast.error(`上传图片只支持 ${props.ext.join(' / ')} 格式`, {
-        description: file.name || file.type,
-      })
-      return false
-    }
-  }
-  if (props.size > 0 && file.size > props.size) {
-    toast.error(`上传图片大小不能超过 ${filesize(props.size, { standard: 'jedec' })}`, {
-      description: `${file.name || file.type} (${filesize(file.size, { standard: 'jedec' })})`,
-    })
-    return false
-  }
-  return true
-}
-
-function uploadFile(file: File) {
-  activeUploadCount.value += 1
-  uploadProgress.value = 0
+async function defaultHttpRequest(options: UploadRequestOptions) {
   const formData = new FormData()
-  Object.entries(props.data).forEach(([key, value]) => {
+  Object.entries(options.data).forEach(([key, value]) => {
     formData.append(key, value)
   })
-  formData.append(props.name, file)
-  let headersObj: Record<string, any> = {}
-  if (props.headers instanceof Headers) {
-    props.headers.forEach((value, key) => {
-      headersObj[key] = value
-    })
-  }
-  else {
-    headersObj = { ...props.headers }
-  }
-  return axios({
-    url: props.action,
-    method: props.method,
-    headers: headersObj,
+  formData.append(options.name, options.file)
+  const response = await axios({
+    url: options.action,
+    method: options.method,
+    headers: getHeadersObject(options.headers),
     data: formData,
     onUploadProgress: (progressEvent) => {
       if (progressEvent.total) {
-        uploadProgress.value = Math.round((progressEvent.loaded * 100) / progressEvent.total)
+        options.onProgress(Math.round((progressEvent.loaded * 100) / progressEvent.total))
       }
     },
-  }).then(async (response) => {
-    const url = await props.afterUpload?.(response.data)
+  })
+  return response.data
+}
+
+async function uploadFile(file: File) {
+  const canUpload = await props.beforeUpload?.(file)
+  if (canUpload === false) {
+    return
+  }
+
+  activeUploadCount.value += 1
+  uploadProgress.value = 0
+  try {
+    const response = await (props.httpRequest ?? defaultHttpRequest)({
+      action: props.action,
+      method: props.method,
+      headers: props.headers,
+      data: props.data,
+      name: props.name,
+      file,
+      onProgress: (percent) => {
+        uploadProgress.value = percent
+      },
+    })
+    const url = await props.afterUpload?.(response)
     if (url) {
       images.value.push(url)
     }
-    emits('onSuccess', response.data, file)
-  }).finally(() => {
+    emits('onSuccess', response, file)
+  }
+  finally {
     activeUploadCount.value -= 1
     if (!isUploading.value) {
       uploadProgress.value = 0
     }
-  })
+  }
 }
 
 function onSelectFile(e: Event) {
@@ -233,7 +212,7 @@ function handleFiles(files: FileList | File[] | null) {
   if (!files || props.disabled || isUploading.value) {
     return false
   }
-  const selectedFiles = [...files]
+  const selectedFiles = [...files].filter(file => file instanceof File)
   const remain = props.max === 0 ? selectedFiles.length : props.max - images.value.length
   if (remain <= 0) {
     return false
@@ -241,7 +220,7 @@ function handleFiles(files: FileList | File[] | null) {
   if (fileInputRef.value) {
     fileInputRef.value.value = ''
   }
-  const filesToAdd = selectedFiles.slice(0, remain).filter(validateFile)
+  const filesToAdd = selectedFiles.slice(0, remain)
   if (filesToAdd.length === 0) {
     return false
   }
@@ -353,26 +332,18 @@ function onBeforeLeave(el: Element) {
         <template v-if="isUploading && uploadProgress > 0 && uploadProgress < 100">
           <FaProgress :model-value="uploadProgress" class="h-1 w-auto inset-x-1 inset-b-1 absolute" />
         </template>
-        <input ref="fileInputRef" type="file" accept="image/*" :multiple="props.multiple" class="hidden" @change="onSelectFile">
+        <input
+          ref="fileInputRef"
+          type="file"
+          accept="image/*"
+          :multiple="props.directory || props.multiple"
+          :webkitdirectory="props.directory || undefined"
+          :directory="props.directory || undefined"
+          class="hidden"
+          @change="onSelectFile"
+        >
       </button>
     </TransitionGroup>
-    <div v-if="!props.hideTips" class="text-xs text-card-foreground/50 flex flex-wrap gap-1 empty:hidden">
-      <div v-if="props.dimension" class="after:content-[';_'] last:after:content-empty">
-        建议尺寸为 {{ props.dimension.width }}*{{ props.dimension.height }}
-      </div>
-      <div v-if="props.ext.length > 0" class="after:content-[';_'] last:after:content-empty">
-        支持 {{ props.ext.join(' / ') }} 格式
-      </div>
-      <div v-if="!props.disabled" class="after:content-[';_'] last:after:content-empty">
-        支持粘贴上传
-      </div>
-      <div v-if="props.size > 0" class="after:content-[';_'] last:after:content-empty">
-        大小不超过 {{ filesize(props.size, { standard: 'jedec' }) }}
-      </div>
-      <div v-if="props.max > 1" class="after:content-[';_'] last:after:content-empty">
-        数量不超过 {{ props.max }} 个
-      </div>
-    </div>
   </div>
 </template>
 
