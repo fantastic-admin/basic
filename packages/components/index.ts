@@ -1,3 +1,4 @@
+export { default as FaAlert } from './src/alert/index.vue'
 export { default as FaAvatar } from './src/avatar/index.vue'
 export { default as FaButtonGroup } from './src/button-group/index.vue'
 export { default as FaButton } from './src/button/index.vue'

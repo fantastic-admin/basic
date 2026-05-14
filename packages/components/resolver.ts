@@ -5,6 +5,7 @@ const COMPONENT_PREFIX = 'Fa'
 const PACKAGE_NAME = '@fantastic-admin/components'
 
 const COMPONENT_NAMES = [
+  'FaAlert',
   'FaAvatar',
   'FaButton',
   'FaButtonGroup',

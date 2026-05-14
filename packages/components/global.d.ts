@@ -1,5 +1,6 @@
 declare module 'vue' {
   export interface GlobalComponents {
+    FaAlert: typeof import('./index')['FaAlert']
     FaAvatar: typeof import('./index')['FaAvatar']
     FaButton: typeof import('./index')['FaButton']
     FaButtonGroup: typeof import('./index')['FaButtonGroup']

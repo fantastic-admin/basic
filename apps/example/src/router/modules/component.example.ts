@@ -14,6 +14,14 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
+      path: 'alert',
+      name: 'componentExampleAlert',
+      component: () => import('@/views/component_example/alert/index.vue'),
+      meta: {
+        title: '提示',
+      },
+    },
+    {
       path: 'avatar',
       name: 'componentExampleAvatar',
       component: () => import('@/views/component_example/avatar/index.vue'),
