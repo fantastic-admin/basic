@@ -3,18 +3,18 @@ const files = ref<string[]>([])
 
 function beforeUpload(file: File) {
   if (!file.type.startsWith('image/')) {
-    faToast.error('请选择图片文件')
+    useFaToast().error('请选择图片文件')
     return false
   }
   if (file.size > 200 * 1024) {
-    faToast.error('图片大小不能超过 200KB')
+    useFaToast().error('图片大小不能超过 200KB')
     return false
   }
   return true
 }
 
 function handleSuccess() {
-  faToast.success('模拟上传成功')
+  useFaToast().success('模拟上传成功')
 }
 </script>
 

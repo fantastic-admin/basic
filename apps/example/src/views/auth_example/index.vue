@@ -24,24 +24,24 @@ function goTest() {
 }
 function permissionCheck(permissions: string | string[]) {
   if (auth(permissions)) {
-    faToast.success('校验通过', {
+    useFaToast().success('校验通过', {
       position: 'top-center',
     })
   }
   else {
-    faToast.error('校验不通过', {
+    useFaToast().error('校验不通过', {
       position: 'top-center',
     })
   }
 }
 function permissionCheck2(permissions: string[]) {
   if (authAll(permissions)) {
-    faToast.success('校验通过', {
+    useFaToast().success('校验通过', {
       position: 'top-center',
     })
   }
   else {
-    faToast.error('校验不通过', {
+    useFaToast().error('校验不通过', {
       position: 'top-center',
     })
   }

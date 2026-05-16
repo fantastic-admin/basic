@@ -2,7 +2,7 @@
 function showToast(type?: 'success' | 'error' | 'info' | 'warning' | 'action' | 'loading1' | 'loading2') {
   if (type) {
     if (type === 'loading1') {
-      faToast.promise(() => new Promise((resolve) => {
+      useFaToast().promise(() => new Promise((resolve) => {
         setTimeout(resolve, 2000)
       }), {
         loading: '加载中',
@@ -13,13 +13,13 @@ function showToast(type?: 'success' | 'error' | 'info' | 'warning' | 'action' | 
       })
     }
     else if (type === 'loading2') {
-      const loading = faToast.loading('加载中', {
+      const loading = useFaToast().loading('加载中', {
         position: 'top-right',
         duration: Infinity,
       })
       setTimeout(() => {
-        faToast.dismiss(loading)
-        faToast('Fantastic-admin 杰出的管理系统框架', {
+        useFaToast().dismiss(loading)
+        useFaToast()('Fantastic-admin 杰出的管理系统框架', {
           description: '开箱即用，提供舒适开发体验',
           position: 'top-right',
           duration: 3000,
@@ -27,20 +27,20 @@ function showToast(type?: 'success' | 'error' | 'info' | 'warning' | 'action' | 
       }, 2000)
     }
     else if (type === 'action') {
-      faToast('Fantastic-admin 杰出的管理系统框架', {
+      useFaToast()('Fantastic-admin 杰出的管理系统框架', {
         description: '开箱即用，提供舒适开发体验',
         position: 'top-right',
         duration: 3000,
         action: {
           label: 'Undo',
           onClick: () => {
-            faToast.success('操作成功')
+            useFaToast().success('操作成功')
           },
         },
       })
     }
     else {
-      faToast[type]('Fantastic-admin 杰出的管理系统框架', {
+      useFaToast()[type]('Fantastic-admin 杰出的管理系统框架', {
         description: '开箱即用，提供舒适开发体验',
         position: 'top-right',
         duration: 3000,
@@ -48,7 +48,7 @@ function showToast(type?: 'success' | 'error' | 'info' | 'warning' | 'action' | 
     }
   }
   else {
-    faToast('Fantastic-admin 杰出的管理系统框架', {
+    useFaToast()('Fantastic-admin 杰出的管理系统框架', {
       description: '开箱即用，提供舒适开发体验',
       position: 'top-right',
       duration: 3000,

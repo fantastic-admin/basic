@@ -2,7 +2,7 @@
 const modal = shallowRef(false)
 
 function handleClick(text: string) {
-  faToast(text)
+  useFaToast()(text)
 }
 
 const items = [

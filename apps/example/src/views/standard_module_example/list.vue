@@ -193,7 +193,7 @@ function onDel(row: any) {
     onConfirm: () => {
       apiStandardModule.delete(row.id).then(() => {
         getDataList()
-        faToast.success('删除成功')
+        useFaToast().success('删除成功')
       })
     },
   })

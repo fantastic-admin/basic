@@ -4,7 +4,7 @@ function showModalInfo() {
     title: '温馨提醒',
     content: '这是 info 弹窗',
     onConfirm: () => {
-      faToast.info('你点了确定')
+      useFaToast().info('你点了确定')
     },
   })
 }
@@ -13,7 +13,7 @@ function showModalSuccess() {
     title: '温馨提醒',
     content: '这是 success 弹窗',
     onConfirm: () => {
-      faToast.info('你点了确定')
+      useFaToast().info('你点了确定')
     },
   })
 }
@@ -22,7 +22,7 @@ function showModalWarning() {
     title: '温馨提醒',
     content: '这是 warning 弹窗',
     onConfirm: () => {
-      faToast.info('你点了确定')
+      useFaToast().info('你点了确定')
     },
   })
 }
@@ -31,7 +31,7 @@ function showModalError() {
     title: '温馨提醒',
     content: '这是 confirm 弹窗',
     onConfirm: () => {
-      faToast.info('你点了确定')
+      useFaToast().info('你点了确定')
     },
   })
 }
@@ -40,7 +40,7 @@ function showModalConfirm() {
     title: '温馨提醒',
     content: '这是 confirm 弹窗',
     onConfirm: () => {
-      faToast.info('你点了确定')
+      useFaToast().info('你点了确定')
     },
   })
 }
@@ -80,11 +80,11 @@ function showModalPromiseConfirm() {
       if (action === 'confirm') {
         await new Promise(resolve => setTimeout(resolve, 1000))
         if (Math.random() > 0.5) {
-          faToast.success('成功了！')
+          useFaToast().success('成功了！')
           done()
         }
         else {
-          faToast.error('失败了！')
+          useFaToast().error('失败了！')
         }
       }
       else {

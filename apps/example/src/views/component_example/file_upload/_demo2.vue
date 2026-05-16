@@ -10,22 +10,22 @@ function beforeUpload(file: File) {
   const isLt200K = file.size <= 200 * 1024
 
   if (!isPng) {
-    faToast.error('只能上传 PNG 文件')
+    useFaToast().error('只能上传 PNG 文件')
     return false
   }
   if (!isLt200K) {
-    faToast.error('文件大小不能超过 200KB')
+    useFaToast().error('文件大小不能超过 200KB')
     return false
   }
   return true
 }
 
 function handleSuccess() {
-  faToast.success('模拟上传成功')
+  useFaToast().success('模拟上传成功')
 }
 
 function handleClick(fileItem: FileItem) {
-  faToast.info(fileItem.name, {
+  useFaToast().info(fileItem.name, {
     description: fileItem.url,
   })
 }

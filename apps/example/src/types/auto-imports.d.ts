@@ -16,7 +16,6 @@ declare global {
   const defineComponent: typeof import('vue').defineComponent
   const defineStore: typeof import('pinia').defineStore
   const effectScope: typeof import('vue').effectScope
-  const faToast: typeof import('@fantastic-admin/components').faToast
   const getActivePinia: typeof import('pinia').getActivePinia
   const getCurrentInstance: typeof import('vue').getCurrentInstance
   const getCurrentScope: typeof import('vue').getCurrentScope
@@ -83,8 +82,8 @@ declare global {
   const useCssVars: typeof import('vue').useCssVars
   const useFaDrawer: typeof import('@fantastic-admin/components').useFaDrawer
   const useFaImagePreview: typeof import('@fantastic-admin/components').useFaImagePreview
-  const useFaLoading: typeof import('@fantastic-admin/components').useFaLoading
   const useFaModal: typeof import('@fantastic-admin/components').useFaModal
+  const useFaToast: typeof import('@fantastic-admin/components').useFaToast
   const useId: typeof import('vue').useId
   const useLink: typeof import('vue-router').useLink
   const useModel: typeof import('vue').useModel

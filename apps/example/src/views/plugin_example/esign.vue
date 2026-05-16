@@ -22,7 +22,7 @@ function handleGenerate() {
   esignRef.value.generate().then((res: string) => {
     result.value = res
   }).catch(() => {
-    faToast.warning('画板为空，无法生成图片')
+    useFaToast().warning('画板为空，无法生成图片')
   })
 }
 function handleDownload() {

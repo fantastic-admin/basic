@@ -47,13 +47,13 @@ defineExpose({
         if (valid) {
           if (form.value.id === '') {
             apiStandardModule.create(form.value).then(() => {
-              faToast.success('新增成功')
+              useFaToast().success('新增成功')
               resolve()
             })
           }
           else {
             apiStandardModule.edit(form.value).then(() => {
-              faToast.success('编辑成功')
+              useFaToast().success('编辑成功')
               resolve()
             })
           }

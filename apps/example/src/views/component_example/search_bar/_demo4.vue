@@ -9,7 +9,7 @@ const search = ref({
 })
 
 function onToggle(fold: boolean) {
-  faToast(fold ? '收起' : '展开')
+  useFaToast()(fold ? '收起' : '展开')
 }
 </script>
 

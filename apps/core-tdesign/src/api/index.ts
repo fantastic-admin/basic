@@ -51,7 +51,7 @@ function handleError(error: any) {
     useAppAccountStore().requestLogout()
   }
   else {
-    faToast.error('Error', {
+    useFaToast().error('Error', {
       description: error.message,
     })
   }
@@ -70,7 +70,7 @@ api.interceptors.response.use(
     if (typeof response.data === 'object') {
       if (response.data.status === 1) {
         if (response.data.error) {
-          faToast.warning('Warning', {
+          useFaToast().warning('Warning', {
             description: response.data.error,
           })
           return Promise.reject(response.data)

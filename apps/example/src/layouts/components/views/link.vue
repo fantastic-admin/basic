@@ -8,7 +8,7 @@ defineOptions({
 const route = useRoute()
 const { copy, copied } = useClipboard()
 watch(copied, (val) => {
-  val && faToast.success('复制成功')
+  val && useFaToast().success('复制成功')
 })
 
 function open() {

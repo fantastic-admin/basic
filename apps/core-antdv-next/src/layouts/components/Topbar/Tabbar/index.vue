@@ -72,13 +72,13 @@ watch(() => route, (val) => {
 function tabbarScrollTip() {
   if (tabContainerRef.value?.$el.clientWidth > (tabsRef.value?.ref?.$el.clientWidth ?? 0) && !localStorage.has('tabbarScrollTip')) {
     localStorage.setItem('tabbarScrollTip', '')
-    const tips = faToast.info('温馨提示', {
+    const tips = useFaToast().info('温馨提示', {
       description: '标签栏数量超过展示区域范围，可以将鼠标移到标签栏上，通过鼠标滚轮滑动浏览',
       position: 'top-center',
       duration: Infinity,
       action: {
         label: '知道了',
-        onClick: () => faToast.dismiss(tips),
+        onClick: () => useFaToast().dismiss(tips),
       },
     })
   }

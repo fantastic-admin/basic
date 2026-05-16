@@ -4,13 +4,7 @@
   "version": "0.0.0",
   "exports": {
     ".": "./index.ts",
-    "./resolver": {
-      "types": "./resolver.ts",
-      "import": "./dist/resolver.mjs"
-    }
-  },
-  "scripts": {
-    "stub": "pnpm unbuild --stub"
+    "./resolver": "./resolver.ts"
   },
   "peerDependencies": {
     "unplugin-auto-import": "catalog:",

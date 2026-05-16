@@ -114,7 +114,7 @@ const { copy, copied, isSupported } = useClipboard()
 
 watch(copied, (val) => {
   if (val) {
-    faToast.success('复制成功', {
+    useFaToast().success('复制成功', {
       position: 'top-center',
     })
   }

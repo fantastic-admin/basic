@@ -2,7 +2,7 @@
 const files = ref<string[]>(['https://fantastic-admin.hurui.me/logo.svg'])
 
 function handleSuccess() {
-  faToast.success('模拟上传成功')
+  useFaToast().success('模拟上传成功')
 }
 </script>
 

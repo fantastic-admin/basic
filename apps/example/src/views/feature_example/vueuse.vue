@@ -2,7 +2,7 @@
 import { useClipboard, useDebounceFn, useThrottleFn } from '@vueuse/core'
 
 function message() {
-  faToast.success('Toast')
+  useFaToast().success('Toast')
 }
 
 const debounce = useDebounceFn(() => {
@@ -16,7 +16,7 @@ const throttle = useThrottleFn(() => {
 const input = ref('test')
 const { text, copy, copied, isSupported } = useClipboard()
 watch(copied, (val) => {
-  val && faToast.success(text.value)
+  val && useFaToast().success(text.value)
 })
 
 function open(url: string) {

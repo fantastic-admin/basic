@@ -1,10 +1,6 @@
 {
   "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "types": ["node"]
-  },
   "include": [
-    "index.ts",
-    "build.config.ts"
+    "index.ts"
   ]
 }

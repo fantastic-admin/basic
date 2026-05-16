@@ -4,7 +4,7 @@ import type { FileItem } from '@fantastic-admin/components'
 const files = ref<FileItem[]>([])
 
 function handleSuccess() {
-  faToast.success('模拟上传成功')
+  useFaToast().success('模拟上传成功')
 }
 </script>
 

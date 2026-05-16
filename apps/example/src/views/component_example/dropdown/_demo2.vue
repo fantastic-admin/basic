@@ -1,6 +1,6 @@
 <script setup lang="ts">
 function handleClick(text: string) {
-  faToast(text)
+  useFaToast()(text)
 }
 </script>
 

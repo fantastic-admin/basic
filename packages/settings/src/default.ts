@@ -1,5 +1,5 @@
 import type { RequiredDeep } from 'type-fest'
-import type { SettingsOptions } from '../types'
+import type { SettingsOptions } from './types'
 
 const settingsDefault: RequiredDeep<SettingsOptions> = {
   app: {

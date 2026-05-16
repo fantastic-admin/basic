@@ -476,7 +476,7 @@ const dialog = ref({
 })
 
 watch(copied, (val) => {
-  val && faToast.success(`复制成功：${text.value}`)
+  val && useFaToast().success(`复制成功：${text.value}`)
 })
 
 function test(index: number) {

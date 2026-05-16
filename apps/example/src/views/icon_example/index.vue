@@ -7,7 +7,7 @@ const { copy, isSupported } = useClipboard()
 function onCopy(iconName: string) {
   if (isSupported.value) {
     copy(`<FaIcon name="i-${iconName}" />`)
-    faToast.success('复制成功', {
+    useFaToast().success('复制成功', {
       description: `<FaIcon name="i-${iconName}" />`,
     })
   }

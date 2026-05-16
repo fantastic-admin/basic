@@ -32,7 +32,7 @@ const form = useForm({
 const onSubmit = form.handleSubmit((values) => {
   loading.value = true
   appAccountStore.editPassword(values).then(async () => {
-    faToast.success('模拟修改成功，请重新登录')
+    useFaToast().success('模拟修改成功，请重新登录')
     appAccountStore.logout()
   }).finally(() => {
     loading.value = false

@@ -1,5 +1,5 @@
 import type { RequiredDeep } from 'type-fest'
-import type { SettingsLegacyOptions, SettingsOptions } from '../types'
+import type { SettingsLegacyOptions, SettingsOptions } from './types'
 import { createDefu } from 'defu'
 import { cloneDeep } from 'es-toolkit'
 import settingsDefault from './default'

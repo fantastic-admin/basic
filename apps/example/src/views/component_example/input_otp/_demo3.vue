@@ -2,7 +2,7 @@
 const input = ref('')
 
 function handleComplete() {
-  faToast.info(input.value)
+  useFaToast().info(input.value)
 }
 </script>
 

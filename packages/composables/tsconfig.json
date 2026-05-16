@@ -5,8 +5,6 @@
     "types": ["vite/client"]
   },
   "include": [
-    "build.config.ts",
-    "index.ts",
     "resolver.ts",
     "src/**/*.ts",
     "src/**/*.d.ts"

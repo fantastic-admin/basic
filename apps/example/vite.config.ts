@@ -48,7 +48,10 @@ export default defineConfig(({ mode, command }) => {
     },
     plugins: createVitePlugins(mode, command === 'build'),
     optimizeDeps: {
-      exclude: ['@fantastic-admin/components'],
+      exclude: [
+        '@fantastic-admin/components',
+        '@fantastic-admin/composables',
+      ],
     },
     resolve: {
       alias: {

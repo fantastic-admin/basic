@@ -5,12 +5,7 @@
     "types": ["vite/client"]
   },
   "include": [
-    "auto-imports.d.ts",
-    "build.config.ts",
-    "global.d.ts",
-    "index.ts",
     "resolver.ts",
-    "utils.ts",
     "src/**/*.ts",
     "src/**/*.vue",
     "src/**/*.d.ts"

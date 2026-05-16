@@ -15,7 +15,7 @@ async function httpRequest({ file, onProgress }: FileUploadRequestOptions) {
 }
 
 function handleSuccess() {
-  faToast.success('自定义上传完成')
+  useFaToast().success('自定义上传完成')
 }
 </script>
 

@@ -2,15 +2,12 @@
   "name": "@fantastic-admin/components",
   "type": "module",
   "version": "0.0.0",
-  "exports": {
-    ".": "./index.ts",
-    "./resolver": {
-      "types": "./resolver.ts",
-      "import": "./dist/resolver.mjs"
-    }
+  "imports": {
+    "#utils": "./src/utils.ts"
   },
-  "scripts": {
-    "stub": "pnpm unbuild --stub"
+  "exports": {
+    ".": "./src/index.ts",
+    "./resolver": "./resolver.ts"
   },
   "peerDependencies": {
     "@vueuse/components": "catalog:",
@@ -18,8 +15,7 @@
     "unplugin-auto-import": "catalog:",
     "unplugin-vue-components": "catalog:",
     "vite": "catalog:",
-    "vue": "catalog:",
-    "vue-router": "catalog:"
+    "vue": "catalog:"
   },
   "peerDependenciesMeta": {
     "unplugin-auto-import": {
@@ -41,6 +37,5 @@
     "tailwind-merge": "catalog:",
     "vue-input-otp": "catalog:",
     "vue-sonner": "catalog:"
-  },
-  "devDependencies": {}
+  }
 }

@@ -53,6 +53,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
         FantasticAdminComposablesAutoImports,
       ],
       dts: './src/types/auto-imports.d.ts',
+      dtsMode: 'overwrite',
       dirs: [
         './src/store/modules/**/*',
         './src/composables/**/*',
@@ -65,6 +66,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
         'src/components/*/index.vue',
       ],
       dts: './src/types/components.d.ts',
+      syncMode: 'overwrite',
       resolvers: [
         FantasticAdminComponentsResolver(),
       ],

@@ -4,7 +4,7 @@ import type { ComponentResolver, TypeImport } from 'unplugin-vue-components'
 const COMPONENT_PREFIX = 'Fa'
 const PACKAGE_NAME = '@fantastic-admin/components'
 
-const COMPONENT_NAMES = [
+const BASIC_COMPONENT_NAMES = [
   'FaAlert',
   'FaAvatar',
   'FaButton',
@@ -49,11 +49,15 @@ const COMPONENT_NAMES = [
   'FaTrend',
 ] as const
 
+const COMPONENT_NAMES = [
+  ...BASIC_COMPONENT_NAMES,
+] as const
+
 const AUTO_IMPORT_NAMES = [
   'useFaDrawer',
   'useFaImagePreview',
   'useFaModal',
-  'faToast',
+  'useFaToast',
 ] as const
 
 export const ComponentsAutoImports: ImportsMap = {

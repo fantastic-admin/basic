@@ -3,13 +3,7 @@
   "type": "module",
   "version": "0.0.0",
   "exports": {
-    ".": {
-      "types": "./index.ts",
-      "import": "./dist/index.mjs"
-    }
-  },
-  "scripts": {
-    "stub": "pnpm unbuild --stub"
+    ".": "./index.ts"
   },
   "peerDependencies": {
     "vite": "catalog:"
