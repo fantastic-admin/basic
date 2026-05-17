@@ -63,7 +63,7 @@ const onSubmit = form.handleSubmit((values) => {
             </FaInput>
           </FormControl>
           <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-            <FormMessage class="text-xs bottom-1 absolute" />
+            <FormMessage class="text-xs m-0 bottom-1 absolute" />
           </Transition>
         </FormItem>
       </FormField>
@@ -76,11 +76,11 @@ const onSubmit = form.handleSubmit((values) => {
               </template>
             </FaInput>
           </FormControl>
-          <FormDescription>
+          <FormDescription class="m-0">
             <FaPasswordStrength :password="value" />
           </FormDescription>
           <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-            <FormMessage class="text-xs bottom-1 absolute" />
+            <FormMessage class="text-xs m-0 bottom-1 absolute" />
           </Transition>
         </FormItem>
       </FormField>
@@ -94,7 +94,7 @@ const onSubmit = form.handleSubmit((values) => {
             </FaInput>
           </FormControl>
           <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-            <FormMessage class="text-xs bottom-1 absolute" />
+            <FormMessage class="text-xs m-0 bottom-1 absolute" />
           </Transition>
         </FormItem>
       </FormField>

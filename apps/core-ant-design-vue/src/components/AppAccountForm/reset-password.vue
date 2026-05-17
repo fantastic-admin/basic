@@ -70,7 +70,7 @@ function handleSendCaptcha() {
             </FaInput>
           </FormControl>
           <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-            <FormMessage class="text-xs bottom-1 absolute" />
+            <FormMessage class="text-xs m-0 bottom-1 absolute" />
           </Transition>
         </FormItem>
       </FormField>
@@ -81,7 +81,7 @@ function handleSendCaptcha() {
               <FaInputOTP :model-value="value" :name="componentField.name" :length="6" class="border-destructive" @update:model-value="val => setValue(val)" />
             </FormControl>
             <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-              <FormMessage class="text-xs bottom-1 absolute" />
+              <FormMessage class="text-xs m-0 bottom-1 absolute" />
             </Transition>
           </FormItem>
         </FormField>
@@ -99,7 +99,7 @@ function handleSendCaptcha() {
             </FaInput>
           </FormControl>
           <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-            <FormMessage class="text-xs bottom-1 absolute" />
+            <FormMessage class="text-xs m-0 bottom-1 absolute" />
           </Transition>
         </FormItem>
       </FormField>
