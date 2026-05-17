@@ -1,8 +1,9 @@
 import type { ImportsMap } from 'unplugin-auto-import/types'
 import type { ComponentResolver, TypeImport } from 'unplugin-vue-components'
+import { createRequire } from 'node:module'
 
 const COMPONENT_PREFIX = 'Fa'
-const PACKAGE_NAME = '@fantastic-admin/components'
+const PACKAGE_NAME = createRequire(import.meta.url)('./package.json').name
 
 const BASIC_COMPONENT_NAMES = [
   'FaAlert',
