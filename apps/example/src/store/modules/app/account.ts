@@ -94,16 +94,6 @@ export const useAppAccountStore = defineStore('appAccount', () => {
     await apiApp.passwordEdit(data)
   }
 
-  // 锁屏
-  function lock() {
-    localStorage.removeItem('token')
-  }
-
-  // 解锁
-  function unlock() {
-    localStorage.setItem('token', token.value)
-  }
-
   return {
     token,
     account,
@@ -115,7 +105,5 @@ export const useAppAccountStore = defineStore('appAccount', () => {
     requestLogout,
     getPermissions,
     editPassword,
-    lock,
-    unlock,
   }
 })
