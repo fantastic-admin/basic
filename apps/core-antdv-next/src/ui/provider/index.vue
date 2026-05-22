@@ -11,6 +11,8 @@ const themeConfig = computed(() => ({
 
 <template>
   <AConfigProvider :locale="antdvNextLocaleZhCN" :theme="themeConfig">
-    <slot />
+    <AApp class="size-full">
+      <slot />
+    </AApp>
   </AConfigProvider>
 </template>
