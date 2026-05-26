@@ -21,65 +21,6 @@
 |------|------|
 | `default` | 按键内容（字符、图标等） |
 
-## 示例
-
-### 基础用法
-
-```vue
-<template>
-  <FaKbd>⌘</FaKbd>
-  <FaKbd>K</FaKbd>
-</template>
-```
-
-### 单个按键
-
-```vue
-<template>
-  <FaKbd>⌘</FaKbd>
-  <FaKbd>K</FaKbd>
-  <FaKbd>Enter</FaKbd>
-</template>
-```
-
-### 组合按键（与 FaKbdGroup 配合使用）
-
-```vue
-<template>
-  <FaKbdGroup>
-    <FaKbd>⌘</FaKbd>
-    <FaKbd>K</FaKbd>
-  </FaKbdGroup>
-  
-  <FaKbdGroup>
-    <FaKbd>Ctrl</FaKbd>
-    <FaKbd>Shift</FaKbd>
-    <FaKbd>P</FaKbd>
-  </FaKbdGroup>
-</template>
-```
-
-### 带图标的快捷键
-
-```vue
-<template>
-  <FaKbdGroup>
-    <FaKbd>⌘</FaKbd>
-    <FaIcon name="i-lucide:command" />
-  </FaKbdGroup>
-</template>
-```
-
-### 在提示文字中使用
-
-```vue
-<template>
-  <div class="text-muted-foreground">
-    按 <FaKbdGroup><FaKbd>⌘</FaKbd><FaKbd>K</FaKbd></FaKbdGroup> 快速搜索
-  </div>
-</template>
-```
-
 ## 注意事项
 
 ### 样式特点

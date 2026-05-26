@@ -26,57 +26,6 @@
 |------|------|
 | `description` | 自定义描述内容，会覆盖 `description` prop 的显示 |
 
-## 示例
-
-### 基础用法
-
-```vue
-<template>
-  <FaAlert
-    icon="i-lucide:info"
-    title="提示信息"
-    description="这是一条普通提示，用于展示页面说明或操作反馈。"
-  />
-</template>
-```
-
-### 不同样式
-
-```vue
-<template>
-  <div class="space-y-4">
-    <FaAlert
-      icon="i-lucide:info"
-      title="普通提示"
-      description="这是一条普通提示。"
-    />
-    <FaAlert
-      icon="i-lucide:circle-alert"
-      title="危险提示"
-      description="这是一条需要用户注意的危险提示。"
-      variant="destructive"
-    />
-  </div>
-</template>
-```
-
-### 自定义描述内容
-
-```vue
-<template>
-  <FaAlert icon="i-lucide:terminal" title="命令执行完成">
-    <template #description>
-      <div>
-        已成功生成文件，可继续进行下一步操作。
-        <FaButton variant="link" class="h-auto px-0">
-          查看详情
-        </FaButton>
-      </div>
-    </template>
-  </FaAlert>
-</template>
-```
-
 ## 注意事项
 
 1. **图标设置**：`icon` 使用 Iconify 图标名称，留空则不显示图标

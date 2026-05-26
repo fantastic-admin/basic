@@ -7,6 +7,7 @@
   },
   "exports": {
     ".": "./src/index.ts",
+    "./examples": "./src/examples.ts",
     "./resolver": "./resolver.ts"
   },
   "peerDependencies": {

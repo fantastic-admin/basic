@@ -30,56 +30,6 @@
 |--------|------|----------|
 | update:modelValue | 值更新时触发 | `(value: number)` |
 
-## 示例
-
-### 基础用法
-
-```vue
-<script setup lang="ts">
-const value = ref(0)
-</script>
-
-<template>
-  <FaNumberField v-model="value" />
-</template>
-```
-
-### 最小值 / 最大值 / 步长
-
-```vue
-<script setup lang="ts">
-const value = ref(10)
-</script>
-
-<template>
-  <FaNumberField v-model="value" :min="0" :max="100" :step="5" />
-</template>
-```
-
-### 禁用状态
-
-```vue
-<script setup lang="ts">
-const value = ref(50)
-</script>
-
-<template>
-  <FaNumberField v-model="value" disabled />
-</template>
-```
-
-### 带自定义宽度
-
-```vue
-<script setup lang="ts">
-const value = ref(0)
-</script>
-
-<template>
-  <FaNumberField v-model="value" class="w-[300px]" />
-</template>
-```
-
 ## 注意事项
 
 - 无特殊限制，建议按示例中的受控方式接入，并结合业务容器尺寸验证最终展示效果。

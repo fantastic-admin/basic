@@ -11,6 +11,7 @@ defineOptions({
 
 const props = withDefaults(defineProps<{
   align?: 'inline' | 'block'
+  disabled?: boolean
   class?: HTMLAttributes['class']
   inputClass?: HTMLAttributes['class']
   startClass?: HTMLAttributes['class']

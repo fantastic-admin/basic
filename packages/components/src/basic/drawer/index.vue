@@ -77,8 +77,6 @@ watch(isOpen, (val) => {
   if (val && !hasOpened.value) {
     hasOpened.value = true
   }
-}, {
-  immediate: true,
 })
 
 const forceMount = computed(() => !props.destroyOnClose && hasOpened.value)

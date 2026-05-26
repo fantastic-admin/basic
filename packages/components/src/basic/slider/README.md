@@ -34,56 +34,6 @@
 |--------|------|----------|
 | update:modelValue | 值更新时触发 | `(value: number[])` |
 
-## 示例
-
-### 基础用法
-
-```vue
-<script setup lang="ts">
-const value = ref<number[]>([0])
-</script>
-
-<template>
-  <FaSlider v-model="value" />
-</template>
-```
-
-### 垂直滑块
-
-```vue
-<script setup lang="ts">
-const value = ref<number[]>([0])
-</script>
-
-<template>
-  <FaSlider v-model="value" orientation="vertical" />
-</template>
-```
-
-### 范围选择
-
-```vue
-<script setup lang="ts">
-const value = ref<number[]>([20, 60])
-</script>
-
-<template>
-  <FaSlider v-model="value" :min="0" :max="100" />
-</template>
-```
-
-### 自定义步长
-
-```vue
-<script setup lang="ts">
-const value = ref<number[]>([50])
-</script>
-
-<template>
-  <FaSlider v-model="value" :step="10" :min="0" :max="100" />
-</template>
-```
-
 ## 注意事项
 
 - 无特殊限制，建议按示例中的受控方式接入，并结合业务容器尺寸验证最终展示效果。

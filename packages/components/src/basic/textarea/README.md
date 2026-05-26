@@ -15,6 +15,7 @@
 | 属性 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
 | `align` | `'inline' \| 'block'` | `'inline'` | 前后缀对齐方式 |
+| `disabled` | `boolean` | `false` | 是否禁用文本域 |
 | `class` | `HTMLAttributes['class']` | - | 组件外层 CSS 类 |
 | `inputClass` | `HTMLAttributes['class']` | - | 文本域 CSS 类 |
 | `startClass` | `HTMLAttributes['class']` | - | 前缀区域 CSS 类 |
@@ -26,133 +27,6 @@
 |------|------|
 | `start` | 文本域前缀内容 |
 | `end` | 文本域后缀内容 |
-
-## 示例
-
-### 基础用法
-
-```vue
-<script setup lang="ts">
-const value = ref('')
-</script>
-
-<template>
-  <FaTextarea v-model="value" placeholder="请输入内容..." />
-</template>
-```
-
-### 基础文本域
-
-```vue
-<script setup lang="ts">
-const value = ref('')
-</script>
-
-<template>
-  <FaTextarea v-model="value" placeholder="请输入描述..." rows="4" />
-</template>
-```
-
-### 带前缀
-
-```vue
-<template>
-  <FaTextarea v-model="value" placeholder="请输入内容">
-    <template #start>
-      <FaIcon name="i-lucide:message-square" />
-    </template>
-  </FaTextarea>
-</template>
-```
-
-### 带后缀
-
-```vue
-<script setup lang="ts">
-const value = ref('')
-
-const charCount = computed(() => value.value?.length || 0)
-</script>
-
-<template>
-  <FaTextarea v-model="value" placeholder="请输入内容（最多 200 字）" rows="4">
-    <template #end>
-      <span class="text-sm text-muted-foreground">{{ charCount }}/200</span>
-    </template>
-  </FaTextarea>
-</template>
-```
-
-### 自定义高度
-
-```vue
-<template>
-  <FaTextarea v-model="value" rows="6" class="h-200" />
-</template>
-```
-
-### 表单中的使用
-
-```vue
-<script setup lang="ts">
-const form = reactive({
-  title: '',
-  content: '',
-})
-
-function handleSubmit() {
-  console.log('提交:', form)
-}
-</script>
-
-<template>
-  <form @submit.prevent="handleSubmit" class="flex flex-col gap-4">
-    <FaInput v-model="form.title" placeholder="标题" />
-    <FaTextarea v-model="form.content" placeholder="内容描述..." rows="5" />
-    <FaButton type="submit">提交</FaButton>
-  </form>
-</template>
-```
-
-### 字数限制
-
-```vue
-<script setup lang="ts">
-const value = ref('')
-const maxLength = 500
-
-const charCount = computed(() => value.value?.length || 0)
-const isOverLimit = computed(() => charCount.value > maxLength)
-</script>
-
-<template>
-  <div>
-    <FaTextarea
-      v-model="value"
-      :input-class="{ 'border-red-500': isOverLimit }"
-      placeholder="请输入内容..."
-      rows="5"
-    >
-      <template #end>
-        <span :class="['text-sm', isOverLimit ? 'text-red-500' : 'text-muted-foreground']">
-          {{ charCount }}/{{ maxLength }}
-        </span>
-      </template>
-    </FaTextarea>
-    <div v-if="isOverLimit" class="text-red-500 text-sm mt-1">
-      已超出字数限制
-    </div>
-  </div>
-</template>
-```
-
-### 禁用状态
-
-```vue
-<template>
-  <FaTextarea v-model="value" disabled placeholder="禁用状态" />
-</template>
-```
 
 ## 注意事项
 

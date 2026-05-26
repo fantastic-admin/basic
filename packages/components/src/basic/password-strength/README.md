@@ -43,54 +43,6 @@ const defaultColorThresholds = [
 
 `colorThresholds` 会按照 `min` 从高到低匹配，例如当前命中 4 条规则时，会使用 `min: 3` 对应的颜色。
 
-## 示例
-
-### 基础用法
-
-```vue
-<script setup lang="ts">
-const password = ref('')
-</script>
-
-<template>
-  <div>
-    <FaInput v-model="password" type="password" placeholder="请输入密码" />
-    <FaPasswordStrength :password="password" class="mt-2" />
-  </div>
-</template>
-```
-
-### 自定义规则和强度颜色
-
-```vue
-<script setup lang="ts">
-const password = ref('')
-
-const rules = [
-  { label: '长度至少为8个字符', rule: (value: string) => value.length >= 8 },
-  { label: '包含大写字母', rule: (value: string) => /[A-Z]/.test(value) },
-  { label: '包含数字', rule: (value: string) => /\d/.test(value) },
-]
-
-const colorThresholds = [
-  { min: 0, color: 'bg-red-500' },
-  { min: 1, color: 'bg-yellow-500' },
-  { min: 3, color: 'bg-green-500' },
-]
-</script>
-
-<template>
-  <div class="space-y-2">
-    <FaInput v-model="password" type="password" placeholder="请输入密码" />
-    <FaPasswordStrength
-      :password="password"
-      :rules="rules"
-      :color-thresholds="colorThresholds"
-    />
-  </div>
-</template>
-```
-
 ## 注意事项
 
 1. **实时反馈**：密码强度会随输入实时更新。
