@@ -71,7 +71,7 @@ watch(() => props.modelValue, (newValue) => {
 })
 
 const hasOpened = ref(false)
-const isClosed = ref(true)
+const isClosed = ref(!props.modelValue)
 
 watch(isOpen, (val) => {
   emits('update:modelValue', val)
