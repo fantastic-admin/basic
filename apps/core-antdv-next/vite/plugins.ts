@@ -81,8 +81,7 @@ export default function createVitePlugins(mode: string, isBuild = false) {
     // https://github.com/condorheroblog/vite-plugin-fake-server
     vitePluginFakeServer({
       logger: !isBuild,
-      include: 'src/api/modules',
-      exclude: 'src/api/modules/**/!(*.fake).{ts,js,mjs,cjs,cts,mts}',
+      include: 'src/api/fake_modules',
       enableProd: isBuild && viteEnv.VITE_BUILD_FAKE,
     }),
 
