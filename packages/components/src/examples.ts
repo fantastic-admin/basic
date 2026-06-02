@@ -1,5 +1,6 @@
 export { default as alert } from './basic/alert/_examples'
 export { default as avatar } from './basic/avatar/_examples'
+export { default as badge } from './basic/badge/_examples'
 export { default as buttonGroup } from './basic/button-group/_examples'
 export { default as button } from './basic/button/_examples'
 export { default as card } from './basic/card/_examples'

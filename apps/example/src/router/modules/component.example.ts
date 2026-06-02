@@ -30,6 +30,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'badge',
+      name: 'componentExampleBadge',
+      component: () => import('@/views/component_example/badge.vue'),
+      meta: {
+        title: '徽章',
+      },
+    },
+    {
       path: 'button',
       name: 'componentExampleButton',
       component: () => import('@/views/component_example/button.vue'),

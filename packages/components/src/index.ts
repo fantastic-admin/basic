@@ -1,6 +1,7 @@
 // 基础版组件
 export { default as FaAlert } from './basic/alert/index.vue'
 export { default as FaAvatar } from './basic/avatar/index.vue'
+export { default as FaBadge } from './basic/badge/index.vue'
 export { default as FaButtonGroup } from './basic/button-group/index.vue'
 export { default as FaButton } from './basic/button/index.vue'
 export { default as FaCard } from './basic/card/index.vue'
