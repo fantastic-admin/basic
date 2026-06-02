@@ -295,6 +295,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'tag',
+      name: 'componentExampleTag',
+      component: () => import('@/views/component_example/tag.vue'),
+      meta: {
+        title: '标签',
+      },
+    },
+    {
       path: 'tabs',
       name: 'componentExampleTabs',
       component: () => import('@/views/component_example/tabs.vue'),
