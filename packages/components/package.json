@@ -28,12 +28,12 @@
   },
   "dependencies": {
     "@iconify/vue": "catalog:",
+    "@lucide/vue": "catalog:",
     "axios": "catalog:",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "es-toolkit": "catalog:",
     "filesize": "catalog:",
-    "lucide-vue-next": "catalog:",
     "reka-ui": "catalog:",
     "tailwind-merge": "catalog:",
     "vue-input-otp": "catalog:",

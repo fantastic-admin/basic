@@ -42,6 +42,9 @@ catalogs:
     '@iconify/vue':
       specifier: ^5.0.1
       version: 5.0.1
+    '@lucide/vue':
+      specifier: ^1.17.0
+      version: 1.17.0
     '@spiriit/vite-plugin-svg-spritemap':
       specifier: ^7.0.0
       version: 7.0.0
@@ -93,9 +96,6 @@ catalogs:
     '@vue/tsconfig':
       specifier: ^0.9.1
       version: 0.9.1
-    '@vueuse/components':
-      specifier: ^14.3.0
-      version: 14.3.0
     '@vueuse/core':
       specifier: ^14.3.0
       version: 14.3.0
@@ -171,9 +171,6 @@ catalogs:
     lint-staged:
       specifier: ^17.0.5
       version: 17.0.5
-    lucide-vue-next:
-      specifier: ^1.0.0
-      version: 1.0.0
     mitt:
       specifier: ^3.0.1
       version: 3.0.1
@@ -497,9 +494,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -690,9 +684,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -883,9 +874,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1073,9 +1061,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1266,9 +1251,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1459,9 +1441,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1652,9 +1631,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1875,9 +1851,6 @@ importers:
       hotkeys-js:
         specifier: 'catalog:'
         version: 4.0.4
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -2059,6 +2032,9 @@ importers:
       '@iconify/vue':
         specifier: 'catalog:'
         version: 5.0.1(vue@3.5.35(typescript@6.0.3))
+      '@lucide/vue':
+        specifier: 'catalog:'
+        version: 1.17.0(vue@3.5.35(typescript@6.0.3))
       '@vueuse/components':
         specifier: 'catalog:'
         version: 14.3.0(vue@3.5.35(typescript@6.0.3))
@@ -2080,9 +2056,6 @@ importers:
       filesize:
         specifier: 'catalog:'
         version: 11.0.17
-      lucide-vue-next:
-        specifier: 'catalog:'
-        version: 1.0.0(vue@3.5.35(typescript@6.0.3))
       reka-ui:
         specifier: 'catalog:'
         version: 2.9.8(vue@3.5.35(typescript@6.0.3))
@@ -3657,6 +3630,11 @@ packages:
   '@ljharb/through@2.3.14':
     resolution: {integrity: sha512-ajBvlKpWucBB17FuQYUShqpqy8GRgYEpJW0vWJbUu1CV9lWyrDCapy0lScU8T8Z6qn49sSwJB3+M+evYIdGg+A==}
     engines: {node: '>= 0.4'}
+
+  '@lucide/vue@1.17.0':
+    resolution: {integrity: sha512-6Q1ZHgr5FbmJzKWe5BxlNdjLj2lbmuH1zwDtVzUJofX0w9UREwKgq4F4jwKqFYyyIS4Rj3FiJvDi2k6djukmmw==}
+    peerDependencies:
+      vue: '>=3.0.1'
 
   '@napi-rs/wasm-runtime@1.1.4':
     resolution: {integrity: sha512-3NQNNgA1YSlJb/kMH1ildASP9HW7/7kYnRI2szWJaofaS1hWmbGI4H+d3+22aGzXXN9IJ+n+GiFVcGipJP18ow==}
@@ -7388,11 +7366,6 @@ packages:
 
   lucide-vue-next@0.511.0:
     resolution: {integrity: sha512-VSv0F3pHniGN7JMMzDcLFNMQbl8381+shNnHwV8hi+El7xl2ZL8qdNuzPoiBViKk8mTKK5K3ZDfmE/wEcTZVIQ==}
-    peerDependencies:
-      vue: '>=3.0.1'
-
-  lucide-vue-next@1.0.0:
-    resolution: {integrity: sha512-V6SPvx1IHTj/UY+FrIYWV5faISsPSb8BnWSFDxAtezWKvWc9ZZ40PDrdu1/Qb5vg4lHWr1hs1BAMGVGm6V1Xdg==}
     peerDependencies:
       vue: '>=3.0.1'
 
@@ -11216,6 +11189,10 @@ snapshots:
     dependencies:
       call-bind: 1.0.8
 
+  '@lucide/vue@1.17.0(vue@3.5.35(typescript@6.0.3))':
+    dependencies:
+      vue: 3.5.35(typescript@6.0.3)
+
   '@napi-rs/wasm-runtime@1.1.4(@emnapi/core@1.10.0)(@emnapi/runtime@1.10.0)':
     dependencies:
       '@emnapi/core': 1.10.0
@@ -11870,8 +11847,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.58.0(typescript@6.0.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.59.2(typescript@6.0.3)
-      '@typescript-eslint/types': 8.59.2
+      '@typescript-eslint/tsconfig-utils': 8.60.0(typescript@6.0.3)
+      '@typescript-eslint/types': 8.60.0
       debug: 4.4.3
       typescript: 6.0.3
     transitivePeerDependencies:
@@ -15211,10 +15188,6 @@ snapshots:
       yallist: 3.1.1
 
   lucide-vue-next@0.511.0(vue@3.5.35(typescript@6.0.3)):
-    dependencies:
-      vue: 3.5.35(typescript@6.0.3)
-
-  lucide-vue-next@1.0.0(vue@3.5.35(typescript@6.0.3)):
     dependencies:
       vue: 3.5.35(typescript@6.0.3)
 

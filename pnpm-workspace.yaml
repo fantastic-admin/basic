@@ -19,6 +19,7 @@ catalog:
   '@faker-js/faker': ^10.4.0
   '@iconify/json': ^2.2.480
   '@iconify/vue': ^5.0.1
+  '@lucide/vue': ^1.17.0
   '@spiriit/vite-plugin-svg-spritemap': ^7.0.0
   '@stylistic/stylelint-config': ^5.0.0
   '@tinymce/tinymce-vue': ^6.3.0
@@ -62,7 +63,6 @@ catalog:
   hotkeys-js: ^4.0.4
   http-server: ^14.1.1
   lint-staged: ^17.0.5
-  lucide-vue-next: ^1.0.0
   mitt: ^3.0.1
   npm-run-all2: ^8.0.4
   nprogress: ^0.2.0
