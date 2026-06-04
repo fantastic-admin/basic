@@ -17,6 +17,7 @@
 | `total` | `number` | **必需** | 数据总条数 |
 | `sizes` | `number[]` | `[10, 20, 30, 40, 50, 100]` | 每页条数选项 |
 | `layout` | `string` | `'total, sizes, ->, pager, jumper'` | 布局配置 |
+| `textTemplates` | `object` | 见下方 | 文本模板配置，用于国际化 |
 | `page` | `number` | **必需** | 当前页码（支持 v-model） |
 | `size` | `number` | **必需** | 每页条数（支持 v-model） |
 
@@ -52,6 +53,39 @@
 
 <!-- 总条数 + 每页条数 + 分页器 -->
 <FaPagination layout="total, sizes, pager" />
+```
+
+### textTemplates 配置
+
+`textTemplates` 属性用于自定义分页组件中的文本，支持国际化场景。
+
+| 属性 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `total` | `(total: number) => string` | `(total) => \`共 ${total} 条\`` | 总条数文本格式化函数 |
+| `sizes` | `(size: number) => string` | `(size) => \`${size} 条/页\`` | 每页条数文本格式化函数 |
+| `jumper` | `{ before: string, after: string }` | `{ before: '前往', after: '页' }` | 页码跳转前后文本 |
+
+#### 国际化示例
+
+```vue
+<script setup>
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+</script>
+
+<template>
+  <FaPagination
+    :text-templates="{
+      total: (total) => t('pagination.total', { total }),
+      sizes: (size) => t('pagination.sizes', { size }),
+      jumper: {
+        before: t('pagination.jumperBefore'),
+        after: t('pagination.jumperAfter'),
+      },
+    }"
+  />
+</template>
 ```
 
 1. **必需属性**：`total`、`page`、`size` 为必需属性

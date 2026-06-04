@@ -23,6 +23,7 @@ const props = withDefaults(defineProps<{
   max?: number
   directory?: boolean
   disabled?: boolean
+  description?: string
 }>(), {
   action: '',
   method: 'post',
@@ -33,6 +34,7 @@ const props = withDefaults(defineProps<{
   max: 0,
   directory: false,
   disabled: false,
+  description: '拖放或点击上传',
 })
 
 const emits = defineEmits<{
@@ -263,7 +265,7 @@ function removeFile(idx: number) {
       <slot>
         <Icon name="i-icon-park-outline:upload" class="text-2xl text-card-foreground/50 mb-2" />
         <div class="text-sm text-card-foreground/70">
-          拖放或点击上传
+          {{ props.description }}
         </div>
       </slot>
       <input

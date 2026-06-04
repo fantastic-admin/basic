@@ -21,9 +21,19 @@ const props = withDefaults(defineProps<{
   total: number
   sizes?: number[]
   layout?: string
+  textTemplates?: {
+    total?: (total: number) => string
+    sizes?: (size: number) => string
+    jumper?: { before: string, after: string }
+  }
 }>(), {
   sizes: () => [10, 20, 30, 40, 50, 100],
   layout: 'total, sizes, ->, pager, jumper',
+  textTemplates: () => ({
+    total: (total: number) => `共 ${total} 条`,
+    sizes: (size: number) => `${size} 条/页`,
+    jumper: { before: '前往', after: '页' },
+  }),
 })
 
 const emits = defineEmits<{
@@ -108,15 +118,15 @@ function handleJump() {
       <PaginationLast size="icon-sm" class="size-8 rtl:rotate-180" />
     </PaginationContent>
     <div v-if="layoutConfig.total.show" class="text-sm text-muted-foreground" :style="{ order: layoutConfig.total.order }">
-      共 {{ props.total }} 条
+      {{ props.textTemplates.total?.(props.total) }}
     </div>
     <div v-if="layoutConfig.sizes.show" :style="{ order: layoutConfig.sizes.order }">
-      <Select v-model="size" :options="props.sizes.map(size => ({ label: `${size} 条/页`, value: size }))" class="w-auto" />
+      <Select v-model="size" :options="props.sizes.map(size => ({ label: props.textTemplates.sizes?.(size) ?? '', value: size }))" class="w-auto" />
     </div>
     <div v-if="layoutConfig.jumper.show" class="flex-center gap-2" :style="{ order: layoutConfig.jumper.order }">
-      <span class="text-sm text-muted-foreground">前往</span>
+      <span class="text-sm text-muted-foreground">{{ props.textTemplates.jumper?.before }}</span>
       <Input v-model="jumpPage" class="h-8 w-16" input-class="text-center" @focus="handleFocus" @input="handleInput" @keyup.enter="handleJump" />
-      <span class="text-sm text-muted-foreground">页</span>
+      <span class="text-sm text-muted-foreground">{{ props.textTemplates.jumper?.after }}</span>
     </div>
     <div v-if="layoutConfig['->'].show" class="flex-1" :style="{ order: layoutConfig['->'].order }" />
   </Pagination>

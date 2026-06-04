@@ -27,6 +27,7 @@
 | `max` | `number` | `0` | 最大上传数量，`0` 表示不限制 |
 | `directory` | `boolean` | `false` | 是否选择文件夹；启用后只能选择文件夹，文件夹内文件会扁平化上传 |
 | `disabled` | `boolean` | `false` | 是否禁用 |
+| `description` | `string` | `拖放或点击上传` | 描述信息 |
 
 ```ts
 interface FileUploadRequestOptions {
