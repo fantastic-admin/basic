@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { TableColumn } from '@fantastic-admin/components'
 import apiStandardModule from '@/api/modules/standardModule'
 import eventBus from '@/utils/eventBus'
 import DetailForm from './components/DetailForm/index.vue'
@@ -7,8 +8,13 @@ defineOptions({
   name: 'PagesExampleFormModeList',
 })
 
+interface StandardModuleItem {
+  id: number
+  title: string
+}
+
 const router = useRouter()
-const { pagination, getParams, onSizeChange, onCurrentChange, onSortChange } = usePagination()
+const { pagination, getParams, onSizeChange, onCurrentChange } = usePagination()
 
 // 表格是否自适应高度
 const tableAutoHeight = ref(false)
@@ -23,7 +29,7 @@ const formMode = ref<'router' | 'modal' | 'drawer'>('router')
 
 // 详情
 const formModeProps = ref({
-  id: '',
+  id: '' as number | string,
 })
 
 // 搜索
@@ -41,12 +47,33 @@ function searchReset() {
 // 批量操作
 const batch = ref({
   enable: true,
-  selectionDataList: [],
+  selectionDataList: [] as StandardModuleItem[],
 })
 
 // 列表
 const loading = ref(false)
-const dataList = ref([])
+const dataList = ref<StandardModuleItem[]>([])
+
+const tableColumns = computed<TableColumn<StandardModuleItem>[]>(() => [
+  ...(batch.value.enable
+    ? [{
+      type: 'selection',
+      fixed: 'left',
+      width: 48,
+    } satisfies TableColumn<StandardModuleItem>]
+    : []),
+  {
+    accessorKey: 'title',
+    header: '标题',
+  },
+  {
+    id: 'operation',
+    header: '操作',
+    width: 120,
+    align: 'center',
+    fixed: 'right',
+  },
+])
 
 onMounted(() => {
   getDataList()
@@ -84,11 +111,6 @@ function sizeChange(size: number) {
 // 当前页码切换（翻页）
 function currentChange(page = 1) {
   onCurrentChange(page).then(() => getDataList())
-}
-
-// 字段排序
-function sortChange({ prop, order }: { prop: string, order: string }) {
-  onSortChange(prop, order).then(() => getDataList())
 }
 
 const formRef = ref<InstanceType<typeof DetailForm>>()
@@ -160,7 +182,7 @@ function onCreate() {
   }
 }
 
-function onEdit(row: any) {
+function onEdit(row: StandardModuleItem) {
   if (formMode.value === 'router') {
     router.push({
       name: 'standardModuleExampleDetail',
@@ -186,7 +208,7 @@ function onEdit(row: any) {
   }
 }
 
-function onDel(row: any) {
+function onDel(row: StandardModuleItem) {
   useFaModal().confirm({
     title: '确认信息',
     content: `确认删除「${row.title}」吗？`,
@@ -194,6 +216,24 @@ function onDel(row: any) {
       apiStandardModule.delete(row.id).then(() => {
         getDataList()
         useFaToast().success('删除成功')
+      })
+    },
+  })
+}
+
+function onBatchDel() {
+  const rows = batch.value.selectionDataList
+  if (!rows.length) {
+    return
+  }
+
+  useFaModal().confirm({
+    title: '确认信息',
+    content: `确认删除选中的 ${rows.length} 条数据吗？`,
+    onConfirm: () => {
+      Promise.all(rows.map(row => apiStandardModule.delete(row.id))).then(() => {
+        getDataList()
+        useFaToast().success('批量删除成功')
       })
     },
   })
@@ -302,41 +342,61 @@ function onDel(row: any) {
           </div>
         </template>
       </FaSearchBar>
-      <div class="mx--4 my-4 border-t border-t-dashed" />
-      <div class="flex-center-between gap-2">
-        <FaButton v-if="batch.enable" variant="outline" :disabled="!batch.selectionDataList.length">
-          批量操作
-        </FaButton>
-        <FaButton @click="onCreate">
-          <FaIcon name="i-ri:add-line" />
-          新增
-        </FaButton>
-      </div>
-      <ElTable v-loading="loading" class="my-4" :data="dataList" stripe highlight-current-row border height="100%" @sort-change="sortChange" @selection-change="batch.selectionDataList = $event">
-        <ElTableColumn v-if="batch.enable" type="selection" align="center" fixed />
-        <ElTableColumn prop="title" label="标题" />
-        <ElTableColumn label="操作" width="120" align="center" fixed="right">
-          <template #default="scope">
-            <div class="flex-center gap-2">
-              <FaButton variant="outline" size="icon-sm" @click="onEdit(scope.row)">
-                <FaIcon name="i-ri:edit-line" />
+      <div class="mx--4 my-3 border-t border-t-dashed" />
+      <FaTable
+        v-loading="loading"
+        table-root-class="rounded-lg overflow-hidden"
+        :class="{ 'min-h-0 flex-1': tableAutoHeight }"
+        row-key="id"
+        selectable
+        multiple
+        stripe
+        column-visibility
+        border
+        :columns="tableColumns"
+        :data="dataList"
+        @selection-change="batch.selectionDataList = $event"
+      >
+        <template #toolbar>
+          <div class="flex flex-1 gap-2 items-center">
+            <FaButton @click="onCreate">
+              新增
+            </FaButton>
+            <FaDropdown
+              v-if="batch.enable"
+              :items="[
+                [
+                  { label: '批量删除', variant: 'destructive', disabled: !batch.selectionDataList.length, handle: onBatchDel },
+                ],
+              ]"
+            >
+              <FaButton variant="outline" :disabled="!batch.selectionDataList.length">
+                批量操作
+                <FaIcon name="i-ep:arrow-down" />
               </FaButton>
-              <FaDropdown
-                :items="[
-                  [
-                    { label: '删除', variant: 'destructive', handle: () => onDel(scope.row) },
-                  ],
-                ]"
-              >
-                <FaButton variant="outline" size="icon-sm">
-                  <FaIcon name="i-ri:more-line" />
-                </FaButton>
-              </FaDropdown>
-            </div>
-          </template>
-        </ElTableColumn>
-      </ElTable>
-      <FaPagination :page="pagination.page" :size="pagination.size" :total="pagination.total" @page-change="currentChange" @size-change="sizeChange" />
+            </FaDropdown>
+          </div>
+        </template>
+        <template #cell-operation="{ row }">
+          <div class="flex-center gap-2">
+            <FaButton variant="outline" size="icon-sm" @click="onEdit(row.original)">
+              <FaIcon name="i-ri:edit-line" />
+            </FaButton>
+            <FaDropdown
+              :items="[
+                [
+                  { label: '删除', variant: 'destructive', handle: () => onDel(row.original) },
+                ],
+              ]"
+            >
+              <FaButton variant="outline" size="icon-sm">
+                <FaIcon name="i-ri:more-line" />
+              </FaButton>
+            </FaDropdown>
+          </div>
+        </template>
+      </FaTable>
+      <FaPagination :page="pagination.page" :size="pagination.size" :total="pagination.total" class="mt-2" @page-change="currentChange" @size-change="sizeChange" />
     </FaPageMain>
   </div>
 </template>
