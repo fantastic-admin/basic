@@ -29,6 +29,7 @@
   "dependencies": {
     "@iconify/vue": "catalog:",
     "@lucide/vue": "catalog:",
+    "@tanstack/vue-table": "catalog:",
     "axios": "catalog:",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",

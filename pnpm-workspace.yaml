@@ -22,6 +22,7 @@ catalog:
   '@lucide/vue': ^1.17.0
   '@spiriit/vite-plugin-svg-spritemap': ^7.0.0
   '@stylistic/stylelint-config': ^5.0.0
+  '@tanstack/vue-table': ^8.21.3
   '@tinymce/tinymce-vue': ^6.3.0
   '@types/fs-extra': ^11.0.4
   '@types/node': ^25.9.1

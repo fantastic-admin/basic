@@ -303,6 +303,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'table',
+      name: 'componentExampleTable',
+      component: () => import('@/views/component_example/table.vue'),
+      meta: {
+        title: '表格',
+      },
+    },
+    {
       path: 'tag',
       name: 'componentExampleTag',
       component: () => import('@/views/component_example/tag.vue'),

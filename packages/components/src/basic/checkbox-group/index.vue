@@ -1,6 +1,7 @@
 <script setup lang="ts" generic="TOption extends CheckboxGroupOption">
-import type { AcceptableValue } from 'reka-ui'
+import type { AcceptableValue, Direction } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
+import { useTextDirection } from '@vueuse/core'
 import { computed, useId, watch } from 'vue'
 import { cn } from '#utils'
 import { Checkbox } from '../checkbox/checkbox'
@@ -23,7 +24,7 @@ const props = defineProps<{
   disabled?: boolean
   min?: number
   max?: number
-  dir?: 'ltr' | 'rtl'
+  dir?: Direction
   class?: HTMLAttributes['class']
   optionClass?: HTMLAttributes['class']
   itemClass?: HTMLAttributes['class']
@@ -47,6 +48,11 @@ const value = defineModel<AcceptableValue[]>({
   default: () => [],
 })
 
+const documentDir = useTextDirection({
+  observe: true,
+})
+
+const dir = computed<Direction>(() => props.dir ?? (documentDir.value === 'rtl' ? 'rtl' : 'ltr'))
 const baseId = useId()
 const checkedCount = computed(() => value.value.length)
 

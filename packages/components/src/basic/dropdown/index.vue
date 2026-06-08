@@ -5,6 +5,7 @@ import { createReusableTemplate, useTextDirection } from '@vueuse/core'
 import Icon from '../icon/index.vue'
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
@@ -41,10 +42,12 @@ const Option = createReusableTemplate<{
 
 interface MenuItem {
   label: string
+  type?: 'checkbox'
   icon?: string
   variant?: 'default' | 'destructive'
   disabled?: boolean
-  handle?: () => void
+  checked?: boolean
+  handle?: (checked?: boolean) => void
 }
 
 interface MenuSubItem {
@@ -62,8 +65,12 @@ function hasIcon(group: (MenuItem | MenuSubItem)[][]) {
   }))
 }
 
-function handleItemClick(item: { handle?: () => void }) {
+function handleItemClick(item: { handle?: (checked?: boolean) => void }) {
   item.handle?.()
+}
+
+function handleCheckboxItemChange(item: MenuItem, checked: boolean) {
+  item.handle?.(checked)
 }
 </script>
 
@@ -83,7 +90,15 @@ function handleItemClick(item: { handle?: () => void }) {
         <template v-for="(item, index) in its" :key="index">
           <DropdownMenuGroup>
             <template v-for="(v, i) in item" :key="i">
-              <DropdownMenuItem v-if="!('items' in v)" :variant="v.variant" :disabled="v.disabled" @click="handleItemClick(v)">
+              <DropdownMenuCheckboxItem
+                v-if="!('items' in v) && v.type === 'checkbox'"
+                :model-value="v.checked"
+                :disabled="v.disabled"
+                @update:model-value="value => handleCheckboxItemChange(v, value)"
+              >
+                {{ v.label }}
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuItem v-else-if="!('items' in v)" :variant="v.variant" :disabled="v.disabled" @click="handleItemClick(v)">
                 <div v-if="hasIcon(its)" class="flex-center size-4">
                   <Icon v-if="v.icon" :name="v.icon" class="size-4" />
                 </div>

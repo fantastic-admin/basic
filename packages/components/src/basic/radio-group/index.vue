@@ -1,7 +1,8 @@
 <script setup lang="ts" generic="TOption extends RadioGroupOption">
-import type { AcceptableValue, RadioGroupRootProps } from 'reka-ui'
+import type { AcceptableValue, Direction, RadioGroupRootProps } from 'reka-ui'
 import type { HTMLAttributes } from 'vue'
-import { useId, watch } from 'vue'
+import { useTextDirection } from '@vueuse/core'
+import { computed, useId, watch } from 'vue'
 import { cn } from '#utils'
 import { Label } from '../label/label'
 import { RadioGroup, RadioGroupItem } from './radio-group'
@@ -21,7 +22,7 @@ defineOptions({
 const props = defineProps<{
   options: TOption[]
   disabled?: RadioGroupRootProps['disabled']
-  dir?: RadioGroupRootProps['dir']
+  dir?: Direction
   class?: HTMLAttributes['class']
   optionClass?: HTMLAttributes['class']
   itemClass?: HTMLAttributes['class']
@@ -41,6 +42,11 @@ const slots = defineSlots<{
 }>()
 
 const value = defineModel<AcceptableValue | undefined>()
+const documentDir = useTextDirection({
+  observe: true,
+})
+
+const dir = computed<Direction>(() => props.dir ?? (documentDir.value === 'rtl' ? 'rtl' : 'ltr'))
 const baseId = useId()
 
 watch(value, (newValue) => {

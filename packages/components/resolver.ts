@@ -8,6 +8,7 @@ const PACKAGE_NAME = createRequire(import.meta.url)('./package.json').name
 const BASIC_COMPONENT_NAMES = [
   'FaAlert',
   'FaAvatar',
+  'FaBadge',
   'FaButton',
   'FaButtonGroup',
   'FaCard',
@@ -43,7 +44,9 @@ const BASIC_COMPONENT_NAMES = [
   'FaSelect',
   'FaSlider',
   'FaSwitch',
+  'FaTable',
   'FaTabs',
+  'FaTag',
   'FaTextarea',
   'FaToast',
   'FaTooltip',
