@@ -5,7 +5,7 @@ import type { TagVariants } from '.'
 import { Primitive } from 'reka-ui'
 import { cn } from '#utils'
 import { tagVariants } from '.'
-import FaIcon from '../../icon/index.vue'
+import Icon from '../../icon/index.vue'
 
 interface Props extends PrimitiveProps {
   variant?: TagVariants['variant']
@@ -34,7 +34,7 @@ function handleClose(event: MouseEvent) {
     :as-child="asChild"
     :class="cn(tagVariants({ variant }), props.class)"
   >
-    <FaIcon v-if="icon" :name="icon" class="size-3" />
+    <Icon v-if="icon" :name="icon" class="size-3" />
     <slot />
     <button
       v-if="closable"
@@ -42,7 +42,7 @@ function handleClose(event: MouseEvent) {
       class="me--1 outline-none rounded-full inline-flex ring-offset-background items-center justify-center focus:ring-2 focus:ring-ring focus:ring-offset-2"
       @click="handleClose"
     >
-      <FaIcon name="i-lucide:x" class="size-3" />
+      <Icon name="i-lucide:x" class="size-3" />
     </button>
   </Primitive>
 </template>
