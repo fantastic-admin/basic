@@ -16,6 +16,7 @@ const BASIC_COMPONENT_NAMES = [
   'FaCheckboxGroup',
   'FaCollapsible',
   'FaContextMenu',
+  'FaDescriptions',
   'FaDivider',
   'FaDrawer',
   'FaDropdown',

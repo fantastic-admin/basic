@@ -94,6 +94,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'descriptions',
+      name: 'componentExampleDescriptions',
+      component: () => import('@/views/component_example/descriptions.vue'),
+      meta: {
+        title: '描述列表',
+      },
+    },
+    {
       path: 'divider',
       name: 'componentExampleDivider',
       component: () => import('@/views/component_example/divider.vue'),
