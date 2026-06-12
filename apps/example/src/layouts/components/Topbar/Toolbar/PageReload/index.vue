@@ -8,13 +8,15 @@ const mainPage = useAppPage()
 
 const isAnimating = ref(false)
 
-function handleClick() {
-  isAnimating.value = true
-  mainPage.reload()
-}
-
-function handleCtrlClick() {
-  location.reload()
+function handleClick(event: MouseEvent) {
+  if (event.ctrlKey && !event.altKey && !event.metaKey && !event.shiftKey) {
+    location.reload()
+    return
+  }
+  if (!event.ctrlKey && !event.altKey && !event.metaKey && !event.shiftKey) {
+    isAnimating.value = true
+    mainPage.reload()
+  }
 }
 </script>
 
@@ -28,7 +30,7 @@ function handleCtrlClick() {
         <p>可切换为浏览器原生刷新</p>
       </div>
     </template>
-    <FaButton variant="ghost" size="icon-sm" @click.exact="handleClick" @click.ctrl.exact="handleCtrlClick" @animationend="isAnimating = false">
+    <FaButton variant="ghost" size="icon-sm" @click="handleClick" @animationend="isAnimating = false">
       <FaIcon name="i-iconoir:refresh-double" class="size-4" :class="{ animation: isAnimating }" />
     </FaButton>
   </FaTooltip>
