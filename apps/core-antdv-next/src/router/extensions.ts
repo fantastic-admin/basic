@@ -110,7 +110,7 @@ function extendClose(router: Router) {
 }
 
 declare module 'vue-router' {
-  interface Router {
+  interface _RouterClassic {
     /**
      * 本方法为框架扩展语法，会同时关闭当前标签页
      *
