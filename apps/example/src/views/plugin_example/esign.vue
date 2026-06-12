@@ -1,43 +1,41 @@
 <script setup lang="ts">
-import VueEsign from 'vue-esign'
+import type { SignCanvasExpose, SignCanvasOptions } from 'sign-canvas'
+import SignCanvas from 'sign-canvas'
 import Alert from './components/alert.vue'
 import Command from './components/command.vue'
 
-const esignRef = useTemplateRef<any>('esignRef')
-const options = ref({
-  lineWidth: 6,
-  lineColor: '#000000',
+const signCanvasRef = useTemplateRef<SignCanvasExpose>('signCanvasRef')
+const signature = shallowRef<string | null>(null)
+const result = shallowRef<string | null>(null)
+const options = reactive<SignCanvasOptions>({
+  canvasWidth: 600,
+  canvasHeight: 360,
+  isDpr: true,
+  isSign: true,
+  writeColor: '#101010',
   bgColor: '#f0f0f0',
-  isCrop: false,
+  isShowBorder: false,
+  imgType: 'png',
 })
-const result = ref('')
 
 function handleReset() {
-  esignRef.value.reset()
-  nextTick(() => {
-    options.value.bgColor = '#f0f0f0'
-  })
+  signCanvasRef.value?.clear()
+  signature.value = null
+  result.value = null
 }
 function handleGenerate() {
-  esignRef.value.generate().then((res: string) => {
-    result.value = res
-  }).catch(() => {
+  const image = signCanvasRef.value?.toDataURL()
+  if (!image) {
     useFaToast().warning('画板为空，无法生成图片')
-  })
+    return
+  }
+  result.value = image
 }
 function handleDownload() {
-  esignRef.value.generate().then((res: string) => {
-    const image = new Image()
-    image.setAttribute('crossOrigin', 'anonymous')
-    image.onload = () => {
-      const a = document.createElement('a')
-      const event = new MouseEvent('click')
-      a.download = Date.parse(new Date().toString()).toString()
-      a.href = image.src
-      a.dispatchEvent(event)
-    }
-    image.src = res
-  })
+  const image = signCanvasRef.value?.downloadSignImg(Date.now().toString())
+  if (!image) {
+    useFaToast().warning('画板为空，无法下载图片')
+  }
 }
 
 function open(url: string) {
@@ -50,15 +48,15 @@ function open(url: string) {
     <Alert />
     <FaPageHeader title="电子签名">
       <template #description>
-        <Command text="pnpm add vue-esign" />
+        <Command text="pnpm add sign-canvas" />
       </template>
-      <FaButton variant="outline" size="icon" @click="open('https://github.com/JaimeCheng/vue-esign')">
+      <FaButton variant="outline" size="icon" @click="open('https://github.com/langyuxiansheng/vue-sign-canvas')">
         <FaIcon name="i-simple-icons:github" />
       </FaButton>
     </FaPageHeader>
     <FaPageMain>
       <div class="space-y-2">
-        <VueEsign ref="esignRef" v-model:bg-color="options.bgColor" :width="500" :height="300" :is-crop="options.isCrop" :line-width="options.lineWidth" :line-color="options.lineColor" />
+        <SignCanvas ref="signCanvasRef" v-model="signature" :options="options" />
         <div class="space-x-2">
           <FaButton @click="handleReset">
             清空画板
@@ -70,7 +68,7 @@ function open(url: string) {
             下载图片
           </FaButton>
         </div>
-        <img v-if="result" :src="result" :width="500" :height="300">
+        <img v-if="result" :src="result" :width="600" :height="360">
       </div>
     </FaPageMain>
   </div>

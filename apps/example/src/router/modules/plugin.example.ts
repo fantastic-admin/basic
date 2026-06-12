@@ -83,14 +83,6 @@ const routes: RouteRecordRaw = {
           },
         },
         {
-          path: 'g2plot',
-          name: 'pluginExampleChartG2plot',
-          component: () => import('@/views/plugin_example/g2plot.vue'),
-          meta: {
-            title: 'G2plot',
-          },
-        },
-        {
           path: 'vue-data-ui',
           name: 'pluginExampleChartVueDataUi',
           component: () => import('@/views/plugin_example/vue-data-ui.vue'),
@@ -107,15 +99,6 @@ const routes: RouteRecordRaw = {
       meta: {
         title: 'TinyMCE',
         icon: 'i-file-icons:tinymce',
-      },
-    },
-    {
-      path: 'markdown',
-      name: 'pluginExampleMarkdown',
-      component: () => import('@/views/plugin_example/markdown.vue'),
-      meta: {
-        title: 'Bytemd',
-        icon: 'i-teenyicons:markdown-outline',
       },
     },
     {

@@ -13,9 +13,6 @@
     "lint": "vue-tsc -b"
   },
   "dependencies": {
-    "@antv/g2plot": "catalog:",
-    "@bytemd/plugin-gfm": "catalog:",
-    "@bytemd/vue-next": "catalog:",
     "@fantastic-admin/components": "workspace:*",
     "@fantastic-admin/composables": "workspace:*",
     "@fantastic-admin/settings": "workspace:*",
@@ -28,7 +25,6 @@
     "@zumer/snapdom": "catalog:",
     "animate.css": "catalog:",
     "axios": "catalog:",
-    "bytemd": "catalog:",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
     "cropperjs": "catalog:",
@@ -49,6 +45,7 @@
     "qs": "catalog:",
     "reka-ui": "catalog:",
     "scule": "catalog:",
+    "sign-canvas": "catalog:",
     "splitpanes": "catalog:",
     "swiper": "catalog:",
     "tailwind-merge": "catalog:",
@@ -60,7 +57,6 @@
     "vue": "catalog:",
     "vue-currency-input": "catalog:",
     "vue-data-ui": "catalog:",
-    "vue-esign": "catalog:",
     "vue-hooks-plus": "catalog:",
     "vue-router": "catalog:",
     "vxe-pc-ui": "catalog:",
