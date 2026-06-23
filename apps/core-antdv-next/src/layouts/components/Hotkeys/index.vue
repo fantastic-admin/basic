@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { globalHotkeyBindings } from '@/hotkeys/registry'
+import { hotkeyBindings } from '@/hotkeys'
 import eventBus from '@/utils/eventBus'
 
 defineOptions({
@@ -11,10 +11,10 @@ const hotkeyContext = {
   settings: appSettingsStore.settings,
 }
 
-const groupTitleMap = {
-  global: '全局',
-  nav: '主导航',
-  tabbar: '标签栏',
+const helpGroupMeta = {
+  global: { title: '全局', order: 10 },
+  nav: { title: '主导航', order: 20 },
+  tabbar: { title: '标签栏', order: 30 },
 } as const
 
 const itemTitleMap: Record<string, string> = {
@@ -32,42 +32,52 @@ const itemTitleMap: Record<string, string> = {
 const isShow = ref(false)
 
 const helpGroups = computed(() => {
-  const groups = [
-    { id: 'global', title: groupTitleMap.global },
-    { id: 'nav', title: groupTitleMap.nav },
-    { id: 'tabbar', title: groupTitleMap.tabbar },
-  ] as const
+  const groups = new Map<string, {
+    id: string
+    title: string
+    order: number
+    items: {
+      id: string
+      title: string
+      order: number
+      displayKeys: string[]
+    }[]
+  }>()
 
-  return groups.map((group) => {
-    const items = globalHotkeyBindings
-      .filter(binding => binding.help?.group === group.id)
-      .filter((binding) => {
-        if (!binding.help) {
-          return false
-        }
-        if (binding.help.visible) {
-          return binding.help.visible(hotkeyContext)
-        }
-        return true
-      })
-      .sort((a, b) => (a.help?.order ?? 0) - (b.help?.order ?? 0))
-      .map((binding) => {
-        const displayKeys = appSettingsStore.os === 'mac' && binding.help?.displayKeys.mac
-          ? binding.help.displayKeys.mac
-          : binding.help?.displayKeys.default ?? []
-
-        return {
-          id: binding.id,
-          title: binding.help?.titleKey ? itemTitleMap[binding.help.titleKey] : '',
-          displayKeys,
-        }
-      })
-
-    return {
-      ...group,
-      items,
+  hotkeyBindings.forEach((binding) => {
+    const help = binding.help
+    if (!help) {
+      return
     }
-  }).filter(group => group.items.length > 0)
+    if (help.visible && !help.visible(hotkeyContext)) {
+      return
+    }
+
+    const meta = helpGroupMeta[help.group as keyof typeof helpGroupMeta]
+    const group = groups.get(help.group) ?? {
+      id: help.group,
+      title: help.groupTitleKey ? itemTitleMap[help.groupTitleKey] ?? help.groupTitleKey : meta?.title ?? help.group,
+      order: meta?.order ?? 100,
+      items: [],
+    }
+
+    group.items.push({
+      id: binding.id,
+      title: itemTitleMap[help.titleKey] ?? help.titleKey,
+      order: help.order ?? 0,
+      displayKeys: appSettingsStore.os === 'mac' && help.displayKeys.mac
+        ? help.displayKeys.mac
+        : help.displayKeys.default,
+    })
+    groups.set(help.group, group)
+  })
+
+  return Array.from(groups.values())
+    .map(group => ({
+      ...group,
+      items: [...group.items].sort((a, b) => a.order - b.order),
+    }))
+    .sort((a, b) => a.order - b.order)
 })
 
 onMounted(() => {

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { MenuRecordRaw } from '@fantastic-admin/types'
 import { match } from 'pinyin-pro'
-import { useHotkeyBindings } from '@/hotkeys/useHotkeys'
+import { useHotkeyBindings } from '@/hotkeys'
 import Breadcrumb from '@/layouts/components/Breadcrumb/index.vue'
 import BreadcrumbItem from '@/layouts/components/Breadcrumb/item.vue'
 import { resolveRoutePath } from '@/utils'

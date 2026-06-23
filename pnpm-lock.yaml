@@ -446,6 +446,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -485,9 +488,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -636,6 +636,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -675,9 +678,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -826,6 +826,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -865,9 +868,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1016,6 +1016,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1052,9 +1055,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1206,6 +1206,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1242,9 +1245,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1396,6 +1396,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1432,9 +1435,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1586,6 +1586,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1622,9 +1625,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -1776,6 +1776,9 @@ importers:
       '@fantastic-admin/composables':
         specifier: workspace:*
         version: link:../../packages/composables
+      '@fantastic-admin/hotkeys':
+        specifier: workspace:*
+        version: link:../../packages/hotkeys
       '@fantastic-admin/settings':
         specifier: workspace:*
         version: link:../../packages/settings
@@ -1830,9 +1833,6 @@ importers:
       es-toolkit:
         specifier: 'catalog:'
         version: 1.47.0
-      hotkeys-js:
-        specifier: 'catalog:'
-        version: 4.0.4
       mitt:
         specifier: 'catalog:'
         version: 3.0.1
@@ -2089,6 +2089,21 @@ importers:
       vite-plugin-banner:
         specifier: 'catalog:'
         version: 0.8.1
+
+  packages/hotkeys:
+    dependencies:
+      '@fantastic-admin/settings':
+        specifier: workspace:*
+        version: link:../settings
+      hotkeys-js:
+        specifier: 'catalog:'
+        version: 4.0.4
+      type-fest:
+        specifier: 'catalog:'
+        version: 5.7.0
+      vue:
+        specifier: 'catalog:'
+        version: 3.5.38(typescript@6.0.3)
 
   packages/iconify-tools:
     dependencies:
@@ -15257,7 +15272,7 @@ snapshots:
   wrap-ansi@7.0.0:
     dependencies:
       ansi-styles: 4.3.0
-      string-width: 4.2.0
+      string-width: 4.1.0
       strip-ansi: 6.0.1
 
   wrap-ansi@8.1.0:

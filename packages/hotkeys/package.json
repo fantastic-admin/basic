@@ -1,0 +1,16 @@
+{
+  "name": "@fantastic-admin/hotkeys",
+  "type": "module",
+  "version": "0.0.0",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "peerDependencies": {
+    "vue": "catalog:"
+  },
+  "dependencies": {
+    "@fantastic-admin/settings": "workspace:*",
+    "hotkeys-js": "catalog:",
+    "type-fest": "catalog:"
+  }
+}

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useHotkeyBindings } from '@/hotkeys/useHotkeys'
+import { useHotkeyBindings } from '@/hotkeys'
 import { useSlots } from '@/slots'
 import Logo from '../Logo/index.vue'
 

@@ -15,6 +15,7 @@
   "dependencies": {
     "@fantastic-admin/components": "workspace:*",
     "@fantastic-admin/composables": "workspace:*",
+    "@fantastic-admin/hotkeys": "workspace:*",
     "@fantastic-admin/settings": "workspace:*",
     "@fantastic-admin/types": "workspace:*",
     "@vee-validate/zod": "catalog:",
@@ -28,7 +29,6 @@
     "dayjs": "catalog:",
     "eruda": "catalog:",
     "es-toolkit": "catalog:",
-    "hotkeys-js": "catalog:",
     "mitt": "catalog:",
     "nprogress": "catalog:",
     "path-browserify": "catalog:",

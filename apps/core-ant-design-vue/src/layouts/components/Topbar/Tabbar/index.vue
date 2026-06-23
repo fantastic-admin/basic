@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { TabbarRecordRaw } from '@fantastic-admin/types'
 import { useMagicKeys } from '@vueuse/core'
-import { useHotkeyBindings } from '@/hotkeys/useHotkeys'
+import { useHotkeyBindings } from '@/hotkeys'
 import { useSlots } from '@/slots'
 
 defineOptions({

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useElementSize, useScroll } from '@vueuse/core'
-import { useHotkeyBindings } from '@/hotkeys/useHotkeys'
+import { useHotkeyBindings } from '@/hotkeys'
 import { useSlots } from '@/slots'
 import { cn } from '@/utils'
 import eventBus from '@/utils/eventBus'
