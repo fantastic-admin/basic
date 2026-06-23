@@ -193,46 +193,48 @@ function open(url: string) {
             class="group card-enter border rounded-xl bg-neutral-950/[.012] dark:bg-white/5"
             :style="{ animationDelay: `${i * 80}ms` }"
           >
-            <div class="flex flex-col h-full">
-              <div class="p-6 border-b flex gap-4 items-start">
-                <img :src="product.logo" :alt="product.name" class="shrink-0 h-10 w-10 object-contain">
-                <div>
-                  <div class="text-sm tracking-tight font-semibold">
-                    {{ product.name }}
-                  </div>
-                  <div class="text-xs text-muted-foreground leading-relaxed mt-1">
-                    {{ product.tagline }}
+            <div>
+              <div class="flex flex-col h-full">
+                <div class="p-6 border-b flex gap-4 items-start">
+                  <img :src="product.logo" :alt="product.name" class="shrink-0 h-10 w-10 object-contain">
+                  <div>
+                    <div class="text-sm tracking-tight font-semibold">
+                      {{ product.name }}
+                    </div>
+                    <div class="text-xs text-muted-foreground leading-relaxed mt-1">
+                      {{ product.tagline }}
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="p-6 flex-col-start flex-1">
-                <div v-if="product.features" class="mb-5 flex-1">
-                  <ul class="space-y-1.5">
-                    <li
-                      v-for="feature in product.features"
-                      :key="feature"
-                      class="text-xs text-muted-foreground flex gap-2 items-start"
+                <div class="p-6 flex-col-start flex-1">
+                  <div v-if="product.features" class="mb-5 flex-1">
+                    <ul class="space-y-1.5">
+                      <li
+                        v-for="feature in product.features"
+                        :key="feature"
+                        class="text-xs text-muted-foreground flex gap-2 items-start"
+                      >
+                        <span class="text-primary mt-0.5 shrink-0">·</span>
+                        <span>{{ feature }}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div v-if="product.images" class="mb-5 border rounded-lg flex-1 overflow-hidden">
+                    <img
+                      :src="product.images[0]"
+                      :alt="product.name"
+                      class="opacity-50 h-full w-full transition-opacity duration-500 object-cover group-hover-opacity-100"
                     >
-                      <span class="text-primary mt-0.5 shrink-0">·</span>
-                      <span>{{ feature }}</span>
-                    </li>
-                  </ul>
-                </div>
-                <div v-if="product.images" class="mb-5 border rounded-lg flex-1 overflow-hidden">
-                  <img
-                    :src="product.images[0]"
-                    :alt="product.name"
-                    class="opacity-50 h-full w-full transition-opacity duration-500 object-cover group-hover-opacity-100"
+                  </div>
+                  <FaButton
+                    variant="link"
+                    size="sm"
+                    class="mt-auto active-scale-98"
+                    @click="open(product.url)"
                   >
+                    探索 →
+                  </FaButton>
                 </div>
-                <FaButton
-                  variant="link"
-                  size="sm"
-                  class="mt-auto active-scale-98"
-                  @click="open(product.url)"
-                >
-                  探索 →
-                </FaButton>
               </div>
             </div>
           </div>
