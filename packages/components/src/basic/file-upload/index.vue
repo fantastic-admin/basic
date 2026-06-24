@@ -2,7 +2,7 @@
 import axios from 'axios'
 import { filesize } from 'filesize'
 import { computed, onMounted, onUnmounted, ref, useTemplateRef } from 'vue'
-import ButtonGroup from '../button-group/index.vue'
+import ButtonGroup from '../button/ButtonGroup.vue'
 import Button from '../button/index.vue'
 import Icon from '../icon/index.vue'
 

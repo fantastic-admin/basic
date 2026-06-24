@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { VisuallyHidden } from 'reka-ui'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import ButtonGroup from '../button-group/index.vue'
+import ButtonGroup from '../button/ButtonGroup.vue'
 import Button from '../button/index.vue'
 import Icon from '../icon/index.vue'
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from './dialog'

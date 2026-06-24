@@ -4,7 +4,7 @@ import { button } from '@fantastic-admin/components/examples'
 
 <template>
   <div>
-    <FaPageHeader title="按钮" description="FaButton" />
+    <FaPageHeader title="按钮" description="FaButton / FaButtonGroup" />
     <FaPageMain
       v-for="example in button"
       :key="example.title"

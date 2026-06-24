@@ -1,5 +1,2 @@
-import { toast } from 'vue-sonner'
-
-export function useToast() {
-  return toast
-}
+export { default as Toast } from './index.vue'
+export { useToast } from './useToast'

@@ -4,7 +4,7 @@ import { checkbox } from '@fantastic-admin/components/examples'
 
 <template>
   <div>
-    <FaPageHeader title="复选框" description="FaCheckbox" />
+    <FaPageHeader title="复选框" description="FaCheckbox / FaCheckboxGroup" />
     <FaPageMain
       v-for="example in checkbox"
       :key="example.title"

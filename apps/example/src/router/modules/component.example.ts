@@ -46,14 +46,6 @@ const routes: RouteRecordRaw = {
       },
     },
     {
-      path: 'button_group',
-      name: 'componentExampleButtonGroup',
-      component: () => import('@/views/component_example/button_group.vue'),
-      meta: {
-        title: '按钮组',
-      },
-    },
-    {
       path: 'card',
       name: 'componentExampleCard',
       component: () => import('@/views/component_example/card.vue'),
@@ -67,14 +59,6 @@ const routes: RouteRecordRaw = {
       component: () => import('@/views/component_example/checkbox.vue'),
       meta: {
         title: '复选框',
-      },
-    },
-    {
-      path: 'checkbox_group',
-      name: 'componentExampleCheckboxGroup',
-      component: () => import('@/views/component_example/checkbox_group.vue'),
-      meta: {
-        title: '复选框组',
       },
     },
     {
