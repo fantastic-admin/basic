@@ -127,6 +127,14 @@ const routes: RouteRecordRaw = {
       },
     },
     {
+      path: 'form',
+      name: 'componentExampleForm',
+      component: () => import('@/views/component_example/form.vue'),
+      meta: {
+        title: '表单',
+      },
+    },
+    {
       path: 'hover_card',
       name: 'componentExampleHoverCard',
       component: () => import('@/views/component_example/hover_card.vue'),

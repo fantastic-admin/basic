@@ -1,11 +1,11 @@
 ---
 name: fa-form-builder
-description: "为 Fantastic-admin 框架生成独立的表单页面，使用 vee-validate + zod 验证，全部使用框架内建 Fa* 组件。当用户说：'帮我做一个用户信息填写页'、'我只需要一个提交表单，不需要列表'、'做个设置页面，有几个输入框和保存按钮'、'生成一个注册/编辑/配置表单页'、'只要表单页，不需要增删改查'，即使用户只是说'做个表单页面'也应触发此技能。"
+description: "为 Fantastic-admin 框架生成独立的表单页面，使用 FaForm/FaFormItem + vee-validate + zod 验证，表单 model 使用 ref，全部使用框架内建 Fa* 组件。当用户说：'帮我做一个用户信息填写页'、'我只需要一个提交表单，不需要列表'、'做个设置页面，有几个输入框和保存按钮'、'生成一个注册/编辑/配置表单页'、'只要表单页，不需要增删改查'，即使用户只是说'做个表单页面'也应触发此技能。"
 ---
 
 # 表单页面生成器
 
-在 Fantastic-admin 框架中生成独立的 Router 表单页面，使用 vee-validate + zod 完成表单验证，全部使用框架内建 Fa* 组件，不引入任何 Element Plus 组件。
+在 Fantastic-admin 框架中生成独立的 Router 表单页面，使用 `FaForm/FaFormItem` 承接 vee-validate + zod 表单验证。
 
 **生成的文件：**
 - `apps/<app>/src/views/{path}/{name}/index.vue` — 表单页面（含验证、提交骨架、固定操作栏）
@@ -50,14 +50,14 @@ description: "为 Fantastic-admin 框架生成独立的表单页面，使用 vee
 
 字段较多时单列会导致页面过长，双列更紧凑。根据字段数量和复杂度判断是否询问用户布局偏好：
 
-- **单列**：`max-w-600px`，`space-y-6`（字段少、字段较长时适合）
+- **单列**：`max-w-600px`，`grid gap-6`（字段少、字段较长时适合）
 - **双列**：`max-w-1200px`，`grid grid-cols-1 gap-x-8 gap-y-6 items-start md:grid-cols-2`（字段多、字段较短时适合）
 
 ### Step 4：确认并生成
 
 汇总信息，展示将要生成的文件，确认后写入。
 
-生成完成后提示：如需配置路由，请使用 `fa-route-generator` 技能；如需 API 模块，请手动创建。
+生成完成后提示：如需配置路由，请使用 `fa-route-generator` 技能；如需 API 模块，请使用 `fa-crud-page-generator` 或手动创建。
 
 ---
 
@@ -80,9 +80,10 @@ description: "为 Fantastic-admin 框架生成独立的表单页面，使用 vee
 - `{cname}` → 模块中文名
 - `{componentName}` → PascalCase 组件名
 - `{zodSchema}` → zod 字段定义（每个必填字段对应一行 zod 规则）
-- `{initialValues}` → 字段初始值（string 默认 `''`，boolean 默认 `false`，number 默认 `0`，array 默认 `[]`）
-- `{formItems}` → 各字段对应的 FormField 代码片段
+- `{initialValues}` → `model` 字段初始值（string 默认 `''`，boolean 默认 `false`，number 默认 `0`，array 默认 `[]`）
+- `{formItems}` → 各字段对应的 FaFormItem 代码片段
+- `{imports}` → 必要的额外 import；默认留空，Fa* 组件通常由自动导入处理
 - `{maxWidth}` → 单列 `max-w-600px` / 双列 `max-w-1200px`
-- `{gridClass}` → 双列时 `grid grid-cols-1 gap-x-8 gap-y-6 items-start md:grid-cols-2` / 单列时 `space-y-6`
+- `{gridClass}` → 双列时 `grid grid-cols-1 gap-x-8 gap-y-6 items-start md:grid-cols-2` / 单列时 `grid gap-6`
 
-生成的代码是骨架：API 调用处用 `// TODO:` 注释标记，动态数据源（select options、upload action 等）用占位注释标记，用户根据实际接口替换。操作栏按钮使用 `FaButton`：取消用 `variant="outline"`，提交用默认 variant 并传 `:loading="isSubmitting"`。
+生成的代码是骨架：API 调用处用 `// TODO:` 注释标记，动态数据源（select options、upload action 等）用占位注释标记，用户根据实际接口替换。表单对象必须使用 `const model = ref({...})`，模板中直接 `:model="model"`；脚本里读写字段使用 `model.value.xxx`。操作栏按钮使用 `FaButton`：取消用 `variant="outline"`，提交用默认 variant 并传 `:loading="loading"`。

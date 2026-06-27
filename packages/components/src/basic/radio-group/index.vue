@@ -95,11 +95,10 @@ function isOptionChecked(option: TOption) {
       "
     >
       <RadioGroupItem
-        v-show="!slots.option"
         :id="getOptionId(option, index)"
         :value="option.value"
         :disabled="isOptionDisabled(option)"
-        :class="props.itemClass"
+        :class="cn(props.itemClass, slots.option && 'hidden')"
       />
       <Label
         :for="getOptionId(option, index)"

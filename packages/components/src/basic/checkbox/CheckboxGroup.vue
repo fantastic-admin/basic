@@ -167,11 +167,10 @@ function handleCustomOptionKeydown(option: TOption) {
       @keydown.space.prevent="handleCustomOptionKeydown(option)"
     >
       <Checkbox
-        v-show="!slots.option"
         :id="getOptionId(option, index)"
         :model-value="isOptionChecked(option)"
         :disabled="isOptionDisabled(option)"
-        :class="props.itemClass"
+        :class="cn(props.itemClass, slots.option && 'hidden')"
         @update:model-value="handleOptionModelValueChange(option, $event)"
       />
       <Label

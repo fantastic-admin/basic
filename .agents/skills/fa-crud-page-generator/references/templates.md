@@ -1,14 +1,25 @@
 # CRUD 代码模板
 
-以下模板基于 `src/views/pages_example/manager` 真实模块提炼，使用以下占位符：
+生成业务模块时优先保持结构一致，再按字段和业务控件做替换。
 
-- `{cname}` — 模块中文名，如 `用户`
-- `{componentNameList}` — 列表页组件名（PascalCase），如 `SystemUserList`
-- `{componentNameDetail}` — 详情页组件名（PascalCase），如 `SystemUserDetail`
-- `{fileName}` — API 文件名（camelCase），如 `systemUser`
-- `{apiPrefix}` — API URL 前缀（无前导斜杠），如 `system/user`
-- `{routeListName}` — 列表路由 name，如 `systemUserList`
-- `{routeDetailName}` — 详情路由 name，如 `systemUserDetail`（仅 router 模式）
+## 占位符
+
+- `{cname}` — 模块中文名，如 `商品`
+- `{moduleName}` — 模块英文名 camelCase，如 `product`
+- `{ModuleName}` — 模块英文名 PascalCase，如 `Product`
+- `{fileName}` — API 文件名，如 `product`
+- `{apiPrefix}` — API URL 前缀，无前导斜杠，如 `product`
+- `{componentNameList}` — 列表页组件名，如 `ProductList`
+- `{componentNameDetail}` — 详情页组件名，如 `ProductDetail`
+- `{routeListName}` — 列表路由 name，如 `productList`
+- `{routeDetailName}` — 详情路由 name，如 `productDetail`
+- `{routeRootName}` — 父级路由 name，如 `product`
+- `{routePath}` — 父级路由 path，如 `/product`
+- `{routeTitle}` — 路由标题，如 `商品管理`
+- `{formMode}` — `router`、`modal` 或 `drawer`
+- `{firstField}` — 删除确认中展示的主字段，如 `title`
+- `{formModelTypes}` — `DetailFormModel` 中除 `id` 外的字段类型
+- `{formValidationSchema}` — `FaForm` 的 validation schema 对象字段
 
 ---
 
@@ -16,7 +27,8 @@
 
 ```vue
 <script setup lang="ts">
-import api{FileName} from '@/api/modules/{fileName}'
+import type { TableColumn } from '@fantastic-admin/components'
+import api{ModuleName} from '@/api/modules/{fileName}'
 import eventBus from '@/utils/eventBus'
 import DetailForm from './components/DetailForm/index.vue'
 
@@ -24,8 +36,13 @@ defineOptions({
   name: '{componentNameList}',
 })
 
+interface {ModuleName}Item {
+  id: number
+  {itemTypeFields}
+}
+
 const router = useRouter()
-const { pagination, getParams, onSizeChange, onCurrentChange, onSortChange } = usePagination()
+const { pagination, getParams, onSizeChange, onCurrentChange } = usePagination()
 
 // 表格是否自适应高度
 const tableAutoHeight = ref(false)
@@ -40,7 +57,7 @@ const formMode = ref<'router' | 'modal' | 'drawer'>('{formMode}')
 
 // 详情
 const formModeProps = ref({
-  id: '',
+  id: '' as number | string,
 })
 
 // 搜索
@@ -55,12 +72,30 @@ function searchReset() {
 // 批量操作
 const batch = ref({
   enable: true,
-  selectionDataList: [],
+  selectionDataList: [] as {ModuleName}Item[],
 })
 
 // 列表
 const loading = ref(false)
-const dataList = ref([])
+const dataList = ref<{ModuleName}Item[]>([])
+
+const tableColumns = computed<TableColumn<{ModuleName}Item>[]>(() => [
+  ...(batch.value.enable
+    ? [{
+      type: 'selection',
+      fixed: 'left',
+      width: 48,
+    } satisfies TableColumn<{ModuleName}Item>]
+    : []),
+  {tableColumns}
+  {
+    id: 'operation',
+    header: '操作',
+    width: 120,
+    align: 'center',
+    fixed: 'right',
+  },
+])
 
 onMounted(() => {
   getDataList()
@@ -83,7 +118,7 @@ function getDataList() {
     ...getParams(),
     {searchParams}
   }
-  api{FileName}.list(params).then((res: any) => {
+  api{ModuleName}.list(params).then((res: any) => {
     loading.value = false
     dataList.value = res.data.list
     pagination.value.total = res.data.total
@@ -100,11 +135,6 @@ function currentChange(page = 1) {
   onCurrentChange(page).then(() => getDataList())
 }
 
-// 字段排序
-function sortChange({ prop, order }: { prop: string, order: string }) {
-  onSortChange(prop, order).then(() => getDataList())
-}
-
 const formRef = ref<InstanceType<typeof DetailForm>>()
 
 const { open: openModal, update: updateModal } = useFaModal().create({
@@ -114,7 +144,11 @@ const { open: openModal, update: updateModal } = useFaModal().create({
   beforeClose: (action, done) => {
     if (action === 'confirm') {
       // 调用 DetailForm 组件内部 submit 方法
-      formRef.value?.submit().then(() => {
+      formRef.value?.submit().then((success) => {
+        if (!success) {
+          return
+        }
+
         getDataList()
         done()
       })
@@ -136,7 +170,11 @@ const { open: openDrawer, update: updateDrawer } = useFaDrawer().create({
   beforeClose: (action, done) => {
     if (action === 'confirm') {
       // 调用 DetailForm 组件内部 submit 方法
-      formRef.value?.submit().then(() => {
+      formRef.value?.submit().then((success) => {
+        if (!success) {
+          return
+        }
+
         getDataList()
         done()
       })
@@ -153,46 +191,79 @@ const { open: openDrawer, update: updateDrawer } = useFaDrawer().create({
 
 function onCreate() {
   if (formMode.value === 'router') {
-    router.push({ name: '{routeDetailName}' })
+    router.push({
+      name: '{routeDetailName}',
+    })
   }
   else {
     formModeProps.value.id = ''
     if (formMode.value === 'modal') {
-      updateModal({ title: '新增{cname}' })
+      updateModal({
+        title: '新增{cname}',
+      })
       openModal()
     }
     else {
-      updateDrawer({ title: '新增{cname}' })
+      updateDrawer({
+        title: '新增{cname}',
+      })
       openDrawer()
     }
   }
 }
 
-function onEdit(row: any) {
+function onEdit(row: {ModuleName}Item) {
   if (formMode.value === 'router') {
-    router.push({ name: '{routeDetailName}', params: { id: row.id } })
+    router.push({
+      name: '{routeDetailName}',
+      params: {
+        id: row.id,
+      },
+    })
   }
   else {
     formModeProps.value.id = row.id
     if (formMode.value === 'modal') {
-      updateModal({ title: '编辑{cname}' })
+      updateModal({
+        title: '编辑{cname}',
+      })
       openModal()
     }
     else {
-      updateDrawer({ title: '编辑{cname}' })
+      updateDrawer({
+        title: '编辑{cname}',
+      })
       openDrawer()
     }
   }
 }
 
-function onDel(row: any) {
+function onDel(row: {ModuleName}Item) {
   useFaModal().confirm({
     title: '确认信息',
     content: `确认删除「${row.{firstField}}」吗？`,
     onConfirm: () => {
-      api{FileName}.delete(row.id).then(() => {
+      api{ModuleName}.delete(row.id).then(() => {
         getDataList()
-        faToast.success('删除成功')
+        useFaToast().success('删除成功')
+      })
+    },
+  })
+}
+
+function onBatchDel() {
+  const rows = batch.value.selectionDataList
+  if (!rows.length) {
+    return
+  }
+
+  useFaModal().confirm({
+    title: '确认信息',
+    content: `确认删除选中的 ${rows.length} 条数据吗？`,
+    onConfirm: () => {
+      Promise.all(rows.map(row => api{ModuleName}.delete(row.id))).then(() => {
+        getDataList()
+        useFaToast().success('批量删除成功')
       })
     },
   })
@@ -206,7 +277,7 @@ function onDel(row: any) {
       <FaSearchBar :show-toggle="false">
         <template #default="{ fold, toggle }">
           <div class="gap-x-8 gap-y-2 grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))]">
-            {fields.search}
+            {searchFields}
             <div class="flex gap-2 col-end--1 justify-end">
               <FaButton variant="outline" @click="searchReset(); currentChange()">
                 重置
@@ -223,51 +294,72 @@ function onDel(row: any) {
           </div>
         </template>
       </FaSearchBar>
-      <div class="mx--5 my-4 border-t border-t-dashed" />
-      <div class="flex-center-between gap-2">
-        <FaButton v-if="batch.enable" variant="outline" :disabled="!batch.selectionDataList.length">
-          批量操作
-        </FaButton>
-        <FaButton @click="onCreate">
-          <FaIcon name="i-ri:add-line" />
-          新增
-        </FaButton>
-      </div>
-      <ElTable v-loading="loading" class="my-4" :data="dataList" stripe highlight-current-row border height="100%" @sort-change="sortChange" @selection-change="batch.selectionDataList = $event">
-        <ElTableColumn v-if="batch.enable" type="selection" align="center" fixed />
-        {fields.list}
-        <ElTableColumn label="操作" width="120" align="center" fixed="right">
-          <template #default="scope">
-            <div class="flex-center gap-2">
-              <FaButton variant="outline" size="icon-sm" @click="onEdit(scope.row)">
-                <FaIcon name="i-ri:edit-line" />
+      <div class="mx--4 my-3 border-t border-t-dashed" />
+      <FaTable
+        v-loading="loading"
+        table-root-class="rounded-lg overflow-hidden"
+        :class="{ 'min-h-0 flex-1': tableAutoHeight }"
+        row-key="id"
+        selectable
+        multiple
+        stripe
+        column-visibility
+        border
+        :columns="tableColumns"
+        :data="dataList"
+        @selection-change="batch.selectionDataList = $event"
+      >
+        <template #toolbar>
+          <div class="flex flex-1 gap-2 items-center">
+            <FaButton @click="onCreate">
+              新增
+            </FaButton>
+            <FaDropdown
+              v-if="batch.enable"
+              :items="[
+                [
+                  { label: '批量删除', variant: 'destructive', disabled: !batch.selectionDataList.length, handle: onBatchDel },
+                ],
+              ]"
+            >
+              <FaButton variant="outline" :disabled="!batch.selectionDataList.length">
+                批量操作
+                <FaIcon name="i-ep:arrow-down" />
               </FaButton>
-              <FaDropdown
-                :items="[
-                  [
-                    { label: '删除', variant: 'destructive', handle: () => onDel(scope.row) },
-                  ],
-                ]"
-              >
-                <FaButton variant="outline" size="icon-sm">
-                  <FaIcon name="i-ri:more-line" />
-                </FaButton>
-              </FaDropdown>
-            </div>
-          </template>
-        </ElTableColumn>
-      </ElTable>
-      <FaPagination :page="pagination.page" :size="pagination.size" :total="pagination.total" @page-change="currentChange" @size-change="sizeChange" />
+            </FaDropdown>
+          </div>
+        </template>
+        {tableCellSlots}
+        <template #cell-operation="{ row }">
+          <div class="flex-center gap-2">
+            <FaButton variant="outline" size="icon-sm" @click="onEdit(row.original)">
+              <FaIcon name="i-ri:edit-line" />
+            </FaButton>
+            <FaDropdown
+              :items="[
+                [
+                  { label: '删除', variant: 'destructive', handle: () => onDel(row.original) },
+                ],
+              ]"
+            >
+              <FaButton variant="outline" size="icon-sm">
+                <FaIcon name="i-ri:more-line" />
+              </FaButton>
+            </FaDropdown>
+          </div>
+        </template>
+      </FaTable>
+      <FaPagination :page="pagination.page" :size="pagination.size" :total="pagination.total" class="mt-2" @page-change="currentChange" @size-change="sizeChange" />
     </FaPageMain>
   </div>
 </template>
 ```
 
-> 注意：`list.vue` 不需要 `<style scoped>` 块，所有样式均通过 UnoCSS 工具类实现。
+业务页面保持简洁标题即可，不要在 `FaPageHeader #description` 中加入解释技能或模板来源的说明文字。
 
 ---
 
-## detail.vue 模板（仅 router 模式）
+## detail.vue 模板（router 模式）
 
 ```vue
 <script setup lang="ts">
@@ -281,10 +373,23 @@ defineOptions({
 const route = useRoute()
 const router = useRouter()
 
+const appPage = useAppPage()
+
+onMounted(() => {
+  appPage.setCustomTitle(route.params.id ? '编辑' : '新增')
+})
+onUnmounted(() => {
+  appPage.resetCustomTitle()
+})
+
 const formRef = useTemplateRef('formRef')
 
 function onSubmit() {
-  formRef.value?.submit().then(() => {
+  formRef.value?.submit().then((success) => {
+    if (!success) {
+      return
+    }
+
     eventBus.emit('get-data-list')
     onCancel()
   })
@@ -306,11 +411,9 @@ function onCancel() {
       </FaPageHeader>
     </FaFixedBar>
     <FaPageMain>
-      <ElRow>
-        <ElCol :md="24" :lg="16">
-          <DetailForm :id="route.params.id as string" ref="formRef" />
-        </ElCol>
-      </ElRow>
+      <div class="max-w-4xl w-full">
+        <DetailForm :id="route.params.id as string" ref="formRef" />
+      </div>
     </FaPageMain>
     <FaFixedBar position="bottom" class="flex-center gap-4">
       <FaButton @click="onSubmit">
@@ -330,8 +433,9 @@ function onCancel() {
 
 ```vue
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus'
-import api{FileName} from '@/api/modules/{fileName}'
+import type { FormExpose } from '@fantastic-admin/components'
+import { ref } from 'vue'
+import api{ModuleName} from '@/api/modules/{fileName}'
 
 export interface Props {
   id?: number | string
@@ -344,67 +448,80 @@ const props = withDefaults(
 )
 
 const loading = ref(false)
-const formRef = useTemplateRef<FormInstance>('formRef')
-const form = ref({
+const formRef = useTemplateRef<FormExpose>('formRef')
+
+interface DetailFormModel {
+  id: number | string
+  {formModelTypes}
+}
+
+const model = ref<DetailFormModel>({
   id: props.id,
-  {fields.formInit}
-})
-const formRules = ref<FormRules>({
-  {fields.rules}
+  {formInitialValues}
 })
 
+const validationSchema = {
+  {formValidationSchema}
+}
+
 onMounted(() => {
-  if (form.value.id !== '') {
+  if (model.value.id !== '') {
     getInfo()
   }
 })
 
 function getInfo() {
   loading.value = true
-  api{FileName}.detail(form.value.id).then((res: any) => {
+  api{ModuleName}.detail(model.value.id).then((res: any) => {
     loading.value = false
-    {fields.formAssign}
+    {formAssign}
   }).catch(() => {
     loading.value = false
   })
 }
 
+async function submit() {
+  const result = await formRef.value?.validate()
+
+  if (!result?.valid) {
+    return false
+  }
+
+  if (model.value.id === '') {
+    await api{ModuleName}.create(model.value)
+    useFaToast().success('新增成功')
+  }
+  else {
+    await api{ModuleName}.edit(model.value)
+    useFaToast().success('编辑成功')
+  }
+
+  return true
+}
+
 defineExpose({
-  submit() {
-    return new Promise<void>((resolve) => {
-      formRef.value?.validate((valid) => {
-        if (valid) {
-          if (form.value.id === '') {
-            api{FileName}.create(form.value).then(() => {
-              faToast.success('新增成功')
-              resolve()
-            })
-          }
-          else {
-            api{FileName}.edit(form.value).then(() => {
-              faToast.success('编辑成功')
-              resolve()
-            })
-          }
-        }
-      })
-    })
-  },
+  submit,
 })
 </script>
 
 <template>
   <div v-loading="loading">
-    <ElForm ref="formRef" :model="form" :rules="formRules" label-width="120px" label-suffix="：">
-      {fields.form}
-    </ElForm>
+    <FaForm
+      ref="formRef"
+      :model="model"
+      :validation-schema="validationSchema"
+      label-placement="right"
+      :label-width="120"
+    >
+      {formFields}
+    </FaForm>
   </div>
 </template>
 ```
 
 ---
 
-## api.ts 模板
+## api/modules/{fileName}.ts 模板
 
 ```typescript
 import api from '../index'
@@ -420,7 +537,9 @@ export default {
   }),
 
   detail: (id: number | string) => api.get('{apiPrefix}/detail', {
-    params: { id },
+    params: {
+      id,
+    },
     fake: true,
   }),
 
@@ -432,27 +551,30 @@ export default {
     fake: true,
   }),
 
-  delete: (id: number | string) => api.post('{apiPrefix}/delete', { id }, {
+  delete: (id: number | string) => api.post('{apiPrefix}/delete', {
+    id,
+  }, {
     fake: true,
   }),
 }
 ```
 
-> 不需要 Mock 数据时，去掉所有 `fake: true` 选项即可。
+不生成 fake mock 时，去掉所有 `fake: true` 配置，并确保接口地址与真实后端约定一致。
 
 ---
 
-## fake.ts 模板
+## api/fake_modules/{fileName}.fake.ts 模板
 
 ```typescript
-import { faker } from '@faker-js/faker/locale/zh_CN'
+import { faker } from '@faker-js/faker'
 import { defineFakeRoute } from 'vite-plugin-fake-server/client'
 
+// {cname}
 const {moduleName}List: any[] = []
 for (let i = 0; i < 50; i++) {
   {moduleName}List.push({
     id: i + 1,
-    {fields.mock}
+    {mockFields}
   })
 }
 
@@ -462,8 +584,9 @@ export default defineFakeRoute([
     method: 'get',
     response: ({ query }) => {
       const { {searchQueryFields}, from, limit } = query
-      let list = {moduleName}List
-      {searchFilters}
+      const list = {moduleName}List.filter((item) => {
+        return {searchFilterExpression}
+      })
       const pageList = list.filter((_item, index) => {
         return index >= ~~from && index < (~~from + ~~limit)
       })
@@ -493,122 +616,257 @@ export default defineFakeRoute([
     url: '/fake/{apiPrefix}/create',
     method: 'post',
     response: () => {
-      return { error: '', status: 1, data: { isSuccess: true } }
+      return {
+        error: '',
+        status: 1,
+        data: {
+          isSuccess: true,
+        },
+      }
     },
   },
   {
     url: '/fake/{apiPrefix}/edit',
     method: 'post',
     response: () => {
-      return { error: '', status: 1, data: { isSuccess: true } }
+      return {
+        error: '',
+        status: 1,
+        data: {
+          isSuccess: true,
+        },
+      }
     },
   },
   {
     url: '/fake/{apiPrefix}/delete',
     method: 'post',
     response: () => {
-      return { error: '', status: 1, data: { isSuccess: true } }
+      return {
+        error: '',
+        status: 1,
+        data: {
+          isSuccess: true,
+        },
+      }
     },
   },
 ])
 ```
 
+如果有多个搜索字段，可以用 `&&` 组合过滤条件：
+
+```typescript
+return (title ? item.title.includes(title) : true)
+  && (status !== undefined && status !== '' ? item.status === ~~status : true)
+```
+
+---
+
+## router/modules/{routeFileName}.ts 模板
+
+```typescript
+import type { RouteRecordRaw } from 'vue-router'
+import { $t } from '@/locales'
+
+function Layout() {
+  return import('@/layouts/index.vue')
+}
+
+const routes: RouteRecordRaw = {
+  path: '{routePath}',
+  component: Layout,
+  name: '{routeRootName}',
+  meta: {
+    title: '{routeTitle}',
+    icon: '{icon}',
+  },
+  children: [
+    {
+      path: '',
+      name: '{routeListName}',
+      component: () => import('@/views/{viewPath}/list.vue'),
+      meta: {
+        title: '{cname}列表',
+        menu: false,
+        breadcrumb: false,
+        keepAlive: '{routeDetailName}',
+      },
+    },
+    {
+      path: 'detail/:id?',
+      name: '{routeDetailName}',
+      component: () => import('@/views/{viewPath}/detail.vue'),
+      meta: {
+        title: '...',
+        menu: false,
+        activeMenu: '{routePath}',
+        keepAlive: true,
+        noKeepAlive: '{routeListName}',
+      },
+    },
+  ],
+}
+
+export default routes
+```
+
+`modal` / `drawer` 模式不需要详情路由，列表路由也不需要 `keepAlive: '{routeDetailName}'`。
+
 ---
 
 ## 字段生成规则
 
+### TypeScript item 字段
+
+```typescript
+title: string
+status: number
+createdAt: string
+```
+
+### 搜索默认值和查询参数
+
+```typescript
+const searchDefault = {
+  title: '',
+  status: '',
+}
+
+const params = {
+  ...getParams(),
+  ...(search.value.title && { title: search.value.title }),
+  ...(search.value.status !== '' && { status: search.value.status }),
+}
+```
+
 ### 搜索栏字段
 
-每个搜索字段用 `FaLabel` 包裹，内部控件根据字段类型自行选择合适的 Fa* 或 El* 组件。次要搜索条件加 `v-show="!fold"` 实现折叠。
+首个主要搜索字段直接显示，次要搜索条件使用 `v-show="!fold"`：
 
 ```vue
 <FaLabel label="{label}" class="col-span-1">
-  <!-- 内部放对应的输入控件，string 用 FaInput，枚举用 FaSelect，日期用 ElDatePicker 等 -->
+  <FaInput
+    v-model="search.{field}"
+    placeholder="请输入{label}，支持模糊查询"
+    clearable
+    class="w-full"
+    @keydown.enter="currentChange()"
+    @clear="currentChange()"
+  />
 </FaLabel>
 ```
 
-### 列表列
+### FaTable 列
 
-普通列直接用 `prop` 渲染，需要自定义展示时使用 `#default` slot：
+普通字段：
+
+```typescript
+{
+  accessorKey: '{field}',
+  header: '{label}',
+},
+```
+
+需要自定义展示的字段使用 `id`，并在模板里添加 `#cell-{id}` 插槽：
+
+```typescript
+{
+  id: 'status',
+  header: '状态',
+  width: 100,
+  align: 'center',
+},
+```
 
 ```vue
-<!-- 普通列 -->
-<ElTableColumn prop="{field}" label="{label}" />
-
-<!-- 需要自定义渲染时 -->
-<ElTableColumn prop="{field}" label="{label}" width="100" align="center">
-  <template #default="scope">
-    <!-- 根据字段含义选择合适的展示方式，如 ElTag、FaSwitch 等 -->
-  </template>
-</ElTableColumn>
+<template #cell-status="{ row }">
+  <FaBadge :variant="row.original.status ? 'default' : 'secondary'">
+    {{ row.original.status ? '启用' : '停用' }}
+  </FaBadge>
+</template>
 ```
 
 ### 表单字段
 
-每个表单字段用 `ElFormItem` 包裹，内部控件根据字段类型自行选择合适的 Fa* 或 El* 组件，注意加 `class="w-full"`。
-
 ```vue
-<ElFormItem label="{label}" prop="{field}">
-  <!-- 内部放对应的输入控件 -->
-</ElFormItem>
+<FaFormItem name="{field}" label="{label}" required>
+  <FaInput placeholder="请输入{label}" class="w-full" />
+</FaFormItem>
 ```
 
-### 表单验证规则
+`FaFormItem` 会自动向第一个子控件注入 `modelValue` 和 `onUpdate:modelValue`，不要再手写
+`v-model="model.{field}"` 或 `v-model="model.value.{field}"`。
+
+### 表单 model 类型字段
 
 ```typescript
-// 必填文本
-{field}: [
-  { required: true, message: '请输入{label}', trigger: 'blur' },
-],
-// 必填选择
-{field}: [
-  { required: true, message: '请选择{label}', trigger: 'change' },
-],
+{field}: string
+status: number
+enabled: boolean
 ```
+
+### 表单初始值
+
+```typescript
+{field}: '',
+status: 0,
+enabled: true,
+```
+
+### 表单详情赋值
+
+```typescript
+model.value.{field} = res.data.{field}
+```
+
+### 表单验证 schema
+
+文本输入：
+
+```typescript
+{field}(value: string) {
+  return value?.trim() ? true : '请输入{label}'
+},
+```
+
+选择、开关、日期：
+
+```typescript
+{field}(value: string | number | boolean | undefined) {
+  return value !== undefined && value !== '' ? true : '请选择{label}'
+},
+```
+
+非必填字段不要生成 validation schema 项；生成必填字段时，在对应 `FaFormItem` 上同时加
+`required`。
 
 ### Mock 数据字段映射
 
-| 字段类型 | faker 方法 |
-|---------|-----------|
-| 姓名 | `faker.person.fullName()` |
-| 账号/用户名 | `faker.person.firstName()` |
-| 手机号 | `faker.phone.number({ style: 'international' })` |
+| 字段类型/含义 | faker 方法 |
+|---------------|------------|
+| 标题 | `faker.book.title()` 或 `faker.lorem.words(3)` |
+| 名称 | `faker.person.fullName()` 或 `faker.commerce.productName()` |
+| 用户名 | `faker.internet.username()` |
+| 手机号 | `faker.phone.number()` |
 | 邮箱 | `faker.internet.email()` |
-| 标题/名称 | `faker.lorem.words(3)` |
 | 描述 | `faker.lorem.sentence()` |
-| 数字（枚举） | `faker.number.int(2)` |
-| 布尔（状态） | `faker.datatype.boolean()` |
+| 数量 | `faker.number.int({ min: 1, max: 100 })` |
 | 金额 | `faker.number.float({ min: 10, max: 9999, fractionDigits: 2 })` |
+| 布尔状态 | `faker.datatype.boolean()` |
+| 枚举状态 | `faker.helpers.arrayElement([0, 1, 2])` |
 | 日期 | `faker.date.recent().toISOString()` |
 
-### Mock 搜索过滤模式
+### Mock 搜索过滤
 
-**string 模糊匹配：**
+字符串模糊匹配：
+
 ```typescript
-list = list.filter((item) => {
-  return {field} ? item.{field}.includes({field}) : true
-})
+title ? item.title.includes(title) : true
 ```
 
-**枚举/数字精确匹配（注意：query 参数均为字符串，`0` 是 falsy，不能直接用 `{field} ?` 判断）：**
+数字/枚举精确匹配。注意 query 参数是字符串，`0` 不能用普通 truthy 判断：
+
 ```typescript
-list = list.filter((item) => {
-  return {field} !== undefined && {field} !== '' ? item.{field} === ~~{field} : true
-})
+status !== undefined && status !== '' ? item.status === ~~status : true
 ```
-
----
-
-## faker.js 字段类型映射
-
-| 字段类型 | 推荐 faker 方法 |
-|---------|----------------|
-| string（名称类） | `faker.person.fullName()` 或 `faker.commerce.productName()` |
-| string（标题类） | `faker.lorem.words(3)` |
-| string（描述类） | `faker.lorem.sentence()` |
-| number（ID） | 自增 `i + 1` |
-| number（金额） | `faker.number.float({ min: 10, max: 9999, fractionDigits: 2 })` |
-| number（数量） | `faker.number.int({ min: 1, max: 100 })` |
-| boolean | `faker.datatype.boolean()` |
-| date | `faker.date.recent().toISOString()` |
-| status（枚举） | `faker.helpers.arrayElement([0, 1, 2])` |

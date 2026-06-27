@@ -22,6 +22,8 @@ const BASIC_COMPONENT_NAMES = [
   'FaDropdown',
   'FaFileUpload',
   'FaFixedBar',
+  'FaForm',
+  'FaFormItem',
   'FaHoverCard',
   'FaIcon',
   'FaImagePreview',

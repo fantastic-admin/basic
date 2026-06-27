@@ -18,6 +18,8 @@
 - `{routeTitle}` — 路由标题，如 `商品管理`
 - `{formMode}` — `router`、`modal` 或 `drawer`
 - `{firstField}` — 删除确认中展示的主字段，如 `title`
+- `{formModelTypes}` — `DetailFormModel` 中除 `id` 外的字段类型
+- `{formValidationSchema}` — `FaForm` 的 validation schema 对象字段
 
 ---
 
@@ -142,7 +144,11 @@ const { open: openModal, update: updateModal } = useFaModal().create({
   beforeClose: (action, done) => {
     if (action === 'confirm') {
       // 调用 DetailForm 组件内部 submit 方法
-      formRef.value?.submit().then(() => {
+      formRef.value?.submit().then((success) => {
+        if (!success) {
+          return
+        }
+
         getDataList()
         done()
       })
@@ -164,7 +170,11 @@ const { open: openDrawer, update: updateDrawer } = useFaDrawer().create({
   beforeClose: (action, done) => {
     if (action === 'confirm') {
       // 调用 DetailForm 组件内部 submit 方法
-      formRef.value?.submit().then(() => {
+      formRef.value?.submit().then((success) => {
+        if (!success) {
+          return
+        }
+
         getDataList()
         done()
       })
@@ -375,7 +385,11 @@ onUnmounted(() => {
 const formRef = useTemplateRef('formRef')
 
 function onSubmit() {
-  formRef.value?.submit().then(() => {
+  formRef.value?.submit().then((success) => {
+    if (!success) {
+      return
+    }
+
     eventBus.emit('get-data-list')
     onCancel()
   })
@@ -397,11 +411,9 @@ function onCancel() {
       </FaPageHeader>
     </FaFixedBar>
     <FaPageMain>
-      <ElRow>
-        <ElCol :md="24" :lg="16">
-          <DetailForm :id="route.params.id as string" ref="formRef" />
-        </ElCol>
-      </ElRow>
+      <div class="max-w-4xl w-full">
+        <DetailForm :id="route.params.id as string" ref="formRef" />
+      </div>
     </FaPageMain>
     <FaFixedBar position="bottom" class="flex-center gap-4">
       <FaButton @click="onSubmit">
@@ -421,7 +433,8 @@ function onCancel() {
 
 ```vue
 <script setup lang="ts">
-import type { FormInstance, FormRules } from 'element-plus'
+import type { FormExpose } from '@fantastic-admin/components'
+import { ref } from 'vue'
 import api{ModuleName} from '@/api/modules/{fileName}'
 
 export interface Props {
@@ -435,24 +448,31 @@ const props = withDefaults(
 )
 
 const loading = ref(false)
-const formRef = useTemplateRef<FormInstance>('formRef')
-const form = ref({
+const formRef = useTemplateRef<FormExpose>('formRef')
+
+interface DetailFormModel {
+  id: number | string
+  {formModelTypes}
+}
+
+const model = ref<DetailFormModel>({
   id: props.id,
   {formInitialValues}
 })
-const formRules = ref<FormRules>({
-  {formRules}
-})
+
+const validationSchema = {
+  {formValidationSchema}
+}
 
 onMounted(() => {
-  if (form.value.id !== '') {
+  if (model.value.id !== '') {
     getInfo()
   }
 })
 
 function getInfo() {
   loading.value = true
-  api{ModuleName}.detail(form.value.id).then((res: any) => {
+  api{ModuleName}.detail(model.value.id).then((res: any) => {
     loading.value = false
     {formAssign}
   }).catch(() => {
@@ -460,35 +480,41 @@ function getInfo() {
   })
 }
 
+async function submit() {
+  const result = await formRef.value?.validate()
+
+  if (!result?.valid) {
+    return false
+  }
+
+  if (model.value.id === '') {
+    await api{ModuleName}.create(model.value)
+    useFaToast().success('新增成功')
+  }
+  else {
+    await api{ModuleName}.edit(model.value)
+    useFaToast().success('编辑成功')
+  }
+
+  return true
+}
+
 defineExpose({
-  submit() {
-    return new Promise<void>((resolve) => {
-      formRef.value?.validate((valid) => {
-        if (valid) {
-          if (form.value.id === '') {
-            api{ModuleName}.create(form.value).then(() => {
-              useFaToast().success('新增成功')
-              resolve()
-            })
-          }
-          else {
-            api{ModuleName}.edit(form.value).then(() => {
-              useFaToast().success('编辑成功')
-              resolve()
-            })
-          }
-        }
-      })
-    })
-  },
+  submit,
 })
 </script>
 
 <template>
   <div v-loading="loading">
-    <ElForm ref="formRef" :model="form" :rules="formRules" label-width="120px" label-suffix="：">
+    <FaForm
+      ref="formRef"
+      :model="model"
+      :validation-schema="validationSchema"
+      label-placement="right"
+      :label-width="120"
+    >
       {formFields}
-    </ElForm>
+    </FaForm>
   </div>
 </template>
 ```
@@ -641,6 +667,7 @@ return (title ? item.title.includes(title) : true)
 
 ```typescript
 import type { RouteRecordRaw } from 'vue-router'
+import { $t } from '@/locales'
 
 function Layout() {
   return import('@/layouts/index.vue')
@@ -763,28 +790,56 @@ const params = {
 ### 表单字段
 
 ```vue
-<ElFormItem label="{label}" prop="{field}">
-  <FaInput v-model="form.{field}" placeholder="请输入{label}" class="w-full" />
-</ElFormItem>
+<FaFormItem name="{field}" label="{label}" required>
+  <FaInput placeholder="请输入{label}" class="w-full" />
+</FaFormItem>
 ```
 
-### 表单验证规则
+`FaFormItem` 会自动向第一个子控件注入 `modelValue` 和 `onUpdate:modelValue`，不要再手写
+`v-model="model.{field}"` 或 `v-model="model.value.{field}"`。
+
+### 表单 model 类型字段
+
+```typescript
+{field}: string
+status: number
+enabled: boolean
+```
+
+### 表单初始值
+
+```typescript
+{field}: '',
+status: 0,
+enabled: true,
+```
+
+### 表单详情赋值
+
+```typescript
+model.value.{field} = res.data.{field}
+```
+
+### 表单验证 schema
 
 文本输入：
 
 ```typescript
-{field}: [
-  { required: true, message: '请输入{label}', trigger: 'blur' },
-],
+{field}(value: string) {
+  return value?.trim() ? true : '请输入{label}'
+},
 ```
 
 选择、开关、日期：
 
 ```typescript
-{field}: [
-  { required: true, message: '请选择{label}', trigger: 'change' },
-],
+{field}(value: string | number | boolean | undefined) {
+  return value !== undefined && value !== '' ? true : '请选择{label}'
+},
 ```
+
+非必填字段不要生成 validation schema 项；生成必填字段时，在对应 `FaFormItem` 上同时加
+`required`。
 
 ### Mock 数据字段映射
 

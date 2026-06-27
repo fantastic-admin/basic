@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import type { FormExpose } from '@fantastic-admin/components'
 import { toTypedSchema } from '@vee-validate/zod'
-import { useForm } from 'vee-validate'
 import * as z from 'zod'
-import { FormControl, FormField, FormItem, FormMessage } from '@/ui/shadcn/ui/form'
 
 defineOptions({
   name: 'LoginForm',
@@ -26,19 +25,27 @@ const loading = ref(false)
 // 登录方式，default 账号密码登录，qrcode 扫码登录
 const type = ref<'default' | 'qrcode'>('default')
 
-const form = useForm({
-  validationSchema: toTypedSchema(z.object({
-    account: z.string().min(1, '请输入用户名'),
-    password: z.string().min(1, '请输入密码'),
-    remember: z.boolean(),
-  })),
-  initialValues: {
-    account: props.account ?? localStorage.getItem('login_account') ?? '',
-    password: '',
-    remember: localStorage.getItem('login_account') !== null,
-  },
+interface LoginModel {
+  account: string
+  password: string
+  remember: boolean
+}
+
+const formRef = useTemplateRef<FormExpose<LoginModel>>('formRef')
+
+const model = ref<LoginModel>({
+  account: props.account ?? localStorage.getItem('login_account') ?? '',
+  password: '',
+  remember: localStorage.getItem('login_account') !== null,
 })
-const onSubmit = form.handleSubmit((values) => {
+
+const validationSchema = toTypedSchema(z.object({
+  account: z.string().min(1, '请输入用户名'),
+  password: z.string().min(1, '请输入密码'),
+  remember: z.boolean(),
+}))
+
+function onSubmit(values: LoginModel) {
   loading.value = true
   appAccountStore.login(values).then(() => {
     if (values.remember) {
@@ -51,12 +58,12 @@ const onSubmit = form.handleSubmit((values) => {
   }).finally(() => {
     loading.value = false
   })
-})
+}
 
-function testAccount(account: string) {
-  form.setFieldValue('account', account)
-  form.setFieldValue('password', '123456')
-  onSubmit()
+async function testAccount(account: string) {
+  model.value.account = account
+  model.value.password = '123456'
+  await formRef.value?.submit()
 }
 </script>
 
@@ -79,48 +86,33 @@ function testAccount(account: string) {
       />
     </div>
     <div v-show="type === 'default'">
-      <form @submit="onSubmit">
-        <FormField v-slot="{ componentField, errors }" name="account">
-          <FormItem class="pb-6 relative space-y-0">
-            <FormControl>
-              <FaInput type="text" placeholder="用户名" class="w-full" :class="{ 'border-destructive': errors.length }" v-bind="componentField">
-                <template #start>
-                  <FaIcon name="i-lucide:user" />
-                </template>
-              </FaInput>
-            </FormControl>
-            <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-              <FormMessage class="text-xs m-0 bottom-1 absolute" />
-            </Transition>
-          </FormItem>
-        </FormField>
-        <FormField v-slot="{ componentField, errors }" name="password">
-          <FormItem class="pb-6 relative space-y-0">
-            <FormControl>
-              <FaInput type="password" placeholder="密码" class="w-full" :class="{ 'border-destructive': errors.length }" v-bind="componentField">
-                <template #start>
-                  <FaIcon name="i-lucide:lock" />
-                </template>
-              </FaInput>
-            </FormControl>
-            <Transition enter-active-class="transition-opacity" enter-from-class="opacity-0" leave-active-class="transition-opacity" leave-to-class="opacity-0">
-              <FormMessage class="text-xs m-0 bottom-1 absolute" />
-            </Transition>
-          </FormItem>
-        </FormField>
-        <div class="mb-4 flex-center-between">
-          <div class="flex-center-start">
-            <FormField v-slot="{ componentField }" type="checkbox" name="remember">
-              <FormItem>
-                <FormControl>
-                  <FaCheckbox :model-value="componentField.modelValue" @update:model-value="componentField['onUpdate:modelValue']?.($event)">
-                    记住我
-                  </FaCheckbox>
-                </FormControl>
-              </FormItem>
-            </FormField>
-          </div>
-          <FaButton variant="link" class="p-0 h-auto" type="button" @click="emits('onResetPassword', form.values.account)">
+      <FaForm
+        ref="formRef"
+        :model="model"
+        :validation-schema="validationSchema"
+        @submit="onSubmit"
+      >
+        <FaFormItem name="account">
+          <FaInput type="text" placeholder="用户名" class="w-full">
+            <template #start>
+              <FaIcon name="i-lucide:user" />
+            </template>
+          </FaInput>
+        </FaFormItem>
+        <FaFormItem name="password">
+          <FaInput type="password" placeholder="密码" class="w-full">
+            <template #start>
+              <FaIcon name="i-lucide:lock" />
+            </template>
+          </FaInput>
+        </FaFormItem>
+        <div class="flex-start-between">
+          <FaFormItem name="remember" class="min-w-0">
+            <FaCheckbox>
+              记住我
+            </FaCheckbox>
+          </FaFormItem>
+          <FaButton variant="link" class="p-0 h-auto" type="button" @click="emits('onResetPassword', model.account)">
             忘记密码了?
           </FaButton>
         </div>
@@ -129,11 +121,11 @@ function testAccount(account: string) {
         </FaButton>
         <div class="text-sm mt-4 flex-center gap-2">
           <span class="text-secondary-foreground op-50">还没有帐号?</span>
-          <FaButton variant="link" class="p-0 h-auto" type="button" @click="emits('onRegister', form.values.account)">
+          <FaButton variant="link" class="p-0 h-auto" type="button" @click="emits('onRegister', model.account)">
             注册新帐号
           </FaButton>
         </div>
-      </form>
+      </FaForm>
       <div class="mt-4 text-center -mb-4">
         <FaDivider>演示账号一键登录</FaDivider>
         <div class="space-x-2">

@@ -37,6 +37,7 @@
     "filesize": "catalog:",
     "reka-ui": "catalog:",
     "tailwind-merge": "catalog:",
+    "vee-validate": "catalog:",
     "vue-input-otp": "catalog:",
     "vue-sonner": "catalog:"
   }
