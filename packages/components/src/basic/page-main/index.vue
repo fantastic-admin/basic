@@ -38,7 +38,7 @@ function handleCollaspe() {
 
 <template>
   <div
-    :class="cn('m-4 flex flex-col overflow-hidden rounded-lg border transition-[background-color,border-color]', {
+    :class="cn('m-4 flex flex-col overflow-hidden rounded-lg border bg-card transition-[background-color,border-color]', {
       'overflow-hidden': collaspe,
     }, props.class)"
   >
@@ -48,17 +48,17 @@ function handleCollaspe() {
       </slot>
     </div>
     <div
-      :class="cn('group/pagemain relative h-[calc-size(auto,size)] bg-card p-4 rounded-lg transition-height after:(pointer-events-none absolute bottom-0 left-0 z-1 h-12 max-h-full w-full from-transparent to-[oklch(var(--card))] bg-gradient-to-b opacity-0 transition-opacity content-empty)', {
+      :class="cn('group/pagemain relative h-[calc-size(auto,size)] bg-inherit p-4 rounded-lg transition-height', {
         'border-t': !!slots.title || title,
         'overflow-hidden': collaspe,
-        'after:(opacity-100)': isCollaspe,
+        'mask-b-from-12': isCollaspe,
       }, props.mainClass)" :style="{
         height: isCollaspe ? height : '',
       }"
     >
       <slot />
       <Button v-if="collaspe" variant="link" size="icon" class="opacity-0 transition-all inset-b-0 inset-s-1/2 absolute group-hover/pagemain:opacity-100 -translate-x-1/2" :class="{ 'rotate-x-180': !isCollaspe }" @click="handleCollaspe">
-        <Icon name="i-ep:arrow-down" class="text-xl" />
+        <Icon name="i-material-symbols:arrow-drop-down-rounded" class="text-xl" />
       </Button>
     </div>
   </div>
