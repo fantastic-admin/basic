@@ -458,22 +458,13 @@ const dialog = ref({
   form: {
     test: '',
   },
-  formRules: {
-    test: [
-      {
-        validator: (_rule: any, value: any, callback: any) => {
-          if (rules.value[dialog.value.index].rule.test(value)) {
-            callback()
-          }
-          else {
-            callback(new Error('不通过'))
-          }
-        },
-        trigger: 'change',
-      },
-    ],
-  },
 })
+
+const validationSchema = {
+  test(value: string) {
+    return rules.value[dialog.value.index].rule.test(value) ? true : '不通过'
+  },
+}
 
 watch(copied, (val) => {
   val && useFaToast().success(`复制成功：${text.value}`)
@@ -498,7 +489,7 @@ function open(url: string) {
       </FaButton>
     </FaPageHeader>
     <FaPageMain v-for="(item, index) in rules" :key="index" :title="item.title">
-      <div class="rule">
+      <div class="mb-4">
         {{ item.rule }}
       </div>
       <div class="space-x-2">
@@ -510,18 +501,12 @@ function open(url: string) {
         </FaButton>
       </div>
     </FaPageMain>
-    <ElDialog v-model="dialog.visible" :title="rules[dialog.index].title" width="500px">
-      <ElForm :model="dialog.form" :rules="dialog.formRules">
-        <ElFormItem prop="test">
-          <ElInput v-model="dialog.form.test" :placeholder="`例如：${rules[dialog.index].examples.join('、')}`" />
-        </ElFormItem>
-      </ElForm>
-    </ElDialog>
+    <FaModal v-model="dialog.visible" :title="rules[dialog.index].title" class="w-[500px]" :footer="false">
+      <FaForm :model="dialog.form" :validation-schema="validationSchema">
+        <FaFormItem name="test">
+          <FaInput :placeholder="`例如：${rules[dialog.index].examples.join('、')}`" class="w-full" />
+        </FaFormItem>
+      </FaForm>
+    </FaModal>
   </div>
 </template>
-
-<style scoped>
-.rule {
-  margin-bottom: 20px;
-}
-</style>

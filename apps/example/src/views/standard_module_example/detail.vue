@@ -12,7 +12,11 @@ const router = useRouter()
 const formRef = useTemplateRef('formRef')
 
 function onSubmit() {
-  formRef.value?.submit().then(() => {
+  formRef.value?.submit().then((success) => {
+    if (!success) {
+      return
+    }
+
     eventBus.emit('get-data-list')
     onCancel()
   })
@@ -34,11 +38,9 @@ function onCancel() {
       </FaPageHeader>
     </FaFixedBar>
     <FaPageMain>
-      <ElRow>
-        <ElCol :md="24" :lg="16">
-          <DetailForm :id="route.params.id as string" ref="formRef" />
-        </ElCol>
-      </ElRow>
+      <div class="max-w-4xl w-full">
+        <DetailForm :id="route.params.id as string" ref="formRef" />
+      </div>
     </FaPageMain>
     <FaFixedBar position="bottom" class="flex-center gap-4">
       <FaButton @click="onSubmit">

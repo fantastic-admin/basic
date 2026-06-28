@@ -32,15 +32,6 @@ const routes: RouteRecordRaw = {
       },
     },
     {
-      path: 'tableautoheight',
-      name: 'featureExampleTableautoheight',
-      component: () => import('@/views/feature_example/table.autoheight.vue'),
-      meta: {
-        title: '表格高度自适应',
-        icon: 'i-tabler:arrow-autofit-height',
-      },
-    },
-    {
       path: 'reload',
       name: 'featureExampleReload',
       component: () => import('@/views/feature_example/reload.vue'),

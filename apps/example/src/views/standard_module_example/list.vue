@@ -122,7 +122,11 @@ const { open: openModal, update: updateModal } = useFaModal().create({
   beforeClose: (action, done) => {
     if (action === 'confirm') {
       // 调用 DetailForm 组件内部 submit 方法
-      formRef.value?.submit().then(() => {
+      formRef.value?.submit().then((success) => {
+        if (!success) {
+          return
+        }
+
         getDataList()
         done()
       })
@@ -144,7 +148,11 @@ const { open: openDrawer, update: updateDrawer } = useFaDrawer().create({
   beforeClose: (action, done) => {
     if (action === 'confirm') {
       // 调用 DetailForm 组件内部 submit 方法
-      formRef.value?.submit().then(() => {
+      formRef.value?.submit().then((success) => {
+        if (!success) {
+          return
+        }
+
         getDataList()
         done()
       })
