@@ -24,7 +24,7 @@
 
 - AI 友好的工程底座，内置多个 Skills
 - 一流的技术栈：Vue 3.6 / Vite 8 / Pinia / UnoCSS / VueUse / TypeScript / ESLint / Stylelint / ...
-- 自由选择喜爱的 UI 库，默认 Element Plus
+- 自由选择喜爱的三方 UI 库
 - 18 套默认主题方案且可扩展，给不同行业提供专属品牌气质
 - 7 款导航菜单模式，匹配产品发展的各个阶段
 - 精细可控的页面保活策略

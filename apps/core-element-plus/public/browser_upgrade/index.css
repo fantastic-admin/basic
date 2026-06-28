@@ -1,0 +1,49 @@
+#browser-upgrade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10001;
+  display: none;
+  width: 100%;
+  height: 100%;
+  color: #736477;
+  user-select: none;
+  background-color: snow;
+}
+
+#browser-upgrade .title {
+  margin: 40px 0;
+  font-size: 24px;
+  text-align: center;
+}
+
+#browser-upgrade .browsers {
+  text-align: center;
+}
+
+#browser-upgrade .browsers .browser {
+  display: inline-block;
+  margin: 0 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#browser-upgrade .browsers .browser .browser-icon {
+  display: block;
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  border: none;
+}
+
+#browser-upgrade .browsers .browser .browser-name {
+  padding-bottom: 2px;
+  margin-top: 10px;
+  color: #736477;
+  text-align: center;
+  border-bottom: 1px solid transparent;
+}
+
+#browser-upgrade .browsers .browser:hover .browser-name {
+  border-bottom: 1px solid #736477;
+}

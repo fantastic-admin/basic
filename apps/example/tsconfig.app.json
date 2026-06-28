@@ -12,8 +12,7 @@
       "vite/client",
       "@spiriit/vite-plugin-svg-spritemap/client",
       "unplugin-turbo-console/client",
-      "vite-plugin-app-loading/client",
-      "element-plus/global"
+      "vite-plugin-app-loading/client"
     ],
     "allowJs": false,
     "strict": true,

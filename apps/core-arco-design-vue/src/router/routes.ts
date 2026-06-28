@@ -1,8 +1,8 @@
 import type { RouteRecordMainRaw } from '@fantastic-admin/types'
 import type { RouteRecordRaw } from 'vue-router'
 import pinia from '@/store'
-import ArcoDesignVueExample from './modules/arco.design.vue.example'
 import MultilevelMenuExample from './modules/multilevel.menu.example'
+import UiExample from './modules/ui.example'
 
 // 固定路由（默认路由）
 const constantRoutes: RouteRecordRaw[] = [
@@ -72,7 +72,7 @@ const asyncRoutes: RouteRecordMainRaw[] = [
       icon: 'i-whh:jqueryui',
     },
     children: [
-      ArcoDesignVueExample,
+      UiExample,
     ],
   },
 ]

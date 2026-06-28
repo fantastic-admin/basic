@@ -1,0 +1,80 @@
+/* 页面布局 CSS 变量 */
+:root {
+  color-scheme: light;
+
+  /* 头部宽度（默认自适应宽度，可固定宽度，固定宽度后为居中显示） */
+  --g-header-width: 100%;
+
+  /* 头部高度 */
+  --g-header-height: 60px;
+
+  /* 侧边栏宽度 */
+  --g-main-sidebar-width: 80px;
+  --g-sub-sidebar-width: 220px;
+  --g-sub-sidebar-collapse-width: 64px;
+
+  /* 侧边栏 Logo 区域高度 */
+  --g-sidebar-logo-height: 50px;
+
+  /* 标签栏高度 */
+  --g-tabbar-height: 50px;
+
+  /* 工具栏高度 */
+  --g-toolbar-height: 50px;
+
+  &.dark {
+    color-scheme: dark;
+  }
+}
+
+/* 明暗模式过渡动画 */
+::view-transition-old(root),
+::view-transition-new(root) {
+  mix-blend-mode: normal;
+  animation: none;
+}
+
+::view-transition-old(root) {
+  z-index: 0;
+}
+
+::view-transition-new(root) {
+  z-index: 1;
+}
+
+.dark {
+  &::view-transition-old(root) {
+    z-index: 1;
+  }
+
+  &::view-transition-new(root) {
+    z-index: 0;
+  }
+}
+
+.disable-color-scheme-transition-duration *,
+.disable-color-scheme-transition-duration *::before,
+.disable-color-scheme-transition-duration *::after {
+  transition-duration: 0ms !important;
+}
+
+html,
+body {
+  height: 100%;
+  text-autospace: normal;
+}
+
+body {
+  box-sizing: border-box;
+  margin: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#app {
+  height: 100%;
+}
+
+/* textarea 字体跟随系统 */
+textarea {
+  font-family: inherit;
+}

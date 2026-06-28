@@ -5,7 +5,6 @@ import AuthExample from './modules/auth.example'
 import BreadcrumbExample from './modules/breadcrumb.example'
 import ComponentExample from './modules/component.example'
 import EcologyExample from './modules/ecology.example'
-import ElementPlusExample from './modules/element.plus.example'
 import ExternalLinkExample from './modules/external.link.example'
 import FakeExample from './modules/fake.example'
 import FeatureExample from './modules/feature.example'
@@ -16,6 +15,7 @@ import MultilevelMenuExample from './modules/multilevel.menu.example'
 import PluginExample from './modules/plugin.example'
 import StandardModuleExample from './modules/standard.module.example'
 import TabbarExample from './modules/tabbar.example'
+import UiExample from './modules/ui.example'
 
 // 固定路由（默认路由）
 const constantRoutes: RouteRecordRaw[] = [
@@ -97,7 +97,7 @@ const asyncRoutes: RouteRecordMainRaw[] = [
       icon: 'i-whh:jqueryui',
     },
     children: [
-      ElementPlusExample,
+      UiExample,
     ],
   },
   {
