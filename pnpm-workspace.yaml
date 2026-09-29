@@ -1,7 +1,7 @@
-autoInstallPeers: true
+ignoreWorkspaceRootCheck: true
 catalogMode: prefer
 cleanupUnusedCatalogs: true
-ignoreWorkspaceRootCheck: true
+autoInstallPeers: true
 shamefullyHoist: true
 shellEmulator: true
 verifyDepsBeforeRun: prompt
@@ -9,40 +9,48 @@ verifyDepsBeforeRun: prompt
 packages:
   - apps/*
   - packages/*
+
+allowBuilds:
+  '@parcel/watcher': true
+  core-js: true
+  esbuild: true
+  simple-git-hooks: true
+  vue-demi: true
+
 catalog:
-  '@antfu/eslint-config': ^9.3.0
-  '@clack/prompts': ^1.7.0
+  '@antfu/eslint-config': ^9.5.1
+  '@clack/prompts': ^1.8.1
   '@faker-js/faker': ^10.6.0
-  '@iconify/json': ^2.2.522
-  '@iconify/vue': ^5.0.1
-  '@lucide/vue': ^1.37.0
+  '@iconify/json': ^2.2.534
+  '@iconify/vue': ^5.0.3
+  '@lucide/vue': ^1.48.0
   '@spiriit/vite-plugin-svg-spritemap': ^7.2.0
   '@stylistic/stylelint-config': ^5.0.0
   '@tanstack/vue-table': ^9.2.4
   '@tinymce/tinymce-vue': ^6.3.0
   '@types/fs-extra': ^11.0.4
-  '@types/node': ^26.4.0
+  '@types/node': ^26.6.3
   '@types/nprogress': ^0.2.3
   '@types/path-browserify': ^1.0.3
   '@types/qs': ^6.15.1
   '@types/splitpanes': ^2.2.6
-  '@unocss/core': ^66.8.1
-  '@unocss/eslint-plugin': ^66.8.1
+  '@unocss/core': ^66.10.5
+  '@unocss/eslint-plugin': ^66.10.5
   '@vee-validate/zod': ^4.15.1
-  '@visactor/vchart': ^2.1.6
+  '@visactor/vchart': ^2.1.7
   '@vitejs/plugin-legacy': ^8.2.3
-  '@vitejs/plugin-vue': ^6.0.8
+  '@vitejs/plugin-vue': ^6.0.9
   '@vitejs/plugin-vue-jsx': ^5.1.6
   '@vue/tsconfig': ^0.9.1
-  '@vueuse/components': ^14.4.0
-  '@vueuse/core': ^14.4.0
-  '@vueuse/integrations': ^14.4.0
-  '@zumer/snapdom': ^2.24.12
+  '@vueuse/components': ^15.0.0
+  '@vueuse/core': ^15.0.0
+  '@vueuse/integrations': ^15.0.0
+  '@zumer/snapdom': ^3.1.1
   animate.css: ^4.1.1
-  autoprefixer: ^10.5.4
+  autoprefixer: ^10.6.1
   axios: ^1.20.0
-  boxen: ^8.0.1
-  bumpp: ^12.2.2
+  boxen: ^9.0.0
+  bumpp: ^12.3.0
   class-variance-authority: ^0.7.1
   clsx: ^2.1.1
   cropperjs: 1.6.2
@@ -52,12 +60,12 @@ catalog:
   echarts: ^6.1.0
   eruda: ^3.4.3
   es-toolkit: ^1.52.0
-  eslint: ^10.9.1
-  filesize: ^11.0.22
-  fs-extra: ^11.4.0
-  hotkeys-js: ^4.0.7
+  eslint: ^10.11.0
+  filesize: ^11.0.25
+  fs-extra: ^11.4.1
+  hotkeys-js: ^4.0.8
   http-server: ^14.1.1
-  lint-staged: ^17.4.1
+  lint-staged: ^17.6.0
   mitt: ^3.0.1
   npm-run-all2: ^9.0.3
   nprogress: ^0.2.0
@@ -66,39 +74,39 @@ catalog:
   picocolors: ^1.1.1
   pinia: ^4.0.3
   pinia-plugin-persistedstate: ^4.7.1
-  pinyin-pro: ^3.29.3
-  postcss: ^8.5.26
+  pinyin-pro: ^3.29.4
+  postcss: ^8.5.28
   postcss-nested: ^8.0.1
   print-js: ^1.6.0
-  qs: ^6.15.3
-  reka-ui: ^2.10.4
-  sass-embedded: ^1.103.1
+  qs: ^6.16.0
+  reka-ui: ^2.10.5
+  sass-embedded: ^1.105.0
   scule: ^1.3.0
   sign-canvas: 2.0.0
   simple-git-hooks: ^2.14.0
   splitpanes: ^4.1.2
-  stylelint: ^17.14.1
+  stylelint: ^17.15.0
   stylelint-config-recess-order: ^7.8.0
   stylelint-config-standard-scss: ^17.0.0
   stylelint-config-standard-vue: ^2.0.0
-  stylelint-scss: ^7.2.0
+  stylelint-scss: ^7.3.0
   svgo: ^4.1.0
   swiper: ^14.2.0
-  tailwind-merge: ^3.6.0
-  taze: ^21.1.0
+  tailwind-merge: ^3.7.0
+  taze: ^21.2.0
   tinymce: 7.9.3
-  tsx: ^4.23.12
-  type-fest: ^5.8.0
+  tsx: ^4.23.15
+  type-fest: ^5.10.0
   typescript: ^6.0.3
   ua-parser-js: ^2.0.10
-  unocss: ^66.8.1
+  unocss: ^66.10.5
   unocss-preset-animations: ^1.3.0
   unplugin-auto-import: ^21.1.0
   unplugin-turbo-console: ^2.3.3
   unplugin-vue-components: ^32.1.0
   vconsole: ^3.15.1
   vee-validate: ^4.15.1
-  vite: ^8.2.2
+  vite: ^8.3.1
   vite-plugin-app-loading: ^0.6.1
   vite-plugin-archiver: ^0.4.1
   vite-plugin-banner: ^0.8.1
@@ -106,36 +114,31 @@ catalog:
   vite-plugin-env-parse: ^1.0.15
   vite-plugin-fake-server: ^2.2.4
   vite-plugin-vue-devtools: ^8.2.1
-  vue: ^3.5.42
+  vue: ^3.5.43
   vue-currency-input: ^3.2.2
-  vue-data-ui: ^3.23.14
+  vue-data-ui: ^3.25.13
   vue-hooks-plus: ^2.4.3
   vue-input-otp: ^0.4.0
-  vue-router: ^5.3.0
+  vue-router: ^5.3.1
   vue-sonner: ^2.0.9
   vue-tsc: ^3.3.11
-  vxe-pc-ui: ^4.17.21
-  vxe-table: ^4.21.2
-  xe-utils: ^4.0.13
-  zod: ^4.5.2
+  vxe-pc-ui: ^4.18.19
+  vxe-table: ^4.22.2
+  xe-utils: ^4.1.2
+  zod: ^4.6.5
+
 catalogs:
   ant-design-vue:
     ant-design-vue: ^4.2.6
   antdv-next:
-    antdv-next: ^1.5.2
+    antdv-next: ^1.5.6
   arco-design-vue:
     '@arco-design/web-vue': ^2.58.0
   element-plus:
-    element-plus: ^2.14.5
+    element-plus: ^2.14.6
   naive-ui:
     naive-ui: ^2.45.3
   tdesign:
-    tdesign-vue-next: ^1.20.7
+    tdesign-vue-next: ^1.20.8
   vexip-ui:
     vexip-ui: ^2.3.40
-allowBuilds:
-  '@parcel/watcher': true
-  core-js: true
-  esbuild: true
-  simple-git-hooks: true
-  vue-demi: true

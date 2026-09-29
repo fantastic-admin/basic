@@ -13,9 +13,8 @@ onActivated(() => {
 })
 
 // 离开时记录当前页面滚动位置
-onBeforeRouteLeave((_to, _from, next) => {
+onBeforeRouteLeave(() => {
   scrollTop.value = document.documentElement.scrollTop
-  next()
 })
 </script>
 
